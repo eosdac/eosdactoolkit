@@ -49,6 +49,26 @@ export const testEndpoint = ({
   })
 }
 
+export const getTokenContractBalance = ({
+  state
+}, payload) => {
+  return new Promise((resolve, reject) => {
+    let eos = Eos(state.endpoints[state.activeEndpointIndex])
+    let timeout = setTimeout(function () {
+      reject(Error('timeout'))
+    }, state.connectionTimeoutMilSec)
+    eos.getTableRows({ json: true, scope: payload.account, code: configFile.network.tokenContract.name, table: 'accounts' }).then((res) => {
+      clearTimeout(timeout)
+      resolve(res)
+    }, (err) => {
+      clearTimeout(timeout)
+      if (err) {
+        reject(Error('failed'))
+      }
+    })
+  })
+}
+
 export const getAccount = ({
   state
 }, payload) => {
