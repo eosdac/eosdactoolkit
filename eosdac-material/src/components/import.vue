@@ -51,7 +51,7 @@ export default {
     LoadingSpinner
   },
   data () {
-    return {
+    return   {
       loading: false,
       loadingText: '',
       account: '',

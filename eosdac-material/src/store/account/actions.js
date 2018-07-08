@@ -1,4 +1,5 @@
 import CryptoJS from 'crypto-js'
+import ecc from 'eosjs-ecc'
 
 export const importAccount = ({
   commit,
@@ -11,10 +12,31 @@ export const importAccount = ({
       if (payload.keys[i].privateKey.length && payload.keys[i].key) {
         let key = payload.keys[i].privateKey
         let encrypted = encrypt(key, payload.password).toString(CryptoJS.enc.Utf8)
-        payload.keys[i].privateKey = encrypted
+        payload.keys[i].privateKeyEnc = encrypted
       }
     }
     commit('IMPORT_ACCOUNT', {info: payload.info, keys: payload.keys})
+    resolve()
+  })
+}
+
+export const unlockAccount = ({
+  commit,
+  state
+}, password) => {
+  return new Promise((resolve, reject) => {
+    let encrypted = state.pkeys
+    for (let i = 0; i < encrypted.length; i++) {
+      if (encrypted[i].privateKeyEnc.length && encrypted[i].key) {
+        let key = encrypted[i].privateKeyEnc
+        let decryptedKey = decrypt(key, password).toString(CryptoJS.enc.Utf8)
+        if (!ecc.isValidPrivate(decryptedKey)) {
+          reject(Error('wrong password'))
+        }
+        encrypted[i].privateKey = decryptedKey
+      }
+    }
+    commit('UNLOCK_ACCOUNT', encrypted)
     resolve()
   })
 }
@@ -36,7 +58,7 @@ function encrypt (msg, pass) {
   return salt.toString() + iv.toString() + encrypted.toString()
 }
 
-/* function decrypt (transitmessage, pass) {
+function decrypt (transitmessage, pass) {
   const keySize = 256
   const iterations = 4500
   const salt = CryptoJS.enc.Hex.parse(transitmessage.substr(0, 32))
@@ -52,4 +74,4 @@ function encrypt (msg, pass) {
     mode: CryptoJS.mode.CBC
   })
   return decrypted
-} */
+}

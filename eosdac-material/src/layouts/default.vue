@@ -2,7 +2,7 @@
   <q-layout view="hHh Lpr lFf">
     <q-layout-header class="no-shadow">
       <q-toolbar
-        color="bg-dark2"
+        color="dark2"
       >
         <q-btn
           flat
@@ -19,18 +19,29 @@
           <img alt="EOSDAC" style="max-height:30px; color: white; margin-bottom:-5px; margin-right:-5px;" src="~assets/eosdac_logo.png"> eosDAC
         </div>
       </q-toolbar-title>
-      <q-btn size="lg" icon="account_circle" flat :label="getAccountName">
-</q-btn>
-        <q-btn-dropdown size="lg" icon="lock" flat label="Button">
-  <q-list link>
-    <q-item>
-      <q-item-main>
-        <q-item-tile icon="lock" label>lock</q-item-tile>
-      </q-item-main>
-    </q-item>
-  </q-list>
-</q-btn-dropdown>
-
+        <div v-if="getUsesScatter">
+          <q-btn size="lg" icon="lock" flat :label="getAccountName" />
+        </div>
+        <div v-else >
+          <q-btn-dropdown size="lg" icon="lock" flat :label="getAccountName">
+            <q-list class="bg-dark2" dark link>
+              <q-item @click.native="lockAccount()" v-if="getUnlocked" dark>
+                <q-item-side>
+                <q-item-tile icon="lock">
+                </q-item-tile>
+                Lock
+              </q-item-side>
+            </q-item>
+            <q-item @click.native="unlockAccount()" v-else dark>
+              <q-item-side>
+              <q-item-tile icon="lock">
+              </q-item-tile>
+              Unlock
+            </q-item-side>
+          </q-item>
+            </q-list>
+  </q-btn-dropdown>
+        </div>
       </q-toolbar>
     </q-layout-header>
 
@@ -54,6 +65,7 @@
     <q-page-container>
       <router-view />
       <Initialize ref="Initialize" />
+      <Unlock ref="Unlock" />
     </q-page-container>
   </q-layout>
 </template>
@@ -62,11 +74,13 @@
 import { openURL } from 'quasar'
 import { mapGetters } from 'vuex'
 import Initialize from 'components/initialize'
+import Unlock from 'components/unlock'
 
 export default {
   name: 'LayoutDefault',
   components: {
-    Initialize
+    Initialize,
+    Unlock
   },
   data () {
     return {
@@ -76,13 +90,21 @@ export default {
   computed: {
     ...mapGetters({
       getImported: 'account/getImported',
-      getAccountName: 'account/getAccountName'
+      getAccountName: 'account/getAccountName',
+      getUnlocked: 'account/getUnlocked',
+      getUsesScatter: 'account/getUsesScatter'
     })
   },
   methods: {
     openURL,
     closeInitModal () {
       this.$refs.Initialize.closeInit()
+    },
+    unlockAccount () {
+      this.$refs.Unlock.openUnlock()
+    },
+    lockAccount() {
+      this.$store.commit('account/LOCK_ACCOUNT')
     }
   },
   mounted () {

@@ -6,3 +6,11 @@ export const getImported = (state) => {
 export const getAccountName = (state) => {
   return state.info.account_name
 }
+
+export const getUnlocked = (state) => {
+  return state.unlocked
+}
+
+export const getUsesScatter = (state) => {
+  return state.useScatter
+}
