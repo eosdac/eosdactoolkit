@@ -17,3 +17,11 @@ export const getConnectionTimeout = (state) => {
 export const getConnectionInterval = (state) => {
   return state.checkIntervalMilSec
 }
+
+export const hasScatter = (state) => {
+  return state.scatterAvailable
+}
+
+export const getScatter = (state) => {
+  return state.scatter
+}

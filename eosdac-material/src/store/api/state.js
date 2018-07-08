@@ -1,3 +1,4 @@
+
 export default {
   activeEndpointIndex: 0,
   checkIntervalMilSec: 3000,

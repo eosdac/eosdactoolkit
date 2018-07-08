@@ -1,8 +1,8 @@
 <template>
-  <q-layout view="lHh Lpr lFf">
-    <q-layout-header>
+  <q-layout view="hHh Lpr lFf">
+    <q-layout-header class="no-shadow">
       <q-toolbar
-        color="dark"
+        color="bg-dark2"
       >
         <q-btn
           flat
@@ -14,19 +14,29 @@
           <q-icon name="menu" />
         </q-btn>
 
-        <q-toolbar-title>
-          Quasar App
-          <div slot="subtitle">Running on Quasar v{{ $q.version }}</div>
-        </q-toolbar-title>
-        <q-btn @click="loginaction = true" color="white" text-color="primary">
-          Unlock account
-        </q-btn>
+        <q-toolbar-title class="text-primary text-white">
+        <div class="q-headline">
+          <img alt="EOSDAC" style="max-height:30px; color: white; margin-bottom:-5px; margin-right:-5px;" src="~assets/eosdac_logo.png"> eosDAC
+        </div>
+      </q-toolbar-title>
+      <q-btn size="lg" icon="account_circle" flat :label="getAccountName">
+</q-btn>
+        <q-btn-dropdown size="lg" icon="lock" flat label="Button">
+  <q-list link>
+    <q-item>
+      <q-item-main>
+        <q-item-tile icon="lock" label>lock</q-item-tile>
+      </q-item-main>
+    </q-item>
+  </q-list>
+</q-btn-dropdown>
+
       </q-toolbar>
     </q-layout-header>
 
     <q-layout-drawer
       v-model="leftDrawerOpen"
-      content-class="bg-dark"
+      content-class="bg-dark2"
     >
       <q-list
         no-border
@@ -34,10 +44,9 @@
         inset-delimiter
         dark
       >
-        <q-list-header>Essential Links</q-list-header>
-        <q-item to="/test">
+        <q-item to="/wallet">
           <q-item-side icon="school" />
-          <q-item-main label="test" sublabel="" />
+          <q-item-main label="Wallet" sublabel="" />
         </q-item>
       </q-list>
     </q-layout-drawer>
@@ -66,16 +75,26 @@ export default {
   },
   computed: {
     ...mapGetters({
-      GETimported: 'account/GETimported'
+      getImported: 'account/getImported',
+      getAccountName: 'account/getAccountName'
     })
   },
   methods: {
-    openURL
+    openURL,
+    closeInitModal () {
+      this.$refs.Initialize.closeInit()
+    }
   },
   mounted () {
-    if (!this.GETimported) {
-      this.$refs.Initialize.open()
+    if (!this.getImported) {
+      this.$refs.Initialize.openInit()
     }
+    document.addEventListener('scatterLoaded', scatterExtension => {
+      if (window.scatter) {
+        this.$store.commit('api/SCATTER_AVAILABLE', window.scatter)
+        window.scatter = null
+      }
+    })
   }
 }
 </script>

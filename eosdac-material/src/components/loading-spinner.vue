@@ -1,7 +1,7 @@
 <template>
 <q-inner-loading  v-bind:visible="visible" v-on:change="$emit('change', $event.target.visible)">
-  <img class="animate-spin-reverse float-left" alt="loading" style="max-height:50%; color: white;" src="~assets/eosdaclogo1-2000-605x605.png">
-  <span class="q-headline">{{text}}</span>
+  <img class="animate-spin-reverse" style="max-height:25%;" src="/assets/eosdaclogo-spinner.png">
+  <span class="q-headline text-black">{{text}}</span>
 </q-inner-loading>
 </template>
 

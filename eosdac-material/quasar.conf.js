@@ -5,7 +5,8 @@ module.exports = function (ctx) {
     // app plugins (/src/plugins)
     plugins: [
       'i18n',
-      'axios'
+      'axios',
+      'configloader'
     ],
     css: [
       'app.styl'
@@ -56,6 +57,7 @@ module.exports = function (ctx) {
         'QItem',
         'QItemMain',
         'QItemSide',
+        'QItemTile',
         'QModal',
         'QStepper',
         'QStep',
@@ -64,7 +66,16 @@ module.exports = function (ctx) {
         'QInput',
         'QAlert',
         'Dialog',
-        'QSpinner'
+        'QSpinner',
+        'QInnerLoading',
+        'QCard',
+        'QCardTitle',
+        'QCardMain',
+        'QCardMedia',
+        'QCardSeparator',
+        'QCardActions',
+        'QChip',
+        'QBtnDropdown'
       ],
       directives: [
         'Ripple',

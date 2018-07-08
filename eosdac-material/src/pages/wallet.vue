@@ -1,7 +1,6 @@
 <template>
-  <q-page :content-class="$q.theme === 'mat' ? 'bg-dark' : null" padding>
+  <q-page padding>
     <!-- content -->
-    hello
   </q-page>
 </template>
 
