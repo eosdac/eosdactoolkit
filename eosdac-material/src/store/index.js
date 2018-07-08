@@ -14,22 +14,22 @@ const store = new Vuex.Store({
   plugins: [createPersistedState({
     storage: {
       getItem: key => window.localStorage.getItem(key),
-      // setItem: (key, value) => filter(key, value), remove pkeys
-      setItem: (key, value) => window.localStorage.setItem(key, value),
+      setItem: (key, value) => filter(key, value), // filter removes decrypted keys so they dont end up in the localstorage
+      // setItem: (key, value) => window.localStorage.setItem(key, value),
       removeItem: key => window.localStorage.removeItem(key)
     }
   })]
 })
-/* function filter (key, value) {
+function filter (key, value) {
   if (typeof value === 'string') {
     let newVal = JSON.parse(value)
-    for (let i = 0; i < newVal.account.keys.length; i++) {
-      newVal.account.keys[i].decrypted = null
+    for (let i = 0; i < newVal.account.pkeys.length; i++) {
+      newVal.account.keys[i].privateKey = ''
     }
     window.localStorage.setItem(key, JSON.stringify(newVal))
   } else {
     window.localStorage.setItem(key, value)
   }
-} */
+}
 
 export default store
