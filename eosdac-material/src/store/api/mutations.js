@@ -44,5 +44,5 @@ export const CHANGE_ENDPOINT = (state, url) => {
 
 export const SCATTER_AVAILABLE = (state, scatter) => {
   state.scatterAvailable = true
-  state.scatter = scatter
+  //state.scatter = scatter
 }
