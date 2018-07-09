@@ -24,7 +24,7 @@ function filter (key, value) {
   if (typeof value === 'string') {
     let newVal = JSON.parse(value)
     for (let i = 0; i < newVal.account.pkeys.length; i++) {
-      newVal.account.keys[i].privateKey = ''
+      newVal.account.pkeys[i].privateKey = ''
     }
     window.localStorage.setItem(key, JSON.stringify(newVal))
   } else {
