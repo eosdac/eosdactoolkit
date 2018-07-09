@@ -114,7 +114,6 @@ export default {
     document.addEventListener('scatterLoaded', scatterExtension => {
       if (window.scatter) {
         this.$store.commit('api/SCATTER_AVAILABLE', window.scatter)
-        this.$scatter = window.scatter
         window.scatter = null
       }
     })

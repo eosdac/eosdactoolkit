@@ -68,6 +68,7 @@ export default {
   computed: {
     ...mapGetters({
       hasScatter: 'api/hasScatter',
+      getScatter: 'api/getScatter',
       getCurrentEndpoint: 'api/getCurrentEndpoint'
     })
   },
@@ -134,8 +135,8 @@ export default {
         host: current.httpEndpoint.split(':')[1].replace(/\//g, ''),
         port: current.httpEndpoint.split(':')[2] || 80
       }
-      this.$scatter.suggestNetwork(network).then(() => {
-        this.$scatter.getIdentity({
+      this.getScatter.suggestNetwork(network).then(() => {
+        this.getScatter.getIdentity({
           accounts: [network2]
         }).then(identity => {
           this.$store.dispatch('api/getAccount', {

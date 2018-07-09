@@ -6,8 +6,7 @@ module.exports = function (ctx) {
     plugins: [
       'i18n',
       'axios',
-      'configloader',
-      'scatter'
+      'configloader'
     ],
     css: [
       'app.styl'
