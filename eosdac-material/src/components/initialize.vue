@@ -9,7 +9,6 @@
         duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
       </p>
       <q-btn class="q-ma-sm" color="primary" @click="start = true" label="Continue" />
-      <q-btn class="q-ma-sm" color="primary" @click="init = false" label="Close" />
     </div>
     <div v-else class="col-xs-12 col-sm-6 col-md-4 text-center">
       <q-stepper v-if="!importInit" class="absolute-center" color="primary" ref="initstepper" contractable>
