@@ -125,16 +125,18 @@ export default {
       let current = this.getCurrentEndpoint
       let network = {
         blockchain: 'eos',
+        protocol: current.httpEndpoint.split(':')[0].replace(/\//g, ''),
         host: current.httpEndpoint.split(':')[1].replace(/\//g, ''),
         port: current.httpEndpoint.split(':')[2] || 80,
         chainId: this.$configFile.network.chainId
       }
       let network2 = {
         blockchain: 'eos',
+        protocol: current.httpEndpoint.split(':')[0].replace(/\//g, ''),
         host: current.httpEndpoint.split(':')[1].replace(/\//g, ''),
         port: current.httpEndpoint.split(':')[2] || 80
       }
-      this.getScatter.suggestNetwork(network).then(() => {
+      this.getScatter.suggestNetwork(network2).then(() => {
         this.getScatter.getIdentity({
           accounts: [network2]
         }).then(identity => {
