@@ -11,14 +11,21 @@
     "test": "echo \"No test specified\" && exit 0"
   },
   "dependencies": {
+    "await-timeout": "^0.2.0",
     "axios": "^0.18.0",
     "crypto-js": "^3.1.9-1",
     "eosjs": "^15.0.3",
+    "markdown-it": "^8.4.1",
     "vue-i18n": "^7.3.3",
     "vuex-persistedstate": "^2.5.4"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.1",
+    "devtron": "1.4.0",
+    "electron": "2.0.0",
+    "electron-debug": "1.5.0",
+    "electron-devtools-installer": "2.2.4",
+    "electron-packager": "^12.0.1",
     "eslint": "^4.18.2",
     "eslint-config-standard": "^11.0.0",
     "eslint-friendly-formatter": "^4.0.1",

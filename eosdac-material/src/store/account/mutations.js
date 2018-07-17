@@ -10,13 +10,23 @@ export const IMPORT_ACCOUNT = (state, payload) => {
 }
 
 export const LOCK_ACCOUNT = (state) => {
-  for (let i = 0; i < state.pkeys.length; i++) {
-    state.pkeys[i].privateKey = ''
-  }
+  state.pkeysArray = []
   state.unlocked = false
 }
 
 export const UNLOCK_ACCOUNT = (state, payload) => {
-  state.pkeys = payload
+  state.pkeysArray = payload.pkeysArray
   state.unlocked = true
+}
+
+export const UNLOCK_ACCOUNT_SCATTER = (state) => {
+  state.unlocked = true
+}
+
+export const ADD_REGISTRATION = (state, payload) => {
+  state.rigistered = payload
+}
+
+export const RESET_STATE = (state) => {
+    Object.assign(state, getDefaultState())
 }

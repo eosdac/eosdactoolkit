@@ -1,9 +1,9 @@
 <template>
-  <q-modal class="text-white" maximized v-model="unlock">
+  <q-modal class="text-white z-max" maximized v-model="unlock">
     <div class="col-xs-12 col-sm-6 col-md-4 text-center">
-<q-card dark flat class="q-mb-sm absolute-center">
-  <q-card-title class="text-primary">
-    <div class="q-title">Unlock account: <b>{{getAccountName}}</b></div>
+<q-card dark flat class="q-ma-sm absolute-center">
+  <q-card-title>
+    <div class="q-title">Login account: <b>{{getAccountName}}</b></div>
   </q-card-title>
   <q-card-main>
     <q-field :error="error" icon="vpn key" label="Password" :error-label="errorText" :label-width="12">
@@ -11,7 +11,7 @@
     </q-field>
   </q-card-main>
   <q-card-actions>
-    <q-btn color="primary" @click="unlockAccount()">Unlock</q-btn>
+    <q-btn color="primary" @click="unlockAccount()">Login</q-btn>
     <q-btn icon="clear" color="danger" flat @click="unlock = false"></q-btn>
   </q-card-actions>
   <LoadingSpinner :visible="loading" :text="loadingText" />
@@ -42,7 +42,7 @@ export default {
     }
   },
   methods: {
-    openUnlock () {
+    open () {
       this.unlock = true
     },
     unlockAccount () {

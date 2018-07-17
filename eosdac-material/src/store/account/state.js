@@ -1,9 +1,11 @@
 export default {
   imported: false,
+  registered: false,
   useScatter: false,
   info: {},
   keys: [],
   pkeys: [],
+  pkeysArray: [],
   unlocked: false,
   lastUnlock: 0,
   autolock: true,

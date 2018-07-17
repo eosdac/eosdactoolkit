@@ -6,18 +6,23 @@ module.exports = function (ctx) {
     plugins: [
       'i18n',
       'axios',
-      'configloader'
+      'configloader',
+      'eosdac-iconfont'
     ],
     css: [
-      'app.styl'
+      'app.styl',
+      'github-markdown.css'
     ],
     extras: [
       ctx.theme.mat ? 'roboto-font' : null,
-      'material-icons' // optional, you are not bound to it
+      'material-icons'
       // 'ionicons',
       // 'mdi',
       // 'fontawesome'
     ],
+    framework: {
+      iconSet: 'eosdac-iconfont'
+    },
     supportIE: false,
     build: {
       scopeHoisting: true,
@@ -75,7 +80,15 @@ module.exports = function (ctx) {
         'QCardSeparator',
         'QCardActions',
         'QChip',
-        'QBtnDropdown'
+        'QBtnDropdown',
+        'QScrollArea',
+        'QCheckbox',
+        'QPopover',
+        'QSelect',
+        'QTabs',
+    'QTab',
+    'QTabPane',
+    'QRouteTab'
       ],
       directives: [
         'Ripple',

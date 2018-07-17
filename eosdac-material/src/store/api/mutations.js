@@ -46,3 +46,22 @@ export const SCATTER_AVAILABLE = (state, scatter) => {
   state.scatterAvailable = true
   state.scatter = scatter
 }
+
+export const ADD_TOKEN_CONTRACT_ABI = (state, payload) => {
+  state.tokenContractAbi = payload
+}
+
+export const NOTIFY = (state, payload) => {
+  state.notification = {
+    icon: payload.icon,
+    color: payload.color,
+    message: payload.message,
+    details: payload.details,
+    seen: false
+  }
+}
+
+export const CLOSE_NOTIFICATION = (state) => {
+  state.notification = {}
+  state.notification.seen = true
+}

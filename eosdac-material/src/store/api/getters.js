@@ -1,5 +1,10 @@
 export const getCurrentEndpoint = (state) => {
-  return state.endpoints[state.activeEndpointIndex]
+  if (state.endpoints[state.activeEndpointIndex]) {
+    return state.endpoints[state.activeEndpointIndex]
+  } else {
+    return false
+  }
+
 }
 
 export const getEndpoints = (state) => {
@@ -24,4 +29,16 @@ export const hasScatter = (state) => {
 
 export const getScatter = (state) => {
   return state.scatter
+}
+
+export const getAbiActions = (state) => {
+  if (state.tokenContractAbi) {
+    return state.tokenContractAbi.actions
+  } else {
+    return null
+  }
+}
+
+export const getNotification = (state) => {
+    return state.notification
 }
