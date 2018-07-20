@@ -1,37 +1,47 @@
 <template>
-<q-modal class="text-white" maximized v-model="init" v-on:hide="hide()">
-  <div class="row justify-center">
-    <div v-if="!start" class="col-xs-12 col-sm-6 col-md-4 text-center">
-      <h4>eosDAC Toolkit</h4>
-      <p class="q-ma-sm">
-        Introduction text? Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren,
-        no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo
-        duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-      </p>
-      <q-btn class="q-ma-sm" color="primary" @click="start = true" label="Continue" />
-    </div>
-    <div v-else class="col-xs-12 col-sm-6 col-md-4 text-center">
-      <q-stepper v-if="!importInit" class="absolute-center" color="primary" ref="initstepper" contractable>
-        <q-step default title="API Endpoint" name="init1">
-          <q-alert message="An API endpoint is needed to enable communication with the eosDAC contracts on the EOS network." class="text-truncate" icon="info" color="grey" />
-          <q-field label-width="12" label="API Endpoint URL" helper="SSL is highly recommended (https)" :error="errorEndpoint" :error-label="errorEndpointText" dark>
-            <q-input dark v-model="endpoint" placeholder="https://endpoint-url.com" />
-          </q-field>
-          <q-stepper-navigation class="justify-center">
-            <q-btn :disabled="badEndpoint" class="q-ma-sm" color="primary" @click="connect()" label="Connect" />
-          </q-stepper-navigation>
-        </q-step>
-        <q-step title="Authentication" name="init2">
-          <h4 class="text-white">Authentication Method</h4>
-          <q-alert v-if="!hasScatter" message="Scatter is not available. If you have Scatter installed please refresh." class="text-truncate" icon="info" color="grey" />
-          <q-alert v-if="scatterError" :message="scatterErrorText" class="text-truncate" icon="info" color="grey" />
-          <q-btn @click="useScatter()" :disabled="!hasScatter" class="q-ma-sm" color="primary" label="Scatter (recommended)" size="xl" />
-          <p class="text-white">OR</p>
-          <q-btn @click="importInit = true" class="q-ma-sm" color="primary" label="Import private keys" size="xl" />
-        </q-step>
-      </q-stepper>
-      <Import class="absolute-center" v-else />
-    </div>
+<q-modal class="text-white" v-model="init" no-esc-dismiss no-backdrop-dismiss>
+  <div class="q-mx-lg text-center" v-if="!start">
+    <h4>eosDAC Toolkit</h4>
+    <p style="min-height:150px;">
+      Introduction text?
+    </p>
+    <q-btn class="q-ma-sm" color="primary" @click="start = true" label="Continue" />
+  </div>
+  <div v-else>
+    <q-stepper v-model="curStep" v-show="!importInit" color="white" ref="initstepper" contractable no-header-navigation>
+      <q-step active-icon="icon-airdrop" default title="API Endpoint" name="init1">
+        <div class="row">
+          <div class="col-xs-12 q-pa-sm">
+            <p class="text-white text-center">An API endpoint is needed to enable communication with the eosDAC contracts on the EOS network.</p>
+            <q-alert v-if="errorEndpoint" :message="errorEndpointText" class="text-truncate" icon="info" color="red" />
+          </div>
+          <div class="col-xs-12 col-md-6 q-pa-sm">
+            <p class="text-white">Server to connect (API Endpoint)</p>
+            <q-field label-width="12" dark>
+              <q-input dark v-model="endpoint" placeholder="https://endpoint-url.com" />
+            </q-field>
+            <q-btn :disabled="badEndpoint" class="q-ma-sm" color="primary" @click="connect(endpoint)" label="Connect" />
+          </div>
+          <div v-if="!endpointListFail" class="col-xs-12 col-md-6 q-pa-sm">
+            <p class="text-white">Endpoint from List</p>
+            <q-select class="" placeholder="Select Endpoint from List" v-model="selectedEndpoint" dark radio :options="endpoints" />
+            <q-btn :disabled="!selectedEndpoint" class="q-ma-sm" color="primary" @click="connect(selectedEndpoint)" label="Connect" />
+          </div>
+        </div>
+      </q-step>
+      <q-step class="text-center" title="Authentication" name="init2" icon="icon-member">
+        <h4 class="text-white">Authentication Method</h4>
+        <q-alert v-if="!hasScatter" message="Scatter is not available. If you have Scatter installed please refresh." class="text-truncate" icon="info" color="grey" />
+        <q-alert v-if="scatterError" :message="scatterErrorText" class="text-truncate" icon="info" color="grey" />
+        <q-btn @click="useScatter()" :disabled="!hasScatter" class="q-ma-sm" color="primary" label="Scatter (recommended)" size="xl" />
+        <p class="text-white text-center">OR</p>
+        <q-btn @click="importInit = true" class="q-ma-sm" color="primary" label="Import private keys" size="xl" />
+      </q-step>
+      <q-step title="Registration" name="init3">
+        <Register ref="Register" v-on:registrationDone="init = false" />
+      </q-step>
+    </q-stepper>
+    <Import v-bind:intro="true" v-if="importInit" v-on:importDone="checkRegister()" />
   </div>
   <LoadingSpinner :visible="loading" :text="loadingText" />
 </q-modal>
@@ -40,6 +50,7 @@
 <script>
 import LoadingSpinner from 'components/loading-spinner'
 import Import from 'components/import'
+import Register from 'components/register'
 import {
   mapGetters
 } from 'vuex'
@@ -47,9 +58,10 @@ export default {
   name: 'Initialize',
   components: {
     LoadingSpinner,
-    Import
+    Import,
+    Register
   },
-  data () {
+  data() {
     return {
       loading: false,
       loadingText: 'loading...',
@@ -61,43 +73,92 @@ export default {
       badEndpoint: true,
       scatterError: false,
       scatterErrorText: '',
-      importInit: false
+      importInit: false,
+      curStep: 'init1',
+      selectedEndpoint: '',
+      endpoints: [],
+      endpointListFail: false
     }
   },
   computed: {
     ...mapGetters({
       hasScatter: 'api/hasScatter',
       getScatter: 'api/getScatter',
-      getCurrentEndpoint: 'api/getCurrentEndpoint'
+      getCurrentEndpoint: 'api/getCurrentEndpoint',
+      getRegistered: 'account/getRegistered',
+      getAccountName: 'account/getAccountName'
     })
   },
+  mounted() {
+    this.loadEndpoints()
+  },
   methods: {
-    hide () {
-      this.init = false
+    checkRegister() {
+      this.loading = true
+      this.loadingText = 'Checking member status...'
+      this.importInit = false
+      this.$store.dispatch('api/getRegistered').then((res) => {
+        this.loading = false
+        let findAccount = res.rows.find(findAccount => {
+          return findAccount.sender === this.getAccountName
+        })
+        if (findAccount) {
+          this.$store.commit('account/ADD_REGISTRATION', findAccount.agreedterms)
+          this.init = false
+        } else {
+          this.$refs.initstepper.next()
+        }
+      })
+      this.loading = false
     },
-    openInit () {
+    open() {
       this.init = true
     },
-    validate (url) {
-      var pattern = /(http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-/]))?/
+    validate(url) {
+      let pattern = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/
       if (pattern.test(url)) {
         return true
       } else {
         return false
       }
     },
-    connect () {
+    async loadEndpoints() {
+      this.loading = true
+      this.loadingText = 'Gathering endpoints...'
+      try {
+        let getEndpoints = await this.$axios.get('https://eosdac.io/topbps.json')
+        let res = []
+        for (let i = 0; i < getEndpoints.data.length; i++) {
+          if (getEndpoints.data[i].nodes) {
+            for (let j = 0; j < getEndpoints.data[i].nodes.length; j++) {
+              if (getEndpoints.data[i].nodes[j].ssl_endpoint) {
+                res.push({
+                  label: getEndpoints.data[i].nodes[j].ssl_endpoint,
+                  value: getEndpoints.data[i].nodes[j].ssl_endpoint
+                })
+              }
+            }
+          }
+        }
+        this.endpoints = res
+        this.loading = false
+      } catch (error) {
+        this.endpointListFail = true
+      }
+    },
+    async connect(url) {
       this.loading = true
       this.loadingText = 'Connecting...'
-      this.$store.dispatch('api/testEndpoint', this.endpoint).then((res) => {
+      try {
+        let test = await this.$store.dispatch('api/testEndpoint', url)
         this.loading = false
         this.$store.commit('api/ADD_ENDPOINT', {
           url: this.endpoint,
           chainId: this.$configFile.network.chainId
         })
-        this.$store.commit('api/CHANGE_ENDPOINT', this.endpoint)
+        this.$store.commit('api/CHANGE_ENDPOINT', url)
         this.$refs.initstepper.next()
-      }, (err) => {
+      } catch (err) {
         this.loading = false
         this.errorEndpoint = true
         this.badEndpoint = true
@@ -117,72 +178,50 @@ export default {
           default:
             this.errorEndpointText = err.message
         }
-      })
+      }
     },
-    useScatter () {
+    async useScatter() {
       this.loading = true
       this.loadingText = 'Waiting for scatter...'
       let current = this.getCurrentEndpoint
-      let network = {
-        blockchain: 'eos',
-        protocol: current.httpEndpoint.split(':')[0].replace(/\//g, ''),
-        host: current.httpEndpoint.split(':')[1].replace(/\//g, ''),
-        port: current.httpEndpoint.split(':')[2] || 80,
-        chainId: this.$configFile.network.chainId
-      }
       let network2 = {
         blockchain: 'eos',
         protocol: current.httpEndpoint.split(':')[0].replace(/\//g, ''),
         host: current.httpEndpoint.split(':')[1].replace(/\//g, ''),
         port: current.httpEndpoint.split(':')[2] || 80
       }
-      this.getScatter.suggestNetwork(network2).then(() => {
-        this.getScatter.getIdentity({
+      try {
+        let suggest = await this.getScatter.suggestNetwork(network2)
+        let identity = await this.getScatter.getIdentity({
           accounts: [network2]
-        }).then(identity => {
-          this.$store.dispatch('api/getAccount', {
-            account_name: identity.accounts[0].name
-          }).then((res) => {
-            this.loading = false
-            this.$store.commit('account/IMPORT_ACCOUNT', {
-              info: res,
-              scatter: true
-            })
-            this.init = false
-          }, (err) => {
-            this.loading = false
-            if (err === 'Error: notFound') {
-              this.scatterError = true
-              this.scatterErrorText = 'Could not find account.'
-            } else {
-              this.scatterError = true
-              this.scatterErrorText = err
-            }
-          })
-        }, (err) => {
-          this.loading = false
-          if (err.type === 'identity_rejected') {
-            this.scatterError = true
-            this.scatterErrorText = 'Identity request was denied. Please try again and accept the request'
-          } else {
-            this.scatterError = true
-            this.scatterErrorText = err
-          }
         })
-      }, (err) => {
+        //if error explain that....
+        let queryAccount = await this.$store.dispatch('api/getAccount', {
+          account_name: identity.accounts[0].name
+        })
+        this.$store.commit('account/IMPORT_ACCOUNT', {
+          info: queryAccount,
+          scatter: true
+        })
+        this.loading = false
+        this.checkRegister()
+      } catch (err) {
         this.loading = false
         if (err.type === 'locked') {
           this.scatterError = true
           this.scatterErrorText = 'Scatter is locked. Please unlock to continue'
+        } else if (err.type === 'identity_rejected') {
+          this.scatterError = true
+          this.scatterErrorText = 'Identity request was denied. Please try again and accept the request'
         } else {
           this.scatterError = true
-          this.scatterErrorText = 'Network request was denied. Please try again and accept the request'
+          this.scatterErrorText = err.message
         }
-      })
+      }
     }
   },
   watch: {
-    endpoint (val) {
+    endpoint(val) {
       if (!val) {
         this.errorEndpoint = false
         this.errorEndpointText = ''

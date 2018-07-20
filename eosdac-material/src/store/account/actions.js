@@ -13,6 +13,7 @@ export const importAccount = ({
         let key = payload.keys[i].privateKey
         let encrypted = encrypt(key, payload.password).toString(CryptoJS.enc.Utf8)
         payload.keys[i].privateKeyEnc = encrypted
+        payload.keys[i].privateKey = ''
       }
     }
     commit('IMPORT_ACCOUNT', {info: payload.info, keys: payload.keys})
@@ -26,6 +27,7 @@ export const unlockAccount = ({
 }, password) => {
   return new Promise((resolve, reject) => {
     let encrypted = state.pkeys
+    let pkeys = []
     for (let i = 0; i < encrypted.length; i++) {
       if (encrypted[i].privateKeyEnc.length && encrypted[i].key) {
         let key = encrypted[i].privateKeyEnc
@@ -33,10 +35,12 @@ export const unlockAccount = ({
         if (!ecc.isValidPrivate(decryptedKey)) {
           reject(Error('wrong password'))
         }
-        encrypted[i].privateKey = decryptedKey
+        pkeys.push(decryptedKey)
+        decryptedKey = null
       }
     }
-    commit('UNLOCK_ACCOUNT', encrypted)
+    commit('UNLOCK_ACCOUNT', {pkeys: encrypted, pkeysArray: pkeys})
+    pkeys = null
     resolve()
   })
 }

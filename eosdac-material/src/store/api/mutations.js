@@ -46,3 +46,27 @@ export const SCATTER_AVAILABLE = (state, scatter) => {
   state.scatterAvailable = true
   state.scatter = scatter
 }
+
+export const ADD_CONTRACT_RICARDIAN = (state, payload) => {
+  let findRicardian = state.ricardians.find(findRicardian => {
+    return findRicardian.contract === payload.contract
+  })
+  if (!findRicardian) {
+    state.ricardians.push(payload)
+  }
+}
+
+export const NOTIFY = (state, payload) => {
+  state.notification = {
+    icon: payload.icon,
+    color: payload.color,
+    message: payload.message,
+    details: payload.details,
+    seen: false
+  }
+}
+
+export const CLOSE_NOTIFICATION = (state) => {
+  state.notification = {}
+  state.notification.seen = true
+}

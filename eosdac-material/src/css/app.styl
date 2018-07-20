@@ -1,7 +1,4 @@
 // app global css
-.q-stepper-tab.step-waiting {
-  color: white;
-}
 
 .dark2 {
   background: #1E2128;
@@ -15,6 +12,39 @@
   background: var(--q-color-primary) !important;
 }
 
-.q-stepper-header {
+.markdown-body {
+        box-sizing: border-box;
+        min-width: 200px;
+        max-width: 980px;
+        padding: 0px 45px 45px 45px;
+        background: white;
+    }
+
+    @media (max-width: 767px) {
+        .markdown-body {
+            padding: 15px;
+        }
+    }
+
+.q-stepper-step {
+  background: #1E2128;
+}
+
+.q-stepper-tab.step-waiting {
   color: white;
+}
+
+.q-stepper-tab.step-done {
+  color: var(--q-color-positive);
+}
+
+.q-stepper-dot {
+  border-radius: none;
+  background: none;
+}
+
+.q-tab.active { border-top: 2px solid white;}
+.q-tabs-position-top .q-tabs-bar {border-bottom-width: 0px;}
+.q-tabs-head {
+min-height:70px;
 }

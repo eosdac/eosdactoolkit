@@ -1,15 +1,15 @@
 <template>
-  <q-stepper color="primary" ref="importstepper">
+  <q-stepper color="white" ref="importstepper" no-header-navigation contractable no-esc-dismiss>
     <q-step default title="Account" name="import1">
       <q-field label-width="12" label="Account name" :error="errorAccount" :error-label="errorAccountText" dark>
         <q-input dark v-model="account" />
       </q-field>
       <q-stepper-navigation class="justify-center">
-        <q-btn :disabled="badAccount" class="q-ma-sm" color="primary" @click="checkAccount()" label="Connect" />
+        <q-btn :disabled="badAccount" class="q-ma-sm" color="primary" @click="checkAccount()" label="Continue" />
       </q-stepper-navigation>
     </q-step>
     <q-step title="Permissions" name="import2">
-      <q-alert message="Below you see all the permission need for your account." class="text-truncate" icon="info" color="grey" />
+      <q-alert message="Below you see all the permission needed for your account." class="text-truncate" icon="info" color="grey" />
     <q-list dark class="no-border">
       <q-list-header>Permission Threshold: {{permissionThreshold}}</q-list-header>
       <q-item v-for="(perm, index) in permissions" :key="index">
@@ -35,7 +35,7 @@
       <q-input dark v-model="password2"  type="password" />
     </q-field>
     <q-stepper-navigation>
-      <q-btn :disable="badImport" color="primary" @click="importAccount()">Finish Import</q-btn>
+      <q-btn :disable="badImport" color="primary" @click="importAccount()">Continue</q-btn>
     </q-stepper-navigation>
   </q-step>
     <LoadingSpinner :visible="loading" :text="loadingText" />
@@ -49,6 +49,9 @@ export default {
   name: 'Import',
   components: {
     LoadingSpinner
+  },
+  props: {
+    intro: Boolean
   },
   data () {
     return   {
@@ -76,41 +79,36 @@ export default {
       this.loading = true
       this.loadingText = 'Encrypting keys...'
       this.$store.dispatch('account/importAccount', {info: this.accountObj, keys: this.permissions, password: this.password}).then(() => {
-        this.$emit('hide', true)
-        this.$parent.$emit('hide', true)
+        if (this.intro) {
+          this.$emit('importDone', true)
+        }
         Object.assign(this.$data, this.$options.data())
       })
       this.loading = false
     },
-    checkAccount () {
+    async checkAccount () {
       this.loading = true
       this.loadingText = 'Looking up account...'
-      this.$store.dispatch('api/getAccount', {
-        account_name: this.account
-      }).then((res) => {
+      try {
+        let queryAccount = await this.$store.dispatch('api/getAccount', { account_name: this.account })
         this.loading = false
-        if (!res.permissions.length) {
+        if (!queryAccount.permissions.length) {
           this.loading = false
           this.badAccount = true
           this.errorAccount = true
           this.errorAccountText = 'Could not find account on network'
         } else {
-          this.accountObj = res
+          this.accountObj = queryAccount
           // this.gatherPermissions(res.permissions)
           // use get_required_keys on transfer action
           // https://developers.eos.io/eosio-nodeos/reference
-          this.gatherPermissions(res.permissions)
+          this.gatherPermissions(queryAccount.permissions)
         }
-      }, (err) => {
+      } catch (err) {
         this.loading = false
-        if (err === 'Error: notFound') {
-          this.errorAccount = true
-          this.errorAccountText = 'Could not find account.'
-        } else {
-          this.errorAccount = true
-          this.errorAccountText = err
-        }
-      })
+        this.errorAccount = true
+        this.errorAccountText = 'Could not find account.'
+      }
     },
     validatePermission (i) {
       if (!this.permissions[i].privateKey.length) {
