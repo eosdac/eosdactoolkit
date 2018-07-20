@@ -7,8 +7,8 @@
       </q-btn>
       <q-toolbar-title class="text-white">
         <p class="text-weight-thin">
-          <q-icon style="font-size:40px;" name="icon-logo-eosdac" />
-          EOS<b>DAC</b> TOOLKIT</p>
+          <q-icon style="font-size:40px;" name="icon-logo-eosdac" /> EOS
+          <b>DAC</b> TOOLKIT</p>
       </q-toolbar-title>
       <div v-if="getImported">
         <MenuDropdown v-if="getUnlocked" iconColor="positive" label="Status" sublabel="Logged-In" icon="icon-lock-unlocked" :iconRight="true">
@@ -50,7 +50,7 @@
     <router-view />
     <Initialize ref="Initialize" v-on:initDone="refs.Register.open()" />
     <Unlock ref="Unlock" />
-    <Notifier />
+    <Notifier :drawer="leftDrawerOpen" />
   </q-page-container>
 </q-layout>
 </template>
@@ -101,7 +101,7 @@ export default {
     lockAccount() {
       this.$store.commit('account/LOCK_ACCOUNT')
     },
-    checkScatter () {
+    checkScatter() {
       if (this.getUsesScatter) {
         this.getScatter.getIdentity().then(identity => {
           this.$store.commit('account/UNLOCK_ACCOUNT_SCATTER')
@@ -110,12 +110,29 @@ export default {
         })
       }
 
-    }/*,
-    autolock () {
-      if (this.getAutolockInterval && this.getAutolockInterval + this.lastUnlock <= Math.floor(Date.now() / 1000)) {
-        this.lockAccount()
+    },
+    loadScatter() {
+      if (window.scatter) {
+        console.log('scatter')
+        this.$store.commit('api/SCATTER_AVAILABLE', window.scatter)
+        window.scatter = null
+      } else {
+        document.addEventListener('scatterLoaded', scatterExtension => {
+          if (window.scatter) {
+            console.log('scatter')
+            this.$store.commit('api/SCATTER_AVAILABLE', window.scatter)
+            window.scatter = null
+          }
+        })
       }
-    }*/
+
+    }
+    /*,
+        autolock () {
+          if (this.getAutolockInterval && this.getAutolockInterval + this.lastUnlock <= Math.floor(Date.now() / 1000)) {
+            this.lockAccount()
+          }
+        }*/
     /*async queryApi() {
       try {
         let query = await this.$store.dispatch('api/pingCurrentEndpoint', this.getCurrentEndpoint)
@@ -123,17 +140,11 @@ export default {
     }*/
   },
   mounted() {
-    document.addEventListener('scatterLoaded', scatterExtension => {
-      if (window.scatter) {
-        this.$store.commit('api/SCATTER_AVAILABLE', window.scatter)
-        window.scatter = null
-      }
-    })
+    this.loadScatter()
     if (this.getCurrentEndpoint) {
       this.$store.dispatch('api/pingCurrentEndpoint', {
         url: this.getCurrentEndpoint.httpEndpoint
-      }).then(() => {
-      }, (err) => {
+      }).then(() => {}, (err) => {
         //open settings
       })
       this.$store.dispatch('api/getRegistered').then((res) => {

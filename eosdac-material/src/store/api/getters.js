@@ -1,3 +1,5 @@
+import configFile from '../../statics/config.json'
+
 export const getCurrentEndpoint = (state) => {
   if (state.endpoints[state.activeEndpointIndex]) {
     return state.endpoints[state.activeEndpointIndex]
@@ -31,9 +33,23 @@ export const getScatter = (state) => {
   return state.scatter
 }
 
-export const getAbiActions = (state) => {
-  if (state.tokenContractAbi) {
-    return state.tokenContractAbi.actions
+export const getTokenContractRicardian = (state) => {
+  let findRicardian = state.ricardians.find(findRicardian => {
+    return findRicardian.contract === configFile.network.tokenContract.name
+  })
+  if (findRicardian) {
+    return findRicardian.ricardian
+  } else {
+    return null
+  }
+}
+
+export const getMainCurrencyContractRicardian = (state) => {
+  let findRicardian = state.ricardians.find(findRicardian => {
+    return findRicardian.contract === configFile.network.mainCurrencyContract.name
+  })
+  if (findRicardian) {
+    return findRicardian.ricardian
   } else {
     return null
   }

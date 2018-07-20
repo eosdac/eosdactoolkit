@@ -25,7 +25,7 @@
         </div>
           <q-card-actions>
             <q-btn color="primary" @click="transact()">Send</q-btn>
-            <q-btn v-if="cancelable" color="danger" @click="visible = false">Cancel</q-btn>
+            <q-btn v-if="!cancelable" color="danger" @click="visible = false">Cancel</q-btn>
           </q-card-actions>
           <LoadingSpinner :visible="loading" :text="loadingText" />
         </q-card>
@@ -52,53 +52,54 @@ export default {
       action: '',
       fields: {},
       ricardian: '',
-      cancelable: true
+      cancelable: false
     }
   },
   computed: {
     ...mapGetters({
       getAccountName: 'account/getAccountName',
       getUnlocked: 'account/getUnlocked',
-      getAbiActions: 'api/getAbiActions',
+      getTokenContractRicardian: 'api/getTokenContractRicardian',
+      getMainCurrencyContractAbi: 'api/getMainCurrencyContractAbi',
       getUsesScatter: 'account/getUsesScatter'
     })
   },
   methods: {
-    newTransaction (action, fields, cancelable) {
+    //
+    // needs rewrite for all contarct abis
+    //
+    async newTransaction (action, fields, cancelable) {
       if (cancelable) {
-        this.cancelable = false
+        this.cancelable = cancelable
       }
       this.visible = true
       this.loading = true
       this.loadingText = 'Loading ABI...'
-      if (!this.getAbiActions) {
-        this.$store.dispatch('api/getTokenContractAbi').then((res) => {
-        this.loading = false
-        let abiAction = this.getAbiActions.find(abiAction => {
-          return abiAction.name === action
-        })
-        if (abiAction) {
-        let md = new MarkdownIt()
-        this.ricardian = md.render(abiAction.ricardian_contract)
-        this.action = action
-        this.fields = fields
-        }
-        }, (err) => {
-          this.loading = false
-        })
-      } else {
-        this.loading = false
-        let abiAction = this.getAbiActions.find(abiAction => {
-          return abiAction.name === action
-        })
-        if (abiAction) {
-        let md = new MarkdownIt()
-        this.ricardian = md.render(abiAction.ricardian_contract)
-        }
-        this.action = action
-        this.fields = fields
+      let ricardian
+      switch(action) {
+        case 'transferMain':
+          if (!this.getMainCurrencyContractAbi) {
+            ricardian = await this.$store.dispatch('api/getContractRicardian', this.$configFile.network.mainCurrencyContract.name)
+          } else {
+            ricardian = this.getMainCurrencyContractAbi
+          }
+        break
+        case 'transfer':
+          if (!this.getTokenContractRicardian) {
+            ricardian = await this.$store.dispatch('api/getContractRicardian', this.$configFile.network.tokenContract.name)
+          } else {
+            ricardian = this.getTokenContractRicardian
+          }
+        break
       }
-
+      let ricardianAction = ricardian.find(ricardianAction => {
+        return ricardianAction.name === action
+      })
+      let md = new MarkdownIt()
+      this.ricardian = md.render(ricardianAction.ricardian_contract)
+      this.action = action
+      this.fields = fields
+      this.loading = false
     },
     transact () {
       if (this.getUsesScatter) {
@@ -110,7 +111,11 @@ export default {
             this.$store.commit('api/NOTIFY', {icon: 'icon-tick', color:'positive', message:'Transaction Successful', detail: ''})
           this.loading = false
         }, (err) => {
-          this.$store.commit('api/NOTIFY', {icon: 'error', color:'red', message:'Error: ' + err.message, detail: ''})
+          if (err.type) {
+            this.$store.commit('api/NOTIFY', {icon: 'error', color:'red', message:'Error: ' + err.type, detail: ''})
+          } else {
+            this.$store.commit('api/NOTIFY', {icon: 'error', color:'red', message:'Error: ' + JSON.parse(err).error.details[0].message, detail: ''})
+          }
           this.loading = false
         })
       } else {

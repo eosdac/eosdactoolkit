@@ -22,3 +22,11 @@ export const getUsesScatter = (state) => {
 export const getAutolockInterval = (state) => {
   return state.getAutolockInterval
 }
+
+export const getTokenBalance = (state) => {
+  return state.tokenBalance
+}
+
+export const getMainCurrencyBalance = (state) => {
+  return state.mainCurrencyBalance
+}

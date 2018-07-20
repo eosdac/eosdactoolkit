@@ -9,6 +9,14 @@ export const IMPORT_ACCOUNT = (state, payload) => {
   }
 }
 
+export const UPDATE_TOKEN_BALANCE = (state, balance) => {
+  state.tokenBalance = balance
+}
+
+export const UPDATE_MAIN_CURRENCY_BALANCE = (state, balance) => {
+  state.mainCurrencyBalance = balance
+}
+
 export const LOCK_ACCOUNT = (state) => {
   state.pkeysArray = []
   state.unlocked = false

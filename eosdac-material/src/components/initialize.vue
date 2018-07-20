@@ -67,7 +67,7 @@ export default {
       loadingText: 'loading...',
       init: false,
       start: false,
-      endpoint: 'http://dev.cryptolions.io:38888',
+      endpoint: '',
       errorEndpoint: false,
       errorEndpointText: '',
       badEndpoint: true,
@@ -115,7 +115,7 @@ export default {
       this.init = true
     },
     validate(url) {
-      var pattern = /(http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-/]))?/
+      let pattern = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/
       if (pattern.test(url)) {
         return true
       } else {

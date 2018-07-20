@@ -5,6 +5,11 @@
       "name": "kas",
       "token": "NANO",
       "decimals": 4
+    },
+    "mainCurrencyContract": {
+      "name": "jungle",
+      "token": "JUNGLE",
+      "decimals": 4
     }
   }
 }

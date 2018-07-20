@@ -7,7 +7,7 @@ export default {
   scatter: null,
   endpoints: [],
   lastGetInfo: {},
-  tokenContractAbi: null,
+  ricardians: [],
   notification: {
     icon: '',
     color: '',
