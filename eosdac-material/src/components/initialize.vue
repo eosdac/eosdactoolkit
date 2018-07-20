@@ -138,10 +138,18 @@ export default {
         this.endpointListFail = true
       }
     },
-    async connect(url) {
+    filterUrl (url) {
+      if(url.substr(-1) === '/') {
+        return url.substr(0, url.length - 1);
+    } else {
+        return url
+      }
+    },
+    async connect(u) {
       this.loading = true
       this.loadingText = 'Connecting...'
       try {
+        let url = await this.filterUrl(u)
         let test = await this.$store.dispatch('api/testEndpoint', url)
         this.loading = false
         this.$store.commit('api/ADD_ENDPOINT', {
