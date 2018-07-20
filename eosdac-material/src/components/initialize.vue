@@ -114,14 +114,6 @@ export default {
     open() {
       this.init = true
     },
-    validate(url) {
-      let pattern = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/
-      if (pattern.test(url)) {
-        return true
-      } else {
-        return false
-      }
-    },
     async loadEndpoints() {
       this.loading = true
       this.loadingText = 'Gathering endpoints...'
@@ -162,21 +154,25 @@ export default {
         this.loading = false
         this.errorEndpoint = true
         this.badEndpoint = true
-        switch (err.message) {
-          case 'timeout':
-            this.errorEndpointText = 'Connection to endpoint timed out.'
-            break
-          case 'NetworkError when attempting to fetch resource.':
-            this.errorEndpointText = 'Could not connect to endpoint.'
-            break
-          case 'Wrong chainId':
-            this.errorEndpointText = 'The chain ID returned by the endpoint is incorrect.'
-            break
-          case 'Failed to fetch':
-            this.errorEndpointText = 'Could not connect to endpoint.'
-            break
-          default:
-            this.errorEndpointText = err.message
+        if (err.message.includes('Cannot POST')) {
+          this.errorEndpointText = 'The URL seems to be invalid.'
+        } else {
+          switch (err.message) {
+            case 'timeout':
+              this.errorEndpointText = 'Connection to endpoint timed out.'
+              break
+            case 'NetworkError when attempting to fetch resource.':
+              this.errorEndpointText = 'Could not connect to endpoint.'
+              break
+            case 'Wrong chainId':
+              this.errorEndpointText = 'The chain ID returned by the endpoint is incorrect.'
+              break
+            case 'Failed to fetch':
+              this.errorEndpointText = 'Could not connect to endpoint.'
+              break
+            default:
+              this.errorEndpointText = err.message
+          }
         }
       }
     },
@@ -225,10 +221,6 @@ export default {
       if (!val) {
         this.errorEndpoint = false
         this.errorEndpointText = ''
-        this.badEndpoint = true
-      } else if (!this.validate(val)) {
-        this.errorEndpoint = true
-        this.errorEndpointText = 'Invalid URL'
         this.badEndpoint = true
       } else {
         this.errorEndpoint = false
