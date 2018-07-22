@@ -11,7 +11,10 @@
           <b>DAC</b> TOOLKIT</p>
       </q-toolbar-title>
       <div v-if="getImported">
-        <MenuDropdown v-if="getUnlocked" iconColor="positive" label="Status" sublabel="Logged-In" icon="icon-lock-unlocked" :iconRight="true">
+        <MenuDropdown v-if="getAccountName" iconColor="white" :label="'Your ' + tokenName + ' Blanace'" :sublabel="String(getTokenBalance)" icon="icon-dac-balance" />
+        <MenuDropdown v-if="getAccountName" iconColor="white" :label="'Your ' + mainCurrencyName + ' Blanace'" :sublabel="String(getAccount.core_liquid_balance)" icon="icon-eos" />
+        <MenuDropdown v-if="getAccountName" iconColor="white" label="Account Name" :sublabel="getAccountName" icon="icon-member" />
+        <MenuDropdown v-if="getAccountName" iconColor="positive" label="Status" sublabel="Logged-In" icon="icon-lock-unlocked" :iconRight="true">
           <q-list class="bg-dark2" dark link>
             <q-item @click.native="lockAccount()" dark>
               <q-item-side>
@@ -36,16 +39,14 @@
       </div>
     </q-toolbar>
   </q-layout-header>
-
   <q-layout-drawer v-model="leftDrawerOpen" content-class="bg-dark2">
     <q-list no-border link inset-delimiter dark>
-      <q-item to="/wallet">
+      <q-item v-if="getAccountName" to="/wallet">
         <q-item-side icon="icon-wallet" />
         <q-item-main label="Wallet" sublabel="" />
       </q-item>
     </q-list>
   </q-layout-drawer>
-
   <q-page-container>
     <router-view />
     <Initialize ref="Initialize" v-on:initDone="refs.Register.open()" />
@@ -78,7 +79,9 @@ export default {
   },
   data() {
     return {
-      leftDrawerOpen: this.$q.platform.is.desktop
+      leftDrawerOpen: this.$q.platform.is.desktop,
+      tokenName: this.$configFile.network.tokenContract.token,
+      mainCurrencyName: this.$configFile.network.mainCurrencyContract.token
     }
   },
   computed: {
@@ -90,7 +93,11 @@ export default {
       getRegistered: 'account/getRegistered',
       getScatter: 'api/getScatter',
       getCurrentEndpoint: 'api/getCurrentEndpoint',
-      getAutolockInterval: 'account/getAutolockInterval'
+      getAutolockInterval: 'account/getAutolockInterval',
+      getConnectionInterval: 'api/getConnectionInterval',
+      getLastUnlock: 'account/getLastUnlock',
+      getTokenBalance: 'account/getTokenBalance',
+      getAccount: 'account/getAccount'
     })
   },
   methods: {
@@ -101,15 +108,10 @@ export default {
     lockAccount() {
       this.$store.commit('account/LOCK_ACCOUNT')
     },
-    checkScatter() {
-      if (this.getUsesScatter) {
-        this.getScatter.getIdentity().then(identity => {
-          this.$store.commit('account/UNLOCK_ACCOUNT_SCATTER')
-        }).catch(error => {
-          this.$store.commit('account/LOCK_ACCOUNT')
-        })
-      }
-
+    lockScatter() {
+      this.getScatter.forgetIdentity().then(() => {
+        this.$store.commit('account/LOCK_ACCOUNT')
+      })
     },
     loadScatter() {
       if (window.scatter) {
@@ -125,28 +127,34 @@ export default {
           }
         })
       }
-
-    }
-    /*,
-        autolock () {
-          if (this.getAutolockInterval && this.getAutolockInterval + this.lastUnlock <= Math.floor(Date.now() / 1000)) {
+    },
+    autolock () {
+      if (this.getLastUnlock) {
+        if (this.getAutolockInterval + this.getLastUnlock < Math.floor(Date.now() / 1000)) {
+          if(this.getUsesScatter) {
+            this.lockScatter()
+          } else {
             this.lockAccount()
           }
-        }*/
-    /*async queryApi() {
-      try {
-        let query = await this.$store.dispatch('api/pingCurrentEndpoint', this.getCurrentEndpoint)
+        }
       }
-    }*/
+    },
+    async queryApis () {
+      try {
+        const tokenBalance = await this.$store.dispatch('api/getTokenContractBalance')
+        const mainBalance = await this.$store.dispatch('api/updateAccountInfo')
+      } catch  (err) {
+
+      }
+    }
   },
   mounted() {
+    //check if registered
     this.loadScatter()
-    if (this.getCurrentEndpoint) {
-      this.$store.dispatch('api/pingCurrentEndpoint', {
-        url: this.getCurrentEndpoint.httpEndpoint
-      }).then(() => {}, (err) => {
-        //open settings
-      })
+    if (!this.getImported) {
+      this.$refs.Initialize.open()
+    }
+    if (this.getAccountName) {
       this.$store.dispatch('api/getRegistered').then((res) => {
         let findAccount = res.rows.find(findAccount => {
           return findAccount.sender === this.getAccountName
@@ -156,12 +164,8 @@ export default {
         }
       })
     }
-
-    if (!this.getImported) {
-      this.$refs.Initialize.open()
-    }
-    //setInterval(this.checkScatter, 1000)
-
+    setInterval(this.queryApis, this.getConnectionInterval)
+    setInterval(this.autolock, 1000)
   }
 }
 </script>

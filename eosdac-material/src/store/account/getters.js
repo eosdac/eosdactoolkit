@@ -8,11 +8,27 @@ export const getRegistered = (state) => {
 }
 
 export const getAccountName = (state) => {
-  return state.info.account_name
+  if (state.info) {
+    return state.info.account_name
+  } else {
+    return false
+  }
+}
+
+export const getAccount = (state) => {
+  if (state.info) {
+    return state.info
+  } else {
+    return false
+  }
 }
 
 export const getUnlocked = (state) => {
   return state.unlocked
+}
+
+export const getLastUnlock= (state) => {
+  return state.lastUnlock
 }
 
 export const getUsesScatter = (state) => {
@@ -25,8 +41,4 @@ export const getAutolockInterval = (state) => {
 
 export const getTokenBalance = (state) => {
   return state.tokenBalance
-}
-
-export const getMainCurrencyBalance = (state) => {
-  return state.mainCurrencyBalance
 }

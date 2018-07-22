@@ -1,13 +1,13 @@
 <template>
 <q-modal class="text-white" v-model="init" no-esc-dismiss no-backdrop-dismiss>
-  <div class="q-mx-lg text-center" v-if="!start">
+  <!--<div class="q-mx-lg text-center" v-if="!start">
     <h4>eosDAC Toolkit</h4>
     <p style="min-height:150px;">
       Introduction text?
     </p>
     <q-btn class="q-ma-sm" color="primary" @click="start = true" label="Continue" />
   </div>
-  <div v-else>
+  <div v-else>-->
     <q-stepper v-model="curStep" v-show="!importInit" color="white" ref="initstepper" contractable no-header-navigation>
       <q-step active-icon="icon-airdrop" default title="API Endpoint" name="init1">
         <div class="row">
@@ -33,16 +33,16 @@
         <h4 class="text-white">Authentication Method</h4>
         <q-alert v-if="!hasScatter" message="Scatter is not available. If you have Scatter installed please refresh." class="text-truncate" icon="info" color="grey" />
         <q-alert v-if="scatterError" :message="scatterErrorText" class="text-truncate" icon="info" color="grey" />
-        <q-btn @click="useScatter()" :disabled="!hasScatter" class="q-ma-sm" color="primary" label="Scatter (recommended)" size="xl" />
-        <p class="text-white text-center">OR</p>
-        <q-btn @click="importInit = true" class="q-ma-sm" color="primary" label="Import private keys" size="xl" />
+        <q-btn v-if="$q.platform.is.desktop" @click="useScatter()" :disabled="!hasScatter" class="q-ma-sm" color="primary" label="Scatter" size="xl" />
+
+        <q-btn v-else @click="importInit = true" class="q-ma-sm" color="primary" label="Import private keys" size="xl" />
       </q-step>
       <q-step title="Registration" name="init3">
         <Register ref="Register" v-on:registrationDone="init = false" />
       </q-step>
     </q-stepper>
     <Import v-bind:intro="true" v-if="importInit" v-on:importDone="checkRegister()" />
-  </div>
+  <!--</div>-->
   <LoadingSpinner :visible="loading" :text="loadingText" />
 </q-modal>
 </template>
@@ -153,7 +153,7 @@ export default {
         let test = await this.$store.dispatch('api/testEndpoint', url)
         this.loading = false
         this.$store.commit('api/ADD_ENDPOINT', {
-          url: this.endpoint,
+          url,
           chainId: this.$configFile.network.chainId
         })
         this.$store.commit('api/CHANGE_ENDPOINT', url)
@@ -188,11 +188,19 @@ export default {
       this.loading = true
       this.loadingText = 'Waiting for scatter...'
       let current = this.getCurrentEndpoint
+      let pp
+      if (current.httpEndpoint.split(':')[0].replace(/\//g, '') === 'https') {
+        pp = 443
+      } else if (current.httpEndpoint.split(':')[0].replace(/\//g, '') === 'http') {
+        pp = 80
+      } else {
+        pp = null
+      }
       let network2 = {
         blockchain: 'eos',
         protocol: current.httpEndpoint.split(':')[0].replace(/\//g, ''),
         host: current.httpEndpoint.split(':')[1].replace(/\//g, ''),
-        port: current.httpEndpoint.split(':')[2] || 80
+        port: current.httpEndpoint.split(':')[2] || pp
       }
       try {
         let suggest = await this.getScatter.suggestNetwork(network2)

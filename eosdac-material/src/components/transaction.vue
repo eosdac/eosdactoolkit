@@ -60,7 +60,7 @@ export default {
       getAccountName: 'account/getAccountName',
       getUnlocked: 'account/getUnlocked',
       getTokenContractRicardian: 'api/getTokenContractRicardian',
-      getMainCurrencyContractAbi: 'api/getMainCurrencyContractAbi',
+      getMainCurrencyContractRicardian: 'api/getMainCurrencyContractRicardian',
       getUsesScatter: 'account/getUsesScatter'
     })
   },
@@ -78,13 +78,20 @@ export default {
       let ricardian
       switch(action) {
         case 'transferMain':
-          if (!this.getMainCurrencyContractAbi) {
+          if (!this.getMainCurrencyContractRicardian) {
             ricardian = await this.$store.dispatch('api/getContractRicardian', this.$configFile.network.mainCurrencyContract.name)
           } else {
-            ricardian = this.getMainCurrencyContractAbi
+            ricardian = this.getMainCurrencyContractRicardian
           }
         break
         case 'transfer':
+          if (!this.getTokenContractRicardian) {
+            ricardian = await this.$store.dispatch('api/getContractRicardian', this.$configFile.network.tokenContract.name)
+          } else {
+            ricardian = this.getTokenContractRicardian
+          }
+        break
+        case 'memberreg':
           if (!this.getTokenContractRicardian) {
             ricardian = await this.$store.dispatch('api/getContractRicardian', this.$configFile.network.tokenContract.name)
           } else {
@@ -96,10 +103,19 @@ export default {
         return ricardianAction.name === action
       })
       let md = new MarkdownIt()
-      this.ricardian = md.render(ricardianAction.ricardian_contract)
+      //this.ricardian = md.render(ricardianAction.ricardian_contract)
+      this.ricardian = this.placeRicardianVars(md.render(ricardianAction.ricardian_contract), fields, action)
       this.action = action
       this.fields = fields
       this.loading = false
+    },
+    placeRicardianVars (markd, fieldsArray, action) {
+      let vars = markd.match(/\{{.*?\}}/g)
+      fieldsArray[action] = action
+      for (let i = 0; i < vars.length; i++) {
+        markd = markd.replace(vars[i], '<b>' +  fieldsArray[vars[i].replace(/\W/g, '')] + '</b>')
+      }
+      return markd
     },
     transact () {
       if (this.getUsesScatter) {

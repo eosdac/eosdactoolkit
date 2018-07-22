@@ -14,11 +14,19 @@ const eosConfig = {
 }
 
 async function scatterNetwork(state) {
+  let pp
+  if (state.endpoints[state.activeEndpointIndex].httpEndpoint.split(':')[0].replace(/\//g, '') === 'https') {
+    pp = 443
+  } else if (state.endpoints[state.activeEndpointIndex].httpEndpoint.split(':')[0].replace(/\//g, '') === 'http') {
+    pp = 80
+  } else {
+    pp = null
+  }
   const network = await {
     blockchain: 'eos',
     protocol: state.endpoints[state.activeEndpointIndex].httpEndpoint.split(':')[0].replace(/\//g, ''),
     host: state.endpoints[state.activeEndpointIndex].httpEndpoint.split(':')[1].replace(/\//g, ''),
-    port: state.endpoints[state.activeEndpointIndex].httpEndpoint.split(':')[2] || 80
+    port: state.endpoints[state.activeEndpointIndex].httpEndpoint.split(':')[2] || pp
   }
   return network
 }
@@ -27,7 +35,6 @@ export async function memberreg({
   state,
   rootState
 }, payload) {
-
   try {
     eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint
     eosConfig.keyProvider = rootState.account.pkeysArray
@@ -51,7 +58,6 @@ export async function transfer({
   state,
   rootState
 }, payload) {
-
   try {
     eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint
     eosConfig.keyProvider = rootState.account.pkeysArray
@@ -188,7 +194,10 @@ export async function getContractRicardian({
     let eos = Eos(eosConfig)
     const contract = await eos.contract(payload)
     let ricardian = contract.fc.abi.actions
-    commit('ADD_CONTRACT_RICARDIAN', {ricardian:ricardian.actions, contract: payload})
+    commit('ADD_CONTRACT_RICARDIAN', {
+      ricardian: ricardian.actions,
+      contract: payload
+    })
     return ricardian
   } catch (error) {
     throw error
@@ -210,14 +219,16 @@ export async function getTokenContractBalance({
     } else {
       balance = 0
     }
-    commit('account/UPDATE_TOKEN_BALANCE', balance, { root: true })
+    commit('account/UPDATE_TOKEN_BALANCE', balance, {
+      root: true
+    })
     return balance
   } catch (error) {
     throw error
   }
 }
 
-export async function getMainCurrencyBalance({
+export async function updateAccountInfo({
   state,
   rootState,
   commit
@@ -225,15 +236,13 @@ export async function getMainCurrencyBalance({
   try {
     eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint
     let eos = Eos(eosConfig)
-    const balances = await eos.getCurrencyBalance(configFile.network.mainCurrencyContract.name, rootState.account.info.account_name, configFile.network.mainCurrencyContract.token)
-    let balance
-    if (balances[0]) {
-      balance = parseFloat(balances[0])
-    } else {
-      balance = 0
-    }
-    commit('account/UPDATE_MAIN_CURRENCY_BALANCE', balance, { root: true })
-    return balance
+    const account = await eos.getAccount({
+      account_name: rootState.account.info.account_name
+    })
+    commit('account/UPDATE_ACCOUNT_INFO', account, {
+      root: true
+    })
+    return account
   } catch (error) {
     throw error
   }

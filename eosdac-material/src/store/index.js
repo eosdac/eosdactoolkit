@@ -15,7 +15,7 @@ const store = new Vuex.Store({
     key: 'account',
     paths: [
       'account.imported',
-      'account.registered',
+      //'account.registered',
       'account.useScatter',
       'account.info',
       'account.pkeys',
@@ -36,7 +36,7 @@ const store = new Vuex.Store({
       'api.checkIntervalMilSec',
       'api.connectionTimeoutMilSec',
       'api.endpoints',
-      'api.lastGetInfo'
+      //'api.lastGetInfo'
     ]
   })]
 })

@@ -1,6 +1,5 @@
 <template>
-<q-page class="text-white q-pa-md">
-
+<q-page v-if="getAccountName" class="text-white q-pa-md">
   <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-8">
       <h4 class="q-display-1 q-mt-none q-mb-md">Wallet</h4>
@@ -46,7 +45,7 @@
             <div class="col-xs-12 col-sm-12 col-md-4">
               <q-card dark flat class="bg-dark2 q-ma-sm">
                 <q-card-main>
-                  <h6 class="text-center q-ma-none">{{getMainCurrencyBalance}} {{mainCurrencyName}}</h6>
+                  <h6 class="text-center q-ma-none">{{getAccount.core_liquid_balance}} {{mainCurrencyName}}</h6>
                 </q-card-main>
                 <q-card-actions>
                 </q-card-actions>
@@ -127,11 +126,13 @@ export default {
       getAccountName: 'account/getAccountName',
       getUnlocked: 'account/getUnlocked',
       getTokenBalance: 'account/getTokenBalance',
-      getMainCurrencyBalance: 'account/getMainCurrencyBalance'
+      getAccount: 'account/getAccount'
     })
   },
   mounted() {
-    this.lookupTokenBalance()
+    if (this.getAccountName) {
+      this.lookupTokenBalance()
+    }
   },
   methods: {
     transferToken() {
@@ -155,6 +156,7 @@ export default {
         this.loading = true
         this.loadingText = 'Looking up balances...'
         const balance = await this.$store.dispatch('api/getTokenContractBalance')
+        const mainBalance = await this.$store.dispatch('api/updateAccountInfo')
         this.loading = false
       } catch (err) {
         this.loading = false
