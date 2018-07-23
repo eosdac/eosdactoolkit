@@ -36,7 +36,7 @@ export const getUsesScatter = (state) => {
 }
 
 export const getAutolockInterval = (state) => {
-  return state.getAutolockInterval
+  return state.autolockIntervalSec
 }
 
 export const getTokenBalance = (state) => {

@@ -1,10 +1,10 @@
 <template>
-  <q-modal class="text-white z-max" v-model="visible" no-esc-dismiss :content-css="{maxWidth: '30vw'}" no-backdrop-dismiss>
+  <q-modal class="text-white z-max" v-model="visible" :content-css="{maxWidth: '30vw'}">
         <q-card dark>
           <q-card-title>
             <div class="q-title">Transaction</div>
           </q-card-title>
-          <q-list>
+          <q-list dark>
             <q-item>
               <q-item-main label="Action" />
               <q-item-side right>
@@ -12,7 +12,7 @@
               </q-item-side>
             </q-item>
           </q-list>
-          <q-list>
+          <q-list dark striped>
             <q-list-header>Fields</q-list-header>
             <q-item v-for="(field, key) in fields" :key="key">
               <q-item-main :label="key + ':'" />
@@ -21,6 +21,7 @@
               </q-item-side>
             </q-item>
           </q-list>
+          <q-alert message="By completing this transaction, I agree to the following terms." class="text-truncate" icon="icon-tick" color="primary" />
           <div v-html="ricardian" class="markdown-body ricardian q-pa-md">
         </div>
           <q-card-actions>
@@ -102,20 +103,19 @@ export default {
       let ricardianAction = ricardian.find(ricardianAction => {
         return ricardianAction.name === action
       })
-      let md = new MarkdownIt()
-      //this.ricardian = md.render(ricardianAction.ricardian_contract)
-      this.ricardian = this.placeRicardianVars(md.render(ricardianAction.ricardian_contract), fields, action)
       this.action = action
       this.fields = fields
-      this.loading = false
-    },
-    placeRicardianVars (markd, fieldsArray, action) {
-      let vars = markd.match(/\{{.*?\}}/g)
-      fieldsArray[action] = action
+      let md = new MarkdownIt()
+      let ric = md.render(ricardianAction.ricardian_contract)
+      let vars = ric.match(/\{{.*?\}}/g)
+      let varArray = Object.assign({}, fields)
+      varArray[action] = action
       for (let i = 0; i < vars.length; i++) {
-        markd = markd.replace(vars[i], '<b>' +  fieldsArray[vars[i].replace(/\W/g, '')] + '</b>')
+        ric = ric.replace(vars[i], '<b><u>' +  varArray[vars[i].replace(/\W/g, '')] + '</u></b>')
       }
-      return markd
+      ric = ric.substring(ric.indexOf('INTENT:') + 17, ric.indexOf('TERM:'))
+      this.ricardian = ric
+      this.loading = false
     },
     transact () {
       if (this.getUsesScatter) {

@@ -215,6 +215,7 @@ export default {
           info: queryAccount,
           scatter: true
         })
+        this.$store.commit('account/UNLOCK_ACCOUNT_SCATTER')
         this.loading = false
         this.checkRegister()
       } catch (err) {

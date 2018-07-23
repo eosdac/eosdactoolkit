@@ -51,7 +51,7 @@
     <router-view />
     <Initialize ref="Initialize" v-on:initDone="refs.Register.open()" />
     <Unlock ref="Unlock" />
-    <Notifier :drawer="leftDrawerOpen" />
+    <Notifier :drawer="$q.platform.is.desktop" />
   </q-page-container>
 </q-layout>
 </template>
@@ -81,7 +81,8 @@ export default {
     return {
       leftDrawerOpen: this.$q.platform.is.desktop,
       tokenName: this.$configFile.network.tokenContract.token,
-      mainCurrencyName: this.$configFile.network.mainCurrencyContract.token
+      mainCurrencyName: this.$configFile.network.mainCurrencyContract.token,
+      lastQuery: 0
     }
   },
   computed: {
@@ -128,10 +129,10 @@ export default {
         })
       }
     },
-    autolock () {
-      if (this.getLastUnlock) {
+    autolock() {
+      if (this.getLastUnlock && this.getUnlocked) {
         if (this.getAutolockInterval + this.getLastUnlock < Math.floor(Date.now() / 1000)) {
-          if(this.getUsesScatter) {
+          if (this.getUsesScatter) {
             this.lockScatter()
           } else {
             this.lockAccount()
@@ -139,13 +140,14 @@ export default {
         }
       }
     },
-    async queryApis () {
+    async queryApis() {
       try {
-        const tokenBalance = await this.$store.dispatch('api/getTokenContractBalance')
-        const mainBalance = await this.$store.dispatch('api/updateAccountInfo')
-      } catch  (err) {
-
-      }
+        if (this.lastQuery + this.getConnectionInterval < Date.now() && this.getImported) {
+          const tokenBalance = await this.$store.dispatch('api/getTokenContractBalance')
+          const mainBalance = await this.$store.dispatch('api/updateAccountInfo')
+          this.lastQuery = Date.now()
+        }
+      } catch (err) {}
     }
   },
   mounted() {
@@ -164,7 +166,7 @@ export default {
         }
       })
     }
-    setInterval(this.queryApis, this.getConnectionInterval)
+    setInterval(this.queryApis, 1000)
     setInterval(this.autolock, 1000)
   }
 }

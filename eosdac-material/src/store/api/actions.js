@@ -2,9 +2,6 @@ import Eos from 'eosjs'
 import Timeout from 'await-timeout'
 import configFile from '../../statics/config.json'
 
-//dont knwo how to implement a latency timeout method that works with scatter
-const tokenContractName = configFile.network.tokenContract.name
-
 const eosConfig = {
   chainId: configFile.network.chainId,
   expireInSeconds: 60,
@@ -46,7 +43,7 @@ export async function memberreg({
       })
       eos = state.scatter.eos(network, Eos, eosConfig)
     }
-    const contract = await eos.contract(tokenContractName)
+    const contract = await eos.contract(configFile.network.tokenContract.name)
     const res = await contract.memberreg(payload.data)
     return res
   } catch (error) {
@@ -69,7 +66,7 @@ export async function transfer({
       })
       eos = state.scatter.eos(network, Eos, eosConfig)
     }
-    const contract = await eos.contract(tokenContractName)
+    const contract = await eos.contract(configFile.network.tokenContract.name)
     const res = await contract.transfer(payload.data)
     return res
   } catch (error) {

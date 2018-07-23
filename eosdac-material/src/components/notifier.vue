@@ -1,6 +1,6 @@
 <template>
   <div v-if="visible">
-  <q-alert class="notifier fixed-bottom z-max" v-bind:class="{ 'drawer-margin': drawerMargin }" :color="color" text-color="white">
+  <q-alert class="notifier fixed-bottom z-max" v-bind:class="{ 'drawer-margin': drawer }" :color="color" text-color="white">
     <div class="row">
       <div class="col-xs-1">
         <q-icon flat size="30px" class="float-left on-left q-ma-sm" :name="icon"></q-icon>
@@ -34,8 +34,7 @@ export default {
       icon: 'done',
       color: 'positive',
       message: '',
-      detail: '',
-      drawerMargin: false
+      detail: ''
     }
   },
   methods: {
@@ -54,13 +53,6 @@ export default {
       this.color = this.getNotification.color
       this.message = this.getNotification.message
       this.detail = this.getNotification.detail
-    },
-    drawer (val) {
-      if (val) {
-        this.drawerMargin = true
-      } else {
-        this.drawerMargin = false
-      }
     }
   }
 }
