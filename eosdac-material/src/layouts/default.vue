@@ -82,7 +82,8 @@ export default {
       leftDrawerOpen: this.$q.platform.is.desktop,
       tokenName: this.$configFile.network.tokenContract.token,
       mainCurrencyName: this.$configFile.network.mainCurrencyContract.token,
-      lastQuery: 0
+      lastQuery: 0,
+      focus: true
     }
   },
   computed: {
@@ -142,7 +143,7 @@ export default {
     },
     async queryApis() {
       try {
-        if (this.lastQuery + this.getConnectionInterval < Date.now() && this.getImported) {
+        if (this.lastQuery + this.getConnectionInterval < Date.now() && this.getImported && this.focus) {
           const tokenBalance = await this.$store.dispatch('api/getTokenContractBalance')
           const mainBalance = await this.$store.dispatch('api/updateAccountInfo')
           this.lastQuery = Date.now()
@@ -151,6 +152,12 @@ export default {
     }
   },
   mounted() {
+    window.addEventListener('blur', () => {
+      this.focus = false
+    })
+    window.addEventListener('focus', () => {
+      this.focus = true
+    })
     //check if registered
     this.loadScatter()
     if (!this.getImported) {
