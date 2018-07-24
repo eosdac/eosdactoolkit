@@ -2,17 +2,17 @@
 <q-layout view="hHh Lpr lFf">
   <q-layout-header class="no-shadow">
     <q-toolbar color="dark2">
-      <q-btn flat dense round @click="leftDrawerOpen = !leftDrawerOpen" aria-label="Menu">
-        <q-icon name="menu" />
-      </q-btn>
-      <q-toolbar-title class="text-white">
-        <p class="text-weight-thin">
-          <q-icon style="font-size:40px;" name="icon-logo-eosdac" /> EOS
-          <b>DAC</b> TOOLKIT</p>
+      <q-toolbar-title class="text-white q-pl-none">
+          <q-icon style="font-size:35px;" name="icon-logo-eosdac" />
+          <span class="q-ml-md q-mt-sm text-weight-thin vertical-middle" style="font-size:23px;">EOS<b>DAC</b> TOOLKIT</span>
+          <q-btn size="lg" flat dense round @click="leftDrawerOpen = !leftDrawerOpen" aria-label="Menu">
+            <q-icon v-if="leftDrawerOpen" name="clear" />
+            <q-icon v-else name="menu" />
+          </q-btn>
       </q-toolbar-title>
       <div v-if="getImported">
         <MenuDropdown v-if="getAccountName" iconColor="white" :label="'Your ' + tokenName + ' Blanace'" :sublabel="String(getTokenBalance)" icon="icon-dac-balance" />
-        <MenuDropdown v-if="getAccountName" iconColor="white" :label="'Your ' + mainCurrencyName + ' Blanace'" :sublabel="String(getAccount.core_liquid_balance)" icon="icon-eos" />
+        <MenuDropdown v-if="getAccountName && getAccount.core_liquid_balance" iconColor="white" :label="'Your ' + mainCurrencyName + ' Blanace'" :sublabel="String(getAccount.core_liquid_balance)" icon="icon-eos" />
         <MenuDropdown v-if="getAccountName" iconColor="white" label="Account Name" :sublabel="getAccountName" icon="icon-member" />
         <MenuDropdown v-if="getAccountName" iconColor="positive" label="Status" sublabel="Logged-In" icon="icon-lock-unlocked" :iconRight="true">
           <q-list class="bg-dark2" dark link>
@@ -143,7 +143,6 @@ export default {
     async queryApis() {
       try {
         if (this.lastQuery + this.getConnectionInterval < Date.now() && this.getImported && this.$q.appVisible) {
-          console.log(this.lastQuery - Date.now())
           const tokenBalance = await this.$store.dispatch('api/getTokenContractBalance')
           const mainBalance = await this.$store.dispatch('api/updateAccountInfo')
           this.lastQuery = Date.now()
