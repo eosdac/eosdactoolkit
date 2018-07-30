@@ -3,12 +3,12 @@
   <q-layout-header class="no-shadow">
     <q-toolbar color="dark2">
       <q-toolbar-title class="text-white q-pl-none">
-          <q-icon style="font-size:35px;" name="icon-logo-eosdac" />
-          <span class="q-ml-md q-mt-sm text-weight-thin vertical-middle" style="font-size:23px;">EOS<b>DAC</b> TOOLKIT</span>
-          <q-btn size="lg" flat dense round @click="leftDrawerOpen = !leftDrawerOpen" aria-label="Menu">
-            <q-icon v-if="leftDrawerOpen" name="clear" />
-            <q-icon v-else name="menu" />
-          </q-btn>
+        <q-icon style="font-size:35px;" name="icon-logo-eosdac" />
+        <span class="q-ml-md q-mt-sm text-weight-thin vertical-middle" style="font-size:23px;">EOS<b>DAC</b> TOOLKIT</span>
+        <q-btn size="lg" flat dense round @click="leftDrawerOpen = !leftDrawerOpen" aria-label="Menu">
+          <q-icon v-if="leftDrawerOpen" name="clear" />
+          <q-icon v-else name="menu" />
+        </q-btn>
       </q-toolbar-title>
       <div v-if="getImported">
         <MenuDropdown v-if="getAccountName" iconColor="white" :label="'Your ' + tokenName + ' Blanace'" :sublabel="String(getTokenBalance)" icon="icon-dac-balance" />
@@ -40,16 +40,25 @@
     </q-toolbar>
   </q-layout-header>
   <q-layout-drawer v-model="leftDrawerOpen" content-class="bg-dark2">
-    <q-list no-border link inset-delimiter dark>
-      <q-item v-if="getAccountName" to="/wallet">
+    <q-list v-if="getAccountName" no-border link inset-delimiter dark>
+      <q-item to="/wallet">
         <q-item-side icon="icon-wallet" />
         <q-item-main label="Wallet" sublabel="" />
+      </q-item>
+      <q-item to="/settings">
+        <q-item-side icon="icon-settings" />
+        <q-item-main label="Settings" sublabel="" />
       </q-item>
     </q-list>
   </q-layout-drawer>
   <q-page-container>
-    <router-view />
-    <Initialize ref="Initialize" v-on:initDone="refs.Register.open()" />
+    <router-view v-show="getRegistered || $route.path === '/settings'" />
+    <div v-show="!getRegistered" class="row justify-center">
+      <div class="col-lg-12 col-xl-8 relative-position">
+        <Register ref="Register" />
+      </div>
+    </div>
+    <Initialize ref="Initialize" />
     <Unlock ref="Unlock" />
     <Notifier :drawer="$q.platform.is.desktop" />
   </q-page-container>
@@ -141,13 +150,13 @@ export default {
       }
     },
     async queryApis() {
-      try {
-        if (this.lastQuery + this.getConnectionInterval < Date.now() && this.getImported && this.$q.appVisible) {
-          const tokenBalance = await this.$store.dispatch('api/getTokenContractBalance')
-          const mainBalance = await this.$store.dispatch('api/updateAccountInfo')
-          this.lastQuery = Date.now()
-        }
-      } catch (err) {}
+      if (this.lastQuery + this.getConnectionInterval < Date.now() && this.getAccountName && this.$q.appVisible) {
+        this.lastQuery = Date.now()
+        const tokenBalance = await this.$store.dispatch('api/getTokenContractBalance')
+        const mainBalance = await this.$store.dispatch('api/updateAccountInfo')
+      } else {
+        this.lastQuery = Date.now()
+      }
     }
   },
   mounted() {
@@ -157,14 +166,7 @@ export default {
       this.$refs.Initialize.open()
     }
     if (this.getAccountName) {
-      this.$store.dispatch('api/getRegistered').then((res) => {
-        let findAccount = res.rows.find(findAccount => {
-          return findAccount.sender === this.getAccountName
-        })
-        if (findAccount) {
-          this.$store.commit('account/ADD_REGISTRATION', findAccount.agreedterms)
-        }
-      })
+      this.$refs.Register.checkRegistered()
     }
     setInterval(this.queryApis, 1000)
     setInterval(this.autolock, 1000)

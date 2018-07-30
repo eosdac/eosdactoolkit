@@ -110,9 +110,11 @@ export default {
       let vars = ric.match(/\{{.*?\}}/g)
       let varArray = Object.assign({}, fields)
       varArray[action] = action
-      for (let i = 0; i < vars.length; i++) {
-        ric = ric.replace(vars[i], '<b><u>' +  varArray[vars[i].replace(/\W/g, '')] + '</u></b>')
-      }
+      if (vars) {
+        for (let i = 0; i < vars.length; i++) {
+          ric = ric.replace(vars[i], '<b><u>' +  varArray[vars[i].replace(/\W/g, '')] + '</u></b>')
+        }
+      }  
       ric = ric.substring(ric.indexOf('INTENT:') + 17, ric.indexOf('TERM:'))
       this.ricardian = ric
       this.loading = false

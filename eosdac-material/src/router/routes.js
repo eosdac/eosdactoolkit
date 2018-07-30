@@ -5,7 +5,8 @@ export default [
     component: () => import('layouts/default'),
     children: [
       { path: '', component: () => import('pages/index') },
-      { path: 'wallet', component: () => import('pages/wallet') }
+      { path: 'wallet', component: () => import('pages/wallet') },
+      { path: 'settings', component: () => import('pages/settings') }
     ]
   },
 

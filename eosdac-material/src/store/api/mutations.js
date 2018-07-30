@@ -62,6 +62,7 @@ export const NOTIFY = (state, payload) => {
     color: payload.color,
     message: payload.message,
     details: payload.details,
+    textColor: payload.textColor,
     seen: false
   }
 }

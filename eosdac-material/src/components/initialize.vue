@@ -35,10 +35,7 @@
         <q-alert v-if="scatterError" :message="scatterErrorText" class="text-truncate" icon="info" color="grey" />
         <q-btn v-if="$q.platform.is.desktop" @click="useScatter()" :disabled="!hasScatter" class="q-ma-sm" color="primary" label="Scatter" size="xl" />
 
-        <q-btn v-else @click="importInit = true" class="q-ma-sm" color="primary" label="Import private keys" size="xl" />
-      </q-step>
-      <q-step title="Registration" name="init3">
-        <Register ref="Register" v-on:registrationDone="init = false" />
+        <!--<q-btn v-else @click="importInit = true" class="q-ma-sm" color="primary" label="Import private keys" size="xl" />-->
       </q-step>
     </q-stepper>
     <Import v-bind:intro="true" v-if="importInit" v-on:importDone="checkRegister()" />
@@ -50,7 +47,6 @@
 <script>
 import LoadingSpinner from 'components/loading-spinner'
 import Import from 'components/import'
-import Register from 'components/register'
 import {
   mapGetters
 } from 'vuex'
@@ -59,7 +55,6 @@ export default {
   components: {
     LoadingSpinner,
     Import,
-    Register
   },
   data() {
     return {
@@ -93,24 +88,6 @@ export default {
     this.loadEndpoints()
   },
   methods: {
-    checkRegister() {
-      this.loading = true
-      this.loadingText = 'Checking member status...'
-      this.importInit = false
-      this.$store.dispatch('api/getRegistered').then((res) => {
-        this.loading = false
-        let findAccount = res.rows.find(findAccount => {
-          return findAccount.sender === this.getAccountName
-        })
-        if (findAccount) {
-          this.$store.commit('account/ADD_REGISTRATION', findAccount.agreedterms)
-          this.init = false
-        } else {
-          this.$refs.initstepper.next()
-        }
-      })
-      this.loading = false
-    },
     open() {
       this.init = true
     },
@@ -198,6 +175,7 @@ export default {
       }
       let network2 = {
         blockchain: 'eos',
+        chainId : this.$configFile.network.chainId,
         protocol: current.httpEndpoint.split(':')[0].replace(/\//g, ''),
         host: current.httpEndpoint.split(':')[1].replace(/\//g, ''),
         port: current.httpEndpoint.split(':')[2] || pp
@@ -217,7 +195,8 @@ export default {
         })
         this.$store.commit('account/UNLOCK_ACCOUNT_SCATTER')
         this.loading = false
-        this.checkRegister()
+        this.init = false
+        location.reload()
       } catch (err) {
         this.loading = false
         if (err.type === 'locked') {

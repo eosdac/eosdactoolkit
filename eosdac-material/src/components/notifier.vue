@@ -1,12 +1,13 @@
 <template>
   <div v-if="visible">
-  <q-alert class="notifier fixed-bottom z-max" v-bind:class="{ 'drawer-margin': drawer }" :color="color" text-color="white">
+  <q-alert class="notifier fixed-bottom z-max" v-bind:class="{ 'drawer-margin': drawer }" :color="color" :text-color="textColor">
     <div class="row">
       <div class="col-xs-1">
         <q-icon flat size="30px" class="float-left on-left q-ma-sm" :name="icon"></q-icon>
       </div>
       <div class="col-xs-9">
         <div class="q-title">{{message}}</div>
+        {{details}}
       </div>
       <div class="col-xs-2">
         <q-icon flat size="40px" class="float-right no-padding" name="clear" @click.native="markSeen()"></q-icon>
@@ -34,7 +35,8 @@ export default {
       icon: 'done',
       color: 'positive',
       message: '',
-      detail: ''
+      details: '',
+      textColor: 'white'
     }
   },
   methods: {
@@ -52,7 +54,8 @@ export default {
       this.icon = this.getNotification.icon
       this.color = this.getNotification.color
       this.message = this.getNotification.message
-      this.detail = this.getNotification.detail
+      this.details = this.getNotification.details
+      this.textColor = this.getNotification.textColor || 'white'
     }
   }
 }

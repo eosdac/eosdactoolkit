@@ -163,7 +163,7 @@ export default {
   },
   methods: {
     percentage (val, max) {
-      return (100 - (val / max) * 100).toFixed(3)
+      return parseFloat((100 - (val / max) * 100).toFixed(3))
     },
     transferToken() {
       this.$refs.Transaction.newTransaction('transfer', {

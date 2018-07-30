@@ -21,6 +21,7 @@ async function scatterNetwork(state) {
   }
   const network = await {
     blockchain: 'eos',
+    chainId : configFile.network.chainId,
     protocol: state.endpoints[state.activeEndpointIndex].httpEndpoint.split(':')[0].replace(/\//g, ''),
     host: state.endpoints[state.activeEndpointIndex].httpEndpoint.split(':')[1].replace(/\//g, ''),
     port: state.endpoints[state.activeEndpointIndex].httpEndpoint.split(':')[2] || pp
@@ -28,9 +29,24 @@ async function scatterNetwork(state) {
   return network
 }
 
+function apiDown(e,c,s) {
+  if (e && e.message) {
+    if(e.message === 'Failed to fetch') {
+      c('NOTIFY',{
+        icon: 'error',
+        color: 'warning',
+        message: 'Connection to endpoint is unstable or unavailable',
+        details: 'Go to Settings to setup a working API Endpoint',
+        textColor: 'black'
+      })
+    }
+  }
+}
+
 export async function memberreg({
   state,
-  rootState
+  rootState,
+  commit
 }, payload) {
   try {
     eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint
@@ -47,13 +63,15 @@ export async function memberreg({
     const res = await contract.memberreg(payload.data)
     return res
   } catch (error) {
+    apiDown(error,commit)
     throw error
   }
 }
 
 export async function transfer({
   state,
-  rootState
+  rootState,
+  commit
 }, payload) {
   try {
     eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint
@@ -70,13 +88,15 @@ export async function transfer({
     const res = await contract.transfer(payload.data)
     return res
   } catch (error) {
+    apiDown(error,commit)
     throw error
   }
 }
 
 export async function transferMain({
   state,
-  rootState
+  rootState,
+  commit
 }, payload) {
 
   try {
@@ -93,6 +113,7 @@ export async function transferMain({
     const res = await eos.transfer(payload.data)
     return res
   } catch (error) {
+    apiDown(error,commit)
     throw error
   }
 }
@@ -165,8 +186,10 @@ export async function testEndpoint({
 }
 
 export async function getRegistered({
-  state
-}, payload) {
+  state,
+  commit,
+  rootState
+}) {
   try {
     eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint
     let eos = Eos(eosConfig)
@@ -174,10 +197,37 @@ export async function getRegistered({
       json: true,
       scope: configFile.network.tokenContract.name,
       code: configFile.network.tokenContract.name,
-      table: 'members'
+      table: 'members',
+      lower_bound: rootState.account.info.account_name,
+      limit:1
     })
-    return members
+    if (!members.rows.length) {
+      return false
+    } else {
+      return members.rows[0]
+    }
   } catch (error) {
+    apiDown(error,commit)
+    throw error
+  }
+}
+
+export async function getMemberTerms({
+  state,
+  commit
+}) {
+  try {
+    eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint
+    let eos = Eos(eosConfig)
+    const memberterms = await eos.getTableRows({
+      json: true,
+      scope: configFile.network.tokenContract.name,
+      code: configFile.network.tokenContract.name,
+      table: 'memberterms'
+    })
+    return memberterms
+  } catch (error) {
+    apiDown(error,commit)
     throw error
   }
 }
@@ -197,6 +247,7 @@ export async function getContractRicardian({
     })
     return ricardian
   } catch (error) {
+    apiDown(error,commit)
     throw error
   }
 }
@@ -221,6 +272,7 @@ export async function getTokenContractBalance({
     })
     return balance
   } catch (error) {
+    apiDown(error,commit)
     throw error
   }
 }
@@ -241,12 +293,14 @@ export async function updateAccountInfo({
     })
     return account
   } catch (error) {
+    apiDown(error,commit)
     throw error
   }
 }
 
 export async function getAccount({
-  state
+  state,
+  commit
 }, payload) {
   try {
     eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint
@@ -256,6 +310,7 @@ export async function getAccount({
     })
     return account
   } catch (error) {
+    apiDown(error,commit)
     throw error
   }
 }
