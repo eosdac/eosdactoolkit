@@ -17,7 +17,7 @@ npm install -g quasar-cli
 ```
 **3. Clone Repo**
 ```
-git clone https://github.com/nanonano7/eosdac-ui-temporary.git
+git clone https://github.com/eosdac/eosdactoolkit.git
 ```
 **4. Install modules**
 ```
