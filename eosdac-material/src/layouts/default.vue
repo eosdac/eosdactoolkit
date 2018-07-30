@@ -52,10 +52,10 @@
     </q-list>
   </q-layout-drawer>
   <q-page-container>
-    <router-view v-show="getRegistered || $route.path === '/settings'" />
-    <div v-show="!getRegistered" class="row justify-center">
+    <router-view v-show="registered || $route.path === '/settings'" />
+    <div v-show="!registered" class="row justify-center">
       <div class="col-lg-12 col-xl-8 relative-position">
-        <Register ref="Register" />
+        <Register ref="Register" v-on:registrationDone="reg()"/>
       </div>
     </div>
     <Initialize ref="Initialize" />
@@ -91,7 +91,8 @@ export default {
       leftDrawerOpen: this.$q.platform.is.desktop,
       tokenName: this.$configFile.network.tokenContract.token,
       mainCurrencyName: this.$configFile.network.mainCurrencyContract.token,
-      lastQuery: 0
+      lastQuery: 0,
+      registered: false
     }
   },
   computed: {
@@ -112,6 +113,10 @@ export default {
   },
   methods: {
     openURL,
+    reg () {
+      this.registered = true
+      console.log('registered:',this.registered)
+    },
     unlockAccount() {
       this.$refs.Unlock.open()
     },
@@ -165,9 +170,10 @@ export default {
     if (!this.getImported) {
       this.$refs.Initialize.open()
     }
-    if (this.getAccountName) {
-      this.$refs.Register.checkRegistered()
-    }
+    //if (this.getAccountName) {
+    //  console.log('Checking if user is registered')
+    //  this.$refs.Register.checkRegistered()
+    //}
     setInterval(this.queryApis, 1000)
     setInterval(this.autolock, 1000)
   }

@@ -204,6 +204,7 @@ export async function getRegistered({
     if (!members.rows.length) {
       return false
     } else {
+      commit('account/ADD_REGISTRATION', members.rows[0], {root: true})
       return members.rows[0]
     }
   } catch (error) {

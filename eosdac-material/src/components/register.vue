@@ -1,6 +1,6 @@
 <template>
 <q-card flat class="text-white">
-  <Transaction ref="Transaction" v-on:done="registered()" />
+  <Transaction ref="Transaction" v-on:done="checkRegistered()" />
   <q-card-title>
     <h4>Registration - Sign the Constitution</h4>
   </q-card-title>
@@ -51,23 +51,27 @@ export default {
       agree: false
     }
   },
+  mounted () {
+    if (this.getAccountName) {
+      this.checkRegistered()
+    }
+  },
   methods: {
-    open() {
-      this.visible = true
-    },
     async checkRegistered() {
       let md = new MarkdownIt()
       this.loading = true
       this.loadingText = 'Checking member status...'
       let memberRegistration = await this.$store.dispatch('api/getRegistered')
+      console.log('Query member registration')
       let latestMemberTerms = await this.$store.dispatch('api/getMemberTerms')
+      console.log('Query latest terms')
       let memberterms = latestMemberTerms.rows[latestMemberTerms.rows.length - 1]
       if (memberRegistration) {
-        if (memberterms.hash === memberRegistration.agreedterms) { //is regsitered
-          this.$store.commit('account/ADD_REGISTRATION', findAccount.agreedterms)
-          this.visible = false
+        if (memberterms.version === memberRegistration.agreedterms) { //is regsitered
+          console.log('Is member. User version:',memberRegistration.agreedterms,'Latest version',memberterms.version)
           this.$emit('registrationDone')
         } else { //new version
+          console.log('New version available. User version:',memberRegistration.agreedterms,'Latest version',memberterms.version)
           this.loadingText = 'Loading latest constitution...'
           let getCt = await this.loadConstitutionFromGithub(memberterms.terms)
           this.hash = CryptoJS.MD5(getCt).toString()
@@ -75,6 +79,7 @@ export default {
           this.statusText = 'The constitution has been updated. Please sign the constitution to continue.'
         }
       } else { // not regsitered
+        console.log('Not registered as a member')
         this.loadingText = 'Loading latest constitution...'
         let getCt = await this.loadConstitutionFromGithub(memberterms.terms)
         this.hash = CryptoJS.MD5(getCt).toString()

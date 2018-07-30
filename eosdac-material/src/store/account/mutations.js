@@ -40,7 +40,7 @@ export const UNLOCK_ACCOUNT_SCATTER = (state) => {
 }
 
 export const ADD_REGISTRATION = (state, payload) => {
-  state.rigistered = payload
+  state.registered = payload
 }
 
 export const RESET_STATE = (state) => {
