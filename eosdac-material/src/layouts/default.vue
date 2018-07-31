@@ -155,13 +155,15 @@ export default {
       }
     },
     async queryApis() {
-      if (this.lastQuery + this.getConnectionInterval < Date.now() && this.getAccountName && this.$q.appVisible) {
-        this.lastQuery = Date.now()
-        this.$store.dispatch('api/getTokenContractBalance')
-        this.$store.dispatch('api/getMainCurrencyBalance')
-        this.$store.dispatch('api/updateAccountInfo')
-      } else {
-        this.lastQuery = Date.now()
+      let now = Date.now()
+      if (this.getAccountName && this.$q.appVisible) {
+        if (now > this.lastQuery + this.getConnectionInterval) {
+          console.log('api update')
+          this.lastQuery = now
+          this.$store.dispatch('api/getTokenContractBalance')
+          this.$store.dispatch('api/getMainCurrencyBalance')
+          this.$store.dispatch('api/updateAccountInfo')
+        }
       }
     }
   },
