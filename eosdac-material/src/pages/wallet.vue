@@ -7,7 +7,7 @@
           <h4 class="q-display-1 q-mt-none q-mb-md">Wallet</h4>
           <q-tabs align="justify">
             <q-tab default slot="title" name="tab-1" icon="icon-logo-eosdac" :label="tokenName" />
-            <q-tab v-if="getAccount.core_liquid_balance" slot="title" name="tab-2" icon="icon-eos" :label="mainCurrencyName" />
+            <q-tab slot="title" name="tab-2" icon="icon-eos" :label="mainCurrencyName" />
             <q-tab-pane name="tab-1">
               <div class="row">
                 <div class="col-lg-12 col-xl-4">
@@ -47,7 +47,7 @@
                 <div class="col-lg-12 col-xl-4">
                   <q-card dark flat class="bg-dark2 q-ma-sm">
                     <q-card-main>
-                      <h6 class="text-center q-ma-none">{{getAccount.core_liquid_balance}} {{mainCurrencyName}}</h6>
+                      <h6 class="text-center q-ma-none">{{getMainCurrencyBalance}} {{mainCurrencyName}}</h6>
                     </q-card-main>
                     <q-card-actions>
                     </q-card-actions>
@@ -153,7 +153,8 @@ export default {
       getAccountName: 'account/getAccountName',
       getUnlocked: 'account/getUnlocked',
       getTokenBalance: 'account/getTokenBalance',
-      getAccount: 'account/getAccount'
+      getAccount: 'account/getAccount',
+      getMainCurrencyBalance: 'account/getMainCurrencyBalance'
     })
   },
   mounted() {
@@ -186,7 +187,8 @@ export default {
         this.loading = true
         this.loadingText = 'Looking up balances...'
         const balance = await this.$store.dispatch('api/getTokenContractBalance')
-        const mainBalance = await this.$store.dispatch('api/updateAccountInfo')
+        const mainBalance = await this.$store.dispatch('api/getMainCurrencyBalance')
+        const acc = await this.$store.dispatch('api/updateAccountInfo')
         this.loading = false
       } catch (err) {
         this.loading = false

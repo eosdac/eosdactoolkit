@@ -103,21 +103,27 @@ export default {
       let ricardianAction = ricardian.find(ricardianAction => {
         return ricardianAction.name === action
       })
-      this.action = action
-      this.fields = fields
-      let md = new MarkdownIt()
-      let ric = md.render(ricardianAction.ricardian_contract)
-      let vars = ric.match(/\{{.*?\}}/g)
-      let varArray = Object.assign({}, fields)
-      varArray[action] = action
-      if (vars) {
-        for (let i = 0; i < vars.length; i++) {
-          ric = ric.replace(vars[i], '<b><u>' +  varArray[vars[i].replace(/\W/g, '')] + '</u></b>')
+      if (ricardianAction) {
+        this.action = action
+        this.fields = fields
+        let md = new MarkdownIt()
+        let ric = md.render(ricardianAction.ricardian_contract)
+        let vars = ric.match(/\{{.*?\}}/g)
+        let varArray = Object.assign({}, fields)
+        varArray[action] = action
+        if (vars) {
+          for (let i = 0; i < vars.length; i++) {
+            ric = ric.replace(vars[i], '<b><u>' +  varArray[vars[i].replace(/\W/g, '')] + '</u></b>')
+          }
         }
-      }  
-      ric = ric.substring(ric.indexOf('INTENT:') + 17, ric.indexOf('TERM:'))
-      this.ricardian = ric
-      this.loading = false
+        ric = ric.substring(ric.indexOf('INTENT:') + 17, ric.indexOf('TERM:'))
+        this.ricardian = ric
+        this.loading = false
+      } else {
+        this.loading = false
+        this.$store.commit('api/NOTIFY', {icon: 'error', color:'red', message:'Error: The ricardian contract for this action could not be loaded.', detail: ''})
+        this.visible = false
+      }
     },
     transact () {
       if (this.getUsesScatter) {

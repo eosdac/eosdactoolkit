@@ -278,6 +278,31 @@ export async function getTokenContractBalance({
   }
 }
 
+export async function getMainCurrencyBalance({
+  state,
+  rootState,
+  commit
+}) {
+  try {
+    eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint
+    let eos = Eos(eosConfig)
+    const balances = await eos.getCurrencyBalance(configFile.network.mainCurrencyContract.name, rootState.account.info.account_name, configFile.network.mainCurrencyContract.token)
+    let balance
+    if (balances[0]) {
+      balance = parseFloat(balances[0])
+    } else {
+      balance = 0
+    }
+    commit('account/UPDATE_MAIN_CURRENCY_BALANCE', balance, {
+      root: true
+    })
+    return balance
+  } catch (error) {
+    apiDown(error,commit)
+    throw error
+  }
+}
+
 export async function updateAccountInfo({
   state,
   rootState,

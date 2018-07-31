@@ -12,6 +12,7 @@ export default {
   autolock: true,
   autolockIntervalSec: 300,
   tokenBalance: 0,
+  mainCurrencyBalance: 0,
   contacts: [],
   proposalDraft: {
     title: '',

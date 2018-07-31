@@ -7,8 +7,8 @@
       "decimals": 4
     },
     "mainCurrencyContract": {
-      "name": "jungle",
-      "token": "JUNGLE",
+      "name": "eosio.token",
+      "token": "EOS",
       "decimals": 4
     }
   }

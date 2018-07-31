@@ -42,3 +42,7 @@ export const getAutolockInterval = (state) => {
 export const getTokenBalance = (state) => {
   return state.tokenBalance
 }
+
+export const getMainCurrencyBalance = (state) => {
+  return state.mainCurrencyBalance
+}
