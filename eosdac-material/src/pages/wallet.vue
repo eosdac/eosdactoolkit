@@ -186,9 +186,10 @@ export default {
       try {
         this.loading = true
         this.loadingText = 'Looking up balances...'
-        this.$store.dispatch('api/getTokenContractBalance')
-        this.$store.dispatch('api/getMainCurrencyBalance')
-        this.$store.dispatch('api/updateAccountInfo')
+        const balance = this.$store.dispatch('api/getTokenContractBalance')
+        const mainBalance = this.$store.dispatch('api/getMainCurrencyBalance')
+        const acc = this.$store.dispatch('api/updateAccountInfo')
+        let race = await Promise.race( [balance, mainBalance, acc] )
         this.loading = false
       } catch (err) {
         this.loading = false
