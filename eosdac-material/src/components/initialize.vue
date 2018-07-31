@@ -8,37 +8,40 @@
     <q-btn class="q-ma-sm" color="primary" @click="start = true" label="Continue" />
   </div>
   <div v-else>-->
-    <q-stepper v-model="curStep" v-show="!importInit" color="white" ref="initstepper" contractable no-header-navigation>
-      <q-step active-icon="icon-airdrop" default title="API Endpoint" name="init1">
-        <div class="row">
-          <div class="col-xs-12 q-pa-sm">
-            <p class="text-white text-center">An API endpoint is needed to enable communication with the eosDAC contracts on the EOS network.</p>
-            <q-alert v-if="errorEndpoint" :message="errorEndpointText" class="text-truncate" icon="info" color="red" />
-          </div>
-          <div class="col-xs-12 col-md-6 q-pa-sm">
-            <p class="text-white">Server to connect (API Endpoint)</p>
-            <q-field label-width="12" dark>
-              <q-input dark v-model="endpoint" placeholder="https://endpoint-url.com" />
-            </q-field>
-            <q-btn :disabled="badEndpoint" class="q-ma-sm" color="primary" @click="connect(endpoint)" label="Connect" />
-          </div>
-          <div v-if="!endpointListFail" class="col-xs-12 col-md-6 q-pa-sm">
-            <p class="text-white">Endpoint from List</p>
-            <q-select class="" placeholder="Select Endpoint from List" v-model="selectedEndpoint" dark radio :options="endpoints" />
-            <q-btn :disabled="!selectedEndpoint" class="q-ma-sm" color="primary" @click="connect(selectedEndpoint)" label="Connect" />
-          </div>
+  <q-stepper v-model="curStep" v-show="!importInit" color="white" ref="initstepper" contractable no-header-navigation>
+    <q-step active-icon="icon-register-1" default title="API Endpoint" name="init1">
+      <div class="row">
+        <div class="col-xs-12 q-pa-sm">
+          <p class="text-white text-center">An API endpoint is needed to enable communication with the eosDAC contracts on the EOS network.</p>
+          <q-alert v-if="errorEndpoint" :message="errorEndpointText" class="text-truncate" icon="info" color="red" />
         </div>
-      </q-step>
-      <q-step class="text-center" title="Authentication" name="init2" icon="icon-member">
-        <h4 class="text-white">Authentication Method</h4>
-        <q-alert v-if="!hasScatter" message="Scatter is not available. If you have Scatter installed please refresh." class="text-truncate" icon="info" color="grey" />
-        <q-alert v-if="scatterError" :message="scatterErrorText" class="text-truncate" icon="info" color="grey" />
-        <q-btn v-if="$q.platform.is.desktop" @click="useScatter()" :disabled="!hasScatter" class="q-ma-sm" color="primary" label="Scatter" size="xl" />
-
-        <!--<q-btn v-else @click="importInit = true" class="q-ma-sm" color="primary" label="Import private keys" size="xl" />-->
-      </q-step>
-    </q-stepper>
-    <Import v-bind:intro="true" v-if="importInit" v-on:importDone="checkRegister()" />
+        <div class="col-xs-12 col-md-6 q-pa-sm">
+          <p class="text-white">Server to connect (API Endpoint)</p>
+          <q-field label-width="12" dark>
+            <q-input dark v-model="endpoint" placeholder="https://endpoint-url.com" />
+          </q-field>
+          <q-btn :disabled="badEndpoint" class="q-ma-sm" color="primary" @click="connect(endpoint)" label="Connect" />
+        </div>
+        <div v-if="!endpointListFail" class="col-xs-12 col-md-6 q-pa-sm">
+          <p class="text-white">Endpoint from List</p>
+          <q-select class="" placeholder="Select Endpoint from List" v-model="selectedEndpoint" dark radio :options="endpoints" />
+          <q-btn :disabled="!selectedEndpoint" class="q-ma-sm" color="primary" @click="connect(selectedEndpoint)" label="Connect" />
+        </div>
+      </div>
+    </q-step>
+    <q-step class="text-center" title="Authentication" name="init2" icon="icon-register-2">
+      <h4 class="text-white">Authentication Method</h4>
+      <q-alert v-if="!hasScatter" message="Scatter is not available. If you have Scatter installed please refresh." class="text-truncate" icon="info" color="grey" />
+      <q-alert v-if="scatterError" class="text-truncate q-mb-lg" icon="info" color="grey">
+        <p>{{scatterErrorText}}
+        </p>
+      </q-alert>
+      <q-btn v-if="$q.platform.is.desktop" @click="useScatter()" :disabled="!hasScatter" class="q-ma-sm" color="primary" label="Scatter" size="xl" />
+      <ScatterTutorial v-if="scatterError" color="white" />
+      <!--<q-btn v-else @click="importInit = true" class="q-ma-sm" color="primary" label="Import private keys" size="xl" />-->
+    </q-step>
+  </q-stepper>
+  <Import v-bind:intro="true" v-if="importInit" v-on:importDone="checkRegister()" />
   <!--</div>-->
   <LoadingSpinner :visible="loading" :text="loadingText" />
 </q-modal>
@@ -46,6 +49,7 @@
 
 <script>
 import LoadingSpinner from 'components/loading-spinner'
+import ScatterTutorial from 'components/scatter-tutorial'
 import Import from 'components/import'
 import {
   mapGetters
@@ -55,6 +59,7 @@ export default {
   components: {
     LoadingSpinner,
     Import,
+    ScatterTutorial
   },
   data() {
     return {
@@ -115,10 +120,10 @@ export default {
         this.endpointListFail = true
       }
     },
-    filterUrl (url) {
-      if(url.substr(-1) === '/') {
+    filterUrl(url) {
+      if (url.substr(-1) === '/') {
         return url.substr(0, url.length - 1);
-    } else {
+      } else {
         return url
       }
     },
@@ -175,7 +180,7 @@ export default {
       }
       let network2 = {
         blockchain: 'eos',
-        chainId : this.$configFile.network.chainId,
+        chainId: this.$configFile.network.chainId,
         protocol: current.httpEndpoint.split(':')[0].replace(/\//g, ''),
         host: current.httpEndpoint.split(':')[1].replace(/\//g, ''),
         port: current.httpEndpoint.split(':')[2] || pp

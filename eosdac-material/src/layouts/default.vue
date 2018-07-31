@@ -3,7 +3,7 @@
   <q-layout-header class="no-shadow">
     <q-toolbar color="dark2">
       <q-toolbar-title class="text-white q-pl-none">
-        <q-icon style="font-size:35px;" name="icon-logo-eosdac" />
+        <q-icon style="font-size:35px;" name="icon-menu-3" />
         <span class="q-ml-md q-mt-sm text-weight-thin vertical-middle" style="font-size:23px;">EOS<b>DAC</b> TOOLKIT</span>
         <q-btn size="lg" flat dense round @click="leftDrawerOpen = !leftDrawerOpen" aria-label="Menu">
           <q-icon v-if="leftDrawerOpen" name="clear" />
@@ -12,24 +12,24 @@
       </q-toolbar-title>
       <div v-if="getImported">
         <MenuDropdown v-if="getAccountName" iconColor="white" :label="'Your ' + tokenName + ' Blanace'" :sublabel="String(getTokenBalance)" icon="icon-dac-balance" />
-        <MenuDropdown v-if="getAccountName" iconColor="white" :label="'Your ' + mainCurrencyName + ' Blanace'" :sublabel="String(getMainCurrencyBalance)" icon="icon-eos" />
-        <MenuDropdown v-if="getAccountName" iconColor="white" label="Account Name" :sublabel="getAccountName" icon="icon-member" />
-        <MenuDropdown v-if="getAccountName" iconColor="positive" label="Status" sublabel="Logged-In" icon="icon-lock-unlocked" :iconRight="true">
+        <MenuDropdown v-if="getAccountName" iconColor="white" :label="'Your ' + mainCurrencyName + ' Blanace'" :sublabel="String(getMainCurrencyBalance)" icon="icon-type-2" />
+        <MenuDropdown v-if="getAccountName" iconColor="white" label="Account Name" :sublabel="getAccountName" icon="icon-topmenu-2" />
+        <MenuDropdown v-if="getAccountName" iconColor="positive" label="Status" sublabel="Logged-In" icon="icon-topmenu-1" :iconRight="true">
           <q-list class="bg-dark2" dark link>
             <q-item @click.native="lockScatter()" dark>
               <q-item-side>
-                <q-item-tile icon="icon-lock-locked">
+                <q-item-tile icon="icon-topmenu-4">
                 </q-item-tile>
                 Log Out
               </q-item-side>
             </q-item>
           </q-list>
         </MenuDropdown>
-        <MenuDropdown v-else iconColor="white" label="Status" sublabel="Logged-Out" icon="icon-lock-locked" :iconRight="true">
+        <MenuDropdown v-else iconColor="white" label="Status" sublabel="Logged-Out" icon="icon-topmenu-4" :iconRight="true">
           <q-list class="bg-dark2" dark link>
             <q-item @click.native="unlockAccount()" dark>
               <q-item-side>
-                <q-item-tile color="positive" icon="icon-lock-unlocked">
+                <q-item-tile color="positive" icon="icon-topmenu-1">
                 </q-item-tile>
                 Log In
               </q-item-side>
@@ -42,18 +42,18 @@
   <q-layout-drawer v-model="leftDrawerOpen" content-class="bg-dark2">
     <q-list v-if="getAccountName" no-border link inset-delimiter dark>
       <q-item to="/wallet">
-        <q-item-side icon="icon-wallet" />
+        <q-item-side icon="icon-menu-6" />
         <q-item-main label="Wallet" sublabel="" />
       </q-item>
       <q-item to="/settings">
-        <q-item-side icon="icon-settings" />
+        <q-item-side icon="icon-topmenu-6" />
         <q-item-main label="Settings" sublabel="" />
       </q-item>
     </q-list>
   </q-layout-drawer>
   <q-page-container>
     <router-view v-show="registered || $route.path === '/settings'" />
-    <div v-show="!registered && getUnlocked" class="row justify-center">
+    <div v-show="!registered && getUnlocked && getImported" class="row justify-center">
       <div class="col-lg-12 col-xl-8 relative-position">
         <Register ref="Register" v-on:registrationDone="reg()"/>
       </div>

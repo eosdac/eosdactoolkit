@@ -21,7 +21,7 @@
               </q-item-side>
             </q-item>
           </q-list>
-          <q-alert message="By completing this transaction, I agree to the following terms." class="text-truncate" icon="icon-tick" color="primary" />
+          <q-alert message="By completing this transaction, I agree to the following terms." class="text-truncate" icon="icon-ui-6" color="primary" />
           <div v-html="ricardian" class="markdown-body ricardian q-pa-md">
         </div>
           <q-card-actions>
@@ -132,7 +132,7 @@ export default {
         this.$store.dispatch('api/' + this.action, {data: this.fields, scatter: true}).then((res) => {
             this.$emit('done')
             this.visible = false
-            this.$store.commit('api/NOTIFY', {icon: 'icon-tick', color:'positive', message:'Transaction Successful', detail: ''})
+            this.$store.commit('api/NOTIFY', {icon: 'icon-ui-6', color:'positive', message:'Transaction Successful', detail: ''})
           this.loading = false
         }, (err) => {
           if (err.type) {
@@ -149,7 +149,7 @@ export default {
           this.$store.dispatch('api/' + this.action, {data: this.fields, scatter: false}).then((res) => {
             this.$emit('done')
             this.visible = false
-            this.$store.commit('api/NOTIFY', {icon: 'icon-tick', color:'positive', message:'Transaction Successful', detail: ''})
+            this.$store.commit('api/NOTIFY', {icon: 'icon-ui-6', color:'positive', message:'Transaction Successful', detail: ''})
             this.loading = false
           }, (err) => {
             this.$store.commit('api/NOTIFY', {icon: 'error', color:'red', message:'Error: ' + err.message, detail: ''})
