@@ -246,11 +246,15 @@ export async function getContractRicardian({
     let eos = Eos(eosConfig)
     const contract = await eos.contract(payload)
     let ricardian = contract.fc.abi.actions
-    commit('ADD_CONTRACT_RICARDIAN', {
-      ricardian: ricardian.actions,
-      contract: payload
-    })
-    return ricardian
+    if (ricardian) {
+      commit('ADD_CONTRACT_RICARDIAN', {
+        ricardian: ricardian,
+        contract: payload
+      })
+      return ricardian
+    } else {
+      throw 'no_ricardian'
+    }
   } catch (error) {
     apiDown(error,commit)
     throw error

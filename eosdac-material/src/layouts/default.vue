@@ -158,7 +158,6 @@ export default {
       let now = Date.now()
       if (this.getAccountName && this.$q.appVisible) {
         if (now > this.lastQuery + this.getConnectionInterval) {
-          console.log('api update')
           this.lastQuery = now
           this.$store.dispatch('api/getTokenContractBalance')
           this.$store.dispatch('api/getMainCurrencyBalance')
