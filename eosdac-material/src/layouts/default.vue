@@ -157,9 +157,9 @@ export default {
     async queryApis() {
       if (this.lastQuery + this.getConnectionInterval < Date.now() && this.getAccountName && this.$q.appVisible) {
         this.lastQuery = Date.now()
-        const tokenBalance = await this.$store.dispatch('api/getTokenContractBalance')
-        const mainBalance = await this.$store.dispatch('api/getMainCurrencyBalance')
-        const acc = await this.$store.dispatch('api/updateAccountInfo')
+        this.$store.dispatch('api/getTokenContractBalance')
+        this.$store.dispatch('api/getMainCurrencyBalance')
+        this.$store.dispatch('api/updateAccountInfo')
       } else {
         this.lastQuery = Date.now()
       }

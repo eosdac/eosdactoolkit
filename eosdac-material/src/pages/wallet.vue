@@ -84,21 +84,21 @@
           <q-alert icon="icon-type-8" color="dark2">
             <h5 class="q-mb-sm q-mt-none">RAM</h5>
   <q-progress color="white" :percentage="percentage(getAccount.ram_usage, getAccount.ram_quota)" />
-            <p class="text-center q-mt-sm">{{percentage(getAccount.ram_usage, getAccount.ram_quota)}} %</p>
+            <p class="text-center q-mt-sm">{{percentage(getAccount.ram_usage, getAccount.ram_quota)}} % remaining</p>
           </q-alert>
         </div>
         <div class="col-lg-12 col-xl-4 q-pa-sm">
           <q-alert icon="icon-ui-9" color="dark2">
             <h5 class="q-mb-sm q-mt-none">CPU</h5>
   <q-progress color="white" :percentage="percentage(getAccount.cpu_limit.used, getAccount.cpu_limit.available)" />
-            <p class="text-center q-mt-sm">{{percentage(getAccount.cpu_limit.used, getAccount.cpu_limit.available)}} %</p>
+            <p class="text-center q-mt-sm">{{percentage(getAccount.cpu_limit.used, getAccount.cpu_limit.available)}} % remaining</p>
           </q-alert>
         </div>
         <div class="col-lg-12 col-xl-4 q-pa-sm">
           <q-alert icon="icon-ui-10" color="dark2">
             <h5 class="q-mb-sm q-mt-none">Network</h5>
   <q-progress color="white" :percentage="percentage(getAccount.net_limit.used, getAccount.net_limit.available)" />
-            <p class="text-center q-mt-sm">{{percentage(getAccount.net_limit.used, getAccount.net_limit.available)}} %</p>
+            <p class="text-center q-mt-sm">{{percentage(getAccount.net_limit.used, getAccount.net_limit.available)}} % remaining</p>
           </q-alert>
         </div>
       </div>
@@ -186,9 +186,9 @@ export default {
       try {
         this.loading = true
         this.loadingText = 'Looking up balances...'
-        const balance = await this.$store.dispatch('api/getTokenContractBalance')
-        const mainBalance = await this.$store.dispatch('api/getMainCurrencyBalance')
-        const acc = await this.$store.dispatch('api/updateAccountInfo')
+        this.$store.dispatch('api/getTokenContractBalance')
+        this.$store.dispatch('api/getMainCurrencyBalance')
+        this.$store.dispatch('api/updateAccountInfo')
         this.loading = false
       } catch (err) {
         this.loading = false
