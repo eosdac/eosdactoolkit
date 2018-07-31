@@ -4,7 +4,7 @@ export default [
     path: '/',
     component: () => import('layouts/default'),
     children: [
-      { path: '', component: () => import('pages/index') },
+      { path: '', redirect: '/wallet' },
       { path: 'wallet', component: () => import('pages/wallet') },
       { path: 'settings', component: () => import('pages/settings') }
     ]

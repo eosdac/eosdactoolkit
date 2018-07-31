@@ -204,8 +204,12 @@ export async function getRegistered({
     if (!members.rows.length) {
       return false
     } else {
-      commit('account/ADD_REGISTRATION', members.rows[0], {root: true})
-      return members.rows[0]
+      if (members.rows[0].sender === rootState.account.info.account_name) {
+        commit('account/ADD_REGISTRATION', members.rows[0], {root: true})
+        return members.rows[0]
+      } else {
+        return false
+      }
     }
   } catch (error) {
     apiDown(error,commit)

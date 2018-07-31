@@ -12,11 +12,11 @@
       </q-toolbar-title>
       <div v-if="getImported">
         <MenuDropdown v-if="getAccountName" iconColor="white" :label="'Your ' + tokenName + ' Blanace'" :sublabel="String(getTokenBalance)" icon="icon-dac-balance" />
-        <MenuDropdown v-if="getAccountName && getAccount.core_liquid_balance" iconColor="white" :label="'Your ' + mainCurrencyName + ' Blanace'" :sublabel="String(getAccount.core_liquid_balance)" icon="icon-eos" />
+        <MenuDropdown v-if="getAccountName" iconColor="white" :label="'Your ' + mainCurrencyName + ' Blanace'" :sublabel="String(getMainCurrencyBalance)" icon="icon-eos" />
         <MenuDropdown v-if="getAccountName" iconColor="white" label="Account Name" :sublabel="getAccountName" icon="icon-member" />
         <MenuDropdown v-if="getAccountName" iconColor="positive" label="Status" sublabel="Logged-In" icon="icon-lock-unlocked" :iconRight="true">
           <q-list class="bg-dark2" dark link>
-            <q-item @click.native="lockAccount()" dark>
+            <q-item @click.native="lockScatter()" dark>
               <q-item-side>
                 <q-item-tile icon="icon-lock-locked">
                 </q-item-tile>
@@ -53,7 +53,7 @@
   </q-layout-drawer>
   <q-page-container>
     <router-view v-show="registered || $route.path === '/settings'" />
-    <div v-show="!registered" class="row justify-center">
+    <div v-show="!registered && getUnlocked" class="row justify-center">
       <div class="col-lg-12 col-xl-8 relative-position">
         <Register ref="Register" v-on:registrationDone="reg()"/>
       </div>
@@ -108,14 +108,15 @@ export default {
       getConnectionInterval: 'api/getConnectionInterval',
       getLastUnlock: 'account/getLastUnlock',
       getTokenBalance: 'account/getTokenBalance',
-      getAccount: 'account/getAccount'
+      getAccount: 'account/getAccount',
+      getMainCurrencyBalance: 'account/getMainCurrencyBalance'
     })
   },
   methods: {
     openURL,
     reg () {
       this.registered = true
-      console.log('registered:',this.registered)
+      console.log('registered:', this.registered)
     },
     unlockAccount() {
       this.$refs.Unlock.open()
@@ -123,10 +124,9 @@ export default {
     lockAccount() {
       this.$store.commit('account/LOCK_ACCOUNT')
     },
-    lockScatter() {
-      this.getScatter.forgetIdentity().then(() => {
-        this.$store.commit('account/LOCK_ACCOUNT')
-      })
+    async lockScatter() {
+      let logout = await this.getScatter.forgetIdentity()
+      this.$store.commit('account/LOCK_ACCOUNT')
     },
     loadScatter() {
       if (window.scatter) {
@@ -167,7 +167,9 @@ export default {
   },
   mounted() {
     //check if registered
-    this.loadScatter()
+    if (!this.getScatter) {
+      this.loadScatter()
+    }
     if (!this.getImported) {
       this.$refs.Initialize.open()
     }
