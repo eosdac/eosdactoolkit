@@ -134,9 +134,9 @@ export default {
         })
       }
     },
-    autolock() {
+    /*autolock() {
       if (this.getLastUnlock && this.getUnlocked && this.lastQuery) {
-        if (this.getAutolockInterval * 10 + this.lastQuery < Date.now()) {
+        if (this.getAutolockInterval * 10 + this.lastQuery < Date.now() / 1000)) {
           if (this.getUsesScatter) {
             this.lockScatter()
           } else {
@@ -144,7 +144,7 @@ export default {
           }
         }
       }
-    },
+    },*/
     async queryApis() {
       let now = Date.now()
       if (this.getAccountName && this.$q.appVisible) {
@@ -170,7 +170,7 @@ export default {
     //  this.$refs.Register.checkRegistered()
     //}
     setInterval(this.queryApis, 1000)
-    setInterval(this.autolock, 1000)
+    //setInterval(this.autolock, 1000)
   }
 }
 </script>
