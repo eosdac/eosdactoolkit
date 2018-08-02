@@ -99,7 +99,6 @@ export default {
         this.loading = false
         this.$store.commit('account/UNLOCK_ACCOUNT_SCATTER')
         this.clear()
-        location.reload()
       } catch (err) {
         console.log(err)
         this.loading = false

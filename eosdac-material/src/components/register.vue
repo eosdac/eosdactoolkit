@@ -1,25 +1,29 @@
 <template>
-<q-card flat class="text-white">
-  <Transaction ref="Transaction" v-on:done="checkRegistered()" />
-  <q-card-title>
-    <h4>Registration - Sign the Constitution</h4>
-  </q-card-title>
-  <q-card-main>
-    <q-alert class="q-mb-md" icon="info" color="grey">{{statusText}}</q-alert>
-    <p>This is the constitution of this DAC. In order to register as a DAC member you need accept the constitution.</p>
-    <q-scroll-area class="markdown-body q-mb-xl" style="height:400px; width:100%;">
-      <div v-html="constitution" class="fit"></div>
-    </q-scroll-area>
-    <q-checkbox class="q-ma-sm float-left" v-model="agree" label="I accept the Constitution" />
-    <p class="float-right q-ma-sm">Constitution Hash:
-      <q-chip dense color="primary">{{hash}}</q-chip>
-    </p>
-  </q-card-main>
-  <q-card-actions style="width:100%;" align="end" class="q-mt-md float-right">
-    <q-btn :disabled="!agree" @click="registerMember()" class="q-ma-md float-right" color="primary" label="Register" />
-  </q-card-actions>
-  <LoadingSpinner :visible="loading" :text="loadingText" />
-</q-card>
+  <div v-show="!getRegistered && getAccountName && getImported" class="row justify-center">
+    <div class="col-lg-12 col-xl-8 relative-position">
+      <q-card flat class="text-white">
+        <Transaction ref="Transaction" v-on:done="checkRegistered()" />
+        <q-card-title>
+          <h4>Registration - Sign the Constitution</h4>
+        </q-card-title>
+        <q-card-main>
+          <q-alert class="q-mb-md" icon="info" color="grey">{{statusText}}</q-alert>
+          <p>This is the constitution of this DAC. In order to register as a DAC member you need accept the constitution.</p>
+          <q-scroll-area class="markdown-body q-mb-xl" style="height:400px; width:100%;">
+            <div v-html="constitution" class="fit"></div>
+          </q-scroll-area>
+          <q-checkbox class="q-ma-sm float-left" v-model="agree" label="I accept the Constitution" />
+          <p class="float-right q-ma-sm">Constitution Hash:
+            <q-chip dense color="primary">{{hash}}</q-chip>
+          </p>
+        </q-card-main>
+        <q-card-actions style="width:100%;" align="end" class="q-mt-md float-right">
+          <q-btn :disabled="!agree" @click="registerMember()" class="q-ma-md float-right" color="primary" label="Register" />
+        </q-card-actions>
+        <LoadingSpinner :visible="loading" :text="loadingText" />
+      </q-card>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -38,7 +42,9 @@ export default {
   },
   computed: {
     ...mapGetters({
-      getAccountName: 'account/getAccountName'
+      getAccountName: 'account/getAccountName',
+      getRegistered: 'account/getRegistered',
+      getImported: 'account/getImported'
     })
   },
   data() {
@@ -48,12 +54,20 @@ export default {
       constitution: '',
       hash: '',
       statusText: '',
-      agree: false
+      agree: false,
+      registered: false
     }
   },
   mounted () {
     if (this.getAccountName) {
       this.checkRegistered()
+    }
+  },
+  watch: {
+    getAccountName (val) {
+      if (val) {
+        this.checkRegistered()
+      }
     }
   },
   methods: {
@@ -69,8 +83,10 @@ export default {
       if (memberRegistration) {
         if (memberterms.version === memberRegistration.agreedterms) { //is regsitered
           console.log('Is member. User version:',memberRegistration.agreedterms,'Latest version',memberterms.version)
-          this.$emit('registrationDone')
+          //this.$emit('registrationDone')
+          this.$store.commit('account/ADD_REGISTRATION')
         } else { //new version
+          this.$store.commit('account/REMOVE_REGISTRATION')
           console.log('New version available. User version:',memberRegistration.agreedterms,'Latest version',memberterms.version)
           this.loadingText = 'Loading latest constitution...'
           let getCt = await this.loadConstitutionFromGithub(memberterms.terms)
@@ -79,6 +95,7 @@ export default {
           this.statusText = 'The constitution has been updated. Please sign the constitution to continue.'
         }
       } else { // not regsitered
+        this.$store.commit('account/REMOVE_REGISTRATION')
         console.log('Not registered as a member')
         this.loadingText = 'Loading latest constitution...'
         let getCt = await this.loadConstitutionFromGithub(memberterms.terms)

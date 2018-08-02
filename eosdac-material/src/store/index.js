@@ -17,7 +17,7 @@ const store = new Vuex.Store({
       'account.imported',
       //'account.registered',
       'account.useScatter',
-      'account.info',
+      //'account.info',
       'account.pkeys',
       'account.lastUnlock',
       'account.autolock',

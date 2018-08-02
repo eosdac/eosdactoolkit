@@ -6,9 +6,9 @@
         <div class="col-xs-12">
           <h4 class="q-display-1 q-mt-none q-mb-md">Wallet</h4>
           <q-tabs align="justify">
-            <q-tab default slot="title" name="tab-1" icon="icon-dac-balance" :label="tokenName" />
-            <q-tab slot="title" name="tab-2" icon="icon-type-2" :label="mainCurrencyName" />
-            <q-tab-pane name="tab-1">
+            <q-tab default slot="title" :name="tokenName" icon="icon-dac-balance" :label="tokenName" />
+            <q-tab slot="title" :name="mainCurrencyName" icon="icon-type-2" :label="mainCurrencyName" />
+            <q-tab-pane :name="tokenName">
               <div class="row">
                 <div class="col-lg-12 col-xl-4">
                   <q-card dark flat class="bg-dark2 q-ma-sm">
@@ -42,7 +42,7 @@
                 </div>
               </div>
             </q-tab-pane>
-            <q-tab-pane name="tab-2">
+            <q-tab-pane :name="mainCurrencyName">
               <div class="row">
                 <div class="col-lg-12 col-xl-4">
                   <q-card dark flat class="bg-dark2 q-ma-sm">
@@ -78,8 +78,6 @@
             </q-tab-pane>
           </q-tabs>
         </div>
-
-
         <div class="col-lg-12 col-xl-4 q-pa-sm">
           <q-alert icon="icon-type-8" color="dark2">
             <h5 class="q-mb-sm q-mt-none">RAM</h5>
@@ -103,8 +101,9 @@
         </div>
       </div>
     </div>
-    <div class="col-xs-12 col-sm-12 col-md-4">
+    <div class="col-xs-12 col-sm-12 col-md-4 q-pl-md">
       <h4 class="q-display-1 q-mt-none q-mb-md">History</h4>
+      <TransferHistory ref="History" />
     </div>
   </div>
   </div>
@@ -116,6 +115,7 @@
 <script>
 import Transaction from 'components/transaction'
 import LoadingSpinner from 'components/loading-spinner'
+import TransferHistory from 'components/transfer-history'
 import {
   mapGetters
 } from 'vuex'
@@ -123,7 +123,8 @@ export default {
   name: 'Wallet',
   components: {
     Transaction,
-    LoadingSpinner
+    LoadingSpinner,
+    TransferHistory
   },
   data() {
     return {
@@ -160,6 +161,7 @@ export default {
   mounted() {
     if (this.getAccountName) {
       this.lookupTokenBalance()
+      this.$refs.History.getTransferHistory()
     }
   },
   methods: {
@@ -203,6 +205,12 @@ export default {
     }
   },
   watch: {
+    getTokenBalance(val) {
+      this.$refs.History.getTransferHistory()
+    },
+    getMainCurrencyBalance(val) {
+      this.$refs.History.getTransferHistory()
+    },
     transferAmount(val) {
       if (val > this.getTokenBalance || ((val + "").match(/\./g) || []).length > 1 || val < 0 || !val) {
         this.transferAmountError = true

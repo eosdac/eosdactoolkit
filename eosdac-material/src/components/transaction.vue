@@ -166,7 +166,7 @@ export default {
           this.loading = false
         })
       } else {
-        if (this.getUnlocked) {
+        if (this.getAccountName) {
           this.loading = true
           this.loadingText = 'Pushing Transaction...'
           this.$store.dispatch('api/' + this.action, {

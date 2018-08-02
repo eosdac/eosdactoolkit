@@ -39,8 +39,12 @@ export const UNLOCK_ACCOUNT_SCATTER = (state) => {
   state.lastUnlock = Math.floor(Date.now() / 1000)
 }
 
-export const ADD_REGISTRATION = (state, payload) => {
-  state.registered = payload
+export const ADD_REGISTRATION = (state) => {
+  state.registered = true
+}
+
+export const REMOVE_REGISTRATION = (state) => {
+  state.registered = false
 }
 
 export const RESET_STATE = (state) => {

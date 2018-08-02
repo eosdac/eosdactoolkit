@@ -85,7 +85,6 @@ export default {
       hasScatter: 'api/hasScatter',
       getScatter: 'api/getScatter',
       getCurrentEndpoint: 'api/getCurrentEndpoint',
-      getRegistered: 'account/getRegistered',
       getAccountName: 'account/getAccountName'
     })
   },

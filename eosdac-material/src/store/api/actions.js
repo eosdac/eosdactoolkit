@@ -35,7 +35,7 @@ function apiDown(e,c,s) {
       c('NOTIFY',{
         icon: 'error',
         color: 'warning',
-        message: 'Connection to endpoint is unstable or unavailable',
+        message: 'Connection to endpoint is unreliable or unavailable',
         details: 'Go to Settings to setup a working API Endpoint',
         textColor: 'black'
       })
@@ -62,6 +62,38 @@ export async function memberreg({
     const contract = await eos.contract(configFile.network.tokenContract.name)
     const res = await contract.memberreg(payload.data)
     return res
+  } catch (error) {
+    apiDown(error,commit)
+    throw error
+  }
+}
+
+export async function getActionHistory({
+  state,
+  rootState,
+  commit
+}, offset) {
+  try {
+    //eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint
+    eosConfig.httpEndpoint = {
+      keyProvider: null,
+      httpEndpoint: 'http://google.com',
+      expireInSeconds: 60,
+      broadcast: true,
+      debug: false,
+      sign: true,
+      ping: null,
+      lastConnectionUnix: null,
+      lastConnection: null,
+      lastConnectionStatus: null
+    }
+    let eos = Eos(eosConfig)
+    const history = await eos.getActions(rootState.account.info.account_name,-1, offset || -5)
+    if (history && history.actions) {
+      return history.actions
+    } else {
+      throw 'unavailable'
+    }
   } catch (error) {
     apiDown(error,commit)
     throw error

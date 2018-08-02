@@ -52,12 +52,8 @@
     </q-list>
   </q-layout-drawer>
   <q-page-container>
-    <router-view v-show="registered || $route.path === '/settings'" />
-    <div v-show="!registered && getUnlocked && getImported" class="row justify-center">
-      <div class="col-lg-12 col-xl-8 relative-position">
-        <Register ref="Register" v-on:registrationDone="reg()"/>
-      </div>
-    </div>
+    <router-view v-show="getRegistered || $route.path === '/settings'" />
+    <Register ref="Register"/>
     <Initialize ref="Initialize" />
     <Unlock ref="Unlock" />
     <Notifier :drawer="$q.platform.is.desktop" />
@@ -91,8 +87,7 @@ export default {
       leftDrawerOpen: this.$q.platform.is.desktop,
       tokenName: this.$configFile.network.tokenContract.token,
       mainCurrencyName: this.$configFile.network.mainCurrencyContract.token,
-      lastQuery: 0,
-      registered: false
+      lastQuery: 0
     }
   },
   computed: {
@@ -114,10 +109,6 @@ export default {
   },
   methods: {
     openURL,
-    reg () {
-      this.registered = true
-      console.log('registered:', this.registered)
-    },
     unlockAccount() {
       this.$refs.Unlock.open()
     },
@@ -125,7 +116,7 @@ export default {
       this.$store.commit('account/LOCK_ACCOUNT')
     },
     async lockScatter() {
-      let logout = await this.getScatter.forgetIdentity()
+      this.getScatter.forgetIdentity()
       this.$store.commit('account/LOCK_ACCOUNT')
     },
     loadScatter() {
@@ -144,8 +135,8 @@ export default {
       }
     },
     autolock() {
-      if (this.getLastUnlock && this.getUnlocked) {
-        if (this.getAutolockInterval + this.getLastUnlock < Math.floor(Date.now() / 1000)) {
+      if (this.getLastUnlock && this.getUnlocked && this.lastQuery) {
+        if (this.getAutolockInterval * 10 + this.lastQuery < Date.now()) {
           if (this.getUsesScatter) {
             this.lockScatter()
           } else {
