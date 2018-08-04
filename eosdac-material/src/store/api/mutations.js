@@ -63,7 +63,8 @@ export const NOTIFY = (state, payload) => {
     message: payload.message,
     details: payload.details,
     textColor: payload.textColor,
-    seen: false
+    seen: false,
+    autoclose: payload.autoclose || 0
   }
 }
 

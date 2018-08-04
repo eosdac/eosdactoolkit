@@ -16,6 +16,8 @@
     "crypto-js": "^3.1.9-1",
     "eosjs": "^15.0.3",
     "markdown-it": "^8.4.1",
+    "request": "^2.87.0",
+    "request-promise": "^4.2.2",
     "vue-i18n": "^7.3.3",
     "vuex-persistedstate": "^2.5.4"
   },

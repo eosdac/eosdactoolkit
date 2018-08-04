@@ -13,6 +13,7 @@ export default {
   autolockIntervalSec: 300,
   tokenBalance: 0,
   mainCurrencyBalance: 0,
+  transferHistory: [],
   contacts: [],
   proposalDraft: {
     title: '',

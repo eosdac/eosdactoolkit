@@ -42,7 +42,10 @@ export default {
   methods: {
     markSeen() {
       this.$store.commit('api/CLOSE_NOTIFICATION')
-    }
+    },
+    sleep (ms) {
+      return new Promise(resolve => setTimeout(resolve, ms))
+    },
   },
   watch: {
     getNotification () {
@@ -56,6 +59,11 @@ export default {
       this.message = this.getNotification.message
       this.details = this.getNotification.details
       this.textColor = this.getNotification.textColor || 'white'
+      if (this.getNotification.autoclose) {
+        sleep(this.getNotification.autoclose * 1000).then(() => {
+          this.markSeen()
+        })
+      }
     }
   }
 }

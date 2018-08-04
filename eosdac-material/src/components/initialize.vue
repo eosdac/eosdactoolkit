@@ -1,33 +1,11 @@
 <template>
 <q-modal class="text-white" v-model="init" no-esc-dismiss no-backdrop-dismiss>
-  <!--<div class="q-mx-lg text-center" v-if="!start">
-    <h4>eosDAC Toolkit</h4>
-    <p style="min-height:150px;">
-      Introduction text?
-    </p>
-    <q-btn class="q-ma-sm" color="primary" @click="start = true" label="Continue" />
-  </div>
-  <div v-else>-->
   <q-stepper v-model="curStep" v-show="!importInit" color="white" ref="initstepper" contractable no-header-navigation>
     <q-step active-icon="icon-register-1" default title="API Endpoint" name="init1">
-      <div class="row">
-        <div class="col-xs-12 q-pa-sm">
-          <p class="text-white text-center">An API endpoint is needed to enable communication with the eosDAC contracts on the EOS network.</p>
-          <q-alert v-if="errorEndpoint" :message="errorEndpointText" class="text-truncate" icon="info" color="red" />
-        </div>
-        <div class="col-xs-12 col-md-6 q-pa-sm">
-          <p class="text-white">Server to connect (API Endpoint)</p>
-          <q-field label-width="12" dark>
-            <q-input dark v-model="endpoint" placeholder="https://endpoint-url.com" />
-          </q-field>
-          <q-btn :disabled="badEndpoint" class="q-ma-sm" color="primary" @click="connect(endpoint)" label="Connect" />
-        </div>
-        <div v-if="!endpointListFail" class="col-xs-12 col-md-6 q-pa-sm">
-          <p class="text-white">Endpoint from List</p>
-          <q-select class="" placeholder="Select Endpoint from List" v-model="selectedEndpoint" dark radio :options="endpoints" />
-          <q-btn :disabled="!selectedEndpoint" class="q-ma-sm" color="primary" @click="connect(selectedEndpoint)" label="Connect" />
-        </div>
+      <div class="col-xs-12 q-pa-sm">
+        <p class="text-white text-center">An API endpoint is needed to enable communication with the eosDAC contracts on the EOS network.</p>
       </div>
+      <NodeSelector v-on:done="$refs.initstepper.next()" />
     </q-step>
     <q-step class="text-center" title="Authentication" name="init2" icon="icon-register-2">
       <h4 class="text-white">Authentication Method</h4>
@@ -42,7 +20,6 @@
     </q-step>
   </q-stepper>
   <Import v-bind:intro="true" v-if="importInit" v-on:importDone="checkRegister()" />
-  <!--</div>-->
   <LoadingSpinner :visible="loading" :text="loadingText" />
 </q-modal>
 </template>
@@ -50,7 +27,7 @@
 <script>
 import LoadingSpinner from 'components/loading-spinner'
 import ScatterTutorial from 'components/scatter-tutorial'
-import Import from 'components/import'
+import NodeSelector from 'components/nodeselector'
 import {
   mapGetters
 } from 'vuex'
@@ -58,7 +35,7 @@ export default {
   name: 'Initialize',
   components: {
     LoadingSpinner,
-    Import,
+    NodeSelector,
     ScatterTutorial
   },
   data() {
@@ -89,81 +66,10 @@ export default {
     })
   },
   mounted() {
-    this.loadEndpoints()
   },
   methods: {
     open() {
       this.init = true
-    },
-    async loadEndpoints() {
-      this.loading = true
-      this.loadingText = 'Gathering endpoints...'
-      try {
-        let getEndpoints = await this.$axios.get('https://eosdac.io/topbps.json')
-        let res = []
-        for (let i = 0; i < getEndpoints.data.length; i++) {
-          if (getEndpoints.data[i].nodes) {
-            for (let j = 0; j < getEndpoints.data[i].nodes.length; j++) {
-              if (getEndpoints.data[i].nodes[j].ssl_endpoint) {
-                res.push({
-                  label: getEndpoints.data[i].nodes[j].ssl_endpoint,
-                  value: getEndpoints.data[i].nodes[j].ssl_endpoint
-                })
-              }
-            }
-          }
-        }
-        this.endpoints = res
-        this.loading = false
-      } catch (error) {
-        this.endpointListFail = true
-      }
-    },
-    filterUrl(url) {
-      if (url.substr(-1) === '/') {
-        return url.substr(0, url.length - 1);
-      } else {
-        return url
-      }
-    },
-    async connect(u) {
-      this.loading = true
-      this.loadingText = 'Connecting...'
-      try {
-        let url = await this.filterUrl(u)
-        let test = await this.$store.dispatch('api/testEndpoint', url)
-        this.loading = false
-        this.$store.commit('api/ADD_ENDPOINT', {
-          url,
-          chainId: this.$configFile.network.chainId
-        })
-        this.$store.commit('api/CHANGE_ENDPOINT', url)
-        this.$refs.initstepper.next()
-      } catch (err) {
-        this.loading = false
-        this.errorEndpoint = true
-        this.badEndpoint = true
-        if (err.message.includes('Cannot POST')) {
-          this.errorEndpointText = 'The URL seems to be invalid.'
-        } else {
-          switch (err.message) {
-            case 'timeout':
-              this.errorEndpointText = 'Connection to endpoint timed out.'
-              break
-            case 'NetworkError when attempting to fetch resource.':
-              this.errorEndpointText = 'Could not connect to endpoint.'
-              break
-            case 'Wrong chainId':
-              this.errorEndpointText = 'The chain ID returned by the endpoint is incorrect.'
-              break
-            case 'Failed to fetch':
-              this.errorEndpointText = 'Could not connect to endpoint.'
-              break
-            default:
-              this.errorEndpointText = err.message
-          }
-        }
-      }
     },
     async useScatter() {
       this.loading = true

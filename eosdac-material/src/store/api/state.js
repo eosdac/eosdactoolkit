@@ -13,6 +13,7 @@ export default {
     color: '',
     message: '',
     details: '',
-    seen: false
+    seen: false,
+    autoclose: 0
   }
 }

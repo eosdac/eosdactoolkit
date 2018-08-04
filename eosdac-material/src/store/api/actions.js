@@ -37,7 +37,8 @@ function apiDown(e,c,s) {
         color: 'warning',
         message: 'Connection to endpoint is unreliable or unavailable',
         details: 'Go to Settings to setup a working API Endpoint',
-        textColor: 'black'
+        textColor: 'black',
+        autoclose: 5
       })
     }
   }
@@ -72,23 +73,11 @@ export async function getActionHistory({
   state,
   rootState,
   commit
-}, offset) {
+}, payload) {
   try {
-    //eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint
-    eosConfig.httpEndpoint = {
-      keyProvider: null,
-      httpEndpoint: 'http://google.com',
-      expireInSeconds: 60,
-      broadcast: true,
-      debug: false,
-      sign: true,
-      ping: null,
-      lastConnectionUnix: null,
-      lastConnection: null,
-      lastConnectionStatus: null
-    }
+    eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint
     let eos = Eos(eosConfig)
-    const history = await eos.getActions(rootState.account.info.account_name,-1, offset || -5)
+    const history = await eos.getActions(/*rootState.account.info.account_name*/ 'pxneosincome', payload.pos, payload.offset)
     if (history && history.actions) {
       return history.actions
     } else {

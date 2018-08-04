@@ -11,5 +11,8 @@
       "token": "EOS",
       "decimals": 4
     }
+  },
+  "api": {
+    "bpNodeApiUrl": "https://eosdac.io/topnodes.json"
   }
 }

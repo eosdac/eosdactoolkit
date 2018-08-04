@@ -52,7 +52,8 @@
     </q-list>
   </q-layout-drawer>
   <q-page-container>
-    <router-view v-show="getRegistered || $route.path === '/settings'" />
+    <router-view v-if="getAccountName" v-show="getRegistered || $route.path === '/settings'" />
+    <h4 class="text-white q-ma-md" v-else>Logged out</h4>
     <Register ref="Register"/>
     <Initialize ref="Initialize" />
     <Unlock ref="Unlock" />

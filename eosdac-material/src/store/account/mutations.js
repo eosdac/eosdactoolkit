@@ -47,6 +47,10 @@ export const REMOVE_REGISTRATION = (state) => {
   state.registered = false
 }
 
+export const ADD_TRANSFER_HISTORY = (state, payload) => {
+  state.transferHistory = payload
+}
+
 export const RESET_STATE = (state) => {
     Object.assign(state, getDefaultState())
 }

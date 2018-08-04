@@ -46,3 +46,7 @@ export const getTokenBalance = (state) => {
 export const getMainCurrencyBalance = (state) => {
   return state.mainCurrencyBalance
 }
+
+export const getTransferHistory = (state) => {
+  return state.transferHistory
+}

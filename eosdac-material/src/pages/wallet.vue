@@ -103,7 +103,7 @@
     </div>
     <div class="col-xs-12 col-sm-12 col-md-4 q-pl-md">
       <h4 class="q-display-1 q-mt-none q-mb-md">History</h4>
-      <TransferHistory ref="History" />
+      <!--<TransferHistory ref="History" />-->
     </div>
   </div>
   </div>
@@ -115,7 +115,7 @@
 <script>
 import Transaction from 'components/transaction'
 import LoadingSpinner from 'components/loading-spinner'
-import TransferHistory from 'components/transfer-history'
+//import TransferHistory from 'components/transfer-history'
 import {
   mapGetters
 } from 'vuex'
@@ -123,8 +123,8 @@ export default {
   name: 'Wallet',
   components: {
     Transaction,
-    LoadingSpinner,
-    TransferHistory
+    LoadingSpinner
+    //TransferHistory
   },
   data() {
     return {
@@ -161,7 +161,6 @@ export default {
   mounted() {
     if (this.getAccountName) {
       this.lookupTokenBalance()
-      this.$refs.History.getTransferHistory()
     }
   },
   methods: {
@@ -205,12 +204,6 @@ export default {
     }
   },
   watch: {
-    getTokenBalance(val) {
-      this.$refs.History.getTransferHistory()
-    },
-    getMainCurrencyBalance(val) {
-      this.$refs.History.getTransferHistory()
-    },
     transferAmount(val) {
       if (val > this.getTokenBalance || ((val + "").match(/\./g) || []).length > 1 || val < 0 || !val) {
         this.transferAmountError = true
