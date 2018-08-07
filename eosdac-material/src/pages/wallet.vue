@@ -1,5 +1,5 @@
 <template>
-<q-page v-if="getAccountName" class="text-white q-pa-md">
+<q-page class="text-white q-pa-md">
   <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-8">
       <div class="row">
@@ -36,7 +36,7 @@
                       </q-field>
                     </q-card-main>
                     <q-card-actions class="justify-end">
-                      <q-btn @click="transferToken()" :disabled="badTransferTo || badTransferAmount" class="q-ma-sm" color="primary" label="Transfer" size="xl" />
+                      <q-btn @click="transferToken()" :disabled="badTransferTo || badTransferAmount" class="q-ma-sm" color="primary" label="Transfer"/>
                     </q-card-actions>
                   </q-card>
                 </div>
@@ -70,7 +70,7 @@
                       </q-field>
                     </q-card-main>
                     <q-card-actions class="justify-end">
-                      <q-btn @click="transferMainCurrency()" :disabled="badTransferTo || badTransferMainAmount" class="q-ma-sm" color="primary" label="Transfer" size="xl" />
+                      <q-btn @click="transferMainCurrency()" :disabled="badTransferTo || badTransferMainAmount" class="q-ma-sm" color="primary" label="Transfer" />
                     </q-card-actions>
                   </q-card>
                 </div>
@@ -101,10 +101,10 @@
         </div>
       </div>
     </div>
-    <div class="col-xs-12 col-sm-12 col-md-4 q-pl-md">
+    <!--<div class="col-xs-12 col-sm-12 col-md-4 q-pl-md">
       <h4 class="q-display-1 q-mt-none q-mb-md">History</h4>
-      <!--<TransferHistory ref="History" />-->
-    </div>
+      <TransferHistory ref="History" />
+    </div>-->
   </div>
   </div>
   <Transaction ref="Transaction" v-on:done="lookupTokenBalance()" />

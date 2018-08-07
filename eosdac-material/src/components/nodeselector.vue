@@ -1,4 +1,5 @@
 <template>
+<div v-if="!setup">
   <div class="row relative-position">
     <div class="col-xs-12 q-pa-sm text-center">
       <q-alert v-if="errorEndpoint" :message="errorEndpointText" class="text-truncate" icon="info" color="red" />
@@ -21,6 +22,48 @@
     </div>
     <LoadingSpinner :visible="loading" :text="loadingText" />
   </div>
+</div>
+<div v-else>
+  <div class="row justify-center">
+    <div class="col-sm-12 col-lg-6 q-pa-sm text-center">
+      <q-alert v-if="errorEndpoint" :message="errorEndpointText" class="text-truncate" icon="info" color="red" />
+      <q-alert v-if="successEndpoint" message="Endpoint set successfully" class="text-truncate" icon="icon-ui-6" color="positive" />
+    </div>
+  </div>
+  <div class="row relative-position justify-center">
+    <div class="col-sm-12 col-lg-6 q-pa-sm text-center">
+      <q-list separator dark>
+        <q-collapsible opened group="1" label="Automatic Selection">
+          <div class="row full-width justify-center">
+            <div v-if="!endpointListFail" class="col-sm-12 q-pa-sm text-center">
+              <p class="text-white">Click <b>Connect</b> below to automatically connect to the fastest endpoint to your location selected from the top EOS block producers. You can also select <b>Choose Endpoint</b> to specify an endpoint. If you do not choose an endpoint before the countdown
+                is complete, you will automatically be connected to the fastest endpoint.</p>
+              <q-btn class="q-ma-sm" size="xl" color="primary" @click="connect(fastest) " :label="(countDone)? 'Connect' :'Connect (' + count + ')'" />
+            </div>
+          </div>
+        </q-collapsible>
+        <q-collapsible group="1" @click.native="countDone = true" label="Choose Endpoint">
+          <div class="row full-width justify-center">
+            <div class="col-sm-12 q-pa-sm text-center">
+              <p class="text-white">Select the endpoint you would like to use and click <b>Connect</b>. Endpoints from the top block producers have been provided for you, but you can also specify your own custom endpoint by selecting <b>Custom Endpoint</b>, populating the input with a url, and pressing <b>Connect</b>.</p>
+            </div>
+            <div class="col-sm-12 col-lg-6 q-pa-sm text-center">
+              <q-select  placeholder="Select Endpoint from List" v-model="selectedEndpoint" dark radio :options="endpoints" />
+              <q-btn :disabled="!selectedEndpoint || setCustom" class="q-ma-sm" color="primary" @click="connect(selectedEndpoint)" label="Connect" />
+              <div v-if="setCustom">
+              <q-field label-width="12" dark>
+                <q-input dark v-model="endpoint" placeholder="https://endpoint-url.com" />
+              </q-field>
+              <q-btn :disabled="badEndpoint" class="q-ma-sm" color="primary" @click="connect(endpoint)" label="Connect" />
+              </div>
+            </div>
+          </div>
+        </q-collapsible>
+      </q-list>
+    </div>
+    <LoadingSpinner :visible="loading" :text="loadingText" />
+  </div>
+</div>
 </template>
 
 <script>
@@ -31,6 +74,9 @@ import {
 } from 'vuex'
 export default {
   name: 'NodeSelector',
+  props: {
+    setup: Boolean
+  },
   components: {
     LoadingSpinner
   },
@@ -39,7 +85,7 @@ export default {
       getCurrentEndpoint: 'api/getCurrentEndpoint'
     })
   },
-  data () {
+  data() {
     return {
       loading: false,
       loadingText: '',
@@ -50,10 +96,14 @@ export default {
       selectedEndpoint: '',
       endpoints: [],
       endpointListFail: false,
-      successEndpoint: false
+      successEndpoint: false,
+      count: 10,
+      fastest: '',
+      countDone: false,
+      setCustom: false
     }
   },
-  mounted () {
+  mounted() {
     this.loadEndpoints()
     if (this.getCurrentEndpoint) {
       this.errorEndpoint = false
@@ -63,7 +113,7 @@ export default {
     }
   },
   methods: {
-    async getFastestNode () {
+    async getFastestNode() {
       let s = new NodeSelector(this.$configFile.api.bpNodeApiUrl)
       this.loading = true
       this.loadingText = 'Gathering endpoints...'
@@ -71,6 +121,21 @@ export default {
       if (fastest) {
         this.connect(fastest.node)
       }
+      this.loading = false
+    },
+    decrease() {
+      if (!this.countDone) {
+        if (this.count <= 0) {
+          this.connect(this.fastest)
+          this.countDone = true
+        } else {
+          this.count--
+        }
+      }
+    },
+    countDown() {
+      this.count = 10
+      setInterval(this.decrease, 1000)
     },
     async loadEndpoints() {
       let s = new NodeSelector(this.$configFile.api.bpNodeApiUrl)
@@ -85,6 +150,15 @@ export default {
             value: element
           })
         })
+        if (this.setup) {
+          res.push({
+            label: 'Custom Endpoint',
+            value: 'custom'
+          })
+          let getFastest = await s.get_fastest_node()
+          this.fastest = getFastest.node
+          this.countDown()
+        }
         this.endpoints = res
         this.loading = false
       } catch (error) {
@@ -98,10 +172,10 @@ export default {
         return url
       }
     },
-    sleep (ms) {
+    sleep(ms) {
       return new Promise(resolve => setTimeout(resolve, ms))
     },
-    async endpointSuccess () {
+    async endpointSuccess() {
       this.successEndpoint = true
       await this.sleep(3000)
       this.successEndpoint = false
@@ -109,6 +183,7 @@ export default {
     async connect(u) {
       this.loading = true
       this.loadingText = 'Connecting...'
+      this.countDone = true
       try {
         let url = await this.filterUrl(u)
         let test = await this.$store.dispatch('api/testEndpoint', url)
@@ -141,7 +216,7 @@ export default {
               this.errorEndpointText = 'Could not connect to endpoint.'
               break
             default:
-              this.errorEndpointText = err.message
+              this.errorEndpointText = 'Could not connect to endpoint.'
           }
         }
       }
@@ -157,6 +232,13 @@ export default {
         this.errorEndpoint = false
         this.errorEndpointText = ''
         this.badEndpoint = false
+      }
+    },
+    selectedEndpoint (val) {
+      if (val === 'custom') {
+        this.setCustom = true
+      } else {
+        this.setCustom = false
       }
     }
   }

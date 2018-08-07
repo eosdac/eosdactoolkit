@@ -1,6 +1,6 @@
 // Configuration for your app
 
-module.exports = function (ctx) {
+module.exports = function(ctx) {
   return {
     // app plugins (/src/plugins)
     plugins: [
@@ -31,13 +31,19 @@ module.exports = function (ctx) {
       // gzip: true,
       // analyze: true,
       // extractCSS: false,
-      extendWebpack (cfg) {
-      //  cfg.module.rules.push({
-      //    enforce: 'pre',
-      //    test: /\.(js|vue)$/,
-      //    loader: 'eslint-loader',
-      //    exclude: /(node_modules|quasar)/
-      //  })
+      extendWebpack(cfg) {
+        //  cfg.module.rules.push({
+        //    enforce: 'pre',
+        //    test: /\.(js|vue)$/,
+        //    loader: 'eslint-loader',
+        //    exclude: /(node_modules|quasar)/
+        //  })
+        for (const rule of cfg.module.rules) {
+          if (!rule.oneOf) continue
+          for (const ruleOneOf of rule.oneOf) {
+            ruleOneOf.use = ruleOneOf.use.filter(u => u.loader !== 'postcss-loader')
+          }
+        }
       }
     },
     devServer: {
@@ -86,11 +92,11 @@ module.exports = function (ctx) {
         'QPopover',
         'QSelect',
         'QTabs',
-    'QTab',
-    'QTabPane',
-    'QRouteTab',
-    'QCollapsible',
-    'QProgress'
+        'QTab',
+        'QTabPane',
+        'QRouteTab',
+        'QCollapsible',
+        'QProgress'
       ],
       directives: [
         'Ripple',
@@ -105,8 +111,7 @@ module.exports = function (ctx) {
       // i18n: 'de' // Quasar language
     },
     // animations: 'all' --- includes all animations
-    animations: [
-    ],
+    animations: [],
     pwa: {
       // workboxPluginMode: 'InjectManifest',
       // workboxOptions: {},
@@ -118,8 +123,7 @@ module.exports = function (ctx) {
         orientation: 'portrait',
         background_color: '#ffffff',
         theme_color: '#027be3',
-        icons: [
-          {
+        icons: [{
             'src': 'statics/icons/icon-128x128.png',
             'sizes': '128x128',
             'type': 'image/png'
@@ -152,7 +156,7 @@ module.exports = function (ctx) {
     },
     electron: {
       // bundler: 'builder', // or 'packager'
-      extendWebpack (cfg) {
+      extendWebpack(cfg) {
         // do something with Electron process Webpack cfg
       },
       packager: {

@@ -41,6 +41,10 @@
   </q-layout-header>
   <q-layout-drawer v-model="leftDrawerOpen" content-class="bg-dark2">
     <q-list v-if="getAccountName" no-border link inset-delimiter dark>
+      <!--<q-item to="/dashboard">
+        <q-item-side icon="icon-menu-1" />
+        <q-item-main label="Dashboard" sublabel="" />
+      </q-item>-->
       <q-item to="/wallet">
         <q-item-side icon="icon-menu-6" />
         <q-item-main label="Wallet" sublabel="" />

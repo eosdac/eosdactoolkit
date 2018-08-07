@@ -60,7 +60,7 @@ export default {
       this.details = this.getNotification.details
       this.textColor = this.getNotification.textColor || 'white'
       if (this.getNotification.autoclose) {
-        sleep(this.getNotification.autoclose * 1000).then(() => {
+        this.sleep(this.getNotification.autoclose * 1000).then(() => {
           this.markSeen()
         })
       }

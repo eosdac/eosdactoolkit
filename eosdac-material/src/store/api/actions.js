@@ -38,7 +38,7 @@ function apiDown(e,c,s) {
         message: 'Connection to endpoint is unreliable or unavailable',
         details: 'Go to Settings to setup a working API Endpoint',
         textColor: 'black',
-        autoclose: 5
+        autoclose: 8
       })
     }
   }

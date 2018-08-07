@@ -2,10 +2,7 @@
 <q-modal class="text-white" v-model="init" no-esc-dismiss no-backdrop-dismiss>
   <q-stepper v-model="curStep" v-show="!importInit" color="white" ref="initstepper" contractable no-header-navigation>
     <q-step active-icon="icon-register-1" default title="API Endpoint" name="init1">
-      <div class="col-xs-12 q-pa-sm">
-        <p class="text-white text-center">An API endpoint is needed to enable communication with the eosDAC contracts on the EOS network.</p>
-      </div>
-      <NodeSelector v-on:done="$refs.initstepper.next()" />
+      <NodeSelector setup v-on:done="$refs.initstepper.next()" />
     </q-step>
     <q-step class="text-center" title="Authentication" name="init2" icon="icon-register-2">
       <h4 class="text-white">Authentication Method</h4>
@@ -106,7 +103,6 @@ export default {
         this.$store.commit('account/UNLOCK_ACCOUNT_SCATTER')
         this.loading = false
         this.init = false
-        location.reload()
       } catch (err) {
         this.loading = false
         if (err.type === 'locked') {

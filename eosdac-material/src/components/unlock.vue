@@ -1,39 +1,47 @@
 <template>
-  <q-modal class="text-white z-max" maximized v-model="unlock">
-    <div class="col-xs-12 col-sm-6 col-md-4 text-center">
-<q-card dark flat class="q-ma-sm absolute-center">
-  <q-card-title>
-    <div class="q-title">Login</div>
-  </q-card-title>
-  <q-alert v-if="scatterError" :message="scatterErrorText" class="text-truncate" icon="info" color="grey" />
-  <q-card-main v-if="!getUsesScatter">
-    <q-field :error="error" icon="vpn key" label="Password" :error-label="errorText" :label-width="12">
-      <q-input dark type="password" v-model="password" />
-    </q-field>
-  </q-card-main>
-  <q-card-actions>
-    <q-btn v-if="!getUsesScatter" color="primary" @click="unlockAccount()">Login</q-btn>
-    <q-btn v-else color="primary" @click="unlockScatter()">Login with Scatter</q-btn>
-    <q-btn icon="clear" color="danger" flat @click="unlock = false"></q-btn>
-  </q-card-actions>
+<q-modal class="text-white relative-position" v-model="unlock">
+  <div class="row full-width justify-center" style="width:50%;">
+    <div class="col-12 q-pa-lg">
+      <q-card dark flat class="q-ma-sm">
+        <q-card-title>
+          <h4 class="q-my-sm">Login</h4>
+          <div slot="right" class="row items-center">
+          <q-btn icon="clear" color="white" flat @click="unlock = false"></q-btn>
+          </div>
+        </q-card-title>
+        <q-alert v-if="scatterError" :message="scatterErrorText" class="text-truncate text-center" icon="info" color="secondary" />
+        <q-card-main v-if="!getUsesScatter">
+          <q-field :error="error" icon="vpn key" label="Password" :error-label="errorText" :label-width="12">
+            <q-input dark type="password" v-model="password" />
+          </q-field>
+        </q-card-main>
+        <q-card-actions align="center">
+          <q-btn v-if="!getUsesScatter" color="primary" @click="unlockAccount()">Login</q-btn>
+          <q-btn v-else color="primary" @click="unlockScatter()">Login with Scatter</q-btn>
+        </q-card-actions>
+      </q-card>
+    </div>
+    <div class="col-12 q-pa-lg">
+      <NodeSelector v-if="netError" />
+    </div>
+  </div>
   <LoadingSpinner :visible="loading" :text="loadingText" />
-</q-card>
-
-</div>
 </q-modal>
 </template>
 
 <script>
 import LoadingSpinner from 'components/loading-spinner'
+import NodeSelector from 'components/nodeselector'
 import {
   mapGetters
 } from 'vuex'
 export default {
   name: 'unlock',
   components: {
-    LoadingSpinner
+    LoadingSpinner,
+    NodeSelector
   },
-  data () {
+  data() {
     return {
       unlock: false,
       account: '',
@@ -43,14 +51,15 @@ export default {
       loading: false,
       loadingText: '',
       scatterError: false,
-      scatterErrorText: ''
+      scatterErrorText: '',
+      netError: false
     }
   },
   methods: {
-    open () {
+    open() {
       this.unlock = true
     },
-    unlockAccount () {
+    unlockAccount() {
       this.loading = true
       this.loadingText = 'Decrypting keys...'
       this.$store.dispatch('account/unlockAccount', this.password).then(() => {
@@ -78,7 +87,7 @@ export default {
       }
       let network2 = {
         blockchain: 'eos',
-        chainId : this.$configFile.network.chainId,
+        chainId: this.$configFile.network.chainId,
         protocol: current.httpEndpoint.split(':')[0].replace(/\//g, ''),
         host: current.httpEndpoint.split(':')[1].replace(/\//g, ''),
         port: current.httpEndpoint.split(':')[2] || pp
@@ -100,7 +109,6 @@ export default {
         this.$store.commit('account/UNLOCK_ACCOUNT_SCATTER')
         this.clear()
       } catch (err) {
-        console.log(err)
         this.loading = false
         if (err.type === 'locked') {
           this.scatterError = true
@@ -109,12 +117,18 @@ export default {
           this.scatterError = true
           this.scatterErrorText = 'Identity request was denied. Please try again and accept the request'
         } else {
-          this.scatterError = true
-          this.scatterErrorText = err.message
+          if (err.message === 'Failed to fetch') {
+            this.scatterError = true
+            this.netError = true
+            this.scatterErrorText = 'Could not connect to endpoint. Please choose a different endpoint and try again.'
+          } else {
+            this.scatterError = true
+            this.scatterErrorText = err.message
+          }
         }
       }
     },
-    clear () {
+    clear() {
       Object.assign(this.$data, this.$options.data())
       this.unlock = false
     }
@@ -128,7 +142,7 @@ export default {
     })
   },
   watch: {
-    password () {
+    password() {
       this.error = false
     }
   }

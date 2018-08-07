@@ -6,7 +6,9 @@ export default [
     children: [
       { path: '', redirect: '/wallet' },
       { path: 'wallet', component: () => import('pages/wallet') },
-      { path: 'settings', component: () => import('pages/settings') }
+      { path: 'settings', component: () => import('pages/settings') },
+      { path: 'test', component: () => import('pages/test') },
+      { path: 'dashboard', component: () => import('pages/dashboard') }
     ]
   },
 
