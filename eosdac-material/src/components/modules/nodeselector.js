@@ -91,7 +91,7 @@ class NodeSelector {
 			let url = node_url;
 			return new Promise(function(resolve, reject) {
 				request({
-					url : url,
+					url : url + self.benchmark_url,
 					time : true,
 					rejectUnauthorized: false,
 					headers: {'User-Agent': 'Chrome/59.0.3071.115'},
