@@ -4,16 +4,16 @@
     <q-toolbar color="dark2">
       <q-toolbar-title class="text-white q-pl-none">
         <q-icon style="font-size:35px;" name="icon-menu-3" />
-        <span class="q-ml-md q-mt-sm text-weight-thin vertical-middle" style="font-size:23px;">EOS<b>DAC</b> TOOLKIT</span>
+        <span class="q-ml-md q-mt-sm text-weight-thin vertical-middle" style="font-size:23px;">EOS<b>DAC</b> Member Client</span>
         <q-btn size="lg" flat dense round @click="leftDrawerOpen = !leftDrawerOpen" aria-label="Menu">
           <q-icon v-if="leftDrawerOpen" name="clear" />
           <q-icon v-else name="menu" />
         </q-btn>
       </q-toolbar-title>
       <div v-if="getImported">
-        <MenuDropdown v-if="getAccountName" iconColor="white" :label="'Your ' + tokenName + ' Blanace'" :sublabel="String(getTokenBalance)" icon="icon-dac-balance" />
-        <MenuDropdown v-if="getAccountName" iconColor="white" :label="'Your ' + mainCurrencyName + ' Blanace'" :sublabel="String(getMainCurrencyBalance)" icon="icon-type-2" />
-        <MenuDropdown v-if="getAccountName" iconColor="white" label="Account Name" :sublabel="getAccountName" icon="icon-topmenu-2" />
+        <MenuDropdown class="no-pointer-events" v-if="getAccountName" iconColor="white" :label="'Your ' + tokenName + ' Blanace'" :sublabel="String(getTokenBalance)" icon="icon-dac-balance" />
+        <MenuDropdown class="no-pointer-events" v-if="getAccountName" iconColor="white" :label="'Your ' + mainCurrencyName + ' Blanace'" :sublabel="String(getMainCurrencyBalance)" icon="icon-type-2" />
+        <MenuDropdown class="no-pointer-events" v-if="getAccountName" iconColor="white" label="Account Name" :sublabel="getAccountName" icon="icon-topmenu-2" />
         <MenuDropdown v-if="getAccountName" iconColor="positive" label="Status" sublabel="Logged-In" icon="icon-topmenu-1" :iconRight="true">
           <q-list class="bg-dark2" dark link>
             <q-item @click.native="lockScatter()" dark>
@@ -53,10 +53,14 @@
         <q-item-side icon="icon-topmenu-6" />
         <q-item-main label="Settings" sublabel="" />
       </q-item>
+      <q-item to="/custodians">
+        <q-item-side icon="icon-topmenu-6" />
+        <q-item-main label="Custodians" sublabel="" />
+      </q-item>
     </q-list>
   </q-layout-drawer>
   <q-page-container>
-    <router-view v-if="getAccountName" v-show="getRegistered || $route.path === '/settings'" />
+    <router-view v-if="getAccountName" v-show="getRegistered || $route.path === '/settings' || $route.path === '/wallet'" />
     <h4 class="text-white q-ma-md" v-else>Logged out</h4>
     <Register ref="Register"/>
     <Initialize ref="Initialize" />

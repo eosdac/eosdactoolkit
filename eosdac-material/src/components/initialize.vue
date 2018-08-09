@@ -1,8 +1,8 @@
 <template>
-<q-modal class="text-white" v-model="init" no-esc-dismiss no-backdrop-dismiss>
+<q-modal class="text-white realtive-position" v-model="init" no-esc-dismiss no-backdrop-dismiss>
   <q-stepper v-model="curStep" v-show="!importInit" color="white" ref="initstepper" contractable no-header-navigation>
     <q-step active-icon="icon-register-1" default title="API Endpoint" name="init1">
-      <NodeSelector setup v-on:done="$refs.initstepper.next()" />
+      <NodeSelector setup v-on:done="stepScatter()" />
     </q-step>
     <q-step class="text-center" title="Authentication" name="init2" icon="icon-register-2">
       <h4 class="text-white">Authentication Method</h4>
@@ -11,7 +11,7 @@
         <p>{{scatterErrorText}}
         </p>
       </q-alert>
-      <q-btn v-if="$q.platform.is.desktop" @click="useScatter()" :disabled="!hasScatter" class="q-ma-sm" color="primary" label="Scatter" size="xl" />
+      <q-btn @click="useScatter()" :disabled="!hasScatter" class="q-mb-lg" color="primary" label="Connect with Scatter" />
       <ScatterTutorial v-if="scatterError" color="white" />
       <!--<q-btn v-else @click="importInit = true" class="q-ma-sm" color="primary" label="Import private keys" size="xl" />-->
     </q-step>
@@ -67,6 +67,12 @@ export default {
   methods: {
     open() {
       this.init = true
+    },
+    stepScatter() {
+      this.$refs.initstepper.next()
+      if (this.hasScatter) {
+        this.useScatter()
+      }
     },
     async useScatter() {
       this.loading = true

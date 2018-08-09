@@ -5,7 +5,7 @@
       <div class="row">
         <div class="col-xs-12">
           <h4 class="q-display-1 q-mt-none q-mb-md">Wallet</h4>
-          <q-tabs align="justify">
+          <q-tabs align="justify q-tabs-position-bottom">
             <q-tab default slot="title" :name="tokenName" icon="icon-dac-balance" :label="tokenName" />
             <q-tab slot="title" :name="mainCurrencyName" icon="icon-type-2" :label="mainCurrencyName" />
             <q-tab-pane :name="tokenName">

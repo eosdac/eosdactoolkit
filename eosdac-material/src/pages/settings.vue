@@ -1,7 +1,7 @@
 <template>
 <q-page class="text-white q-pa-md">
   <h4 class="q-display-1 q-mt-none q-mb-md">Settings</h4>
-  <q-tabs align="justify">
+  <q-tabs align="justify  q-tabs-position-bottom">
     <q-tab default slot="title" name="tab-1" label="API" />
     <!--<q-tab slot="title" name="tab-2" label="Account" />-->
     <q-tab-pane class="shadow-1 bg-dark2" name="tab-1">
