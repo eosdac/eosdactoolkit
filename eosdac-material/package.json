@@ -2,7 +2,7 @@
   "name": "eosdac-material",
   "version": "1.0.0",
   "description": "Toolkit GUI for eosDAC",
-  "productName": "eosDAC Toolkit",
+  "productName": "eosDAC Member Client",
   "cordovaId": "org.cordova.quasar.app",
   "author": "nanonano7 <nanonano@protonmail.com>",
   "private": true,
