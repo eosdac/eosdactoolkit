@@ -2,13 +2,15 @@
   <div class="wp_row row q-mt-md bg-dark2 q-pa-sm shadow-5" style="min-height:190px" >
 
     <!-- first column XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-->
-    <div class="mycol col-md-4 col-sm-12 q-pl-sm q-pr-sm">
+    <div class="wp_col col-md-4 col-sm-12 q-pl-sm q-pr-sm">
+
         <div class="row" style="color:#9077AB">
           <div class="col-2"> {{data.id}}</div>
           <div class="col-10"> {{data.title}}</div>
         </div>
+
         <div class="row q-mt-md q-caption">
-          <div class="col-2 text-left white_text">
+<!--           <div class="col-2 text-left white_text">
               <div>WP by:</div>
               <div>Submitted:</div>
               <div>Type:</div>
@@ -17,16 +19,30 @@
               <div>{{data.member.name}} - {{data.member.account}}</div>
               <div>{{data.submit_date}}</div>
               <div>{{data.type}}</div>
-
+          </div> -->
+          <div class=" white_text">
+              <div style="margin-bottom:3px">
+                <span style="display:inline-block;min-width:65px">WP by:</span>
+                <span class="whiter_text" style="display:inline-block;min-width:65px">{{data.member.name}} - {{data.member.account}}</span></div>
+              <div style="margin-bottom:3px">
+                <span style="display:inline-block;min-width:65px">Submitted:</span>
+                <span class="whiter_text" style="display:inline-block;min-width:65px">{{data.submit_date}}</span></div>
+              <div>
+                <span style="display:inline-block;min-width:65px">Type:</span>
+                <span class="whiter_text" style="display:inline-block;min-width:65px">{{data.type}}</span>
+              </div>
           </div>
         </div>
+
         <div class="row q-mt-md q-mb-md q-caption white_text">
-          {{data.description}}
+          {{data.description.slice(0,160)+'...'}}
         </div>
+
     </div>
 
     <!-- second colum XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-->
-    <div class="mycol col-md-4 col-sm-12 q-pl-sm q-pr-sm ">
+    <div class="wp_col col-md-4 col-sm-12 q-pl-sm q-pr-sm ">
+
       <div class="row">
         <div class="col-1">
           <q-icon class="white_text" style="font-size:22px" name="icon-type-2" />
@@ -61,7 +77,7 @@
     </div>
 
     <!-- third column XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-->
-    <div class="mycol col-xl-4 col-lg-4 col-md-4 col-sm-12 q-pl-sm q-pr-sm">
+    <div class="wp_col col-xl-4 col-lg-4 col-md-4 col-sm-12 q-pl-sm q-pr-sm">
 
       <div class="row">
         <div class="col-1">
@@ -98,18 +114,18 @@
 
 
 <style >
-  .wp_row > .mycol:first-of-type{
+  .wp_row > .wp_col:first-of-type{
       border:0;
   }
-  .mycol{
-    border-left:1px solid rgba(255,255,255,0.7);
+  .wp_col{
+    border-left:1px solid rgba(255,255,255,0.5);
     /*background:blue;*/
   }
   .white_text{
     color:rgba(255,255,255,0.6);
   }
   .whiter_text{
-    color:rgba(255,255,255,0.8);
+    color:rgba(255,255,255,0.9);
   }
 </style>
 
