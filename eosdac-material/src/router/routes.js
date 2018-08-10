@@ -8,8 +8,8 @@ export default [
       { path: 'wallet', component: () => import('pages/wallet') },
       { path: 'settings', component: () => import('pages/settings') },
       { path: 'test', component: () => import('pages/test') },
-      { path: 'dashboard', component: () => import('pages/dashboard') },
-      { path: 'custodians', component: () => import('pages/custodians') }
+      { path: 'dashboard', component: () => import('pages/dashboard') }
+      //{ path: 'custodians', component: () => import('pages/custodians') }
     ]
   },
 
