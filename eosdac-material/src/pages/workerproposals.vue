@@ -1,12 +1,12 @@
 <template>
-<q-page class="text-white q-pa-md">
+<q-page class="q-pa-md">
   <h4 class="q-display-1 q-mt-none q-mb-md">Worker Proposals</h4>
   <q-tabs >
     <q-tab default slot="title" name="tab-1" label="OPEN" />
     <q-tab slot="title" name="tab-2" label="APPROVED" />
     <wp_member_view v-for="wp in wps" :data="wp"/>
 <!--     <q-tab-pane class="" name="tab-1">
-      
+
     </q-tab-pane> -->
     <!--<q-tab-pane name="tab-2">
 
@@ -28,7 +28,7 @@ export default {
     return {
       wps:[
       {
-        id: '# 001', 
+        id: '# 001',
         title:'This is the title of a very nice worker proposal vote for it',
         member:{
           name:'Kasper',
@@ -51,7 +51,7 @@ export default {
 
 
       {
-        id: '# 002', 
+        id: '# 002',
         title:'This is an other great worker proposal title',
         member:{
           name:'Nano',
