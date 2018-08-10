@@ -2,7 +2,7 @@
 <q-modal class="text-white realtive-position" v-model="init" no-esc-dismiss no-backdrop-dismiss>
   <q-stepper v-model="curStep" v-show="!importInit" color="white" ref="initstepper" contractable no-header-navigation>
     <q-step active-icon="icon-register-1" default title="API Endpoint" name="init1">
-      <NodeSelector setup v-on:done="stepScatter()" />
+      <NodeSelector v-if="init" setup v-on:done="stepScatter()" />
     </q-step>
     <q-step class="text-center" title="Authentication" name="init2" icon="icon-register-2">
       <h4 class="text-white">Authentication Method</h4>

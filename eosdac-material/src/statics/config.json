@@ -11,8 +11,8 @@
       "token": "EOS",
       "decimals": 4
     },
-    "custodianContarct": {
-      "name": "decelections"
+    "custodianContract": {
+      "name": "dacelections"
     }
   },
   "api": {
