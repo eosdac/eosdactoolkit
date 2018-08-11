@@ -31,7 +31,7 @@
     <div class="col-sm-12 col-lg-6 q-pa-sm text-center">
           <div class="row justify-center">
             <div v-if="!endpointListFail" class="col-sm-12 q-pa-sm text-center">
-              <p class="text-white">Click <b>Connect</b> below to automatically connect to the fastest endpoint to your location selected from the top EOS block producers.</p>
+              <p class="text-white">Click <b>{{ $t('connect') }}</b> below to automatically connect to the fastest endpoint to your location selected from the top EOS block producers.</p>
               <q-btn class="q-ma-sm" color="primary" @click="getFastestNode() " label="Connect" />
             </div>
           </div>

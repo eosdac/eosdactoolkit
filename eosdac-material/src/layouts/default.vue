@@ -81,6 +81,7 @@ import {
 import {
   mapGetters
 } from 'vuex'
+import { Quasar } from 'quasar'
 import Initialize from 'components/initialize'
 import Unlock from 'components/unlock'
 import Register from 'components/register'
@@ -171,6 +172,8 @@ export default {
     }
   },
   mounted() {
+    //language detection
+    this.$i18n.locale = this.$q.i18n.getLocale()
     //check if registered
     if (!this.getScatter) {
       this.loadScatter()

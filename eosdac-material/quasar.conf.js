@@ -38,6 +38,14 @@ module.exports = function(ctx) {
         //    loader: 'eslint-loader',
         //    exclude: /(node_modules|quasar)/
         //  })
+        cfg.module.rules.push({
+          resourceQuery: /blockType=i18n/,
+          use: [{
+              loader: '@kazupon/vue-i18n-loader'
+            }
+          ]
+        })
+
         for (const rule of cfg.module.rules) {
           if (!rule.oneOf) continue
           for (const ruleOneOf of rule.oneOf) {
@@ -96,7 +104,8 @@ module.exports = function(ctx) {
         'QTabPane',
         'QRouteTab',
         'QCollapsible',
-        'QProgress'
+        'QProgress',
+        'QSlideTransition'
       ],
       directives: [
         'Ripple',
@@ -106,9 +115,10 @@ module.exports = function(ctx) {
       plugins: [
         'Notify',
         'AppVisibility'
-      ]
+      ],
       // iconSet: ctx.theme.mat ? 'material-icons' : 'ionicons'
       // i18n: 'de' // Quasar language
+      i18n: 'en-us'
     },
     // animations: 'all' --- includes all animations
     animations: [],
