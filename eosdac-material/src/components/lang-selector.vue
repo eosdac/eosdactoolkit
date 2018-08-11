@@ -1,7 +1,7 @@
 <template>
+  <q-field label="Choose your Language" label-width="12" dark>
   <q-select
   dark
-    stack-label="I18n"
     :options="[
       { label: 'English (US)',         value: 'en-us' },
       { label: 'English (UK)',         value: 'en-uk' },
@@ -15,6 +15,7 @@
     ]"
     v-model="lang"
   />
+</q-field>
 </template>
 
 <script>

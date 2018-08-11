@@ -54,7 +54,7 @@
         <q-item-main label="Settings" sublabel="" />
       </q-item>
       <q-item to="/custodians">
-        <q-item-side icon="icon-topmenu-6" />
+        <q-item-side icon="icon-ui-3" />
         <q-item-main label="Custodians" sublabel="" />
       </q-item>
       <q-item to="/workerproposals">
@@ -173,7 +173,13 @@ export default {
   },
   mounted() {
     //language detection
-    this.$i18n.locale = this.$q.i18n.getLocale()
+    let lang = this.$q.i18n.getLocale()
+    this.$i18n.locale = lang
+    import('quasar-framework/i18n/' + lang).then(lang => {
+      if (lang) {
+        this.$q.i18n.set(lang.default)
+      }
+    })
     //check if registered
     if (!this.getScatter) {
       this.loadScatter()

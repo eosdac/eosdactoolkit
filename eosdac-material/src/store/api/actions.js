@@ -238,6 +238,30 @@ export async function getRegistered({
   }
 }
 
+export async function getCustodians({
+  state,
+  commit
+}) {
+  try {
+    eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint
+    let eos = Eos(eosConfig)
+    const custodians = await eos.getTableRows({
+      json: true,
+      scope: configFile.network.custodianContract.name,
+      code: configFile.network.custodianContract.name,
+      table: 'candidates'
+    })
+    if (!custodians.rows.length) {
+      return false
+    } else {
+      return custodians.rows
+    }
+  } catch (error) {
+    apiDown(error,commit)
+    throw error
+  }
+}
+
 export async function getMemberTerms({
   state,
   commit

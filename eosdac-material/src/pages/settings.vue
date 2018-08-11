@@ -6,7 +6,7 @@
     <q-tab slot="title" name="tab-2" label="Language" />
     <!--<q-tab slot="title" name="tab-2" label="Account" />-->
     <q-tab-pane class="shadow-1 bg-dark2" name="tab-1">
-      <q-collapsible separator dark icon="icon-register-1" label="API Endpoint">
+      <q-collapsible separator dark icon="icon-register-1" collapse-icon="icon-ui-11" label="API Endpoint">
       <NodeSelector />
     </q-collapsible>
     </q-tab-pane>

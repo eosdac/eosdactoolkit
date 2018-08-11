@@ -6,7 +6,7 @@
         <q-card-title>
           <h4 class="q-my-sm">Login</h4>
           <div slot="right" class="row items-center">
-          <q-btn icon="clear" color="white" flat @click="unlock = false"></q-btn>
+          <q-btn icon="icon-ui-8" color="white" flat @click="unlock = false"></q-btn>
           </div>
         </q-card-title>
         <q-alert v-if="scatterError" :message="scatterErrorText" class="text-truncate text-center" icon="info" color="secondary" />
