@@ -4,7 +4,7 @@
   <q-tabs >
     <q-tab default slot="title" name="tab-1" label="OPEN" />
     <q-tab slot="title" name="tab-2" label="APPROVED" />
-    <wp_member_view v-for="wp in wps" :data="wp"/>
+    <wp_member_view v-for="(wp, index) in wps" :key="index" :data="wp"/>
 <!--     <q-tab-pane class="" name="tab-1">
 
     </q-tab-pane> -->
