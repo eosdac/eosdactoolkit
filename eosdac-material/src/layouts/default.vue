@@ -188,14 +188,7 @@ export default {
     }
   },
   mounted() {
-    //language detection
-    let lang = this.$q.i18n.getLocale()
-    this.$i18n.locale = lang
-    import ('quasar-framework/i18n/' + lang).then(lang => {
-      if (lang) {
-        this.$q.i18n.set(lang.default)
-      }
-    })
+
     //check if registered
     if (!this.getScatter) {
       this.loadScatter()
@@ -209,6 +202,16 @@ export default {
     //}
     setInterval(this.queryApis, 1000)
     //setInterval(this.autolock, 1000)
+  },
+  created(){
+    //language detection
+    let lang = this.$q.i18n.getLocale()
+    this.$i18n.locale = lang
+    import ('quasar-framework/i18n/' + lang).then(lang => {
+      if (lang) {
+        this.$q.i18n.set(lang.default)
+      }
+    })
   }
 }
 </script>
