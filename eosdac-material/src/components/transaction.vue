@@ -56,7 +56,7 @@ export default {
       fields: {},
       ricardian: '',
       cancelable: false,
-      ricardianErrorText: 'The ricardian contract for this action could not be found. Are you sure you want',
+      ricardianErrorText: 'The ricardian contract for this action could not be found. Are you sure you want to execute this transaction?',
       ricardianError: false
     }
   },
@@ -139,7 +139,7 @@ export default {
           scatter: true
         }).then((res) => {
           this.$emit('done')
-          if (this.action === 'transferMain') {
+          if (this.action !== 'transfer') {
             this.$store.commit('api/NOTIFY', {
               icon: 'icon-ui-6',
               color: 'positive',
