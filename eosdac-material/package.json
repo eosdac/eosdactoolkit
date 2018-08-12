@@ -15,10 +15,12 @@
     "axios": "^0.18.0",
     "crypto-js": "^3.1.9-1",
     "eosjs": "^15.0.3",
+    "ipfs-api": "^23.0.0",
     "markdown-it": "^8.4.1",
     "request": "^2.87.0",
     "vue-i18n": "^7.3.3",
-    "vuex-persistedstate": "^2.5.4"
+    "vuex-persistedstate": "^2.5.4",
+    "yallist": "^3.0.2"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.1",

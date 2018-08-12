@@ -7,7 +7,8 @@ module.exports = function(ctx) {
       'i18n',
       'axios',
       'configloader',
-      'eosdac-iconfont'
+      'eosdac-iconfont',
+      'ipfs'
     ],
     css: [
       'app.styl',
