@@ -139,12 +139,25 @@ export default {
           scatter: true
         }).then((res) => {
           this.$emit('done')
-          this.$store.commit('api/NOTIFY', {
-            icon: 'icon-ui-6',
-            color: 'positive',
-            message: 'Transaction Successful',
-            detail: ''
-          })
+          if (this.action === 'transferMain') {
+            this.$store.commit('api/NOTIFY', {
+              icon: 'icon-ui-6',
+              color: 'positive',
+              message: 'Transaction Successful',
+              details: res.transaction_id,
+              linkText: 'View in explorer',
+              linkUrl: this.$configFile.api.mainCurrencyExplorerUrl + '/transaction/' + res.transaction_id
+            })
+          } else {
+            this.$store.commit('api/NOTIFY', {
+              icon: 'icon-ui-6',
+              color: 'positive',
+              message: 'Transaction Successful',
+              details: res.transaction_id,
+              linkText: 'View in explorer',
+              linkUrl:  res.transaction_id
+            })
+          }
           this.loading = false
           this.close()
         }, (err) => {
@@ -178,7 +191,7 @@ export default {
               icon: 'icon-ui-6',
               color: 'positive',
               message: 'Transaction Successful',
-              detail: ''
+              details: res
             })
             this.loading = false
             this.close()
@@ -187,7 +200,7 @@ export default {
               icon: 'error',
               color: 'red',
               message: 'Error: ' + err.message,
-              detail: ''
+              details: ''
             })
             this.loading = false
           })

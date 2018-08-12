@@ -1,6 +1,6 @@
 <template>
   <div v-show="!getRegistered && getAccountName && getImported" class="row justify-center">
-    <div class="col-lg-12 col-xl-8 relative-position">
+    <div v-if="!queryError" class="col-lg-12 col-xl-8 relative-position">
       <q-card flat class="text-white">
         <Transaction ref="Transaction" v-on:done="checkRegistered()" />
         <q-card-title>
@@ -22,6 +22,9 @@
         </q-card-actions>
         <LoadingSpinner :visible="loading" :text="loadingText" />
       </q-card>
+    </div>
+    <div v-else class="col-lg-12 col-xl-8 relative-position">
+      <q-alert :actions="[{ label: 'Try again', handler: () => { checkRegistered() } }]" message="Could not retrieve member status" class="text-truncate q-ma-xl" icon="info" color="grey" />
     </div>
   </div>
 </template>
@@ -55,7 +58,8 @@ export default {
       hash: '',
       statusText: '',
       agree: false,
-      registered: false
+      registered: false,
+      queryError: false
     }
   },
   mounted () {
@@ -72,44 +76,50 @@ export default {
   },
   methods: {
     async checkRegistered() {
-      let md = new MarkdownIt()
-      this.loading = true
-      this.loadingText = 'Checking member status...'
-      let memberRegistration = await this.$store.dispatch('api/getRegistered')
-      console.log('Query member registration')
-      let latestMemberTerms = await this.$store.dispatch('api/getMemberTerms')
-      console.log('Query latest terms')
-      let memberterms = latestMemberTerms.rows[latestMemberTerms.rows.length - 1]
-      if (memberRegistration) {
-        if (memberterms.version === memberRegistration.agreedterms) { //is regsitered
-          console.log('Is member. User version:',memberRegistration.agreedterms,'Latest version',memberterms.version)
-          //this.$emit('registrationDone')
-          this.$store.commit('account/ADD_REGISTRATION')
-        } else { //new version
+      try {
+        let md = new MarkdownIt()
+        this.loading = true
+        this.loadingText = 'Checking member status...'
+        this.queryError = false
+        let memberRegistration = await this.$store.dispatch('api/getRegistered')
+        console.log('Query member registration')
+        let latestMemberTerms = await this.$store.dispatch('api/getMemberTerms')
+        console.log('Query latest terms')
+        let memberterms = latestMemberTerms.rows[latestMemberTerms.rows.length - 1]
+        if (memberRegistration) {
+          if (memberterms.version === memberRegistration.agreedterms) { //is regsitered
+            console.log('Is member. User version:',memberRegistration.agreedterms,'Latest version',memberterms.version)
+            //this.$emit('registrationDone')
+            this.$store.commit('account/ADD_REGISTRATION')
+          } else { //new version
+            this.$store.commit('account/REMOVE_REGISTRATION')
+            console.log('New version available. User version:',memberRegistration.agreedterms,'Latest version',memberterms.version)
+            this.loadingText = 'Loading latest constitution...'
+            let getCt = await this.loadConstitutionFromGithub(memberterms.terms)
+            this.hash = CryptoJS.MD5(getCt).toString()
+            this.constitution = md.render(getCt)
+            this.statusText = 'The constitution has been updated. Please sign the constitution to continue.'
+          }
+        } else { // not regsitered
           this.$store.commit('account/REMOVE_REGISTRATION')
-          console.log('New version available. User version:',memberRegistration.agreedterms,'Latest version',memberterms.version)
+          console.log('Not registered as a member')
           this.loadingText = 'Loading latest constitution...'
           let getCt = await this.loadConstitutionFromGithub(memberterms.terms)
           this.hash = CryptoJS.MD5(getCt).toString()
           this.constitution = md.render(getCt)
-          this.statusText = 'The constitution has been updated. Please sign the constitution to continue.'
+          this.statusText = 'You have not been registered as a member yet. Please sign the constitution to continue.'
         }
-      } else { // not regsitered
-        this.$store.commit('account/REMOVE_REGISTRATION')
-        console.log('Not registered as a member')
-        this.loadingText = 'Loading latest constitution...'
-        let getCt = await this.loadConstitutionFromGithub(memberterms.terms)
-        this.hash = CryptoJS.MD5(getCt).toString()
-        this.constitution = md.render(getCt)
-        this.statusText = 'You have not been registered as a member yet. Please sign the constitution to continue.'
+      } catch (err) {
+        this.queryError = true
+      } finally {
+        this.loading = false
       }
-      this.loading = false
     },
     registerMember() {
       this.$refs.Transaction.newTransaction('memberreg', {
         sender: this.getAccountName,
         agreedterms: this.hash
-      }, true)
+      }, false)
     },
     async loadConstitutionFromGithub(url) {
       try {

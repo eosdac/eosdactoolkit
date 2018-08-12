@@ -57,15 +57,9 @@ export const ADD_CONTRACT_RICARDIAN = (state, payload) => {
 }
 
 export const NOTIFY = (state, payload) => {
-  state.notification = {
-    icon: payload.icon,
-    color: payload.color,
-    message: payload.message,
-    details: payload.details,
-    textColor: payload.textColor,
-    seen: false,
-    autoclose: payload.autoclose || 0
-  }
+  payload.seen = false
+  payload.autoclose = payload.autoclose || 0
+  state.notification = payload
 }
 
 export const CLOSE_NOTIFICATION = (state) => {

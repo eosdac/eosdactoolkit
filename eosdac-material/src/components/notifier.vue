@@ -8,6 +8,7 @@
       <div class="col-xs-9">
         <div class="q-title">{{message}}</div>
         {{details}}
+        <q-btn v-if="linkText" @click="openLink(linkUrl)" :text-color="color" :color="textColor">{{linkText}}</q-btn>
       </div>
       <div class="col-xs-2">
         <q-icon flat size="40px" class="float-right no-padding" name="clear" @click.native="markSeen()"></q-icon>
@@ -19,6 +20,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import { openURL } from 'quasar'
 export default {
   name: 'Notifier',
   props: {
@@ -36,10 +38,19 @@ export default {
       color: 'positive',
       message: '',
       details: '',
-      textColor: 'white'
+      textColor: 'white',
+      linkText: '',
+      linkUrl: ''
     }
   },
   methods: {
+    openLink (url) {
+      if (url.includes('.')) {
+        openURL(url)
+      } else {
+        this.$router.push('/explorer/' + url)
+      }
+    },
     markSeen() {
       this.$store.commit('api/CLOSE_NOTIFICATION')
     },
@@ -59,6 +70,8 @@ export default {
       this.message = this.getNotification.message
       this.details = this.getNotification.details
       this.textColor = this.getNotification.textColor || 'white'
+      this.linkText = this.getNotification.linkText
+      this.linkUrl = this.getNotification.linkUrl
       if (this.getNotification.autoclose) {
         this.sleep(this.getNotification.autoclose * 1000).then(() => {
           this.markSeen()

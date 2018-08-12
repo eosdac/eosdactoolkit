@@ -1,7 +1,7 @@
 <template>
 <q-page class="text-white q-pa-md">
   <div class="row">
-    <div class="col-xs-12 col-sm-12 col-md-8">
+    <div class="col-sm-12 col-md-8">
       <div class="row gutter-md">
         <div class="col-xs-12">
           <h4 class="q-display-1 q-mt-none q-mb-md">Candidate List</h4>
@@ -35,28 +35,28 @@
               </q-item-side>
             </q-item>
             <q-slide-transition>
-              <p v-show="candidateIndex === index">
+              <div v-show="candidateIndex === index">
               <q-card class="bg-dark2 q-px-lg q-mb-lg" style="min-height:80px;">
                 <q-card  v-show="candidateIndex === index" class="q-py-md q-mb-lg no-shadow" style="min-height:80px; border-top:1px solid grey;">
                   BIO
                   sdsdsdsdsdsdsd
                 </q-card>
               </q-card>
-            </p>
+            </div>
             </q-slide-transition>
           </div>
         </div>
       </div>
     </div>
-    <div class="col-xs-12 col-sm-12 col-md-4 q-pl-md">
+    <div class="col-sm-12 col-md-4 q-pl-md">
       <h4 class="q-display-1 q-mt-none q-mb-md">My Votes - 0</h4>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam libero urna, efficitur at laoreet fermentum, facilisis in ex. Proin luctus erat sem, ut mollis dui laoreet id.
       <q-card class="q-pa-lg q-mt-md" style="background:#32363F;">
         <q-btn style="font-weight: 300;" class="full-width items-baseline" color="primary" size="xl">
-          <div class="col-sm-3">
+          <div class="col-sm-3 col-md-12 col-lg-5 col-xl-4">
             <q-icon size="50px" class="float-left" name="icon-ui-3"></q-icon>
           </div>
-          <div class="col-sm-8 text-left">
+          <div class="col-sm-9 col-md-12 col-lg-7 col-xl-8 text-left">
             Submit my Votes
           </div>
         </q-btn>
