@@ -87,7 +87,6 @@ import {
 import {
   mapGetters
 } from 'vuex'
-import ScatterJS from 'scatter-js/dist/scatter.cjs'
 import {
   Quasar
 } from 'quasar'
@@ -143,27 +142,6 @@ export default {
       this.getScatter.forgetIdentity()
       this.$store.commit('account/LOCK_ACCOUNT')
     },
-    loadScatter() {
-      /*if (window.scatter) {
-        console.log('scatter')
-        this.$store.commit('api/SCATTER_AVAILABLE', window.scatter)
-        window.scatter = null
-      } else {
-        document.addEventListener('scatterLoaded', scatterExtension => {
-          if (window.scatter) {
-            console.log('scatter')
-            this.$store.commit('api/SCATTER_AVAILABLE', window.scatter)
-            window.scatter = null
-          }
-        })
-      }*/
-      ScatterJS.scatter.connect('EOSDAC Member Client').then(connected => {
-        if (connected) {
-          this.$store.commit('api/SCATTER_AVAILABLE', ScatterJS.scatter)
-          window.scatter = null
-        }
-      })
-    },
     /*autolock() {
       if (this.getLastUnlock && this.getUnlocked && this.lastQuery) {
         if (this.getAutolockInterval * 10 + this.lastQuery < Date.now() / 1000)) {
@@ -188,18 +166,9 @@ export default {
     }
   },
   mounted() {
-
-    //check if registered
-    if (!this.getScatter) {
-      this.loadScatter()
-    }
     if (!this.getImported) {
       this.$refs.Initialize.open()
     }
-    //if (this.getAccountName) {
-    //  console.log('Checking if user is registered')
-    //  this.$refs.Register.checkRegistered()
-    //}
     setInterval(this.queryApis, 1000)
     //setInterval(this.autolock, 1000)
   },
