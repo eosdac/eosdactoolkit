@@ -11,6 +11,8 @@
         </q-btn>
       </q-toolbar-title>
       <div v-if="getImported">
+        <MenuDropdown class="no-pointer-events" v-if="getAccountName && getRegistered" iconColor="white" label="Member status" :statusLabel="1" sublabel="Registered" icon="icon-dac-balance" />
+        <MenuDropdown class="no-pointer-events" v-if="getAccountName && !getRegistered" iconColor="white" label="Member status" :statusLabel="2" sublabel="not registered" icon="icon-dac-balance" />
         <MenuDropdown class="no-pointer-events" v-if="getAccountName" iconColor="white" :label="'Your ' + tokenName + ' Blanace'" :sublabel="String(getTokenBalance)" icon="icon-dac-balance" />
         <MenuDropdown class="no-pointer-events" v-if="getAccountName" iconColor="white" :label="'Your ' + mainCurrencyName + ' Blanace'" :sublabel="String(getMainCurrencyBalance)" icon="icon-type-2" />
         <MenuDropdown class="no-pointer-events" v-if="getAccountName" iconColor="white" label="Account Name" :sublabel="getAccountName" icon="icon-topmenu-2" />
@@ -49,24 +51,28 @@
         <q-item-side icon="icon-menu-6" />
         <q-item-main label="Wallet" sublabel="" />
       </q-item>
+      <q-item to="/explorer/ ">
+        <q-item-side icon="icon-menu-4" />
+        <q-item-main label="Explorer" sublabel="" />
+      </q-item>
       <q-item to="/settings">
         <q-item-side icon="icon-topmenu-6" />
         <q-item-main label="Settings" sublabel="" />
       </q-item>
-      <q-item to="/custodians">
+      <!--<q-item to="/custodians">
         <q-item-side icon="icon-ui-3" />
         <q-item-main label="Custodians" sublabel="" />
       </q-item>
       <q-item to="/workerproposals">
         <q-item-side icon="icon-register-3" />
         <q-item-main label="Worker Proposals" sublabel="" />
-      </q-item>
+      </q-item>-->
     </q-list>
   </q-layout-drawer>
   <q-page-container>
-    <router-view v-if="getAccountName" v-show="getRegistered || $route.path === '/settings' || $route.path === '/wallet'" />
+    <Register ref="Register" />
+    <router-view v-if="getAccountName" v-show="getRegistered || $route.path === '/settings'" />
     <h4 class="text-white q-ma-md" v-else>Logged out</h4>
-    <Register ref="Register"/>
     <Initialize ref="Initialize" />
     <Unlock ref="Unlock" />
     <Notifier :drawer="$q.platform.is.desktop" />
@@ -81,7 +87,10 @@ import {
 import {
   mapGetters
 } from 'vuex'
-import { Quasar } from 'quasar'
+import ScatterJS from 'scatter-js/dist/scatter.cjs'
+import {
+  Quasar
+} from 'quasar'
 import Initialize from 'components/initialize'
 import Unlock from 'components/unlock'
 import Register from 'components/register'
@@ -101,7 +110,8 @@ export default {
       leftDrawerOpen: this.$q.platform.is.desktop,
       tokenName: this.$configFile.network.tokenContract.token,
       mainCurrencyName: this.$configFile.network.mainCurrencyContract.token,
-      lastQuery: 0
+      lastQuery: 0,
+      memberStatus: 0
     }
   },
   computed: {
@@ -134,7 +144,7 @@ export default {
       this.$store.commit('account/LOCK_ACCOUNT')
     },
     loadScatter() {
-      if (window.scatter) {
+      /*if (window.scatter) {
         console.log('scatter')
         this.$store.commit('api/SCATTER_AVAILABLE', window.scatter)
         window.scatter = null
@@ -146,7 +156,13 @@ export default {
             window.scatter = null
           }
         })
-      }
+      }*/
+      ScatterJS.scatter.connect('EOSDAC Member Client').then(connected => {
+        if (connected) {
+          this.$store.commit('api/SCATTER_AVAILABLE', ScatterJS.scatter)
+          window.scatter = null
+        }
+      })
     },
     /*autolock() {
       if (this.getLastUnlock && this.getUnlocked && this.lastQuery) {
@@ -175,7 +191,7 @@ export default {
     //language detection
     let lang = this.$q.i18n.getLocale()
     this.$i18n.locale = lang
-    import('quasar-framework/i18n/' + lang).then(lang => {
+    import ('quasar-framework/i18n/' + lang).then(lang => {
       if (lang) {
         this.$q.i18n.set(lang.default)
       }
