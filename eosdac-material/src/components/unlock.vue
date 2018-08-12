@@ -9,6 +9,7 @@
           <q-btn icon="icon-ui-8" color="white" flat @click="unlock = false"></q-btn>
           </div>
         </q-card-title>
+        <q-alert v-if="!hasScatter" message="Scatter is not available. If you have Scatter installed please refresh." class="text-truncate" icon="info" color="grey" />
         <q-alert v-if="scatterError" :message="scatterErrorText" class="text-truncate text-center" icon="info" color="secondary" />
         <q-card-main v-if="!getUsesScatter">
           <q-field :error="error" icon="vpn key" label="Password" :error-label="errorText" :label-width="12">
@@ -17,7 +18,7 @@
         </q-card-main>
         <q-card-actions align="center">
           <q-btn v-if="!getUsesScatter" color="primary" @click="unlockAccount()">Login</q-btn>
-          <q-btn v-else color="primary" @click="unlockScatter()">Login with Scatter</q-btn>
+          <q-btn :disabled="!hasScatter" v-else color="primary" @click="unlockScatter()">Login with Scatter</q-btn>
         </q-card-actions>
       </q-card>
     </div>
@@ -138,7 +139,8 @@ export default {
       getAccountName: 'account/getAccountName',
       getUsesScatter: 'account/getUsesScatter',
       getCurrentEndpoint: 'api/getCurrentEndpoint',
-      getScatter: 'api/getScatter'
+      getScatter: 'api/getScatter',
+      hasScatter: 'api/hasScatter'
     })
   },
   watch: {
