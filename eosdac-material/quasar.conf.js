@@ -107,7 +107,8 @@ module.exports = function(ctx) {
         'QRouteTab',
         'QCollapsible',
         'QProgress',
-        'QSlideTransition'
+        'QSlideTransition',
+        'QRadio'
       ],
       directives: [
         'Ripple',

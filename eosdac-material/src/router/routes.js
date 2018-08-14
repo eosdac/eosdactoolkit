@@ -10,7 +10,8 @@ export default [
       { path: 'explorer/:id', component: () => import('pages/explorer') },
       { path: 'dashboard', component: () => import('pages/dashboard') },
       { path: 'workerproposals', component: () => import('pages/workerproposals') },
-      { path: 'custodians', component: () => import('pages/custodians') }
+      { path: 'custodians', component: () => import('pages/custodians') },
+      { path: 'profile', component: () => import('pages/profile') }
     ]
   },
 
