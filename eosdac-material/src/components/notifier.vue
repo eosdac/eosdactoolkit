@@ -83,7 +83,5 @@ export default {
 </script>
 
 <style>
-.drawer-margin {
-  margin-left:300px;
-}
+
 </style>

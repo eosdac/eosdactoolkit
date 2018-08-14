@@ -32,6 +32,7 @@ const store = new Vuex.Store({
   }), createPersistedState({
     key: 'api',
     paths: [
+      'api.chainId',
       'api.activeEndpointIndex',
       'api.checkIntervalMilSec',
       'api.connectionTimeoutMilSec',

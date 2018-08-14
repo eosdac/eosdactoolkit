@@ -9,6 +9,19 @@ export const getCurrentEndpoint = (state) => {
 
 }
 
+export const getCurrentConnectionStatus = (state) => {
+  if (state.endpoints[state.activeEndpointIndex]) {
+    return state.endpoints[state.activeEndpointIndex].lastConnectionStatus
+  } else {
+    return false
+  }
+
+}
+
+export const getChainId = (state) => {
+  return state.chainId
+}
+
 export const getEndpoints = (state) => {
   return state.endpoints
 }

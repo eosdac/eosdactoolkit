@@ -1,6 +1,6 @@
 <template>
 <q-modal class="text-white z-max" v-model="visible" :content-css="{maxWidth: '30vw'}">
-  <q-card dark>
+  <q-card dark class="bg-dark">
     <q-card-title>
       <div class="q-title">Transaction</div>
     </q-card-title>

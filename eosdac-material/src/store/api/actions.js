@@ -40,6 +40,7 @@ function apiDown(e,c,s) {
         textColor: 'black',
         autoclose: 8
       })
+      c('SET_CURRENT_CONNECTION_STATUS', true)
     }
   }
 }
@@ -63,6 +64,7 @@ export async function memberreg({
     const contract = await eos.contract(configFile.network.tokenContract.name)
     const res = await contract.memberreg(payload.data)
     return res
+    commit('SET_CURRENT_CONNECTION_STATUS', true)
   } catch (error) {
     apiDown(error,commit)
     throw error
@@ -83,6 +85,7 @@ export async function getActionHistory({
     } else {
       throw 'unavailable'
     }
+    commit('SET_CURRENT_CONNECTION_STATUS', true)
   } catch (error) {
     apiDown(error,commit)
     throw error
@@ -108,6 +111,7 @@ export async function transfer({
     const contract = await eos.contract(configFile.network.tokenContract.name)
     const res = await contract.transfer(payload.data)
     return res
+    commit('SET_CURRENT_CONNECTION_STATUS', true)
   } catch (error) {
     apiDown(error,commit)
     throw error
@@ -133,6 +137,7 @@ export async function transferMain({
     }
     const res = await eos.transfer(payload.data)
     return res
+    commit('SET_CURRENT_CONNECTION_STATUS', true)
   } catch (error) {
     apiDown(error,commit)
     throw error
@@ -163,20 +168,14 @@ export async function pingCurrentEndpoint({
       throw Error('Wrong chainId')
     }
     if (new Date(info.head_block_time).getTime() + 10000 > new Date(utcD).getTime()) {
-      commit('PING_ENDPOINT_SUCCESS', {
-        getInfo: info,
-        ping: ping
-      })
+      commit('SET_CURRENT_CONNECTION_STATUS', true)
     } else {
-      commit('PING_ENDPOINT_STUCK', {
-        getInfo: info,
-        ping: ping
-      })
+      commit('SET_CURRENT_CONNECTION_STATUS', false)
     }
     return info
   } catch (error) {
     clearTimeout(timeout)
-    commit('PING_ENDPOINT_FAIL')
+    commit('SET_CURRENT_CONNECTION_STATUS', false)
     throw error
   } finally {
     timeout.clear()
@@ -232,6 +231,7 @@ export async function getRegistered({
         return false
       }
     }
+    commit('SET_CURRENT_CONNECTION_STATUS', true)
   } catch (error) {
     apiDown(error,commit)
     throw error
@@ -256,6 +256,7 @@ export async function getCustodians({
     } else {
       return custodians.rows
     }
+    commit('SET_CURRENT_CONNECTION_STATUS', true)
   } catch (error) {
     apiDown(error,commit)
     throw error
@@ -276,6 +277,7 @@ export async function getMemberTerms({
       table: 'memberterms'
     })
     return memberterms
+    commit('SET_CURRENT_CONNECTION_STATUS', true)
   } catch (error) {
     apiDown(error,commit)
     throw error
@@ -300,6 +302,7 @@ export async function getContractRicardian({
     } else {
       throw 'no_ricardian'
     }
+    commit('SET_CURRENT_CONNECTION_STATUS', true)
   } catch (error) {
     apiDown(error,commit)
     throw error
@@ -325,6 +328,7 @@ export async function getTokenContractBalance({
       root: true
     })
     return balance
+    commit('SET_CURRENT_CONNECTION_STATUS', true)
   } catch (error) {
     apiDown(error,commit)
     throw error
@@ -350,6 +354,7 @@ export async function getMainCurrencyBalance({
       root: true
     })
     return balance
+    commit('SET_CURRENT_CONNECTION_STATUS', true)
   } catch (error) {
     apiDown(error,commit)
     throw error
@@ -371,6 +376,7 @@ export async function updateAccountInfo({
       root: true
     })
     return account
+    commit('SET_CURRENT_CONNECTION_STATUS', true)
   } catch (error) {
     apiDown(error,commit)
     throw error
@@ -388,6 +394,7 @@ export async function getAccount({
       account_name: payload.account_name
     })
     return account
+    commit('SET_CURRENT_CONNECTION_STATUS', true)
   } catch (error) {
     apiDown(error,commit)
     throw error

@@ -1,7 +1,32 @@
 // app global css
 
+.drawer-margin {
+  margin-left:300px;
+}
+
 .dark2 {
   background: #1E2128;
+  color: #fff;
+}
+
+.p-light {
+  color: #7c41ba;
+}
+
+.large-text-dark2 {
+  color: rgba(255, 255, 255, .41);
+}
+
+.small-text-dark2 {
+  color: rgba(255, 255, 255, .46);
+}
+
+.large-text-dark {
+  color: rgba(255, 255, 255, .34);
+}
+
+.small-text-dark {
+  color: rgba(255, 255, 255, .48);
 }
 
 .bg-dark2 {
@@ -30,17 +55,28 @@
   background: #1E2128;
 }
 
-.q-stepper-tab.step-waiting {
-  color: white;
+.q-stepper-dot {
+  background: none;
+  font-size: 24px;
 }
-
 .q-stepper-tab.step-done {
   color: var(--q-color-positive);
 }
 
-.q-stepper-dot {
-  border-radius: none;
-  background: none;
+.q-stepper-tab.step-done.step-colored > .q-stepper-line:after {
+background: var(--q-color-positive);
+}
+
+.q-stepper-tab.step-done.step-colored > .q-stepper-line:before {
+background: var(--q-color-positive);
+}
+
+.q-stepper-tab.step-waiting {
+color : var(--q-color-white);
+}
+
+.q-stepper-tab.step-done.step-colored > .q-stepper-dot > span > i {
+  color: var(--q-color-positive);
 }
 
 .q-tabs-position-top .q-tabs-bar {
@@ -48,10 +84,6 @@
     border-top-width: 1px;
 }
 
-
-.q-tabs-head {
-min-height:70px;
-}
 
 /*these are the default quasar breakpoints
 use these when you need to change additional
