@@ -3,7 +3,7 @@
   <q-layout-header class="no-shadow">
     <q-toolbar color="dark2">
       <q-toolbar-title class="text-white q-pl-none">
-        <q-icon style="font-size:35px;" name="icon-menu-3" />
+        <q-icon style="font-size:35px;" name="icon-dac-balance" />
         <span class="q-ml-md q-mt-sm text-weight-thin vertical-middle" style="font-size:23px;">EOS<b>DAC</b> Member Client</span>
         <q-btn size="lg" flat dense round @click="leftDrawerOpen = !leftDrawerOpen" aria-label="Menu">
           <q-icon v-if="leftDrawerOpen" name="clear" />
@@ -51,9 +51,10 @@
         <q-item-side icon="icon-menu-6" />
         <q-item-main label="Wallet" sublabel="" />
       </q-item>
-      <q-item to="/explorer/ ">
+      <q-item @click.native="openURL($configFile.api.tokenExplorerUrl)" >
         <q-item-side icon="icon-menu-4" />
-        <q-item-main label="Explorer" sublabel="" />
+        <q-item-main label="Token Explorer" sublabel="" />
+        <q-item-side right icon="icon-type-12" />
       </q-item>
       <q-item to="/settings">
         <q-item-side icon="icon-topmenu-6" />
@@ -70,13 +71,26 @@
     </q-list>
   </q-layout-drawer>
   <q-page-container>
-    <Register ref="Register" />
-    <router-view v-if="getAccountName" v-show="getRegistered || $route.path === '/settings'" />
+    <!--<Register ref="Register" />-->
+    <router-view v-if="getAccountName" />
     <h4 class="text-white q-ma-md" v-else>Logged out</h4>
-    <Initialize ref="Initialize" />
-    <Unlock ref="Unlock" />
+    <!--<Initialize ref="Initialize" />-->
+    <!--<Unlock ref="Unlock" />-->
     <Notifier :drawer="$q.platform.is.desktop" />
+    <q-alert v-if="!getRegistered && getAccountName" class="fixed-bottom z-max" v-bind:class="{ 'drawer-margin': leftDrawerOpen }" color="blue" text-color="white">
+      <div class="row">
+        <div class="col-xs-1">
+          <q-icon flat size="30px" class="float-left on-left q-ma-sm" name="icon-register-3"></q-icon>
+        </div>
+        <div class="col-xs-9">
+          <div class="q-title">Sign the Constitution</div>
+          You have not been registered as a Member yet. Please sign the constitution to use the Member Client.
+          <q-btn @click="$refs.Multi.init('sign')" text-color="blue" color="white">Sign the Constitution</q-btn>
+        </div>
+      </div>
+    </q-alert>
   </q-page-container>
+  <MultiModal ref="Multi" />
 </q-layout>
 </template>
 
@@ -95,6 +109,7 @@ import Unlock from 'components/unlock'
 import Register from 'components/register'
 import Notifier from 'components/notifier'
 import MenuDropdown from 'components/menu-dropdown'
+import MultiModal from 'components/multi-modal'
 export default {
   name: 'LayoutDefault',
   components: {
@@ -102,7 +117,8 @@ export default {
     Unlock,
     Register,
     Notifier,
-    MenuDropdown
+    MenuDropdown,
+    MultiModal
   },
   data() {
     return {
@@ -133,7 +149,8 @@ export default {
   methods: {
     openURL,
     unlockAccount() {
-      this.$refs.Unlock.open()
+      //this.$refs.Unlock.open()
+      this.$refs.Multi.init('signin')
     },
     lockAccount() {
       this.$store.commit('account/LOCK_ACCOUNT')
@@ -167,7 +184,8 @@ export default {
   },
   mounted() {
     if (!this.getImported) {
-      this.$refs.Initialize.open()
+      //this.$refs.Initialize.open()
+      this.$refs.Multi.init('register')
     }
     setInterval(this.queryApis, 1000)
     //setInterval(this.autolock, 1000)

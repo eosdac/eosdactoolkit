@@ -1,6 +1,6 @@
 <template>
 <q-modal class="text-white z-max" v-model="visible" :content-css="{maxWidth: '30vw'}">
-  <q-card dark>
+  <q-card dark class="bg-dark">
     <q-card-title>
       <div class="q-title">Transaction</div>
     </q-card-title>
@@ -155,7 +155,7 @@ export default {
               message: 'Transaction Successful',
               details: res.transaction_id,
               linkText: 'View in explorer',
-              linkUrl:  res.transaction_id
+              linkUrl:  this.$configFile.api.tokenExplorerUrl + '/transaction/' + res.transaction_id
             })
           }
           this.loading = false

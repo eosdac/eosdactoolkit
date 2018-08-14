@@ -1,20 +1,3 @@
-export const PING_ENDPOINT_SUCCESS = (state, payload) => {
-  state.endpoints[state.activeEndpointIndex].ping = payload.ping
-  state.endpoints[state.activeEndpointIndex].lastConnectionStatus = 0
-  state.endpoints[state.activeEndpointIndex].lastConnection = Date.now()
-  state.lastGetInfo = payload.getInfo
-}
-
-export const PING_ENDPOINT_STUCK = (state, payload) => {
-  state.endpoints[state.activeEndpointIndex].ping = payload.ping
-  state.endpoints[state.activeEndpointIndex].lastConnectionStatus = 2
-  state.endpoints[state.activeEndpointIndex].lastConnection = Date.now()
-  state.lastGetInfo = payload.getInfo
-}
-
-export const PING_ENDPOINT_FAIL = (state) => {
-  state.endpoints[state.activeEndpointIndex].lastConnectionStatus = 1
-}
 
 export const ADD_ENDPOINT = (state, payload) => {
   let findEndpoint = state.endpoints.find(findEndpoint => {
@@ -31,7 +14,7 @@ export const ADD_ENDPOINT = (state, payload) => {
       sign: true,
       ping: null,
       lastConnectionUnix: null,
-      lastConnection: null,
+      lastConnection: true,
       lastConnectionStatus: null
     })
   }
@@ -40,6 +23,11 @@ export const ADD_ENDPOINT = (state, payload) => {
 export const CHANGE_ENDPOINT = (state, url) => {
   let findEndpoint = state.endpoints.findIndex(findEndpoint => findEndpoint.httpEndpoint === url)
   state.activeEndpointIndex = findEndpoint
+  state.endpoints[state.activeEndpointIndex].lastConnectionStatus = true
+}
+
+export const SET_CURRENT_CONNECTION_STATUS = (state, good) => {
+  state.endpoints[state.activeEndpointIndex].lastConnectionStatus = good
 }
 
 export const SCATTER_AVAILABLE = (state, scatter) => {
@@ -65,4 +53,8 @@ export const NOTIFY = (state, payload) => {
 export const CLOSE_NOTIFICATION = (state) => {
   state.notification = {}
   state.notification.seen = true
+}
+
+export const SET_CHAIN_ID = (state, id) => {
+  state.chainId = id
 }

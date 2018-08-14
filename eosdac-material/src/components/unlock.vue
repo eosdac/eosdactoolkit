@@ -1,19 +1,22 @@
 <template>
-<q-modal class="text-white relative-position" v-model="unlock">
-  <div class="row full-width justify-center" style="width:50%;">
+<q-modal class="relative-position fit" :content-css="{maxWidth: '900px', maxHeight: '610px'}" v-model="unlock" maximized>
+  <div class="row justify-center">
     <div class="col-12 q-pa-lg">
       <q-card dark flat class="q-ma-sm">
         <q-card-title>
-          <h4 class="q-my-sm">Login</h4>
+          <h6 class="q-my-sm">Connection Type</h6>
           <div slot="right" class="row items-center">
-          <q-btn icon="icon-ui-8" color="white" flat @click="unlock = false"></q-btn>
+            <q-btn icon="icon-ui-8" color="white" flat @click="unlock = false"></q-btn>
           </div>
         </q-card-title>
         <q-alert v-if="!hasScatter" message="Scatter is not available. If you have Scatter installed please refresh." class="text-truncate" icon="info" color="grey" />
         <q-alert v-if="scatterError" :message="scatterErrorText" class="text-truncate text-center" icon="info" color="secondary" />
-        <q-card-main v-if="!getUsesScatter">
-          <q-field :error="error" icon="vpn key" label="Password" :error-label="errorText" :label-width="12">
-            <q-input dark type="password" v-model="password" />
+        <q-card-main>
+          <p class="q-body-1">Please choose an authentication type to sign into the eosDAC Member Client.</p>
+          <q-field label="Choose Connection Type" :label-width="12">
+            <q-select dark v-model="connectionMethod" radio :options="[
+     {label:'Scatter',value:'Scatter'}
+      ]" />
           </q-field>
         </q-card-main>
         <q-card-actions align="center">
@@ -53,7 +56,8 @@ export default {
       loadingText: '',
       scatterError: false,
       scatterErrorText: '',
-      netError: false
+      netError: false,
+      connectionMethod: 'Scatter'
     }
   },
   methods: {
