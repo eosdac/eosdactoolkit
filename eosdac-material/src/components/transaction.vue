@@ -155,7 +155,7 @@ export default {
               message: 'Transaction Successful',
               details: res.transaction_id,
               linkText: 'View in explorer',
-              linkUrl:  res.transaction_id
+              linkUrl:  this.$configFile.api.tokenExplorerUrl + '/transaction/' + res.transaction_id
             })
           }
           this.loading = false

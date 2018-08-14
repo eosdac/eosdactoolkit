@@ -51,9 +51,10 @@
         <q-item-side icon="icon-menu-6" />
         <q-item-main label="Wallet" sublabel="" />
       </q-item>
-      <q-item to="/explorer/ ">
+      <q-item @click.native="openURL($configFile.api.tokenExplorerUrl)" >
         <q-item-side icon="icon-menu-4" />
-        <q-item-main label="Explorer" sublabel="" />
+        <q-item-main label="Token Explorer" sublabel="" />
+        <q-item-side right icon="icon-type-12" />
       </q-item>
       <q-item to="/settings">
         <q-item-side icon="icon-topmenu-6" />
