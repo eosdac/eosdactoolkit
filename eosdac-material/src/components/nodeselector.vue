@@ -163,6 +163,7 @@ export default {
         let test = await this.$store.dispatch('api/testEndpoint', url)
         this.loading = false
         this.$store.commit('api/ADD_ENDPOINT', {
+          save: true,
           url,
           chainId: this.$configFile.network.chainId
         })
@@ -210,6 +211,9 @@ export default {
         this.errorEndpointText = ''
         this.badEndpoint = false
       }
+    },
+    getCurrentEndpoint () {
+      this.endpoint = this.getCurrentEndpoint.httpEndpoint
     }
   }
 }

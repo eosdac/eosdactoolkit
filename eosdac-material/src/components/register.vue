@@ -3,7 +3,7 @@
   <div v-if="!success">
   <div v-if="!queryError" class="row relative-position">
   <div class="col-12 relative-position">
-    <Transaction ref="Transaction" v-on:done="checkRegistered()" />
+    <Transaction ref="Transaction" v-on:done="checkRegistered(true)" />
     <h6 class="text-white q-mt-none q-mb-lg">Registration - Sign the Constitution</h6>
     <q-alert v-if="statusText" class="q-mb-md" icon="info" color="grey">{{statusText}}</q-alert>
     <p class="text-white">In order to become a Member of eosDAC you have to agree and sign the Constitution. <q-btn dense flat @click="toggleFullscreen = true" class="p-light q-ma-none">(Fullscreen)</q-btn></p>
@@ -30,10 +30,12 @@
   <q-alert :actions="[{ label: 'Try again', handler: () => { checkRegistered() } }]" message="Could not retrieve member status" class="text-truncate q-ma-xl" icon="info" color="grey" />
 </div>
 </div>
-<div v-else>
-  <q-alert icon="icon-ui-6" color="positive">
-    You are successfully registered as a eosDAC Member.
+<div class="row q-py-xl q-px-sm" v-else>
+  <div class="col-12 q-mt-xl">
+  <q-alert class="q-mt-xl" icon="icon-ui-6" color="positive">
+    You are already registered as a eosDAC Member.
   </q-alert>
+  </div>
 </div>
 </div>
 </template>
@@ -79,17 +81,26 @@ export default {
       }
     }
   },
+  mounted() {
+    this.init()
+  },
   methods: {
     init () {
       this.active = true
       this.checkRegistered()
     },
-    async checkRegistered() {
+    sleep(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms))
+    },
+    async checkRegistered(wait) {
       try {
         let md = new MarkdownIt()
         this.loading = true
         this.loadingText = 'Checking member status...'
         this.queryError = false
+        if (wait) {
+          await this.sleep(2000)
+        }
         let memberRegistration = await this.$store.dispatch('api/getRegistered')
         console.log('Query member registration')
         let latestMemberTerms = await this.$store.dispatch('api/getMemberTerms')
@@ -123,6 +134,7 @@ export default {
         this.queryError = true
       } finally {
         this.loading = false
+        this.$emit('done')
       }
     },
     registerMember() {

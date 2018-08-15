@@ -85,7 +85,7 @@
     <!--<Initialize ref="Initialize" />-->
     <!--<Unlock ref="Unlock" />-->
     <Notifier :drawer="$q.platform.is.desktop" />
-    <q-alert v-if="!getRegistered && getAccountName" class="fixed-bottom z-max" v-bind:class="{ 'drawer-margin': leftDrawerOpen }" color="blue" text-color="white">
+    <q-alert v-if="!getRegistered && getAccountName" class="fixed-bottom z-max" style="margin-bttom:80px;" v-bind:class="{ 'drawer-margin': leftDrawerOpen }" color="blue" text-color="white">
       <div class="row">
         <div class="col-xs-1">
           <q-icon flat size="30px" class="float-left on-left q-ma-sm" name="icon-register-3"></q-icon>

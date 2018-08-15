@@ -24,11 +24,7 @@ const store = new Vuex.Store({
       'account.autolockIntervalSec',
       'account.proposalDraft'
     ],
-    storage: {
-      getItem: key => window.localStorage.getItem(key),
-      setItem: (key, value) => window.localStorage.setItem(key, value),
-      removeItem: key => window.localStorage.removeItem(key)
-    }
+    //filter: mutation => (mutation.payload.save)? true : false
   }), createPersistedState({
     key: 'api',
     paths: [
@@ -38,7 +34,9 @@ const store = new Vuex.Store({
       'api.connectionTimeoutMilSec',
       'api.endpoints',
       //'api.lastGetInfo'
-    ]
+    ],
+    //filter: mutation => (mutation.payload.save)? true : false
+    //filter: mutation => console.log(mutation)
   })]
 })
 

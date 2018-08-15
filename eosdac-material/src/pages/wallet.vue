@@ -78,25 +78,25 @@
             </q-tab-pane>
           </q-tabs>
         </div>
-        <div class="col-lg-12 col-xl-4 q-pa-sm">
+        <div v-if="getAccountResources.ram" class="col-lg-12 col-xl-4 q-pa-sm">
           <q-alert icon="icon-type-8" color="dark2">
             <h5 class="q-mb-sm q-mt-none">RAM</h5>
-  <q-progress color="white" :percentage="percentage(getAccount.ram_usage, getAccount.ram_quota)" />
-            <p class="text-center q-mt-sm">{{percentage(getAccount.ram_usage, getAccount.ram_quota)}} % remaining</p>
+  <q-progress color="white" :percentage="getAccountResources.ram.available" />
+            <p class="text-center q-mt-sm">{{getAccountResources.ram.available}} % remaining</p>
           </q-alert>
         </div>
-        <div class="col-lg-12 col-xl-4 q-pa-sm">
+        <div v-if="getAccountResources.cpu" class="col-lg-12 col-xl-4 q-pa-sm">
           <q-alert icon="icon-ui-9" color="dark2">
             <h5 class="q-mb-sm q-mt-none">CPU</h5>
-  <q-progress color="white" :percentage="percentage(getAccount.cpu_limit.used, getAccount.cpu_limit.available)" />
-            <p class="text-center q-mt-sm">{{percentage(getAccount.cpu_limit.used, getAccount.cpu_limit.available)}} % remaining</p>
+  <q-progress color="white" :percentage="getAccountResources.cpu.available" />
+            <p class="text-center q-mt-sm">{{getAccountResources.cpu.available}} % remaining</p>
           </q-alert>
         </div>
-        <div class="col-lg-12 col-xl-4 q-pa-sm">
+        <div v-if="getAccountResources.net" class="col-lg-12 col-xl-4 q-pa-sm">
           <q-alert icon="icon-ui-10" color="dark2">
             <h5 class="q-mb-sm q-mt-none">Network</h5>
-  <q-progress color="white" :percentage="percentage(getAccount.net_limit.used, getAccount.net_limit.available)" />
-            <p class="text-center q-mt-sm">{{percentage(getAccount.net_limit.used, getAccount.net_limit.available)}} % remaining</p>
+  <q-progress color="white" :percentage="getAccountResources.net.available" />
+            <p class="text-center q-mt-sm">{{getAccountResources.net.available}} % remaining</p>
           </q-alert>
         </div>
       </div>
@@ -155,7 +155,8 @@ export default {
       getUnlocked: 'account/getUnlocked',
       getTokenBalance: 'account/getTokenBalance',
       getAccount: 'account/getAccount',
-      getMainCurrencyBalance: 'account/getMainCurrencyBalance'
+      getMainCurrencyBalance: 'account/getMainCurrencyBalance',
+      getAccountResources: 'account/getAccountResources'
     })
   },
   mounted() {
@@ -164,9 +165,6 @@ export default {
     }
   },
   methods: {
-    percentage (val, max) {
-      return parseFloat((100 - (val / max) * 100).toFixed(3))
-    },
     transferToken() {
       this.$refs.Transaction.newTransaction('transfer', {
         from: this.getAccountName,
