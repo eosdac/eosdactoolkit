@@ -61,7 +61,7 @@
         <q-item-main label="Settings" sublabel="" />
       </q-item>
       <q-item to="/constitution">
-        <q-item-side icon="icon-topmenu-6" />
+        <q-item-side icon="icon-register-3" />
         <q-item-main label="Constitution" sublabel="" />
       </q-item>
 <!--       <q-item to="/profile">
