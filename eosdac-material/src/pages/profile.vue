@@ -1,6 +1,6 @@
 <template>
 <q-page padding>
-
+  
   <div class="q-pa-md bg-dark2 round-borders shadow-5 animate-pop">
     <div class="row">
 
@@ -36,13 +36,13 @@
     <q-input dark type="textarea" v-model="form.description"  class="q-mt-md" float-label="About Me" placeholder="This is my short bio..." />
 
     <q-input dark type="url"
-      class="q-mt-md q-mb-md"
-      v-model="social.link"
+      class="q-mt-md q-mb-md" 
+      v-model="social.link"  
       v-for="(social, i) in form.sameAs"
       :key = i
       :float-label="`Social Link ${i+1}`"
-      @input="deleteEmptyLinks"
-      placeholder="Social profile link"
+      @input="deleteEmptyLinks" 
+      placeholder="Social profile link" 
     />
     <div class="relative-position" >
         <q-btn  color="primary" @click="addSocial" icon="icon-plus" />
@@ -50,7 +50,7 @@
         <q-btn class="absolute-right" :loading="isuploading" color="positive" @click="saveProfile" label="Save">
             <q-spinner slot="loading" />
         </q-btn>
-
+        
 
     </div>
     <!-- debug -->
@@ -64,7 +64,7 @@
           <q-input dark type="url" v-model="form.image" @input="loaded=false" class="q-mt-md" float-label="Profile Picture Url" placeholder="http://example.site/mypic.jpg" />
           <q-btn round color="primary" class="absolute" style="top:5px;right:5px" @click="visible=false" icon="icon-plus" />
         </div>
-    </q-modal>
+    </q-modal> 
 
 </div>
 
@@ -80,7 +80,7 @@
   border: 3px solid $primary;
   box-sizing: border-box;
   position:relative;
-
+  
 }
 .pic_wrapper {
   width: 100%;
@@ -142,7 +142,7 @@ export default {
     }
   },
 
-
+  
   methods:{
      onLoaded() {
         let img = this.$refs.profile_pic;
@@ -163,7 +163,7 @@ export default {
       if(this.form.sameAs.length ){
         this.form.sameAs = this.form.sameAs.filter(function(item){
           return item.link !='';
-        });
+        });      
       }
 
     },
@@ -184,10 +184,10 @@ export default {
           //retry with different node...
           self.isuploading = false;
           throw err;
-        }
+        } 
         self.isuploading = false;
         self.ipfslink='https://ipfs.io/ipfs/'+hash[0].hash;
-        console.log(hash);
+        console.log(hash);  
       });
 
     },
@@ -202,6 +202,6 @@ export default {
 
   mounted: function(){
    }
-
+   
 }
 </script>
