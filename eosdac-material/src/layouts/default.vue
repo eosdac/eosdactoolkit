@@ -60,6 +60,10 @@
         <q-item-side icon="icon-topmenu-6" />
         <q-item-main label="Settings" sublabel="" />
       </q-item>
+<!--       <q-item to="/profile">
+        <q-item-side icon="icon-topmenu-6" />
+        <q-item-main label="Profile" sublabel="" />
+      </q-item> -->
       <!--<q-item to="/custodians">
         <q-item-side icon="icon-ui-3" />
         <q-item-main label="Custodians" sublabel="" />
