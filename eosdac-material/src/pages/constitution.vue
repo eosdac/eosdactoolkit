@@ -1,7 +1,11 @@
 <template>
 <q-page class="text-white q-pa-md">
+  <div class="row justify-center">
+    <div class="col-auto">
   <div v-if="!isloading" class="q-pt-md round-borders shadow-5 bg-dark2">
     <div class="markdown-body overwrite" v-html="constitution" />
+    </div>
+  </div>
   </div>
   <LoadingSpinner :visible="isloading" text="Loading constitution" />
 </q-page>
@@ -11,7 +15,7 @@
 @import '~variables'
 
 .overwrite{
-  background: none !important; 
+  background: none !important;
   color: white !important;
 }
 tbody, td, th{
@@ -39,7 +43,7 @@ export default {
     }
   },
 
-  
+
   methods:{
 
     async getConstitution(){
@@ -73,6 +77,6 @@ export default {
   mounted: function(){
     this.getConstitution();
    }
-   
+
 }
 </script>

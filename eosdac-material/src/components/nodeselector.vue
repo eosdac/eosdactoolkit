@@ -152,8 +152,13 @@ export default {
     },
     async endpointSuccess() {
       this.successEndpoint = true
-      await this.sleep(3000)
+      await this.sleep(5000)
       this.successEndpoint = false
+    },
+    async endpointFail() {
+      this.errorEndpoint = true
+      await this.sleep(5000)
+      this.errorEndpoint = false
     },
     async connect(u) {
       this.loading = true
@@ -172,7 +177,7 @@ export default {
         this.$emit('done')
       } catch (err) {
         this.loading = false
-        this.errorEndpoint = true
+        this.endpointFail()
         if (this.setup) {
           this.setupError = true
           this.loadEndpoints()
