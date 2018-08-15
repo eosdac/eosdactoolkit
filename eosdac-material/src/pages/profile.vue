@@ -169,6 +169,17 @@ export default {
     },
     saveProfile(){
       this.ipfsAdd(this.form);
+      // this.postToServer(this.form);
+
+    },
+
+    postToServer(data){
+      this.$axios.post(this.$configFile.api.profileStoreUrl, data)
+      .then(res => {
+         console.log(res);
+      }).catch(e =>{
+        console.log(e)
+      });
     },
 
     async ipfsAdd(data){
@@ -201,6 +212,7 @@ export default {
   },
 
   mounted: function(){
+
    }
    
 }

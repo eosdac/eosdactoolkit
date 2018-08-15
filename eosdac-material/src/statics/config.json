@@ -18,6 +18,7 @@
   "api": {
     "bpNodeApiUrl": "https://eosdac.io/topnodes.json",
     "mainCurrencyExplorerUrl": "https://www.bloks.io",
-    "tokenExplorerUrl": "https://explorer.eosdac.io"
+    "tokenExplorerUrl": "https://explorer.eosdac.io",
+    "profileStoreUrl": "dummy"
   }
 }
