@@ -1,4 +1,37 @@
 
+export const getAccountResources = (state) => {
+  let res = {}
+  if (state.info) {
+    if (state.info.cpu_limit) {
+      let cpu_limit = state.info.cpu_limit
+      let available = parseFloat((100 - (cpu_limit.used / cpu_limit.available) * 100).toFixed(3))
+      let used = parseFloat((cpu_limit.used / cpu_limit.available) * 100).toFixed(3)
+      res.cpu = {available, used, raw: cpu_limit, warning: (available < 10)? true: false}
+    } else {
+      res.cpu = null
+    }
+    if (state.info.net_limit) {
+      let net_limit = state.info.net_limit
+      let available = parseFloat((100 - (net_limit.used / net_limit.available) * 100).toFixed(3))
+      let used = parseFloat((net_limit.used / net_limit.available) * 100).toFixed(3)
+      res.net = {available, used, raw: net_limit, warning: (available < 10)? true: false}
+    } else {
+      res.net = null
+    }
+    if (state.info.ram_usage && state.info.ram_quota) {
+      let ram_limit = { used: state.info.ram_usage, available: state.info.ram_quota}
+      let available = parseFloat((100 - (ram_limit.used / ram_limit.available) * 100).toFixed(3))
+      let used = parseFloat((ram_limit.used / ram_limit.available) * 100).toFixed(3)
+      res.ram = {available, used, raw: ram_limit, warning: (available < 10)? true: false}
+    } else {
+      res.ram = null
+    }
+  } else {
+    res = null
+  }
+  return res
+}
+
 export const getImported = (state) => {
   return state.imported
 }

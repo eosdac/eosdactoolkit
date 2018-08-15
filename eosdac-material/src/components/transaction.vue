@@ -21,6 +21,9 @@
         </q-item-side>
       </q-item>
     </q-list>
+    <q-alert v-if="getAccountResources.cpu.warning" message="Low CPU. Your CPU allocation has less than 10% remaining. The Transaction might fail." class="text-truncate" text-color="black" icon="icon-ui-9" color="warning" />
+    <q-alert v-if="getAccountResources.ram.warning" message="Low RAM. Your RAM allocation has less than 10% remaining. The Transaction might fail." class="text-truncate" text-color="black" icon="icon-type-8" color="warning" />
+    <q-alert v-if="getAccountResources.net.warning" message="Low Network Bandwidth. Your network bandwidth allocation has less than 10% remaining. The Transaction might fail." class="text-truncate" text-color="black" icon="icon-ui-10" color="warning" />
     <q-alert :message="ricardianError? ricardianErrorText : 'By completing this transaction, I agree to the following terms.'" class="text-truncate" :text-color="ricardianError? 'black' : 'white'" :icon="ricardianError? 'info' : 'icon-ui-6'" :color="ricardianError? 'warning' : 'primary'" />
     <div v-html="ricardian" class="markdown-body ricardian q-pa-md">
     </div>
@@ -66,7 +69,8 @@ export default {
       getUnlocked: 'account/getUnlocked',
       getTokenContractRicardian: 'api/getTokenContractRicardian',
       getMainCurrencyContractRicardian: 'api/getMainCurrencyContractRicardian',
-      getUsesScatter: 'account/getUsesScatter'
+      getUsesScatter: 'account/getUsesScatter',
+      getAccountResources: 'account/getAccountResources'
     })
   },
   methods: {
@@ -172,7 +176,7 @@ export default {
             this.$store.commit('api/NOTIFY', {
               icon: 'error',
               color: 'red',
-              message: 'Error: ' + JSON.parse(err).error.details[0].message,
+              message: 'Error: ' + JSON.parse(err).error.details[0].message || JSON.parse(err),
               detail: ''
             })
           }
