@@ -60,6 +60,10 @@
         <q-item-side icon="icon-topmenu-6" />
         <q-item-main label="Settings" sublabel="" />
       </q-item>
+      <q-item to="/constitution">
+        <q-item-side icon="icon-topmenu-6" />
+        <q-item-main label="Constitution" sublabel="" />
+      </q-item>
 <!--       <q-item to="/profile">
         <q-item-side icon="icon-topmenu-6" />
         <q-item-main label="Profile" sublabel="" />

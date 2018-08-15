@@ -11,7 +11,8 @@ export default [
       { path: 'dashboard', component: () => import('pages/dashboard') },
       { path: 'workerproposals', component: () => import('pages/workerproposals') },
       { path: 'custodians', component: () => import('pages/custodians') },
-      { path: 'profile', component: () => import('pages/profile') }
+      { path: 'profile', component: () => import('pages/profile') },
+      { path: 'constitution', component: () => import('pages/constitution') }
     ]
   },
 
