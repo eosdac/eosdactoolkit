@@ -1,5 +1,5 @@
 <template>
-<q-page padding>
+<q-page class="q-pa-md">
   
   <div class="q-pa-md bg-dark2 round-borders shadow-5 animate-pop">
     <div class="row">

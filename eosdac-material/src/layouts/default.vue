@@ -64,18 +64,18 @@
         <q-item-side icon="icon-topmenu-6" />
         <q-item-main label="Constitution" sublabel="" />
       </q-item>
-<!--       <q-item to="/profile">
+      <q-item to="/profile">
         <q-item-side icon="icon-topmenu-6" />
         <q-item-main label="Profile" sublabel="" />
-      </q-item> -->
-      <!--<q-item to="/custodians">
+      </q-item>
+      <q-item to="/custodians">
         <q-item-side icon="icon-ui-3" />
         <q-item-main label="Custodians" sublabel="" />
       </q-item>
       <q-item to="/workerproposals">
         <q-item-side icon="icon-register-3" />
         <q-item-main label="Worker Proposals" sublabel="" />
-      </q-item>-->
+      </q-item>
     </q-list>
   </q-layout-drawer>
   <q-page-container>
