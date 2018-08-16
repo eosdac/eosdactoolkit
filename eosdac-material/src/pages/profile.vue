@@ -170,7 +170,7 @@ export default {
 
     async saveProfile(){
       this.isuploading = true;
-      const buffer = await Buffer.from(JSON.stringify(this.form));
+      const buffer = await Buffer.from(JSON.stringify(this.form)); //try catch
       let ipfshash = await this.ipfsAdd(buffer);
       this.isuploading = false;
 

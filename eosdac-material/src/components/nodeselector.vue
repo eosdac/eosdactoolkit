@@ -27,36 +27,40 @@
       <q-alert v-if="successEndpoint" message="Endpoint set successfully" class="text-truncate" icon="icon-ui-6" color="positive" />
     </div>
   </div>
-  <div class="row relative-position justify-center">
-    <div class="col-sm-12 col-lg-6 q-pa-sm text-center">
-          <div class="row justify-center">
-            <div v-if="!endpointListFail" class="col-sm-12 q-pa-sm text-center">
-              <p class="text-white">Click <b>{{ $t('connect') }}</b> below to automatically connect to the fastest endpoint to your location selected from the top EOS block producers.</p>
-              <q-btn class="q-ma-sm" color="primary" @click="getFastestNode() " label="Connect" />
+  <div class="row relative-position">
+    <!-- col1 -->
+    <div class="col-sm-12 col-lg-4 q-pa-sm relative-position" >
+          <div>
+            <div v-if="!endpointListFail" >
+              <p>Automatic Connection</p>
+              <p class="text-dimwhite">Click <b>{{ $t('connect') }}</b> below to automatically connect to the fastest endpoint to your location selected from the top EOS block producers.</p>
             </div>
           </div>
-          </div>
-<div class="col-sm-12 col-lg-6 q-pa-sm text-center">
-          <div class="row full-width justify-center">
-            <div class="col-sm-12 q-pa-sm text-center">
-              <p class="text-white">Select the endpoint you would like to use and click <b>Connect</b>. Endpoints from the top block producers have been provided for you, but you can also specify your own custom endpoint by populating the
-                input with a url, and pressing <b>Connect</b>.</p>
-            </div>
-            <div class="col-sm-12 q-pa-sm">
+          <q-btn class="vertical-bottom" color="primary" @click="getFastestNode() " label="Connect" />
+    </div>
+    <!-- col2 -->
+    <div class="col-sm-12 col-lg-4 q-pa-sm relative-position" >
+          <div class="row full-width">
+            <div >
+              <p>Select Endpoint from List</p>
+              <p class="text-dimwhite">Select the endpoint you would like to use and click <b>Connect</b>. Endpoints from the top block producers have been provided f</p>
               <q-field label="Choose Endpoint from List" label-width="12" dark>
               <q-select placeholder="Select Endpoint from List" v-model="selectedEndpoint" dark radio :options="endpoints" />
               </q-field>
-              <q-btn :disabled="!selectedEndpoint" class="q-ma-sm float-right" color="primary" @click="connect(selectedEndpoint)" label="Connect" />
             </div>
-            <div class="col-sm-12 q-pa-sm">
+          </div>
+          <q-btn :disabled="!selectedEndpoint" class="" color="primary" @click="connect(selectedEndpoint)" label="Connect" />
+    </div>
+    <!-- col3 -->
+    <div class="col-sm-12 col-lg-4 q-pa-sm relative-position">
+            <div >
+              <p>Manual Connection</p>
+              <p class="text-dimwhite">Specify your own custom endpoint by populating the input with an url and click the connect button.</p>
               <q-field label="Custom Endpoint" label-width="12" dark>
                 <q-input dark v-model="endpoint" placeholder="https://endpoint-url.com" />
               </q-field>
-              <q-btn :disabled="badEndpoint" class="q-ma-sm float-right" color="primary" @click="connect(endpoint)" label="Connect" />
             </div>
-
-          </div>
-
+            <q-btn :disabled="badEndpoint" class="" color="primary" @click="connect(endpoint)" label="Connect" />
     </div>
     <LoadingSpinner :visible="loading" :text="loadingText" />
   </div>
