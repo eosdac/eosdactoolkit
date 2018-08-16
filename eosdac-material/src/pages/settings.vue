@@ -41,21 +41,21 @@
           <p class="q-title" >Unregister Membership</p>
           <p class="text-dimwhite q-body-1" style="min-height:30px">Click the button below to unregister your eosDAC membership</p>
           <div class="q-mt-lg">
-              <q-btn size="sm" class="float-right" color="primary" @click="unRegisterMember" label="Unregister Membership" />
+              <q-btn :disabled="!getRegistered" size="sm" class="float-right" color="primary" @click="unRegisterMember" label="Unregister Membership" />
           </div>
         </div>
         <div class="col-sm-12 col-lg-4 q-pa-md relative-position" >
           <p class="q-title">Register as Member</p>
           <p class="text-dimwhite q-body-1" style="min-height:30px">Click "Register Now" to become a member of eosDAC.</p>
           <div class="q-mt-lg">
-            <q-btn size="sm" class="float-right" color="primary" @click="" label="Register Now" />
+            <q-btn size="sm" :disabled="getRegistered" class="float-right" color="primary" @click="$refs.Multi.init('sign')" label="Register Now" />
           </div>
         </div>
     </div>
   </q-collapsible>
 </div>
 
-
+<MultiModal ref="Multi" />
 </q-page>
 </template>
 <style lang="stylus">
@@ -67,7 +67,10 @@
 </style>
 
 <script>
+
 import Transaction from 'components/transaction'
+import Register from 'components/register'
+import MultiModal from 'components/multi-modal'
 import NodeSelector from 'components/nodeselector'
 import LangSelector from 'components/lang-selector'
 import {
@@ -78,7 +81,10 @@ export default {
   components: {
     NodeSelector,
     LangSelector,
-    Transaction
+    Transaction,
+    Register,
+    MultiModal
+
   },
   data (){
     return{
