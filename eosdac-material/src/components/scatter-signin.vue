@@ -1,23 +1,23 @@
 <template>
 <div class="row fit q-pa-md">
   <div class="col-12">
-    <h6 class="q-my-sm">Connection Type</h6>
-    <p class="text-grey q-my-lg">Please choose an authentication type to sign into the eosDAC Member Client.</p>
+    <h6 class="q-my-sm">{{ $t('scatter_signin.connection_type') }}</h6>
+    <p class="text-grey q-my-lg">{{ $t('scatter_signin.choose_authentication_type') }}</p>
   </div>
   <div class="col-12 q-my-xl">
-    <q-field class="q-mt-xl" label="Choose Connection Type" :label-width="12">
+    <q-field class="q-mt-xl" :label="$t('scatter_signin.choose_connection_type')" :label-width="12">
       <q-select color="white" dark v-model="connectionMethod" radio :options="[{label:'Scatter',value:'Scatter'}]" />
     </q-field>
-    <q-alert v-if="!hasScatter" message="Scatter is not available. If you have Scatter installed please refresh." class="text-truncate q-ma-sm" icon="info" color="grey" />
+    <q-alert v-if="!hasScatter" :message="$('scatter_signin.scatter_is_not_available')" class="text-truncate q-ma-sm" icon="info" color="grey" />
     <q-alert v-if="scatterError" class="text-truncate q-ma-lg" icon="info" color="grey">
-      {{scatterErrorText}}
+      {{ $t(scatterErrorText) }}
     </q-alert>
     <ScatterTutorial v-if="scatterError" />
   </div>
   <div class="col-12 q-mt-xl relative-position">
-    <q-btn @click="useScatter()" style="min-width: 20%;" class="float-right no-shadow" size="12px" color="primary" label="SIGN IN" />
+    <q-btn @click="useScatter()" style="min-width: 20%;" class="float-right no-shadow" size="12px" color="primary" :label="$t('scatter_signin.sign_in')" />
   </div>
-  <LoadingSpinner :visible="loading" :text="loadingText" />
+  <LoadingSpinner :visible="loading" :text="$t(loadingText)" />
 </div>
 </template>
 
@@ -53,7 +53,7 @@ export default {
   methods: {
     async useScatter() {
       this.loading = true
-      this.loadingText = 'Waiting for scatter...'
+      this.loadingText = 'scatter_signin.waiting_for_scatter'
       let current = this.getCurrentEndpoint
       let pp
       if (current.httpEndpoint.split(':')[0].replace(/\//g, '') === 'https') {
@@ -89,10 +89,10 @@ export default {
         this.loading = false
         if (err.type === 'locked') {
           this.scatterError = true
-          this.scatterErrorText = 'Scatter is locked. Please unlock to continue.'
+          this.scatterErrorText = 'scatter_signin.scatter_is_locked'
         } else if (err.type === 'identity_rejected') {
           this.scatterError = true
-          this.scatterErrorText = 'Identity request was denied. Please try again and accept the request.'
+          this.scatterErrorText = 'scatter_signin.identity_request_denied'
         } else {
           this.scatterError = true
           this.scatterErrorText = err.message

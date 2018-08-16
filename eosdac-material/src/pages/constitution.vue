@@ -7,7 +7,7 @@
     </div>
   </div>
   </div>
-  <LoadingSpinner :visible="isloading" text="Loading constitution" />
+  <LoadingSpinner :visible="isloading" :text="$t('constitution.loading_constitution')" />
 </q-page>
 </template>
 

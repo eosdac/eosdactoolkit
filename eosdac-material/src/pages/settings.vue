@@ -1,7 +1,7 @@
 <template>
 <q-page class="text-white q-pa-md">
 
-  <h4 class="q-display-1 q-mt-none q-mb-md">Settings</h4>
+  <h4 class="q-display-1 q-mt-none q-mb-md">{{ $t("settings.settings") }}</h4>
 
 <div class="shadow-5" style="background:#2F333D">
   <q-collapsible  label="First" separator header-class="bg-dark2" collapse-icon="icon-ui-11">
@@ -10,8 +10,8 @@
         <q-icon name="icon-register-1"  color="white"  size="24px" />
       </q-item-side>
       <q-item-main >
-        <span>API Endpoints</span>
-        <span class="q-ml-lg text-dimwhite" >Current Connection:</span>
+        <span>{{ $tc('settings.API_endpoint') }}</span>
+        <span class="q-ml-lg text-dimwhite" >{{ $t("settings.current_connection") }}:</span>
         <span v-if="getCurrentEndpoint.lastConnectionStatus" class="q-ml-md text-positive">{{getCurrentEndpoint.httpEndpoint}}</span>
         <span v-else class="q-ml-md text-negative">{{getCurrentEndpoint.httpEndpoint}}</span>
       </q-item-main>
@@ -30,26 +30,26 @@
         <q-icon name="icon-type-4"  color="white"  size="24px" />
       </q-item-side>
       <q-item-main >
-        <span>Member Status</span>
-        <span class="q-ml-lg text-dimwhite" >Current Status:</span>
-        <span v-if="getRegistered" class=" q-ml-md text-positive">REGISTERED</span>
-        <span v-else class=" q-ml-md text-negative">NOT REGISTERED</span>
+        <span>{{ $t("settings.member_status") }}</span>
+        <span class="q-ml-lg text-dimwhite" >{{ $t("settings.current_status") }}:</span>
+        <span v-if="getRegistered" class=" q-ml-md text-positive">{{ $t("settings.REGISTERED") }}</span>
+        <span v-else class=" q-ml-md text-negative">{{ $t("settings.NOT_REGISTERED") }}</span>
       </q-item-main>
       <span class="hack_height"></span>
     </template>
     <div class="row" style="min-height:140px">
         <div class="col-sm-12 col-lg-4 q-pa-md relative-position" >
-          <p class="q-title" >Unregister Membership</p>
-          <p class="text-dimwhite q-body-1" style="min-height:30px">Click the button below to unregister your eosDAC membership</p>
+          <p class="q-title" >{{ $t("settings.unregister_membership") }}</p>
+          <p class="text-dimwhite q-body-1" style="min-height:30px">{{ $t("settings.click_below_to_unregister_membership") }}</p>
           <div class="q-mt-lg">
-              <q-btn :disabled="!getRegistered" size="sm" class="float-right" color="primary" @click="unRegisterMember" label="Unregister Membership" />
+              <q-btn :disabled="!getRegistered" size="sm" class="float-right" color="primary" @click="unRegisterMember" :label="$t("settings.unregister_membership")" />
           </div>
         </div>
         <div class="col-sm-12 col-lg-4 q-pa-md relative-position" >
-          <p class="q-title">Register as Member</p>
-          <p class="text-dimwhite q-body-1" style="min-height:30px">Click "Register Now" to become a member of eosDAC.</p>
+          <p class="q-title">{{ $t('settings.register_as_member') }}</p>
+          <p class="text-dimwhite q-body-1" style="min-height:30px">{{ $t('settings.click_register_now') }}</p>
           <div class="q-mt-lg">
-            <q-btn size="sm" :disabled="getRegistered" class="float-right" color="primary" @click="$refs.Multi.init('sign')" label="Register Now" />
+            <q-btn size="sm" :disabled="getRegistered" class="float-right" color="primary" @click="$refs.Multi.init('sign')" :label="$t('settings.register_now')" />
           </div>
         </div>
     </div>

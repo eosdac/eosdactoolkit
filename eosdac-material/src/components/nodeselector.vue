@@ -4,16 +4,16 @@
     <div class="col-sm-12 text-center">
       <div class="row justify-center">
         <div class="col-sm-12 q-pa-sm text-center">
-          <q-alert v-if="errorEndpoint" :message="errorEndpointText" class="text-truncate" icon="info" color="red" />
-          <q-alert v-if="successEndpoint" message="Endpoint set successfully" class="text-truncate" icon="icon-ui-6" color="positive" />
+          <q-alert v-if="errorEndpoint" :message="$t(errorEndpointText)" class="text-truncate" icon="info" color="red" />
+          <q-alert v-if="successEndpoint" :message="$t('nodeselector.endpoint_set')" class="text-truncate" icon="icon-ui-6" color="positive" />
         </div>
       </div>
       <div class="row justify-center">
         <div class="col-sm-12 q-pa-sm text-center">
-          <q-field label="Custom Endpoint" label-width="12" dark>
+          <q-field :label="$t('nodeselector.custom_endpoint')" label-width="12" dark>
             <q-input dark v-model="endpoint" placeholder="https://endpoint-url.com" />
           </q-field>
-          <q-btn :disabled="badEndpoint" class="q-ma-sm" color="primary" @click="connect(endpoint)" label="Connect" />
+          <q-btn :disabled="badEndpoint" class="q-ma-sm" color="primary" @click="connect(endpoint)" :label="$t('nodeselector.connect')" />
         </div>
       </div>
     </div>
@@ -23,11 +23,10 @@
 <div v-else>
   <div class="row justify-center">
     <div class="col-sm-12 col-lg-6 q-pa-sm text-center">
-      <q-alert v-if="errorEndpoint" :message="errorEndpointText" class="text-truncate" icon="info" color="red" />
-      <q-alert v-if="successEndpoint" message="Endpoint set successfully" class="text-truncate" icon="icon-ui-6" color="positive" />
+      <q-alert v-if="errorEndpoint" :message="$t(errorEndpointText)" class="text-truncate" icon="info" color="red" />
+      <q-alert v-if="successEndpoint" :message="$t('nodeselector.endpoint_set')" class="text-truncate" icon="icon-ui-6" color="positive" />
     </div>
   </div>
-
   <div class="row relative-position" style="min-height:250px">
     <!-- col1 -->
     <div class="col-sm-12 col-lg-4 q-pa-md">
@@ -35,10 +34,10 @@
         <div class="column justify-between" style="height:100%">
           <div v-if="!endpointListFail">
               <p class="q-title">Automatic Connection</p>
-              <p class="text-dimwhite q-body-1" style="min-height:50px">Click <b>{{ $t('connect') }}</b> below to automatically connect to the fastest endpoint to your location selected from the top EOS block producers.</p>
+              <p class="text-dimwhite q-body-1" style="min-height:50px" v-html="$t('nodeselector.click_connect_below')"></p>
           </div >
           <div >
-            <q-btn size="sm" class="float-right" color="primary" @click="getFastestNode() " label="Connect" />
+            <q-btn size="sm" class="float-right" color="primary" @click="getFastestNode() " :label="$t('nodeselector.connect')" />
           </div>
         </div>
 
@@ -49,13 +48,13 @@
       <!-- <div class="column justify-between" style="height:100%"> -->
           <div>
               <p class="q-title">Select Endpoint from List</p>
-              <p class="text-dimwhite q-body-1" style="min-height:50px">Select the endpoint you would like to use and click <b>Connect</b>. Endpoints from the top block producers have been provided f</p>
-              <q-field label="Choose Endpoint from List" label-width="12" dark>
-              <q-select placeholder="Select Endpoint from List" v-model="selectedEndpoint" dark radio :options="endpoints" />
+              <p class="text-dimwhite q-body-1" style="min-height:50px" v-html="$t('nodeselector.select_the_endpoint_you_would_like')"></p>
+              <q-field :label="$t('nodeselector.choose_endpoint')" label-width="12" dark>
+              <q-select :placeholder="$t('nodeselector.select_endpoint')" v-model="selectedEndpoint" dark radio :options="endpoints" />
               </q-field>
           </div>
           <div class="q-mt-lg">
-              <q-btn size="sm" :disabled="!selectedEndpoint" class="float-right" color="primary" @click="connect(selectedEndpoint)" label="Connect" />
+              <q-btn size="sm" :disabled="!selectedEndpoint" class="float-right" color="primary" @click="connect(selectedEndpoint)" :label="$t('nodeselector.connect')" />
           </div>
       <!-- </div> -->
     </div>
@@ -64,13 +63,13 @@
         <div class="column justify-between" style="height:100%">
             <div >
               <p class="q-title">Manual Connection</p>
-              <p class="text-dimwhite q-body-1" style="min-height:50px">Specify your own custom endpoint by populating the input with an url and click the connect button.</p>
-              <q-field label="Custom Endpoint" label-width="12" dark>
+              <p class="text-dimwhite q-body-1" style="min-height:50px">{{ $t('specify_your_own') }}</p>
+              <q-field :label="$t('custom_endpoint')" label-width="12" dark>
                 <q-input dark v-model="endpoint" placeholder="https://endpoint-url.com" />
               </q-field>
             </div>
             <div class="q-mt-lg">
-                <q-btn size="sm" :disabled="badEndpoint" class="float-right" color="primary" @click="connect(endpoint)" label="Connect" />
+                <q-btn size="sm" :disabled="badEndpoint" class="float-right" color="primary" @click="connect(endpoint)" :label="$t('nodeselector.connect')" />
             </div>
         </div>
     </div>
@@ -130,7 +129,7 @@ export default {
     async getFastestNode() {
       let s = new NodeSelector(this.$configFile.api.bpNodeApiUrl)
       this.loading = true
-      this.loadingText = 'Gathering endpoints...'
+      this.loadingText = 'nodeselector.gathering_endpoints'
       let fastest = await s.get_fastest_node()
       if (fastest) {
         this.connect(fastest.node)
@@ -140,7 +139,7 @@ export default {
     async loadEndpoints() {
       let s = new NodeSelector(this.$configFile.api.bpNodeApiUrl)
       this.loading = true
-      this.loadingText = 'Gathering endpoints...'
+      this.loadingText = 'nodeselector.gathering_endpoints'
       try {
         let getEndpoints = await s.get_nodes()
         let res = []
@@ -178,7 +177,7 @@ export default {
     },
     async connect(u) {
       this.loading = true
-      this.loadingText = 'Connecting...'
+      this.loadingText = 'nodeselector.connecting'
       try {
         let url = await this.filterUrl(u)
         let test = await this.$store.dispatch('api/testEndpoint', url)
@@ -199,23 +198,23 @@ export default {
           this.loadEndpoints()
         }
         if (err.message.includes('Cannot POST')) {
-          this.errorEndpointText = 'The URL seems to be invalid.'
+          this.errorEndpointText = 'nodeselector.error_invalid_url'
         } else {
           switch (err.message) {
             case 'timeout':
-              this.errorEndpointText = 'Connection to endpoint timed out.'
+              this.errorEndpointText = 'nodeselector.error_endpoint_connection_timed_out'
               break
             case 'NetworkError when attempting to fetch resource.':
-              this.errorEndpointText = 'Could not connect to endpoint.'
+              this.errorEndpointText = 'nodeselector.error_could_not_connect_to_endpoint'
               break
             case 'Wrong chainId':
-              this.errorEndpointText = 'The chain ID returned by the endpoint is incorrect.'
+              this.errorEndpointText = 'nodeselector.error_chain_id'
               break
             case 'Failed to fetch':
-              this.errorEndpointText = 'Could not connect to endpoint.'
+              this.errorEndpointText = 'nodeselector.error_could_not_connect_to_endpoint'
               break
             default:
-              this.errorEndpointText = 'Could not connect to endpoint.'
+              this.errorEndpointText = 'nodeselector.error_could_not_connect_to_endpoint'
           }
         }
       }

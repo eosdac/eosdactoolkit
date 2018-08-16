@@ -3,17 +3,17 @@
   <div class="row full-height">
     <div class="col-12">
       <q-tabs v-model="selectedTab" no-pane-border align="left">
-        <q-tab v-show="initialmode === 'signin'" @click.native="initialmode === 'signin' ? mode = 'signin': mode = mode" slot="title" name="signin" label="SIGN IN" />
-        <q-tab @click.native="mode = 'register'" slot="title" name="register" label="REGISTER AS A DAC-MEMBER" />
+        <q-tab v-show="initialmode === 'signin'" @click.native="initialmode === 'signin' ? mode = 'signin': mode = mode" slot="title" name="signin" :label="$t('multi_modal.sign_in')" />
+        <q-tab @click.native="mode = 'register'" slot="title" name="register" :label="$t('multi_modal.register_as_dac_member')" />
         <q-tab class="absolute-right" v-if="getImported" @click.native="close()" slot="title" name="close" icon="icon-ui-8" />
       </q-tabs>
       <q-stepper v-model="step" color="white" ref="stepper" contractable no-header-navigation class="bg-dark no-shadow no-line" v-bind:class="{'registered-step': getRegistered && step === 'step3' }">
         <!--node-->
-        <q-step style="display:none;" :order="1" active-icon="icon-register-1" done-icon="icon-register-1" icon="icon-register-1" default title="API Endpoint" name="step1" />
+        <q-step style="display:none;" :order="1" active-icon="icon-register-1" done-icon="icon-register-1" icon="icon-register-1" default :title="$t('settings.API_endpoint')" name="step1" />
         <!--scatter-->
         <q-step style="display:none;" :order="2" title="Authentication" name="step2" active-icon="icon-register-2" done-icon="icon-register-2" icon="icon-register-2" />
         <!--register-->
-        <q-step style="display:none;" :order="3" v-if="mode !== 'signin'" active-icon="icon-register-3" done-icon="icon-register-3" icon="icon-register-3" title="Registration" name="step3" />
+        <q-step style="display:none;" :order="3" v-if="mode !== 'signin'" active-icon="icon-register-3" done-icon="icon-register-3" icon="icon-register-3" :title="$t('multi_modal.registration')" name="step3" />
       </q-stepper>
     </div>
     <div class="col-12">
@@ -73,7 +73,7 @@ export default {
   data() {
     return {
       loading: false,
-      loadingText: 'loading...',
+      loadingText: 'initalize.loading_text',
       active: false,
       step: 'step1',
       scatterError: false,

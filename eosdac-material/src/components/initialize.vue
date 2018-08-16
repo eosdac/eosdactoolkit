@@ -1,23 +1,23 @@
 <template>
 <q-modal class="text-white realtive-position" v-model="init" no-esc-dismiss no-backdrop-dismiss>
   <q-stepper v-model="curStep" v-show="!importInit" color="white" ref="initstepper" contractable no-header-navigation>
-    <q-step active-icon="icon-register-1" default title="API Endpoint" name="init1">
+    <q-step active-icon="icon-register-1" default title="$t('settings.API_endpoint')" name="init1">
       <NodeSelector v-if="init" setup v-on:done="stepScatter()" />
     </q-step>
     <q-step class="text-center" title="Authentication" name="init2" icon="icon-register-2">
       <h4 class="text-white">Authentication Method</h4>
-      <q-alert v-if="!hasScatter" message="Scatter is not available. If you have Scatter installed please refresh." class="text-truncate" icon="info" color="grey" />
+      <q-alert v-if="!hasScatter" :message="$t('scatter_not_available')" class="text-truncate" icon="info" color="grey" />
       <q-alert v-if="scatterError" class="text-truncate q-mb-lg" icon="info" color="grey">
-        <p>{{scatterErrorText}}
+        <p>{{$t(scatterErrorText)}}
         </p>
       </q-alert>
-      <q-btn @click="useScatter()" :disabled="!hasScatter" class="q-mb-lg" color="primary" label="Connect with Scatter" />
+      <q-btn @click="useScatter()" :disabled="!hasScatter" class="q-mb-lg" color="primary" :label="$t('connect_with_scatter')" />
       <ScatterTutorial v-if="scatterError" color="white" />
-      <!--<q-btn v-else @click="importInit = true" class="q-ma-sm" color="primary" label="Import private keys" size="xl" />-->
+      <!--<q-btn v-else @click="importInit = true" class="q-ma-sm" color="primary" :label="$t('import_private_keys')" size="xl" />-->
     </q-step>
   </q-stepper>
   <Import v-bind:intro="true" v-if="importInit" v-on:importDone="checkRegister()" />
-  <LoadingSpinner :visible="loading" :text="loadingText" />
+  <LoadingSpinner :visible="loading" :text="$t(loadingText)" />
 </q-modal>
 </template>
 
@@ -38,7 +38,7 @@ export default {
   data() {
     return {
       loading: false,
-      loadingText: 'loading...',
+      loadingText: 'loading_text',
       init: false,
       start: false,
       endpoint: '',
@@ -76,7 +76,7 @@ export default {
     },
     async useScatter() {
       this.loading = true
-      this.loadingText = 'Waiting for scatter...'
+      this.loadingText = 'waiting_for_scatter'
       let current = this.getCurrentEndpoint
       let pp
       if (current.httpEndpoint.split(':')[0].replace(/\//g, '') === 'https') {
@@ -113,10 +113,10 @@ export default {
         this.loading = false
         if (err.type === 'locked') {
           this.scatterError = true
-          this.scatterErrorText = 'Scatter is locked. Please unlock to continue'
+          this.scatterErrorText = 'scatter_is_locked'
         } else if (err.type === 'identity_rejected') {
           this.scatterError = true
-          this.scatterErrorText = 'Identity request was denied. Please try again and accept the request'
+          this.scatterErrorText = 'identity_request_denied'
         } else {
           this.scatterError = true
           this.scatterErrorText = err.message
