@@ -12,7 +12,8 @@
       <q-item-main >
         <span>API Endpoints</span>
         <span class="q-ml-lg text-dimwhite" >Current Connection:</span>
-        <span class=" q-ml-md text-positive">{{getCurrentEndpoint.httpEndpoint}}</span>
+        <span v-if="getCurrentEndpoint.lastConnectionStatus" class="q-ml-md text-positive">{{getCurrentEndpoint.httpEndpoint}}</span>
+        <span v-else class="q-ml-md text-negative">{{getCurrentEndpoint.httpEndpoint}}</span>
       </q-item-main>
       <span class="hack_height"></span>
     </template>

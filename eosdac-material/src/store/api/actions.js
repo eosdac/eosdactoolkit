@@ -40,7 +40,7 @@ function apiDown(e,c,s) {
         textColor: 'black',
         autoclose: 8
       })
-      c('SET_CURRENT_CONNECTION_STATUS', true)
+      c('SET_CURRENT_CONNECTION_STATUS', false)
     }
   }
 }
