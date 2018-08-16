@@ -112,7 +112,9 @@
 <script>
 const IPFS = require('ipfs-api');
 const ipfs = new IPFS({ host: 'ipfs.infura.io', port: 5001, protocol: 'https' });
-
+import {
+  mapGetters
+} from 'vuex'
 export default {
   components:{
 
@@ -140,6 +142,13 @@ export default {
 
 
     }
+  },
+  computed: {
+    ...mapGetters({
+      getAccountName: 'account/getAccountName',
+      getAccount : 'account/getAccount',
+      getScatter: 'api/getScatter',
+    })
   },
 
   
@@ -182,6 +191,13 @@ export default {
       }
 
     },
+    signMessage(data){
+      let publicKey = this.getAccount.permissions[0].required_auth.keys[0].key;
+      let whatfor = 'Profile Upload';//do not translate
+
+      return this.getScatter.getArbitrarySignature(publicKey, data, whatfor, false)
+      .then(res => res).catch(e => {console.log(e); return false});
+    },
 
     postToServer(data){
       console.log('Start upload to server!');
@@ -208,7 +224,7 @@ export default {
   },
 
   mounted: function(){
-
+    
    }
    
 }
