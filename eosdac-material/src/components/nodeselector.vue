@@ -41,7 +41,7 @@
             <q-btn size="sm" class="float-right" color="primary" @click="getFastestNode() " label="Connect" />
           </div>
         </div>
-          
+
     </div>
     <!-- col2 -->
     <div class="col-sm-12 col-lg-4 q-pa-md">

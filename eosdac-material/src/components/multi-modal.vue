@@ -17,7 +17,7 @@
       </q-stepper>
     </div>
     <div class="col-12">
-      <NodeSelector v-if="initialmode !== 'sign' && active" setup v-on:done="$refs.stepper.goToStep('step2')" />
+      <NodeSelector v-if="initialmode !== 'sign' && active && step === 'step1'" setup v-on:done="step ='step2'" />
       <ScatterSignIn v-if="step === 'step2'" v-on:done="ifReg()" />
       <Register v-if="step === 'step3'" :visible="selectedTab === 'register'" ref="reg" v-on:done="(mode === 'signin')? close(): ''" />
       <LoadingSpinner :visible="loading" :text="loadingText" />
@@ -97,9 +97,13 @@ export default {
         }
 
         if (this.getAccountName) {
-          this.$refs.stepper.goToStep('step3')
+          this.step = 'step3'
         } else {
-          this.$refs.stepper.goToStep('step2')
+          if (this.getCurrentConnectionStatus) {
+            this.step = 'step2'
+          } else {
+            this.step = 'step1'
+          }
         }
       } else {
         this.selectTab('register')
