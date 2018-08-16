@@ -1,5 +1,5 @@
 <template>
-<div v-if="visible" class="justify-center relative-position">
+<div v-if="visible" class="justify-center relative-position q-pa-md">
   <div v-if="!success">
     <div v-if="!queryError" class="row relative-position">
       <div class="col-12 relative-position">
