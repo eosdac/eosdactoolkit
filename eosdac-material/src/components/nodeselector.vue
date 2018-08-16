@@ -27,40 +27,52 @@
       <q-alert v-if="successEndpoint" message="Endpoint set successfully" class="text-truncate" icon="icon-ui-6" color="positive" />
     </div>
   </div>
-  <div class="row relative-position">
+
+  <div class="row relative-position" style="min-height:250px">
     <!-- col1 -->
-    <div class="col-sm-12 col-lg-4 q-pa-sm relative-position" >
-          <div>
-            <div v-if="!endpointListFail" >
-              <p>Automatic Connection</p>
-              <p class="text-dimwhite">Click <b>{{ $t('connect') }}</b> below to automatically connect to the fastest endpoint to your location selected from the top EOS block producers.</p>
-            </div>
+    <div class="col-sm-12 col-lg-4 q-pa-md">
+
+        <div class="column justify-between" style="height:100%">
+          <div v-if="!endpointListFail">
+              <p class="q-title">Automatic Connection</p>
+              <p class="text-dimwhite q-body-1" style="min-height:50px">Click <b>{{ $t('connect') }}</b> below to automatically connect to the fastest endpoint to your location selected from the top EOS block producers.</p>
+          </div >
+          <div >
+            <q-btn size="sm" class="float-right" color="primary" @click="getFastestNode() " label="Connect" />
           </div>
-          <q-btn class="vertical-bottom" color="primary" @click="getFastestNode() " label="Connect" />
+        </div>
+          
     </div>
     <!-- col2 -->
-    <div class="col-sm-12 col-lg-4 q-pa-sm relative-position" >
-          <div class="row full-width">
-            <div >
-              <p>Select Endpoint from List</p>
-              <p class="text-dimwhite">Select the endpoint you would like to use and click <b>Connect</b>. Endpoints from the top block producers have been provided f</p>
+    <div class="col-sm-12 col-lg-4 q-pa-md">
+      <!-- can't use flex with the q-select, breakpoint get triggered buggy -->
+      <!-- <div class="column justify-between" style="height:100%"> -->
+          <div>
+              <p class="q-title">Select Endpoint from List</p>
+              <p class="text-dimwhite q-body-1" style="min-height:50px">Select the endpoint you would like to use and click <b>Connect</b>. Endpoints from the top block producers have been provided f</p>
               <q-field label="Choose Endpoint from List" label-width="12" dark>
               <q-select placeholder="Select Endpoint from List" v-model="selectedEndpoint" dark radio :options="endpoints" />
               </q-field>
-            </div>
           </div>
-          <q-btn :disabled="!selectedEndpoint" class="" color="primary" @click="connect(selectedEndpoint)" label="Connect" />
+          <div class="q-mt-lg">
+              <q-btn size="sm" :disabled="!selectedEndpoint" class="float-right" color="primary" @click="connect(selectedEndpoint)" label="Connect" />
+          </div>
+      <!-- </div> -->
     </div>
     <!-- col3 -->
-    <div class="col-sm-12 col-lg-4 q-pa-sm relative-position">
+    <div class="col-sm-12 col-lg-4 q-pa-md" >
+        <div class="column justify-between" style="height:100%">
             <div >
-              <p>Manual Connection</p>
-              <p class="text-dimwhite">Specify your own custom endpoint by populating the input with an url and click the connect button.</p>
+              <p class="q-title">Manual Connection</p>
+              <p class="text-dimwhite q-body-1" style="min-height:50px">Specify your own custom endpoint by populating the input with an url and click the connect button.</p>
               <q-field label="Custom Endpoint" label-width="12" dark>
                 <q-input dark v-model="endpoint" placeholder="https://endpoint-url.com" />
               </q-field>
             </div>
-            <q-btn :disabled="badEndpoint" class="" color="primary" @click="connect(endpoint)" label="Connect" />
+            <div class="q-mt-lg">
+                <q-btn size="sm" :disabled="badEndpoint" class="float-right" color="primary" @click="connect(endpoint)" label="Connect" />
+            </div>
+        </div>
     </div>
     <LoadingSpinner :visible="loading" :text="loadingText" />
   </div>

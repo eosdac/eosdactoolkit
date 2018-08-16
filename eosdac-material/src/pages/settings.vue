@@ -34,37 +34,29 @@
       </q-item-main>
       <span class="hack_height"></span>
     </template>
-    <NodeSelector />
+      <div class="row" style="min-height:140px">
+        <div class="col-sm-12 col-lg-4 q-pa-md relative-position" >
+          <p class="q-title" >Unregister Membership</p>
+          <p class="text-dimwhite q-body-1" style="min-height:30px">Click the button below to unregister your eosDAC membership</p>
+          <div class="q-mt-lg">
+              <q-btn size="sm" class="absolute-bottom-right" color="primary" @click="" label="Unregister Membership" />
+          </div>
+        </div>
+
+        <div class="col-sm-12 col-lg-4 q-pa-md relative-position" >
+          <p class="q-title">Register as Member</p>
+          <p class="text-dimwhite q-body-1" style="min-height:30px">Click "Register Now" to become a member of eosDAC.</p>
+          <div class="q-mt-lg">
+            <q-btn size="sm" class="absolute-bottom-right" color="primary" @click="" label="Register Now" />
+          </div>
+          
+        </div>
+      </div>
+
+
   </q-collapsible>
 </div>
 
-<br><br>
-
-
-
-
-
-
-
-
-
-
-  <q-tabs align="justify">
-    <q-tab default slot="title" name="tab-1" label="API" />
-    <!--<q-tab slot="title" name="tab-2" label="Language" />-->
-    <!--<q-tab slot="title" name="tab-2" label="Account" />-->
-    <q-tab-pane class="shadow-1 bg-dark2" name="tab-1">
-      <q-collapsible separator dark icon="icon-register-1" collapse-icon="icon-ui-11" label="API Endpoint">
-      <NodeSelector />
-    </q-collapsible>
-    </q-tab-pane>
-    <q-tab-pane class="shadow-1 bg-dark2" name="tab-2">
-    <LangSelector/>
-    </q-tab-pane>
-    <!--<q-tab-pane name="tab-2">
-
-    </q-tab-pane>-->
-  </q-tabs>
 
 </q-page>
 </template>
