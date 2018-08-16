@@ -127,6 +127,9 @@ export default {
           case 'memberreg':
             ricardian = (!this.getTokenContractRicardian) ? await this.$store.dispatch('api/getContractRicardian', this.$configFile.network.tokenContract.name) : this.getTokenContractRicardian
             break
+          case 'memberunreg':
+            ricardian = (!this.getTokenContractRicardian) ? await this.$store.dispatch('api/getContractRicardian', this.$configFile.network.tokenContract.name) : this.getTokenContractRicardian
+            break
         }
         return ricardian
       } catch (err) {
