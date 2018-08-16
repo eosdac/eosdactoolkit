@@ -42,7 +42,7 @@
           <p class="q-title" >{{ $t("settings.unregister_membership") }}</p>
           <p class="text-dimwhite q-body-1" style="min-height:30px">{{ $t("settings.click_below_to_unregister_membership") }}</p>
           <div class="q-mt-lg">
-              <q-btn :disabled="!getRegistered" size="sm" class="float-right" color="primary" @click="unRegisterMember" :label="$t("settings.unregister_membership")" />
+              <q-btn :disabled="!getRegistered" size="sm" class="float-right" color="primary" @click="unRegisterMember" :label="$t('settings.unregister_membership')" />
           </div>
         </div>
         <div class="col-sm-12 col-lg-4 q-pa-md relative-position" >

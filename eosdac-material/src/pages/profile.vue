@@ -1,6 +1,6 @@
 <template>
 <q-page class="q-pa-md">
-  
+
   <div class="q-pa-md bg-dark2 round-borders shadow-5 animate-pop">
     <div class="row">
 
@@ -19,38 +19,38 @@
       </div>
 
       <div style="width:400px">
-        <q-input dark type="text" v-model="form.givenName"  class="q-mt-md" float-label="{{ $t("givenName") }}" placeholder="Jhon" />
-        <q-input dark type="text" v-model="form.familyName"  class="q-mt-md" float-label="{{ $t("familyName") }}" placeholder="Jhon" />
+        <q-input dark type="text" v-model="form.givenName"  class="q-mt-md" :float-label="$t('givenName')" placeholder="Jhon" />
+        <q-input dark type="text" v-model="form.familyName"  class="q-mt-md" :float-label="$t('familyName')" placeholder="Jhon" />
       </div>
 
     </div> <!-- end row -->
 
-    <q-input dark type="email" v-model="form.email"  class="q-mt-md" float-label="{{ $t("email_address") }}" placeholder="my.email@example.site" />
+    <q-input dark type="email" v-model="form.email"  class="q-mt-md" :float-label="$t('email_address')" placeholder="my.email@example.site" />
 
-    <div class="q-mt-md" style="color:#979797;margin-bottom:3px">{{ $t("gender") }}</div>
-    <q-radio dark v-model="form.gender" val="female" label="{{ $t("female") }}" class="q-mr-sm" />
-    <q-radio dark v-model="form.gender" val="male" label="{{ $t("male") }}" class="q-mr-sm" />
-    <q-radio dark v-model="form.gender" val="opt3" label="{{ $t("other") }}" />
+    <div class="q-mt-md" style="color:#979797;margin-bottom:3px">{{ $t('gender') }}</div>
+    <q-radio dark v-model="form.gender" val="female" :label="$t('female')" class="q-mr-sm" />
+    <q-radio dark v-model="form.gender" val="male" :label="$t('male')" class="q-mr-sm" />
+    <q-radio dark v-model="form.gender" val="opt3" :label="$t('other')" />
 
-    <q-input dark type="url" v-model="form.url"  class="" float-label="{{ $t("website") }}" placeholder="http://example.com" />
-    <q-input dark type="textarea" v-model="form.description"  class="q-mt-md" float-label="{{ $t("about_me") }}" placeholder="{{ $t("placeholder_short_bio") }}" />
+    <q-input dark type="url" v-model="form.url"  class="" :float-label="$t('website')" placeholder="http://example.com" />
+    <q-input dark type="textarea" v-model="form.description"  class="q-mt-md" :float-label="$t('about_me')" :placeholder="$t('placeholder_short_bio')" />
 
     <q-input dark type="url"
-      class="q-mt-md q-mb-md" 
-      v-model="social.link"  
+      class="q-mt-md q-mb-md"
+      v-model="social.link"
       v-for="(social, i) in form.sameAs"
       :key = i
-      :float-label="{{ $t("social_link") }} `${i+1}`"
-      @input="deleteEmptyLinks" 
-      placeholder="{{ $t("social_profile_link") }}" 
+      :float-label="$t('social_link') + '`${i+1}`'"
+      @input="deleteEmptyLinks"
+      :placeholder="$t('social_profile_link')"
     />
     <div class="relative-position" >
         <q-btn  color="primary" @click="addSocial" icon="icon-plus" />
 
-        <q-btn class="absolute-right" :loading="isuploading" color="positive" @click="saveProfile" label="{{ $t("save") }}">
+        <q-btn class="absolute-right" :loading="isuploading" color="positive" @click="saveProfile" :label="$t('save')">
             <q-spinner slot="loading" />
         </q-btn>
-        
+
 
     </div>
     <!-- debug -->
@@ -61,10 +61,10 @@
 <!--     profile pic modal -->
     <q-modal v-model="visible"  minimized :content-css="{width: '80vw'}" >
         <div style="padding: 20px; border:1px solid #491289" class="bg-dark round-borders">
-          <q-input dark type="url" v-model="form.image" @input="loaded=false" class="q-mt-md" float-label="{{ $t("profile_picture_url") }}" placeholder="http://example.site/mypic.jpg" />
+          <q-input dark type="url" v-model="form.image" @input="loaded=false" class="q-mt-md" :float-label="$t('profile_picture_url')" placeholder="http://example.site/mypic.jpg" />
           <q-btn round color="primary" class="absolute" style="top:5px;right:5px" @click="visible=false" icon="icon-plus" />
         </div>
-    </q-modal> 
+    </q-modal>
 
 </div>
 
@@ -80,7 +80,7 @@
   border: 3px solid $primary;
   box-sizing: border-box;
   position:relative;
-  
+
 }
 .pic_wrapper {
   width: 100%;
@@ -142,7 +142,7 @@ export default {
     }
   },
 
-  
+
   methods:{
      onLoaded() {
         let img = this.$refs.profile_pic;
@@ -163,7 +163,7 @@ export default {
       if(this.form.sameAs.length ){
         this.form.sameAs = this.form.sameAs.filter(function(item){
           return item.link !='';
-        });      
+        });
       }
 
     },
@@ -210,6 +210,6 @@ export default {
   mounted: function(){
 
    }
-   
+
 }
 </script>

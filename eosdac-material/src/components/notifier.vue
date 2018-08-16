@@ -1,5 +1,5 @@
 <template>
-  <div v-if="visible">
+  <div v-if="visible && getAccount">
   <q-alert class="notifier fixed-bottom z-max" v-bind:class="{ 'drawer-margin': drawer }" :color="color" :text-color="textColor">
     <div class="row">
       <div class="col-md-2 col-lg-1">
@@ -28,7 +28,8 @@ export default {
   },
   computed: {
     ...mapGetters({
-      getNotification: 'api/getNotification'
+      getNotification: 'api/getNotification',
+      getAccount: 'account/getAccount'
     })
   },
   data () {

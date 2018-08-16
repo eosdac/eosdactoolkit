@@ -63,8 +63,8 @@
         <div class="column justify-between" style="height:100%">
             <div >
               <p class="q-title">Manual Connection</p>
-              <p class="text-dimwhite q-body-1" style="min-height:50px">{{ $t('specify_your_own') }}</p>
-              <q-field :label="$t('custom_endpoint')" label-width="12" dark>
+              <p class="text-dimwhite q-body-1" style="min-height:50px">{{ $t('nodeselector.specify_your_own') }}</p>
+              <q-field :label="$t('nodeselector.custom_endpoint')" label-width="12" dark>
                 <q-input dark v-model="endpoint" placeholder="https://endpoint-url.com" />
               </q-field>
             </div>
