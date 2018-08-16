@@ -66,7 +66,6 @@ export default {
   computed: {
     ...mapGetters({
       getAccountName: 'account/getAccountName',
-      getUnlocked: 'account/getUnlocked',
       getTokenContractRicardian: 'api/getTokenContractRicardian',
       getMainCurrencyContractRicardian: 'api/getMainCurrencyContractRicardian',
       getUsesScatter: 'account/getUsesScatter',

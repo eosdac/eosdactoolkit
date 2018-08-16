@@ -1,7 +1,11 @@
 export default {
   accountName: null,
   imported: false,
-  registered: false,
+  registered: {
+    version: null,
+    memberterms: null
+  },
+  firstReg: true,
   useScatter: false,
   info: {},
   keys: [],

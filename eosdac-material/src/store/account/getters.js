@@ -37,7 +37,19 @@ export const getImported = (state) => {
 }
 
 export const getRegistered = (state) => {
-  return state.registered
+  if (state.registered.version && state.registered.memberterms) {
+    if (state.registered.version === state.registered.memberterms.version) {
+      return state.registered.version
+    } else {
+      return false
+    }
+  } else {
+    return false
+  }
+}
+
+export const getFirstReg = (state) => {
+  return state.firstReg
 }
 
 export const getAccountName = (state) => {
@@ -54,10 +66,6 @@ export const getAccount = (state) => {
   } else {
     return false
   }
-}
-
-export const getUnlocked = (state) => {
-  return state.unlocked
 }
 
 export const getLastUnlock= (state) => {

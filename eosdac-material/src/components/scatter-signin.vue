@@ -1,5 +1,5 @@
 <template>
-<div class="row full-width q-pa-md">
+<div class="row fit q-pa-md">
   <div class="col-12">
     <h6 class="q-my-sm">Connection Type</h6>
     <p class="text-grey q-my-lg">Please choose an authentication type to sign into the eosDAC Member Client.</p>

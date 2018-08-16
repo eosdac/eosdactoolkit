@@ -1,42 +1,44 @@
 <template>
-<div v-if="active" class="justify-center relative-position">
+<div v-if="visible" class="justify-center relative-position">
   <div v-if="!success">
-  <div v-if="!queryError" class="row relative-position">
-  <div class="col-12 relative-position">
-    <Transaction ref="Transaction" v-on:done="checkRegistered(true)" />
-    <h6 class="text-white q-mt-none q-mb-lg">Registration - Sign the Constitution</h6>
-    <q-alert v-if="statusText" class="q-mb-md" icon="info" color="grey">{{statusText}}</q-alert>
-    <p class="text-white">In order to become a Member of eosDAC you have to agree and sign the Constitution. <q-btn dense flat @click="toggleFullscreen = true" class="p-light q-ma-none">(Fullscreen)</q-btn></p>
-
-    <q-scroll-area class="markdown-body q-mb-md" v-bind:class="[toggleFullscreen ? fullscreen : '']" style="height:200px;padding:10px;">
-      <q-btn v-if="toggleFullscreen" @click="toggleFullscreen = false" class="fixed-top-right no-shadow q-mt-md" size="lg" color="primary" icon="icon-ui-8" label="Close" />
-      <div v-html="constitution" class="fit"></div>
-    </q-scroll-area>
+    <div v-if="!queryError" class="row relative-position">
+      <div class="col-12 relative-position">
+        <Transaction ref="Transaction" v-on:done="checkRegistered(true)" />
+        <h6 class="text-white q-mt-none q-mb-lg">Registration - Sign the Constitution</h6>
+        <q-alert v-if="statusText" class="q-mb-md" icon="info" color="grey">{{statusText}}</q-alert>
+        <p class="text-white">In order to become a Member of eosDAC you have to agree and sign the Constitution.
+          <q-btn dense flat @click="toggleFullscreen = true" class="p-light q-ma-none">(Fullscreen)</q-btn>
+        </p>
+        <q-scroll-area v-if="constitution" class="markdown-body q-mb-md" v-bind:class="[toggleFullscreen ? fullscreen : '']" style="height:200px;padding:10px;">
+          <q-btn v-if="toggleFullscreen" @click="toggleFullscreen = false" class="fixed-top-right no-shadow q-mt-md" size="lg" color="primary" icon="icon-ui-8" label="Close" />
+          <div v-html="constitution" class="fit"></div>
+        </q-scroll-area>
+      </div>
+      <div class="col-12">
+        <q-checkbox class=" float-left text-white" color="white" v-model="agree">
+          I accept the Constitution
+        </q-checkbox>
+        <p class="float-right text-white">Constitution Hash:
+          <q-chip dense color="primary">{{hash}}</q-chip>
+        </p>
+      </div>
+      <div class="col-12">
+        <q-btn :disabled="!agree" @click="registerMember()" style="min-width: 20%;" class="float-right no-shadow q-mt-md" color="primary" label="Register" />
+      </div>
+      <LoadingSpinner :visible="loading" :text="loadingText" />
+    </div>
+    <div v-else class="col-lg-12 col-xl-8 relative-position">
+      <q-alert :actions="[{ label: 'Try again', handler: () => { checkRegistered() } }]" message="Could not retrieve member status" class="text-truncate q-ma-xl" icon="info" color="grey" />
+    </div>
   </div>
-  <div class="col-12">
-    <q-checkbox class=" float-left text-white" color="white" v-model="agree" >
-      I accept the Constitution
-    </q-checkbox>
-    <p class="float-right text-white">Constitution Hash:
-      <q-chip dense color="primary">{{hash}}</q-chip>
-    </p>
+  <div class="row q-px-sm" v-else>
+    <div class="col-12">
+      <q-alert icon="icon-ui-6" color="positive">
+        <span v-if="altMessage">Congratulations! You are now registered as an eosDAC Member.</span>
+        <span v-else>You are already registered as a eosDAC Member.</span>
+      </q-alert>
+    </div>
   </div>
-  <div class="col-12">
-    <q-btn :disabled="!agree" @click="registerMember()" style="min-width: 20%;" class="float-right no-shadow q-mt-md" color="primary" label="Register" />
-  </div>
-  <LoadingSpinner :visible="loading" :text="loadingText" />
-</div>
-<div v-else class="col-lg-12 col-xl-8 relative-position">
-  <q-alert :actions="[{ label: 'Try again', handler: () => { checkRegistered() } }]" message="Could not retrieve member status" class="text-truncate q-ma-xl" icon="info" color="grey" />
-</div>
-</div>
-<div class="row q-py-xl q-px-sm" v-else>
-  <div class="col-12 q-mt-xl">
-  <q-alert class="q-mt-xl" icon="icon-ui-6" color="positive">
-    You are already registered as a eosDAC Member.
-  </q-alert>
-  </div>
-</div>
 </div>
 </template>
 
@@ -54,16 +56,19 @@ export default {
     LoadingSpinner,
     Transaction
   },
+  props: {
+    visible: Boolean
+  },
   computed: {
     ...mapGetters({
       getAccountName: 'account/getAccountName',
       getRegistered: 'account/getRegistered',
-      getImported: 'account/getImported'
+      getImported: 'account/getImported',
+      getFirstReg: 'account/getFirstReg'
     })
   },
   data() {
     return {
-      active: false,
       loading: false,
       loadingText: '',
       constitution: '',
@@ -73,6 +78,7 @@ export default {
       queryError: false,
       toggleFullscreen: false,
       success: false,
+      altMessage: false,
       fullscreen: {
         active: true,
         'fullscreen': true,
@@ -85,8 +91,7 @@ export default {
     this.init()
   },
   methods: {
-    init () {
-      this.active = true
+    init() {
       this.checkRegistered()
     },
     sleep(ms) {
@@ -105,12 +110,17 @@ export default {
         console.log('Query member registration')
         let latestMemberTerms = await this.$store.dispatch('api/getMemberTerms')
         console.log('Query latest terms')
-        let memberterms = latestMemberTerms.rows[latestMemberTerms.rows.length - 1]
+        let memberterms = latestMemberTerms
         if (memberRegistration) {
           if (memberterms.version === memberRegistration.agreedterms) { //is regsitered
+            if (this.getFirstReg) {
+              this.altMessage = true
+              console.log('First time registration')
+              this.$store.commit('account/SET_FIRST_REGISTRATION')
+            }
             console.log('Is member. User version:', memberRegistration.agreedterms, 'Latest version', memberterms.version)
             //this.$emit('registrationDone')
-            this.$store.commit('account/ADD_REGISTRATION')
+            this.$store.commit('account/ADD_REGISTRATION', memberRegistration.agreedterms)
             this.success = true
           } else { //new version
             this.$store.commit('account/REMOVE_REGISTRATION')
@@ -131,6 +141,7 @@ export default {
           this.statusText = ''
         }
       } catch (err) {
+        console.log(err)
         this.queryError = true
       } finally {
         this.loading = false

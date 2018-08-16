@@ -39,12 +39,23 @@ export const UNLOCK_ACCOUNT_SCATTER = (state) => {
   state.lastUnlock = Math.floor(Date.now() / 1000)
 }
 
-export const ADD_REGISTRATION = (state) => {
-  state.registered = true
+export const ADD_REGISTRATION = (state, version) => {
+  state.registered.version = version
 }
 
+export const SET_FIRST_REGISTRATION = (state) => {
+  state.firstReg = false
+}
+
+export const ADD_MEMBER_TERMS = (state, payload) => {
+  let t = payload
+  t.lastUpdate = Math.floor(Date.now() / 1000)
+  state.registered.memberterms = t
+}
+
+
 export const REMOVE_REGISTRATION = (state) => {
-  state.registered = false
+  state.registered.version = null
 }
 
 export const ADD_TRANSFER_HISTORY = (state, payload) => {

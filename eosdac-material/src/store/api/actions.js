@@ -225,7 +225,7 @@ export async function getRegistered({
       return false
     } else {
       if (members.rows[0].sender === rootState.account.info.account_name) {
-        commit('account/ADD_REGISTRATION', members.rows[0], {root: true})
+        commit('account/ADD_REGISTRATION', members.rows[0].agreedterms, {root: true})
         return members.rows[0]
       } else {
         return false
@@ -276,7 +276,8 @@ export async function getMemberTerms({
       code: configFile.network.tokenContract.name,
       table: 'memberterms'
     })
-    return memberterms
+    commit('account/ADD_MEMBER_TERMS', memberterms.rows[memberterms.rows.length - 1], {root: true})
+    return memberterms.rows[memberterms.rows.length - 1]
     commit('SET_CURRENT_CONNECTION_STATUS', true)
   } catch (error) {
     apiDown(error,commit)

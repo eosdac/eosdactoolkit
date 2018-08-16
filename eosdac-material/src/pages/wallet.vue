@@ -152,7 +152,6 @@ export default {
   computed: {
     ...mapGetters({
       getAccountName: 'account/getAccountName',
-      getUnlocked: 'account/getUnlocked',
       getTokenBalance: 'account/getTokenBalance',
       getAccount: 'account/getAccount',
       getMainCurrencyBalance: 'account/getMainCurrencyBalance',

@@ -22,7 +22,8 @@ const store = new Vuex.Store({
       'account.lastUnlock',
       'account.autolock',
       'account.autolockIntervalSec',
-      'account.proposalDraft'
+      'account.proposalDraft',
+      'account.firstReg'
     ],
     //filter: mutation => (mutation.payload.save)? true : false
   }), createPersistedState({

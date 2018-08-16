@@ -1,6 +1,6 @@
 <template>
 <q-modal @hide="close()" :no-route-dismiss="!getImported" :no-backdrop-dismiss="!getImported" :no-esc-dismiss="!getImported" v-model="active" content-classes="fit bg-dark2" :content-css="{maxWidth: '900px', maxHeight: '610px'}">
-  <div class="row">
+  <div class="row full-height">
     <div class="col-12">
       <q-tabs v-model="selectedTab" no-pane-border align="left">
         <q-tab v-show="initialmode === 'signin'" @click.native="initialmode === 'signin' ? mode = 'signin': mode = mode" slot="title" name="signin" label="SIGN IN" />
@@ -19,7 +19,7 @@
     <div class="col-12">
       <NodeSelector v-if="initialmode !== 'sign' && active" setup v-on:done="$refs.stepper.goToStep('step2')" />
       <ScatterSignIn v-if="step === 'step2'" v-on:done="ifReg()" />
-      <Register v-if="step === 'step3'" ref="reg" v-on:done="(mode === 'signin')? close(): ''" />
+      <Register v-if="step === 'step3'" :visible="selectedTab === 'register'" ref="reg" v-on:done="(mode === 'signin')? close(): ''" />
       <LoadingSpinner :visible="loading" :text="loadingText" />
     </div>
   </div>

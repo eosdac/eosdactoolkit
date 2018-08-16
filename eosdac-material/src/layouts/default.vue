@@ -141,7 +141,6 @@ export default {
     ...mapGetters({
       getImported: 'account/getImported',
       getAccountName: 'account/getAccountName',
-      getUnlocked: 'account/getUnlocked',
       getUsesScatter: 'account/getUsesScatter',
       getRegistered: 'account/getRegistered',
       getScatter: 'api/getScatter',
@@ -167,17 +166,6 @@ export default {
       this.getScatter.forgetIdentity()
       this.$store.commit('account/LOCK_ACCOUNT')
     },
-    /*autolock() {
-      if (this.getLastUnlock && this.getUnlocked && this.lastQuery) {
-        if (this.getAutolockInterval * 10 + this.lastQuery < Date.now() / 1000)) {
-          if (this.getUsesScatter) {
-            this.lockScatter()
-          } else {
-            this.lockAccount()
-          }
-        }
-      }
-    },*/
     async queryApis() {
       let now = Date.now()
       if (this.getAccountName && this.$q.appVisible) {
@@ -192,11 +180,9 @@ export default {
   },
   mounted() {
     if (!this.getImported) {
-      //this.$refs.Initialize.open()
       this.$refs.Multi.init('register')
     }
     setInterval(this.queryApis, 1000)
-    //setInterval(this.autolock, 1000)
   },
   created(){
     //language detection
