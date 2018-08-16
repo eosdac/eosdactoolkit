@@ -167,14 +167,25 @@ export default {
       }
 
     },
-    saveProfile(){
-      this.ipfsAdd(this.form);
-      // this.postToServer(this.form);
+
+    async saveProfile(){
+      this.isuploading = true;
+      const buffer = await Buffer.from(JSON.stringify(this.form));
+      let ipfshash = await this.ipfsAdd(buffer);
+      this.isuploading = false;
+
+      if(ipfshash[0].hash != undefined){
+        this.ipfslink='https://ipfs.io/ipfs/'+ipfshash[0].hash;
+      }
+      else{
+        console.log('error getting hash from ipfs');
+      }
 
     },
 
     postToServer(data){
-      this.$axios.post(this.$configFile.api.profileStoreUrl, data)
+      console.log('Start upload to server!');
+      return this.$axios.post(this.$configFile.api.profileStoreUrl, data)
       .then(res => {
          console.log(res);
       }).catch(e =>{
@@ -182,26 +193,11 @@ export default {
       });
     },
 
-    async ipfsAdd(data){
-      var self =this;
-      this.isuploading = true;
-      console.log('Upload to ipfs started!')
-      if(data !== null && typeof data === 'object'){
-          data = JSON.stringify(data);
-      }
-      const buffer = await Buffer.from(data);
-      ipfs.add(buffer, function(err, hash) {
-        if (err) {
-          //retry with different node...
-          self.isuploading = false;
-          throw err;
-        } 
-        self.isuploading = false;
-        self.ipfslink='https://ipfs.io/ipfs/'+hash[0].hash;
-        console.log(hash);  
-      });
-
+    ipfsAdd(buffer){
+      console.log('Start upload to ipfs!');
+      return ipfs.add(buffer).then(res => res).catch(e => {return false});
     },
+
     ipfsGet (hash) {
       ipfs.cat(hash, {buffer: false}).then(content => {
         console.log(content.toString() )
