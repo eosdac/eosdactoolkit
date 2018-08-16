@@ -51,7 +51,6 @@ export default {
       this.isloading = true;
       try{
           let latestMemberTerms = await this.$store.dispatch('api/getMemberTerms');
-
           let getCt = await this.loadConstitutionFromGithub(latestMemberTerms.terms);
           this.constitution = md.render(getCt);
           this.isloading = false;

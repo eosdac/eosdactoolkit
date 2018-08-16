@@ -2,10 +2,10 @@
   <div v-if="visible">
   <q-alert class="notifier fixed-bottom z-max" v-bind:class="{ 'drawer-margin': drawer }" :color="color" :text-color="textColor">
     <div class="row">
-      <div class="col-xs-1">
+      <div class="col-md-2 col-lg-1">
         <q-icon flat size="30px" class="float-left on-left q-ma-sm" :name="icon"></q-icon>
       </div>
-      <div class="col-xs-9">
+      <div class="col-md-8 col-lg-9">
         <div class="q-title">{{message}}</div>
         {{details}}
         <q-btn v-if="linkText" @click="openLink(linkUrl)" :text-color="color" :color="textColor">{{linkText}}</q-btn>

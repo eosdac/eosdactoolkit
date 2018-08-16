@@ -20,8 +20,8 @@
   </q-collapsible>
 </div>
 
-<Transaction ref="Transaction" v-on:done="checkRegistered(true)" />
-
+<Transaction ref="Transaction" v-on:done="$refs.Register.checkRegistered(true)" />
+<Register ref="Register" />
 <div class="shadow-5 q-mt-md" style="background:#2F333D">
   <q-collapsible  label="First"  separator  header-class="bg-dark2" collapse-icon="icon-ui-11">
     <template slot="header" >
