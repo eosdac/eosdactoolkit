@@ -77,6 +77,17 @@ export default {
     identity_request_denied: 'Identity request was denied. Please try again and accept the request.',
     sign_in: 'SIGN IN'
   },
+  scatter_tutorial: {
+    import_account: '1. Import account',
+    make_sure_active_key: 'Make sure that you have your active key for your account imported into scatter.',
+    import_account_into_identity: '2. Import Account into Identity',
+    import_identity_instructions: 'Go to your Identities section.<br>On your Identity click on the pencil icon.<br>Inside your Identity, go to the "Account" section.<br>Now choose your imported account from the list.<br>Save your Identity with the Save button in the top right.',
+    if_you_are_unable_to_choose_an_identity: 'If you are unable to choose an identity, follow the steps below.',
+    unable_to_connect: 'If you are unable to connect to Scatter, follow the steps below to reset your permissions.',
+    permissions: '1. Go To Permissions',
+    select_domain: '2. Select the Domain',
+    revoke_identity: '3. Revoke Identity'
+  },
   settings: {
     API: 'API',
     API_endpoint: 'API Endpoint',
