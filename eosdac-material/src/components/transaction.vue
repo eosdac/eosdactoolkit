@@ -33,7 +33,6 @@
     </q-card-actions>
     <LoadingSpinner :visible="loading" :text="$t(loadingText)" />
   </q-card>
-  <Unlock ref="Unlock" />
 </q-modal>
 </template>
 
@@ -43,12 +42,10 @@ import LoadingSpinner from 'components/loading-spinner'
 import {
   mapGetters
 } from 'vuex'
-import Unlock from 'components/unlock'
 export default {
   name: 'Transaction',
   components: {
-    LoadingSpinner,
-    Unlock
+    LoadingSpinner
   },
   data() {
     return {
@@ -210,8 +207,6 @@ export default {
             })
             this.loading = false
           })
-        } else {
-          this.$refs.Unlock.open()
         }
       }
     }

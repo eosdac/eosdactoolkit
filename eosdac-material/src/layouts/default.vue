@@ -83,7 +83,6 @@
     <router-view v-if="getAccountName" />
     <h4 class="text-white q-ma-md" v-else>Logged out</h4>
     <!--<Initialize ref="Initialize" />-->
-    <!--<Unlock ref="Unlock" />-->
     <Notifier :drawer="leftDrawerOpen" />
     <q-alert v-if="!getRegistered && getAccountName" class="fixed-bottom z-top" style="margin-bttom:80px;" v-bind:class="{ 'drawer-margin': leftDrawerOpen }" color="blue" text-color="white">
       <div class="row">
@@ -113,7 +112,6 @@ import {
   Quasar
 } from 'quasar'
 import Initialize from 'components/initialize'
-import Unlock from 'components/unlock'
 import Register from 'components/register'
 import Notifier from 'components/notifier'
 import MenuDropdown from 'components/menu-dropdown'
@@ -122,7 +120,6 @@ export default {
   name: 'LayoutDefault',
   components: {
     Initialize,
-    Unlock,
     Register,
     Notifier,
     MenuDropdown,
@@ -156,7 +153,6 @@ export default {
   methods: {
     openURL,
     unlockAccount() {
-      //this.$refs.Unlock.open()
       this.$refs.Multi.init('signin')
     },
     lockAccount() {
