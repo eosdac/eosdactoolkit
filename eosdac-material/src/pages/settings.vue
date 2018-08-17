@@ -56,6 +56,23 @@
   </q-collapsible>
 </div>
 
+<div class="shadow-5 q-mt-md" style="background:#2F333D">
+  <q-collapsible  label="First" separator header-class="bg-dark2" collapse-icon="icon-ui-11">
+    <template slot="header" >
+      <q-item-side left >
+        <q-icon name="icon-language-1"  color="white"  size="24px" />
+      </q-item-side>
+      <q-item-main >
+        <span>{{ $t('settings.language_preference') }}</span>
+        <span class="q-ml-lg text-dimwhite" >{{ $t("settings.current_language") }}:</span>
+        <span v-if="getCurrentEndpoint.lastConnectionStatus" class="q-ml-md text-positive"> TODO: get current language dynamically (this.$i18n.locale ? )</span>
+      </q-item-main>
+      <span class="hack_height"></span>
+    </template>
+    <LangSelector />
+  </q-collapsible>
+</div>
+
 <MultiModal ref="Multi" />
 </q-page>
 </template>
