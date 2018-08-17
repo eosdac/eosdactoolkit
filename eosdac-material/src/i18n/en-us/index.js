@@ -16,6 +16,7 @@ export default {
   social_link: 'Social Link',
   save: 'Save',
   profile_picture_url: 'Profile Picture Url',
+  placeholder_short_bio: 'This is my short bio...',
   constitution: {
     loading_constitution: 'Loading constitution',
   },
@@ -133,7 +134,6 @@ export default {
     history: 'History',
     memo: 'Memo',
     network: 'Network',
-    placeholder_short_bio: 'This is my short bio...',
     RAM: 'RAM',
     settings: 'Settings',
     transfer: 'Transfer',

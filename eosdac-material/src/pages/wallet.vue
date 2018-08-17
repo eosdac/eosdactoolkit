@@ -22,7 +22,7 @@
                 <div class="col-lg-12 col-xl-8">
                   <q-card dark flat class="bg-dark2 q-ma-sm">
                     <q-card-title>
-                      <h5 class="q-ma-none">{{ $t("transfer") }}</h5>
+                      <h5 class="q-ma-none">{{ $t('wallet.transfer') }}</h5>
                     </q-card-title>
                     <q-card-main>
                       <q-field class="q-mb-md" icon="icon-topmenu-2" :label="$t('wallet.transfer_to')" :error="transferToError" :error-label="transferToErrorText">
