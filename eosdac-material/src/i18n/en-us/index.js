@@ -36,7 +36,8 @@ export default {
     error_could_not_connect_to_endpoint: 'Could not connect to endpoint.',
     error_chain_id: 'The chain ID returned by the endpoint is incorrect.'
   },
-  initalize: {
+  initialize: {
+    authentication_method: 'Authentication Method',
     connect_with_scatter: 'Connect with Scatter',
     import_private_keys: 'Import private keys',
     loading_text: 'loading...',

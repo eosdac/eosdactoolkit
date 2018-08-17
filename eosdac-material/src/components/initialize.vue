@@ -5,15 +5,15 @@
       <NodeSelector v-if="init" setup v-on:done="stepScatter()" />
     </q-step>
     <q-step class="text-center" title="Authentication" name="init2" icon="icon-register-2">
-      <h4 class="text-white">Authentication Method</h4>
-      <q-alert v-if="!hasScatter" :message="$t('scatter_not_available')" class="text-truncate" icon="info" color="grey" />
+      <h4 class="text-white">{{ $t('initialize.authentication_method') }}</h4>
+      <q-alert v-if="!hasScatter" :message="$t('initialize.scatter_not_available')" class="text-truncate" icon="info" color="grey" />
       <q-alert v-if="scatterError" class="text-truncate q-mb-lg" icon="info" color="grey">
         <p>{{$t(scatterErrorText)}}
         </p>
       </q-alert>
-      <q-btn @click="useScatter()" :disabled="!hasScatter" class="q-mb-lg" color="primary" :label="$t('connect_with_scatter')" />
+      <q-btn @click="useScatter()" :disabled="!hasScatter" class="q-mb-lg" color="primary" :label="$t('initialize.connect_with_scatter')" />
       <ScatterTutorial v-if="scatterError" color="white" />
-      <!--<q-btn v-else @click="importInit = true" class="q-ma-sm" color="primary" :label="$t('import_private_keys')" size="xl" />-->
+      <!--<q-btn v-else @click="importInit = true" class="q-ma-sm" color="primary" :label="$t('initialize.import_private_keys')" size="xl" />-->
     </q-step>
   </q-stepper>
   <Import v-bind:intro="true" v-if="importInit" v-on:importDone="checkRegister()" />
@@ -113,10 +113,10 @@ export default {
         this.loading = false
         if (err.type === 'locked') {
           this.scatterError = true
-          this.scatterErrorText = 'scatter_is_locked'
+          this.scatterErrorText = 'initialize.scatter_is_locked'
         } else if (err.type === 'identity_rejected') {
           this.scatterError = true
-          this.scatterErrorText = 'identity_request_denied'
+          this.scatterErrorText = 'initialize.identity_request_denied'
         } else {
           this.scatterError = true
           this.scatterErrorText = err.message
