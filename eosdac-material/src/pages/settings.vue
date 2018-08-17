@@ -1,7 +1,7 @@
 <template>
 <q-page class="text-white q-pa-md">
 
-  <h4 class="q-display-1 q-mt-none q-mb-md">{{ $t("settings.settings") }}</h4>
+<h4 class="q-display-1 q-mt-none q-mb-md">{{ $t("settings.settings") }}</h4>
 
 <div class="shadow-5" style="background:#2F333D">
   <q-collapsible  label="First" separator header-class="bg-dark2" collapse-icon="icon-ui-11">
@@ -38,20 +38,20 @@
       <span class="hack_height"></span>
     </template>
     <div class="row" style="min-height:140px">
-        <div class="col-sm-12 col-lg-4 q-pa-md relative-position" >
-          <p class="q-title" >{{ $t("settings.unregister_membership") }}</p>
-          <p class="text-dimwhite q-body-1" style="min-height:30px">{{ $t("settings.click_below_to_unregister_membership") }}</p>
-          <div class="q-mt-lg">
-              <q-btn :disabled="!getRegistered" size="sm" class="float-right" color="primary" @click="unRegisterMember" :label="$t('settings.unregister_membership')" />
-          </div>
+      <div class="col-sm-12 col-lg-4 q-pa-md relative-position" >
+        <p class="q-title" >{{ $t("settings.unregister_membership") }}</p>
+        <p class="text-dimwhite q-body-1" style="min-height:30px">{{ $t("settings.click_below_to_unregister_membership") }}</p>
+        <div class="q-mt-lg">
+          <q-btn :disabled="!getRegistered" size="sm" class="float-right" color="primary" @click="unRegisterMember" :label="$t('settings.unregister_membership')" />
         </div>
-        <div class="col-sm-12 col-lg-4 q-pa-md relative-position" >
-          <p class="q-title">{{ $t('settings.register_as_member') }}</p>
-          <p class="text-dimwhite q-body-1" style="min-height:30px">{{ $t('settings.click_register_now') }}</p>
-          <div class="q-mt-lg">
-            <q-btn size="sm" :disabled="getRegistered" class="float-right" color="primary" @click="$refs.Multi.init('sign')" :label="$t('settings.register_now')" />
-          </div>
+      </div>
+      <div class="col-sm-12 col-lg-4 q-pa-md relative-position" >
+        <p class="q-title">{{ $t('settings.register_as_member') }}</p>
+        <p class="text-dimwhite q-body-1" style="min-height:30px">{{ $t('settings.click_register_now') }}</p>
+        <div class="q-mt-lg">
+          <q-btn size="sm" :disabled="getRegistered" class="float-right" color="primary" @click="$refs.Multi.init('sign')" :label="$t('settings.register_now')" />
         </div>
+      </div>
     </div>
   </q-collapsible>
 </div>
@@ -59,8 +59,8 @@
 <MultiModal ref="Multi" />
 </q-page>
 </template>
-<style lang="stylus">
 
+<style lang="stylus">
 .hack_height{
   height:50px !important;
 }
@@ -89,8 +89,6 @@ export default {
   },
   data (){
     return{
-        current_connection: 'test',
-        // current_member_status : true
     }
   },
   computed: {
@@ -110,6 +108,3 @@ export default {
   }
 }
 </script>
-
-<style>
-</style>
