@@ -49,7 +49,7 @@ export default {
     waiting_for_scatter: 'Waiting for scatter...',
     scatter_is_locked: 'Scatter is locked. Please unlock to continue',
     identity_request_denied: 'Identity request was denied. Please try again and accept the request',
-    scatter_not_available: 'Scatter is not available. If you have Scatter installed please refresh.',
+    scatter_not_available: 'Scatter is not available. If you have Scatter installed please refresh.'
   },
   register: {
     must_sign_constitution: 'In order to become a Member of eosDAC you have to agree and sign the Constitution.',
@@ -102,6 +102,25 @@ export default {
     register_as_member: 'Register as Member',
     click_register_now: 'Click "Register Now" to become a member of eosDAC.',
     register_now: 'Register Now'
+  },
+  transaction: {
+    transaction: 'Transaction',
+    fields: 'Fields',
+    action: 'Action',
+    warning_cpu: 'Low CPU. Your CPU allocation has less than 10% remaining. The Transaction might fail.',
+    warning_ram: 'Low RAM. Your RAM allocation has less than 10% remaining. The Transaction might fail.',
+    warning_bandwidth: 'Low Network Bandwidth. Your network bandwidth allocation has less than 10% remaining. The Transaction might fail.',
+    by_completing_agree: 'By completing this transaction, I agree to the following terms.',
+    cancel: 'Cancel',
+    warning_ricardian: 'The ricardian contract for this action could not be found. Are you sure you want to execute this transaction?',
+    loading_abi: 'Loading ABI...',
+    pushing_transaction: 'Pushing Transaction...',
+    transaction_successful: 'Transaction Successful',
+    view_in_explorer: 'View in explorer',
+    from: "From",
+    to: "To",
+    quantity: "Quantity",
+    memo: "Memo"
   },
   wallet: {
     amount: 'Amount',

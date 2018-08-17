@@ -2,36 +2,36 @@
 <q-modal class="text-white z-max" v-model="visible" :content-css="{maxWidth: '30vw'}">
   <q-card dark class="bg-dark">
     <q-card-title>
-      <div class="q-title">Transaction</div>
+      <div class="q-title">{{ $t('transaction.transaction') }}</div>
     </q-card-title>
     <q-list dark>
       <q-item>
-        <q-item-main label="Action" />
+        <q-item-main :label="$t('transaction.action')" />
         <q-item-side right>
           {{action}}
         </q-item-side>
       </q-item>
     </q-list>
     <q-list dark striped>
-      <q-list-header>Fields</q-list-header>
+      <q-list-header>{{ $t('transaction.fields') }}</q-list-header>
       <q-item v-for="(field, key) in fields" :key="key">
-        <q-item-main :label="key + ':'" />
+        <q-item-main :label="$t('transaction.'+key) + ':'" />
         <q-item-side right>
           {{field}}
         </q-item-side>
       </q-item>
     </q-list>
-    <q-alert v-if="getAccountResources.cpu.warning" message="Low CPU. Your CPU allocation has less than 10% remaining. The Transaction might fail." class="text-truncate" text-color="black" icon="icon-ui-9" color="warning" />
-    <q-alert v-if="getAccountResources.ram.warning" message="Low RAM. Your RAM allocation has less than 10% remaining. The Transaction might fail." class="text-truncate" text-color="black" icon="icon-type-8" color="warning" />
-    <q-alert v-if="getAccountResources.net.warning" message="Low Network Bandwidth. Your network bandwidth allocation has less than 10% remaining. The Transaction might fail." class="text-truncate" text-color="black" icon="icon-ui-10" color="warning" />
-    <q-alert :message="ricardianError? ricardianErrorText : 'By completing this transaction, I agree to the following terms.'" class="text-truncate" :text-color="ricardianError? 'black' : 'white'" :icon="ricardianError? 'info' : 'icon-ui-6'" :color="ricardianError? 'warning' : 'primary'" />
+    <q-alert v-if="getAccountResources.cpu.warning" :message="$t('transaction.warning_cpu')" class="text-truncate" text-color="black" icon="icon-ui-9" color="warning" />
+    <q-alert v-if="getAccountResources.ram.warning" :message="$t('transaction.warning_ram')" class="text-truncate" text-color="black" icon="icon-type-8" color="warning" />
+    <q-alert v-if="getAccountResources.net.warning" :message="$t('transaction.warning_bandwidth')" class="text-truncate" text-color="black" icon="icon-ui-10" color="warning" />
+    <q-alert :message="ricardianError? $t(ricardianErrorText) : $t('transaction.by_completing_agree')" class="text-truncate" :text-color="ricardianError? 'black' : 'white'" :icon="ricardianError? 'info' : 'icon-ui-6'" :color="ricardianError? 'warning' : 'primary'" />
     <div v-html="ricardian" class="markdown-body ricardian q-pa-md">
     </div>
     <q-card-actions>
       <q-btn color="primary" @click="transact()">Send</q-btn>
-      <q-btn v-if="!cancelable" color="danger" @click="close()">Cancel</q-btn>
+      <q-btn v-if="!cancelable" color="danger" @click="close()">{{ $t('transaction.cancel') }}</q-btn>
     </q-card-actions>
-    <LoadingSpinner :visible="loading" :text="loadingText" />
+    <LoadingSpinner :visible="loading" :text="$t(loadingText)" />
   </q-card>
   <Unlock ref="Unlock" />
 </q-modal>
@@ -53,13 +53,13 @@ export default {
   data() {
     return {
       loading: false,
-      loadingText: 'loading...',
+      loadingText: 'initialize.loading_text',
       visible: false,
       action: '',
       fields: {},
       ricardian: '',
       cancelable: false,
-      ricardianErrorText: 'The ricardian contract for this action could not be found. Are you sure you want to execute this transaction?',
+      ricardianErrorText: 'transaction.warning_ricardian',
       ricardianError: false
     }
   },
@@ -80,7 +80,7 @@ export default {
       }
       this.visible = true
       this.loading = true
-      this.loadingText = 'Loading ABI...'
+      this.loadingText = 'transaction.loading_abi'
       this.action = action
       this.fields = fields
       let ricardian = await this.getRic(action)
@@ -139,7 +139,7 @@ export default {
     transact() {
       if (this.getUsesScatter) {
         this.loading = true
-        this.loadingText = 'Pushing Transaction...'
+        this.loadingText = 'transaction.pushing_transaction'
         this.$store.dispatch('api/' + this.action, {
           data: this.fields,
           scatter: true
@@ -149,7 +149,7 @@ export default {
             this.$store.commit('api/NOTIFY', {
               icon: 'icon-ui-6',
               color: 'positive',
-              message: 'Transaction Successful',
+              message: 'transaction.transaction_successful',
               details: res.transaction_id,
               linkText: 'View in explorer',
               linkUrl: this.$configFile.api.mainCurrencyExplorerUrl + '/transaction/' + res.transaction_id
@@ -158,9 +158,9 @@ export default {
             this.$store.commit('api/NOTIFY', {
               icon: 'icon-ui-6',
               color: 'positive',
-              message: 'Transaction Successful',
+              message: 'transaction.transaction_successful',
               details: res.transaction_id,
-              linkText: 'View in explorer',
+              linkText: 'transaction.view_in_explorer',
               linkUrl:  this.$configFile.api.tokenExplorerUrl + '/transaction/' + res.transaction_id
             })
           }
@@ -187,7 +187,7 @@ export default {
       } else {
         if (this.getAccountName) {
           this.loading = true
-          this.loadingText = 'Pushing Transaction...'
+          this.loadingText = 'transaction.pushing_transaction'
           this.$store.dispatch('api/' + this.action, {
             data: this.fields,
             scatter: false
@@ -196,7 +196,7 @@ export default {
             this.$store.commit('api/NOTIFY', {
               icon: 'icon-ui-6',
               color: 'positive',
-              message: 'Transaction Successful',
+              message: 'transaction.transaction_successful',
               details: res
             })
             this.loading = false
