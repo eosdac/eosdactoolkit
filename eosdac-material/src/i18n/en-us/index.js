@@ -131,7 +131,6 @@ export default {
   },
   wallet: {
     amount: 'Amount',
-    amount: 'Amount',
     CPU: 'CPU',
     history: 'History',
     memo: 'Memo',
