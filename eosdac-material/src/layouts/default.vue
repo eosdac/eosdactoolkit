@@ -60,6 +60,7 @@
         <q-item-side icon="icon-topmenu-6" />
         <q-item-main :label="$t('default.settings')" sublabel="" />
       </q-item>
+      <!--
       <q-item to="/constitution">
         <q-item-side icon="icon-register-3" />
         <q-item-main :label="$t('default.constitution')" sublabel="" />
@@ -76,6 +77,7 @@
         <q-item-side icon="icon-register-3" />
         <q-item-main :label="$t('default.worker_proposals')" sublabel="" />
       </q-item>
+      -->
     </q-list>
   </q-layout-drawer>
   <q-page-container>
