@@ -237,7 +237,7 @@ export default {
   },
 
   mounted: function(){
-    
+
    }
 
 }
