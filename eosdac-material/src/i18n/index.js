@@ -5,6 +5,7 @@ import fr from './fr'
 import de from './de'
 import it from './it'
 import ro from './ro'
+import ru from './ru'
 import zhHANS from './zh-hans'
 export default {
   'en-us': enUS,
@@ -14,5 +15,6 @@ export default {
   'de': de,
   'it': it,
   'ro': ro,
+  'ru': ru,
   'zh-hans': zhHANS
 }
