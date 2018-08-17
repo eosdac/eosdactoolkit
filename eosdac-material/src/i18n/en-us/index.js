@@ -122,6 +122,19 @@ export default {
     quantity: "Quantity",
     memo: "Memo"
   },
+  unlock: {
+    connection_type: 'Connection Type',
+    scatter_not_available: 'Scatter is not available. If you have Scatter installed please refresh.',
+    choose_authentication_type: 'Please choose an authentication type to sign into the eosDAC Member Client.',
+    choose_connection_type: 'Choose Connection Type',
+    login: 'Login',
+    login_with_scatter: 'Login with Scatter',
+    decrypting_keys: 'Decrypting keys...',
+    waiting_for_scatter: 'Waiting for scatter...',
+    error_scatter_is_locked: 'Scatter is locked. Please unlock to continue',
+    error_identity_request_denied: 'Identity request was denied. Please try again and accept the request',
+    error_could_not_connect: 'Could not connect to endpoint. Please choose a different endpoint and try again.'
+  },
   wallet: {
     amount: 'Amount',
     amount: 'Amount',

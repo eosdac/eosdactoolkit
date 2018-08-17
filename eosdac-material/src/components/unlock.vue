@@ -4,24 +4,24 @@
     <div class="col-12 q-pa-lg">
       <q-card dark flat class="q-ma-sm">
         <q-card-title>
-          <h6 class="q-my-sm">Connection Type</h6>
+          <h6 class="q-my-sm">{{ $t('unlock.connection_type') }}</h6>
           <div slot="right" class="row items-center">
             <q-btn icon="icon-ui-8" color="white" flat @click="unlock = false"></q-btn>
           </div>
         </q-card-title>
-        <q-alert v-if="!hasScatter" message="Scatter is not available. If you have Scatter installed please refresh." class="text-truncate" icon="info" color="grey" />
-        <q-alert v-if="scatterError" :message="scatterErrorText" class="text-truncate text-center" icon="info" color="secondary" />
+        <q-alert v-if="!hasScatter" :message="$t('unlock.scatter_not_available')" class="text-truncate" icon="info" color="grey" />
+        <q-alert v-if="scatterError" :message="$t(scatterErrorText)" class="text-truncate text-center" icon="info" color="secondary" />
         <q-card-main>
-          <p class="q-body-1">Please choose an authentication type to sign into the eosDAC Member Client.</p>
-          <q-field label="Choose Connection Type" :label-width="12">
+          <p class="q-body-1">{{ $t('unlock.choose_authentication_type') }}</p>
+          <q-field :label="$t('unlock.choose_connection_type')" :label-width="12">
             <q-select dark v-model="connectionMethod" radio :options="[
      {label:'Scatter',value:'Scatter'}
       ]" />
           </q-field>
         </q-card-main>
         <q-card-actions align="center">
-          <q-btn v-if="!getUsesScatter" color="primary" @click="unlockAccount()">Login</q-btn>
-          <q-btn :disabled="!hasScatter" v-else color="primary" @click="unlockScatter()">Login with Scatter</q-btn>
+          <q-btn v-if="!getUsesScatter" color="primary" @click="unlockAccount()">{{ $t('unlock.login') }}</q-btn>
+          <q-btn :disabled="!hasScatter" v-else color="primary" @click="unlockScatter()">{{ $t('unlock.login_with_scatter') }}</q-btn>
         </q-card-actions>
       </q-card>
     </div>
@@ -29,7 +29,7 @@
       <NodeSelector v-if="netError" />
     </div>
   </div>
-  <LoadingSpinner :visible="loading" :text="loadingText" />
+  <LoadingSpinner :visible="loading" :text="$t(loadingText)" />
 </q-modal>
 </template>
 
@@ -66,7 +66,7 @@ export default {
     },
     unlockAccount() {
       this.loading = true
-      this.loadingText = 'Decrypting keys...'
+      this.loadingText = 'unlock.decrypting_keys'
       this.$store.dispatch('account/unlockAccount', this.password).then(() => {
         this.loading = false
         this.clear()
@@ -80,7 +80,7 @@ export default {
     },
     async unlockScatter() {
       this.loading = true
-      this.loadingText = 'Waiting for scatter...'
+      this.loadingText = 'unlock.waiting_for_scatter'
       let current = this.getCurrentEndpoint
       let pp
       if (current.httpEndpoint.split(':')[0].replace(/\//g, '') === 'https') {
@@ -117,15 +117,15 @@ export default {
         this.loading = false
         if (err.type === 'locked') {
           this.scatterError = true
-          this.scatterErrorText = 'Scatter is locked. Please unlock to continue'
+          this.scatterErrorText = 'unlock.error_scatter_is_locked'
         } else if (err.type === 'identity_rejected') {
           this.scatterError = true
-          this.scatterErrorText = 'Identity request was denied. Please try again and accept the request'
+          this.scatterErrorText = 'unlock.error_identity_request_denied'
         } else {
           if (err.message === 'Failed to fetch') {
             this.scatterError = true
             this.netError = true
-            this.scatterErrorText = 'Could not connect to endpoint. Please choose a different endpoint and try again.'
+            this.scatterErrorText = 'unlock.error_could_not_connect'
           } else {
             this.scatterError = true
             this.scatterErrorText = err.message
