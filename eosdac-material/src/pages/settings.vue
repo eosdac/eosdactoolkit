@@ -65,7 +65,7 @@
       <q-item-main >
         <span>{{ $t('settings.language_preference') }}</span>
         <span class="q-ml-lg text-dimwhite" >{{ $t("settings.current_language") }}:</span>
-        <span v-if="getCurrentEndpoint.lastConnectionStatus" class="q-ml-md text-positive"> TODO: get current language dynamically (this.$i18n.locale ? )</span>
+        <span v-if="getCurrentEndpoint.lastConnectionStatus" class="q-ml-md text-positive">{{ $i18n.locale }}</span>
       </q-item-main>
       <span class="hack_height"></span>
     </template>
