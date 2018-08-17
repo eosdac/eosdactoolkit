@@ -4,36 +4,36 @@
     <q-toolbar color="dark2">
       <q-toolbar-title class="text-white q-pl-none">
         <q-icon style="font-size:35px;" name="icon-dac-balance" />
-        <span class="q-ml-md q-mt-sm text-weight-thin vertical-middle" style="font-size:23px;">EOS<b>DAC</b> Member Client</span>
-        <q-btn size="lg" flat dense round @click="leftDrawerOpen = !leftDrawerOpen" aria-label="Menu">
+        <span class="q-ml-md q-mt-sm text-weight-thin vertical-middle" style="font-size:23px;">eos<b>DAC</b> {{ $t('default.member_client')}}</span>
+        <q-btn size="lg" flat dense round @click="leftDrawerOpen = !leftDrawerOpen" :aria-label="$t('menu')">
           <q-icon v-if="leftDrawerOpen" name="clear" />
           <q-icon v-else name="menu" />
         </q-btn>
       </q-toolbar-title>
       <div v-if="getImported">
-        <MenuDropdown class="no-pointer-events" v-if="getAccountName && getRegistered" iconColor="white" label="Member status" :statusLabel="1" sublabel="Registered" icon="icon-dac-balance" />
-        <MenuDropdown class="no-pointer-events" v-if="getAccountName && !getRegistered" iconColor="white" label="Member status" :statusLabel="2" sublabel="not registered" icon="icon-dac-balance" />
-        <MenuDropdown class="no-pointer-events" v-if="getAccountName" iconColor="white" :label="'Your ' + tokenName + ' Blanace'" :sublabel="String(getTokenBalance)" icon="icon-dac-balance" />
-        <MenuDropdown class="no-pointer-events" v-if="getAccountName" iconColor="white" :label="'Your ' + mainCurrencyName + ' Blanace'" :sublabel="String(getMainCurrencyBalance)" icon="icon-type-2" />
-        <MenuDropdown class="no-pointer-events" v-if="getAccountName" iconColor="white" label="Account Name" :sublabel="getAccountName" icon="icon-topmenu-2" />
-        <MenuDropdown v-if="getAccountName" iconColor="positive" label="Status" sublabel="Logged-In" icon="icon-topmenu-1" :iconRight="true">
+        <MenuDropdown class="no-pointer-events" v-if="getAccountName && getRegistered" iconColor="white" :label="$t('default.member_status')" :statusLabel="1" :sublabel="$t('default.registered')" icon="icon-dac-balance" />
+        <MenuDropdown class="no-pointer-events" v-if="getAccountName && !getRegistered" iconColor="white" :label="$t('default.member_status')" :statusLabel="2" :sublabel="$t('default.not_registered')" icon="icon-dac-balance" />
+        <MenuDropdown class="no-pointer-events" v-if="getAccountName" iconColor="white" :label="$t('default.your_token_balance', { tokenName: tokenName })" :sublabel="String(getTokenBalance)" icon="icon-dac-balance" />
+        <MenuDropdown class="no-pointer-events" v-if="getAccountName" iconColor="white" :label="$t('default.your_token_balance', { tokenName: mainCurrencyName })" :sublabel="String(getMainCurrencyBalance)" icon="icon-type-2" />
+        <MenuDropdown class="no-pointer-events" v-if="getAccountName" iconColor="white" :label="$t('default.account_name')" :sublabel="getAccountName" icon="icon-topmenu-2" />
+        <MenuDropdown v-if="getAccountName" iconColor="positive" :label="$t('default.status')" :sublabel="$t('default.logged_in')" icon="icon-topmenu-1" :iconRight="true">
           <q-list class="bg-dark2" dark link>
             <q-item @click.native="lockScatter()" dark>
               <q-item-side>
                 <q-item-tile icon="icon-topmenu-4">
                 </q-item-tile>
-                Log Out
+                {{ $t('default.log_out') }}
               </q-item-side>
             </q-item>
           </q-list>
         </MenuDropdown>
-        <MenuDropdown v-else iconColor="white" label="Status" sublabel="Logged-Out" icon="icon-topmenu-4" :iconRight="true">
+        <MenuDropdown v-else iconColor="white" :label="$t('default.status')" :sublabel="$t('default.logged_out')" icon="icon-topmenu-4" :iconRight="true">
           <q-list class="bg-dark2" dark link>
             <q-item @click.native="unlockAccount()" dark>
               <q-item-side>
                 <q-item-tile color="positive" icon="icon-topmenu-1">
                 </q-item-tile>
-                Log In
+                {{ $t('default.log_in') }}
               </q-item-side>
             </q-item>
           </q-list>
@@ -49,39 +49,39 @@
       </q-item>-->
       <q-item to="/wallet">
         <q-item-side icon="icon-menu-6" />
-        <q-item-main label="Wallet" sublabel="" />
+        <q-item-main :label="$t('default.wallet')" sublabel="" />
       </q-item>
       <q-item @click.native="openURL($configFile.api.tokenExplorerUrl)" >
         <q-item-side icon="icon-menu-4" />
-        <q-item-main label="Token Explorer" sublabel="" />
+        <q-item-main :label="$t('default.token_explorer')" sublabel="" />
         <q-item-side right icon="icon-type-12" />
       </q-item>
       <q-item to="/settings">
         <q-item-side icon="icon-topmenu-6" />
-        <q-item-main label="Settings" sublabel="" />
+        <q-item-main :label="$t('default.settings')" sublabel="" />
       </q-item>
       <q-item to="/constitution">
         <q-item-side icon="icon-register-3" />
-        <q-item-main label="Constitution" sublabel="" />
+        <q-item-main :label="$t('default.constitution')" sublabel="" />
       </q-item>
       <q-item to="/profile">
         <q-item-side icon="icon-topmenu-6" />
-        <q-item-main label="Profile" sublabel="" />
+        <q-item-main :label="$t('default.profile')" sublabel="" />
       </q-item>
       <q-item to="/custodians">
         <q-item-side icon="icon-ui-3" />
-        <q-item-main label="Custodians" sublabel="" />
+        <q-item-main :label="$t('default.custodians')" sublabel="" />
       </q-item>
       <q-item to="/workerproposals">
         <q-item-side icon="icon-register-3" />
-        <q-item-main label="Worker Proposals" sublabel="" />
+        <q-item-main :label="$t('default.worker_proposals')" sublabel="" />
       </q-item>
     </q-list>
   </q-layout-drawer>
   <q-page-container>
     <!--<Register ref="Register" />-->
     <router-view v-if="getAccountName" />
-    <h4 class="text-white q-ma-md" v-else>Logged out</h4>
+    <h4 class="text-white q-ma-md" v-else>{{ $t('default.logged_out') }}</h4>
     <!--<Initialize ref="Initialize" />-->
     <Notifier :drawer="leftDrawerOpen" />
     <q-alert v-if="!getRegistered && getAccountName" class="fixed-bottom z-top" style="margin-bttom:80px;" v-bind:class="{ 'drawer-margin': leftDrawerOpen }" color="blue" text-color="white">
@@ -90,9 +90,9 @@
           <q-icon flat size="30px" class="float-left on-left q-ma-sm" name="icon-register-3"></q-icon>
         </div>
         <div class="col-xs-9">
-          <div class="q-title">Sign the Constitution</div>
-          You have not been registered as a Member yet. Please sign the constitution to use the Member Client.
-          <q-btn @click="$refs.Multi.init('sign')" text-color="blue" color="white">Sign the Constitution</q-btn>
+          <div class="q-title">{{ $t('default.sign_the_constitution') }}</div>
+          {{ $t('default.you_have_not_yet_registered') }}
+          <q-btn @click="$refs.Multi.init('sign')" text-color="blue" color="white">{{ $t('default.sign_the_constitution') }}</q-btn>
         </div>
       </div>
     </q-alert>
