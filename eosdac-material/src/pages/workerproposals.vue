@@ -2,8 +2,8 @@
 <q-page class="q-pa-md">
   <h4 class="q-display-1 q-mt-none q-mb-md">Worker Proposals</h4>
   <q-tabs >
-    <q-tab default slot="title" name="tab-1" :label="$t('OPEN')" />
-    <q-tab slot="title" name="tab-2" :label="$t('APPROVED')" />
+    <q-tab default slot="title" name="tab-1" :label="$t('worker_proposals.OPEN')" />
+    <q-tab slot="title" name="tab-2" :label="$t('worker_proposals.APPROVED')" />
     <wp_member_view v-for="(wp, index) in wps" :key="index" :data="wp"/>
 <!--     <q-tab-pane class="" name="tab-1">
 
