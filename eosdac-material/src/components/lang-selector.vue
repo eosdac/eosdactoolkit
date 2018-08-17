@@ -3,15 +3,16 @@
   <q-select
   dark
     :options="[
+      { label: 'Chinese (Simplified)', value: 'zh-hans' },
       { label: 'English (US)',         value: 'en-us' },
       { label: 'English (UK)',         value: 'en-uk' },
-      { label: 'Romanian',             value: 'ro' },
-      { label: 'Chinese (Simplified)', value: 'zh-hans' },
-      { label: 'Italian',              value: 'it' },
-      { label: 'Spanish',              value: 'es' },
       { label: 'French',               value: 'fr' },
       { label: 'German',               value: 'de' },
-      { label: 'Russian',              value: 'ru' }
+      { label: 'Korean',               value: 'ko' },
+      { label: 'Italian',              value: 'it' },
+      { label: 'Romanian',             value: 'ro' },
+      { label: 'Russian',              value: 'ru' },
+      { label: 'Spanish',              value: 'es' },
     ]"
     v-model="lang"
   />
