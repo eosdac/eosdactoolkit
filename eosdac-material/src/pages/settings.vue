@@ -60,7 +60,7 @@
   <q-collapsible  label="First" separator header-class="bg-dark2" collapse-icon="icon-ui-11">
     <template slot="header" >
       <q-item-side left >
-        <q-icon name="icon-language-1"  color="white"  size="24px" />
+        <q-icon name="icon-ui-10"  color="white"  size="24px" />
       </q-item-side>
       <q-item-main >
         <span>{{ $t('settings.language_preference') }}</span>
