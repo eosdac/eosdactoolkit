@@ -18,7 +18,7 @@
       </div>
     </div>
   </div>
-  <LoadingSpinner :visible="loading" :text="loadingText" />
+  <LoadingSpinner :visible="loading" :text="$t(loadingText)" />
 </div>
 <div v-else>
   <div class="row justify-center">
@@ -33,7 +33,7 @@
 
         <div class="column justify-between" style="height:100%">
           <div v-if="!endpointListFail">
-              <p class="q-title">Automatic Connection</p>
+              <p class="q-title">{{ $t('nodeselector.automatic_connection') }}</p>
               <p class="text-dimwhite q-body-1" style="min-height:50px" v-html="$t('nodeselector.click_connect_below')"></p>
           </div >
           <div >
@@ -47,7 +47,7 @@
       <!-- can't use flex with the q-select, breakpoint get triggered buggy -->
       <!-- <div class="column justify-between" style="height:100%"> -->
           <div>
-              <p class="q-title">Select Endpoint from List</p>
+              <p class="q-title">{{ $t('nodeselector.select_endpoint') }}</p>
               <p class="text-dimwhite q-body-1" style="min-height:50px" v-html="$t('nodeselector.select_the_endpoint_you_would_like')"></p>
               <q-field :label="$t('nodeselector.choose_endpoint')" label-width="12" dark>
               <q-select :placeholder="$t('nodeselector.select_endpoint')" v-model="selectedEndpoint" dark radio :options="endpoints" />
@@ -62,7 +62,7 @@
     <div class="col-sm-12 col-lg-4 q-pa-md" >
         <div class="column justify-between" style="height:100%">
             <div >
-              <p class="q-title">Manual Connection</p>
+              <p class="q-title">{{ $t('nodeselector.manual_connection') }}</p>
               <p class="text-dimwhite q-body-1" style="min-height:50px">{{ $t('nodeselector.specify_your_own') }}</p>
               <q-field :label="$t('nodeselector.custom_endpoint')" label-width="12" dark>
                 <q-input dark v-model="endpoint" placeholder="https://endpoint-url.com" />
@@ -73,7 +73,7 @@
             </div>
         </div>
     </div>
-    <LoadingSpinner :visible="loading" :text="loadingText" />
+    <LoadingSpinner :visible="loading" :text="$t(loadingText)" />
   </div>
 </div>
 </template>

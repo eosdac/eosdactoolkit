@@ -73,7 +73,7 @@ export default {
   data() {
     return {
       loading: false,
-      loadingText: 'initalize.loading_text',
+      loadingText: 'initialize.loading_text',
       active: false,
       step: 'step1',
       scatterError: false,

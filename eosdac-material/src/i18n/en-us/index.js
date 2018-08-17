@@ -34,7 +34,12 @@ export default {
     error_invalid_url: 'The URL seems to be invalid.',
     error_endpoint_connection_timed_out: 'Connection to endpoint timed out.',
     error_could_not_connect_to_endpoint: 'Could not connect to endpoint.',
-    error_chain_id: 'The chain ID returned by the endpoint is incorrect.'
+    error_chain_id: 'The chain ID returned by the endpoint is incorrect.',
+    automatic_connection: 'Automatic Connection',
+    manual_connection: 'Manual Connection'
+  },
+  lang_selector: {
+    choose_your_language: 'Choose your Language'
   },
   initialize: {
     authentication_method: 'Authentication Method',

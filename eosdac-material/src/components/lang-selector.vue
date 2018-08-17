@@ -1,5 +1,5 @@
 <template>
-  <q-field label="Choose your Language" label-width="12" dark>
+  <q-field :label="$t('lang_selector.choose_your_language')" label-width="12" dark>
   <q-select
   dark
     :options="[
