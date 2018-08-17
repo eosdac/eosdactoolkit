@@ -40,18 +40,17 @@
       v-model="social.link"
       v-for="(social, i) in form.sameAs"
       :key = i
-      :float-label="$t('social_link') + '`${i+1}`'"
+      :float-label="`${$t('social_link')} ${i+1}`"
       @input="deleteEmptyLinks"
       :placeholder="$t('social_profile_link')"
     />
-    <div class="relative-position" >
-        <q-btn  color="primary" @click="addSocial" icon="icon-plus" />
+    <div class="relative-position" style="height:50px">
+        <q-btn  class="float-left" color="primary" @click="addSocial" icon="icon-plus" />
 
-        <q-btn class="absolute-right" :loading="isuploading" color="positive" @click="saveProfile" :label="$t('save')">
+        <q-btn class="float-right" :loading="isuploading" color="positive" @click="saveProfile" :label="$t('save')">
             <q-spinner slot="loading" />
         </q-btn>
-
-
+        <q-btn color="primary" class="float-right on-left"  @click="download(JSON.stringify(form),`${getAccountName}_eosdac_profile.json`, 'application/json')"  label="Download" />
     </div>
     <!-- debug -->
     <div v-if="ipfslink!='' "><a target="_blank" :href="ipfslink">{{ipfslink}}</a></div>
@@ -63,6 +62,7 @@
         <div style="padding: 20px; border:1px solid #491289" class="bg-dark round-borders">
           <q-input dark type="url" v-model="form.image" @input="loaded=false" class="q-mt-md" :float-label="$t('profile_picture_url')" placeholder="http://example.site/mypic.jpg" />
           <q-btn round color="primary" class="absolute" style="top:5px;right:5px" @click="visible=false" icon="icon-plus" />
+
         </div>
     </q-modal>
 
@@ -179,17 +179,22 @@ export default {
 
     async saveProfile(){
       this.isuploading = true;
-      const buffer = await Buffer.from(JSON.stringify(this.form)); //try catch
-      let ipfshash = await this.ipfsAdd(buffer);
+      let form_string = JSON.stringify(this.form);
+      const buffer = await Buffer.from(form_string); //try catch
+      // let ipfshash = await this.ipfsAdd(buffer);
+      // this.isuploading = false;
+
+      // if(ipfshash[0].hash != undefined){
+      //   this.ipfslink='https://ipfs.io/ipfs/'+ipfshash[0].hash;
+      // }
+      // else{
+      //   console.log('error getting hash from ipfs');
+      // }
+      let signedmsg = await this.signMessage(form_string);
+      let ipfshash = await this.ipfsAdd(buffer, false );
+      console.log(ipfshash);
+
       this.isuploading = false;
-
-      if(ipfshash[0].hash != undefined){
-        this.ipfslink='https://ipfs.io/ipfs/'+ipfshash[0].hash;
-      }
-      else{
-        console.log('error getting hash from ipfs');
-      }
-
     },
     signMessage(data){
       let publicKey = this.getAccount.permissions[0].required_auth.keys[0].key;
@@ -198,6 +203,7 @@ export default {
       return this.getScatter.getArbitrarySignature(publicKey, data, whatfor, false)
       .then(res => res).catch(e => {console.log(e); return false});
     },
+
 
     postToServer(data){
       console.log('Start upload to server!');
@@ -209,9 +215,8 @@ export default {
       });
     },
 
-    ipfsAdd(buffer){
-      console.log('Start upload to ipfs!');
-      return ipfs.add(buffer).then(res => res).catch(e => {return false});
+    ipfsAdd(buffer, dont_upload=false){
+      return ipfs.add(buffer, {"onlyhash": dont_upload}).then(res => res).catch(e => {return false});
     },
 
     ipfsGet (hash) {
@@ -219,6 +224,14 @@ export default {
         console.log(content.toString() )
       })
       .catch(error => console.log(error) )
+    },
+
+    download(content, fileName, contentType) {
+        var a = document.createElement("a");
+        var file = new Blob([content], {type: contentType});
+        a.href = URL.createObjectURL(file);
+        a.download = fileName;
+        a.click();
     }
 
   },
