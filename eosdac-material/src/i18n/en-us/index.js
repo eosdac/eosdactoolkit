@@ -136,6 +136,20 @@ export default {
     transfer_to: 'Transfer to',
     wallet: 'Wallet'
   },
+  wp_member_view: {
+    worker_proposal_by: 'Worker Proposal by',
+    submitted: 'Submitted',
+    type: 'Type',
+    requested_payment: 'Requested Payment',
+    approx_USD: '(Aprox. xxxx USD)',
+    time_left: 'Time Left',
+    deadline: 'Deadline',
+    votes: 'Votes',
+    yes: 'Yes',
+    no: 'No',
+    view_votes: 'View Votes',
+    view_proposal: 'View Proposal'
+  },
   APPROVED: 'APPROVED',
   OPEN: 'OPEN'
 }

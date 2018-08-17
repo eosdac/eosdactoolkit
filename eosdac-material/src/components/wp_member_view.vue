@@ -22,13 +22,13 @@
           </div> -->
           <div class=" white_text">
               <div style="margin-bottom:3px">
-                <span style="display:inline-block;min-width:65px">WP by:</span>
+                <span style="display:inline-block;min-width:65px">{{ $t('wp_member_view.worker_proposal_by') }}:</span>
                 <span class="whiter_text" style="display:inline-block;min-width:65px">{{data.member.name}} - {{data.member.account}}</span></div>
               <div style="margin-bottom:3px">
-                <span style="display:inline-block;min-width:65px">Submitted:</span>
+                <span style="display:inline-block;min-width:65px">{{ $t('wp_member_view.submitted') }}:</span>
                 <span class="whiter_text" style="display:inline-block;min-width:65px">{{data.submit_date}}</span></div>
               <div>
-                <span style="display:inline-block;min-width:65px">Type:</span>
+                <span style="display:inline-block;min-width:65px">{{ $t('wp_member_view.type') }}:</span>
                 <span class="whiter_text" style="display:inline-block;min-width:65px">{{data.type}}</span>
               </div>
           </div>
@@ -48,8 +48,8 @@
           <q-icon class="white_text" style="font-size:22px" name="icon-type-2" />
         </div>
         <div class="col-11">
-          <div class="q-caption white_text">Requested Payment</div>
-          <div> {{data.reqpay}} (Aprox. xxxx USD)</div>
+          <div class="q-caption white_text">{{ $t('wp_member_view.requested_payment') }}</div>
+          <div> {{data.reqpay}} {{ $t('wp_member_view.approx_USD') }}</div>
         </div>
       </div>
 
@@ -58,7 +58,7 @@
           <q-icon class="white_text" style="font-size:22px" name="icon-type-11" />
         </div>
         <div class="col-11">
-          <div class="q-caption white_text">Time Left</div>
+          <div class="q-caption white_text">{{ $t('wp_member_view.time_left') }}</div>
           <div>{{data.time_left.string}}</div>
           <q-progress :percentage="data.time_left.percentage" color="blue" style="height:3px; margin-top:3px"/>
         </div>
@@ -69,7 +69,7 @@
           <q-icon class="white_text" style="font-size:22px" name="icon-menu-1" />
         </div>
         <div class="col-11">
-          <div class="q-caption white_text">Deadline</div>
+          <div class="q-caption white_text">{{ $t('wp_member_view.deadline') }}</div>
           <div>{{data.deadline}}</div>
         </div>
       </div>
@@ -84,8 +84,8 @@
           <q-icon  class="text-positive" style="font-size:22px;" name="icon-ui-6" />
         </div>
         <div class="col-11">
-          <div class="q-caption white_text">Votes</div>
-          <div class="text-positive">{{data.votes.yes}}% Yes</div>
+          <div class="q-caption white_text">{{ $t('wp_member_view.votes') }}</div>
+          <div class="text-positive">{{data.votes.yes}}% {{ $t('wp_member_view.yes') }}</div>
           <q-progress :percentage="data.votes.yes" color="positive" style="height:3px; margin-top:3px"/>
         </div>
       </div>
@@ -95,15 +95,15 @@
           <q-icon  class="text-negative" style="font-size:22px;" name="icon-ui-6" />
         </div>
         <div class="col-11">
-          <div class="q-caption white_text">Votes</div>
-          <div class="text-negative">{{data.votes.no}}% No</div>
+          <div class="q-caption white_text">{{ $t('wp_member_view.votes') }}</div>
+          <div class="text-negative">{{data.votes.no}}% {{ $t('wp_member_view.no') }}</div>
           <q-progress :percentage="data.votes.no" color="negative" style="height:3px; margin-top:3px"/>
         </div>
       </div>
 
       <div class="row q-mt-lg justify-end">
-          <q-btn size="small" class="q-mr-md" color="primary" label="View Proposal"  />
-          <q-btn size="small" color="primary" label="View Votes" />
+          <q-btn size="small" class="q-mr-md" color="primary" :label="$t('wp_member_view.view_proposal')"  />
+          <q-btn size="small" color="primary" :label="$t('wp_member_view.view_votes')" />
       </div>
 
     </div>
