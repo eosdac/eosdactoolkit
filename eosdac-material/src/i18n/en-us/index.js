@@ -1,4 +1,8 @@
 export default {
+  four_zero_four: {
+    sorry_nothing_here: 'Sorry, nothing here...',
+    go_back: 'Go back'
+  },
   givenName: 'Name',
   familyName: 'Family Name',
   email_address: 'Email Address',
