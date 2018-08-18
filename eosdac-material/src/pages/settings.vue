@@ -1,8 +1,12 @@
 <template>
 <q-page class="text-white q-pa-md">
 
+<Transaction ref="Transaction" v-on:done="$refs.Register.checkRegistered(true)" />
+<Register ref="Register" />
+
 <h4 class="q-display-1 q-mt-none q-mb-md">{{ $t("settings.settings") }}</h4>
 
+<!-- api endpoints -->
 <div class="shadow-5" style="background:#2F333D">
   <q-collapsible  label="First" separator header-class="bg-dark2" collapse-icon="icon-ui-11">
     <template slot="header" >
@@ -21,10 +25,9 @@
   </q-collapsible>
 </div>
 
-<Transaction ref="Transaction" v-on:done="$refs.Register.checkRegistered(true)" />
-<Register ref="Register" />
+<!-- member status -->
 <div class="shadow-5 q-mt-md" style="background:#2F333D">
-  <q-collapsible  label="First"  separator  header-class="bg-dark2" collapse-icon="icon-ui-11">
+  <q-collapsible  label="First"  separator  header-class="bg-dark2"  collapse-icon="icon-ui-11">
     <template slot="header" >
       <q-item-side left >
         <q-icon name="icon-type-4"  color="white"  size="24px" />
@@ -56,6 +59,7 @@
   </q-collapsible>
 </div>
 
+<!-- language setting -->
 <div class="shadow-5 q-mt-md" style="background:#2F333D">
   <q-collapsible  label="First" separator header-class="bg-dark2" collapse-icon="icon-ui-11">
     <template slot="header" >
@@ -69,7 +73,9 @@
       </q-item-main>
       <span class="hack_height"></span>
     </template>
-    <LangSelector />
+    <div class="q-pa-md">
+      <LangSelector />
+    </div>
   </q-collapsible>
 </div>
 

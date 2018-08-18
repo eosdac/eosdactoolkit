@@ -21,12 +21,10 @@
   <LoadingSpinner :visible="loading" :text="$t(loadingText)" />
 </div>
 <div v-else>
-  <div class="row justify-center">
-    <div class="col-sm-12 col-lg-6 q-pa-sm text-center">
-      <q-alert v-if="errorEndpoint" :message="$t(errorEndpointText)" class="text-truncate" icon="info" color="red" />
-      <q-alert v-if="successEndpoint" :message="$t('nodeselector.endpoint_set')" class="text-truncate" icon="icon-ui-6" color="positive" />
-    </div>
-  </div>
+
+  <q-alert v-if="errorEndpoint" :message="$t(errorEndpointText)" class="text-truncate" icon="info" color="red" />
+  <q-alert v-if="successEndpoint" :message="$t('nodeselector.endpoint_set')" class="text-truncate" icon="icon-ui-6" color="positive" />
+
   <div class="row relative-position" style="min-height:250px">
     <!-- col1 -->
     <div class="col-sm-12 col-lg-4 q-pa-md">
