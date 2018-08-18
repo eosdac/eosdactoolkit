@@ -95,7 +95,11 @@ export default {
           this.scatterErrorText = 'scatter_signin.identity_request_denied'
         } else {
           this.scatterError = true
-          this.scatterErrorText = err.message
+          if (typeof(err.message) != "undefined") {
+            this.scatterErrorText = err.message
+          } else {
+            this.scatterErrorText = 'scatter_signin.scatter_is_not_available'
+          }
         }
       }
     }
