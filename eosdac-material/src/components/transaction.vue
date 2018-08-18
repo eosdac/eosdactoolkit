@@ -15,7 +15,7 @@
     <q-list dark striped>
       <q-list-header>{{ $t('transaction.fields') }}</q-list-header>
       <q-item v-for="(field, key) in fields" :key="key">
-        <q-item-main :label="$t('transaction.'+key) + ':'" />
+        <q-item-main :label="key + ':'" />
         <q-item-side right>
           {{field}}
         </q-item-side>
