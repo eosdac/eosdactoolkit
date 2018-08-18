@@ -14,11 +14,11 @@
 <style lang="stylus">
 @import '~variables'
 
-.overwrite{
+.overwrite {
   background: none !important;
   color: white !important;
 }
-tbody, td, th{
+.overwrite > tbody, td, th{
   background: $dark !important;
 }
 
