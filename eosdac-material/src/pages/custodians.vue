@@ -142,7 +142,7 @@ export default {
       this.$refs.Transaction.newTransaction(this.$configFile.network.custodianContract.name, 'votecust', {
         voter: this.getAccountName,
         newvotes: votes
-      }, false)
+      }, false, false)
     }
   }
 }
