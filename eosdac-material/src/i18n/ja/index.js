@@ -80,6 +80,18 @@ export default {
   },
   lang_selector: {
     choose_your_language: '言語を選んでください',
+    languages: {
+        chinese: '中国語（簡体字）',
+        english_gb: '英語（GB）',
+        english_us: '英語（米国）',
+        french: 'フランス語',
+        german: 'ドイツ人',
+        italian: 'イタリアの',
+        japanese: '日本語',
+        korean: '韓国語',
+        russian: 'ロシア',
+        spanish: 'スペイン語',
+    },
   },
   register: {
     already_registered: 'あなたはすでにeosDACメンバーとして登録されています。',

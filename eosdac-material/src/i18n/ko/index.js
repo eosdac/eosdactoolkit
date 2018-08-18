@@ -80,6 +80,18 @@ export default {
   },
   lang_selector: {
     choose_your_language: '당신의 언어를 고르시 오',
+    languages: {
+        chinese: '중국어 간체)',
+        english_gb: '영어 (GB)',
+        english_us: '영어 (미국)',
+        french: '프랑스 국민',
+        german: '독일 사람',
+        italian: '이탈리아 사람',
+        japanese: '일본어',
+        korean: '한국어',
+        russian: '러시아인',
+        spanish: '스페인 사람',
+    },
   },
   register: {
     already_registered: '귀하는 이미 eosDAC 회원으로 등록되어 있습니다.',

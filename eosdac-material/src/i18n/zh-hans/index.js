@@ -80,6 +80,18 @@ export default {
   },
   lang_selector: {
     choose_your_language: '选择你的语言',
+    languages: {
+        chinese: '简体中文）',
+        english_gb: '英文（GB）',
+        english_us: '英语（美国）',
+        french: '法国',
+        german: '德语',
+        italian: '意大利',
+        japanese: '日本',
+        korean: '朝鲜的',
+        russian: '俄语',
+        spanish: '西班牙语',
+    },
   },
   register: {
     already_registered: '您已经注册为eosDAC会员。',

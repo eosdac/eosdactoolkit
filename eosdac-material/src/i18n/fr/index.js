@@ -80,6 +80,18 @@ export default {
   },
   lang_selector: {
     choose_your_language: 'Choisissez votre langue',
+    languages: {
+        chinese: 'Chinois simplifié)',
+        english_gb: 'Anglais (GB)',
+        english_us: 'Anglais (US)',
+        french: 'Français',
+        german: 'Allemand',
+        italian: 'Italien',
+        japanese: 'Japonais',
+        korean: 'Coréen',
+        russian: 'Russe',
+        spanish: 'Espanol',
+    },
   },
   register: {
     already_registered: 'Vous êtes déjà inscrit en tant que membre eosDAC.',
