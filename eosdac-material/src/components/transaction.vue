@@ -25,12 +25,14 @@
     <q-alert v-if="getAccountResources.ram.warning" :message="$t('transaction.warning_ram')" class="text-truncate" text-color="black" icon="icon-type-8" color="warning" />
     <q-alert v-if="getAccountResources.net.warning" :message="$t('transaction.warning_bandwidth')" class="text-truncate" text-color="black" icon="icon-ui-10" color="warning" />
     <q-alert :message="ricardianError? $t(ricardianErrorText) : $t('transaction.by_completing_agree')" class="text-truncate" :text-color="ricardianError? 'black' : 'white'" :icon="ricardianError? 'info' : 'icon-ui-6'" :color="ricardianError? 'warning' : 'primary'" />
+<q-scroll-area v-if="ricardian" style="height:150px;">
     <div v-html="ricardian" class="markdown-body ricardian q-pa-md">
     </div>
-    <q-card-actions>
+  </q-scroll-area>
+    <div class="relative-position q-pa-sm">
       <q-btn color="primary" @click="transact()">Send</q-btn>
-      <q-btn v-if="!cancelable" color="danger" @click="close()">{{ $t('transaction.cancel') }}</q-btn>
-    </q-card-actions>
+      <q-btn class="on-right" v-if="!cancelable" color="negative" @click="close()">{{ $t('transaction.cancel') }}</q-btn>
+    </div>
     <LoadingSpinner :visible="loading" :text="$t(loadingText)" />
   </q-card>
 </q-modal>
@@ -79,6 +81,7 @@ export default {
       this.action = action
       this.fields = fields
       this.contract = contract
+      console.log(this.contract,this.action )
       let ricardian
       if (this.getRicardians[this.contract]) {
         ricardian = this.getRicardians[this.contract]
@@ -106,7 +109,7 @@ export default {
       let varArray = Object.assign({}, this.fields)
       varArray[this.action] = this.action
       if (this.contract === this.$configFile.network.mainCurrencyContract.name) {
-        varArray['transaction.delay'] = 0
+        varArray['transactiondelay'] = 0
       }
       if (findVars) {
         for (let i = 0; i < findVars.length; i++) {

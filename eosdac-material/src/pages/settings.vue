@@ -123,7 +123,7 @@ export default {
   },
   methods:{
     unRegisterMember() {
-      this.$refs.Transaction.newTransaction(this.$configFile.network.mainCurrencyContract.name, 'memberunreg', {
+      this.$refs.Transaction.newTransaction(this.$configFile.network.tokenContract.name, 'memberunreg', {
         sender: this.getAccountName
       }, false)
     },
