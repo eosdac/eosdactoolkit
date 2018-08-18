@@ -37,7 +37,7 @@ export default {
     loading_text: 'Caricamento in corso...',
     scatter_is_locked: 'Scatter è bloccato. Si prega di sbloccare per continuare',
     scatter_not_available: 'Scatter non è disponibile. Se hai installato Scatter, aggiorna.',
-    waiting_for_scatter: 'In attesa di dispersione ...',
+    waiting_for_scatter: 'In attesa di Scatter...',
   },
   multi_modal: {
     register_as_dac_member: 'REGISTRATI COME MEMBRO DEL DAC',
