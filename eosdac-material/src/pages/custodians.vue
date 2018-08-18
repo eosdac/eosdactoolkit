@@ -1,5 +1,6 @@
 <template>
 <q-page class="text-white q-pa-md">
+  <Transaction ref="Transaction" v-on:done="" />
   <div class="row">
     <div class="col-sm-12 col-md-8">
       <div class="row gutter-md">
@@ -56,7 +57,7 @@
           <div class="col-sm-3 col-md-12 col-lg-5 col-xl-4">
             <q-icon size="50px" class="float-left" name="icon-ui-3"></q-icon>
           </div>
-          <div class="col-sm-9 col-md-12 col-lg-7 col-xl-8 text-left">
+          <div class="col-sm-9 col-md-12 col-lg-7 col-xl-8 text-left" @click="voteForCandidates">
             Submit my Votes
           </div>
         </q-btn>
@@ -91,24 +92,29 @@ import {
 } from 'vuex'
 export default {
   name: 'Custodians',
-  components: {},
+  components: {
+    Transaction
+  },
   data() {
     return {
       loading: false,
       loadingText: '',
       custodians: [],
-      newvotes: [],
+      newvotes: ["kas"],
       candidateIndex: -1
     }
   },
+
   computed: {
     ...mapGetters({
       getAccountName: 'account/getAccountName',
     })
   },
+
   mounted() {
     this.getCustodians()
   },
+
   methods: {
     toggleBio(index) {
       if (index === this.candidateIndex) {
@@ -117,12 +123,15 @@ export default {
         this.candidateIndex = index
       }
     },
+
     async getCustodians() {
       let custodians = await this.$store.dispatch('api/getCustodians')
       console.log(custodians)
       this.custodians = custodians
     },
+
     voteForCandidates() {
+      console.log(this.newvotes)
       this.$refs.Transaction.newTransaction(this.$configFile.network.custodianContract.name, 'votecust', {
         voter: this.getAccountName,
         newvotes: this.newvotes
@@ -134,4 +143,3 @@ export default {
 
 <style>
 </style>
-{voter: "", newvotes: ""}

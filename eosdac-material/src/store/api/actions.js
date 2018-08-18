@@ -2,6 +2,7 @@ import Eos from 'eosjs'
 import Timeout from 'await-timeout'
 import configFile from '../../statics/config.json'
 
+
 const eosConfig = {
   chainId: configFile.network.chainId,
   expireInSeconds: 60,
@@ -306,11 +307,14 @@ export async function votecust({
         accounts: [network]
       })
       eos = state.scatter.eos(network, Eos, eosConfig)
+      let authority = identity.accounts[0].authority
+      let accountname = identity.accounts[0].name
+      let auth = { authorization: [ accountname+'@'+authority ] }
+      const contract = await eos.contract(configFile.network.custodianContract.name)
+      const res = await contract.votecust(payload.data, auth )
+      return res
+      commit('SET_CURRENT_CONNECTION_STATUS', true)
     }
-    const contract = await eos.contract(configFile.network.custodianContract.name)
-    const res = await contract.votecust(payload.data)
-    return res
-    commit('SET_CURRENT_CONNECTION_STATUS', true)
   } catch (error) {
     apiDown(error,commit)
     throw error
