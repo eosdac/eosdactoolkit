@@ -18,7 +18,7 @@
   background: none !important;
   color: white !important;
 }
-.overwrite > tbody, .overwrite > td, .overwrite > th{
+.overwrite td, .overwrite th {
   background: $dark !important;
 }
 
