@@ -138,7 +138,8 @@ export default {
         this.loadingText = 'transaction.pushing_transaction'
         this.$store.dispatch('api/' + this.action, {
           data: this.fields,
-          scatter: true
+          scatter: true,
+          contract: this.contract
         }).then((res) => {
           this.$emit('done')
           if (this.action !== 'transfer') {
