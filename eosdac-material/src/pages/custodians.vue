@@ -14,7 +14,7 @@
               <q-item-side>
                 <q-item-tile>
                   <div class="row">
-                    <q-btn class="q-mr-md" icon="icon-plus" round color="primary" style="height:55px;width:55px;margin-top:3px;" />
+                    <q-btn class="q-mr-md" icon="icon-plus" round color="primary" style="height:55px;width:55px;margin-top:3px;" @click="addToVoteList(candidate)" />
                     <img style="height:60px;width:60px;border-radius:50%;" class="q-mr-md" src="https://eosdac.io/wp-content/uploads/elementor/thumbs/female1-nqk9ciy87u6os74yatkpw2xi7qbjzjq3r5sl9wy0mm.jpg">
                   </div>
                 </q-item-tile>
@@ -77,6 +77,7 @@
           </q-item>
 
         </q-list>
+        <pre>{{newvotes}}</pre>
       </q-card>
 
     </div>
@@ -100,7 +101,7 @@ export default {
       loading: false,
       loadingText: '',
       custodians: [],
-      newvotes: ["kas"],
+      newvotes: [],
       candidateIndex: -1
     }
   },
@@ -129,12 +130,18 @@ export default {
       console.log(custodians)
       this.custodians = custodians
     },
+    addToVoteList(cand){
+      this.newvotes.push(cand);
+    },
+    deleteFromVoteList(accountname){
+      this.newvotes = this.newvotes.filter(x => x != acountname);
+    },
 
     voteForCandidates() {
-      console.log(this.newvotes)
+      let votes = this.newvotes.map(c => c.candidate_name);
       this.$refs.Transaction.newTransaction(this.$configFile.network.custodianContract.name, 'votecust', {
         voter: this.getAccountName,
-        newvotes: this.newvotes
+        newvotes: votes
       }, false)
     }
   }
