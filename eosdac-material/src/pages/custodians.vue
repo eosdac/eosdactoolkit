@@ -62,17 +62,17 @@
           </div>
         </q-btn>
         <q-list class="q-mt-md">
-          <q-item class="bg-dark2" style="height:66px;margin-bottom:1px;">
+          <q-item class="bg-dark2" style="height:66px;margin-bottom:1px;" v-for="(cand, i) in newvotes" :key="i">
             <q-item-side>
               <q-item-tile style="height:36px;width:36px;" class="q-mr-sm">
                 <img style="height:36px;width:36px;border-radius:50%;" class="q-mr-md responsive" src="https://eosdac.io/wp-content/uploads/elementor/thumbs/female1-nqk9ciy87u6os74yatkpw2xi7qbjzjq3r5sl9wy0mm.jpg">
               </q-item-tile>
             </q-item-side>
             <q-item-main>
-              <h6 class="q-ma-none">name</h6>
+              <h6 class="q-ma-none">{{cand.candidate_name}}</h6>
             </q-item-main>
             <q-item-side right>
-              <q-btn dense round color="primary" icon="icon-ui-8" />
+              <q-btn dense round color="primary" icon="icon-ui-8" @click="newvotes.splice(i, 1)" />
             </q-item-side>
           </q-item>
 
