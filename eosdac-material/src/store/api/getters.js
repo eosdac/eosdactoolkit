@@ -46,28 +46,10 @@ export const getScatter = (state) => {
   return state.scatter
 }
 
-export const getTokenContractRicardian = (state) => {
-  let findRicardian = state.ricardians.find(findRicardian => {
-    return findRicardian.contract === configFile.network.tokenContract.name
-  })
-  if (findRicardian) {
-    return findRicardian.ricardian
-  } else {
-    return null
-  }
-}
-
-export const getMainCurrencyContractRicardian = (state) => {
-  let findRicardian = state.ricardians.find(findRicardian => {
-    return findRicardian.contract === configFile.network.mainCurrencyContract.name
-  })
-  if (findRicardian) {
-    return findRicardian.ricardian
-  } else {
-    return null
-  }
+export const getRicardians = (state) => {
+  return state.ricardians
 }
 
 export const getNotification = (state) => {
-    return state.notification
+  return state.notification
 }

@@ -165,7 +165,7 @@ export default {
   },
   methods: {
     transferToken() {
-      this.$refs.Transaction.newTransaction('transfer', {
+      this.$refs.Transaction.newTransaction(this.$configFile.network.tokenContract.name, 'transfer', {
         from: this.getAccountName,
         to: this.transferTo,
         quantity: this.transferAmount.toFixed(this.$configFile.network.tokenContract.decimals) + ' ' + this.$configFile.network.tokenContract.token,
@@ -173,7 +173,7 @@ export default {
       })
     },
     transferMainCurrency() {
-      this.$refs.Transaction.newTransaction('transferMain', {
+      this.$refs.Transaction.newTransaction(this.$configFile.network.mainCurrencyContract.name, 'transfer', {
         from: this.getAccountName,
         to: this.transferTo,
         quantity: this.transferMainAmount.toFixed(this.$configFile.network.mainCurrencyContract.decimals) + ' ' + this.$configFile.network.mainCurrencyContract.token,

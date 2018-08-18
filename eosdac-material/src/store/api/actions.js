@@ -275,7 +275,9 @@ export async function getCustodians({
       json: true,
       scope: configFile.network.custodianContract.name,
       code: configFile.network.custodianContract.name,
-      table: 'candidates'
+      table: 'candidates',
+      key_type: 'i64',
+      index_position:2
     })
     if (!custodians.rows.length) {
       return false
@@ -318,8 +320,8 @@ export async function getContractRicardian({
   try {
     eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint
     let eos = Eos(eosConfig)
-    const contract = await eos.contract(payload)
-    let ricardian = contract.fc.abi.actions
+    const contract = await eos.getAbi(payload)
+    let ricardian = contract.abi.actions
     if (ricardian) {
       commit('ADD_CONTRACT_RICARDIAN', {
         ricardian: ricardian,
@@ -427,4 +429,3 @@ export async function getAccount({
     throw error
   }
 }
-

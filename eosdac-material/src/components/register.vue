@@ -149,7 +149,7 @@ export default {
       }
     },
     registerMember() {
-      this.$refs.Transaction.newTransaction('memberreg', {
+      this.$refs.Transaction.newTransaction(this.$configFile.network.tokenContract.name,'memberreg', {
         sender: this.getAccountName,
         agreedterms: this.hash
       }, false)

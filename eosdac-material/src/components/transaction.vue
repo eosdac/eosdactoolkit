@@ -54,6 +54,7 @@ export default {
       visible: false,
       action: '',
       fields: {},
+      contract: '',
       ricardian: '',
       cancelable: false,
       ricardianErrorText: 'transaction.warning_ricardian',
@@ -63,41 +64,35 @@ export default {
   computed: {
     ...mapGetters({
       getAccountName: 'account/getAccountName',
-      getTokenContractRicardian: 'api/getTokenContractRicardian',
-      getMainCurrencyContractRicardian: 'api/getMainCurrencyContractRicardian',
       getUsesScatter: 'account/getUsesScatter',
-      getAccountResources: 'account/getAccountResources'
+      getAccountResources: 'account/getAccountResources',
+      getRicardians: 'api/getRicardians'
     })
   },
   methods: {
-    async newTransaction(action, fields, cancelable) {
+    async newTransaction(contract, action, fields, cancelable) {
       Object.assign(this.$data, this.$options.data())
-      if (cancelable) {
-        this.cancelable = cancelable
-      }
+      this.cancelable = cancelable
       this.visible = true
       this.loading = true
       this.loadingText = 'transaction.loading_abi'
       this.action = action
       this.fields = fields
-      let ricardian = await this.getRic(action)
+      this.contract = contract
+      let ricardian
+      if (this.getRicardians[this.contract]) {
+        ricardian = this.getRicardians[this.contract]
+      } else {
+        ricardian = await this.$store.dispatch('api/getContractRicardian', this.contract)
+      }
       if (ricardian) {
         let ricardianAction = ricardian.find(ricardianAction => {
-          return ricardianAction.name === action
+          return ricardianAction.name === this.action
         })
         if (ricardianAction) {
           let md = new MarkdownIt()
           let ric = md.render(ricardianAction.ricardian_contract)
-          let vars = ric.match(/\{{.*?\}}/g)
-          let varArray = Object.assign({}, fields)
-          varArray[action] = action
-          if (vars) {
-            for (let i = 0; i < vars.length; i++) {
-              ric = ric.replace(vars[i], '<b><u>' + varArray[vars[i].replace(/\W/g, '')] + '</u></b>')
-            }
-          }
-          ric = ric.substring(ric.indexOf('INTENT:') + 17, ric.indexOf('TERM:'))
-          this.ricardian = ric
+          this.replaceVars(ric)
         } else {
           this.ricardianError = true
         }
@@ -105,33 +100,27 @@ export default {
         this.ricardianError = true
       }
       this.loading = false
-
+    },
+    replaceVars (ric) {
+      let findVars = ric.match(/\{{.*?\}}/g)
+      let varArray = Object.assign({}, this.fields)
+      varArray[this.action] = this.action
+      if (this.contract === this.$configFile.network.mainCurrencyContract.name) {
+        varArray['transaction.delay'] = 0
+      }
+      if (findVars) {
+        for (let i = 0; i < findVars.length; i++) {
+          ric = ric.replace(findVars[i], '<b><u>' + varArray[findVars[i].replace(/\W/g, '')] + '</u></b>')
+        }
+      }
+      if (this.contract !== this.$configFile.network.mainCurrencyContract.name) {
+        ric = ric.substring(ric.indexOf('INTENT:') + 17, ric.indexOf('TERM:'))
+      }
+      this.ricardian = ric
     },
     close () {
       Object.assign(this.$data, this.$options.data())
       this.visible = false
-    },
-    async getRic(action) {
-      try {
-        let ricardian
-        switch (action) {
-          case 'transferMain':
-            ricardian = (!this.getMainCurrencyContractRicardian) ? await this.$store.dispatch('api/getContractRicardian', this.$configFile.network.mainCurrencyContract.name) : this.getMainCurrencyContractRicardian
-            break
-          case 'transfer':
-            ricardian = (!this.getTokenContractRicardian) ? await this.$store.dispatch('api/getContractRicardian', this.$configFile.network.tokenContract.name) : this.getTokenContractRicardian
-            break
-          case 'memberreg':
-            ricardian = (!this.getTokenContractRicardian) ? await this.$store.dispatch('api/getContractRicardian', this.$configFile.network.tokenContract.name) : this.getTokenContractRicardian
-            break
-          case 'memberunreg':
-            ricardian = (!this.getTokenContractRicardian) ? await this.$store.dispatch('api/getContractRicardian', this.$configFile.network.tokenContract.name) : this.getTokenContractRicardian
-            break
-        }
-        return ricardian
-      } catch (err) {
-        throw err
-      }
     },
     transact() {
       if (this.getUsesScatter) {

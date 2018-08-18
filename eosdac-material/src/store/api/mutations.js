@@ -36,12 +36,7 @@ export const SCATTER_AVAILABLE = (state, scatter) => {
 }
 
 export const ADD_CONTRACT_RICARDIAN = (state, payload) => {
-  let findRicardian = state.ricardians.find(findRicardian => {
-    return findRicardian.contract === payload.contract
-  })
-  if (!findRicardian) {
-    state.ricardians.push(payload)
-  }
+  state.ricardians[payload.contract] = payload.ricardian
 }
 
 export const NOTIFY = (state, payload) => {

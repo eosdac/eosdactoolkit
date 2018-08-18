@@ -8,7 +8,7 @@ export default {
   scatter: null,
   endpoints: [],
   lastGetInfo: {},
-  ricardians: [],
+  ricardians: {},
   notification: {
     icon: '',
     color: '',
