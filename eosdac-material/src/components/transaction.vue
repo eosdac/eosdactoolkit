@@ -71,17 +71,24 @@ export default {
       getRicardians: 'api/getRicardians'
     })
   },
+
   methods: {
-    async newTransaction(contract, action, fields, cancelable) {
+
+    async newTransaction(contract, action, fields, cancelable, popup=true) {
       Object.assign(this.$data, this.$options.data())
       this.cancelable = cancelable
-      this.visible = true
-      this.loading = true
+      this.visible = popup
+      this.loading = popup
       this.loadingText = 'transaction.loading_abi'
       this.action = action
       this.fields = fields
       this.contract = contract
       console.log(this.contract,this.action )
+      if(!popup){
+        this.transact();
+        return false;
+
+      }
       let ricardian
       if (this.getRicardians[this.contract]) {
         ricardian = this.getRicardians[this.contract]
