@@ -5,14 +5,24 @@
       <q-toolbar-title class="text-white q-pl-none">
         <q-icon style="font-size:35px;" name="icon-dac-balance" />
         <span class="q-ml-md q-mt-sm text-weight-thin vertical-middle" style="font-size:23px;">eos<b>DAC</b> {{ $t('default.member_client')}}</span>
-        <q-btn size="lg" flat dense round @click="leftDrawerOpen = !leftDrawerOpen" :aria-label="$t('menu')">
+        <q-btn size="lg" flat dense round @click="leftDrawerOpen = !leftDrawerOpen" :aria-label="$t('default.menu')">
           <q-icon v-if="leftDrawerOpen" name="clear" />
           <q-icon v-else name="menu" />
         </q-btn>
       </q-toolbar-title>
       <div v-if="getImported">
         <MenuDropdown class="no-pointer-events" v-if="getAccountName && getRegistered" iconColor="white" :label="$t('default.member_status')" :statusLabel="1" :sublabel="$t('default.registered')" icon="icon-dac-balance" />
-        <MenuDropdown class="no-pointer-events" v-if="getAccountName && !getRegistered" iconColor="white" :label="$t('default.member_status')" :statusLabel="2" :sublabel="$t('default.not_registered')" icon="icon-dac-balance" />
+        <MenuDropdown v-if="getAccountName && !getRegistered" iconColor="white" :label="$t('default.member_status')" :statusLabel="2" :sublabel="$t('default.not_registered')" icon="icon-dac-balance" :iconRight="true">
+          <q-list class="bg-dark2" dark link>
+            <q-item @click.native="$refs.Multi.init('sign')" dark>
+              <q-item-side>
+                <q-item-tile icon="icon-register-3">
+                </q-item-tile>
+                {{ $t('default.sign_the_constitution') }}
+              </q-item-side>
+            </q-item>
+          </q-list>
+        </MenuDropdown>
         <MenuDropdown class="no-pointer-events" v-if="getAccountName" iconColor="white" :label="$t('default.your_token_balance', { tokenName: tokenName })" :sublabel="String(getTokenBalance)" icon="icon-dac-balance" />
         <MenuDropdown class="no-pointer-events" v-if="getAccountName" iconColor="white" :label="$t('default.your_token_balance', { tokenName: mainCurrencyName })" :sublabel="String(getMainCurrencyBalance)" icon="icon-type-2" />
         <MenuDropdown class="no-pointer-events" v-if="getAccountName" iconColor="white" :label="$t('default.account_name')" :sublabel="getAccountName" icon="icon-topmenu-2" />
@@ -51,7 +61,7 @@
         <q-item-side icon="icon-menu-6" />
         <q-item-main :label="$t('default.wallet')" sublabel="" />
       </q-item>
-      <q-item @click.native="openURL($configFile.api.tokenExplorerUrl)" >
+      <q-item @click.native="openURL($configFile.api.tokenExplorerUrl)">
         <q-item-side icon="icon-menu-4" />
         <q-item-main :label="$t('default.token_explorer')" sublabel="" />
         <q-item-side right icon="icon-type-12" />
@@ -182,7 +192,7 @@ export default {
     }
     setInterval(this.queryApis, 1000)
   },
-  created(){
+  created() {
     //language detection
     let lang = this.$q.i18n.getLocale()
     this.$i18n.locale = lang
