@@ -17,6 +17,7 @@ export default ({
       'es': messages['es'],
       'fr': messages['fr'],
       'it': messages['it'],
+      'ja': messages['ja'],
       'ko': messages['ko'],
       'ru': messages['ru'],
       'zh-hans': messages['zh-hans'],

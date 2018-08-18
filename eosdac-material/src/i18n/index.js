@@ -4,6 +4,7 @@ import enUS from './en-us'
 import es from './es'
 import fr from './fr'
 import it from './it'
+import ja from './ja'
 import ko from './ko'
 import ru from './ru'
 import zhHANS from './zh-hans'
@@ -14,6 +15,7 @@ export default {
   'es': es,
   'fr': fr,
   'it': it,
+  'ja': ja,
   'ko': ko,
   'ru': ru,
   'zh-hans': zhHANS

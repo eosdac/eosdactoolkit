@@ -8,8 +8,9 @@
       { label: 'English (GB)',         value: 'en-gb' },
       { label: 'French',               value: 'fr' },
       { label: 'German',               value: 'de' },
-      { label: 'Korean',               value: 'ko' },
       { label: 'Italian',              value: 'it' },
+      { label: 'Japanese',             value: 'ja' },
+      { label: 'Korean',               value: 'ko' },
       { label: 'Russian',              value: 'ru' },
       { label: 'Spanish',              value: 'es' },
     ]"
