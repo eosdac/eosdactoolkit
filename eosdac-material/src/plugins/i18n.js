@@ -12,13 +12,12 @@ export default ({
     fallbackLocale: 'en-us',
     messages: {
       'de': messages['de'],
-      'en-uk': messages['en-uk'],
+      'en-gb': messages['en-gb'],
       'en-us': messages['en-us'],
       'es': messages['es'],
       'fr': messages['fr'],
       'it': messages['it'],
       'ko': messages['ko'],
-      'ro': messages['ro'],
       'ru': messages['ru'],
       'zh-hans': messages['zh-hans'],
     }

@@ -5,12 +5,11 @@
     :options="[
       { label: 'Chinese (Simplified)', value: 'zh-hans' },
       { label: 'English (US)',         value: 'en-us' },
-      { label: 'English (UK)',         value: 'en-uk' },
+      { label: 'English (GB)',         value: 'en-gb' },
       { label: 'French',               value: 'fr' },
       { label: 'German',               value: 'de' },
       { label: 'Korean',               value: 'ko' },
       { label: 'Italian',              value: 'it' },
-      { label: 'Romanian',             value: 'ro' },
       { label: 'Russian',              value: 'ru' },
       { label: 'Spanish',              value: 'es' },
     ]"
