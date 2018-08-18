@@ -85,6 +85,10 @@
 </template>
 
 <script>
+import Transaction from 'components/transaction'
+import {
+  mapGetters
+} from 'vuex'
 export default {
   name: 'Custodians',
   components: {},
@@ -93,8 +97,14 @@ export default {
       loading: false,
       loadingText: '',
       custodians: [],
+      newvotes: [],
       candidateIndex: -1
     }
+  },
+  computed: {
+    ...mapGetters({
+      getAccountName: 'account/getAccountName',
+    })
   },
   mounted() {
     this.getCustodians()
@@ -111,6 +121,12 @@ export default {
       let custodians = await this.$store.dispatch('api/getCustodians')
       console.log(custodians)
       this.custodians = custodians
+    },
+    voteForCandidates() {
+      this.$refs.Transaction.newTransaction(this.$configFile.network.custodianContract.name, 'votecust', {
+        voter: this.getAccountName,
+        newvotes: this.newvotes
+      }, false)
     }
   }
 }
@@ -118,3 +134,4 @@ export default {
 
 <style>
 </style>
+{voter: "", newvotes: ""}
