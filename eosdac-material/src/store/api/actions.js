@@ -94,33 +94,6 @@ commit
   }
 }
 
-
-// export async function transferMain({
-//   state,
-//   rootState,
-//   commit
-// }, payload) {
-
-//   try {
-//     eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint
-//     eosConfig.keyProvider = rootState.account.pkeysArray
-//     let eos = Eos(eosConfig)
-//     if (payload.scatter) {
-//       const network = await scatterNetwork(state)
-//       const identity = await state.scatter.getIdentity({
-//         accounts: [network]
-//       })
-//       eos = state.scatter.eos(network, Eos, eosConfig)
-//     }
-//     const res = await eos.transfer(payload.data)
-//     return res
-//     commit('SET_CURRENT_CONNECTION_STATUS', true)
-//   } catch (error) {
-//     apiDown(error,commit)
-//     throw error
-//   }
-// }
-
 function timeOut(time) {
   return new Promise(function(resolve, reject) {
     setTimeout(reject('timeout'), time)
