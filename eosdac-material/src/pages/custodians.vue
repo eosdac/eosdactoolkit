@@ -1,5 +1,10 @@
 <template>
 <q-page class="text-white q-pa-md">
+
+
+
+
+
   <Transaction ref="Transaction" v-on:done="" />
   <div class="row">
     <div class="col-sm-12 col-md-8">
@@ -7,10 +12,12 @@
         <div class="col-xs-12">
           <h4 class="q-display-1 q-mt-none q-mb-md">Candidate List</h4>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam libero urna, efficitur at laoreet fermentum, facilisis in ex. Proin luctus erat sem, ut mollis dui laoreet id. Curabitur eleifend ante in lacus rutrum dapibus. Nulla sit amet maximus metus, ac interdum dui. Aliquam placerat nisl eu bibendum dictum. Integer pharetra diam pretium felis venenatis, in aliquam ex imperdiet. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
+
         </div>
         <div class="col-xs-12 q-mb-md">
-          <div v-for="(candidate, index) in custodians" :key="index">
-            <q-item class="bg-dark2 q-px-lg cursor-pointer" style="height:80px;">
+          <div v-for="(candidate, index) in paginate" :key="index">
+            <Candidate :data="candidate" @clickVoteFor="addToVoteList(candidate.candidate_name)" :key="index" /> 
+<!--             <q-item class="bg-dark2 q-px-lg cursor-pointer" style="height:80px;">
               <q-item-side>
                 <q-item-tile>
                   <div class="row">
@@ -45,8 +52,14 @@
                 </q-card>
               </q-card>
             </div>
-            </q-slide-transition>
+            </q-slide-transition> -->
           </div>
+          <q-pagination
+          v-show="pagination.max > 1"
+  v-model="pagination.page"
+  :min="1"
+  :max="pagination.max"
+/>
         </div>
       </div>
     </div>
@@ -63,6 +76,8 @@
           </div>
         </q-btn>
         <q-list class="q-mt-md">
+
+<transition-group name="list" tag="p">
           <q-item class="bg-dark2" style="height:66px;margin-bottom:1px;" v-for="(cand, i) in getSelectedCand" :key="i">
             <q-item-side>
               <q-item-tile style="height:36px;width:36px;" class="q-mr-sm">
@@ -76,6 +91,8 @@
               <q-btn dense round color="primary" icon="icon-ui-8" @click="deleteFromVoteList(cand.candidate_name)" />
             </q-item-side>
           </q-item>
+</transition-group>
+
 
         </q-list>
         <pre>{{getSelectedCand}}</pre>
@@ -88,6 +105,7 @@
 </template>
 
 <script>
+import Candidate from 'components/candidate'
 import Transaction from 'components/transaction'
 import {
   mapGetters
@@ -95,15 +113,21 @@ import {
 export default {
   name: 'Custodians',
   components: {
-    Transaction
+    Transaction,
+    Candidate
   },
   data() {
     return {
       loading: false,
       loadingText: '',
       custodians: [],
-      newvotes: [],
-      candidateIndex: -1
+      candidateIndex: -1,
+      page_content:[],
+      pagination :{
+        page:1,
+        max:1,
+        items_per_page: 2
+      }
     }
   },
 
@@ -114,13 +138,23 @@ export default {
     getSelectedCand(){
       let selected = this.custodians.filter(x => x.selected == true);
       return selected;
-
     },
+    paginate(){
+
+      return this.custodians.slice((this.pagination.page-1) * this.pagination.items_per_page, this.pagination.page * this.pagination.items_per_page);
+
+      // return this.custodians.slice(0,1)
+    }
   },
 
-  mounted() {
+  created() {
     // this.getCustodians()
     this.getAllCandidates()
+  },
+  mounted(){
+
+
+
   },
 
   methods: {
@@ -173,6 +207,7 @@ export default {
       //   return c;
       // })
       console.log(temp)
+      this.pagination.max = Math.ceil(temp.length/this.pagination.items_per_page);
       this.custodians = temp;
     },
 
@@ -181,8 +216,8 @@ export default {
       console.log(custodians)
       this.custodians = custodians
     },
-    addToVoteList(i){
-      this.custodians[i].selected =true;      
+    addToVoteList(name){
+      this.custodians.find(x => x.candidate_name === name).selected =true;
     },
     deleteFromVoteList(name){
       this.custodians.find(x => x.candidate_name === name).selected =false;
@@ -198,10 +233,22 @@ export default {
         voter: this.getAccountName,
         newvotes: votes
       }, false, false)
-    }
+    },
+
   }
 }
 </script>
 
 <style>
+.list-item {
+  display: inline-block;
+  margin-right: 10px;
+}
+.list-enter-active, .list-leave-active {
+  transition: all 0.5s;
+}
+.list-enter, .list-leave-to /* .list-leave-active below version 2.1.8 */ {
+  opacity: 0;
+  transform: translateY(30px);
+}
 </style>

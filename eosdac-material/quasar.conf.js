@@ -18,6 +18,7 @@ module.exports = function(ctx) {
     extras: [
       ctx.theme.mat ? 'roboto-font' : null,
       'material-icons'
+
       // 'ionicons',
       // 'mdi',
       // 'fontawesome'
@@ -109,7 +110,11 @@ module.exports = function(ctx) {
         'QCollapsible',
         'QProgress',
         'QSlideTransition',
-        'QRadio'
+        'QRadio',
+        'QPagination'
+
+
+
       ],
       directives: [
         'Ripple',
