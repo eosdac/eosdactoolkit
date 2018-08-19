@@ -14,7 +14,7 @@
               <q-item-side>
                 <q-item-tile>
                   <div class="row">
-                    <q-btn class="q-mr-md" icon="icon-plus" round color="primary" style="height:55px;width:55px;margin-top:3px;" @click="addToVoteList(candidate)" />
+                    <q-btn class="q-mr-md" icon="icon-plus" round color="primary" style="height:55px;width:55px;margin-top:3px;" @click="addToVoteList(index)" />
                     <img style="height:60px;width:60px;border-radius:50%;" class="q-mr-md" src="https://eosdac.io/wp-content/uploads/elementor/thumbs/female1-nqk9ciy87u6os74yatkpw2xi7qbjzjq3r5sl9wy0mm.jpg">
                   </div>
                 </q-item-tile>
@@ -33,6 +33,7 @@
               </q-item-main>
               <q-item-side right>
                 <q-item-tile @click.native="toggleBio(index)" :icon="(candidateIndex !== index)? 'icon-ui-1': 'icon-ui-11'" color="white" />
+                <span v-if="candidate.selected">test selected</span>
               </q-item-side>
             </q-item>
             <q-slide-transition>
@@ -62,7 +63,7 @@
           </div>
         </q-btn>
         <q-list class="q-mt-md">
-          <q-item class="bg-dark2" style="height:66px;margin-bottom:1px;" v-for="(cand, i) in newvotes" :key="i">
+          <q-item class="bg-dark2" style="height:66px;margin-bottom:1px;" v-for="(cand, i) in getSelectedCand" :key="i">
             <q-item-side>
               <q-item-tile style="height:36px;width:36px;" class="q-mr-sm">
                 <img style="height:36px;width:36px;border-radius:50%;" class="q-mr-md responsive" src="https://eosdac.io/wp-content/uploads/elementor/thumbs/female1-nqk9ciy87u6os74yatkpw2xi7qbjzjq3r5sl9wy0mm.jpg">
@@ -72,12 +73,12 @@
               <h6 class="q-ma-none">{{cand.candidate_name}}</h6>
             </q-item-main>
             <q-item-side right>
-              <q-btn dense round color="primary" icon="icon-ui-8" @click="newvotes.splice(i, 1)" />
+              <q-btn dense round color="primary" icon="icon-ui-8" @click="deleteFromVoteList(cand.candidate_name)" />
             </q-item-side>
           </q-item>
 
         </q-list>
-        <pre>{{newvotes}}</pre>
+        <pre>{{getSelectedCand}}</pre>
       </q-card>
 
     </div>
@@ -109,7 +110,12 @@ export default {
   computed: {
     ...mapGetters({
       getAccountName: 'account/getAccountName',
-    })
+    }),
+    getSelectedCand(){
+      let selected = this.custodians.filter(x => x.selected == true);
+      return selected;
+
+    },
   },
 
   mounted() {
@@ -149,9 +155,23 @@ export default {
             }
         }
       }
+      //sort by votes desc + add selected boolean to all candidates
+      //this is less expensive compared to looping through it again.
       temp = temp.sort(function(a, b) {
-          return b.total_votes - a.total_votes;
+          if(a.selected == undefined){
+            a.selected = false;
+          }
+          if(b.selected == undefined){
+            b.selected = false;
+          }
+          let t = b.total_votes - a.total_votes;
+          return t;
       });
+      //add selected key to all custodians
+      // temp = temp.map(c => {
+      //   c.selected = false;
+      //   return c;
+      // })
       console.log(temp)
       this.custodians = temp;
     },
@@ -161,21 +181,15 @@ export default {
       console.log(custodians)
       this.custodians = custodians
     },
-    addToVoteList(cand){
-      if ( !this.newvotes.includes(cand) ) {
-        this.newvotes.push(cand);
-      }
-      else{
-        console.log('already in list')
-      }
-      
+    addToVoteList(i){
+      this.custodians[i].selected =true;      
     },
-    deleteFromVoteList(accountname){
-      this.newvotes = this.newvotes.filter(x => x != acountname);
+    deleteFromVoteList(name){
+      this.custodians.find(x => x.candidate_name === name).selected =false;
     },
 
     voteForCandidates() {
-      let votes = this.newvotes.map(c => c.candidate_name);
+      let votes = this.custodians.filter(x => x.selected == true).map(c => c.candidate_name);
       if(!votes.length){
         console.log('Votelist can\'t be empty');
         return false;
