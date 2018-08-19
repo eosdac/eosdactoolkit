@@ -280,7 +280,7 @@ export async function getCustodians({
       code: configFile.network.custodianContract.name,
       table: 'candidates',
       lower_bound: param.lb,
-      limit:30
+      limit:0
       // key_type: 'i64',
       // index_position:1
     })

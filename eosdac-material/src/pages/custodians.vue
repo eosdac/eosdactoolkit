@@ -131,18 +131,23 @@ export default {
 
       while(lb !== null){
         let c = await this.$store.dispatch('api/getCustodians', {lb: lb});
+        if(c){
 
-        if(lb === c[c.length-1].candidate_name){
-          lb = null;
+            if(lb === c[c.length-1].candidate_name){
+              //if last received is same as start last requested
+              // end loop!
+              lb = null;
+            }
+            else{
+              if(lb != ''){
+                //remove first entry except for the first run
+                c.shift(); 
+              }
+              //set lower_bound to the last received candidate_name
+              lb = c[c.length-1].candidate_name; 
+              temp.push(...c);
+            }
         }
-        else{
-          if(lb != ''){
-            c.shift();
-          }
-          lb = c[c.length-1].candidate_name;
-          temp.push(...c);
-        }
-
       }
       temp = temp.sort(function(a, b) {
           return b.total_votes - a.total_votes;
