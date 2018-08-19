@@ -32,13 +32,13 @@ export default {
       }
       this.$axios.get(this.data.bio).then(r => {
         this.image_profile = r.data.image;
-        // console.log(this.profileData);
+        console.log(r.data);
       })
       .catch(e => console.log('could not load profile file from'+this.data.candidate_name))
     }
 
   },
-  created:function(){
+  mounted:function(){
     this.getProfileData()
   }
 

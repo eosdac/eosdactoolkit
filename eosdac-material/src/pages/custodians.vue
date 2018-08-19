@@ -15,8 +15,8 @@
 
         </div>
         <div class="col-xs-12 q-mb-md">
-          <div v-for="(candidate, index) in paginate" :key="index">
-            <Candidate :data="candidate" @clickVoteFor="addToVoteList(candidate.candidate_name)" :key="index" /> 
+          <div v-for="(candidate, index) in paginate" :key="candidate.candidate_name">
+            <Candidate :data="candidate" @clickVoteFor="addToVoteList(candidate.candidate_name)"  /> 
 <!--             <q-item class="bg-dark2 q-px-lg cursor-pointer" style="height:80px;">
               <q-item-side>
                 <q-item-tile>
