@@ -113,7 +113,8 @@ export default {
   },
 
   mounted() {
-    this.getCustodians()
+    // this.getCustodians()
+    this.getAllCandidates()
   },
 
   methods: {
@@ -124,9 +125,34 @@ export default {
         this.candidateIndex = index
       }
     },
+    async getAllCandidates(){
+      let lb='';
+      let temp = [];
 
-    async getCustodians() {
-      let custodians = await this.$store.dispatch('api/getCustodians')
+      while(lb !== null){
+        let c = await this.$store.dispatch('api/getCustodians', {lb: lb});
+
+        if(lb === c[c.length-1].candidate_name){
+          lb = null;
+        }
+        else{
+          if(lb != ''){
+            c.shift();
+          }
+          lb = c[c.length-1].candidate_name;
+          temp.push(...c);
+        }
+
+      }
+      temp = temp.sort(function(a, b) {
+          return b.total_votes - a.total_votes;
+      });
+      console.log(temp)
+      this.custodians = temp;
+    },
+
+    async getCustodians(lb='') {
+      let custodians = await this.$store.dispatch('api/getCustodians', {lb: lb})
       console.log(custodians)
       this.custodians = custodians
     },
@@ -145,6 +171,10 @@ export default {
 
     voteForCandidates() {
       let votes = this.newvotes.map(c => c.candidate_name);
+      if(!votes.length){
+        console.log('Votelist can\'t be empty');
+        return false;
+      }
       this.$refs.Transaction.newTransaction(this.$configFile.network.custodianContract.name, 'votecust', {
         voter: this.getAccountName,
         newvotes: votes

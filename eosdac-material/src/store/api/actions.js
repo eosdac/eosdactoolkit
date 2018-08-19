@@ -267,9 +267,11 @@ export async function getRegistered({
 
 export async function getCustodians({
   state,
-  commit
-}) {
+  commit,
+  
+}, param) {
   try {
+    console.log(param)
     eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint
     let eos = Eos(eosConfig)
     const custodians = await eos.getTableRows({
@@ -277,8 +279,10 @@ export async function getCustodians({
       scope: configFile.network.custodianContract.name,
       code: configFile.network.custodianContract.name,
       table: 'candidates',
-      key_type: 'i64',
-      index_position:2
+      lower_bound: param.lb,
+      limit:30
+      // key_type: 'i64',
+      // index_position:1
     })
     if (!custodians.rows.length) {
       return false
