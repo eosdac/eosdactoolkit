@@ -131,7 +131,13 @@ export default {
       this.custodians = custodians
     },
     addToVoteList(cand){
-      this.newvotes.push(cand);
+      if ( !this.newvotes.includes(cand) ) {
+        this.newvotes.push(cand);
+      }
+      else{
+        console.log('already in list')
+      }
+      
     },
     deleteFromVoteList(accountname){
       this.newvotes = this.newvotes.filter(x => x != acountname);
