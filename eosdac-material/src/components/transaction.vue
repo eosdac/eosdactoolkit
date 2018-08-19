@@ -136,7 +136,8 @@ export default {
       if (this.getUsesScatter) {
         this.loading = true
         this.loadingText = 'transaction.pushing_transaction'
-        this.$store.dispatch('api/' + this.action, {
+        this.$store.dispatch('api/transaction', {
+          action: this.action,
           data: this.fields,
           scatter: true,
           contract: this.contract
@@ -148,7 +149,7 @@ export default {
               color: 'positive',
               message: 'transaction.transaction_successful',
               details: res.transaction_id,
-              linkText: 'View in explorer',
+              linkText: 'transaction.view_in_explorer',
               linkUrl: this.$configFile.api.mainCurrencyExplorerUrl + '/transaction/' + res.transaction_id
             })
           } else {

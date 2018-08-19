@@ -46,58 +46,6 @@ function apiDown(e,c,s) {
   }
 }
 
-export async function memberreg({
-  state,
-  rootState,
-  commit
-}, payload) {
-  try {
-    eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint
-    eosConfig.keyProvider = rootState.account.pkeysArray
-    let eos = Eos(eosConfig)
-    if (payload.scatter) {
-      const network = await scatterNetwork(state)
-      const identity = await state.scatter.getIdentity({
-        accounts: [network]
-      })
-      eos = state.scatter.eos(network, Eos, eosConfig)
-    }
-    const contract = await eos.contract(payload.contract)
-    const res = await contract.memberreg(payload.data)
-    return res
-    commit('SET_CURRENT_CONNECTION_STATUS', true)
-  } catch (error) {
-    apiDown(error,commit)
-    throw error
-  }
-}
-
-export async function memberunreg({
-  state,
-  rootState,
-  commit
-}, payload) {
-  try {
-    eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint
-    eosConfig.keyProvider = rootState.account.pkeysArray
-    let eos = Eos(eosConfig)
-    if (payload.scatter) {
-      const network = await scatterNetwork(state)
-      const identity = await state.scatter.getIdentity({
-        accounts: [network]
-      })
-      eos = state.scatter.eos(network, Eos, eosConfig)
-    }
-    const contract = await eos.contract(payload.contract)
-    const res = await contract.memberunreg(payload.data)
-    return res
-    commit('SET_CURRENT_CONNECTION_STATUS', true)
-  } catch (error) {
-    apiDown(error,commit)
-    throw error
-  }
-}
-
 export async function getActionHistory({
   state,
   rootState,
@@ -119,31 +67,33 @@ export async function getActionHistory({
   }
 }
 
-export async function transfer({
-  state,
-  rootState,
-  commit
-}, payload) {
+export async function transaction({
+rootState,
+commit
+}, payload) { //scatter, contract, action, data
   try {
-    eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint
-    eosConfig.keyProvider = rootState.account.pkeysArray
+    eosConfig.httpEndpoint = rootState.api.endpoints[rootState.api.activeEndpointIndex].httpEndpoint
     let eos = Eos(eosConfig)
     if (payload.scatter) {
-      const network = await scatterNetwork(state)
-      const identity = await state.scatter.getIdentity({
+      const network = await scatterNetwork(rootState.api)
+      const identity = await rootState.api.scatter.getIdentity({
         accounts: [network]
       })
-      eos = state.scatter.eos(network, Eos, eosConfig)
+      let authority = identity.accounts[0].authority
+      let accountname = identity.accounts[0].name
+      let auth = { authorization: [ accountname+'@'+authority ] }
+      eos = rootState.api.scatter.eos(network, Eos, eosConfig)
+      const contract = await eos.contract(payload.contract)
+      const res = await contract[payload.action](payload.data, auth)
+      commit('SET_CURRENT_CONNECTION_STATUS', true)
+      return res
     }
-    const contract = await eos.contract(payload.contract)
-    const res = await contract.transfer(payload.data)
-    return res
-    commit('SET_CURRENT_CONNECTION_STATUS', true)
   } catch (error) {
     apiDown(error,commit)
     throw error
   }
 }
+
 
 // export async function transferMain({
 //   state,
@@ -268,7 +218,7 @@ export async function getRegistered({
 export async function getCustodians({
   state,
   commit,
-  
+
 }, param) {
   try {
     console.log(param)
