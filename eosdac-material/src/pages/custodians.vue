@@ -6,10 +6,10 @@
   <!-- first column  -->
   <div class="col-sm-12 col-md-8" >
     <div>
-      <span class="q-display-1 q-mt-none ">Candidate List</span>
+      <span class="q-display-1 q-mt-none ">Candidate List - {{custodians.length}}</span>
       <p class="text-dimwhite">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam libero urna, efficitur at laoreet fermentum, facilisis in ex. Proin luctus erat sem, ut mollis dui laoreet id. Curabitur eleifend ante in lacus rutrum dapibus. Nulla sit amet maximus metus, ac interdum dui. Aliquam placerat nisl eu bibendum dictum. Integer pharetra diam pretium felis venenatis, in aliquam ex imperdiet. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
       </p>
-    <div >
+
       <Candidate 
         v-for="(candidate, index) in paginate" 
         :key="candidate.candidate_name" 
@@ -17,9 +17,9 @@
         @profile ="addProfile" 
         @clickvotefor="addToVoteList(candidate.candidate_name)"  
       /> 
-    </div>
-
-      <q-pagination v-show="pagination.max > 1" v-model="pagination.page" :min="1" :max="pagination.max"/>
+      <div class="bg-dark2 q-pa-md shadow-5 rounded-corners">
+        <q-pagination v-show="pagination.max > 1" v-model="pagination.page" :min="1" :max="pagination.max" direction-links/>
+      </div>
     </div>
   </div>
   <!-- second column -->
@@ -29,10 +29,10 @@
       <p class="text-dimwhite">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam libero urna, efficitur at laoreet fermentum, facilisis in ex. Proin luctus erat sem, ut mollis dui laoreet id.</p>
       <q-card class="q-pa-lg q-mt-md" style="background:#32363F;">
         <q-btn style="font-weight: 300;" class="full-width items-baseline" color="primary" size="xl" @click="voteForCandidates">
-          <div class="col-sm-3 col-md-12 col-lg-5 col-xl-4">
+          <div style="width:55px;display:inlineblock">
             <q-icon size="50px" class="float-left" name="icon-ui-3"></q-icon>
           </div>
-          <div class="col-sm-9 col-md-12 col-lg-7 col-xl-8 text-left" >
+          <div style="display:inline-block" >
             Submit my Votes
           </div>
         </q-btn>
@@ -53,7 +53,7 @@
             </q-item>
           </transition-group>
         </q-list>
-        <pre>{{getSelectedCand}}</pre>
+        <!-- <pre>{{getSelectedCand}}</pre> -->
       </q-card>
     </div>
   </div>
@@ -79,7 +79,6 @@ export default {
       loading: false,
       loadingText: '',
       custodians: [],
-      candidateIndex: -1,
       page_content:[],
       pagination :{
         page:1,
@@ -98,10 +97,7 @@ export default {
       return selected;
     },
     paginate(){
-
       return this.custodians.slice((this.pagination.page-1) * this.pagination.items_per_page, this.pagination.page * this.pagination.items_per_page);
-
-      // return this.custodians.slice(0,1)
     }
   },
 
@@ -109,20 +105,8 @@ export default {
     // this.getCustodians()
     this.getAllCandidates()
   },
-  mounted(){
-
-
-
-  },
 
   methods: {
-    toggleBio(index) {
-      if (index === this.candidateIndex) {
-        this.candidateIndex = -1
-      } else {
-        this.candidateIndex = index
-      }
-    },
     async getAllCandidates(){
       let lb='';
       let temp = [];
@@ -174,9 +158,18 @@ export default {
       console.log(custodians)
       this.custodians = custodians
     },
+
     addToVoteList(name){
-      this.custodians.find(x => x.candidate_name === name).selected =true;
+      let selected = this.custodians.filter(x => x.selected == true);
+      if(selected.length < 8){
+        this.custodians.find(x => x.candidate_name === name).selected =true;
+      }
+      else{
+        console.log('reached max number of votes.')
+      }
+      
     },
+
     deleteFromVoteList(name){
       this.custodians.find(x => x.candidate_name === name).selected =false;
     },
@@ -192,6 +185,7 @@ export default {
         newvotes: votes
       }, false, false)
     },
+
     addProfile(eventdata){
       this.custodians.find(x => x.candidate_name === eventdata.candidate_name).profile =eventdata.profile;
     }
