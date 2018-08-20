@@ -25,7 +25,7 @@
   <!-- second column -->
   <div class="col-sm-12 col-md-4" >
     <div>
-      <span class="q-display-1">My Votes - 0</span>
+      <span class="q-display-1">My Votes - {{getSelectedCand.length}}</span>
       <p class="text-dimwhite">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam libero urna, efficitur at laoreet fermentum, facilisis in ex. Proin luctus erat sem, ut mollis dui laoreet id.</p>
       <q-card class="q-pa-lg q-mt-md" style="background:#32363F;">
         <q-btn style="font-weight: 300;" class="full-width items-baseline" color="primary" size="xl" @click="voteForCandidates">
@@ -53,7 +53,7 @@
             </q-item>
           </transition-group>
         </q-list>
-        <!-- <pre>{{getSelectedCand}}</pre> -->
+        <pre>{{getSelectedCand}}</pre>
       </q-card>
     </div>
   </div>

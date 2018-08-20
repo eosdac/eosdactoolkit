@@ -16,8 +16,8 @@
 
 </q-item> -->
 
-<div class="q-mb-md round-borders" style="background:#2F333D; box-sizing:border-box;" v-bind:class="{ 'selected_candidate': data.selected, 'shadow-5':!data.selected}">
-  <q-collapsible  label="First"  icon-toggle header-class="bg-dark2 candidate_header" collapse-icon="icon-ui-11">
+<div class="q-mb-md bg-dark2 round-borders"  v-bind:class="{ 'selected_candidate': data.selected, 'shadow-5':!data.selected}">
+  <q-collapsible  label="First"  icon-toggle header-class="candidate_header" collapse-icon="icon-ui-11">
     <template slot="header" >
       <q-item-side left >
         <div class="row">
@@ -33,9 +33,9 @@
       </q-item-main>
       <span style=""></span>
     </template>
-    <div>
+    <div class="q-pt-sm" style="border-top:1px solid grey">
       <span>BIO</span>
-      <div v-if="data.profile !== undefined">{{data.profile.description}}</div>
+      <div class="text-dimwhite" v-if="data.profile !== undefined">{{data.profile.description}}</div>
     </div>
   </q-collapsible>
 </div>
@@ -93,6 +93,7 @@ export default {
 @import '~variables'
 .candidate_header{
   height:80px;
+  border-radius:2px;
 }
 .selected_candidate{
   border:2px solid $positive;
