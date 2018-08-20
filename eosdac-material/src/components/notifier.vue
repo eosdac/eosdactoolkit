@@ -7,7 +7,7 @@
       </div>
       <div class="col-md-8 col-lg-9">
         <div class="q-title">{{ $t(message) }}</div>
-        {{ $t(details) }}
+        {{ details }}
         <q-btn v-if="linkText" @click="openLink(linkUrl)" :text-color="color" :color="textColor">{{ $t(linkText) }}</q-btn>
       </div>
       <div class="col-xs-2">

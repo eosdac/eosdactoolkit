@@ -62,7 +62,7 @@
                       <q-field class="q-mb-md" icon="icon-topmenu-2" :label="$t('wallet.transfer_to')" :error="transferToError" :error-label="transferToErrorText">
                         <q-input dark v-model="transferTo" />
                       </q-field>
-                      <q-field class="q-mb-md" icon="icon-type-2" :label="$t('wallet.amount')" :error="transferAmountErrorText" :error-label="transferMainAmountErrorText">
+                      <q-field class="q-mb-md" icon="icon-type-2" :label="$t('wallet.amount')" :error="transferMainAmountError" :error-label="transferMainAmountErrorText">
                         <q-input v-model="transferMainAmount" :suffix="mainCurrencyName" type="number" :decimals="transferMainAmountDecimals" dark />
                       </q-field>
                       <q-field inset="icon" class="q-mb-md" :label="$t('wallet.memo')">
