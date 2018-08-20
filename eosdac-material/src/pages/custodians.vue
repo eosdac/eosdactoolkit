@@ -16,7 +16,7 @@
         </div>
         <div class="col-xs-12 q-mb-md">
           <div v-for="(candidate, index) in paginate" :key="candidate.candidate_name">
-            <Candidate :data="candidate" @clickVoteFor="addToVoteList(candidate.candidate_name)"  /> 
+            <Candidate :data="candidate" @profile ="addProfile" @clickvotefor="addToVoteList(candidate.candidate_name)"  /> 
 <!--             <q-item class="bg-dark2 q-px-lg cursor-pointer" style="height:80px;">
               <q-item-side>
                 <q-item-tile>
@@ -234,6 +234,9 @@ export default {
         newvotes: votes
       }, false, false)
     },
+    addProfile(eventdata){
+      this.custodians.find(x => x.candidate_name === eventdata.candidate_name).profile =eventdata.profile;
+    }
 
   }
 }
