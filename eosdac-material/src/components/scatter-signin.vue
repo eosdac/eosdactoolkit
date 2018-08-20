@@ -71,7 +71,6 @@ export default {
         port: current.httpEndpoint.split(':')[2] || pp
       }
       try {
-        let forget = await this.getScatter.forgetIdentity()
         let suggest = await this.getScatter.suggestNetwork(network2)
         let identity = await this.getScatter.getIdentity({
           accounts: [network2]
