@@ -1,21 +1,5 @@
 <template>
 
-
-<!-- <q-item class="bg-dark2 q-px-lg cursor-pointer q-mb-md shadow-5 round-borders" v-bind:class="{ selected_candidate: data.selected }" style="height:80px;" >
-  <q-item-side>
-    <div class="row">
-      <q-btn class="q-mr-md" icon="icon-plus" round color="primary" style="height:55px;width:55px;margin-top:3px;" @click="$emit('clickvotefor')" />
-      <q-item-tile avatar>
-        <img style="height:60px;width:60px;" class="q-mr-md" :src="image_profile" @click="getProfileData" :name="data.candidate_name+'_pic'">
-      </q-item-tile>
-    </div>
-  </q-item-side>
-  <q-item-main @click.native="">
-    {{data.candidate_name}}
-  </q-item-main>
-
-</q-item> -->
-
 <div class="q-mb-md bg-dark2 round-borders"  v-bind:class="{ 'selected_candidate': data.selected, 'unselected_candidate':!data.selected, 'shadow-5':!data.selected}">
   <q-collapsible  label="First"  icon-toggle header-class="candidate_header" collapse-icon="icon-ui-11">
     <template slot="header" >
@@ -40,10 +24,7 @@
   </q-collapsible>
 </div>
 
-
 </template>
-
-
 
 <script>
 
@@ -107,6 +88,4 @@ export default {
 .unselected_candidate{
   border:2px solid transparent;
 }
-
-
 </style>

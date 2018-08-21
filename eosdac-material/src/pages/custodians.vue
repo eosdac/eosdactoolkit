@@ -10,6 +10,9 @@
       <p class="text-dimwhite">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam libero urna, efficitur at laoreet fermentum, facilisis in ex. Proin luctus erat sem, ut mollis dui laoreet id. Curabitur eleifend ante in lacus rutrum dapibus. Nulla sit amet maximus metus, ac interdum dui. Aliquam placerat nisl eu bibendum dictum. Integer pharetra diam pretium felis venenatis, in aliquam ex imperdiet. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
       </p>
 
+      <div class="bg-dark2 q-pa-md q-mb-md shadow-5 round-borders" v-if="!loading">
+        <q-pagination v-show="pagination.max > 1" v-model="pagination.page" :min="1" :max="pagination.max" direction-links/>
+      </div>
       <Candidate 
         v-for="(candidate, index) in paginate" 
         :key="candidate.candidate_name" 
@@ -17,9 +20,10 @@
         @profile ="addProfile" 
         @clickvotefor="addToVoteList(candidate.candidate_name)"  
       /> 
-      <div class="bg-dark2 q-pa-md shadow-5 rounded-corners">
+      <div class="bg-dark2 q-pa-md shadow-5 round-borders" v-if="!loading">
         <q-pagination v-show="pagination.max > 1" v-model="pagination.page" :min="1" :max="pagination.max" direction-links/>
       </div>
+
     </div>
   </div>
   <!-- second column -->
@@ -58,13 +62,14 @@
     </div>
   </div>
 </div><!-- end row -->
-
+<LoadingSpinner :visible="loading" :text="$t('loading_candidates')" />
 </q-page>
 </template>
 
 <script>
 import Candidate from 'components/candidate'
 import Transaction from 'components/transaction'
+import LoadingSpinner from 'components/loading-spinner'
 import {
   mapGetters
 } from 'vuex'
@@ -72,7 +77,8 @@ export default {
   name: 'Custodians',
   components: {
     Transaction,
-    Candidate
+    Candidate,
+    LoadingSpinner
   },
   data() {
     return {
@@ -83,7 +89,7 @@ export default {
       pagination :{
         page:1,
         max:1,
-        items_per_page: 5
+        items_per_page: 9
       }
     }
   },
@@ -108,6 +114,7 @@ export default {
 
   methods: {
     async getAllCandidates(){
+      this.loading = true;
       let lb='';
       let temp = [];
 
@@ -151,6 +158,7 @@ export default {
       console.log(temp)
       this.pagination.max = Math.ceil(temp.length/this.pagination.items_per_page);
       this.custodians = temp;
+      this.loading = false;
     },
 
     async getCustodians(lb='') {
