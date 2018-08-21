@@ -115,7 +115,7 @@
         <q-item-side icon="icon-topmenu-6" />
         <q-item-main :label="$t('default.profile')" sublabel="" />
       </q-item>
-      <q-item to="/custodians">
+      <q-item to="/votecustodians">
         <q-item-side icon="icon-ui-3" />
         <q-item-main :label="$t('default.custodians')" sublabel="" />
       </q-item>

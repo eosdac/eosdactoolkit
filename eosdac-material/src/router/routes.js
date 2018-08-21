@@ -10,7 +10,7 @@ export default [
       { path: 'settings', component: () => import('pages/settings') },
       { path: 'dashboard', component: () => import('pages/dashboard') },
       { path: 'workerproposals', component: () => import('pages/workerproposals') },
-      { path: 'custodians', component: () => import('pages/custodians') },
+      { path: 'votecustodians', component: () => import('pages/votecustodians') },
       { path: 'profile', component: () => import('pages/profile') },
       { path: 'constitution', component: () => import('pages/constitution') }
     ]

@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-// import Quasar from 'quasar'
-// console.log(Quasar.i18n.getLocale())
+import Quasar from 'quasar'
+console.log(Quasar.i18n.getLocale())
 
 import routes from './routes'
 
@@ -37,8 +37,8 @@ const Router = new VueRouter({
 //   import ('quasar-framework/i18n/' + language).then(lang => {
 //     console.log(lang)
 //     if (lang) {
-//       // Quasar.i18n.set(language);
-//       Quasar.i18n.locale = language
+//       Quasar.i18n.set(lang.default);
+//       // Quasar.i18n.locale = language
 //     }
 //   })
   

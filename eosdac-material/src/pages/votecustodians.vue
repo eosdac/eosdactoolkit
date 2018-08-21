@@ -6,9 +6,8 @@
   <!-- first column  -->
   <div class="col-sm-12 col-md-8" >
     <div>
-      <span class="q-display-1 q-mt-none ">Candidate List - {{custodians.length}}</span>
-      <p class="text-dimwhite">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam libero urna, efficitur at laoreet fermentum, facilisis in ex. Proin luctus erat sem, ut mollis dui laoreet id. Curabitur eleifend ante in lacus rutrum dapibus. Nulla sit amet maximus metus, ac interdum dui. Aliquam placerat nisl eu bibendum dictum. Integer pharetra diam pretium felis venenatis, in aliquam ex imperdiet. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
-      </p>
+      <span class="q-display-1 q-mt-none ">{{ $t('vote_custodians.candidate_list') }} - {{custodians.length}}</span>
+      <p class="text-dimwhite">{{ $t('vote_custodians.description_main') }}</p>
 
       <div class="bg-dark2 q-pa-md q-mb-md shadow-5 round-borders" v-if="!loading">
         <q-pagination v-show="pagination.max > 1" v-model="pagination.page" :min="1" :max="pagination.max" direction-links/>
@@ -29,15 +28,15 @@
   <!-- second column -->
   <div class="col-sm-12 col-md-4" >
     <div>
-      <span class="q-display-1">My Votes - {{getSelectedCand.length}}</span>
-      <p class="text-dimwhite">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam libero urna, efficitur at laoreet fermentum, facilisis in ex. Proin luctus erat sem, ut mollis dui laoreet id.</p>
+      <span class="q-display-1">{{ $t('vote_custodians.my_votes') }} - {{getSelectedCand.length}}</span>
+      <p class="text-dimwhite">{{ $t('vote_custodians.description_side') }}</p>
       <q-card class="q-pa-lg q-mt-md" style="background:#32363F;">
         <q-btn style="font-weight: 300;" class="full-width items-baseline" color="primary" size="xl" @click="voteForCandidates">
           <div style="width:55px;display:inlineblock">
             <q-icon size="50px" class="float-left" name="icon-ui-3"></q-icon>
           </div>
           <div style="display:inline-block" >
-            Submit my Votes
+            {{ $t('vote_custodians.submit_my_votes') }}
           </div>
         </q-btn>
         <q-list class="q-mt-md">
@@ -62,7 +61,7 @@
     </div>
   </div>
 </div><!-- end row -->
-<LoadingSpinner :visible="loading" :text="$t('loading_candidates')" />
+<LoadingSpinner :visible="loading" :text="$t('vote_custodians.loading_candidates')" />
 </q-page>
 </template>
 
@@ -74,7 +73,7 @@ import {
   mapGetters
 } from 'vuex'
 export default {
-  name: 'Custodians',
+  name: 'Votecustodians',
   components: {
     Transaction,
     Candidate,
