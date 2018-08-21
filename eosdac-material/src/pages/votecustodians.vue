@@ -11,7 +11,7 @@
 
       <div class="bg-dark2 q-pa-md q-mb-md shadow-5 round-borders" v-if="!loading" >
         <q-search dark color="primary" class="q-mb-md" v-model="filter" :placeholder="$t('vote_custodians.search')" />
-        <q-pagination v-show="pagination.max > 1" v-model="pagination.page" :min="1" :max="pagination.max" direction-links/>
+        <q-pagination v-show="true" v-model="pagination.page" :min="1" :max="calcMax" direction-links/>
         <q-select
           class="q-mt-md"
           style="width:50px"
@@ -95,7 +95,6 @@ export default {
       page_content:[],
       pagination :{
         page:1,
-        max:1,
         items_per_page: 6
       },
       filter : ''
@@ -122,8 +121,10 @@ export default {
         filtered = this.custodians;
       }
 
-
       return filtered.slice((this.pagination.page-1) * this.pagination.items_per_page, this.pagination.page * this.pagination.items_per_page);
+    },
+    calcMax(){
+      return Math.ceil(this.custodians.length/this.pagination.items_per_page);
     }
   },
 
