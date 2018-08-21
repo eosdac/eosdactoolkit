@@ -56,33 +56,38 @@
       <q-item class="lg-hide xl-hide" @click.native="lockScatter()">
         <q-item-side>
           <q-item-tile color="negative" icon="icon-topmenu-4" />
-          </q-item-side>
-          <q-item-main :label="$t('default.log_out')" sublabel="" />
+        </q-item-side>
+        <q-item-main :label="$t('default.log_out')" sublabel="" />
       </q-item>
-      <q-item class="lg-hide xl-hide">
+      <q-item v-if="getRegistered" class="lg-hide xl-hide">
         <q-item-side>
           <q-item-tile color="white" icon="icon-dac-balance" />
         </q-item-side>
-          <q-item-main v-if="getRegistered" class="text-positive"  :sublabel="$t('default.member_status')">
-            <b>{{ $t('default.registered') }}</b>
-          </q-item-main>
-          <q-item-main v-else class="text-negative" :sublabel="$t('default.member_status')">
-            <b>{{ $t('default.not_registered') }}</b>
-          </q-item-main>
-          <q-item-side right>
-          <q-item-tile v-if="!getRegistered" color="white" icon="icon-ui-11" />
-          </q-item-side>
-          <q-popover v-if="!getRegistered" fit>
-            <q-list class="bg-dark2" dark link>
-              <q-item @click.native="$refs.Multi.init('sign')" dark>
-                <q-item-side>
-                  <q-item-tile icon="icon-register-3">
-                  </q-item-tile>
-                  {{ $t('default.sign_the_constitution') }}
-                </q-item-side>
-              </q-item>
-            </q-list>
-          </q-popover>
+        <q-item-main class="text-positive" :sublabel="$t('default.member_status')">
+          <b>{{ $t('default.registered') }}</b>
+        </q-item-main>
+      </q-item>
+      <q-item v-else class="lg-hide xl-hide">
+        <q-item-side>
+          <q-item-tile color="white" icon="icon-dac-balance" />
+        </q-item-side>
+        <q-item-main class="text-negative" :sublabel="$t('default.member_status')">
+          <b>{{ $t('default.not_registered') }}</b>
+        </q-item-main>
+        <q-item-side right>
+          <q-item-tile color="white" icon="icon-ui-11" />
+        </q-item-side>
+        <q-popover v-if="!getRegistered" class="lg-hide xl-hide" fit>
+          <q-list class="bg-dark2" dark link>
+            <q-item @click.native="$refs.Multi.init('sign')" dark>
+              <q-item-side>
+                <q-item-tile icon="icon-register-3">
+                </q-item-tile>
+                {{ $t('default.sign_the_constitution') }}
+              </q-item-side>
+            </q-item>
+          </q-list>
+        </q-popover>
       </q-item>
       <q-item-separator class="lg-hide xl-hide" />
       <!--<q-item to="/dashboard">
@@ -119,12 +124,12 @@
         <q-item-main :label="$t('default.worker_proposals')" sublabel="" />
       </q-item>
     </q-list>
-    <q-list v-else  no-border link inset-delimiter dark>
+    <q-list v-else no-border link inset-delimiter dark>
       <q-item @click.native="unlockAccount()">
         <q-item-side>
           <q-item-tile color="positive" icon="icon-topmenu-1" />
-          </q-item-side>
-          <q-item-main :label="$t('default.log_in')" sublabel="" />
+        </q-item-side>
+        <q-item-main :label="$t('default.log_in')" sublabel="" />
       </q-item>
     </q-list>
   </q-layout-drawer>
