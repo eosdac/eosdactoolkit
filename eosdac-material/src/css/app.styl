@@ -119,37 +119,31 @@ use these when you need to change additional
 styles*/
 
 /*xs  576px Extra small sized window*/
-@media only screen and (min-width: 576px) {
+@media only screen and (max-width: 575px) {
 
 }
 
 /*sm  768px Small sized window*/
-@media only screen and (max-width: 768px) {
-    .wp_col{
+@media only screen and (min-width: 576px) and (max-width: 767px) {
+  /*.wp_col{
       border-left:0 !important;
       border-top:1px solid rgba(255,255,255,0.5);
       margin-bottom:15px !important;
       padding-top:20px !important;
-
-
-  }
-
+  }*/
 }
 /*md  992px Medium-sized window*/
-@media only screen and (min-width: 992px) {
-
-}
-@media only screen and (max-width: 1199px) {
-  .hide_md_and_smaller {
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  /*.hide_md_and_smaller {
     display: none !important;
-  }
-
+  }*/
 }
+
 /*lg  1200px  Large sized window*/
-@media only screen and (min-width: 1200px) {
-  .hide_lg_and_bigger {
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+  /*.hide_lg_and_bigger {
     display: none !important;
-  }
+  }*/
 }
 /*xl  Infinite  Extra large sized window*/
 @media only screen and (min-width: 1200px) {
