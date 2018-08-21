@@ -1,6 +1,7 @@
 
 export default [
   {
+    // path: '/:lang',
     path: '/',
     component: () => import('layouts/default'),
     children: [
