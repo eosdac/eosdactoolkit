@@ -10,7 +10,7 @@
           <q-icon v-else name="menu" />
         </q-btn>
       </q-toolbar-title>
-      <div class="hide_md_and_smaller" v-if="getImported">
+      <div class="xs-hide sm-hide md-hide" v-if="getImported">
         <MenuDropdown class="no-pointer-events" v-if="getAccountName && getRegistered" iconColor="white" :label="$t('default.member_status')" :statusLabel="1" :sublabel="$t('default.registered')" icon="icon-dac-balance" />
         <MenuDropdown v-if="getAccountName && !getRegistered" iconColor="white" :label="$t('default.member_status')" :statusLabel="2" :sublabel="$t('default.not_registered')" icon="icon-dac-balance" :iconRight="true">
           <q-list class="bg-dark2" dark link>
@@ -53,13 +53,13 @@
   </q-layout-header>
   <q-layout-drawer v-model="leftDrawerOpen" content-class="bg-dark2">
     <q-list v-if="getAccountName" no-border link inset-delimiter dark>
-      <q-item class="hide_lg_and_bigger" @click.native="lockScatter()">
+      <q-item class="lg-hide xl-hide" @click.native="lockScatter()">
         <q-item-side>
           <q-item-tile color="negative" icon="icon-topmenu-4" />
           </q-item-side>
           <q-item-main :label="$t('default.log_out')" sublabel="" />
       </q-item>
-      <q-item class="hide_lg_and_bigger">
+      <q-item class="lg-hide xl-hide">
         <q-item-side>
           <q-item-tile color="white" icon="icon-dac-balance" />
         </q-item-side>
@@ -84,7 +84,7 @@
             </q-list>
           </q-popover>
       </q-item>
-      <q-item-separator class="hide_lg_and_bigger" />
+      <q-item-separator class="lg-hide xl-hide" />
       <!--<q-item to="/dashboard">
         <q-item-side icon="icon-menu-1" />
         <q-item-main label="Dashboard" sublabel="" />
