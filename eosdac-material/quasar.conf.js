@@ -111,7 +111,8 @@ module.exports = function(ctx) {
         'QProgress',
         'QSlideTransition',
         'QRadio',
-        'QPagination'
+        'QPagination',
+        'QSearch'
 
 
 

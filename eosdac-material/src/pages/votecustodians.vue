@@ -9,9 +9,19 @@
       <span class="q-display-1 q-mt-none ">{{ $t('vote_custodians.candidate_list') }} - {{custodians.length}}</span>
       <p class="text-dimwhite">{{ $t('vote_custodians.description_main') }}</p>
 
-      <div class="bg-dark2 q-pa-md q-mb-md shadow-5 round-borders" v-if="!loading">
+      <div class="bg-dark2 q-pa-md q-mb-md shadow-5 round-borders" v-if="!loading" >
+        <q-search dark color="primary" class="q-mb-md" v-model="filter" :placeholder="$t('vote_custodians.search')" />
         <q-pagination v-show="pagination.max > 1" v-model="pagination.page" :min="1" :max="pagination.max" direction-links/>
+        <q-select
+          class="q-mt-md"
+          style="width:50px"
+          v-model="pagination.items_per_page"
+          dark
+         :options="[{label:'2', value:2}, {label:'4', value:4}, {label:'6', value:6}, {label:'8', value:8}, {label:'10', value:10}]"
+        />
+
       </div>
+
       <Candidate 
         v-for="(candidate, index) in paginate" 
         :key="candidate.candidate_name" 
@@ -19,9 +29,7 @@
         @profile ="addProfile" 
         @clickvotefor="addToVoteList(candidate.candidate_name)"  
       /> 
-      <div class="bg-dark2 q-pa-md shadow-5 round-borders" v-if="!loading">
-        <q-pagination v-show="pagination.max > 1" v-model="pagination.page" :min="1" :max="pagination.max" direction-links/>
-      </div>
+
 
     </div>
   </div>
@@ -88,8 +96,9 @@ export default {
       pagination :{
         page:1,
         max:1,
-        items_per_page: 9
-      }
+        items_per_page: 6
+      },
+      filter : ''
     }
   },
 
@@ -102,7 +111,19 @@ export default {
       return selected;
     },
     paginate(){
-      return this.custodians.slice((this.pagination.page-1) * this.pagination.items_per_page, this.pagination.page * this.pagination.items_per_page);
+      let filtered;
+
+      if(this.filter != ''){
+        filtered = this.custodians.filter(cand => {
+            return cand.candidate_name.indexOf(this.filter) !== -1;
+        });
+      }
+      else{
+        filtered = this.custodians;
+      }
+
+
+      return filtered.slice((this.pagination.page-1) * this.pagination.items_per_page, this.pagination.page * this.pagination.items_per_page);
     }
   },
 
