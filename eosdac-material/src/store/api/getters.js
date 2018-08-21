@@ -53,3 +53,7 @@ export const getRicardians = (state) => {
 export const getNotification = (state) => {
   return state.notification
 }
+
+export const getConfig = (state) => {
+  return state.clientConfig
+}

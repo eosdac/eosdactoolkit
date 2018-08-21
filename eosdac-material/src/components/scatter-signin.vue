@@ -65,7 +65,7 @@ export default {
       }
       let network2 = {
         blockchain: 'eos',
-        chainId: this.$configFile.network.chainId,
+        chainId: current.chainId,
         protocol: current.httpEndpoint.split(':')[0].replace(/\//g, ''),
         host: current.httpEndpoint.split(':')[1].replace(/\//g, ''),
         port: current.httpEndpoint.split(':')[2] || pp

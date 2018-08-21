@@ -15,9 +15,7 @@ const store = new Vuex.Store({
     key: 'account',
     paths: [
       'account.imported',
-      //'account.registered',
       'account.useScatter',
-      //'account.info',
       'account.pkeys',
       'account.lastUnlock',
       'account.autolock',
@@ -33,8 +31,7 @@ const store = new Vuex.Store({
       'api.activeEndpointIndex',
       'api.checkIntervalMilSec',
       'api.connectionTimeoutMilSec',
-      'api.endpoints',
-      //'api.lastGetInfo'
+      'api.endpoints'
     ],
     //filter: mutation => (mutation.payload.save)? true : false
     //filter: mutation => console.log(mutation)

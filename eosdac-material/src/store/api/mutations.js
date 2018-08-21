@@ -20,6 +20,10 @@ export const ADD_ENDPOINT = (state, payload) => {
   }
 }
 
+export const CLEAR_ENDPOINTS = (state) => {
+  state.endpoints = []
+}
+
 export const CHANGE_ENDPOINT = (state, url) => {
   let findEndpoint = state.endpoints.findIndex(findEndpoint => findEndpoint.httpEndpoint === url)
   state.activeEndpointIndex = findEndpoint
@@ -52,4 +56,8 @@ export const CLOSE_NOTIFICATION = (state) => {
 
 export const SET_CHAIN_ID = (state, id) => {
   state.chainId = id
+}
+
+export const SET_CONFIG = (state, config) => {
+  state.clientConfig = config
 }
