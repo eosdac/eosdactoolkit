@@ -90,6 +90,7 @@ module.exports = function(ctx) {
         'QAlert',
         'Dialog',
         'QSpinner',
+        'QSpinnerOval',
         'QInnerLoading',
         'QCard',
         'QCardTitle',
@@ -111,10 +112,9 @@ module.exports = function(ctx) {
         'QProgress',
         'QSlideTransition',
         'QRadio',
-        'QPagination'
-
-
-
+        'QPagination',
+        'QSearch',
+        'QSlider'
       ],
       directives: [
         'Ripple',

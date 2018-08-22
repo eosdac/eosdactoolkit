@@ -10,7 +10,7 @@
           <q-icon v-else name="menu" />
         </q-btn>
       </q-toolbar-title>
-      <div class="hide_md_and_smaller" v-if="getImported">
+      <div class="xs-hide sm-hide md-hide" v-if="getImported">
         <MenuDropdown class="no-pointer-events" v-if="getAccountName && getRegistered" iconColor="white" :label="$t('default.member_status')" :statusLabel="1" :sublabel="$t('default.registered')" icon="icon-dac-balance" />
         <MenuDropdown v-if="getAccountName && !getRegistered" iconColor="white" :label="$t('default.member_status')" :statusLabel="2" :sublabel="$t('default.not_registered')" icon="icon-dac-balance" :iconRight="true">
           <q-list class="bg-dark2" dark link>
@@ -53,38 +53,43 @@
   </q-layout-header>
   <q-layout-drawer v-model="leftDrawerOpen" content-class="bg-dark2">
     <q-list v-if="getAccountName" no-border link inset-delimiter dark>
-      <q-item class="hide_lg_and_bigger" @click.native="lockScatter()">
+      <q-item class="lg-hide xl-hide" @click.native="lockScatter()">
         <q-item-side>
           <q-item-tile color="negative" icon="icon-topmenu-4" />
-          </q-item-side>
-          <q-item-main :label="$t('default.log_out')" sublabel="" />
+        </q-item-side>
+        <q-item-main :label="$t('default.log_out')" sublabel="" />
       </q-item>
-      <q-item class="hide_lg_and_bigger">
+      <q-item v-if="getRegistered" class="lg-hide xl-hide">
         <q-item-side>
           <q-item-tile color="white" icon="icon-dac-balance" />
         </q-item-side>
-          <q-item-main v-if="getRegistered" class="text-positive"  :sublabel="$t('default.member_status')">
-            <b>{{ $t('default.registered') }}</b>
-          </q-item-main>
-          <q-item-main v-else class="text-negative" :sublabel="$t('default.member_status')">
-            <b>{{ $t('default.not_registered') }}</b>
-          </q-item-main>
-          <q-item-side right>
-          <q-item-tile v-if="!getRegistered" color="white" icon="icon-ui-11" />
-          </q-item-side>
-          <q-popover v-if="!getRegistered" fit>
-            <q-list class="bg-dark2" dark link>
-              <q-item @click.native="$refs.Multi.init('sign')" dark>
-                <q-item-side>
-                  <q-item-tile icon="icon-register-3">
-                  </q-item-tile>
-                  {{ $t('default.sign_the_constitution') }}
-                </q-item-side>
-              </q-item>
-            </q-list>
-          </q-popover>
+        <q-item-main class="text-positive" :sublabel="$t('default.member_status')">
+          <b>{{ $t('default.registered') }}</b>
+        </q-item-main>
       </q-item>
-      <q-item-separator class="hide_lg_and_bigger" />
+      <q-item v-else class="lg-hide xl-hide">
+        <q-item-side>
+          <q-item-tile color="white" icon="icon-dac-balance" />
+        </q-item-side>
+        <q-item-main class="text-negative" :sublabel="$t('default.member_status')">
+          <b>{{ $t('default.not_registered') }}</b>
+        </q-item-main>
+        <q-item-side right>
+          <q-item-tile color="white" icon="icon-ui-11" />
+        </q-item-side>
+        <q-popover v-if="!getRegistered" class="lg-hide xl-hide" fit>
+          <q-list class="bg-dark2" dark link>
+            <q-item @click.native="$refs.Multi.init('sign')" dark>
+              <q-item-side>
+                <q-item-tile icon="icon-register-3">
+                </q-item-tile>
+                {{ $t('default.sign_the_constitution') }}
+              </q-item-side>
+            </q-item>
+          </q-list>
+        </q-popover>
+      </q-item>
+      <q-item-separator class="lg-hide xl-hide" />
       <!--<q-item to="/dashboard">
         <q-item-side icon="icon-menu-1" />
         <q-item-main label="Dashboard" sublabel="" />
@@ -111,7 +116,7 @@
         <q-item-side icon="icon-topmenu-6" />
         <q-item-main :label="$t('default.profile')" sublabel="" />
       </q-item>
-      <q-item to="/custodians">
+      <q-item to="/votecustodians">
         <q-item-side icon="icon-ui-3" />
         <q-item-main :label="$t('default.custodians')" sublabel="" />
       </q-item>
@@ -121,12 +126,12 @@
       </q-item>
       -->
     </q-list>
-    <q-list v-else  no-border link inset-delimiter dark>
+    <q-list v-else no-border link inset-delimiter dark>
       <q-item @click.native="unlockAccount()">
         <q-item-side>
           <q-item-tile color="positive" icon="icon-topmenu-1" />
-          </q-item-side>
-          <q-item-main :label="$t('default.log_in')" sublabel="" />
+        </q-item-side>
+        <q-item-main :label="$t('default.log_in')" sublabel="" />
       </q-item>
     </q-list>
   </q-layout-drawer>

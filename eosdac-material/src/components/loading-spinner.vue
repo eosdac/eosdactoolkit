@@ -1,7 +1,7 @@
 <template>
 <q-inner-loading dark  v-bind:visible="visible" v-on:change="$emit('change', $event.target.visible)">
-  <img class="animate-spin-reverse" style="max-height:25%;" src="/statics/eosdaclogo-spinner.png">
-  <q-alert :message="text" color="secondary">
+  <q-spinner-oval color="primary" style="opacity:1" size="25vh" />
+  <q-alert class="q-mt-md" :message="text" color="primary">
     <span class="q-headline text-white">{{text}}</span>
   </q-alert>
 </q-inner-loading>

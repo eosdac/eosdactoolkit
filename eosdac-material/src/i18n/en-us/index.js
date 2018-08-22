@@ -176,7 +176,21 @@ export default {
     settings: 'Settings',
     transfer: 'Transfer',
     transfer_to: 'Transfer to',
+    transfer_tokens: 'Transfer Tokens',
     wallet: 'Wallet',
+    total_staked: 'Total Staked',
+    send_tokens: 'Send Tokens',
+    total_eos_balance: 'Total eos balance',
+    liquid: 'liquid',
+    token_selection_and_quantity: 'Token Selection and Quantity',
+    select_token_to_send: 'Select Token to send',
+    select_from_list: 'Select from List',
+    quantity_to_send: 'Quantity to send',
+    destination: 'Destination',
+    manage_addressbook: 'Manage Addressbook',
+    or_select_address_book: 'Or select a Destination Account from AddressBook',
+    input_a_destination_account: 'Input a Destination Account',
+    total: 'total'
   },
   wp_member_view: {
     approx_USD: '(Aprox. xxxx USD)',
@@ -195,5 +209,15 @@ export default {
   worker_proposals: {
     APPROVED: 'APPROVED',
     OPEN: 'OPEN',
+  },
+  vote_custodians:{
+    loading_candidates: 'Loading candidates',
+    candidate_list: 'Candidate List',
+    my_votes: 'My Votes',
+    search: 'Search',
+    submit_my_votes: 'SUBMIT MY VOTES',
+    description_main: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam libero urna, efficitur at laoreet fermentum, facilisis in ex. Proin luctus erat sem, ut mollis dui laoreet id. Curabitur eleifend ante in lacus rutrum dapibus. Nulla sit amet maximus metus, ac interdum dui. Aliquam placerat nisl eu bibendum dictum. Integer pharetra diam pretium felis venenatis, in aliquam ex imperdiet. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.',
+    description_side: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam libero urna, efficitur at laoreet fermentum, facilisis in ex. Proin luctus erat sem, ut mollis dui laoreet id.',
+
   }
 }

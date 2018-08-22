@@ -5,31 +5,38 @@
     <template slot="header" >
       <q-item-side left >
         <div class="row">
-          <q-btn v-if="!data.selected" class="q-mr-md" icon="icon-plus" round color="primary" style="height:55px;width:55px;margin-top:3px;" @click="$emit('clickvotefor')" />
-          <q-btn v-else class="q-mr-md" icon="icon-ui-6" round color="positive" style="height:55px;width:55px;margin-top:3px;" />
-          <q-item-tile avatar>
+          <q-btn v-if="!data.selected" class="q-mr-md" icon="icon-plus" round color="primary" style="height:55px;width:55px;margin-top:0px;" @click="$emit('clickvotefor')" />
+          <q-btn v-else class="q-mr-md" icon="icon-ui-6" round color="positive" style="height:55px;width:55px;margin-top:0px;" />
+          <q-item-tile avatar style="margin-top:-2px">
             <img style="height:60px;width:60px;" class="q-mr-md" :src="image_profile" @click="getProfileData" :name="data.candidate_name+'_pic'">
           </q-item-tile>
+<!--           <q-item-tile style="margin-top:3px">
+            <ProfilePic :url="image_profile" size= "60px" />
+          </q-item-tile> -->
         </div>
       </q-item-side>
       <q-item-main >
         <div class="q-ml-lg">{{data.candidate_name}}<br>xxxxxx</div>
       </q-item-main>
-      <span style=""></span>
     </template>
-    <div class="q-pt-sm" style="border-top:1px solid grey">
+    <div class="q-pt-sm q-pt-none" style="border-top:1px solid grey">
       <span>BIO</span>
       <div class="text-dimwhite" v-if="data.profile !== undefined">{{data.profile.description}}</div>
     </div>
   </q-collapsible>
+
 </div>
 
 </template>
 
 <script>
+import ProfilePic from 'components/profile-pic'
 
 export default {
   name: 'Candidate',
+  components: {
+    ProfilePic
+  },
   props: {
     data: Object,
 

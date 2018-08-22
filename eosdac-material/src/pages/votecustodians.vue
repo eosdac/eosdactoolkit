@@ -2,17 +2,29 @@
 <q-page class="text-white q-pa-md">
 <Transaction ref="Transaction" v-on:done="" />
 
-<div class="row gutter-sm">
+<div class="row gutter-md">
   <!-- first column  -->
   <div class="col-sm-12 col-md-8" >
     <div>
-      <span class="q-display-1 q-mt-none ">Candidate List - {{custodians.length}}</span>
-      <p class="text-dimwhite">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam libero urna, efficitur at laoreet fermentum, facilisis in ex. Proin luctus erat sem, ut mollis dui laoreet id. Curabitur eleifend ante in lacus rutrum dapibus. Nulla sit amet maximus metus, ac interdum dui. Aliquam placerat nisl eu bibendum dictum. Integer pharetra diam pretium felis venenatis, in aliquam ex imperdiet. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
-      </p>
+      <span class="q-display-1 q-mt-none ">{{ $t('vote_custodians.candidate_list') }} <span class="text-dimwhite">- {{custodians.length}}</span></span>
+      <p class="text-dimwhite">{{ $t('vote_custodians.description_main') }}</p>
 
-      <div class="bg-dark2 q-pa-md q-mb-md shadow-5 round-borders" v-if="!loading">
-        <q-pagination v-show="pagination.max > 1" v-model="pagination.page" :min="1" :max="pagination.max" direction-links/>
+      <div class="row bg-dark2 q-pa-md q-mb-md shadow-5 round-borders justify-between" v-if="!loading" >
+        <q-search dark color="primary"  v-model="filter" :placeholder="$t('vote_custodians.search')" />
+        <div class="row inline items-center" style="font-size:12px;">
+          <span >Rows Per Page:</span>
+           <q-select
+              class="q-ml-md"
+              style="width:40px;"
+              hide-underline
+              v-model="pagination.items_per_page"
+              dark
+             :options="[{label:'2', value:2}, {label:'4', value:4}, {label:'6', value:6}, {label:'8', value:8}, {label:'10', value:10}]"
+            />
+            <q-pagination  v-show="true" v-model="pagination.page" :min="1" :max="pagination.max" :max-pages="6" direction-links size="12px" />
+        </div>
       </div>
+
       <Candidate 
         v-for="(candidate, index) in paginate" 
         :key="candidate.candidate_name" 
@@ -20,24 +32,38 @@
         @profile ="addProfile" 
         @clickvotefor="addToVoteList(candidate.candidate_name)"  
       /> 
-      <div class="bg-dark2 q-pa-md shadow-5 round-borders" v-if="!loading">
-        <q-pagination v-show="pagination.max > 1" v-model="pagination.page" :min="1" :max="pagination.max" direction-links/>
+
+      <div class="row bg-dark2 q-pa-md q-mb-md shadow-5 round-borders justify-between" v-if="!loading" >
+        <q-search dark color="primary"  v-model="filter" :placeholder="$t('vote_custodians.search')" />
+        <div class="row inline items-center" style="font-size:12px;">
+          <span >Rows Per Page:</span>
+           <q-select
+              class="q-ml-md"
+              style="width:40px;"
+              hide-underline
+              v-model="pagination.items_per_page"
+              dark
+             :options="[{label:'2', value:2}, {label:'4', value:4}, {label:'6', value:6}, {label:'8', value:8}, {label:'10', value:10}]"
+            />
+            <q-pagination  v-show="true" v-model="pagination.page" :min="1" :max="pagination.max" :max-pages="6" direction-links size="12px" />
+        </div>
       </div>
+
 
     </div>
   </div>
   <!-- second column -->
   <div class="col-sm-12 col-md-4" >
     <div>
-      <span class="q-display-1">My Votes - {{getSelectedCand.length}}</span>
-      <p class="text-dimwhite">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam libero urna, efficitur at laoreet fermentum, facilisis in ex. Proin luctus erat sem, ut mollis dui laoreet id.</p>
+      <span class="q-display-1">{{ $t('vote_custodians.my_votes') }} <span class="text-dimwhite">- {{getSelectedCand.length}}</span></span>
+      <p class="text-dimwhite">{{ $t('vote_custodians.description_side') }}</p>
       <q-card class="q-pa-lg q-mt-md" style="background:#32363F;">
         <q-btn style="font-weight: 300;" class="full-width items-baseline" color="primary" size="xl" @click="voteForCandidates">
           <div style="width:55px;display:inlineblock">
             <q-icon size="50px" class="float-left" name="icon-ui-3"></q-icon>
           </div>
           <div style="display:inline-block" >
-            Submit my Votes
+            {{ $t('vote_custodians.submit_my_votes') }}
           </div>
         </q-btn>
         <q-list class="q-mt-md">
@@ -62,7 +88,7 @@
     </div>
   </div>
 </div><!-- end row -->
-<LoadingSpinner :visible="loading" :text="$t('loading_candidates')" />
+<LoadingSpinner :visible="loading" :text="$t('vote_custodians.loading_candidates')" />
 </q-page>
 </template>
 
@@ -74,7 +100,7 @@ import {
   mapGetters
 } from 'vuex'
 export default {
-  name: 'Custodians',
+  name: 'Votecustodians',
   components: {
     Transaction,
     Candidate,
@@ -89,8 +115,9 @@ export default {
       pagination :{
         page:1,
         max:1,
-        items_per_page: 9
-      }
+        items_per_page: 6
+      },
+      filter : ''
     }
   },
 
@@ -103,7 +130,19 @@ export default {
       return selected;
     },
     paginate(){
-      return this.custodians.slice((this.pagination.page-1) * this.pagination.items_per_page, this.pagination.page * this.pagination.items_per_page);
+      let filtered;
+
+      if(this.filter != ''){
+        filtered = this.custodians.filter(cand => {
+            return cand.candidate_name.indexOf(this.filter) !== -1;
+        });
+      }
+      else{
+        filtered = this.custodians;
+      }
+      this.pagination.max = Math.ceil(filtered.length/this.pagination.items_per_page)
+
+      return filtered.slice((this.pagination.page-1) * this.pagination.items_per_page, this.pagination.page * this.pagination.items_per_page);
     }
   },
 
@@ -156,7 +195,6 @@ export default {
       //   return c;
       // })
       console.log(temp)
-      this.pagination.max = Math.ceil(temp.length/this.pagination.items_per_page);
       this.custodians = temp;
       this.loading = false;
     },

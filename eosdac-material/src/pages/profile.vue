@@ -90,17 +90,7 @@
 
 }
 
-.fade-enter-active {
-  transition: opacity 1s ease-in-out;
-}
 
-.fade-enter-to {
-  opacity: 1;
-}
-
-.fade-enter {
-  opacity: 0;
-}
 .fitheight{
   height:100%;
 }
