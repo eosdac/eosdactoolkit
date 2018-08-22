@@ -190,7 +190,7 @@ export default {
     manage_addressbook: 'Manage Addressbook',
     or_select_address_book: 'Or select a Destination Account from AddressBook',
     input_a_destination_account: 'Input a Destination Account',
-    total: 'total'
+    total: 'total',
   },
   wp_member_view: {
     approx_USD: '(Aprox. xxxx USD)',
