@@ -202,7 +202,8 @@ export default {
       getLastUnlock: 'account/getLastUnlock',
       getTokenBalance: 'account/getTokenBalance',
       getAccount: 'account/getAccount',
-      getMainCurrencyBalance: 'account/getMainCurrencyBalance'
+      getMainCurrencyBalance: 'account/getMainCurrencyBalance',
+      getLanguage: 'account/getLanguage'
     })
   },
   methods: {
@@ -237,7 +238,12 @@ export default {
   },
   created() {
     //language detection
-    let lang = this.$q.i18n.getLocale()
+    let lang
+    if (this.getLanguage) {
+      lang = this.getLanguage
+    } else {
+      lang = this.$q.i18n.getLocale()
+    }
     this.$i18n.locale = lang
     import ('quasar-framework/i18n/' + lang).then(lang => {
       if (lang) {

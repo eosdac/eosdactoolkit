@@ -4,12 +4,19 @@ import messages from 'src/i18n'
 export default ({
   app,
   Vue,
+  store,
   router
 }) => {
   Vue.use(VueI18n)
+  let la
+  if (store.getters['account/getLanguage']) {
+    la = store.getters['account/getLanguage']
+  } else {
+    la = 'en-us'
+  }
   // Set i18n instance on app
   app.i18n = new VueI18n({
-    locale: 'en-us',
+    locale: la,
     fallbackLocale: 'en-us',
     messages: {
       'de': messages['de'],
