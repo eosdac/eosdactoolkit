@@ -65,3 +65,7 @@ export const ADD_TRANSFER_HISTORY = (state, payload) => {
 export const RESET_STATE = (state) => {
     Object.assign(state, getDefaultState())
 }
+
+export const SET_LANGUAGE = (state, payload) => {
+    state.language = payload
+}

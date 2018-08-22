@@ -20,8 +20,16 @@
 </template>
 
 <script>
+import {
+  mapGetters
+} from 'vuex'
 export default {
   name: 'LangSelector',
+  computed: {
+    ...mapGetters({
+      getLanguage: 'account/getLanguage'
+    })
+  },
   data () {
     return {
       lang: this.$q.i18n.lang
@@ -29,11 +37,12 @@ export default {
   },
   watch: {
     lang (lang) {
-      // dynamic import, so loading on demand only
+      this.$store.commit('account/SET_LANGUAGE', lang)
       import('quasar-framework/i18n/' + lang).then(lang => {
         this.$q.i18n.set(lang.default)
       })
       this.$i18n.locale = lang
+
     }
   }
 }
