@@ -238,14 +238,8 @@ export default {
   },
   created() {
     //language detection
-    let lang
-    if (this.getLanguage) {
-      lang = this.getLanguage
-    } else {
-      lang = this.$q.i18n.getLocale()
-    }
-    this.$i18n.locale = lang
-    import ('quasar-framework/i18n/' + lang).then(lang => {
+    let qLang = (this.getLanguage === 'en-gb')? 'en-uk': this.getLanguage
+    import ('quasar-framework/i18n/' + qLang).then(lang => {
       if (lang) {
         this.$q.i18n.set(lang.default)
       }

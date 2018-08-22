@@ -33,6 +33,9 @@ export default {
     LoadingSpinner,
     ScatterTutorial
   },
+  props: {
+    skipSelection: Boolean
+  },
   data() {
     return {
       loading: false,
@@ -49,6 +52,11 @@ export default {
       hasScatter: 'api/hasScatter',
       getScatter: 'api/getScatter'
     })
+  },
+  mounted () {
+    if (this.skipSelection) {
+      this.useScatter()
+    }
   },
   methods: {
     async useScatter() {

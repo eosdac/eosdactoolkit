@@ -8,15 +8,19 @@ export default ({
   router
 }) => {
   Vue.use(VueI18n)
-  let la
+  let lang
   if (store.getters['account/getLanguage']) {
-    la = store.getters['account/getLanguage']
+    lang = store.getters['account/getLanguage']
   } else {
-    la = 'en-us'
+    if (typeof(messages[browserLocale()]) === 'undefined') {
+      lang = 'en-us'
+    } else {
+      lang = browserLocale()
+    }
   }
-  // Set i18n instance on app
+  store.commit('account/SET_LANGUAGE', lang)
   app.i18n = new VueI18n({
-    locale: la,
+    locale: lang,
     fallbackLocale: 'en-us',
     messages: {
       'de': messages['de'],
@@ -31,4 +35,20 @@ export default ({
       'zh-hans': messages['zh-hans'],
     }
   })
+
+}
+
+function browserLocale() {
+  let lang
+  if (navigator.languages && navigator.languages.length) {
+    // latest versions of Chrome and Firefox set this correctly
+    lang = navigator.languages[0]
+  } else if (navigator.userLanguage) {
+    // IE only
+    lang = navigator.userLanguage
+  } else {
+    // latest versions of Chrome, Firefox, and Safari set this correctly
+    lang = navigator.language
+  }
+  return lang.toLowerCase()
 }
