@@ -370,8 +370,12 @@ export default {
       getAccountResources: 'account/getAccountResources'
     }),
     getMainCurrencyStaked() {
+      let mainCurrencyStaked = 0
       let res = this.getAccount.self_delegated_bandwidth
-      return (parseFloat(res.net_weight) + parseFloat(res.cpu_weight))
+      if (res) {
+        mainCurrencyStaked = (parseFloat(res.net_weight) + parseFloat(res.cpu_weight))
+      }
+      return mainCurrencyStaked
     }
   },
   mounted() {
