@@ -46,7 +46,7 @@ export default {
   },
   nodeselector: {
     automatic_connection: 'Automatische Verbindung',
-    choose_endpoint: 'Wählen Sie einen Endpunkt aus der Liste,
+    choose_endpoint: 'Wählen Sie einen Endpunkt aus der Liste',
     click_connect_below: 'Klicken Sie unten auf <b> Verbinden </ b>, um automatisch eine Verbindung zum schnellsten Endpunkt zu Ihrem Standort herzustellen.',
     connect: 'Verbinden',
     connecting: 'Verbinde ...',

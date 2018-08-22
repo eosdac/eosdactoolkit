@@ -1,6 +1,218 @@
 <template>
-<q-page class="text-white q-pa-md">
-  <div class="row">
+<q-page class="relative-position" style="overflow-x: hidden;">
+  <div class="gradient-bg-primary q-px-md q-pt-md">
+    <div class="row">
+      <div class="col-12">
+        <h4 class="q-display-1 q-mb-sm q-mt-none">{{ $t("wallet.wallet") }}</h4>
+      </div>
+    </div>
+    <div class="row gutter-md">
+      <div class="col-lg-12 col-xl-4 relative-position">
+        <span class="q-subheading text-dimwhite uppercase">{{ $t("wallet.total_eos_balance") }}</span>
+        <h4 class="q-my-sm text-no-wrap shrink_balance"><span class="text-weight-thin">{{getMainCurrencyBalance}}</span> {{mainCurrencyName}}</h4>
+        <div class="blur-details q-px-md q-py-md" style="min-height:120px;margin-right:-16px;margin-left:-16px;">
+          <div class="row">
+            <div class="col-lg-12 col-xl-6">
+              <p class="q-subheading"><span class="text-dimwhite uppercase">{{ $t("wallet.total_staked") }}</span><br><span class="uppercase q-title">{{getMainCurrencyStaked}} {{mainCurrencyName}}</span></p>
+            </div>
+            <div class="col-lg-12 col-xl-6">
+              <p class="q-subheading"><span class="text-dimwhite uppercase">{{ $t("wallet.liquid") }}</span><br><span class="uppercase q-title">{{getMainCurrencyBalance}} {{mainCurrencyName}}</span></p>
+            </div>
+          </div>
+        </div>
+        <q-card class="bg-dark2 absolute lg-hide md-hide sm-hide xs-hide" style="bottom:-55px; left:33px; width:94%;">
+          <q-item>
+            <q-item-side>
+              <q-item-tile icon>
+                <q-icon color="positive" style="font-size:50px;" name="icon-ui-13" />
+              </q-item-tile>
+            </q-item-side>
+            <q-item-main class="q-pa-sm no-margin">
+              <span class="q-subheading text-dimwhite uppercase q-pl-sm">{{ $t("wallet.RAM") }}</span>
+              <p class="no-margin q-pl-sm">{{getAccountResources.ram.available}} % remaining</p>
+              <q-slider color="positive" readonly v-model="getAccountResources.ram.available" :min="0" :max="100" :step="1" />
+            </q-item-main>
+          </q-item>
+        </q-card>
+      </div>
+      <div class="col-lg-12 col-xl-4 relative-position">
+        <span class="q-subheading text-dimwhite uppercase">{{ $t("wallet.total") }} {{tokenName}}</span>
+        <h4 class="q-my-sm text-no-wrap shrink_balance"><span class="text-weight-thin">{{getTokenBalance}}</span> {{tokenName}}</h4>
+        <div class="blur-details q-px-md q-py-md" style="min-height:120px;margin-right:-16px;margin-left:-16px;">
+          <div class="row">
+            <div class="col-lg-12 col-xl-6">
+              <!--<p class="q-subheading"><span class="text-dimwhite uppercase">{{ $t("wallet.total_staked") }}</span><br><span class="uppercase q-title">{{getMainCurrencyBalance}} {{mainCurrencyName}}</span></p>-->
+            </div>
+            <div class="col-lg-12 col-xl-6">
+              <p class="q-subheading"><span class="text-dimwhite uppercase">{{ $t("wallet.liquid") }}</span><br><span class="uppercase q-title">{{getTokenBalance}} {{tokenName}}</span></p>
+            </div>
+          </div>
+        </div>
+        <q-card class="bg-dark2 absolute lg-hide md-hide sm-hide xs-hide" style="bottom:-55px; left:33px; width:94%">
+          <q-item>
+            <q-item-side>
+              <q-item-tile icon>
+                <q-icon color="blue" style="font-size:50px;" name="icon-ui-9" />
+              </q-item-tile>
+            </q-item-side>
+            <q-item-main class="q-pa-sm no-margin">
+              <span class="q-subheading text-dimwhite uppercase q-pl-sm">{{ $t("wallet.CPU") }}</span>
+              <p class="no-margin q-pl-sm">{{getAccountResources.cpu.available}} % remaining</p>
+              <q-slider color="blue" readonly v-model="getAccountResources.cpu.available" :min="0" :max="100" :step="1" label snap />
+            </q-item-main>
+          </q-item>
+        </q-card>
+      </div>
+      <div class="col-lg-12 col-xl-4 relative-position">
+        <span class="q-subheading text-dimwhite uppercase">{{ $t("wallet.total_eos_balance") }}</span>
+        <h4 class="q-my-sm text-no-wrap shrink_balance"><span class="text-weight-thin">{{getMainCurrencyBalance}}</span> {{mainCurrencyName}}</h4>
+        <div class="blur-details q-px-md q-py-md" style="min-height:120px;margin-right:-16px;margin-left:-16px;">
+          <div class="row">
+            <div class="col-lg-12 col-xl-6">
+              <p class="q-subheading"><span class="text-dimwhite uppercase">{{ $t("wallet.total_staked") }}</span><br><span class="uppercase q-title">{{getMainCurrencyBalance}} {{mainCurrencyName}}</span></p>
+            </div>
+            <div class="col-lg-12 col-xl-6">
+              <p class="q-subheading"><span class="text-dimwhite uppercase">{{ $t("wallet.total_staked") }}</span><br><span class="uppercase q-title">{{getMainCurrencyBalance}} {{mainCurrencyName}}</span></p>
+            </div>
+          </div>
+        </div>
+        <q-card class="bg-dark2 absolute lg-hide md-hide sm-hide xs-hide" style="bottom:-55px; left:33px; width:94%">
+          <q-item>
+            <q-item-side>
+              <q-item-tile icon>
+                <q-icon color="red" style="font-size:50px;" name="icon-ui-14" />
+              </q-item-tile>
+            </q-item-side>
+            <q-item-main class="q-pa-sm no-margin">
+              <span class="q-subheading text-dimwhite uppercase q-pl-sm">{{ $t("wallet.network") }}</span>
+              <p class="no-margin q-pl-sm">{{getAccountResources.net.available}} % remaining</p>
+              <q-slider color="red" readonly v-model="getAccountResources.net.available" :min="0" :max="100" :step="0.001" label snap />
+            </q-item-main>
+          </q-item>
+        </q-card>
+      </div>
+    </div>
+  </div>
+
+  <div class="row q-px-lg">
+    <div class="col-12 xl-hide">
+      <q-item>
+        <q-item-side>
+          <q-item-tile icon>
+            <q-icon color="positive" style="font-size:50px;" name="icon-type-8" />
+          </q-item-tile>
+        </q-item-side>
+        <q-item-main class="q-pa-sm no-margin">
+          <span class="q-subheading text-dimwhite uppercase q-pl-sm">{{ $t("wallet.RAM") }}</span>
+          <p class="no-margin q-pl-sm">{{getAccountResources.ram.available}} % remaining</p>
+          <q-slider color="positive" readonly v-model="getAccountResources.ram.available" :min="0" :max="100" :step="1" />
+        </q-item-main>
+      </q-item>
+      <q-item>
+        <q-item-side>
+          <q-item-tile icon>
+            <q-icon color="blue" style="font-size:50px;" name="icon-ui-9" />
+          </q-item-tile>
+        </q-item-side>
+        <q-item-main class="q-pa-sm no-margin">
+          <span class="q-subheading text-dimwhite uppercase q-pl-sm">{{ $t("wallet.CPU") }}</span>
+          <p class="no-margin q-pl-sm">{{getAccountResources.cpu.available}} % remaining</p>
+          <q-slider color="blue" readonly v-model="getAccountResources.cpu.available" :min="0" :max="100" :step="1" />
+        </q-item-main>
+      </q-item>
+      <q-item>
+        <q-item-side>
+          <q-item-tile icon>
+            <q-icon color="red" style="font-size:50px;" name="icon-ui-10" />
+          </q-item-tile>
+        </q-item-side>
+        <q-item-main class="q-pa-sm no-margin">
+          <span class="q-subheading text-dimwhite uppercase q-pl-sm">{{ $t("wallet.network") }}</span>
+          <p class="no-margin q-pl-sm">{{getAccountResources.net.available}} % remaining</p>
+          <q-slider color="red" readonly v-model="getAccountResources.net.available" :min="0" :max="100" :step="1" />
+        </q-item-main>
+      </q-item>
+    </div>
+  </div>
+  <div class="row q-mt-xl q-px-md md-hide sm-hide xs-hide">
+    <div class="col-12 q-mt-lg">
+      <h4 class="q-display-1 q-mb-sm q-mt-none text-weight-thin">{{ $t("wallet.send_tokens") }}</h4>
+    </div>
+  </div>
+  <div class="row q-px-md lg-hide xl-hide">
+    <div class="col-12">
+      <h4 class="q-display-1 q-mb-sm q-mt-none text-weight-thin">{{ $t("wallet.send_tokens") }}</h4>
+    </div>
+  </div>
+  <div class="row q-px-md">
+    <div class="col-12 bg-dark2">
+      <div class="row gutter-xs">
+        <div class="col-lg-12 col-xl-4">
+          <q-card class="no-shadow">
+            <q-card-title>
+              <span class="q-title">{{ $t('wallet.token_selection_and_quantity') }}</span>
+            </q-card-title>
+            <q-card-main>
+              <q-field class="q-mb-md" :label="$t('wallet.select_token_to_send')" label-width="12" dark>
+                <q-select dark :placeholder="$t('wallet.select_from_list')" :options="[
+                  { label: mainCurrencyName,  value: mainCurrencyName },
+                  { label: tokenName, value: tokenName }
+                ]" v-model="tokenSelection" />
+              </q-field>
+              <q-field :label="$t('wallet.quantity_to_send')" :error="transferAmountError" :error-label="transferAmountErrorText" label-width="12">
+                <q-input :error="transferAmountError" placeholder="0.0000" v-model="transferAmount" type="number" :decimals="(tokenSelection === mainCurrencyName)?transferMainAmountDecimals : transferAmountDecimals" dark />
+              </q-field>
+            </q-card-main>
+          </q-card>
+        </div>
+        <div class="col-lg-12 col-xl-4">
+          <q-card class="no-shadow">
+            <q-card-title>
+              <span class="q-title">{{ $t('wallet.destination') }}</span>
+            </q-card-title>
+            <q-card-main>
+              <q-field class="q-mb-md" :label="$t('wallet.input_a_destination_account')" :error="transferToError" :error-label="transferToErrorText" label-width="12">
+                <q-input :error="transferToError" dark v-model="transferTo" />
+              </q-field>
+              <div class="row">
+                <div class="col-lg-12 col-xl-8">
+                  <q-field class="q-mb-md" :label="$t('wallet.or_select_address_book')" label-width="12" dark>
+                    <q-select dark :placeholder="$t('wallet.select_from_list')" :options="[
+                  { label: mainCurrencyName,  value: mainCurrencyName },
+                  { label: tokenName, value: tokenName }
+                ]" v-model="tokenSelection" />
+                  </q-field>
+                </div>
+                <div class="col-lg-12 col-xl-4 text-right">
+                  <q-btn no-caps dense class="q-mt-lg" flat color="p-light">{{ $t('wallet.manage_addressbook') }}</q-btn>
+                </div>
+              </div>
+            </q-card-main>
+          </q-card>
+        </div>
+        <div class="col-lg-12 col-xl-4">
+          <q-card class="no-shadow">
+            <q-card-title>
+              <span class="q-title">{{ $t('wallet.memo') }}</span>
+            </q-card-title>
+            <q-card-main>
+              <q-field dark label-width="12">
+                <q-input inverted rows="8" color="dark" max-height="200" type="textarea" v-model="transferMemo" dark />
+              </q-field>
+            </q-card-main>
+          </q-card>
+        </div>
+      </div>
+      <div class="row q-pa-xs">
+        <div class="col-12 relative-postition">
+          <q-btn color="primary" @click="transfer()" :disabled="badTransferTo || transferAmountError" class="q-ma-md float-right no-shadow"  :label="$t('wallet.transfer_tokens')" />
+        </div>
+      </div>
+    </div>
+  </div>
+  <Transaction ref="Transaction" v-on:done="lookupTokenBalance()" />
+  <LoadingSpinner :visible="loading" :text="loadingText" />
+  <!--<div class="row">
     <div class="col-xs-12 col-sm-12 col-md-8">
       <div class="row">
         <div class="col-xs-12">
@@ -101,21 +313,16 @@
         </div>
       </div>
     </div>
-    <!--<div class="col-xs-12 col-sm-12 col-md-4 q-pl-md">
-      <h4 class="q-display-1 q-mt-none q-mb-md">{{ $t("wallet.history") }}</h4>
-      <TransferHistory ref="History" />
-    </div>-->
   </div>
   </div>
   <Transaction ref="Transaction" v-on:done="lookupTokenBalance()" />
-  <LoadingSpinner :visible="loading" :text="loadingText" />
+  <LoadingSpinner :visible="loading" :text="loadingText" />-->
 </q-page>
 </template>
 
 <script>
 import Transaction from 'components/transaction'
 import LoadingSpinner from 'components/loading-spinner'
-//import TransferHistory from 'components/transfer-history'
 import {
   mapGetters
 } from 'vuex'
@@ -130,14 +337,15 @@ export default {
     return {
       loading: false,
       loadingText: '',
+      tokenSelection: '',
       tokenName: this.$configFile.network.tokenContract.token,
       mainCurrencyName: this.$configFile.network.mainCurrencyContract.token,
+      transferTo: '',
       transferToError: false,
       transferToErrorText: '',
-      transferTo: '',
+      transferAmount: 0,
       transferAmountError: false,
       transferAmountErrorText: '',
-      transferAmount: 0,
       transferAmountDecimals: this.$configFile.network.tokenContract.decimals,
       transferMainAmountError: false,
       transferMainAmountErrorText: '',
@@ -156,7 +364,11 @@ export default {
       getAccount: 'account/getAccount',
       getMainCurrencyBalance: 'account/getMainCurrencyBalance',
       getAccountResources: 'account/getAccountResources'
-    })
+    }),
+    getMainCurrencyStaked() {
+      let res = this.getAccount.total_resources
+      return Math.max(parseFloat(res.net_weight), parseFloat(res.cpu_weight))
+    }
   },
   mounted() {
     if (this.getAccountName) {
@@ -164,21 +376,22 @@ export default {
     }
   },
   methods: {
-    transferToken() {
-      this.$refs.Transaction.newTransaction(this.$configFile.network.tokenContract.name, 'transfer', {
-        from: this.getAccountName,
-        to: this.transferTo,
-        quantity: this.transferAmount.toFixed(this.$configFile.network.tokenContract.decimals) + ' ' + this.$configFile.network.tokenContract.token,
-        memo: this.transferMemo
-      })
-    },
-    transferMainCurrency() {
-      this.$refs.Transaction.newTransaction(this.$configFile.network.mainCurrencyContract.name, 'transfer', {
-        from: this.getAccountName,
-        to: this.transferTo,
-        quantity: this.transferMainAmount.toFixed(this.$configFile.network.mainCurrencyContract.decimals) + ' ' + this.$configFile.network.mainCurrencyContract.token,
-        memo: this.transferMemo
-      })
+    transfer () {
+      if(this.tokenSelection === this.tokenName) {
+        this.$refs.Transaction.newTransaction(this.$configFile.network.tokenContract.name, 'transfer', {
+          from: this.getAccountName,
+          to: this.transferTo,
+          quantity: this.transferAmount.toFixed(this.$configFile.network.tokenContract.decimals) + ' ' + this.$configFile.network.tokenContract.token,
+          memo: this.transferMemo
+        })
+      } else {
+        this.$refs.Transaction.newTransaction(this.$configFile.network.mainCurrencyContract.name, 'transfer', {
+          from: this.getAccountName,
+          to: this.transferTo,
+          quantity: this.transferAmount.toFixed(this.$configFile.network.mainCurrencyContract.decimals) + ' ' + this.$configFile.network.mainCurrencyContract.token,
+          memo: this.transferMemo
+        })
+      }
     },
     async lookupTokenBalance() {
       try {
@@ -187,7 +400,7 @@ export default {
         const balance = this.$store.dispatch('api/getTokenContractBalance')
         const mainBalance = this.$store.dispatch('api/getMainCurrencyBalance')
         const acc = this.$store.dispatch('api/updateAccountInfo')
-        let race = await Promise.race( [balance, mainBalance, acc] )
+        let race = await Promise.race([balance, mainBalance, acc])
         this.loading = false
       } catch (err) {
         this.loading = false
@@ -202,23 +415,22 @@ export default {
   },
   watch: {
     transferAmount(val) {
-      if (val > this.getTokenBalance || ((val + "").match(/\./g) || []).length > 1 || val < 0 || !val) {
-        this.transferAmountError = true
-        this.transferAmountErrorText = 'Invalid amount'
-        this.badTransferAmount = true
+      if (this.tokenSelection === this.tokenName) {
+        if (val > this.getTokenBalance || ((val + "").match(/\./g) || []).length > 1 || val < 0 || !val) {
+          this.transferAmountError = true
+          this.transferAmountErrorText = 'Invalid amount'
+        } else {
+          this.transferAmountError = false
+        }
+      } else if (this.tokenSelection === this.mainCurrencyName) {
+        if (val > this.getMainCurrencyBalance || ((val + "").match(/\./g) || []).length > 1 || val < 0 || !val) {
+          this.transferAmountError = true
+          this.transferAmountErrorText = 'Invalid amount'
+        } else {
+          this.transferAmountError = false
+        }
       } else {
         this.transferAmountError = false
-        this.badTransferAmount = false
-      }
-    },
-    transferMainAmount(val) {
-      if (val > this.getMainCurrencyBalance || ((val + "").match(/\./g) || []).length > 1 || val < 0 || !val) {
-        this.transferMainAmountError = true
-        this.transferMainAmountErrorText = 'Invalid amount'
-        this.badTransferMainAmount = true
-      } else {
-        this.transferMainAmountError = false
-        this.badTransferMainAmount = false
       }
     },
     transferTo(val) {
@@ -235,6 +447,12 @@ export default {
   }
 }
 </script>
+<style lang="stylus">
+@import '~variables'
 
-<style>
+.gradient-bg-primary
+  background-image linear-gradient(to right, $primary, $p-light)
+
+.blur-details
+  background rgba(255, 255, 255, 0.1)
 </style>
