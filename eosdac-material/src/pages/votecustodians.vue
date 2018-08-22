@@ -21,7 +21,7 @@
               dark
              :options="[{label:'2', value:2}, {label:'4', value:4}, {label:'6', value:6}, {label:'8', value:8}, {label:'10', value:10}]"
             />
-            <q-pagination  v-show="true" v-model="pagination.page" :min="1" :max="calcMax" :max-pages="6" direction-links size="12px" />
+            <q-pagination  v-show="true" v-model="pagination.page" :min="1" :max="pagination.max" :max-pages="6" direction-links size="12px" />
         </div>
       </div>
 
@@ -32,7 +32,7 @@
         @profile ="addProfile" 
         @clickvotefor="addToVoteList(candidate.candidate_name)"  
       /> 
-      
+
       <div class="row bg-dark2 q-pa-md q-mb-md shadow-5 round-borders justify-between" v-if="!loading" >
         <q-search dark color="primary"  v-model="filter" :placeholder="$t('vote_custodians.search')" />
         <div class="row inline items-center" style="font-size:12px;">
@@ -45,7 +45,7 @@
               dark
              :options="[{label:'2', value:2}, {label:'4', value:4}, {label:'6', value:6}, {label:'8', value:8}, {label:'10', value:10}]"
             />
-            <q-pagination  v-show="true" v-model="pagination.page" :min="1" :max="calcMax" :max-pages="6" direction-links size="12px" />
+            <q-pagination  v-show="true" v-model="pagination.page" :min="1" :max="pagination.max" :max-pages="6" direction-links size="12px" />
         </div>
       </div>
 
@@ -55,7 +55,7 @@
   <!-- second column -->
   <div class="col-sm-12 col-md-4" >
     <div>
-      <span class="q-display-1">{{ $t('vote_custodians.my_votes') }} - {{getSelectedCand.length}}</span>
+      <span class="q-display-1">{{ $t('vote_custodians.my_votes') }} <span class="text-dimwhite">- {{getSelectedCand.length}}</span></span>
       <p class="text-dimwhite">{{ $t('vote_custodians.description_side') }}</p>
       <q-card class="q-pa-lg q-mt-md" style="background:#32363F;">
         <q-btn style="font-weight: 300;" class="full-width items-baseline" color="primary" size="xl" @click="voteForCandidates">
@@ -114,6 +114,7 @@ export default {
       page_content:[],
       pagination :{
         page:1,
+        max:1,
         items_per_page: 6
       },
       filter : ''
@@ -139,11 +140,9 @@ export default {
       else{
         filtered = this.custodians;
       }
+      this.pagination.max = Math.ceil(filtered.length/this.pagination.items_per_page)
 
       return filtered.slice((this.pagination.page-1) * this.pagination.items_per_page, this.pagination.page * this.pagination.items_per_page);
-    },
-    calcMax(){
-      return Math.ceil(this.custodians.length/this.pagination.items_per_page);
     }
   },
 
@@ -196,7 +195,6 @@ export default {
       //   return c;
       // })
       console.log(temp)
-      this.pagination.max = Math.ceil(temp.length/this.pagination.items_per_page);
       this.custodians = temp;
       this.loading = false;
     },
