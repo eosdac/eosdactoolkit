@@ -30,19 +30,22 @@ export default {
       getLanguage: 'account/getLanguage'
     })
   },
+  mounted() {
+      this.lang = this.getLanguage
+  },
   data () {
     return {
-      lang: this.$q.i18n.lang
+      lang: ''
     }
   },
   watch: {
     lang (lang) {
       this.$store.commit('account/SET_LANGUAGE', lang)
-      import('quasar-framework/i18n/' + lang).then(lang => {
+      let qLang = (lang === 'en-gb')? 'en-uk': lang
+      import('quasar-framework/i18n/' + qLang).then(lang => {
         this.$q.i18n.set(lang.default)
       })
       this.$i18n.locale = lang
-
     }
   }
 }
