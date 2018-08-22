@@ -9,17 +9,20 @@
       <span class="q-display-1 q-mt-none ">{{ $t('vote_custodians.candidate_list') }} - {{custodians.length}}</span>
       <p class="text-dimwhite">{{ $t('vote_custodians.description_main') }}</p>
 
-      <div class="bg-dark2 q-pa-md q-mb-md shadow-5 round-borders" v-if="!loading" >
-        <q-search dark color="primary" class="q-mb-md" v-model="filter" :placeholder="$t('vote_custodians.search')" />
-        <q-pagination v-show="true" v-model="pagination.page" :min="1" :max="calcMax" direction-links/>
-        <q-select
-          class="q-mt-md"
-          style="width:50px"
-          v-model="pagination.items_per_page"
-          dark
-         :options="[{label:'2', value:2}, {label:'4', value:4}, {label:'6', value:6}, {label:'8', value:8}, {label:'10', value:10}]"
-        />
-
+      <div class="row bg-dark2 q-pa-md q-mb-md shadow-5 round-borders justify-between" v-if="!loading" >
+        <q-search dark color="primary"  v-model="filter" :placeholder="$t('vote_custodians.search')" />
+        <div class="row inline items-center" style="font-size:12px;">
+          <span >Rows Per Page:</span>
+           <q-select
+              class="q-ml-md"
+              style="width:40px;"
+              hide-underline
+              v-model="pagination.items_per_page"
+              dark
+             :options="[{label:'2', value:2}, {label:'4', value:4}, {label:'6', value:6}, {label:'8', value:8}, {label:'10', value:10}]"
+            />
+            <q-pagination  v-show="true" v-model="pagination.page" :min="1" :max="calcMax" :max-pages="6" direction-links size="12px" />
+        </div>
       </div>
 
       <Candidate 
@@ -29,6 +32,22 @@
         @profile ="addProfile" 
         @clickvotefor="addToVoteList(candidate.candidate_name)"  
       /> 
+      
+      <div class="row bg-dark2 q-pa-md q-mb-md shadow-5 round-borders justify-between" v-if="!loading" >
+        <q-search dark color="primary"  v-model="filter" :placeholder="$t('vote_custodians.search')" />
+        <div class="row inline items-center" style="font-size:12px;">
+          <span >Rows Per Page:</span>
+           <q-select
+              class="q-ml-md"
+              style="width:40px;"
+              hide-underline
+              v-model="pagination.items_per_page"
+              dark
+             :options="[{label:'2', value:2}, {label:'4', value:4}, {label:'6', value:6}, {label:'8', value:8}, {label:'10', value:10}]"
+            />
+            <q-pagination  v-show="true" v-model="pagination.page" :min="1" :max="calcMax" :max-pages="6" direction-links size="12px" />
+        </div>
+      </div>
 
 
     </div>

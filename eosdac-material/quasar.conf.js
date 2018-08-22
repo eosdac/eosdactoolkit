@@ -90,6 +90,7 @@ module.exports = function(ctx) {
         'QAlert',
         'Dialog',
         'QSpinner',
+        'QSpinnerOval',
         'QInnerLoading',
         'QCard',
         'QCardTitle',
