@@ -2,11 +2,11 @@
 <q-page class="text-white q-pa-md">
 <Transaction ref="Transaction" v-on:done="" />
 
-<div class="row gutter-sm">
+<div class="row gutter-md">
   <!-- first column  -->
   <div class="col-sm-12 col-md-8" >
     <div>
-      <span class="q-display-1 q-mt-none ">{{ $t('vote_custodians.candidate_list') }} - {{custodians.length}}</span>
+      <span class="q-display-1 q-mt-none ">{{ $t('vote_custodians.candidate_list') }} <span class="text-dimwhite">- {{custodians.length}}</span></span>
       <p class="text-dimwhite">{{ $t('vote_custodians.description_main') }}</p>
 
       <div class="row bg-dark2 q-pa-md q-mb-md shadow-5 round-borders justify-between" v-if="!loading" >
