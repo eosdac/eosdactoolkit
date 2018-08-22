@@ -197,7 +197,7 @@
             </q-card-title>
             <q-card-main>
               <q-field dark label-width="12">
-                <q-input inverted rows="8" color="dark" max-height="200" type="textarea" v-model="transferMemo" dark />
+                <q-input inverted rows="8" color="dark" type="textarea" v-model="transferMemo" dark />
               </q-field>
             </q-card-main>
           </q-card>
