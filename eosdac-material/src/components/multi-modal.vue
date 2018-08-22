@@ -1,5 +1,7 @@
 <template>
 <q-modal @hide="close()" :no-route-dismiss="!getImported" :no-backdrop-dismiss="!getImported" :no-esc-dismiss="!getImported" v-model="active" content-classes="fit bg-dark2" :content-css="{maxWidth: '900px', maxHeight: '610px'}">
+
+<q-scroll-area class="fit" :thumb-style="{background: '#4A1289', opacity: 0.5}">
   <div class="row full-height">
     <div class="col-12">
       <q-tabs v-model="selectedTab" no-pane-border align="left">
@@ -16,13 +18,16 @@
         <q-step style="display:none;" :order="3" v-if="mode !== 'signin'" active-icon="icon-register-3" done-icon="icon-register-3" icon="icon-register-3" :title="$t('multi_modal.registration')" name="step3" />
       </q-stepper>
     </div>
+
     <div class="col-12">
       <NodeSelector v-if="initialmode !== 'sign' && active && step === 'step1'" setup v-on:done="step ='step2'" />
       <ScatterSignIn v-if="step === 'step2'" v-on:done="ifReg()" />
       <Register v-if="step === 'step3'" :visible="selectedTab === 'register'" ref="reg" v-on:done="(mode === 'signin')? close(): ''" />
       <LoadingSpinner :visible="loading" :text="loadingText" />
     </div>
-  </div>
+
+  </div> <!-- end row full height -->
+</q-scroll-area>
 </q-modal>
 </template>
 
