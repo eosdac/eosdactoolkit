@@ -113,10 +113,8 @@ module.exports = function(ctx) {
         'QSlideTransition',
         'QRadio',
         'QPagination',
-        'QSearch'
-
-
-
+        'QSearch',
+        'QSlider'
       ],
       directives: [
         'Ripple',
