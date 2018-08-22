@@ -9,7 +9,7 @@
     <div class="row gutter-md">
       <div class="col-lg-12 col-xl-4 relative-position">
         <span class="q-subheading text-dimwhite uppercase">{{ $t("wallet.total_eos_balance") }}</span>
-        <h4 class="q-my-sm text-no-wrap shrink_balance"><span class="text-weight-thin">{{getMainCurrencyBalance}}</span> {{mainCurrencyName}}</h4>
+        <h4 class="q-my-sm text-no-wrap shrink_balance"><span class="text-weight-thin">{{(getMainCurrencyBalance + getMainCurrencyStaked).toFixed(transferMainAmountDecimals)}}</span> {{mainCurrencyName}}</h4>
         <div class="blur-details q-px-md q-py-md" style="min-height:120px;margin-right:-16px;margin-left:-16px;">
           <div class="row">
             <div class="col-lg-12 col-xl-6">
@@ -40,11 +40,11 @@
         <h4 class="q-my-sm text-no-wrap shrink_balance"><span class="text-weight-thin">{{getTokenBalance}}</span> {{tokenName}}</h4>
         <div class="blur-details q-px-md q-py-md" style="min-height:120px;margin-right:-16px;margin-left:-16px;">
           <div class="row">
-            <div class="col-lg-12 col-xl-6">
-              <!--<p class="q-subheading"><span class="text-dimwhite uppercase">{{ $t("wallet.total_staked") }}</span><br><span class="uppercase q-title">{{getMainCurrencyBalance}} {{mainCurrencyName}}</span></p>-->
+            <div class="col-lg-12 col-xl-12"><!--12 bc only one for now-->
+              <p class="q-subheading"><span class="text-dimwhite uppercase">{{ $t("wallet.liquid") }}</span><br><span class="uppercase q-title">{{getTokenBalance}} {{tokenName}}</span></p>
             </div>
             <div class="col-lg-12 col-xl-6">
-              <p class="q-subheading"><span class="text-dimwhite uppercase">{{ $t("wallet.liquid") }}</span><br><span class="uppercase q-title">{{getTokenBalance}} {{tokenName}}</span></p>
+              <!--<p class="q-subheading"><span class="text-dimwhite uppercase">{{ $t("wallet.total_staked") }}</span><br><span class="uppercase q-title">{{getMainCurrencyBalance}} {{mainCurrencyName}}</span></p>-->
             </div>
           </div>
         </div>
@@ -64,15 +64,17 @@
         </q-card>
       </div>
       <div class="col-lg-12 col-xl-4 relative-position">
-        <span class="q-subheading text-dimwhite uppercase">{{ $t("wallet.total_eos_balance") }}</span>
-        <h4 class="q-my-sm text-no-wrap shrink_balance"><span class="text-weight-thin">{{getMainCurrencyBalance}}</span> {{mainCurrencyName}}</h4>
+        <span v-if="showValue" class="q-subheading text-dimwhite uppercase">{{ $t("wallet.total") }}</span>
+        <span v-else class="q-subheading text-dimwhite uppercase">&zwnj;</span>
+        <h4 v-if="showValue" class="q-my-sm text-no-wrap shrink_balance"><span class="text-weight-thin">{{total}}</span> USD</h4>
+        <h4 v-else class="q-my-sm text-no-wrap shrink_balance">&zwnj;</h4>
         <div class="blur-details q-px-md q-py-md" style="min-height:120px;margin-right:-16px;margin-left:-16px;">
           <div class="row">
             <div class="col-lg-12 col-xl-6">
-              <p class="q-subheading"><span class="text-dimwhite uppercase">{{ $t("wallet.total_staked") }}</span><br><span class="uppercase q-title">{{getMainCurrencyBalance}} {{mainCurrencyName}}</span></p>
+              <!--<p class="q-subheading"><span class="text-dimwhite uppercase">{{ $t("wallet.total_staked") }}</span><br><span class="uppercase q-title">{{getMainCurrencyBalance}} {{mainCurrencyName}}</span></p>-->
             </div>
             <div class="col-lg-12 col-xl-6">
-              <p class="q-subheading"><span class="text-dimwhite uppercase">{{ $t("wallet.total_staked") }}</span><br><span class="uppercase q-title">{{getMainCurrencyBalance}} {{mainCurrencyName}}</span></p>
+              <!--<p class="q-subheading"><span class="text-dimwhite uppercase">{{ $t("wallet.total_staked") }}</span><br><span class="uppercase q-title">{{getMainCurrencyBalance}} {{mainCurrencyName}}</span></p>-->
             </div>
           </div>
         </div>
@@ -174,7 +176,7 @@
               <q-field class="q-mb-md" :label="$t('wallet.input_a_destination_account')" :error="transferToError" :error-label="transferToErrorText" label-width="12">
                 <q-input :error="transferToError" dark v-model="transferTo" />
               </q-field>
-              <div class="row">
+              <!--<div class="row">
                 <div class="col-lg-12 col-xl-8">
                   <q-field class="q-mb-md" :label="$t('wallet.or_select_address_book')" label-width="12" dark>
                     <q-select dark :placeholder="$t('wallet.select_from_list')" :options="[
@@ -186,7 +188,7 @@
                 <div class="col-lg-12 col-xl-4 text-right">
                   <q-btn no-caps dense class="q-mt-lg" flat color="p-light">{{ $t('wallet.manage_addressbook') }}</q-btn>
                 </div>
-              </div>
+              </div>-->
             </q-card-main>
           </q-card>
         </div>
@@ -205,7 +207,7 @@
       </div>
       <div class="row q-pa-xs">
         <div class="col-12 relative-postition">
-          <q-btn color="primary" @click="transfer()" :disabled="badTransferTo || transferAmountError" class="q-ma-md float-right no-shadow"  :label="$t('wallet.transfer_tokens')" />
+          <q-btn color="primary" @click="transfer()" :disabled="badTransferTo || transferAmountError" class="q-ma-md float-right no-shadow" :label="$t('wallet.transfer_tokens')" />
         </div>
       </div>
     </div>
@@ -354,7 +356,9 @@ export default {
       transferMemo: '',
       badTransferAmount: true,
       badTransferMainAmount: true,
-      badTransferTo: true
+      badTransferTo: true,
+      showValue: false,
+      total: 0
     }
   },
   computed: {
@@ -366,18 +370,37 @@ export default {
       getAccountResources: 'account/getAccountResources'
     }),
     getMainCurrencyStaked() {
-      let res = this.getAccount.total_resources
-      return Math.max(parseFloat(res.net_weight), parseFloat(res.cpu_weight))
+      let res = this.getAccount.self_delegated_bandwidth
+      return (parseFloat(res.net_weight) + parseFloat(res.cpu_weight))
     }
   },
   mounted() {
     if (this.getAccountName) {
       this.lookupTokenBalance()
+      this.getTokenPrices()
     }
   },
   methods: {
-    transfer () {
-      if(this.tokenSelection === this.tokenName) {
+    async getPriceOf(name) {
+      try {
+        let price = await this.$axios.get('https://api.coingecko.com/api/v3/coins/' + name.toLowerCase() + '?localization=false')
+        return price.data.market_data.current_price.usd
+      } catch (error) {
+        throw Error('bad')
+      }
+    },
+    async getTokenPrices() {
+      try {
+        let mainP = await this.getPriceOf(this.mainCurrencyName)
+        let tokenP = await this.getPriceOf(this.tokenName)
+        this.total = ((mainP * (this.getMainCurrencyBalance + this.getMainCurrencyStaked)) + (tokenP * this.getTokenBalance)).toFixed(3)
+        this.showValue = true
+      } catch (error) {
+        this.showValue = false
+      }
+    },
+    transfer() {
+      if (this.tokenSelection === this.tokenName) {
         this.$refs.Transaction.newTransaction(this.$configFile.network.tokenContract.name, 'transfer', {
           from: this.getAccountName,
           to: this.transferTo,
