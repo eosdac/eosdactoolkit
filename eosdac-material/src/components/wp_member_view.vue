@@ -105,6 +105,14 @@
           <q-btn size="small" class="q-mr-md" color="primary" :label="$t('wp_member_view.view_proposal')"  />
           <q-btn size="small" color="primary" :label="$t('wp_member_view.view_votes')" />
       </div>
+<!--       <div class="row gutter-sm justify-end">
+        <div>
+          <q-btn size="md" class="" color="primary" :label="$t('wp_member_view.view_proposal')"  />
+        </div>
+        <div>
+          <q-btn size="md" color="primary" :label="$t('wp_member_view.view_votes')" />
+        </div>
+      </div> -->
 
     </div>
 
