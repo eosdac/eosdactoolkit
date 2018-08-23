@@ -1,6 +1,7 @@
 export default {
   constitution: {
     loading_constitution: '規約をロードしています',
+    switch_contrast: 'スイッチのコントラスト',
   },
   default: {
     account_name: 'アカウント名',

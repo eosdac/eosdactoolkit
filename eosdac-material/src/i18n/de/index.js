@@ -1,6 +1,7 @@
 export default {
   constitution: {
     loading_constitution: 'Ladeverfassung',
+    switch_contrast: 'Kontrast Umschalten',
   },
   default: {
     account_name: 'Kontoname',
