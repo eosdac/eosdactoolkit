@@ -13,12 +13,12 @@
       </div>
     </div>
 
-    <div style="position:absolute; z-index:1;height:140px;width:140px; top:70px;">
-      <q-btn v-if="edit" round size="md" color="primary" icon="icon-plus" style="position:absolute; bottom:0px;right:7px; z-index:2" @click="visible=true" />
-      <div class="fit" style="border-radius:50%; border:4px solid white; background:grey;overflow:hidden;" >
+    <div class="animate-pop profile_image_outer_wrap" style="">
+      <q-btn v-if="edit" round size="md" class="animate-pop" color="primary" icon="icon-plus" style="position:absolute;bottom:0;right:7px;z-index:2" @click="visible=true" />
+      <div class="fit profile_image_inner_wrap">
         <transition name="fade">
-          <img  :class="fitcontainer"  v-bind:src="form.image" v-on:load="onLoaded" v-show="loaded" ref="profile_pic">
-        </transition>
+          <img  :class="fitcontainer" class="hack_center" v-bind:src="setImgSrc" v-on:load="onLoaded" v-show="loaded" ref="profile_pic">
+        </transition> 
       </div>
     </div>
 
@@ -79,12 +79,12 @@
             />
             <q-btn  round  color="primary" @click="addSocial" icon="icon-plus" />
           </div>
-          <div class="row gutter-sm justify-end">
+          <div class="row gutter-sm justify-end q-mt-md">
             <div>
-              <q-btn size="md" class="" color="primary" @click="edit = !edit" :label="$t('profile.edit')" />
+              <q-btn size="md" class="animate-pop" color="primary" @click="edit = !edit" :label="$t('profile.edit')" />
             </div>
             <div>
-              <q-btn size="md" class="" color="dark" @click="download(JSON.stringify(form),`${getAccountName}_eosdac_profile.json`, 'application/json')" :label="$t('profile.download')" />
+              <q-btn size="md" class="animate-pop" color="dark" @click="download(JSON.stringify(form),`${getAccountName}_eosdac_profile.json`, 'application/json')" :label="$t('profile.download')" />
             </div>
           </div>
         </div>
@@ -97,7 +97,7 @@
 
   <q-modal v-model="visible"  minimized :content-css="{width: '80vw'}" >
     <div style="padding: 20px;" class="bg-dark round-borders">
-      <q-input dark type="url" v-model="form.image" @input="loaded=false" class="q-mt-md" :float-label="$t('profile_picture_url')" placeholder="http://example.site/mypic.jpg" />
+      <q-input dark type="url" v-model="form.image" @input="loaded=false" class="q-mt-md " :float-label="$t('profile_picture_url')" placeholder="http://example.site/mypic.jpg" />
       <q-btn round color="primary" class="absolute" style="top:5px;right:5px" @click="visible=false" icon="icon-plus" />
 
     </div>
@@ -187,42 +187,28 @@
   background rgba(255, 255, 255, 0.1);
 }
 
-.square {
-  width: 50%;
-}
-
-.square:after {
-  content: "";
-  display: block;
-  padding-bottom: 100%;
-}
-
-.wrapper{
-  width: 140px;
-  height: 140px;
-  border: 3px solid white;
-  border-radius:50%;
-  box-sizing: border-box;
+.profile_image_inner_wrap{
+  border-radius:50%; 
+  border:4px solid white; 
+  background:$dark;
+  overflow:hidden;
   position:relative;
-  overflow:hidden;
-
 
 }
-.pic_wrapper {
-  width: 100%;
-  height: 100%;
-  overflow:hidden;
-  box-sizing: border-box;
+.profile_image_outer_wrap{
+  position:absolute; z-index:1;height:140px;width:140px; top:70px;
 
+}
+.hack_center{
+    position: absolute;
+    top: -9999px;
+    bottom: -9999px;
+    left: -9999px;
+    right: -9999px;
+    margin: auto;
 }
 
 
-.fitheight{
-  height:100%;
-}
-.fitwidth{
-  width:100%;
-}
 </style>
 
 <script>
@@ -242,7 +228,7 @@ export default {
       edit:false,
 
       visible:false,
-      fitcontainer:'fitheight',
+      fitcontainer:'full-height',
       loaded:false,
       isuploading: false,
       form:{
@@ -252,7 +238,7 @@ export default {
           "description": "This is an example bio....",
           "email": "",
           "url": "",
-          "image": "https://i.ytimg.com/vi/zjNHS3aIQJ0/maxresdefault.jpg",
+          "image": "",
           "sameAs": [{link:''}],
           "timezone": new Date().getTimezoneOffset() //time-zone offset see: https://stackoverflow.com/questions/1091372/getting-the-clients-timezone-in-javascript
         }
@@ -265,7 +251,15 @@ export default {
       getAccountName: 'account/getAccountName',
       getAccount : 'account/getAccount',
       getScatter: 'api/getScatter',
-    })
+    }),
+    setImgSrc(){
+      let image = 'https://www.telegraph.co.uk/content/dam/science/2017/10/22/TELEMMGLPICT000144108354_trans_NvBQzQNjv4BqZqbNnzMENeQWOPqPMX-4IhRy7TN-7bbEnHI_PZtKCtQ.jpeg?imwidth=450'
+      if(this.form.image != ''){
+        image = this.form.image;
+      }
+      return image;
+
+    }
   },
 
 
@@ -273,7 +267,7 @@ export default {
      onLoaded() {
         let img = this.$refs.profile_pic;
 
-        this.fitcontainer = img.width <= img.height ? 'fitwidth' : 'fitheight';
+        this.fitcontainer = img.width <= img.height ? 'full-width' : 'full-height';
         console.log(img.width +' '+ img.height);
         this.visible = false;
         this.loaded = true;
