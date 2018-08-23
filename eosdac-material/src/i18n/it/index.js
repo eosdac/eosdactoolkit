@@ -1,6 +1,7 @@
 export default {
   constitution: {
     loading_constitution: 'Caricamento costituzione',
+    switch_contrast: 'Cambia Contrasto',
   },
   default: {
     account_name: 'Nome utente',

@@ -1,6 +1,7 @@
 export default {
   constitution: {
     loading_constitution: '加载章程',
+    switch_contrast: '切换对比度',
   },
   default: {
     account_name: '账户名',
