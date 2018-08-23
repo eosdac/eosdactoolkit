@@ -18,12 +18,15 @@
 .overwrite {
   background: none !important;
   color: rgba(255,255,255,0.8) !important;
+  // transition: all 0.1s linear;
 }
 .overwrite h1, .overwrite h2{
   color: #fff;
+  // transition: all 0.1s linear;
 }
 .overwrite td, .overwrite th {
   background: $dark !important;
+  // transition: all 0.1s linear;
 }
 
 

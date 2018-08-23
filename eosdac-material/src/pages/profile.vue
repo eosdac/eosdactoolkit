@@ -79,9 +79,13 @@
             />
             <q-btn  round  color="primary" @click="addSocial" icon="icon-plus" />
           </div>
-          <div >
-            <q-btn size="md" class="float-right" color="primary" @click="edit = !edit" :label="$t('profile.edit')" />
-            <q-btn size="md" class="float-right on-left" color="dark" @click="download(JSON.stringify(form),`${getAccountName}_eosdac_profile.json`, 'application/json')" :label="$t('profile.download')" />
+          <div class="row gutter-sm justify-end">
+            <div>
+              <q-btn size="md" class="" color="primary" @click="edit = !edit" :label="$t('profile.edit')" />
+            </div>
+            <div>
+              <q-btn size="md" class="" color="dark" @click="download(JSON.stringify(form),`${getAccountName}_eosdac_profile.json`, 'application/json')" :label="$t('profile.download')" />
+            </div>
           </div>
         </div>
       </div>
