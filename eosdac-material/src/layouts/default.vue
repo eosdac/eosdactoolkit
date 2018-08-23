@@ -215,7 +215,7 @@ export default {
       getTokenBalance: 'account/getTokenBalance',
       getAccount: 'account/getAccount',
       getMainCurrencyBalance: 'account/getMainCurrencyBalance',
-      getLanguage: 'account/getLanguage'
+      getLanguage: 'usersettings/getLanguage'
     })
   },
   methods: {

@@ -9,8 +9,8 @@ export default ({
 }) => {
   Vue.use(VueI18n)
   let lang
-  if (store.getters['account/getLanguage']) {
-    lang = store.getters['account/getLanguage']
+  if (store.getters['usersettings/getLanguage']) {
+    lang = store.getters['usersettings/getLanguage']
   } else {
     if (typeof(messages[browserLocale()]) === 'undefined') {
       lang = 'en-us'
@@ -18,7 +18,7 @@ export default ({
       lang = browserLocale()
     }
   }
-  store.commit('account/SET_LANGUAGE', lang)
+  store.commit('usersettings/SET_LANGUAGE', lang)
   app.i18n = new VueI18n({
     locale: lang,
     fallbackLocale: 'en-us',

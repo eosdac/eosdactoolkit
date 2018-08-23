@@ -1,3 +1,4 @@
-/*
-export const someGetter = (state) => {}
- */
+
+export const getLanguage = (state) => {
+  return state.language
+}

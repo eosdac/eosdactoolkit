@@ -5,7 +5,6 @@ export default {
     version: null,
     memberterms: null
   },
-  language: null,
   firstReg: true,
   useScatter: false,
   info: {},

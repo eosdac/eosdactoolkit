@@ -27,7 +27,7 @@ export default {
   name: 'LangSelector',
   computed: {
     ...mapGetters({
-      getLanguage: 'account/getLanguage'
+      getLanguage: 'usersettings/getLanguage'
     })
   },
   mounted() {
@@ -40,7 +40,7 @@ export default {
   },
   watch: {
     lang (lang) {
-      this.$store.commit('account/SET_LANGUAGE', lang)
+      this.$store.commit('usersettings/SET_LANGUAGE', lang)
       let qLang = (lang === 'en-gb')? 'en-uk': lang
       import('quasar-framework/i18n/' + qLang).then(lang => {
         this.$q.i18n.set(lang.default)
