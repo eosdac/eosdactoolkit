@@ -1,3 +1,4 @@
 export default {
-  language: null
+  language: null,
+  transactionPopup : true
 }

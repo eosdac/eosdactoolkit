@@ -79,6 +79,27 @@
   </q-collapsible>
 </div>
 
+<!-- Misc usersettings -->
+<div class="shadow-5 q-mt-md" style="background:#2F333D">
+  <q-collapsible  label="First" separator header-class="bg-dark2" collapse-icon="icon-ui-11">
+    <template slot="header" >
+      <q-item-side left >
+        <q-icon name="icon-ui-10"  color="white"  size="24px" />
+      </q-item-side>
+      <q-item-main >
+        <span>{{ $t('settings.user_preference') }}</span>
+        <span class="q-ml-lg text-dimwhite" >xxxxxxxxxxxx:</span>
+        <span v-if="true" class="q-ml-md text-positive">xxxxxxxxxxxxxxxxx</span>
+      </q-item-main>
+      <span class="hack_height"></span>
+    </template>
+    <div class="q-pa-md">
+      <q-toggle  class="float-right" v-model="transactionpopup" left-label :label="$t('settings.transaction_popup')" />
+      {{transactionpopup}}
+    </div>
+  </q-collapsible>
+</div>
+
 <MultiModal ref="Multi" />
 </q-page>
 </template>
@@ -112,13 +133,19 @@ export default {
   },
   data (){
     return{
+      transactionpopup: ''
     }
+  },
+  mounted() {
+    this.transactionpopup = this.getTransactionPopup
+
   },
   computed: {
     ...mapGetters({
       getAccountName: 'account/getAccountName',
       getRegistered: 'account/getRegistered',
-      getCurrentEndpoint: 'api/getCurrentEndpoint'
+      getCurrentEndpoint: 'api/getCurrentEndpoint',
+      getTransactionPopup: 'usersettings/getTransactionPopup'
     })
   },
   methods:{
@@ -128,6 +155,11 @@ export default {
       }, false)
     },
 
+  },
+  watch: {
+    transactionpopup (bool) {
+      this.$store.commit('usersettings/SET_TRANSACTIONPOPUP', bool)
+    }
   }
 }
 </script>

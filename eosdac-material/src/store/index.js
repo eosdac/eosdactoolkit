@@ -40,7 +40,8 @@ const store = new Vuex.Store({
   }), createPersistedState({
     key: 'usersettings',
     paths: [
-      'usersettings.language'
+      'usersettings.language',
+      'usersettings.transactionPopup'
     ],
     //filter: mutation => (mutation.payload.save)? true : false
   })]
