@@ -1,8 +1,9 @@
 <template>
 <q-page class="text-white q-pa-md">
   <div class="row justify-center q-mt-sm">
-    <div class="col-auto shadow-5">
-      <div class="bg-dark2 q-pa-md"><q-toggle  class="float-right" v-model="white_constitution" left-label :label="$t('constitution.switch_contrast')" /></div>
+    <div class="col-lg-12 col-xl-auto shadow-5">
+      <div class="bg-dark2 q-pa-md">
+        <q-toggle class="float-right" v-model="white_constitution" left-label :label="$t('constitution.switch_contrast')" /></div>
       <div v-if="!isloading" class="q-pt-md round-borders  bg-dark2">
         <div v-bind:class="{ overwrite: !white_constitution }" class="markdown-body" v-html="constitution"></div>
       </div>
@@ -29,7 +30,6 @@
   // transition: all 0.1s linear;
 }
 
-
 </style>
 
 <script>
@@ -37,33 +37,33 @@ import MarkdownIt from 'markdown-it'
 import LoadingSpinner from 'components/loading-spinner'
 
 export default {
-  components:{
+  components: {
     LoadingSpinner
 
   },
-  data () {
+  data() {
     return {
 
-      isloading:false,
-      constitution:'',
+      isloading: false,
+      constitution: '',
       white_constitution: false
 
     }
   },
 
 
-  methods:{
+  methods: {
 
-    async getConstitution(){
+    async getConstitution() {
       let md = new MarkdownIt();
       this.isloading = true;
-      try{
-          let latestMemberTerms = await this.$store.dispatch('api/getMemberTerms');
-          let getCt = await this.loadConstitutionFromGithub(latestMemberTerms.terms);
-          this.constitution = md.render(getCt);
-          this.isloading = false;
+      try {
+        let latestMemberTerms = await this.$store.dispatch('api/getMemberTerms');
+        let getCt = await this.loadConstitutionFromGithub(latestMemberTerms.terms);
+        this.constitution = md.render(getCt);
+        this.isloading = false;
 
-      }catch(e){
+      } catch (e) {
         console.log(e);
         this.isloading = false;
       }
@@ -81,9 +81,9 @@ export default {
 
   },
 
-  mounted: function(){
+  mounted: function() {
     this.getConstitution();
-   }
+  }
 
 }
 </script>
