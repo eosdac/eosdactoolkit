@@ -45,14 +45,14 @@
         <p class="q-title" >{{ $t("settings.unregister_membership") }}</p>
         <p class="text-dimwhite q-body-1" style="min-height:30px">{{ $t("settings.click_below_to_unregister_membership") }}</p>
         <div class="q-mt-lg">
-          <q-btn :disabled="!getRegistered" size="sm" class="float-right" color="primary" @click="unRegisterMember" :label="$t('settings.unregister_membership')" />
+          <q-btn :disabled="!getRegistered" size="md" class="float-right" color="primary" @click="unRegisterMember" :label="$t('settings.unregister_membership')" />
         </div>
       </div>
       <div class="col-sm-12 col-lg-4 q-pa-md relative-position" >
         <p class="q-title">{{ $t('settings.register_as_member') }}</p>
         <p class="text-dimwhite q-body-1" style="min-height:30px">{{ $t('settings.click_register_now') }}</p>
         <div class="q-mt-lg">
-          <q-btn size="sm" :disabled="getRegistered" class="float-right" color="primary" @click="$refs.Multi.init('sign')" :label="$t('settings.register_now')" />
+          <q-btn size="md" :disabled="getRegistered" class="float-right" color="primary" @click="$refs.Multi.init('sign')" :label="$t('settings.register_now')" />
         </div>
       </div>
     </div>

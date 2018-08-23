@@ -63,6 +63,7 @@ export default {
     specify_your_own: 'Specify your own custom endpoint by populating the input with an url and click the connect button.',
   },
   profile: {
+    profile: 'Profile',
     about_me: 'About Me',
     email_address: 'Email Address',
     familyName: 'Family Name',
