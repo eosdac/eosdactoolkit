@@ -5,7 +5,7 @@
       <q-toolbar-title class="text-white q-pl-none">
         <q-icon style="font-size:35px;" name="icon-dac-balance" />
         <span class="q-ml-sm q-mt-sm text-weight-thin vertical-middle" style="font-size:20px;">eos<b>DAC</b> {{ $t('default.member_client')}}</span>
-        <q-btn size="lg" flat dense round @click="leftDrawerOpen = !leftDrawerOpen" :aria-label="$t('default.menu')">
+        <q-btn size="md" flat dense round class="q-ml-md"style="margin-top:2px"  @click="leftDrawerOpen = !leftDrawerOpen" :aria-label="$t('default.menu')">
           <q-icon v-if="leftDrawerOpen" name="icon-ui-8" />
           <q-icon v-else name="menu" />
         </q-btn>
