@@ -9,7 +9,7 @@
     <div class="row  q-mt-md" style="margin-left:154px;background:none">
       <div class="col-xs-12">
         <div class="text-dimwhite text-weight-light q-caption">User Name</div>
-        <div class="q-display-1 text-weight-thin">LUKESTOKES</div>
+        <div class="q-display-1 text-weight-thin uppercase">kasperfish</div>
       </div>
     </div>
 
@@ -95,7 +95,7 @@
 
 
 
-  <q-modal v-model="visible"  minimized :content-css="{width: '80vw'}" >
+  <q-modal v-model="visible"  minimized @hide="handleModalClose" :content-css="{width: '80vw'}" >
     <div style="padding: 20px;" class="bg-dark round-borders">
       <q-input dark type="url" v-model="form.image" @input="loaded=false" class="q-mt-md " :float-label="$t('profile_picture_url')" placeholder="http://example.site/mypic.jpg" />
       <q-btn round color="primary" class="absolute" style="top:5px;right:5px" @click="visible=false" icon="icon-plus" />
@@ -253,7 +253,7 @@ export default {
       getScatter: 'api/getScatter',
     }),
     setImgSrc(){
-      let image = 'https://www.telegraph.co.uk/content/dam/science/2017/10/22/TELEMMGLPICT000144108354_trans_NvBQzQNjv4BqZqbNnzMENeQWOPqPMX-4IhRy7TN-7bbEnHI_PZtKCtQ.jpeg?imwidth=450'
+      let image = 'https://i0.wp.com/www.hylandfishandchips.ca/wp-content/uploads/2015/11/Sad-Fish-300x243.png'; //default image
       if(this.form.image != ''){
         image = this.form.image;
       }
@@ -286,6 +286,11 @@ export default {
         });
       }
 
+    },
+    handleModalClose(){
+      if(!this.loaded){
+        this.form.image = '';
+      }
     },
 
     async saveProfile(){
