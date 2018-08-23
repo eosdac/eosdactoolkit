@@ -182,7 +182,7 @@ export default {
     send_tokens: '토큰 보내기',
     total_eos_balance: '총 EOS 잔액',
     liquid: '액체',
-    token_selection_and_quantitAy: '토큰 선택 및 수량',
+    token_selection_and_quantity: '토큰 선택 및 수량',
     select_token_to_send: '보낼 토큰 선택',
     select_from_list: '목록에서 선택',
     quantity_to_send: '보낼 수량',
