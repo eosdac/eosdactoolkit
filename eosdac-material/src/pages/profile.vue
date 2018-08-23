@@ -26,15 +26,15 @@
       <div class="row  " style="margin-left:170px; margin-right:16px; background:none">
 
         <div class="col-md-2 col-xs-6 q-pl-sm" >
-          <div class="text-dimwhite text-weight-light q-caption">Given Name</div>
+          <div class="text-dimwhite text-weight-light q-caption">{{ $t('profile.givenName') }}</div>
           <q-input color="white" dark :readonly="!edit" :hide-underline="!edit" v-model="form.givenName"/>
         </div>
         <div class="col-md-2 col-xs-6 q-pl-sm">
-          <div class="text-dimwhite text-weight-light q-caption">Family Name</div>
+          <div class="text-dimwhite text-weight-light q-caption">{{ $t('profile.familyName') }}</div>
           <q-input color="white" dark :readonly="!edit" :hide-underline="!edit"  v-model="form.familyName"/>
         </div>
         <div class="col-md-2 col-xs-6 q-pl-sm">
-          <div class="text-dimwhite text-weight-light q-caption">Gender</div>
+          <div class="text-dimwhite text-weight-light q-caption">{{ $t('profile.gender') }}</div>
            <q-select
               class=""
               color="white"
@@ -42,7 +42,7 @@
               :hide-underline="!edit"
               v-model="form.gender"
               dark
-             :options="[{label:'Female', value:'female'}, {label:'Male', value:'male'}, {label:'Other', value:'other'}]"
+             :options="[{label:$t('profile.female'), value:'female'}, {label:$t('profile.male'), value:'male'}, {label:$t('profile.other'), value:'other'}]"
             />
         </div>
         <div class="col-md-2 col-xs-6 q-pl-sm">
@@ -73,9 +73,9 @@
               v-model="social.link"
               v-for="(social, i) in form.sameAs"
               :key = i
-              :float-label="`${$t('social_link')} ${i+1}`"
+              :float-label="`${$t('profile.social_link')} ${i+1}`"
               @input="deleteEmptyLinks"
-              :placeholder="$t('social_profile_link')"
+              :placeholder="$t('profile.social_profile_link')"
             />
             <q-btn  round  color="primary" @click="addSocial" icon="icon-plus" />
           </div>
@@ -103,77 +103,6 @@
     </div>
   </q-modal>
 </q-page>
-
-<!-- <q-page class="q-pa-md">
-
-  <div class="q-pa-md bg-dark2 round-borders shadow-5 animate-pop">
-    <div class="row">
-
-      <div style="width:150px">
-        <div class="wrapper round-borders">
-          <q-btn round size="sm" color="primary" icon="icon-plus" style="position:absolute; top:-15px;right:-15px; z-index:2" @click="visible=true" />
-          <div class="pic_wrapper bg-dark" >
-            <transition name="fade">
-              <q-icon style="font-size:100px" class="text-primary absolute-center" name="icon-topmenu-2" v-if="!loaded" />
-            </transition>
-            <transition name="fade">
-              <img  :class="fitcontainer"  v-bind:src="form.image" v-on:load="onLoaded" v-show="loaded" ref="profile_pic">
-            </transition>
-          </div>
-        </div>
-      </div>
-
-      <div style="width:400px">
-        <q-input dark type="text" v-model="form.givenName"  class="q-mt-md" :float-label="$t('givenName')" placeholder="Jhon" />
-        <q-input dark type="text" v-model="form.familyName"  class="q-mt-md" :float-label="$t('familyName')" placeholder="Jhon" />
-      </div>
-
-    </div> 
-
-    <q-input dark type="email" v-model="form.email"  class="q-mt-md" :float-label="$t('email_address')" placeholder="my.email@example.site" />
-
-    <div class="q-mt-md" style="color:#979797;margin-bottom:3px">{{ $t('gender') }}</div>
-    <q-radio dark v-model="form.gender" val="female" :label="$t('female')" class="q-mr-sm" />
-    <q-radio dark v-model="form.gender" val="male" :label="$t('male')" class="q-mr-sm" />
-    <q-radio dark v-model="form.gender" val="opt3" :label="$t('other')" />
-
-    <q-input dark type="url" v-model="form.url"  class="" :float-label="$t('website')" placeholder="http://example.com" />
-    <q-input dark type="textarea" v-model="form.description"  class="q-mt-md" :float-label="$t('about_me')" :placeholder="$t('placeholder_short_bio')" />
-
-    <q-input dark type="url"
-      class="q-mt-md q-mb-md"
-      v-model="social.link"
-      v-for="(social, i) in form.sameAs"
-      :key = i
-      :float-label="`${$t('social_link')} ${i+1}`"
-      @input="deleteEmptyLinks"
-      :placeholder="$t('social_profile_link')"
-    />
-    <div class="relative-position" style="height:50px">
-        <q-btn  class="float-left" color="primary" @click="addSocial" icon="icon-plus" />
-
-        <q-btn class="float-right" :loading="isuploading" color="positive" @click="saveProfile" :label="$t('save')">
-            <q-spinner slot="loading" />
-        </q-btn>
-        <q-btn color="primary" class="float-right on-left"  @click="download(JSON.stringify(form),`${getAccountName}_eosdac_profile.json`, 'application/json')"  label="Download" />
-    </div>
- 
-    <div v-if="ipfslink!='' "><a target="_blank" :href="ipfslink">{{ipfslink}}</a></div>
-    <pre v-if="debug_view">{{ form }}</pre>
-  
-
-
-    <q-modal v-model="visible"  minimized :content-css="{width: '80vw'}" >
-        <div style="padding: 20px; border:1px solid #491289" class="bg-dark round-borders">
-          <q-input dark type="url" v-model="form.image" @input="loaded=false" class="q-mt-md" :float-label="$t('profile_picture_url')" placeholder="http://example.site/mypic.jpg" />
-          <q-btn round color="primary" class="absolute" style="top:5px;right:5px" @click="visible=false" icon="icon-plus" />
-
-        </div>
-    </q-modal>
-
-</div>
-
-</q-page> -->
 </template>
 
 <style lang="stylus">
@@ -182,11 +111,9 @@
 .gradient-bg-primary{
   background-image linear-gradient(to right, $primary, $p-light);
 }
-
 .blur-details{
   background rgba(255, 255, 255, 0.1);
 }
-
 .profile_image_inner_wrap{
   border-radius:50%; 
   border:4px solid white; 
@@ -196,8 +123,11 @@
 
 }
 .profile_image_outer_wrap{
-  position:absolute; z-index:1;height:140px;width:140px; top:70px;
-
+  position:absolute; 
+  z-index:1;
+  height:140px;
+  width:140px; 
+  top:70px;
 }
 .hack_center{
     position: absolute;
@@ -272,25 +202,27 @@ export default {
         this.visible = false;
         this.loaded = true;
     },
+
     addSocial(){
 
       this.deleteEmptyLinks();
       this.form.sameAs.push({link:''});
-
-
     },
+
     deleteEmptyLinks(){
       if(this.form.sameAs.length ){
         this.form.sameAs = this.form.sameAs.filter(function(item){
           return item.link !='';
         });
       }
-
     },
+
     handleModalClose(){
-      if(!this.loaded){
-        this.form.image = '';
-      }
+      setTimeout(()=>{
+        if(!this.loaded){
+          this.form.image = '';
+        }
+      },300)
     },
 
     async saveProfile(){
