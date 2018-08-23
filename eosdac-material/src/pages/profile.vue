@@ -1,5 +1,106 @@
 <template>
-<q-page class="q-pa-md">
+<q-page class="relative-position" style="overflow-x: hidden; ">
+  <div class=" gradient-bg-primary q-px-md q-pt-md relative-position" style="min-height:260px">
+    <div class="row">
+      <div class="col-12">
+        <h4 class="q-display-1 q-mb-sm q-mt-none">{{ $t("profile.profile") }}</h4>
+      </div>
+    </div>
+    <div class="row  q-mt-md" style="margin-left:154px;background:none">
+      <div class="col-xs-12">
+        <div class="text-dimwhite text-weight-light q-caption">User Name</div>
+        <div class="q-display-1 text-weight-thin">LUKESTOKES</div>
+      </div>
+    </div>
+
+    <div style="position:absolute; z-index:1;height:140px;width:140px; top:70px;">
+      <q-btn v-if="edit" round size="md" color="primary" icon="icon-plus" style="position:absolute; bottom:0px;right:7px; z-index:2" @click="visible=true" />
+      <div class="fit" style="border-radius:50%; border:4px solid white; background:grey;overflow:hidden;" >
+        <transition name="fade">
+          <img  :class="fitcontainer"  v-bind:src="form.image" v-on:load="onLoaded" v-show="loaded" ref="profile_pic">
+        </transition>
+      </div>
+    </div>
+
+    <div class="blur-details q-pa-md absolute-bottom" style="height:120px;margin-right:-16px;margin-left:-16px;">
+      <div class="row  " style="margin-left:170px; margin-right:16px; background:none">
+
+        <div class="col-md-2 col-xs-6 q-pl-sm" >
+          <div class="text-dimwhite text-weight-light q-caption">Given Name</div>
+          <q-input color="white" dark :readonly="!edit" :hide-underline="!edit" v-model="form.givenName"/>
+        </div>
+        <div class="col-md-2 col-xs-6 q-pl-sm">
+          <div class="text-dimwhite text-weight-light q-caption">Family Name</div>
+          <q-input color="white" dark :readonly="!edit" :hide-underline="!edit"  v-model="form.familyName"/>
+        </div>
+        <div class="col-md-2 col-xs-6 q-pl-sm">
+          <div class="text-dimwhite text-weight-light q-caption">Gender</div>
+           <q-select
+              class=""
+              color="white"
+              :readonly="!edit" 
+              :hide-underline="!edit"
+              v-model="form.gender"
+              dark
+             :options="[{label:'Female', value:'female'}, {label:'Male', value:'male'}, {label:'Other', value:'other'}]"
+            />
+        </div>
+        <div class="col-md-2 col-xs-6 q-pl-sm">
+          <div class="text-dimwhite text-weight-light q-caption">Type</div>
+          <div>Member</div>
+        </div>
+      </div>
+
+    </div>
+  </div> <!-- end header gradient -->
+
+  <div class="q-px-md" >
+    <div class="row q-mt-md gutters-md bg-dark2 round-corners shadow-5" style="min-height:265px">
+      <div class="col-md-8 col-sm-12 q-pa-md">
+        <div class="" style="height:100%">
+          <div class="q-mb-md">{{ $t('profile.bio') }}</div>
+          <q-input v-if="edit" inverted rows="8" color="dark" type="textarea" v-model="form.description" dark />
+          <div v-if="!edit">{{form.description}}</div>
+        </div>
+      </div>
+      <div class="col-md-4 col-sm-12 q-pa-md">
+        <div class="column justify-between" style="height:100%">
+          <div class="q-mb-md">{{ $t('profile.website') }}</div>
+          <q-input dark type="url" v-model="form.url"  :readonly="!edit" :hide-underline="!edit"  :float-label="$t('website')" placeholder="http://example.com" /> 
+          <div v-if="edit"> 
+            <q-input dark type="url"
+              class="q-mt-md q-mb-md"
+              v-model="social.link"
+              v-for="(social, i) in form.sameAs"
+              :key = i
+              :float-label="`${$t('social_link')} ${i+1}`"
+              @input="deleteEmptyLinks"
+              :placeholder="$t('social_profile_link')"
+            />
+            <q-btn  round  color="primary" @click="addSocial" icon="icon-plus" />
+          </div>
+          <div >
+            <q-btn size="md" class="float-right" color="primary" @click="edit = !edit" :label="$t('profile.edit')" />
+            <q-btn size="md" class="float-right on-left" color="dark" @click="download(JSON.stringify(form),`${getAccountName}_eosdac_profile.json`, 'application/json')" :label="$t('profile.download')" />
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+
+
+  <q-modal v-model="visible"  minimized :content-css="{width: '80vw'}" >
+    <div style="padding: 20px;" class="bg-dark round-borders">
+      <q-input dark type="url" v-model="form.image" @input="loaded=false" class="q-mt-md" :float-label="$t('profile_picture_url')" placeholder="http://example.site/mypic.jpg" />
+      <q-btn round color="primary" class="absolute" style="top:5px;right:5px" @click="visible=false" icon="icon-plus" />
+
+    </div>
+  </q-modal>
+</q-page>
+
+<!-- <q-page class="q-pa-md">
 
   <div class="q-pa-md bg-dark2 round-borders shadow-5 animate-pop">
     <div class="row">
@@ -23,7 +124,7 @@
         <q-input dark type="text" v-model="form.familyName"  class="q-mt-md" :float-label="$t('familyName')" placeholder="Jhon" />
       </div>
 
-    </div> <!-- end row -->
+    </div> 
 
     <q-input dark type="email" v-model="form.email"  class="q-mt-md" :float-label="$t('email_address')" placeholder="my.email@example.site" />
 
@@ -52,12 +153,12 @@
         </q-btn>
         <q-btn color="primary" class="float-right on-left"  @click="download(JSON.stringify(form),`${getAccountName}_eosdac_profile.json`, 'application/json')"  label="Download" />
     </div>
-    <!-- debug -->
+ 
     <div v-if="ipfslink!='' "><a target="_blank" :href="ipfslink">{{ipfslink}}</a></div>
     <pre v-if="debug_view">{{ form }}</pre>
-    <!-- debug -->
+  
 
-<!--     profile pic modal -->
+
     <q-modal v-model="visible"  minimized :content-css="{width: '80vw'}" >
         <div style="padding: 20px; border:1px solid #491289" class="bg-dark round-borders">
           <q-input dark type="url" v-model="form.image" @input="loaded=false" class="q-mt-md" :float-label="$t('profile_picture_url')" placeholder="http://example.site/mypic.jpg" />
@@ -68,18 +169,39 @@
 
 </div>
 
-</q-page>
+</q-page> -->
 </template>
 
 <style lang="stylus">
 @import '~variables'
 
+.gradient-bg-primary{
+  background-image linear-gradient(to right, $primary, $p-light);
+}
+
+.blur-details{
+  background rgba(255, 255, 255, 0.1);
+}
+
+.square {
+  width: 50%;
+}
+
+.square:after {
+  content: "";
+  display: block;
+  padding-bottom: 100%;
+}
+
 .wrapper{
-  width: 120px;
-  height: 120px;
-  border: 3px solid $primary;
+  width: 140px;
+  height: 140px;
+  border: 3px solid white;
+  border-radius:50%;
   box-sizing: border-box;
   position:relative;
+  overflow:hidden;
+
 
 }
 .pic_wrapper {
@@ -113,19 +235,20 @@ export default {
     return {
       debug_view: false,
       ipfslink:'',
+      edit:false,
 
       visible:false,
       fitcontainer:'fitheight',
       loaded:false,
       isuploading: false,
       form:{
-          "givenName": "",
-          "familyName": "",
-          "gender": "",
-          "description": "",
+          "givenName": "Kasper",
+          "familyName": "Taeymans",
+          "gender": "male",
+          "description": "This is an example bio....",
           "email": "",
           "url": "",
-          "image": "",
+          "image": "https://i.ytimg.com/vi/zjNHS3aIQJ0/maxresdefault.jpg",
           "sameAs": [{link:''}],
           "timezone": new Date().getTimezoneOffset() //time-zone offset see: https://stackoverflow.com/questions/1091372/getting-the-clients-timezone-in-javascript
         }
