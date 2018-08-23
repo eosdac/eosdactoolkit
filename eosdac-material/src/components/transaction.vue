@@ -78,8 +78,8 @@ export default {
     async newTransaction(contract, action, fields, cancelable) {
       Object.assign(this.$data, this.$options.data())
       this.cancelable = cancelable
-      this.visible = true
-      this.loading = true
+      this.visible = this.getTransactionPopup //boolean 
+      this.loading = this.getTransactionPopup //boolean
       this.loadingText = 'transaction.loading_abi'
       this.action = action
       this.fields = fields
