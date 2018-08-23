@@ -101,7 +101,7 @@
       <q-item @click.native="openURL($configFile.api.tokenExplorerUrl)">
         <q-item-side icon="icon-menu-4" />
         <q-item-main :label="$t('default.token_explorer')" sublabel="" />
-        <q-item-side right icon="icon-type-12" />
+        <q-item-side right icon="icon-transfer-out" />
       </q-item>
       <q-item to="/settings">
         <q-item-side icon="icon-topmenu-6" />
