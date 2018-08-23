@@ -13,7 +13,7 @@
           <q-field :label="$t('nodeselector.custom_endpoint')" label-width="12" dark>
             <q-input dark v-model="endpoint" placeholder="https://endpoint-url.com" />
           </q-field>
-          <q-btn :disabled="badEndpoint" class="q-ma-sm" color="primary" @click="connect(endpoint)" :label="$t('nodeselector.connect')" />
+          <q-btn :disabled="badEndpoint"  class="q-ma-sm" color="primary" @click="connect(endpoint)" :label="$t('nodeselector.connect')" />
         </div>
       </div>
     </div>
@@ -35,7 +35,7 @@
               <p class="text-dimwhite q-body-1" style="min-height:50px" v-html="$t('nodeselector.click_connect_below')"></p>
           </div >
           <div >
-            <q-btn size="sm" class="float-right" color="primary" @click="getFastestNode() " :label="$t('nodeselector.connect')" />
+            <q-btn size="md" class="float-right" color="primary" @click="getFastestNode() " :label="$t('nodeselector.connect')" />
           </div>
         </div>
 
@@ -52,7 +52,7 @@
               </q-field>
           </div>
           <div class="q-mt-lg">
-              <q-btn size="sm" :disabled="!selectedEndpoint" class="float-right" color="primary" @click="connect(selectedEndpoint)" :label="$t('nodeselector.connect')" />
+              <q-btn size="md" :disabled="!selectedEndpoint" class="float-right" color="primary" @click="connect(selectedEndpoint)" :label="$t('nodeselector.connect')" />
           </div>
       <!-- </div> -->
     </div>
@@ -67,7 +67,7 @@
               </q-field>
             </div>
             <div class="q-mt-lg">
-                <q-btn size="sm" :disabled="badEndpoint" class="float-right" color="primary" @click="connect(endpoint)" :label="$t('nodeselector.connect')" />
+                <q-btn size="md" :disabled="badEndpoint" class="float-right" color="primary" @click="connect(endpoint)" :label="$t('nodeselector.connect')" />
             </div>
         </div>
     </div>

@@ -1,11 +1,12 @@
 <template>
 <q-page class="text-white q-pa-md">
-  <div class="row justify-center">
-    <div class="col-auto">
-  <div v-if="!isloading" class="q-pt-md round-borders shadow-5 bg-dark2">
-    <div class="markdown-body overwrite" v-html="constitution" />
+  <div class="row justify-center q-mt-sm">
+    <div class="col-auto shadow-5">
+      <div class="bg-dark2 q-pa-md"><q-toggle  class="float-right" v-model="white_constitution" left-label :label="$t('constitution.switch_contrast')" /></div>
+      <div v-if="!isloading" class="q-pt-md round-borders  bg-dark2">
+        <div v-bind:class="{ overwrite: !white_constitution }" class="markdown-body" v-html="constitution"></div>
+      </div>
     </div>
-  </div>
   </div>
   <LoadingSpinner :visible="isloading" :text="$t('constitution.loading_constitution')" />
 </q-page>
@@ -16,10 +17,16 @@
 
 .overwrite {
   background: none !important;
-  color: white !important;
+  color: rgba(255,255,255,0.8) !important;
+  // transition: all 0.1s linear;
+}
+.overwrite h1, .overwrite h2{
+  color: #fff;
+  // transition: all 0.1s linear;
 }
 .overwrite td, .overwrite th {
   background: $dark !important;
+  // transition: all 0.1s linear;
 }
 
 
@@ -38,7 +45,8 @@ export default {
     return {
 
       isloading:false,
-      constitution:''
+      constitution:'',
+      white_constitution: false
 
     }
   },

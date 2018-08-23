@@ -1,6 +1,7 @@
 export default {
   constitution: {
     loading_constitution: 'Loading constitution',
+    switch_contrast: 'Switch Contrast'
   },
   default: {
     account_name: 'Account Name',
@@ -63,6 +64,7 @@ export default {
     specify_your_own: 'Specify your own custom endpoint by populating the input with an url and click the connect button.',
   },
   profile: {
+    profile: 'Profile',
     about_me: 'About Me',
     email_address: 'Email Address',
     familyName: 'Family Name',
