@@ -91,7 +91,3 @@ export const getMainCurrencyBalance = (state) => {
 export const getTransferHistory = (state) => {
   return state.transferHistory
 }
-
-export const getLanguage = (state) => {
-  return state.language
-}
