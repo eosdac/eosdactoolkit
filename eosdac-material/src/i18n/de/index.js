@@ -56,7 +56,7 @@ export default {
     error_could_not_connect_to_endpoint: 'Verbindung zum Endpunkt konnte nicht hergestellt werden.',
     error_endpoint_connection_timed_out: 'Die Verbindung zum Endpunkt ist abgelaufen.',
     error_invalid_url: 'Die URL scheint ungültig zu sein.',
-    gathering_endpoints: 'Endpunkte sammeln ...',
+    gathering_endpoints: 'Lade Endpunkte ...',
     manual_connection: 'Manuelle Verbindung',
     select_endpoint: 'Wählen Sie einen Endpunkt aus der Liste',
     select_the_endpoint_you_would_like: 'Wählen Sie den Endpunkt aus, den Sie verwenden möchten, und klicken Sie auf <b> Verbinden </ b>. Endpoints von den Top-Block-Herstellern wurden für Sie bereitgestellt, Sie können jedoch auch Ihren eigenen benutzerdefinierten Endpunkt angeben, indem Sie die Eingabe mit einer URL füllen und <b> Verbinden </ b> drücken.',
