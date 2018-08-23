@@ -24,7 +24,8 @@ module.exports = function(ctx) {
       // 'fontawesome'
     ],
     framework: {
-      iconSet: 'eosdac-iconfont'
+      iconSet: 'eosdac-iconfont',
+
     },
     supportIE: false,
     build: {
@@ -119,7 +120,8 @@ module.exports = function(ctx) {
       ],
       directives: [
         'Ripple',
-        'CloseOverlay'
+        'CloseOverlay',
+        'BackToTop'
       ],
       // Quasar plugins
       plugins: [
