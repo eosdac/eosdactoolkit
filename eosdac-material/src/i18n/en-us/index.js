@@ -79,6 +79,7 @@ export default {
     social_link: 'Social Link',
     social_profile_link: 'Social profile link',
     website: 'Website',
+    bio: 'Bio'
   },
   lang_selector: {
     choose_your_language: 'Choose your Language',
