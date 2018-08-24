@@ -1,4 +1,8 @@
 export default {
+  api: {
+    connection_to_endpoint_failed: 'Die Verbing zum Endpoint ist unzuverlässig oder nicht verfügbar',
+    connection_to_endpoint_failed_details: 'Gehen Sie zu den Einstellungen um einen funktionierenden Endpunt einzustellen'
+  },
   constitution: {
     loading_constitution: 'Lade Verfassung',
   },
@@ -190,7 +194,7 @@ export default {
     manage_addressbook: 'Adressbuch verwalten',
     or_select_address_book: 'Oder wählen Sie ein Zielkonto aus dem Adressbuch',
     input_a_destination_account: 'Geben Sie ein Zielkonto ein',
-    total: 'Gesamt',
+    total: 'Total',
   },
   wp_member_view: {
     approx_USD: '(Ungef. Xxxx USD)',

@@ -36,8 +36,8 @@ function apiDown(e,c,s) {
       c('NOTIFY',{
         icon: 'error',
         color: 'warning',
-        message: 'Connection to endpoint is unreliable or unavailable',
-        details: 'Go to Settings to setup a working API Endpoint',
+        message: 'api.connection_to_endpoint_failed',
+        details: 'api.connection_to_endpoint_failed_details',
         textColor: 'black',
         autoclose: 8
       })

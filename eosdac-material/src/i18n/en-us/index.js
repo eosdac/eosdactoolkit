@@ -1,4 +1,8 @@
 export default {
+  api: {
+    connection_to_endpoint_failed: 'Connection to endpoint is unreliable or unavailable',
+    connection_to_endpoint_failed_details: 'Go to Settings to setup a working API Endpoint'
+  },
   constitution: {
     loading_constitution: 'Loading constitution',
     switch_contrast: 'Switch Contrast',
