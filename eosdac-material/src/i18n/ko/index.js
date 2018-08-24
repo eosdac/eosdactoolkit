@@ -1,7 +1,7 @@
 export default {
   constitution: {
     loading_constitution: '헌법 불러오는 중',
-    switch_contrast: '스위치 대조',
+    switch_contrast: '테마색 ',
   },
   default: {
     account_name: '계정 이름',
