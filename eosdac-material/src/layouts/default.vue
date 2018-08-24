@@ -7,7 +7,7 @@
         <q-icon v-else name="icon-menu-9" />
       </q-btn>
       <q-toolbar-title class="text-white q-pl-none">
-        <img src="statics/img/icon-signet-eosdacmemberclient175x48.svg" style="height:48px;">
+        <img src="statics/img/icon-signet-eosdacmemberclient175x48.svg" style="height:48px;" :title="$t('default.member_client')">
       </q-toolbar-title>
       <div class="xs-hide sm-hide md-hide" v-if="getImported">
         <MenuDropdown class="no-pointer-events" v-if="getAccountName && getRegistered" iconColor="white" :label="$t('default.member_status')" :statusLabel="1" :sublabel="$t('default.registered')" icon="icon-topmenu-8" />
