@@ -111,7 +111,7 @@
         <q-item-main :label="$t('default.constitution')" sublabel="" />
       </q-item>
       <q-item to="/profile">
-        <q-item-side icon="icon-topmenu-6" />
+        <q-item-side icon="icon-menu-10" />
         <q-item-main :label="$t('default.profile')" sublabel="" />
       </q-item>
       <q-item to="/votecustodians">
@@ -119,7 +119,7 @@
         <q-item-main :label="$t('default.custodians')" sublabel="" />
       </q-item>
       <q-item to="/workerproposals">
-        <q-item-side icon="icon-register-3" />
+        <q-item-side icon="icon-menu-8" />
         <q-item-main :label="$t('default.worker_proposals')" sublabel="" />
       </q-item>
     </q-list>
