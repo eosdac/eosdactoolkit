@@ -11,8 +11,8 @@
         </q-btn>
       </q-toolbar-title>
       <div class="xs-hide sm-hide md-hide" v-if="getImported">
-        <MenuDropdown class="no-pointer-events" v-if="getAccountName && getRegistered" iconColor="white" :label="$t('default.member_status')" :statusLabel="1" :sublabel="$t('default.registered')" icon="icon-dac-balance" />
-        <MenuDropdown v-if="getAccountName && !getRegistered" iconColor="white" :label="$t('default.member_status')" :statusLabel="2" :sublabel="$t('default.not_registered')" icon="icon-dac-balance" :iconRight="true">
+        <MenuDropdown class="no-pointer-events" v-if="getAccountName && getRegistered" iconColor="white" :label="$t('default.member_status')" :statusLabel="1" :sublabel="$t('default.registered')" icon="icon-topmenu-8" />
+        <MenuDropdown v-if="getAccountName && !getRegistered" iconColor="white" :label="$t('default.member_status')" :statusLabel="2" :sublabel="$t('default.not_registered')" icon="icon-topmenu-7" :iconRight="true">
           <q-list class="bg-dark2" dark link>
             <q-item @click.native="$refs.Multi.init('sign')" dark>
               <q-item-side>
