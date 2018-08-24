@@ -98,7 +98,7 @@
       <div class="col-sm-12 col-lg-4 q-pa-md relative-position" >
         <p class="q-title" >{{ $t("settings.toggle_transaction_popup") }}</p>
         <div class="q-mt-lg">
-          <q-toggle  class="float-right" v-model="transactionpopup" left-label :label="$t('settings.transaction_popup_label')" />
+          <q-toggle  class="float-right" v-model="transactionpopup" color="p-light" left-label :label="$t('settings.transaction_popup_label')" />
         </div>
       </div>
     </div>
