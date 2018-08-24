@@ -91,7 +91,14 @@
       </div>
       
     </div>
+
+<!--     <div class="q-pa-md q-mt-md shadow-5 bg-dark2">
+      <q-input color="white" dark v-model="dev_profile_url" placeholder="profile url"/>
+    </div> -->
+
   </div>
+
+
 
 
 
@@ -119,7 +126,7 @@ export default {
   },
   data () {
     return {
-      debug_view: false,
+      dev_profile_url: '',
       ipfslink:'',
       edit:false,
 
@@ -135,7 +142,7 @@ export default {
           "email": "",
           "url": "",
           "image": "",
-          "sameAs": [{link:''}],
+          "sameAs": [{link:'ddddd'}, {link:'ddddd'}, {link:'ddddd'}],
           "timezone": new Date().getTimezoneOffset() //time-zone offset see: https://stackoverflow.com/questions/1091372/getting-the-clients-timezone-in-javascript
         }
 

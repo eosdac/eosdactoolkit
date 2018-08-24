@@ -2,13 +2,15 @@
 <q-layout view="hHh Lpr lFf">
   <q-layout-header class="no-shadow">
     <q-toolbar color="dark2">
+      <q-btn size="md" flat dense round class="q-mr-sm" style="margin-top:-4px"  @click="leftDrawerOpen = !leftDrawerOpen" :aria-label="$t('default.menu')">
+        <q-icon v-if="leftDrawerOpen" name="icon-ui-8" />
+        <q-icon v-else name="icon-menu-9" />
+      </q-btn>
       <q-toolbar-title class="text-white q-pl-none">
-        <q-icon style="font-size:35px;" name="icon-dac-balance" />
-        <span class="q-ml-sm q-mt-sm text-weight-thin vertical-middle" style="font-size:20px;">eos<b>DAC</b> {{ $t('default.member_client')}}</span>
-        <q-btn size="md" flat dense round class="q-ml-md"style="margin-top:2px"  @click="leftDrawerOpen = !leftDrawerOpen" :aria-label="$t('default.menu')">
-          <q-icon v-if="leftDrawerOpen" name="icon-ui-8" />
-          <q-icon v-else name="menu" />
-        </q-btn>
+<!--         <q-icon style="font-size:35px;" name="icon-dac-balance" />
+        <span class="q-ml-sm q-mt-sm text-weight-thin vertical-middle" style="font-size:20px;">eos<b>DAC</b> {{ $t('default.member_client')}}</span> -->
+
+        <img src="statics/img/icon-signet-eosdacmemberclient175x48.svg" style="height:48px; color:white">
       </q-toolbar-title>
       <div class="xs-hide sm-hide md-hide" v-if="getImported">
         <MenuDropdown class="no-pointer-events" v-if="getAccountName && getRegistered" iconColor="white" :label="$t('default.member_status')" :statusLabel="1" :sublabel="$t('default.registered')" icon="icon-dac-balance" />
