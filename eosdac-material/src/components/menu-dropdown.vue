@@ -23,12 +23,19 @@ export default {
   },
   computed: {
     statusObject: function() {
-      if (this.statusLabel === 1) {
-        return {active:true, 'text-positive': true}
-      } else if (this.statusLabel === 2) {
-        return {active:true, 'text-negative': true}
-      } else {
-        return {active:true, 'text-white': true}
+
+      switch(this.statusLabel) {
+          case 1: //registered
+              return {active:true, 'text-positive': true}
+              break;
+          case 2: //unregistered
+              return {active:true, 'text-negative': true}
+              break;
+          case 3: //pending
+              return {active:true, 'text-warning': true}
+              break;
+          default:
+              return {active:true, 'text-white': true}
       }
     }
   },

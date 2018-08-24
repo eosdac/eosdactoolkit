@@ -21,6 +21,7 @@ export default {
     not_registered: 'not registered',
     profile: 'Profile',
     registered: 'Registered',
+    pending: 'Pending',
     settings: 'Settings',
     sign_the_constitution: 'Sign the Constitution',
     status: 'Status',
