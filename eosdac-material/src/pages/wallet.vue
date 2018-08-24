@@ -43,7 +43,7 @@
             <div class="col-lg-12 col-xl-12"><!--12 bc only one for now-->
               <p class="q-subheading"><span class="text-dimwhite uppercase">{{ $t("wallet.liquid") }}</span><br><span class="uppercase q-title">{{getTokenBalance}} {{tokenName}}</span></p>
             </div>
-            <div class="col-lg-12 col-xl-6">
+            <div class="col-lg-12 col-xl-6 ">
               <!--<p class="q-subheading"><span class="text-dimwhite uppercase">{{ $t("wallet.total_staked") }}</span><br><span class="uppercase q-title">{{getMainCurrencyBalance}} {{mainCurrencyName}}</span></p>-->
             </div>
           </div>
@@ -63,7 +63,7 @@
           </q-item>
         </q-card>
       </div>
-      <div class="col-lg-12 col-xl-4 relative-position">
+      <div class="col-lg-12 col-xl-4 relative-position lg-hide">
         <span v-if="showValue" class="q-subheading text-dimwhite uppercase">{{ $t("wallet.total") }}</span>
         <span v-else class="q-subheading text-dimwhite uppercase">&zwnj;</span>
         <h4 v-if="showValue" class="q-my-sm text-no-wrap shrink_balance"><span class="text-weight-thin">{{total}}</span> USD</h4>
