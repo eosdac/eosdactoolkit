@@ -1,7 +1,7 @@
 export default {
   constitution: {
     loading_constitution: '헌법 불러오는 중',
-    switch_contrast: '테마색 ',
+    switch_contrast: '테마색 변경',
   },
   default: {
     account_name: '계정 이름',
@@ -57,7 +57,7 @@ export default {
     error_could_not_connect_to_endpoint: '엔드포인트에 연결할 수 없습니다.',
     error_endpoint_connection_timed_out: '엔드포인트 연결 시간이 초과되었습니다.',
     error_invalid_url: 'URL이 유효하지 않은 것 같습니다.',
-    gathering_endpoints: '엔드포인트 수집 중 ...',
+    gathering_endpoints: '엔드포인트 수집 중...',
     manual_connection: '수동 연결',
     select_endpoint: '목록에서 엔드포인트 선택',
     select_the_endpoint_you_would_like: '사용할 엔드 포인트를 선택하고 <b>연결</b>을 클릭하십시오. 상위 블록 프로듀서의 엔드포인트가 제공되었습니다. 직접 특정 엔드포인트를 지정하고 싶을 경우 URL을 입력하고 <b>연결</b>을 누르십시오.',
