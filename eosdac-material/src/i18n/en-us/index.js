@@ -16,7 +16,7 @@ export default {
     logged_in: 'Logged-In',
     logged_out: 'Logged-Out',
     member_client: 'Member Client',
-    member_status: 'Member status',
+    member_status: 'Member Status',
     menu: 'Menu',
     not_registered: 'not registered',
     profile: 'Profile',

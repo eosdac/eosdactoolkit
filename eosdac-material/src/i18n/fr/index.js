@@ -12,7 +12,7 @@ export default {
     logged_in: 'Connecté',
     logged_out: 'Déconnecté',
     member_client: 'Client Membre',
-    member_status: 'Statut du membre',
+    member_status: 'Statut du Membre',
     menu: 'Menu',
     not_registered: 'non enregistré',
     profile: 'Profil',
