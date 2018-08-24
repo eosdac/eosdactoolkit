@@ -63,7 +63,7 @@
           </q-item>
         </q-card>
       </div>
-      <div class="col-lg-12 col-xl-4 relative-position lg-hide">
+      <div class="col-lg-12 col-xl-4 relative-position lg-hide md-hide sm-hide xs-hide">
         <span v-if="showValue" class="q-subheading text-dimwhite uppercase">{{ $t("wallet.total") }}</span>
         <span v-else class="q-subheading text-dimwhite uppercase">&zwnj;</span>
         <h4 v-if="showValue" class="q-my-sm text-no-wrap shrink_balance"><span class="text-weight-thin">{{total}}</span> USD</h4>
