@@ -158,6 +158,7 @@ export default {
     unregister_membership: 'Unregister Membership',
   },
   transaction: {
+    send: 'send',
     action: 'Action',
     by_completing_agree: 'By completing this transaction, I agree to the following terms.',
     cancel: 'Cancel',
@@ -201,6 +202,7 @@ export default {
     or_select_address_book: 'Or select a Destination Account from AddressBook',
     input_a_destination_account: 'Input a Destination Account',
     total: 'total',
+    remaining: 'remaining'
   },
   wp_member_view: {
     approx_USD: '(Aprox. xxxx USD)',

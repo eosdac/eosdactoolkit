@@ -20,27 +20,14 @@
             </div>
           </div>
         </div>
-        <q-card class="bg-dark2 absolute lg-hide md-hide sm-hide xs-hide" style="bottom:-55px; left:33px; width:94%;">
-          <q-item>
-            <q-item-side>
-              <q-item-tile icon>
-                <q-icon color="positive" style="font-size:50px;" name="icon-ui-13" />
-              </q-item-tile>
-            </q-item-side>
-            <q-item-main class="q-pa-sm no-margin">
-              <span class="q-subheading text-dimwhite uppercase q-pl-sm">{{ $t("wallet.RAM") }}</span>
-              <p class="no-margin q-pl-sm">{{getAccountResources.ram.available}} % remaining</p>
-              <q-slider color="positive" readonly v-model="getAccountResources.ram.available" :min="0" :max="100" :step="1" />
-            </q-item-main>
-          </q-item>
-        </q-card>
       </div>
       <div class="col-lg-12 col-xl-4 relative-position">
         <span class="q-subheading text-dimwhite uppercase">{{ $t("wallet.total") }} {{tokenName}}</span>
         <h4 class="q-my-sm text-no-wrap shrink_balance"><span class="text-weight-thin">{{getTokenBalance}}</span> {{tokenName}}</h4>
         <div class="blur-details q-px-md q-py-md" style="min-height:120px;margin-right:-16px;margin-left:-16px;">
           <div class="row">
-            <div class="col-lg-12 col-xl-12"><!--12 bc only one for now-->
+            <div class="col-lg-12 col-xl-12">
+              <!--12 bc only one for now-->
               <p class="q-subheading"><span class="text-dimwhite uppercase">{{ $t("wallet.liquid") }}</span><br><span class="uppercase q-title">{{getTokenBalance}} {{tokenName}}</span></p>
             </div>
             <div class="col-lg-12 col-xl-6 ">
@@ -48,20 +35,6 @@
             </div>
           </div>
         </div>
-        <q-card class="bg-dark2 absolute lg-hide md-hide sm-hide xs-hide" style="bottom:-55px; left:33px; width:94%">
-          <q-item>
-            <q-item-side>
-              <q-item-tile icon>
-                <q-icon color="blue" style="font-size:50px;" name="icon-ui-9" />
-              </q-item-tile>
-            </q-item-side>
-            <q-item-main class="q-pa-sm no-margin">
-              <span class="q-subheading text-dimwhite uppercase q-pl-sm">{{ $t("wallet.CPU") }}</span>
-              <p class="no-margin q-pl-sm">{{getAccountResources.cpu.available}} % remaining</p>
-              <q-slider color="blue" readonly v-model="getAccountResources.cpu.available" :min="0" :max="100" :step="1" label snap />
-            </q-item-main>
-          </q-item>
-        </q-card>
       </div>
       <div class="col-lg-12 col-xl-4 relative-position lg-hide md-hide sm-hide xs-hide">
         <span v-if="showValue" class="q-subheading text-dimwhite uppercase">{{ $t("wallet.total") }}</span>
@@ -78,26 +51,62 @@
             </div>
           </div>
         </div>
-        <q-card class="bg-dark2 absolute lg-hide md-hide sm-hide xs-hide" style="bottom:-55px; left:33px; width:94%">
-          <q-item>
-            <q-item-side>
-              <q-item-tile icon>
-                <q-icon color="red" style="font-size:50px;" name="icon-ui-14" />
-              </q-item-tile>
-            </q-item-side>
-            <q-item-main class="q-pa-sm no-margin">
-              <span class="q-subheading text-dimwhite uppercase q-pl-sm">{{ $t("wallet.network") }}</span>
-              <p class="no-margin q-pl-sm">{{getAccountResources.net.available}} % remaining</p>
-              <q-slider color="red" readonly v-model="getAccountResources.net.available" :min="0" :max="100" :step="0.001" label snap />
-            </q-item-main>
-          </q-item>
-        </q-card>
       </div>
     </div>
   </div>
 
-  <div class="row q-px-lg">
-    <div class="col-12 xl-hide">
+  <div class="row q-px-md gutter-md lg-hide md-hide sm-hide xs-hide">
+    <div class="col-lg-12 col-xl-4">
+      <q-card class="bg-dark2 relative-position" style="margin-top:-43px;">
+        <q-item>
+          <q-item-side>
+            <q-item-tile icon>
+              <q-icon color="positive" style="font-size:50px;" name="icon-ui-13" />
+            </q-item-tile>
+          </q-item-side>
+          <q-item-main class="q-pa-sm no-margin">
+            <span class="q-subheading text-dimwhite uppercase q-pl-sm">{{ $t("wallet.RAM") }}</span>
+            <p class="no-margin q-pl-sm">{{getAccountResources.ram.available}} % {{ $t('wallet.remaining') }}</p>
+            <q-slider color="positive" readonly v-model="getAccountResources.ram.available" :min="0" :max="100" :step="1" />
+          </q-item-main>
+        </q-item>
+      </q-card>
+    </div>
+    <div class="col-lg-12 col-xl-4">
+      <q-card class="bg-dark2 relative-position" style="margin-top:-43px;">
+        <q-item>
+          <q-item-side>
+            <q-item-tile icon>
+              <q-icon color="blue" style="font-size:50px;" name="icon-ui-9" />
+            </q-item-tile>
+          </q-item-side>
+          <q-item-main class="q-pa-sm no-margin">
+            <span class="q-subheading text-dimwhite uppercase q-pl-sm">{{ $t("wallet.CPU") }}</span>
+            <p class="no-margin q-pl-sm">{{getAccountResources.cpu.available}} % {{ $t('wallet.remaining') }}</p>
+            <q-slider color="blue" readonly v-model="getAccountResources.cpu.available" :min="0" :max="100" :step="1" label snap />
+          </q-item-main>
+        </q-item>
+      </q-card>
+    </div>
+    <div class="col-lg-12 col-xl-4">
+      <q-card class="bg-dark2 relative-position" style="margin-top:-43px;">
+        <q-item>
+          <q-item-side>
+            <q-item-tile icon>
+              <q-icon color="red" style="font-size:50px;" name="icon-ui-14" />
+            </q-item-tile>
+          </q-item-side>
+          <q-item-main class="q-pa-sm no-margin">
+            <span class="q-subheading text-dimwhite uppercase q-pl-sm">{{ $t("wallet.network") }}</span>
+            <p class="no-margin q-pl-sm">{{getAccountResources.net.available}} % {{ $t('wallet.remaining') }}</p>
+            <q-slider color="red" readonly v-model="getAccountResources.net.available" :min="0" :max="100" :step="0.001" label snap />
+          </q-item-main>
+        </q-item>
+      </q-card>
+    </div>
+  </div>
+  <div class="row q-px-lg xl-hide">
+    <div class="col-12">
       <q-item>
         <q-item-side>
           <q-item-tile icon>
@@ -106,7 +115,7 @@
         </q-item-side>
         <q-item-main class="q-pa-sm no-margin">
           <span class="q-subheading text-dimwhite uppercase q-pl-sm">{{ $t("wallet.RAM") }}</span>
-          <p class="no-margin q-pl-sm">{{getAccountResources.ram.available}} % remaining</p>
+          <p class="no-margin q-pl-sm">{{getAccountResources.ram.available}} % {{ $t('wallet.remaining') }}</p>
           <q-slider color="positive" readonly v-model="getAccountResources.ram.available" :min="0" :max="100" :step="1" />
         </q-item-main>
       </q-item>
@@ -118,7 +127,7 @@
         </q-item-side>
         <q-item-main class="q-pa-sm no-margin">
           <span class="q-subheading text-dimwhite uppercase q-pl-sm">{{ $t("wallet.CPU") }}</span>
-          <p class="no-margin q-pl-sm">{{getAccountResources.cpu.available}} % remaining</p>
+          <p class="no-margin q-pl-sm">{{getAccountResources.cpu.available}} % {{ $t('wallet.remaining') }}</p>
           <q-slider color="blue" readonly v-model="getAccountResources.cpu.available" :min="0" :max="100" :step="1" />
         </q-item-main>
       </q-item>
@@ -130,7 +139,7 @@
         </q-item-side>
         <q-item-main class="q-pa-sm no-margin">
           <span class="q-subheading text-dimwhite uppercase q-pl-sm">{{ $t("wallet.network") }}</span>
-          <p class="no-margin q-pl-sm">{{getAccountResources.net.available}} % remaining</p>
+          <p class="no-margin q-pl-sm">{{getAccountResources.net.available}} % {{ $t('wallet.remaining') }}</p>
           <q-slider color="red" readonly v-model="getAccountResources.net.available" :min="0" :max="100" :step="1" />
         </q-item-main>
       </q-item>
@@ -214,111 +223,6 @@
   </div>
   <Transaction ref="Transaction" v-on:done="lookupTokenBalance()" />
   <LoadingSpinner :visible="loading" :text="loadingText" />
-  <!--<div class="row">
-    <div class="col-xs-12 col-sm-12 col-md-8">
-      <div class="row">
-        <div class="col-xs-12">
-          <h4 class="q-display-1 q-mt-none q-mb-md">{{ $t("wallet.wallet") }}</h4>
-          <q-tabs align="justify">
-            <q-tab default slot="title" :name="tokenName" icon="icon-dac-balance" :label="tokenName" />
-            <q-tab slot="title" :name="mainCurrencyName" icon="icon-type-2" :label="mainCurrencyName" />
-            <q-tab-pane :name="tokenName">
-              <div class="row">
-                <div class="col-lg-12 col-xl-4">
-                  <q-card dark flat class="bg-dark2 q-ma-sm">
-                    <q-card-main>
-                      <h6 class="text-center q-ma-none">{{getTokenBalance}} {{tokenName}}</h6>
-                    </q-card-main>
-                    <q-card-actions>
-                    </q-card-actions>
-                  </q-card>
-                </div>
-                <div class="col-lg-12 col-xl-8">
-                  <q-card dark flat class="bg-dark2 q-ma-sm">
-                    <q-card-title>
-                      <h5 class="q-ma-none">{{ $t('wallet.transfer') }}</h5>
-                    </q-card-title>
-                    <q-card-main>
-                      <q-field class="q-mb-md" icon="icon-topmenu-2" :label="$t('wallet.transfer_to')" :error="transferToError" :error-label="transferToErrorText">
-                        <q-input dark v-model="transferTo" />
-                      </q-field>
-                      <q-field class="q-mb-md" icon="icon-dac-balance" :label="$t('wallet.amount')" :error="transferAmountError" :error-label="transferAmountErrorText">
-                        <q-input v-model="transferAmount" :suffix="tokenName" type="number" :decimals="transferAmountDecimals" dark />
-                      </q-field>
-                      <q-field inset="icon" class="q-mb-md" label="Memo">
-                        <q-input rows="3" type="textarea" v-model="transferMemo" dark />
-                      </q-field>
-                    </q-card-main>
-                    <q-card-actions class="justify-end">
-                      <q-btn @click="transferToken()" :disabled="badTransferTo || badTransferAmount" class="q-ma-sm" color="primary" :label="$t('wallet.transfer')"/>
-                    </q-card-actions>
-                  </q-card>
-                </div>
-              </div>
-            </q-tab-pane>
-            <q-tab-pane :name="mainCurrencyName">
-              <div class="row">
-                <div class="col-lg-12 col-xl-4">
-                  <q-card dark flat class="bg-dark2 q-ma-sm">
-                    <q-card-main>
-                      <h6 class="text-center q-ma-none">{{getMainCurrencyBalance}} {{mainCurrencyName}}</h6>
-                    </q-card-main>
-                    <q-card-actions>
-                    </q-card-actions>
-                  </q-card>
-                </div>
-                <div class="col-lg-12 col-xl-8">
-                  <q-card dark flat class="bg-dark2 q-ma-sm">
-                    <q-card-title>
-                      <h5 class="q-ma-none">{{ $t("wallet.transfer") }}</h5>
-                    </q-card-title>
-                    <q-card-main>
-                      <q-field class="q-mb-md" icon="icon-topmenu-2" :label="$t('wallet.transfer_to')" :error="transferToError" :error-label="transferToErrorText">
-                        <q-input dark v-model="transferTo" />
-                      </q-field>
-                      <q-field class="q-mb-md" icon="icon-type-2" :label="$t('wallet.amount')" :error="transferMainAmountError" :error-label="transferMainAmountErrorText">
-                        <q-input v-model="transferMainAmount" :suffix="mainCurrencyName" type="number" :decimals="transferMainAmountDecimals" dark />
-                      </q-field>
-                      <q-field inset="icon" class="q-mb-md" :label="$t('wallet.memo')">
-                        <q-input rows="3" type="textarea" v-model="transferMemo" dark />
-                      </q-field>
-                    </q-card-main>
-                    <q-card-actions class="justify-end">
-                      <q-btn @click="transferMainCurrency()" :disabled="badTransferTo || badTransferMainAmount" class="q-ma-sm" color="primary" :label="$t('wallet.transfer')" />
-                    </q-card-actions>
-                  </q-card>
-                </div>
-              </div>
-            </q-tab-pane>
-          </q-tabs>
-        </div>
-        <div v-if="getAccountResources.ram" class="col-lg-12 col-xl-4 q-pa-sm">
-          <q-alert icon="icon-type-8" color="dark2">
-            <h5 class="q-mb-sm q-mt-none">{{ $t("wallet.RAM") }}</h5>
-  <q-progress color="white" :percentage="getAccountResources.ram.available" />
-            <p class="text-center q-mt-sm">{{getAccountResources.ram.available}} % remaining</p>
-          </q-alert>
-        </div>
-        <div v-if="getAccountResources.cpu" class="col-lg-12 col-xl-4 q-pa-sm">
-          <q-alert icon="icon-ui-9" color="dark2">
-            <h5 class="q-mb-sm q-mt-none">{{ $t("wallet.CPU") }}</h5>
-  <q-progress color="white" :percentage="getAccountResources.cpu.available" />
-            <p class="text-center q-mt-sm">{{getAccountResources.cpu.available}} % remaining</p>
-          </q-alert>
-        </div>
-        <div v-if="getAccountResources.net" class="col-lg-12 col-xl-4 q-pa-sm">
-          <q-alert icon="icon-ui-10" color="dark2">
-            <h5 class="q-mb-sm q-mt-none">{{ $t("wallet.network") }}</h5>
-  <q-progress color="white" :percentage="getAccountResources.net.available" />
-            <p class="text-center q-mt-sm">{{getAccountResources.net.available}} % remaining</p>
-          </q-alert>
-        </div>
-      </div>
-    </div>
-  </div>
-  </div>
-  <Transaction ref="Transaction" v-on:done="lookupTokenBalance()" />
-  <LoadingSpinner :visible="loading" :text="loadingText" />-->
 </q-page>
 </template>
 

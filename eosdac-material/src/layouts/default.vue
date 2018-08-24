@@ -12,7 +12,7 @@
       <div class="xs-hide sm-hide md-hide" v-if="getImported">
         <MenuDropdown class="no-pointer-events" v-if="getAccountName && getRegistered && getTokenBalance" iconColor="white" :label="$t('default.member_status')" :statusLabel="1" :sublabel="$t('default.registered')" icon="icon-topmenu-8" />
         <MenuDropdown class="no-pointer-events" v-if="getAccountName && getRegistered && !getTokenBalance" iconColor="white" :label="$t('default.member_status')" :statusLabel="3" :sublabel="$t('default.pending')" icon="icon-topmenu-8"/>
-        <MenuDropdown v-if="getAccountName && !getRegistered" iconColor="white" :label="$t('default.member_status')" :statusLabel="2" :sublabel="$t('default.not_registered')" icon="icon-topmenu-7" :iconRight="true">
+        <MenuDropdown v-close-overlay v-if="getAccountName && !getRegistered" iconColor="white" :label="$t('default.member_status')" :statusLabel="2" :sublabel="$t('default.not_registered')" icon="icon-topmenu-7" :iconRight="true">
           <q-list class="bg-dark2" dark link>
             <q-item @click.native="$refs.Multi.init('sign')" dark>
               <q-item-side>
@@ -27,7 +27,7 @@
         <MenuDropdown class="no-pointer-events" v-if="getAccountName" iconColor="white" :label="$t('default.your_token_balance', { tokenName: mainCurrencyName })" :sublabel="String(getMainCurrencyBalance)" icon="icon-type-2" />
         <MenuDropdown class="no-pointer-events" v-if="getAccountName" iconColor="white" :label="$t('default.account_name')" :sublabel="getAccountName" icon="icon-topmenu-2" />
         <MenuDropdown v-if="getAccountName" iconColor="positive" :label="$t('default.status')" :sublabel="$t('default.logged_in')" icon="icon-topmenu-1" :iconRight="true">
-          <q-list class="bg-dark2" dark link>
+          <q-list v-close-overlay class="bg-dark2" dark link>
             <q-item @click.native="lockScatter()" dark>
               <q-item-side>
                 <q-item-tile icon="icon-topmenu-4">
@@ -38,7 +38,7 @@
           </q-list>
         </MenuDropdown>
         <MenuDropdown v-else iconColor="white" :label="$t('default.status')" :sublabel="$t('default.logged_out')" icon="icon-topmenu-4" :iconRight="true">
-          <q-list class="bg-dark2" dark link>
+          <q-list v-close-overlay class="bg-dark2" dark link>
             <q-item @click.native="unlockAccount()" dark>
               <q-item-side>
                 <q-item-tile color="positive" icon="icon-topmenu-1">
@@ -59,7 +59,7 @@
         </q-item-side>
         <q-item-main :label="$t('default.log_out')" sublabel="" />
       </q-item>
-      
+
       <q-item v-if="getRegistered" class="lg-hide xl-hide">
         <q-item-side>
           <q-item-tile color="white" icon="icon-dac-balance" />

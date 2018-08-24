@@ -31,7 +31,7 @@
       </div>
     </q-scroll-area>
     <div class="relative-position q-pa-sm">
-      <q-btn color="primary" @click="transact()">Send</q-btn>
+      <q-btn color="primary" @click="transact()">{{ $t('transaction.send') }}</q-btn>
       <q-btn class="on-right" v-if="!cancelable" color="negative" @click="close()">{{ $t('transaction.cancel') }}</q-btn>
     </div>
     <LoadingSpinner :visible="loading" :text="$t(loadingText)" />
@@ -78,7 +78,7 @@ export default {
     async newTransaction(contract, action, fields, cancelable) {
       Object.assign(this.$data, this.$options.data())
       this.cancelable = cancelable
-      this.visible = this.getTransactionPopup //boolean 
+      this.visible = this.getTransactionPopup //boolean
       this.loading = this.getTransactionPopup //boolean
       this.loadingText = 'transaction.loading_abi'
       this.action = action

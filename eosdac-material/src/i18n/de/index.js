@@ -152,6 +152,7 @@ export default {
     unregister_membership: 'Mitgliedschaft aufheben',
   },
   transaction: {
+    send: 'Senden',
     action: 'Aktion',
     by_completing_agree: 'Mit dem Abschluss dieser Transaktion stimme ich den folgenden Bedingungen zu.',
     cancel: 'Abbrechen',
@@ -195,6 +196,7 @@ export default {
     or_select_address_book: 'Oder wählen Sie ein Zielkonto aus dem Adressbuch',
     input_a_destination_account: 'Geben Sie ein Zielkonto ein',
     total: 'Total',
+    remaining: 'übrig'
   },
   wp_member_view: {
     approx_USD: '(Ungef. Xxxx USD)',
