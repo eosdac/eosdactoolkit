@@ -88,15 +88,21 @@
       </q-item-side>
       <q-item-main >
         <span>{{ $t('settings.user_preference') }}</span>
-        <span class="q-ml-lg text-dimwhite" >xxxxxxxxxxxx:</span>
-        <span v-if="true" class="q-ml-md text-positive">xxxxxxxxxxxxxxxxx</span>
+        <span class="q-ml-lg text-dimwhite" ></span>
+        <span v-if="true" class="q-ml-md text-positive"></span>
       </q-item-main>
       <span class="hack_height"></span>
     </template>
-    <div class="q-pa-md">
-      <q-toggle  class="float-right" v-model="transactionpopup" left-label :label="$t('settings.transaction_popup')" />
-      {{transactionpopup}}
+
+    <div class="row ">
+      <div class="col-sm-12 col-lg-4 q-pa-md relative-position" >
+        <p class="q-title" >{{ $t("settings.toggle_transaction_popup") }}</p>
+        <div class="q-mt-lg">
+          <q-toggle  class="float-right" v-model="transactionpopup" left-label :label="$t('settings.transaction_popup_label')" />
+        </div>
+      </div>
     </div>
+    
   </q-collapsible>
 </div>
 

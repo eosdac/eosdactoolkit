@@ -6,7 +6,7 @@
         <h4 class="q-display-1 q-mb-sm q-mt-none">{{ $t("profile.profile") }}</h4>
       </div>
     </div>
-    <div class="row  q-mt-md" style="margin-left:154px;background:none">
+    <div class="row  q-mt-md profile_header_top_row">
       <div class="col-xs-12">
         <div class="text-dimwhite text-weight-light q-caption">User Name</div>
         <div class="q-display-1 text-weight-thin uppercase">kasperfish</div>
@@ -23,7 +23,7 @@
     </div>
 
     <div class="blur-details q-pa-md absolute-bottom" style="height:120px;margin-right:-16px;margin-left:-16px;">
-      <div class="row  " style="margin-left:170px; margin-right:16px; background:none">
+      <div class="row profile_header_bottom_row">
 
         <div class="col-md-2 col-xs-6 q-pl-sm" >
           <div class="text-dimwhite text-weight-light q-caption">{{ $t('profile.givenName') }}</div>
@@ -105,41 +105,7 @@
 </q-page>
 </template>
 
-<style lang="stylus">
-@import '~variables'
 
-.gradient-bg-primary{
-  background-image linear-gradient(to right, $primary, $p-light);
-}
-.blur-details{
-  background rgba(255, 255, 255, 0.1);
-}
-.profile_image_inner_wrap{
-  border-radius:50%; 
-  border:4px solid white; 
-  background:$dark;
-  overflow:hidden;
-  position:relative;
-
-}
-.profile_image_outer_wrap{
-  position:absolute; 
-  z-index:1;
-  height:140px;
-  width:140px; 
-  top:70px;
-}
-.hack_center{
-    position: absolute;
-    top: -9999px;
-    bottom: -9999px;
-    left: -9999px;
-    right: -9999px;
-    margin: auto;
-}
-
-
-</style>
 
 <script>
 const IPFS = require('ipfs-api');
@@ -290,3 +256,50 @@ export default {
 
 }
 </script>
+
+<style lang="stylus">
+@import '~variables'
+
+.gradient-bg-primary{
+  background-image linear-gradient(to right, $primary, $p-light);
+}
+.blur-details{
+  background rgba(255, 255, 255, 0.1);
+}
+
+.profile_header_bottom_row{
+  margin-left:170px; 
+  margin-right:16px; 
+  background:none
+
+}
+.profile_header_top_row{
+  margin-left:154px;
+  background:none
+
+}
+.profile_image_inner_wrap{
+  border-radius:50%; 
+  border:4px solid white; 
+  background: #7c41ba;
+  overflow:hidden;
+  position:relative;
+
+}
+.profile_image_outer_wrap{
+  position:absolute; 
+  z-index:1;
+  height:140px;
+  width:140px; 
+  top:70px;
+  transition: all .2s ease-in-out;
+}
+.hack_center{
+    position: absolute;
+    top: -9999px;
+    bottom: -9999px;
+    left: -9999px;
+    right: -9999px;
+    margin: auto;
+}
+</style>
