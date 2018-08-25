@@ -156,6 +156,8 @@ export default {
     REGISTERED: 'REGISTERED',
     settings: 'Settings',
     unregister_membership: 'Unregister Membership',
+    user_preference: 'User Settings',
+    transaction_popup_label: 'Transaction Popups'
   },
   transaction: {
     send: 'send',
