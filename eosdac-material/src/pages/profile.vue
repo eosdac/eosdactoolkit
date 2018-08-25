@@ -25,15 +25,15 @@
 
     <div class="blur-details q-pa-md absolute-bottom" style="height:120px;margin-right:-16px;margin-left:-16px;">
       <div class="row profile_header_bottom_row">
-        <div class="col-md-2 col-xs-6 q-pl-sm" >
+        <div class="col-md-2 col-xs-6 q-pr-sm" >
           <div class="text-dimwhite text-weight-light q-caption">{{ $t('profile.givenName') }}</div>
           <q-input color="white" dark :readonly="!edit" :hide-underline="!edit" v-model="form.givenName"/>
         </div>
-        <div class="col-md-2 col-xs-6 q-pl-sm">
+        <div class="col-md-2 col-xs-6 q-pr-sm">
           <div class="text-dimwhite text-weight-light q-caption">{{ $t('profile.familyName') }}</div>
           <q-input color="white" dark :readonly="!edit" :hide-underline="!edit"  v-model="form.familyName"/>
         </div>
-        <div class="col-md-2 col-xs-6 q-pl-sm">
+        <div class="col-md-2 col-xs-6 q-pr-sm">
           <div class="text-dimwhite text-weight-light q-caption">{{ $t('profile.gender') }}</div>
            <q-select
               class=""
@@ -45,7 +45,7 @@
              :options="[{label:$t('profile.female'), value:'female'}, {label:$t('profile.male'), value:'male'}, {label:$t('profile.other'), value:'other'}]"
             />
         </div>
-        <div class="col-md-2 col-xs-6 q-pl-sm">
+        <div class="col-md-2 col-xs-6">
           <div class="text-dimwhite text-weight-light q-caption">Type</div>
           <div>Member</div>
         </div>
