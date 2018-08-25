@@ -41,7 +41,8 @@ const store = new Vuex.Store({
     key: 'usersettings',
     paths: [
       'usersettings.language',
-      'usersettings.transactionPopup'
+      'usersettings.transactionPopup',
+      'usersettings.consoleMessage'
     ],
     //filter: mutation => (mutation.payload.save)? true : false
   })]

@@ -100,6 +100,7 @@
         <p class="q-title" ></p>
         <div class="q-mt-lg">
           <q-toggle  class="float-left" v-model="transactionpopup" color="p-light" left-label :label="$t('settings.transaction_popup_label')" />
+          <q-toggle  class="float-left" v-model="consolemessage" color="p-light" left-label :label="$t('settings.console_message_label')" />
         </div>
       </div>
     </div>
@@ -140,11 +141,13 @@ export default {
   },
   data (){
     return{
-      transactionpopup: ''
+      transactionpopup: '',
+      consolemessage: ''
     }
   },
   mounted() {
     this.transactionpopup = this.getTransactionPopup
+    this.consolemessage = this.getConsoleMessage
 
   },
   computed: {
@@ -152,7 +155,8 @@ export default {
       getAccountName: 'account/getAccountName',
       getRegistered: 'account/getRegistered',
       getCurrentEndpoint: 'api/getCurrentEndpoint',
-      getTransactionPopup: 'usersettings/getTransactionPopup'
+      getTransactionPopup: 'usersettings/getTransactionPopup',
+      getConsoleMessage: 'usersettings/getConsoleMessage'
     })
   },
   methods:{
@@ -166,6 +170,9 @@ export default {
   watch: {
     transactionpopup (bool) {
       this.$store.commit('usersettings/SET_TRANSACTIONPOPUP', bool)
+    },
+    consolemessage (bool) {
+      this.$store.commit('usersettings/SET_CONSOLEMESSAGE', bool)
     }
   }
 }
