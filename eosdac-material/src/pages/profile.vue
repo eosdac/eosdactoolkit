@@ -19,7 +19,7 @@
         <transition name="fade">
           <img  :class="fitcontainer" class="hack_center" v-bind:src="setImgSrc" v-on:load="onLoaded" v-show="loaded" ref="profile_pic">
         </transition> 
-        <q-spinner-oval color="white" class="hack_center" v-if="!loaded" size="80px" />
+        <q-spinner-oval color="white" class="hack_center" v-if="!loaded" size="139px" />
       </div>
     </div>
 
@@ -89,7 +89,6 @@
           </div>
         </div>
       </div>
-      
     </div>
 
 <!--     <div class="q-pa-md q-mt-md shadow-5 bg-dark2">
@@ -98,17 +97,17 @@
 
   </div>
 
-
-
-
-
-  <q-modal v-model="visible"  minimized @hide="handleModalClose" :content-css="{width: '80vw'}" >
-    <div style="padding: 20px;" class="bg-dark round-borders">
-      <q-input dark type="url" v-model="form.image" @input="loaded=false" class="q-mt-md " :float-label="$t('profile_picture_url')" placeholder="http://example.site/mypic.jpg" />
-      <q-btn round color="primary" class="absolute" style="top:5px;right:5px" @click="visible=false" icon="icon-plus" />
-
+  <q-modal v-model="visible"  minimized @hide="handleModalClose"  :content-css="{width: '80vw'}" >
+    <div  class="bg-dark round-borders q-pa-md">
+      <div style="overflow: auto;">
+        <q-btn round color="primary" class="float-right" @click="visible=false" icon="icon-plus" />
+      </div>
+      <div>
+        <q-input dark type="url" v-model="form.image" @input="loaded=false" class="q-mt-md " :float-label="$t('profile_picture_url')" placeholder="http://example.site/mypic.jpg" />
+      </div>
     </div>
   </q-modal>
+
 </q-page>
 </template>
 
