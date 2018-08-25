@@ -19,12 +19,12 @@
         <transition name="fade">
           <img  :class="fitcontainer" class="hack_center" v-bind:src="setImgSrc" v-on:load="onLoaded" v-show="loaded" ref="profile_pic">
         </transition> 
+        <q-spinner-oval color="white" class="hack_center" v-if="!loaded" size="80px" />
       </div>
     </div>
 
     <div class="blur-details q-pa-md absolute-bottom" style="height:120px;margin-right:-16px;margin-left:-16px;">
       <div class="row profile_header_bottom_row">
-
         <div class="col-md-2 col-xs-6 q-pl-sm" >
           <div class="text-dimwhite text-weight-light q-caption">{{ $t('profile.givenName') }}</div>
           <q-input color="white" dark :readonly="!edit" :hide-underline="!edit" v-model="form.givenName"/>
@@ -300,6 +300,9 @@ export default {
   width:140px; 
   top:70px;
   transition: all .2s ease-in-out;
+}
+.profile_header_bottom_row .q-if-control{
+    display:none !important;
 }
 .hack_center{
     position: absolute;
