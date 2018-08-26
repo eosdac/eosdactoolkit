@@ -17,7 +17,7 @@
       <q-btn v-if="edit" round size="md" class="animate-pop" color="primary" icon="icon-plus" style="position:absolute;bottom:0;right:7px;z-index:2" @click="visible=true" />
       <div class="fit profile_image_inner_wrap">
         <transition name="fade">
-          <img  :class="{ 'hack_center': centerimage, 'full-width': setwidth, 'full-height': setheight }" v-bind:src="setImgSrc" v-on:load="onLoaded" v-show="loaded" ref="profile_pic">
+          <img  :class="{ 'hack_center': centerimage, 'full-width': setwidth, 'full-height': !setwidth }" v-bind:src="setImgSrc" v-on:load="onLoaded" v-show="loaded" ref="profile_pic">
         </transition> 
         <q-spinner-oval color="white" class="hack_center" v-if="!loaded" size="139px" />
       </div>
@@ -130,9 +130,8 @@ export default {
       edit:false,
 
       visible:false,
-      fitcontainer:'full-height',
+      centerimage:true,
       setwidth: true,
-      setheight: false,
       loaded:false,
       isuploading: false,
       form:{
@@ -143,7 +142,7 @@ export default {
           "email": "",
           "url": "",
           "image": "",
-          "sameAs": [{link:'ddddd'}, {link:'ddddd'}, {link:'ddddd'}],
+          "sameAs": [{link:''}],
           "timezone": new Date().getTimezoneOffset() //time-zone offset see: https://stackoverflow.com/questions/1091372/getting-the-clients-timezone-in-javascript
         }
 
@@ -170,10 +169,9 @@ export default {
   methods:{
      onLoaded() {
         let img = this.$refs.profile_pic;
+        this.$consoleMsg('Profile image size: '+img.width +' x '+ img.height);
         this.setwidth = img.width <= img.height ? true : false;
-        this.setheight = !this.setwidth;
         this.centerimage = img.width == img.height ? false : true;
-        console.log(img.width +' '+ img.height);
         this.visible = false;
         this.loaded = true;
     },
@@ -194,7 +192,7 @@ export default {
     },
 
     deleteEmptyLinks(){
-      if(this.form.sameAs.length ){
+      if(this.form.sameAs.length > 1 ){
         this.form.sameAs = this.form.sameAs.filter(function(item){
           return item.link !='';
         });
