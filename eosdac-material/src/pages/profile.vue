@@ -17,7 +17,7 @@
       <q-btn v-if="edit" round size="md" class="animate-pop" color="primary" icon="icon-plus" style="position:absolute;bottom:0;right:7px;z-index:2" @click="visible=true" />
       <div class="fit profile_image_inner_wrap">
         <transition name="fade">
-          <img  :class="fitcontainer" class="hack_center" v-bind:src="setImgSrc" v-on:load="onLoaded" v-show="loaded" ref="profile_pic">
+          <img  :class="{ 'hack_center': centerimage, 'full-width': setwidth, 'full-height': setheight }" v-bind:src="setImgSrc" v-on:load="onLoaded" v-show="loaded" ref="profile_pic">
         </transition> 
         <q-spinner-oval color="white" class="hack_center" v-if="!loaded" size="139px" />
       </div>
@@ -131,6 +131,8 @@ export default {
 
       visible:false,
       fitcontainer:'full-height',
+      setwidth: true,
+      setheight: false,
       loaded:false,
       isuploading: false,
       form:{
@@ -168,11 +170,21 @@ export default {
   methods:{
      onLoaded() {
         let img = this.$refs.profile_pic;
-
-        this.fitcontainer = img.width <= img.height ? 'full-width' : 'full-height';
+        this.setwidth = img.width <= img.height ? true : false;
+        this.setheight = !this.setwidth;
+        this.centerimage = img.width == img.height ? false : true;
         console.log(img.width +' '+ img.height);
         this.visible = false;
         this.loaded = true;
+    },
+
+    getSocialIconFromLink(){
+      //supported social networks
+      const icons = ['social-youtube-com', 'social-linkedin-com', 'social-ask-fm', 'social-tumblr-com', 
+                    'social-weibo-com', 'social-qzoneqq-com', 'social-flickr-com', 'social-instagram-com',
+                    'social-facebook-com', 'social-plusgoogle-com', 'social-meetup-com', 'social-ok-ru',
+                    'social-reddit-com', 'social-twitter-com', 'social-vk-com', 'social-pinterest-com'];
+      //todo
     },
 
     addSocial(){
