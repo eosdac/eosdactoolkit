@@ -14,7 +14,7 @@
         <q-icon name="icon-register-1"  color="white"  size="24px" />
       </q-item-side>
       <q-item-main >
-        <span>{{ $tc('settings.API_endpoint') }}</span>
+        <span>{{ $t('settings.API_endpoint') }}</span>
         <span class="q-ml-lg text-dimwhite" >{{ $t("settings.current_connection") }}:</span>
         <span v-if="getCurrentEndpoint.lastConnectionStatus" class="q-ml-md text-positive">{{getCurrentEndpoint.httpEndpoint}}</span>
         <span v-else class="q-ml-md text-negative">{{getCurrentEndpoint.httpEndpoint}}</span>
