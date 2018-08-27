@@ -58,16 +58,27 @@
     <div class="row q-mt-md gutters-md bg-dark2 round-corners shadow-5" style="min-height:265px">
       <div class="col-md-8 col-sm-12 q-pa-md">
         <div class="" style="height:100%">
-          <div class="q-mb-md">{{ $t('profile.bio') }}</div>
+          <div class="q-title q-mb-md">{{ $t('profile.bio') }}</div>
           <q-input v-if="edit" inverted rows="8" color="dark" type="textarea" v-model="form.description" dark />
-          <div v-if="!edit">{{form.description}}</div>
+          <div class="text-dimwhite" v-if="!edit">{{form.description}}</div>
         </div>
       </div>
       <div class="col-md-4 col-sm-12 q-pa-md">
         <div class="column justify-between" style="height:100%">
-          <div class="q-mb-md">{{ $t('profile.website') }}</div>
-          <q-input dark type="url" v-model="form.url"  :readonly="!edit" :hide-underline="!edit"  :float-label="$t('website')" placeholder="http://example.com" /> 
-          <div v-if="edit"> 
+          
+          <!-- on display -->
+          <div v-if="!edit">
+            <div class="q-title q-mb-md">{{ $t('profile.website') }}</div>
+            <div class="text-dimwhite">{{form.url}}</div>
+
+            <q-btn v-for="(social, i) in form.sameAs" :key ="i" round color="dark">
+              <q-icon  :name="'icon-'+social.icon" />
+            </q-btn>
+          </div>
+          <!-- on edit -->
+          <div v-if="edit">
+            <div class="q-title q-mb-md">{{ $t('profile.website') }}</div>
+            <q-input dark type="url" v-model="form.url"  placeholder="http://example.com" />
             <q-input dark type="url"
               class="q-mt-md q-mb-md"
               v-model="social.link"
@@ -79,6 +90,7 @@
             />
             <q-btn  round  color="primary" @click="addSocial" icon="icon-plus" />
           </div>
+
           <div class="row gutter-sm justify-end q-mt-md">
             <div>
               <q-btn size="md" class="animate-pop" color="primary" @click="edit = !edit" :label="$t('profile.edit')" />
@@ -140,9 +152,9 @@ export default {
           "gender": "male",
           "description": "This is an example bio....",
           "email": "",
-          "url": "",
+          "url": "http://google.com",
           "image": "",
-          "sameAs": [{link:''}],
+          "sameAs": [{link:'https://www.twitter.com/neonexchange'},{link:'https://www.facebook.com/DonaldTrump/'}, {link: 'https://plus.google.com/+LukeStokes'}],
           "timezone": new Date().getTimezoneOffset() //time-zone offset see: https://stackoverflow.com/questions/1091372/getting-the-clients-timezone-in-javascript
         }
 
@@ -182,7 +194,25 @@ export default {
                     'social-weibo-com', 'social-qzoneqq-com', 'social-flickr-com', 'social-instagram-com',
                     'social-facebook-com', 'social-plusgoogle-com', 'social-meetup-com', 'social-ok-ru',
                     'social-reddit-com', 'social-twitter-com', 'social-vk-com', 'social-pinterest-com'];
-      //todo
+      
+      let lookup = icons.map(icon=> { return icon.split('-')[1] } );
+
+      this.form.sameAs.forEach((obj, index) => {
+        
+        let urlparts = new URL(obj.link);//does not work in IE
+        let hostparts = urlparts.hostname.split('.');
+
+        if(hostparts[0] ==='www'){
+          delete hostparts[0];
+        }
+        hostparts.pop();//remove TLD
+        let host = hostparts.join('');
+        let i = lookup.indexOf(host);
+        if(i > -1){
+          this.form.sameAs[index]['icon'] = icons[i];
+        }
+        //else default icon?
+      });
     },
 
     addSocial(){
@@ -267,7 +297,7 @@ export default {
   },
 
   mounted: function(){
-
+      this.getSocialIconFromLink();
    }
 
 }
