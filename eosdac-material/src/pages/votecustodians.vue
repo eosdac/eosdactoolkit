@@ -1,6 +1,6 @@
 <template>
 <q-page class="text-white q-pa-md">
-<Transaction ref="Transaction" v-on:done="" />
+<Transaction ref="Transaction"/>
 
 <div class="row gutter-md">
   <!-- first column  -->
@@ -26,7 +26,7 @@
       </div>
 
       <Candidate 
-        v-for="(candidate, index) in paginate" 
+        v-for="candidate in paginate" 
         :key="candidate.candidate_name" 
         :data="candidate" 
         @profile ="addProfile" 
