@@ -4,7 +4,7 @@
   <p class="q-caption text-left no-margin text-grey" style="font-size:10px;text-transform:none;">{{label}}<br><span v-if="sublabel" class="q-subheading text-bold" v-bind:class="statusObject">{{sublabel}}</span>
     <q-icon v-if="iconRight" class="on-right text-white" style="font-size:13px;" name="icon-ui-11" />
   </p>
-  <q-popover fit>
+  <q-popover class="xs-hide sm-hide md-hide bg-transparent" ref="pop" fit>
     <slot></slot>
   </q-popover>
 </q-btn>
@@ -24,18 +24,30 @@ export default {
   computed: {
     statusObject: function() {
 
-      switch(this.statusLabel) {
-          case 1: //registered
-              return {active:true, 'text-positive': true}
-              break;
-          case 2: //unregistered
-              return {active:true, 'text-negative': true}
-              break;
-          case 3: //pending
-              return {active:true, 'text-warning': true}
-              break;
-          default:
-              return {active:true, 'text-white': true}
+      switch (this.statusLabel) {
+        case 1: //registered
+          return {
+            active: true,
+            'text-positive': true
+          }
+          break;
+        case 2: //unregistered
+          return {
+            active: true,
+            'text-negative': true
+          }
+          break;
+        case 3: //pending
+          return {
+            active: true,
+            'text-warning': true
+          }
+          break;
+        default:
+          return {
+            active: true,
+            'text-white': true
+          }
       }
     }
   },
