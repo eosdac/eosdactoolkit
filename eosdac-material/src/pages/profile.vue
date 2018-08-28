@@ -154,13 +154,14 @@ export default {
           "email": "",
           "url": "http://google.com",
           "image": "",
-          "sameAs": [{link:'https://www.twitter.com/neonexchange'},{link:'https://www.facebook.com/DonaldTrump/'}, {link: 'https://plus.google.com/+LukeStokes'} ],
+          "sameAs": [{link:'https://www.twitter.com/neonexchange'},{link:'https://www.facebook.com/DonaldTrump/'}, {link: 'https://plus.google.com/+LukeStokes'}, {link:'https://steemit.com/@suesa'} ],
           "timezone": new Date().getTimezoneOffset() //time-zone offset see: https://stackoverflow.com/questions/1091372/getting-the-clients-timezone-in-javascript
         }
 
 
     }
   },
+  
   computed: {
     ...mapGetters({
       getAccountName: 'account/getAccountName',
@@ -177,7 +178,6 @@ export default {
     }
   },
 
-
   methods:{
      onLoaded() {
         let img = this.$refs.profile_pic;
@@ -193,11 +193,14 @@ export default {
       const icons = ['social-youtube-com', 'social-linkedin-com', 'social-ask-fm', 'social-tumblr-com', 
                     'social-weibo-com', 'social-qzoneqq-com', 'social-flickr-com', 'social-instagram-com',
                     'social-facebook-com', 'social-plusgoogle-com', 'social-meetup-com', 'social-ok-ru',
-                    'social-reddit-com', 'social-twitter-com', 'social-vk-com', 'social-pinterest-com'];
+                    'social-reddit-com', 'social-twitter-com', 'social-vk-com', 'social-pinterest-com',
+                    'social-behance-net', 'social-dribble-com', 'social-github-com', 'social-medium-com',
+                    'social-steemit-com', 'social-general'];
       
       let lookup = icons.map(icon=> { return icon.split('-')[1] } );
 
       this.form.sameAs.forEach((obj, index) => {
+        
         
         let urlparts = new URL(obj.link);//does not work in IE
         let hostparts = urlparts.hostname.split('.');

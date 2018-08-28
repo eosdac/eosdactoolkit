@@ -1,19 +1,19 @@
 @charset "UTF-8";
 
 @font-face {
-  font-family: "eosdac-iconfont-v1-4";
-  src:url("fonts/eosdac-iconfont-v1-4.eot");
-  src:url("fonts/eosdac-iconfont-v1-4.eot?#iefix") format("embedded-opentype"),
-    url("fonts/eosdac-iconfont-v1-4.woff") format("woff"),
-    url("fonts/eosdac-iconfont-v1-4.ttf") format("truetype"),
-    url("fonts/eosdac-iconfont-v1-4.svg#eosdac-iconfont-v1-4") format("svg");
+  font-family: "eosdac-iconfont-v1-5";
+  src:url("fonts/eosdac-iconfont-v1-5.eot");
+  src:url("fonts/eosdac-iconfont-v1-5.eot?#iefix") format("embedded-opentype"),
+    url("fonts/eosdac-iconfont-v1-5.woff") format("woff"),
+    url("fonts/eosdac-iconfont-v1-5.ttf") format("truetype"),
+    url("fonts/eosdac-iconfont-v1-5.svg#eosdac-iconfont-v1-5") format("svg");
   font-weight: normal;
   font-style: normal;
 
 }
 
 [data-icon]:before {
-  font-family: "eosdac-iconfont-v1-4" !important;
+  font-family: "eosdac-iconfont-v1-5" !important;
   content: attr(data-icon);
   font-style: normal !important;
   font-weight: normal !important;
@@ -27,7 +27,7 @@
 
 [class^="icon-"]:before,
 [class*=" icon-"]:before {
-  font-family: "eosdac-iconfont-v1-4" !important;
+  font-family: "eosdac-iconfont-v1-5" !important;
   font-style: normal !important;
   font-weight: normal !important;
   font-variant: normal !important;
@@ -242,9 +242,6 @@
 .icon-menu-9:before {
   content: "\22";
 }
-.icon-ui-20:before {
-  content: "\27";
-}
 .icon-topmenu-7:before {
   content: "\28";
 }
@@ -253,4 +250,25 @@
 }
 .icon-topmenu-8:before {
   content: "\2a";
+}
+.icon-menu-11:before {
+  content: "\27";
+}
+.icon-social-behance-net:before {
+  content: "\2b";
+}
+.icon-social-dribbble-com:before {
+  content: "\2c";
+}
+.icon-social-github-com:before {
+  content: "\2d";
+}
+.icon-social-general:before {
+  content: "\2e";
+}
+.icon-social-medium-com:before {
+  content: "\2f";
+}
+.icon-social-steemit-com:before {
+  content: "\3a";
 }
