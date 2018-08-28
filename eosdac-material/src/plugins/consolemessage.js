@@ -1,5 +1,5 @@
 var consoleMsg;
-setInterval(function(){ console.clear()}, 1000*60*30);
+setInterval(function(){ console.clear()}, 1000*60*30)
 export default ({
   Vue,
   store
