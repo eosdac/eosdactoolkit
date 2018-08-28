@@ -71,7 +71,7 @@
             <div class="q-title q-mb-md">{{ $t('profile.website') }}</div>
             <div class="text-dimwhite">{{form.url}}</div>
             <div class="q-mt-md">
-              <q-btn v-for="(social, i) in parseSocialLinks()" class="on-left" :key ="i" round color="dark">
+              <q-btn v-for="(social, i) in parseSocialLinks()" class="on-left" :key ="i" round color="dark" @click.native="openURL(social.link)" >
                 <q-icon  :name="'icon-'+social.icon" />
               </q-btn>
             </div>
@@ -130,6 +130,9 @@
 const IPFS = require('ipfs-api');
 const ipfs = new IPFS({ host: 'ipfs.infura.io', port: 5001, protocol: 'https' });
 import {
+  openURL
+} from 'quasar'
+import {
   mapGetters
 } from 'vuex'
 export default {
@@ -180,6 +183,7 @@ export default {
   },
 
   methods:{
+    openURL,
      onLoaded() {
         let img = this.$refs.profile_pic;
         this.$consoleMsg('Profile image size: '+img.width +' x '+ img.height);
@@ -200,7 +204,7 @@ export default {
       
       let lookup = icons.map(icon=> { return icon.split('-')[1] } );
 
-      let links = this.form.sameAs;
+      let links = JSON.parse(JSON.stringify(this.form.sameAs));
       links.forEach((obj, index) => {
         
         
