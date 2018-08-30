@@ -6,6 +6,7 @@ export default ({store, app, router, Vue }) => {
     if (connected) {
       store.commit('api/SCATTER_AVAILABLE', ScatterJS.scatter)
       window.scatter = null
+      store.getters['api/getScatter'].forgetIdentity()
     }
   })
 }
