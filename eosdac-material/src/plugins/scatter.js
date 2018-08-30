@@ -13,7 +13,14 @@ export default ({
     if (connected) {
       if (store.getters['api/getScatterChainId'] && configFile.network.chainId !== store.getters['api/getScatterChainId']) {
         console.log('New chain ID, forget identity')
-        ScatterJS.scatter.forgetIdentity()
+        ScatterJS.scatter.getIdentity({
+          accounts: [{
+            blockchain: 'eos',
+            chainId: store.getters['api/getScatterChainId']
+          }]
+        }).then(identity => {
+          ScatterJS.scatter.forgetIdentity()
+        })
       }
       store.commit('api/SCATTER_AVAILABLE', {scatter: ScatterJS.scatter, chainId: configFile.network.chainId})
       window.scatter = null
