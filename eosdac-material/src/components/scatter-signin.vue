@@ -53,7 +53,7 @@ export default {
       getScatter: 'api/getScatter'
     })
   },
-  mounted () {
+  mounted() {
     if (this.skipSelection) {
       this.useScatter()
     }
@@ -81,7 +81,10 @@ export default {
       try {
         let suggest = await this.getScatter.suggestNetwork(network2)
         let identity = await this.getScatter.getIdentity({
-          accounts: [network2]
+          accounts: [{
+            blockchain: 'eos',
+            chainId: current.chainId
+          }]
         })
         let queryAccount = await this.$store.dispatch('api/getAccount', {
           account_name: identity.accounts[0].name
