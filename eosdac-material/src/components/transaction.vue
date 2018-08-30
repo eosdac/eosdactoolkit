@@ -14,11 +14,18 @@
     </q-list>
     <q-list dark striped>
       <q-list-header>{{ $t('transaction.fields') }}</q-list-header>
-      <q-item v-for="(field, key) in fields" :key="key">
+      <q-item v-for="(field, key) in fields" :key="key" v-if="String(field).length < 20">
         <q-item-main :label="key + ':'" />
         <q-item-side right>
           {{field}}
         </q-item-side>
+      </q-item>
+      <q-item v-else>
+        <div class="q-item-label">{{key + ':'}}</div>
+          <q-scroll-area class="bg-dark2" style="width: 100%; height: 80px;">
+            <pre class="q-ma-none q-pa-sm">{{field}}</pre>
+        </q-scroll-area>
+
       </q-item>
     </q-list>
     <q-alert v-if="getAccountResources.cpu.warning" :message="$t('transaction.warning_cpu')" class="text-truncate" text-color="black" icon="icon-ui-9" color="warning" />
