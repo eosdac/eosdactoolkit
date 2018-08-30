@@ -7,6 +7,7 @@ export default {
   connectionTimeoutMilSec: 10000,
   scatterAvailable: false,
   scatter: null,
+  scatterChainId: null,
   endpoints: [],
   lastGetInfo: {},
   ricardians: {},
