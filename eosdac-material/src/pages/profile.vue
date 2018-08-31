@@ -71,7 +71,7 @@
             <div class="q-title q-mb-md">{{ $t('profile.website') }}</div>
             <div class="text-dimwhite">{{form.url}}</div>
             <div class="q-mt-md">
-              <q-btn v-for="(social, i) in parseSocialLinks()" class="on-left" :key ="i" round color="dark" @click.native="openURL(social.link)" >
+              <q-btn v-for="(social, i) in parseSocialLinks()"  class="on-left" :key ="i" round color="dark" @click.native="openURL(social.link)" >
                 <q-icon  :name="'icon-'+social.icon" />
               </q-btn>
             </div>
