@@ -1,7 +1,7 @@
 export default {
   constitution: {
     loading_constitution: '헌법 불러오는 중',
-    switch_contrast: '테마색 변경',
+    switch_contrast: '색상 대조',
   },
   default: {
     account_name: '계정 이름',
@@ -181,8 +181,8 @@ export default {
     wallet: '지갑',
     total_staked: '스테이킹한 토큰',
     send_tokens: '토큰 보내기',
-    total_eos_balance: '총 EOS 잔액',
-    liquid: '액체',
+    total_eos_balance: '총 EOS 수량',
+    liquid: '유동량',
     token_selection_and_quantity: '토큰 선택 및 수량',
     select_token_to_send: '보낼 토큰 선택',
     select_from_list: '목록에서 선택',
@@ -191,7 +191,7 @@ export default {
     manage_addressbook: '주소록 관리',
     or_select_address_book: '또는 주소록에서 보낼 계정을 선택하십시오.',
     input_a_destination_account: '보낼 계정 입력',
-    total: '합계',
+    total: '총량',
   },
   wp_member_view: {
     approx_USD: '(약 xxxx USD)',
