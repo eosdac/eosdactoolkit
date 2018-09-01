@@ -149,7 +149,7 @@ export default {
   created() {
     // this.getCustodians()
     this.getAllCandidates();
-    this.getMemberVotes();
+
   },
 
   methods: {
@@ -197,6 +197,16 @@ export default {
       // })
       console.log(temp)
       this.custodians = temp;
+      //select member votes
+      let votes = await this.$store.dispatch('api/getMemberVotes', {member: this.getAccountName});
+      if(votes && votes[0].candidates.length ){
+        votes[0].candidates.forEach((vote) =>{
+          this.addToVoteList(vote);
+        })
+      }
+      else{
+        console.log(`${this.getAccountName} has not voted.`);
+      }
       this.loading = false;
     },
 
@@ -206,15 +216,9 @@ export default {
       this.custodians = custodians
     },
   
-    async getMemberVotes() {
-      let votes = await this.$store.dispatch('api/getMemberVotes', {member: this.getAccountName})
-      console.log(votes)
-      // this.custodians = custodians
-    },
-
     addToVoteList(name){
       let selected = this.custodians.filter(x => x.selected == true);
-      if(selected.length < 8){
+      if(selected.length < 5){
         this.custodians.find(x => x.candidate_name === name).selected =true;
       }
       else{
@@ -229,10 +233,10 @@ export default {
 
     voteForCandidates() {
       let votes = this.custodians.filter(x => x.selected == true).map(c => c.candidate_name);
-      if(!votes.length){
-        console.log('Votelist can\'t be empty');
-        return false;
-      }
+      // if(!votes.length){
+      //   console.log('Votelist can\'t be empty');
+      //   return false;
+      // }
       this.$refs.Transaction.newTransaction(this.$configFile.network.custodianContract.name, 'votecust', {
         voter: this.getAccountName,
         newvotes: votes
