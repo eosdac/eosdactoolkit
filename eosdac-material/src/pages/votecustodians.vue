@@ -148,7 +148,8 @@ export default {
 
   created() {
     // this.getCustodians()
-    this.getAllCandidates()
+    this.getAllCandidates();
+    this.getMemberVotes();
   },
 
   methods: {
@@ -203,6 +204,12 @@ export default {
       let custodians = await this.$store.dispatch('api/getCustodians', {lb: lb})
       console.log(custodians)
       this.custodians = custodians
+    },
+  
+    async getMemberVotes() {
+      let votes = await this.$store.dispatch('api/getMemberVotes', {member: this.getAccountName})
+      console.log(votes)
+      // this.custodians = custodians
     },
 
     addToVoteList(name){

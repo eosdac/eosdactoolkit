@@ -219,6 +219,37 @@ export async function getCustodians({
   }
 }
 
+export async function getMemberVotes({
+  state,
+  commit,
+
+}, param) {
+  try {
+    console.log(param)
+    eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint
+    let eos = Eos(eosConfig)
+    const votes = await eos.getTableRows({
+      json: true,
+      scope: configFile.network.custodianContract.name,
+      code: configFile.network.custodianContract.name,
+      table: 'votes',
+      lower_bound: param.member,
+      limit:1
+      // key_type: 'i64',
+      // index_position:1
+    })
+    if (!votes.rows.length) {
+      return false
+    } else {
+      return votes.rows
+    }
+    commit('SET_CURRENT_CONNECTION_STATUS', true)
+  } catch (error) {
+    apiDown(error,commit)
+    throw error
+  }
+}
+
 export async function votecust({
   state,
   rootState,
