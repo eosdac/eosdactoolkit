@@ -48,6 +48,18 @@ export const getRegistered = (state) => {
   }
 }
 
+export const getRegisteredVersionUpdate = (state) => {
+  if (state.registered.version && state.registered.memberterms) {
+    if (state.registered.version < state.registered.memberterms) {
+      return true
+    } else {
+      return false
+    }
+  } else {
+    return false
+  }
+}
+
 export const getFirstReg = (state) => {
   return state.firstReg
 }

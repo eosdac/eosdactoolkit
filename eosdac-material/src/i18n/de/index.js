@@ -27,6 +27,7 @@ export default {
     wallet: 'Konto',
     worker_proposals: 'Arbeitsangebote',
     you_have_not_yet_registered: 'Sie sind noch nicht als Mitglied registriert. Bitte unterschreiben Sie die Verfassung, um Mitglied zu werden.',
+    constitution_has_been_updated: 'The Verfassung wurde aktualisiert. Bitte unterschreiben Sie die Verfassung, um Mitglied zu bleiben.',
     your_token_balance: 'Dein {tokenName} Guthaben',
   },
   four_zero_four: {

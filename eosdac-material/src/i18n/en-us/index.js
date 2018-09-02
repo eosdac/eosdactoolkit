@@ -29,6 +29,7 @@ export default {
     wallet: 'Wallet',
     worker_proposals: 'Worker Proposals',
     you_have_not_yet_registered: 'You have not been registered as a Member yet. Please sign the constitution to use the Member Client.',
+    constitution_has_been_updated: 'The Constitution has been updated. Please sign the updated Constitution to use the Member Client.',
     your_token_balance: 'Your {tokenName} Balance',
   },
   four_zero_four: {
