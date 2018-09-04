@@ -12,7 +12,8 @@ export default [
       { path: 'workerproposals', component: () => import('pages/workerproposals') },
       { path: 'votecustodians', component: () => import('pages/votecustodians') },
       { path: 'profile', component: () => import('pages/profile') },
-      { path: 'constitution', component: () => import('pages/constitution') }
+      { path: 'constitution', component: () => import('pages/constitution') },
+      { path: 'registercandidate', component: () => import('pages/registercandidate') }
     ]
   },
 

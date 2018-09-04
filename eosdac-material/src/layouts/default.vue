@@ -124,6 +124,10 @@
         <q-item-side icon="icon-menu-8" />
         <q-item-main :label="$t('default.worker_proposals')" sublabel="" />
       </q-item>
+      <q-item to="/registercandidate">
+        <q-item-side icon="icon-register-2" />
+        <q-item-main :label="$t('default.register_as_candidate')" sublabel="" />
+      </q-item>
     </q-list>
     <q-list v-else no-border link inset-delimiter dark>
       <q-item @click.native="unlockAccount()">
