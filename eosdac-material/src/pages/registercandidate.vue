@@ -7,7 +7,7 @@
         dddddddd
       </div>
       <div class="col-md-4 col-sm-12 q-pa-md">
-        ssssssss
+        <q-btn size="md" class="animate-pop" color="primary" @click="registerAsCandidate" :label="$t('regcandidate.register')" />
       </div>
 </div>
 
@@ -47,10 +47,10 @@ export default {
     })
   },
   methods:{
-    unRegisterMember() {
-      this.$refs.Transaction.newTransaction(this.$configFile.network.tokenContract.name, 'memberunreg', {
-        sender: this.getAccountName
-      }, false)
+    registerAsCandidate() {
+        this.$store.dispatch('api/registerCandidate', {
+          scatter: true,
+        })
     },
 
   }

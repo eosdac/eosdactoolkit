@@ -279,6 +279,58 @@ export async function votecust({
   }
 }
 
+export async function registerCandidate({
+  state,
+  rootState,
+  commit
+}, payload) {
+  try {
+    eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint
+    eosConfig.keyProvider = rootState.account.pkeysArray
+    let eos = Eos(eosConfig)
+    if (payload.scatter) {
+      const network = await scatterNetwork(state)
+      const identity = await state.scatter.getIdentity({
+        accounts: [network]
+      })
+      eos = state.scatter.eos(network, Eos, eosConfig);
+      let authority = identity.accounts[0].authority
+      let accountname = identity.accounts[0].name
+      let res = await eos.transaction(
+        {
+          actions: [
+            {
+              account: 'kasdactokens',
+              name: 'transfer',
+              authorization: [{
+                actor: accountname,
+                permission: authority
+              }],
+              data: {from: accountname, to: 'dacelections', quantity: '1.0000 KASDAC', memo: 'dacelections'}
+            },
+            {
+              account: 'dacelections',
+              name: 'regcandidate',
+              authorization: [{
+                actor: accountname,
+                permission: authority
+              }],
+              data: {cand: accountname,bio:'blablabla' ,requestedpay :'100.0000 EOS'}
+            },
+          ]
+        }
+        // config -- example: {broadcast: false, sign: true}
+      )
+      console.log(res)
+      return res
+      commit('SET_CURRENT_CONNECTION_STATUS', true)
+    }
+  } catch (error) {
+    apiDown(error,commit)
+    throw error
+  }
+}
+
 export async function getMemberTerms({
   state,
   commit
