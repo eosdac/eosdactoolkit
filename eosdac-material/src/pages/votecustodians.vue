@@ -2,9 +2,9 @@
 <q-page class="text-white q-pa-md">
 <Transaction ref="Transaction"/>
 
-<div class="row gutter-md">
+<div class="row gutter-md reverse-wrap">
   <!-- first column  -->
-  <div class="col-sm-12 col-md-8" >
+  <div class="col-lg-12 col-xl-8" >
     <div>
       <span class="q-display-1 q-mt-none ">{{ $t('vote_custodians.candidate_list') }} <span class="text-dimwhite">- {{custodians.length}}</span></span>
       <p class="text-dimwhite">{{ $t('vote_custodians.description_main') }}</p>
@@ -48,12 +48,10 @@
             <q-pagination  v-show="true" v-model="pagination.page" :min="1" :max="pagination.max" :max-pages="6" direction-links size="12px" />
         </div>
       </div>
-
-
     </div>
   </div>
   <!-- second column -->
-  <div class="col-sm-12 col-md-4" >
+  <div class="col-lg-12 col-xl-4" >
     <div>
       <span class="q-display-1">{{ $t('vote_custodians.my_votes') }} <span class="text-dimwhite">- {{getSelectedCand.length}}</span></span>
       <p class="text-dimwhite">{{ $t('vote_custodians.description_side') }}</p>
@@ -109,9 +107,7 @@ export default {
   data() {
     return {
       loading: false,
-      loadingText: '',
       custodians: [],
-      page_content:[],
       pagination :{
         page:1,
         max:1,
@@ -147,9 +143,7 @@ export default {
   },
 
   created() {
-    // this.getCustodians()
     this.getAllCandidates();
-
   },
 
   methods: {
@@ -190,12 +184,8 @@ export default {
           let t = b.total_votes - a.total_votes;
           return t;
       });
-      //add selected key to all custodians
-      // temp = temp.map(c => {
-      //   c.selected = false;
-      //   return c;
-      // })
-      console.log(temp)
+
+      // console.log(temp)
       this.custodians = temp;
       //select member votes
       let votes = await this.$store.dispatch('api/getMemberVotes', {member: this.getAccountName});
@@ -233,10 +223,7 @@ export default {
 
     voteForCandidates() {
       let votes = this.custodians.filter(x => x.selected == true).map(c => c.candidate_name);
-      // if(!votes.length){
-      //   console.log('Votelist can\'t be empty');
-      //   return false;
-      // }
+
       this.$refs.Transaction.newTransaction(this.$configFile.network.custodianContract.name, 'votecust', {
         voter: this.getAccountName,
         newvotes: votes
