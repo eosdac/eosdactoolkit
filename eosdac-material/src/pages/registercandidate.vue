@@ -10,7 +10,9 @@
         <q-input dark type="text" v-model="stakedata.quantity" float-label="Stake Amount" placeholder="1.0000 KASDAC" />
         <q-input dark type="url" v-model="registerdata.bio"  float-label="Profile JSON url" placeholder="http://example.com/myjsonprofile.json" />
         <q-input dark type="text" v-model="registerdata.requestedpay" float-label="Requested Pay" placeholder="requested pay in EOS" />
-        <q-btn size="md" class="animate-pop" color="primary" @click="registerAsCandidate" :label="$t('regcandidate.register')" />
+        <q-btn size="md" class="animate-pop" :loading="loading" color="primary" @click="registerAsCandidate" :label="$t('regcandidate.register')">
+          <q-spinner slot="loading" />
+        </q-btn>
       </div>
 </div>
 
@@ -36,6 +38,7 @@ export default {
   },
   data (){
     return{
+      loading: false,
       stakedata: { quantity: '1.0000 KASDAC', memo: 'dacelections'},
       registerdata: { bio:'', requestedpay :'100.0000 EOS'}
 
@@ -53,14 +56,46 @@ export default {
   },
   methods:{
     registerAsCandidate() {
+        this.loading = true;
         this.$store.dispatch('api/registerCandidate', {
           scatter: true,
           stakedata: this.stakedata,
           registerdata : this.registerdata
         })
-        .then(res => console.log(res) )
-        .catch(e => console.log(e) )
+        .then(res => {
+          this.$store.commit('api/NOTIFY', {
+            icon: 'icon-ui-6',
+            color: 'positive',
+            message: 'transaction.transaction_successful',
+            details: res.transaction_id,
+            linkText: 'transaction.view_in_explorer',
+            linkUrl: this.$configFile.api.tokenExplorerUrl + '/transaction/' + res.transaction_id
+          })
+          this.loading = false;
+
+        }).catch(err => {
+
+          if (err.type) {
+            this.$store.commit('api/NOTIFY', {
+              icon: 'error',
+              color: 'red',
+              message: 'Error: ' + err.type,
+              detail: ''
+            })
+          } 
+          else {
+            this.$store.commit('api/NOTIFY', {
+              icon: 'error',
+              color: 'red',
+              message: 'Error: ' + JSON.parse(err).error.details[0].message || JSON.parse(err),
+              detail: ''
+            })
+          }
+          this.loading = false;
+        });
     },
+
+
 
   }
 }
