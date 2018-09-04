@@ -27,12 +27,14 @@ import {
   mapGetters
 } from 'vuex'
 export default {
-  name: 'Settings',
+  name: 'RegisterCandidate',
   components: {
     Transaction
   },
   data (){
     return{
+      stakedata: { to: 'dacelections', quantity: '1.0000 KASDAC', memo: 'dacelections'},
+      registerdata: { bio:'blablabla', requestedpay :'100.0000 EOS'}
 
     }
   },
@@ -50,7 +52,11 @@ export default {
     registerAsCandidate() {
         this.$store.dispatch('api/registerCandidate', {
           scatter: true,
+          stakedata: this.stakedata,
+          registerdata : this.registerdata
         })
+        .then(res => console.log(res) )
+        .catch(e => console.log(e) )
     },
 
   }

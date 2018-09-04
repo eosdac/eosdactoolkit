@@ -300,28 +300,26 @@ export async function registerCandidate({
         {
           actions: [
             {
-              account: 'kasdactokens',
+              account: configFile.network.tokenContract.name,
               name: 'transfer',
               authorization: [{
                 actor: accountname,
                 permission: authority
               }],
-              data: {from: accountname, to: 'dacelections', quantity: '1.0000 KASDAC', memo: 'dacelections'}
+              data: Object.assign({from : accountname, to: configFile.network.custodianContract.name}, payload.stakedata)
             },
             {
-              account: 'dacelections',
+              account: configFile.network.custodianContract.name,
               name: 'regcandidate',
               authorization: [{
                 actor: accountname,
                 permission: authority
               }],
-              data: {cand: accountname,bio:'blablabla' ,requestedpay :'100.0000 EOS'}
+              data: Object.assign({cand : accountname}, payload.registerdata) 
             },
           ]
         }
-        // config -- example: {broadcast: false, sign: true}
       )
-      console.log(res)
       return res
       commit('SET_CURRENT_CONNECTION_STATUS', true)
     }
