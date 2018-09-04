@@ -7,6 +7,9 @@
         dddddddd
       </div>
       <div class="col-md-4 col-sm-12 q-pa-md">
+        <q-input dark type="text" v-model="stakedata.quantity" float-label="Stake Amount" placeholder="1.0000 KASDAC" />
+        <q-input dark type="url" v-model="registerdata.bio"  float-label="Profile JSON url" placeholder="http://example.com/myjsonprofile.json" />
+        <q-input dark type="text" v-model="registerdata.requestedpay" float-label="Requested Pay" placeholder="requested pay in EOS" />
         <q-btn size="md" class="animate-pop" color="primary" @click="registerAsCandidate" :label="$t('regcandidate.register')" />
       </div>
 </div>
@@ -33,8 +36,8 @@ export default {
   },
   data (){
     return{
-      stakedata: { to: 'dacelections', quantity: '1.0000 KASDAC', memo: 'dacelections'},
-      registerdata: { bio:'blablabla', requestedpay :'100.0000 EOS'}
+      stakedata: { quantity: '1.0000 KASDAC', memo: 'dacelections'},
+      registerdata: { bio:'', requestedpay :'100.0000 EOS'}
 
     }
   },
