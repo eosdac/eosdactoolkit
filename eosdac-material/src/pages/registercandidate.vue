@@ -17,6 +17,7 @@
 </div>
 
 <Transaction ref="Transaction"  />
+<LoadingSpinner :visible="init_loading" :text="$t('regcandidate.loadconfig')" />
 </q-page>
 </template>
 
@@ -27,6 +28,7 @@
 <script>
 
 import Transaction from 'components/transaction'
+import LoadingSpinner from 'components/loading-spinner'
 
 import {
   mapGetters
@@ -34,20 +36,22 @@ import {
 export default {
   name: 'RegisterCandidate',
   components: {
-    Transaction
+    Transaction,
+    LoadingSpinner
   },
   data (){
     return{
       loading: false,
-      stakedata: { quantity: '1.0000 KASDAC', memo: 'dacelections'},
+      init_loading: false,
+      stakedata: { quantity: '2.0000 KASDAC', memo: 'dacelections'},
       registerdata: { bio:'', requestedpay :'100.0000 EOS'}
 
     }
   },
-  mounted() {
-
-
+  created() {
+    this.getContractConfig();
   },
+
   computed: {
     ...mapGetters({
       getAccountName: 'account/getAccountName',
@@ -93,6 +97,15 @@ export default {
           }
           this.loading = false;
         });
+    },
+
+    async getContractConfig() {
+      this.init_loading = true;
+      let config = await this.$store.dispatch('api/getContractConfig', {contract: this.$configFile.network.custodianContract.name})
+      if(config){
+        this.stakedata.quantity = config[0].lockupasset;
+      }
+      this.init_loading = false;
     },
 
 

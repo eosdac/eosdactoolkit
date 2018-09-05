@@ -222,7 +222,6 @@ export async function getCustodians({
 export async function getMemberVotes({
   state,
   commit,
-
 }, param) {
   try {
     console.log(param)
@@ -461,6 +460,32 @@ export async function getAccount({
       account_name: payload.account_name
     })
     return account
+    commit('SET_CURRENT_CONNECTION_STATUS', true)
+  } catch (error) {
+    apiDown(error,commit)
+    throw error
+  }
+}
+
+export async function getContractConfig({
+  state,
+  commit,
+}, param) {
+  try {
+    console.log(param)
+    eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint
+    let eos = Eos(eosConfig)
+    const config = await eos.getTableRows({
+      json: true,
+      scope: param.contract,
+      code: param.contract,
+      table: 'config'
+    })
+    if (!config.rows.length) {
+      return false
+    } else {
+      return config.rows
+    }
     commit('SET_CURRENT_CONNECTION_STATUS', true)
   } catch (error) {
     apiDown(error,commit)
