@@ -249,34 +249,34 @@ export async function getMemberVotes({
   }
 }
 
-export async function votecust({
-  state,
-  rootState,
-  commit
-}, payload) {
-  try {
-    eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint
-    eosConfig.keyProvider = rootState.account.pkeysArray
-    let eos = Eos(eosConfig)
-    if (payload.scatter) {
-      const network = await scatterNetwork(state)
-      const identity = await state.scatter.getIdentity({
-        accounts: [network]
-      })
-      eos = state.scatter.eos(network, Eos, eosConfig)
-      let authority = identity.accounts[0].authority
-      let accountname = identity.accounts[0].name
-      let auth = { authorization: [ accountname+'@'+authority ] }
-      const contract = await eos.contract(payload.contract)
-      const res = await contract.votecust(payload.data, auth )
-      return res
-      commit('SET_CURRENT_CONNECTION_STATUS', true)
-    }
-  } catch (error) {
-    apiDown(error,commit)
-    throw error
-  }
-}
+// export async function votecust({
+//   state,
+//   rootState,
+//   commit
+// }, payload) {
+//   try {
+//     eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint
+//     eosConfig.keyProvider = rootState.account.pkeysArray
+//     let eos = Eos(eosConfig)
+//     if (payload.scatter) {
+//       const network = await scatterNetwork(state)
+//       const identity = await state.scatter.getIdentity({
+//         accounts: [network]
+//       })
+//       eos = state.scatter.eos(network, Eos, eosConfig)
+//       let authority = identity.accounts[0].authority
+//       let accountname = identity.accounts[0].name
+//       let auth = { authorization: [ accountname+'@'+authority ] }
+//       const contract = await eos.contract(payload.contract)
+//       const res = await contract.votecust(payload.data, auth )
+//       return res
+//       commit('SET_CURRENT_CONNECTION_STATUS', true)
+//     }
+//   } catch (error) {
+//     apiDown(error,commit)
+//     throw error
+//   }
+// }
 
 export async function registerCandidate({
   state,
@@ -470,15 +470,14 @@ export async function getAccount({
 export async function getContractConfig({
   state,
   commit,
-}, param) {
+}, payload) {
   try {
-    console.log(param)
     eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint
     let eos = Eos(eosConfig)
     const config = await eos.getTableRows({
       json: true,
-      scope: param.contract,
-      code: param.contract,
+      scope: payload.contract,
+      code: payload.contract,
       table: 'config'
     })
     if (!config.rows.length) {

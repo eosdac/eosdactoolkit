@@ -202,7 +202,7 @@ export default {
 
     async getCustodians(lb='') {
       let custodians = await this.$store.dispatch('api/getCustodians', {lb: lb})
-      console.log(custodians)
+      // console.log(custodians)
       this.custodians = custodians
     },
   

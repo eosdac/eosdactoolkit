@@ -28,7 +28,7 @@
       <LoadingSpinner :visible="loading" :text="$t(loadingText)" />
     </div>
     <div v-else class="col-lg-12 col-xl-8 relative-position">
-      <q-alert :actions="[{ label: $t('register.try_again'), handler: () => { checkRegistered() } }]" message=$t('register.could_not_retrieve_member_status') class="text-truncate q-ma-xl" icon="info" color="grey" />
+      <q-alert :actions="[{ label: $t('register.try_again'), handler: () => { checkRegistered() } }]" :message="$t('register.could_not_retrieve_member_status')" class="text-truncate q-ma-xl" icon="info" color="grey" />
     </div>
   </div>
   <div class="row q-px-sm" v-else>
