@@ -7,7 +7,7 @@
   <div class="col-lg-12 col-xl-8" >
     <div>
       <span class="q-display-1 q-mt-none ">{{ $t('vote_custodians.candidate_list') }} <span class="text-dimwhite">- {{custodians.length}}</span></span>
-      <p class="text-dimwhite">{{ $t('vote_custodians.description_main') }}</p>
+      <p class="text-dimwhite q-body-1">{{ $t('vote_custodians.description_main') }}</p>
 
       <div class="row bg-dark2 q-pa-md q-mb-md shadow-5 round-borders justify-between" v-if="!loading" >
         <q-search dark color="primary"  v-model="filter" :placeholder="$t('vote_custodians.search')" />
@@ -54,11 +54,11 @@
   <div class="col-lg-12 col-xl-4" >
     <div>
       <span class="q-display-1">{{ $t('vote_custodians.my_votes') }} <span class="text-dimwhite">- {{getSelectedCand.length}}</span></span>
-      <p class="text-dimwhite">{{ $t('vote_custodians.description_side') }}</p>
+      <p class="text-dimwhite q-body-1">{{ $t('vote_custodians.description_side') }}</p>
       <q-card class="q-pa-lg q-mt-md" style="background:#32363F;">
         <q-btn style="font-weight: 300;" class="full-width items-baseline" color="primary" size="xl" @click="voteForCandidates">
           <div style="width:55px;display:inlineblock">
-            <q-icon size="50px" class="float-left" name="icon-ui-3"></q-icon>
+            <q-icon size="48px" class="float-left" name="icon-ui-3"></q-icon>
           </div>
           <div style="display:inline-block" >
             {{ $t('vote_custodians.submit_my_votes') }}
