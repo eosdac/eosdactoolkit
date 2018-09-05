@@ -103,7 +103,7 @@ export default {
       this.init_loading = true;
       let config = await this.$store.dispatch('api/getContractConfig', {contract: this.$configFile.network.custodianContract.name})
       if(config){
-        this.stakedata.quantity = config[0].lockupasset;
+        this.stakedata.quantity = config.lockupasset;
       }
       this.init_loading = false;
     },

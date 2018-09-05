@@ -471,6 +471,13 @@ export async function getContractConfig({
   state,
   commit,
 }, payload) {
+
+  let already_in_store = state.contractConfigs.find(cc => cc.contract == payload.contract);
+  if(already_in_store){
+    console.log('got config from store')
+    return already_in_store.config;
+  }
+
   try {
     eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint
     let eos = Eos(eosConfig)
@@ -483,7 +490,8 @@ export async function getContractConfig({
     if (!config.rows.length) {
       return false
     } else {
-      return config.rows
+      commit('SET_CONTRACT_CONFIG', {contract:payload.contract, config: config.rows[0]})
+      return config.rows[0];
     }
     commit('SET_CURRENT_CONNECTION_STATUS', true)
   } catch (error) {

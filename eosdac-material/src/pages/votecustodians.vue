@@ -53,7 +53,7 @@
   <!-- second column -->
   <div class="col-lg-12 col-xl-4" >
     <div>
-      <span class="q-display-1">{{ $t('vote_custodians.my_votes') }} <span class="text-dimwhite">- {{getSelectedCand.length}}</span></span>
+      <span class="q-display-1">{{ $t('vote_custodians.my_votes') }} <span class="text-dimwhite">- {{getSelectedCand.length}}/{{maxvotes}}</span></span>
       <p class="text-dimwhite q-body-1">{{ $t('vote_custodians.description_side') }}</p>
       <q-card class="q-pa-lg q-mt-md" style="background:#32363F;">
         <q-btn style="font-weight: 300;" class="full-width items-baseline" color="primary" size="xl" @click="voteForCandidates">
@@ -113,7 +113,8 @@ export default {
         max:1,
         items_per_page: 6
       },
-      filter : ''
+      filter : '',
+      maxvotes : 5
     }
   },
 
@@ -136,7 +137,7 @@ export default {
       else{
         filtered = this.custodians;
       }
-      this.pagination.max = Math.ceil(filtered.length/this.pagination.items_per_page)
+      this.pagination.max = Math.ceil(filtered.length/this.pagination.items_per_page);
 
       return filtered.slice((this.pagination.page-1) * this.pagination.items_per_page, this.pagination.page * this.pagination.items_per_page);
     }

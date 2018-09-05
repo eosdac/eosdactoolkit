@@ -62,3 +62,7 @@ export const SET_CHAIN_ID = (state, id) => {
 export const SET_CONFIG = (state, config) => {
   state.clientConfig = config
 }
+
+export const SET_CONTRACT_CONFIG = (state, config) => {
+  state.contractConfigs.push(config)
+}

@@ -60,3 +60,7 @@ export const getNotification = (state) => {
 export const getConfig = (state) => {
   return state.clientConfig
 }
+
+export const getContractConfig = (state) => {
+  return state.contractConfigs
+}

@@ -11,6 +11,7 @@ export default {
   endpoints: [],
   lastGetInfo: {},
   ricardians: {},
+  contractConfigs : [],
   notification: {
     icon: '',
     color: '',
