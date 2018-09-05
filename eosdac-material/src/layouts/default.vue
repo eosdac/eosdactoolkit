@@ -10,9 +10,9 @@
         <img src="statics/img/icon-signet-eosdacmemberclient175x48.svg" style="height:48px;" :title="$t('default.member_client')">
       </q-toolbar-title>
       <div class="xs-hide sm-hide md-hide" v-if="getImported">
-        <MenuDropdown class="no-pointer-events" v-if="getAccountName && getRegistered && getTokenBalance" iconColor="white" :label="$t('default.member_status')" :statusLabel="1" :sublabel="$t('default.registered')" icon="icon-topmenu-8" />
-        <MenuDropdown class="no-pointer-events" v-if="getAccountName && getRegistered && !getTokenBalance" iconColor="white" :label="$t('default.member_status')" :statusLabel="3" :sublabel="$t('default.pending')" icon="icon-topmenu-8" />
-        <MenuDropdown v-close-overlay v-if="getAccountName && !getRegistered" iconColor="white" :label="$t('default.member_status')" :statusLabel="2" :sublabel="$t('default.not_registered')" icon="icon-topmenu-7" :iconRight="true">
+        <MenuDropdown class="no-pointer-events" v-if="getAccountName && getRegistered && getTokenBalance" iconColor="white" :label="$t('default.member_status')" :statusLabel="1" :sublabel="$t('default.registered')" icon="icon-role-3" />
+        <MenuDropdown class="no-pointer-events" v-if="getAccountName && getRegistered && !getTokenBalance" iconColor="white" :label="$t('default.member_status')" :statusLabel="3" :sublabel="$t('default.pending')" icon="icon-role-2" />
+        <MenuDropdown v-close-overlay v-if="getAccountName && !getRegistered" iconColor="white" :label="$t('default.member_status')" :statusLabel="2" :sublabel="$t('default.not_registered')" icon="icon-role-1" :iconRight="true">
           <q-list class="bg-dark2" dark link>
             <q-item @click.native="$refs.Multi.init('sign')" dark>
               <q-item-side>
@@ -113,7 +113,7 @@
         <q-item-main :label="$t('default.constitution')" sublabel="" />
       </q-item>
       <q-item to="/profile">
-        <q-item-side icon="icon-menu-10" />
+        <q-item-side icon="icon-single-neutral-focus" />
         <q-item-main :label="$t('default.profile')" sublabel="" />
       </q-item>
       <q-item to="/votecustodians">
@@ -125,7 +125,7 @@
         <q-item-main :label="$t('default.worker_proposals')" sublabel="" />
       </q-item>
       <q-item to="/registercandidate">
-        <q-item-side icon="icon-register-2" />
+        <q-item-side icon="icon-menu-12" />
         <q-item-main :label="$t('default.register_as_candidate')" sublabel="" />
       </q-item>
     </q-list>
