@@ -13,10 +13,14 @@
         <q-btn size="md" class="animate-pop" :loading="loading" color="primary" @click="registerAsCandidate" :label="$t('regcandidate.register')">
           <q-spinner slot="loading" />
         </q-btn>
+        <q-btn size="md" class="animate-pop" :loading="loading" color="primary" @click="unregisterAsCandidtate" :label="$t('regcandidate.unregister')">
+          <q-spinner slot="loading" />
+        </q-btn>
+        <pre>{{getMemberRoles}}</pre>
       </div>
 </div>
 
-<Transaction ref="Transaction"  />
+<Transaction ref="Transaction" v-on:done="checkMemberRoles()" />
 <LoadingSpinner :visible="init_loading" :text="$t('regcandidate.loadconfig')" />
 </q-page>
 </template>
@@ -50,12 +54,14 @@ export default {
   },
   created() {
     this.getContractConfig();
+    this.checkMemberRoles();
   },
 
   computed: {
     ...mapGetters({
       getAccountName: 'account/getAccountName',
-      getRegistered: 'account/getRegistered'
+      getRegistered: 'account/getRegistered',
+      getMemberRoles: 'account/getMemberRoles'
     })
   },
   methods:{
@@ -76,6 +82,7 @@ export default {
             linkUrl: this.$configFile.api.tokenExplorerUrl + '/transaction/' + res.transaction_id
           })
           this.loading = false;
+          this.checkMemberRoles();
 
         }).catch(err => {
 
@@ -99,6 +106,12 @@ export default {
         });
     },
 
+    unregisterAsCandidtate(){
+        this.$refs.Transaction.newTransaction(this.$configFile.network.custodianContract.name,'unregcand', {
+        cand: this.getAccountName
+      }, false)
+    },
+
     async getContractConfig() {
       this.init_loading = true;
       let config = await this.$store.dispatch('api/getContractConfig', {contract: this.$configFile.network.custodianContract.name})
@@ -106,6 +119,15 @@ export default {
         this.stakedata.quantity = config.lockupasset;
       }
       this.init_loading = false;
+    },
+
+    async checkMemberRoles(){
+      try {
+        let iscandidate = await this.$store.dispatch('api/getIsCandidate');
+        console.log(iscandidate)
+      } catch (err) {
+        throw err
+      }
     },
 
 
