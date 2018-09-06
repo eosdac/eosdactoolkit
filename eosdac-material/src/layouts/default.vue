@@ -112,6 +112,7 @@
         <q-item-side icon="icon-register-3" />
         <q-item-main :label="$t('default.constitution')" sublabel="" />
       </q-item>
+      <!--
       <q-item to="/profile">
         <q-item-side icon="icon-single-neutral-focus" />
         <q-item-main :label="$t('default.profile')" sublabel="" />
@@ -128,6 +129,7 @@
         <q-item-side icon="icon-menu-12" />
         <q-item-main :label="$t('default.register_as_candidate')" sublabel="" />
       </q-item>
+      -->
     </q-list>
     <q-list v-else no-border link inset-delimiter dark>
       <q-item @click.native="unlockAccount()">
