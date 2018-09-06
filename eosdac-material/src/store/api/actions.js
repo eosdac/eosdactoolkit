@@ -188,6 +188,41 @@ export async function getRegistered({
   }
 }
 
+export async function getIsCandidate({
+  state,
+  commit,
+  rootState
+}) {
+  try {
+    eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint
+    let eos = Eos(eosConfig)
+    const candidate = await eos.getTableRows({
+      json: true,
+      scope: configFile.network.custodianContract.name,
+      code: configFile.network.custodianContract.name,
+      table: 'candidates',
+      lower_bound: rootState.account.info.account_name,
+      limit:1
+    })
+    if (!candidate.rows.length) {
+      commit('account/SET_MEMBER_ROLES', {candidate: false}, {root: true} );
+      return false;
+    } else {
+      if (candidate.rows[0].candidate_name === rootState.account.info.account_name) {
+        commit('account/SET_MEMBER_ROLES', {candidate: true}, {root: true} );
+        return candidate.rows[0];
+      } else {
+        commit('account/SET_MEMBER_ROLES', {candidate: false}, {root: true} );
+        return false
+      }
+    }
+    commit('SET_CURRENT_CONNECTION_STATUS', true)
+  } catch (error) {
+    apiDown(error,commit)
+    throw error
+  }
+}
+
 export async function getCustodians({
   state,
   commit,
@@ -249,34 +284,6 @@ export async function getMemberVotes({
   }
 }
 
-// export async function votecust({
-//   state,
-//   rootState,
-//   commit
-// }, payload) {
-//   try {
-//     eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint
-//     eosConfig.keyProvider = rootState.account.pkeysArray
-//     let eos = Eos(eosConfig)
-//     if (payload.scatter) {
-//       const network = await scatterNetwork(state)
-//       const identity = await state.scatter.getIdentity({
-//         accounts: [network]
-//       })
-//       eos = state.scatter.eos(network, Eos, eosConfig)
-//       let authority = identity.accounts[0].authority
-//       let accountname = identity.accounts[0].name
-//       let auth = { authorization: [ accountname+'@'+authority ] }
-//       const contract = await eos.contract(payload.contract)
-//       const res = await contract.votecust(payload.data, auth )
-//       return res
-//       commit('SET_CURRENT_CONNECTION_STATUS', true)
-//     }
-//   } catch (error) {
-//     apiDown(error,commit)
-//     throw error
-//   }
-// }
 
 export async function registerCandidate({
   state,
@@ -474,7 +481,7 @@ export async function getContractConfig({
 
   let already_in_store = state.contractConfigs.find(cc => cc.contract == payload.contract);
   if(already_in_store){
-    console.log('got config from store')
+    // console.log('got config from store');
     return already_in_store.config;
   }
 
