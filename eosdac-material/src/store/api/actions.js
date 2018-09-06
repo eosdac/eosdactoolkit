@@ -36,8 +36,8 @@ function apiDown(e,c,s) {
       c('NOTIFY',{
         icon: 'error',
         color: 'warning',
-        message: 'Connection to endpoint is unreliable or unavailable',
-        details: 'Go to Settings to setup a working API Endpoint',
+        message: 'api.connection_to_endpoint_failed',
+        details: 'api.connection_to_endpoint_failed_details',
         textColor: 'black',
         autoclose: 8
       })
@@ -188,6 +188,41 @@ export async function getRegistered({
   }
 }
 
+export async function getIsCandidate({
+  state,
+  commit,
+  rootState
+}) {
+  try {
+    eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint
+    let eos = Eos(eosConfig)
+    const candidate = await eos.getTableRows({
+      json: true,
+      scope: configFile.network.custodianContract.name,
+      code: configFile.network.custodianContract.name,
+      table: 'candidates',
+      lower_bound: rootState.account.info.account_name,
+      limit:1
+    })
+    if (!candidate.rows.length) {
+      commit('account/SET_MEMBER_ROLES', {candidate: false}, {root: true} );
+      return false;
+    } else {
+      if (candidate.rows[0].candidate_name === rootState.account.info.account_name) {
+        commit('account/SET_MEMBER_ROLES', {candidate: true}, {root: true} );
+        return candidate.rows[0];
+      } else {
+        commit('account/SET_MEMBER_ROLES', {candidate: false}, {root: true} );
+        return false
+      }
+    }
+    commit('SET_CURRENT_CONNECTION_STATUS', true)
+  } catch (error) {
+    apiDown(error,commit)
+    throw error
+  }
+}
+
 export async function getCustodians({
   state,
   commit,
@@ -219,7 +254,38 @@ export async function getCustodians({
   }
 }
 
-export async function votecust({
+export async function getMemberVotes({
+  state,
+  commit,
+}, param) {
+  try {
+    console.log(param)
+    eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint
+    let eos = Eos(eosConfig)
+    const votes = await eos.getTableRows({
+      json: true,
+      scope: configFile.network.custodianContract.name,
+      code: configFile.network.custodianContract.name,
+      table: 'votes',
+      lower_bound: param.member,
+      limit:1
+      // key_type: 'i64',
+      // index_position:1
+    })
+    if (!votes.rows.length) {
+      return false
+    } else {
+      return votes.rows
+    }
+    commit('SET_CURRENT_CONNECTION_STATUS', true)
+  } catch (error) {
+    apiDown(error,commit)
+    throw error
+  }
+}
+
+
+export async function registerCandidate({
   state,
   rootState,
   commit
@@ -233,12 +299,33 @@ export async function votecust({
       const identity = await state.scatter.getIdentity({
         accounts: [network]
       })
-      eos = state.scatter.eos(network, Eos, eosConfig)
+      eos = state.scatter.eos(network, Eos, eosConfig);
       let authority = identity.accounts[0].authority
       let accountname = identity.accounts[0].name
-      let auth = { authorization: [ accountname+'@'+authority ] }
-      const contract = await eos.contract(payload.contract)
-      const res = await contract.votecust(payload.data, auth )
+      let res = await eos.transaction(
+        {
+          actions: [
+            {
+              account: configFile.network.tokenContract.name,
+              name: 'transfer',
+              authorization: [{
+                actor: accountname,
+                permission: authority
+              }],
+              data: Object.assign({from : accountname, to: configFile.network.custodianContract.name}, payload.stakedata)
+            },
+            {
+              account: configFile.network.custodianContract.name,
+              name: 'regcandidate',
+              authorization: [{
+                actor: accountname,
+                permission: authority
+              }],
+              data: Object.assign({cand : accountname}, payload.registerdata) 
+            },
+          ]
+        }
+      )
       return res
       commit('SET_CURRENT_CONNECTION_STATUS', true)
     }
@@ -380,6 +467,39 @@ export async function getAccount({
       account_name: payload.account_name
     })
     return account
+    commit('SET_CURRENT_CONNECTION_STATUS', true)
+  } catch (error) {
+    apiDown(error,commit)
+    throw error
+  }
+}
+
+export async function getContractConfig({
+  state,
+  commit,
+}, payload) {
+
+  let already_in_store = state.contractConfigs.find(cc => cc.contract == payload.contract);
+  if(already_in_store){
+    // console.log('got config from store');
+    return already_in_store.config;
+  }
+
+  try {
+    eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint
+    let eos = Eos(eosConfig)
+    const config = await eos.getTableRows({
+      json: true,
+      scope: payload.contract,
+      code: payload.contract,
+      table: 'config'
+    })
+    if (!config.rows.length) {
+      return false
+    } else {
+      commit('SET_CONTRACT_CONFIG', {contract:payload.contract, config: config.rows[0]})
+      return config.rows[0];
+    }
     commit('SET_CURRENT_CONNECTION_STATUS', true)
   } catch (error) {
     apiDown(error,commit)

@@ -28,7 +28,7 @@
       <LoadingSpinner :visible="loading" :text="$t(loadingText)" />
     </div>
     <div v-else class="col-lg-12 col-xl-8 relative-position">
-      <q-alert :actions="[{ label: $t('register.try_again'), handler: () => { checkRegistered() } }]" message=$t('register.could_not_retrieve_member_status') class="text-truncate q-ma-xl" icon="info" color="grey" />
+      <q-alert :actions="[{ label: $t('register.try_again'), handler: () => { checkRegistered() } }]" :message="$t('register.could_not_retrieve_member_status')" class="text-truncate q-ma-xl" icon="info" color="grey" />
     </div>
   </div>
   <div class="row q-px-sm" v-else>
@@ -92,7 +92,8 @@ export default {
   },
   methods: {
     init() {
-      this.checkRegistered()
+      this.checkRegistered();
+      
     },
     sleep(ms) {
       return new Promise(resolve => setTimeout(resolve, ms))
@@ -113,6 +114,7 @@ export default {
         let memberterms = latestMemberTerms
         if (memberRegistration) {
           if (memberterms.version === memberRegistration.agreedterms) { //is regsitered
+            this.checkMemberRoles();///////////////////////// WIP add this to dedicated component!
             if (this.getFirstReg) {
               this.altMessage = true
               console.log('First time registration')
@@ -146,6 +148,15 @@ export default {
       } finally {
         this.loading = false
         this.$emit('done')
+      }
+    },
+    async checkMemberRoles(){
+      try {
+        let iscandidate = await this.$store.dispatch('api/getIsCandidate');
+        console.log(iscandidate)
+        
+      } catch (err) {
+        throw err
       }
     },
     registerMember() {

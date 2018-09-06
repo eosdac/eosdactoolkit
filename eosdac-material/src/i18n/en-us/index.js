@@ -1,4 +1,8 @@
 export default {
+  api: {
+    connection_to_endpoint_failed: 'Connection to endpoint is unreliable or unavailable',
+    connection_to_endpoint_failed_details: 'Go to Settings to setup a working API Endpoint'
+  },
   constitution: {
     loading_constitution: 'Loading constitution',
     switch_contrast: 'Switch Contrast',
@@ -12,11 +16,12 @@ export default {
     logged_in: 'Logged-In',
     logged_out: 'Logged-Out',
     member_client: 'Member Client',
-    member_status: 'Member status',
+    member_status: 'Member Status',
     menu: 'Menu',
     not_registered: 'not registered',
     profile: 'Profile',
     registered: 'Registered',
+    pending: 'Pending',
     settings: 'Settings',
     sign_the_constitution: 'Sign the Constitution',
     status: 'Status',
@@ -24,6 +29,7 @@ export default {
     wallet: 'Wallet',
     worker_proposals: 'Worker Proposals',
     you_have_not_yet_registered: 'You have not been registered as a Member yet. Please sign the constitution to use the Member Client.',
+    constitution_has_been_updated: 'The Constitution has been updated. Please sign the updated Constitution to use the Member Client.',
     your_token_balance: 'Your {tokenName} Balance',
   },
   four_zero_four: {
@@ -151,8 +157,11 @@ export default {
     REGISTERED: 'REGISTERED',
     settings: 'Settings',
     unregister_membership: 'Unregister Membership',
+    user_preference: 'User Settings',
+    transaction_popup_label: 'Transaction Popups'
   },
   transaction: {
+    send: 'send',
     action: 'Action',
     by_completing_agree: 'By completing this transaction, I agree to the following terms.',
     cancel: 'Cancel',
@@ -196,6 +205,7 @@ export default {
     or_select_address_book: 'Or select a Destination Account from AddressBook',
     input_a_destination_account: 'Input a Destination Account',
     total: 'total',
+    remaining: 'remaining'
   },
   wp_member_view: {
     approx_USD: '(Aprox. xxxx USD)',

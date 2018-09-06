@@ -1,4 +1,8 @@
 export default {
+  api: {
+    connection_to_endpoint_failed: 'Die Verbing zum Endpoint ist unzuverlässig oder nicht verfügbar',
+    connection_to_endpoint_failed_details: 'Gehen Sie zu den Einstellungen um einen funktionierenden Endpunt einzustellen'
+  },
   constitution: {
     loading_constitution: 'Lade Verfassung',
   },
@@ -23,6 +27,7 @@ export default {
     wallet: 'Konto',
     worker_proposals: 'Arbeitsangebote',
     you_have_not_yet_registered: 'Sie sind noch nicht als Mitglied registriert. Bitte unterschreiben Sie die Verfassung, um Mitglied zu werden.',
+    constitution_has_been_updated: 'The Verfassung wurde aktualisiert. Bitte unterschreiben Sie die Verfassung, um Mitglied zu bleiben.',
     your_token_balance: 'Dein {tokenName} Guthaben',
   },
   four_zero_four: {
@@ -148,6 +153,7 @@ export default {
     unregister_membership: 'Mitgliedschaft aufheben',
   },
   transaction: {
+    send: 'Senden',
     action: 'Aktion',
     by_completing_agree: 'Mit dem Abschluss dieser Transaktion stimme ich den folgenden Bedingungen zu.',
     cancel: 'Abbrechen',
@@ -190,7 +196,8 @@ export default {
     manage_addressbook: 'Adressbuch verwalten',
     or_select_address_book: 'Oder wählen Sie ein Zielkonto aus dem Adressbuch',
     input_a_destination_account: 'Geben Sie ein Zielkonto ein',
-    total: 'Gesamt',
+    total: 'Total',
+    remaining: 'übrig'
   },
   wp_member_view: {
     approx_USD: '(Ungef. Xxxx USD)',

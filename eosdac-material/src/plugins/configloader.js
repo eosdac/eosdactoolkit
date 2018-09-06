@@ -14,3 +14,5 @@ export default ({
   store.commit('api/SET_CONFIG', configFile)
   Vue.prototype.$configFile = configFile
 }
+
+export {configFile}

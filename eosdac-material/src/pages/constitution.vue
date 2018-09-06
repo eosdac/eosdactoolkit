@@ -3,7 +3,7 @@
   <div class="row justify-center q-mt-sm">
     <div class="col-lg-12 col-xl-auto shadow-5">
       <div class="bg-dark2 q-pa-md">
-        <q-toggle class="float-right" v-model="white_constitution" left-label :label="$t('constitution.switch_contrast')" /></div>
+        <q-toggle class="float-right" color="p-light" v-model="white_constitution" left-label :label="$t('constitution.switch_contrast')" /></div>
       <div v-if="!isloading" class="q-pt-md round-borders  bg-dark2">
         <div v-bind:class="{ overwrite: !white_constitution }" class="markdown-body" v-html="constitution"></div>
       </div>

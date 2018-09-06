@@ -65,3 +65,15 @@ export const ADD_TRANSFER_HISTORY = (state, payload) => {
 export const RESET_STATE = (state) => {
     Object.assign(state, getDefaultState())
 }
+
+export const SET_MEMBER_ROLES = (state, roles) => {
+  //role must be an  object for example {candidate: true} or {candidate: false, custodian: true, worker: true}
+  //the role key must exist (ie being hardcoded) in the state
+  if(Object.keys(roles).every(k => Object.keys(state.memberRoles).includes(k)) ){
+    Object.assign(state.memberRoles, roles);
+  }
+  else{
+    console.log('One or more role keys are not allowed.')
+  }
+  
+}

@@ -6,7 +6,7 @@
         <h4 class="q-display-1 q-mb-sm q-mt-none">{{ $t("profile.profile") }}</h4>
       </div>
     </div>
-    <div class="row  q-mt-md" style="margin-left:154px;background:none">
+    <div class="row  q-mt-md profile_header_top_row">
       <div class="col-xs-12">
         <div class="text-dimwhite text-weight-light q-caption">User Name</div>
         <div class="q-display-1 text-weight-thin uppercase">kasperfish</div>
@@ -17,23 +17,23 @@
       <q-btn v-if="edit" round size="md" class="animate-pop" color="primary" icon="icon-plus" style="position:absolute;bottom:0;right:7px;z-index:2" @click="visible=true" />
       <div class="fit profile_image_inner_wrap">
         <transition name="fade">
-          <img  :class="fitcontainer" class="hack_center" v-bind:src="setImgSrc" v-on:load="onLoaded" v-show="loaded" ref="profile_pic">
+          <img  :class="{ 'hack_center': centerimage, 'full-width': setwidth, 'full-height': !setwidth }" v-bind:src="setImgSrc" v-on:load="onLoaded" v-show="loaded" ref="profile_pic">
         </transition> 
+        <q-spinner-oval color="white" class="hack_center" v-if="!loaded" size="139px" />
       </div>
     </div>
 
     <div class="blur-details q-pa-md absolute-bottom" style="height:120px;margin-right:-16px;margin-left:-16px;">
-      <div class="row  " style="margin-left:170px; margin-right:16px; background:none">
-
-        <div class="col-md-2 col-xs-6 q-pl-sm" >
+      <div class="row profile_header_bottom_row">
+        <div class="col-md-2 col-xs-6 q-pr-sm" >
           <div class="text-dimwhite text-weight-light q-caption">{{ $t('profile.givenName') }}</div>
           <q-input color="white" dark :readonly="!edit" :hide-underline="!edit" v-model="form.givenName"/>
         </div>
-        <div class="col-md-2 col-xs-6 q-pl-sm">
+        <div class="col-md-2 col-xs-6 q-pr-sm">
           <div class="text-dimwhite text-weight-light q-caption">{{ $t('profile.familyName') }}</div>
           <q-input color="white" dark :readonly="!edit" :hide-underline="!edit"  v-model="form.familyName"/>
         </div>
-        <div class="col-md-2 col-xs-6 q-pl-sm">
+        <div class="col-md-2 col-xs-6 q-pr-sm">
           <div class="text-dimwhite text-weight-light q-caption">{{ $t('profile.gender') }}</div>
            <q-select
               class=""
@@ -45,7 +45,7 @@
              :options="[{label:$t('profile.female'), value:'female'}, {label:$t('profile.male'), value:'male'}, {label:$t('profile.other'), value:'other'}]"
             />
         </div>
-        <div class="col-md-2 col-xs-6 q-pl-sm">
+        <div class="col-md-2 col-xs-6">
           <div class="text-dimwhite text-weight-light q-caption">Type</div>
           <div>Member</div>
         </div>
@@ -58,16 +58,28 @@
     <div class="row q-mt-md gutters-md bg-dark2 round-corners shadow-5" style="min-height:265px">
       <div class="col-md-8 col-sm-12 q-pa-md">
         <div class="" style="height:100%">
-          <div class="q-mb-md">{{ $t('profile.bio') }}</div>
+          <div class="q-title q-mb-md">{{ $t('profile.bio') }}</div>
           <q-input v-if="edit" inverted rows="8" color="dark" type="textarea" v-model="form.description" dark />
-          <div v-if="!edit">{{form.description}}</div>
+          <div class="text-dimwhite" v-if="!edit">{{form.description}}</div>
         </div>
       </div>
       <div class="col-md-4 col-sm-12 q-pa-md">
         <div class="column justify-between" style="height:100%">
-          <div class="q-mb-md">{{ $t('profile.website') }}</div>
-          <q-input dark type="url" v-model="form.url"  :readonly="!edit" :hide-underline="!edit"  :float-label="$t('website')" placeholder="http://example.com" /> 
-          <div v-if="edit"> 
+          
+          <!-- on display -->
+          <div v-if="!edit">
+            <div class="q-title q-mb-md">{{ $t('profile.website') }}</div>
+            <div class="text-dimwhite">{{form.url}}</div>
+            <div class="q-mt-md">
+              <q-btn v-for="(social, i) in parseSocialLinks()"  class="on-left" :key ="i" round color="dark" @click.native="openURL(social.link)" >
+                <q-icon  :name="'icon-'+social.icon" />
+              </q-btn>
+            </div>
+          </div>
+          <!-- on edit -->
+          <div v-if="edit">
+            <div class="q-title q-mb-md">{{ $t('profile.website') }}</div>
+            <q-input dark type="url" v-model="form.url"  placeholder="http://example.com" />
             <q-input dark type="url"
               class="q-mt-md q-mb-md"
               v-model="social.link"
@@ -79,6 +91,7 @@
             />
             <q-btn  round  color="primary" @click="addSocial" icon="icon-plus" />
           </div>
+
           <div class="row gutter-sm justify-end q-mt-md">
             <div>
               <q-btn size="md" class="animate-pop" color="primary" @click="edit = !edit" :label="$t('profile.edit')" />
@@ -89,61 +102,36 @@
           </div>
         </div>
       </div>
-      
     </div>
+
+<!--     <div class="q-pa-md q-mt-md shadow-5 bg-dark2">
+      <q-input color="white" dark v-model="dev_profile_url" placeholder="profile url"/>
+    </div> -->
+
   </div>
 
-
-
-  <q-modal v-model="visible"  minimized @hide="handleModalClose" :content-css="{width: '80vw'}" >
-    <div style="padding: 20px;" class="bg-dark round-borders">
-      <q-input dark type="url" v-model="form.image" @input="loaded=false" class="q-mt-md " :float-label="$t('profile_picture_url')" placeholder="http://example.site/mypic.jpg" />
-      <q-btn round color="primary" class="absolute" style="top:5px;right:5px" @click="visible=false" icon="icon-plus" />
-
+  <q-modal v-model="visible"  minimized @hide="handleModalClose"  :content-css="{width: '80vw'}" >
+    <div  class="bg-dark round-borders q-pa-md">
+      <div style="overflow: auto;">
+        <q-btn round color="primary" class="float-right" @click="visible=false" icon="icon-plus" />
+      </div>
+      <div>
+        <q-input dark type="url" v-model="form.image" @input="loaded=false" class="q-mt-md " :float-label="$t('profile_picture_url')" placeholder="http://example.site/mypic.jpg" />
+      </div>
     </div>
   </q-modal>
+
 </q-page>
 </template>
 
-<style lang="stylus">
-@import '~variables'
 
-.gradient-bg-primary{
-  background-image linear-gradient(to right, $primary, $p-light);
-}
-.blur-details{
-  background rgba(255, 255, 255, 0.1);
-}
-.profile_image_inner_wrap{
-  border-radius:50%; 
-  border:4px solid white; 
-  background:$dark;
-  overflow:hidden;
-  position:relative;
-
-}
-.profile_image_outer_wrap{
-  position:absolute; 
-  z-index:1;
-  height:140px;
-  width:140px; 
-  top:70px;
-}
-.hack_center{
-    position: absolute;
-    top: -9999px;
-    bottom: -9999px;
-    left: -9999px;
-    right: -9999px;
-    margin: auto;
-}
-
-
-</style>
 
 <script>
 const IPFS = require('ipfs-api');
 const ipfs = new IPFS({ host: 'ipfs.infura.io', port: 5001, protocol: 'https' });
+import {
+  openURL
+} from 'quasar'
 import {
   mapGetters
 } from 'vuex'
@@ -153,12 +141,13 @@ export default {
   },
   data () {
     return {
-      debug_view: false,
+      dev_profile_url: '',
       ipfslink:'',
       edit:false,
 
       visible:false,
-      fitcontainer:'full-height',
+      centerimage:true,
+      setwidth: true,
       loaded:false,
       isuploading: false,
       form:{
@@ -167,15 +156,16 @@ export default {
           "gender": "male",
           "description": "This is an example bio....",
           "email": "",
-          "url": "",
+          "url": "http://google.com",
           "image": "",
-          "sameAs": [{link:''}],
+          "sameAs": [{link:'https://www.twitter.com/neonexchange'},{link:'https://www.facebook.com/DonaldTrump/'}, {link: 'https://plus.google.com/+LukeStokes'}, {link:'https://steemit.com/@suesa'} ],
           "timezone": new Date().getTimezoneOffset() //time-zone offset see: https://stackoverflow.com/questions/1091372/getting-the-clients-timezone-in-javascript
         }
 
 
     }
   },
+  
   computed: {
     ...mapGetters({
       getAccountName: 'account/getAccountName',
@@ -192,15 +182,49 @@ export default {
     }
   },
 
-
   methods:{
+    openURL,
      onLoaded() {
         let img = this.$refs.profile_pic;
-
-        this.fitcontainer = img.width <= img.height ? 'full-width' : 'full-height';
-        console.log(img.width +' '+ img.height);
+        this.$consoleMsg('Profile image size: '+img.width +' x '+ img.height);
+        this.setwidth = img.width <= img.height ? true : false;
+        this.centerimage = img.width == img.height ? false : true;
         this.visible = false;
         this.loaded = true;
+    },
+
+    parseSocialLinks(){
+      //supported social networks
+      const icons = ['social-youtube-com', 'social-linkedin-com', 'social-ask-fm', 'social-tumblr-com', 
+                    'social-weibo-com', 'social-qzoneqq-com', 'social-flickr-com', 'social-instagram-com',
+                    'social-facebook-com', 'social-plusgoogle-com', 'social-meetup-com', 'social-ok-ru',
+                    'social-reddit-com', 'social-twitter-com', 'social-vk-com', 'social-pinterest-com',
+                    'social-behance-net', 'social-dribble-com', 'social-github-com', 'social-medium-com',
+                    'social-steemit-com', 'social-general'];
+      
+      let lookup = icons.map(icon=> { return icon.split('-')[1] } );
+
+      let links = JSON.parse(JSON.stringify(this.form.sameAs));
+      links.forEach((obj, index) => {
+        
+        
+        let urlparts = new URL(obj.link);//does not work in IE
+        let hostparts = urlparts.hostname.split('.');
+
+        if(hostparts[0] ==='www'){
+          delete hostparts[0];
+        }
+        hostparts.pop();//remove TLD
+        let host = hostparts.join('');
+        let i = lookup.indexOf(host);
+        if(i > -1){
+          links[index]['icon'] = icons[i];
+        }
+        else{
+          links[index]['icon'] = 'social-general'
+        }
+      });
+      return links;
     },
 
     addSocial(){
@@ -210,7 +234,7 @@ export default {
     },
 
     deleteEmptyLinks(){
-      if(this.form.sameAs.length ){
+      if(this.form.sameAs.length > 1 ){
         this.form.sameAs = this.form.sameAs.filter(function(item){
           return item.link !='';
         });
@@ -285,8 +309,58 @@ export default {
   },
 
   mounted: function(){
-
+      // this.getSocialIconFromLink();
    }
 
 }
 </script>
+
+<style lang="stylus">
+@import '~variables'
+
+.gradient-bg-primary{
+  background-image linear-gradient(to right, $primary, $p-light);
+}
+.blur-details{
+  background rgba(255, 255, 255, 0.1);
+}
+
+.profile_header_bottom_row{
+  margin-left:170px; 
+  margin-right:16px; 
+  background:none
+
+}
+.profile_header_top_row{
+  margin-left:154px;
+  background:none
+
+}
+.profile_image_inner_wrap{
+  border-radius:50%; 
+  border:4px solid white; 
+  background: #7c41ba;
+  overflow:hidden;
+  position:relative;
+
+}
+.profile_image_outer_wrap{
+  position:absolute; 
+  z-index:1;
+  height:140px;
+  width:140px; 
+  top:70px;
+  transition: all .2s ease-in-out;
+}
+.profile_header_bottom_row .q-if-control{
+    display:none !important;
+}
+.hack_center{
+    position: absolute;
+    top: -9999px;
+    bottom: -9999px;
+    left: -9999px;
+    right: -9999px;
+    margin: auto;
+}
+</style>
