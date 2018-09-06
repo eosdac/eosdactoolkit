@@ -7,7 +7,7 @@
       { label: $t('lang_selector.languages.english_us') + ' - English (US)', value: 'en-us' },
       { label: $t('lang_selector.languages.english_gb') + ' - English (GB)', value: 'en-gb' },
       { label: $t('lang_selector.languages.french') + ' - Français',     value: 'fr' },
-      { label: $t('lang_selector.languages.german') + ' - Deutsche',     value: 'de' },
+      { label: $t('lang_selector.languages.german') + ' - Deutsch',     value: 'de' },
       { label: $t('lang_selector.languages.italian') + ' - Italiano',    value: 'it' },
       { label: $t('lang_selector.languages.japanese') + ' - 日本語',   value: 'ja' },
       { label: $t('lang_selector.languages.korean') + ' - 한국어',     value: 'ko' },

@@ -1,7 +1,7 @@
 export default {
   constitution: {
     loading_constitution: '헌법 불러오는 중',
-    switch_contrast: '스위치 대조',
+    switch_contrast: '색상 대조',
   },
   default: {
     account_name: '계정 이름',
@@ -57,7 +57,7 @@ export default {
     error_could_not_connect_to_endpoint: '엔드포인트에 연결할 수 없습니다.',
     error_endpoint_connection_timed_out: '엔드포인트 연결 시간이 초과되었습니다.',
     error_invalid_url: 'URL이 유효하지 않은 것 같습니다.',
-    gathering_endpoints: '엔드포인트 수집 중 ...',
+    gathering_endpoints: '엔드포인트 수집 중...',
     manual_connection: '수동 연결',
     select_endpoint: '목록에서 엔드포인트 선택',
     select_the_endpoint_you_would_like: '사용할 엔드 포인트를 선택하고 <b>연결</b>을 클릭하십시오. 상위 블록 프로듀서의 엔드포인트가 제공되었습니다. 직접 특정 엔드포인트를 지정하고 싶을 경우 URL을 입력하고 <b>연결</b>을 누르십시오.',
@@ -181,8 +181,8 @@ export default {
     wallet: '지갑',
     total_staked: '스테이킹한 토큰',
     send_tokens: '토큰 보내기',
-    total_eos_balance: '총 EOS 잔액',
-    liquid: '액체',
+    total_eos_balance: '총 EOS 수량',
+    liquid: '유동량',
     token_selection_and_quantity: '토큰 선택 및 수량',
     select_token_to_send: '보낼 토큰 선택',
     select_from_list: '목록에서 선택',
@@ -191,7 +191,7 @@ export default {
     manage_addressbook: '주소록 관리',
     or_select_address_book: '또는 주소록에서 보낼 계정을 선택하십시오.',
     input_a_destination_account: '보낼 계정 입력',
-    total: '합계',
+    total: '총량',
   },
   wp_member_view: {
     approx_USD: '(약 xxxx USD)',

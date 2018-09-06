@@ -87,6 +87,13 @@ export default {
       initialmode: ''
     }
   },
+  watch: {
+    getCurrentConnectionStatus (val) {
+      if (!val) {
+        this.step = 'step1'
+      }
+    }
+  },
   methods: {
     init(mode) {
       this.active = true

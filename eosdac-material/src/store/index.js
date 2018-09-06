@@ -33,14 +33,17 @@ const store = new Vuex.Store({
       'api.activeEndpointIndex',
       'api.checkIntervalMilSec',
       'api.connectionTimeoutMilSec',
-      'api.endpoints'
+      'api.endpoints',
+      'api.scatterChainId'
     ],
     //filter: mutation => (mutation.payload.save)? true : false
     //filter: mutation => console.log(mutation)
   }), createPersistedState({
     key: 'usersettings',
     paths: [
-      'usersettings.language'
+      'usersettings.language',
+      'usersettings.transactionPopup',
+      'usersettings.consoleMessage'
     ],
     //filter: mutation => (mutation.payload.save)? true : false
   })]

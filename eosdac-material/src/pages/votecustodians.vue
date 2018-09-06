@@ -1,13 +1,13 @@
 <template>
 <q-page class="text-white q-pa-md">
-<Transaction ref="Transaction" v-on:done="" />
+<Transaction ref="Transaction"/>
 
-<div class="row gutter-md">
+<div class="row gutter-md reverse-wrap">
   <!-- first column  -->
-  <div class="col-sm-12 col-md-8" >
+  <div class="col-lg-12 col-xl-8" >
     <div>
       <span class="q-display-1 q-mt-none ">{{ $t('vote_custodians.candidate_list') }} <span class="text-dimwhite">- {{custodians.length}}</span></span>
-      <p class="text-dimwhite">{{ $t('vote_custodians.description_main') }}</p>
+      <p class="text-dimwhite q-body-1">{{ $t('vote_custodians.description_main') }}</p>
 
       <div class="row bg-dark2 q-pa-md q-mb-md shadow-5 round-borders justify-between" v-if="!loading" >
         <q-search dark color="primary"  v-model="filter" :placeholder="$t('vote_custodians.search')" />
@@ -26,7 +26,7 @@
       </div>
 
       <Candidate 
-        v-for="(candidate, index) in paginate" 
+        v-for="candidate in paginate" 
         :key="candidate.candidate_name" 
         :data="candidate" 
         @profile ="addProfile" 
@@ -48,19 +48,17 @@
             <q-pagination  v-show="true" v-model="pagination.page" :min="1" :max="pagination.max" :max-pages="6" direction-links size="12px" />
         </div>
       </div>
-
-
     </div>
   </div>
   <!-- second column -->
-  <div class="col-sm-12 col-md-4" >
+  <div class="col-lg-12 col-xl-4" >
     <div>
-      <span class="q-display-1">{{ $t('vote_custodians.my_votes') }} <span class="text-dimwhite">- {{getSelectedCand.length}}</span></span>
-      <p class="text-dimwhite">{{ $t('vote_custodians.description_side') }}</p>
+      <span class="q-display-1">{{ $t('vote_custodians.my_votes') }} <span class="text-dimwhite">- {{getSelectedCand.length}}/{{maxvotes}}</span></span>
+      <p class="text-dimwhite q-body-1">{{ $t('vote_custodians.description_side') }}</p>
       <q-card class="q-pa-lg q-mt-md" style="background:#32363F;">
         <q-btn style="font-weight: 300;" class="full-width items-baseline" color="primary" size="xl" @click="voteForCandidates">
           <div style="width:55px;display:inlineblock">
-            <q-icon size="50px" class="float-left" name="icon-ui-3"></q-icon>
+            <q-icon size="48px" class="float-left" name="icon-ui-3"></q-icon>
           </div>
           <div style="display:inline-block" >
             {{ $t('vote_custodians.submit_my_votes') }}
@@ -109,15 +107,14 @@ export default {
   data() {
     return {
       loading: false,
-      loadingText: '',
       custodians: [],
-      page_content:[],
       pagination :{
         page:1,
         max:1,
         items_per_page: 6
       },
-      filter : ''
+      filter : '',
+      maxvotes : 5
     }
   },
 
@@ -140,15 +137,14 @@ export default {
       else{
         filtered = this.custodians;
       }
-      this.pagination.max = Math.ceil(filtered.length/this.pagination.items_per_page)
+      this.pagination.max = Math.ceil(filtered.length/this.pagination.items_per_page);
 
       return filtered.slice((this.pagination.page-1) * this.pagination.items_per_page, this.pagination.page * this.pagination.items_per_page);
     }
   },
 
   created() {
-    // this.getCustodians()
-    this.getAllCandidates()
+    this.getAllCandidates();
   },
 
   methods: {
@@ -189,25 +185,31 @@ export default {
           let t = b.total_votes - a.total_votes;
           return t;
       });
-      //add selected key to all custodians
-      // temp = temp.map(c => {
-      //   c.selected = false;
-      //   return c;
-      // })
-      console.log(temp)
+
+      // console.log(temp)
       this.custodians = temp;
+      //select member votes
+      let votes = await this.$store.dispatch('api/getMemberVotes', {member: this.getAccountName});
+      if(votes && votes[0].candidates.length ){
+        votes[0].candidates.forEach((vote) =>{
+          this.addToVoteList(vote);
+        })
+      }
+      else{
+        console.log(`${this.getAccountName} has not voted.`);
+      }
       this.loading = false;
     },
 
     async getCustodians(lb='') {
       let custodians = await this.$store.dispatch('api/getCustodians', {lb: lb})
-      console.log(custodians)
+      // console.log(custodians)
       this.custodians = custodians
     },
-
+  
     addToVoteList(name){
       let selected = this.custodians.filter(x => x.selected == true);
-      if(selected.length < 8){
+      if(selected.length < 5){
         this.custodians.find(x => x.candidate_name === name).selected =true;
       }
       else{
@@ -222,14 +224,11 @@ export default {
 
     voteForCandidates() {
       let votes = this.custodians.filter(x => x.selected == true).map(c => c.candidate_name);
-      if(!votes.length){
-        console.log('Votelist can\'t be empty');
-        return false;
-      }
+
       this.$refs.Transaction.newTransaction(this.$configFile.network.custodianContract.name, 'votecust', {
         voter: this.getAccountName,
         newvotes: votes
-      }, false, false)
+      }, false)
     },
 
     addProfile(eventdata){

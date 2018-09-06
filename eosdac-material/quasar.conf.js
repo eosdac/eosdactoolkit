@@ -9,7 +9,8 @@ module.exports = function(ctx) {
       'configloader',
       'eosdac-iconfont',
       'ipfs',
-      'scatter'
+      'scatter',
+      'consolemessage'
     ],
     css: [
       'app.styl',
@@ -45,9 +46,8 @@ module.exports = function(ctx) {
         cfg.module.rules.push({
           resourceQuery: /blockType=i18n/,
           use: [{
-              loader: '@kazupon/vue-i18n-loader'
-            }
-          ]
+            loader: '@kazupon/vue-i18n-loader'
+          }]
         })
 
         for (const rule of cfg.module.rules) {
@@ -133,7 +133,7 @@ module.exports = function(ctx) {
       i18n: 'en-us'
     },
     // animations: 'all' --- includes all animations
-    animations: [],
+    animations: ['fadeInDown', 'fadeOutUp'],
     pwa: {
       // workboxPluginMode: 'InjectManifest',
       // workboxOptions: {},

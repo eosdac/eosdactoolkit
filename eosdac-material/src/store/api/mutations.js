@@ -34,9 +34,10 @@ export const SET_CURRENT_CONNECTION_STATUS = (state, good) => {
   state.endpoints[state.activeEndpointIndex].lastConnectionStatus = good
 }
 
-export const SCATTER_AVAILABLE = (state, scatter) => {
+export const SCATTER_AVAILABLE = (state, payload) => {
   state.scatterAvailable = true
-  state.scatter = scatter
+  state.scatter = payload.scatter
+  state.scatterChainId = payload.chainId
 }
 
 export const ADD_CONTRACT_RICARDIAN = (state, payload) => {
@@ -60,4 +61,8 @@ export const SET_CHAIN_ID = (state, id) => {
 
 export const SET_CONFIG = (state, config) => {
   state.clientConfig = config
+}
+
+export const SET_CONTRACT_CONFIG = (state, config) => {
+  state.contractConfigs.push(config)
 }

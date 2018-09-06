@@ -1,4 +1,10 @@
-export default {
+﻿export default {
+
+ api: {
+    connection_to_endpoint_failed: 'La conncection au noeud n\'est pas fiable ou indisponible.',
+    connection_to_endpoint_failed_details: 'Aller dans la section Paramètres pour choisir un noeud API différent.'
+  },
+
   constitution: {
     loading_constitution: 'Chargement de la constitution',
     switch_contrast: 'Changer de Contraste',
@@ -12,7 +18,7 @@ export default {
     logged_in: 'Connecté',
     logged_out: 'Déconnecté',
     member_client: 'Client Membre',
-    member_status: 'Statut du membre',
+    member_status: 'Statut du Membre',
     menu: 'Menu',
     not_registered: 'non enregistré',
     profile: 'Profil',
@@ -20,11 +26,11 @@ export default {
     settings: 'Paramètres',
     sign_the_constitution: 'Signature de la Constitution',
     status: 'Statut',
-    token_explorer: 'Explorateur de jetons',
+    token_explorer: 'Explorateur de jeton',
     wallet: 'Portefeuille',
     worker_proposals: 'Propositions des travailleurs',
     you_have_not_yet_registered: 'Vous n\'avez pas encore été enregistré en tant que membre. Veuillez signer la constitution pour utiliser le client membre.',
-    your_token_balance: 'Votre solde de {tokenName}',
+    your_token_balance: 'Votre solde {tokenName}',
   },
   four_zero_four: {
     go_back: 'Retourner',
@@ -33,12 +39,12 @@ export default {
   initialize: {
     authentication_method: 'Méthode d\'authentification',
     connect_with_scatter: 'Se connecter avec Scatter',
-    identity_request_denied: 'La demande d\'identification a été refusée. Veuillez réessayer et accepter la demande',
+    identity_request_denied: 'La demande d\'identification a été refusée. Veuillez réessayer et accepter la demande.',
     import_private_keys: 'Importer des clés privées',
     loading_text: 'chargement en cours...',
     scatter_is_locked: 'Scatter est verrouillé. Veuillez débloquer pour continuer',
     scatter_not_available: 'Scatter n\'est pas disponible. Si vous avez installé Scatter, veuillez rafraîchir Scatter.',
-    waiting_for_scatter: 'En attente de réponse de la part de Scatter ...',
+    waiting_for_scatter: 'En attente de réponse de la part de Scatter...',
   },
   multi_modal: {
     register_as_dac_member: 'S\'INSCRIRE EN TANT QUE MEMBRE DU DAC',
@@ -48,7 +54,7 @@ export default {
   nodeselector: {
     automatic_connection: 'Connexion automatique',
     choose_endpoint: 'Choisir un noeud dans la liste',
-    click_connect_below: 'Cliquez sur <b> Connexion </ b> ci-dessous pour vous connecter automatiquement au noeud le plus proche de votre emplacement, sélectionné parmi les meilleurs producteurs de blocs EOS.',
+    click_connect_below: 'Cliquez sur <b> Connexion </ b> ci-dessous pour vous connecter automatiquement au noeud le plus rapide par rapport à votre emplacement, sélectionné parmi les meilleurs producteurs de blocs EOS.',
     connect: 'Connexion',
     connecting: 'En cours de connexion...',
     custom_endpoint: 'Noeud personalisé',
@@ -57,7 +63,7 @@ export default {
     error_could_not_connect_to_endpoint: 'Impossible de se connecter au noeud.',
     error_endpoint_connection_timed_out: 'La connexion au noeud a expiré.',
     error_invalid_url: 'L\'URL semble être incorrecte.',
-    gathering_endpoints: 'Collection des noeuds en cours ...',
+    gathering_endpoints: 'Rassemblement des noeuds en cours...',
     manual_connection: 'Connexion manuelle',
     select_endpoint: 'Sélectionner un noeud dans la liste',
     select_the_endpoint_you_would_like: 'Sélectionnez le noeud que vous souhaitez utiliser et cliquez sur <b> Connecter </ b>. Les noeuds vous sont fournis par les meilleurs producteurs de blocs, cependant vous pouvez également spécifier votre propre noeud personnalisé en renseignant l\'entrée avec une URL et en appuyant sur <b> Connecter </ b>.',
@@ -96,14 +102,14 @@ export default {
   },
   register: {
     already_registered: 'Vous êtes déjà inscrit en tant que membre eosDAC.',
-    checking_status: 'Vérification du statut du membre ...',
+    checking_status: 'Vérification du statut du membre...',
     close: 'Fermer',
     congratulations_registered: 'Toutes nos félicitations! Vous êtes maintenant inscrit en tant que membre eosDAC.',
     constitution_hash: 'Constitution Hash',
     could_not_retrieve_member_status: 'Impossible de récupérer le statut du membre',
     fullscreen: 'Plein écran',
     i_accept_the_constitution: 'J\'accepte la constitution',
-    loading_latest_constitution: 'Chargement de la dernière constitution ...',
+    loading_latest_constitution: 'Chargement de la dernière constitution...',
     must_sign_constitution: 'Pour devenir membre de eosDAC, vous devez accepter et signer la Constitution.',
     register: 'Inscription',
     registration_sign_the_constitution: 'Inscription - Signer la Constitution',
@@ -118,7 +124,7 @@ export default {
     scatter_is_locked: 'Scatter est verrouillé. Veuillez déverrouiller pour continuer.',
     scatter_is_not_available: 'Scatter n\'est pas disponible. Si vous avez installé Scatter, actualisez ou accédez à Autorisations, supprimez l\'autorisation pour ce site et réessayez.',
     sign_in: 'SE CONNECTER',
-    waiting_for_scatter: 'En attente de Scatter ...',
+    waiting_for_scatter: 'En attente de Scatter...',
   },
   scatter_tutorial: {
     if_you_are_unable_to_choose_an_identity: 'Si vous ne pouvez pas choisir une identité, suivez les étapes ci-dessous.',
@@ -154,9 +160,9 @@ export default {
     cancel: 'Annuler',
     fields: 'Champs',
     from: 'De',
-    loading_abi: 'Chargement ABI en cours ...',
+    loading_abi: 'Chargement ABI en cours...',
     memo: 'Note',
-    pushing_transaction: 'Transaction poussée ...',
+    pushing_transaction: 'Transaction poussée...',
     quantity: 'Quantité',
     to: 'À',
     transaction: 'Transaction',

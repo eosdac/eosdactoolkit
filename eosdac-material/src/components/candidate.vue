@@ -66,7 +66,7 @@ export default {
         }
         this.$emit('profile', {candidate_name:this.data.candidate_name, profile: r.data});
       })
-      .catch(e => console.log('could not load profile file from'+this.data.candidate_name))
+      .catch(e => console.log('could not load profile file from '+this.data.candidate_name))
     },
 
     isUrl(url){
