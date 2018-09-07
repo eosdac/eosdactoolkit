@@ -87,7 +87,7 @@ export default {
     website: 'Website',
     bio: 'Bio',
     edit: 'Edit',
-    download: 'Download'
+    download: 'Download',
   },
   lang_selector: {
     choose_your_language: 'Choose your Language',
@@ -158,7 +158,7 @@ export default {
     settings: 'Settings',
     unregister_membership: 'Unregister Membership',
     user_preference: 'User Settings',
-    transaction_popup_label: 'Transaction Popups'
+    transaction_popup_label: 'Transaction Popups',
   },
   transaction: {
     send: 'send',
@@ -205,7 +205,7 @@ export default {
     or_select_address_book: 'Or select a Destination Account from AddressBook',
     input_a_destination_account: 'Input a Destination Account',
     total: 'total',
-    remaining: 'remaining'
+    remaining: 'remaining',
   },
   wp_member_view: {
     approx_USD: '(Aprox. xxxx USD)',
@@ -233,6 +233,5 @@ export default {
     submit_my_votes: 'SUBMIT MY VOTES',
     description_main: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam libero urna, efficitur at laoreet fermentum, facilisis in ex. Proin luctus erat sem, ut mollis dui laoreet id. Curabitur eleifend ante in lacus rutrum dapibus. Nulla sit amet maximus metus, ac interdum dui. Aliquam placerat nisl eu bibendum dictum. Integer pharetra diam pretium felis venenatis, in aliquam ex imperdiet. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.',
     description_side: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam libero urna, efficitur at laoreet fermentum, facilisis in ex. Proin luctus erat sem, ut mollis dui laoreet id.',
-
   }
 }
