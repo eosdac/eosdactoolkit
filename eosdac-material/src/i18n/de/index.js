@@ -5,6 +5,7 @@ export default {
   },
   constitution: {
     loading_constitution: 'Lade Verfassung',
+    switch_contrast: 'Switch Contrast',
   },
   default: {
     account_name: 'Kontoname',
@@ -18,6 +19,7 @@ export default {
     member_status: 'Mitgliedsstatus',
     menu: 'Menü',
     not_registered: 'nicht registriert',
+    pending: 'Anstehend',
     profile: 'Profil',
     registered: 'Registriert',
     settings: 'Einstellungen',
@@ -68,6 +70,7 @@ export default {
     specify_your_own: 'Geben Sie Ihren eigenen benutzerdefinierten Endpunkt an, indem Sie die Eingabe mit einer URL füllen und auf die Schaltfläche Verbinden klicken.',
   },
   profile: {
+    profile: 'Profil',
     about_me: 'Über mich',
     email_address: 'E-Mail-Addresse',
     familyName: 'Familienname',
@@ -82,20 +85,23 @@ export default {
     social_link: 'Soziale Links',
     social_profile_link: 'URL zum Sozialen Profil',
     website: 'Webseite',
+    bio: 'Bio',
+    edit: 'Edit',
+    download: 'Download'
   },
   lang_selector: {
     choose_your_language: 'Wähle deine Sprache',
     languages: {
-        chinese: 'Vereinfachtes Chinesisch',
-        english_gb: 'Englisch',
-        english_us: 'Amerikanisches Englisch',
-        french: 'Französisch',
-        german: 'Deutsch',
-        italian: 'Italienisch',
-        japanese: 'Japanisch',
-        korean: 'Koreanisch',
-        russian: 'Russisch',
-        spanish: 'Spanisch',
+      chinese: 'Vereinfachtes Chinesisch',
+      english_gb: 'Englisch',
+      english_us: 'Amerikanisches Englisch',
+      french: 'Französisch',
+      german: 'Deutsch',
+      italian: 'Italienisch',
+      japanese: 'Japanisch',
+      korean: 'Koreanisch',
+      russian: 'Russisch',
+      spanish: 'Spanisch',
     },
   },
   register: {
@@ -151,6 +157,8 @@ export default {
     REGISTERED: 'REGISTRIERT',
     settings: 'Einstellungen',
     unregister_membership: 'Mitgliedschaft aufheben',
+    user_preference: 'Benutzereinstellungen',
+    transaction_popup_label: 'Transaktionspopups',
   },
   transaction: {
     send: 'Senden',
@@ -216,5 +224,14 @@ export default {
   worker_proposals: {
     APPROVED: 'GENEHMIGT',
     OPEN: 'OFFEN',
-  }
+  },
+  vote_custodians:{
+    loading_candidates: 'Laden Kandidaten',
+    candidate_list: 'Kandidatenliste',
+    my_votes: 'meine Stimme',
+    search: 'Suche',
+    submit_my_votes: 'Zustellen meine Stimmen',
+    description_main: 'Die Depotbank verwaltet die Geschäfte und Angelegenheiten des DAC, einschließlich, aber nicht beschränkt auf, die Verwaltung und Verwaltung der Vermögenswerte und Verbindlichkeiten des DAC. Die folgenden DAC-Mitglieder haben einige ihrer Token zur Verfügung gestellt, um sich selbst und Kandidaten für eine Position auf der Depotbank, die für 7 Tage dauern, vorzulegen. Alle 7 Tage werden Ihre Stimmen neu berechnet, um auszuwählen, wer an der nächsten Depotbank teilnimmt. Abstimmung ist wichtig! Bitte wählen Sie häufig und bleiben Sie innerhalb des DAC engagiert, um zu wissen, wer einen Mehrwert bietet.',
+    description_side: 'Sie können für bis zu 5 Depotkandidaten gleichzeitig abstimmen. Bitte wählen Sie Kandidaten aus, von denen Sie glauben, dass sie einen Mehrwert für den DAC bringen.',
+  },
 }

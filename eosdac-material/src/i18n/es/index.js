@@ -1,4 +1,8 @@
 export default {
+  api: {
+    connection_to_endpoint_failed: 'La conexión al punto final no es confiable o no está disponible',
+    connection_to_endpoint_failed_details: 'Vaya a Configuración para configurar una API de Endpoint que funcione'
+  },
   constitution: {
     loading_constitution: 'Cargando constitución',
     switch_contrast: 'Cambiar Contraste',
@@ -15,6 +19,7 @@ export default {
     member_status: 'Estado',
     menu: 'Menú',
     not_registered: 'no registrado',
+    pending: 'Pendiente',
     profile: 'Perfil',
     registered: 'Registrado',
     settings: 'Configuracion',
@@ -24,6 +29,7 @@ export default {
     wallet: 'Billetera',
     worker_proposals: 'Propuestas de trabajo',
     you_have_not_yet_registered: 'Aun no registrado como miembro. Firme la constitución para ser un miembro.',
+    constitution_has_been_updated: 'La Constitución ha sido actualizada. Firme la Constitución actualizada para usar el Cliente miembro.',
     your_token_balance: 'Su saldo {tokenName}',
   },
   four_zero_four: {
@@ -64,6 +70,7 @@ export default {
     specify_your_own: 'Especifique su endpoint personalizado rellenando el campo con una url y haga clic en el botón de conexión.',
   },
   profile: {
+    profile: 'Perfil',
     about_me: 'Sobre mi',
     email_address: 'Dirección de correo electrónico',
     familyName: 'Apellido',
@@ -78,6 +85,9 @@ export default {
     social_link: 'Link social',
     social_profile_link: 'Enlace de perfil social',
     website: 'Sitio web',
+    bio: 'Bio',
+    edit: 'Edit',
+    download: 'Download'
   },
   lang_selector: {
     choose_your_language: 'Elige tu idioma',
@@ -147,8 +157,11 @@ export default {
     REGISTERED: 'REGISTRADO',
     settings: 'Configuraciones',
     unregister_membership: 'Anular el registro de membresía',
+    user_preference: 'Ajustes de usuario',
+    transaction_popup_label: 'Ventanas emergentes de transacción',
   },
   transaction: {
+    send: 'enviar',
     action: 'Aceptar',
     by_completing_agree: 'Al completar esta transacción, acepto los siguientes términos.',
     cancel: 'Cancelar',
@@ -192,6 +205,7 @@ export default {
     or_select_address_book: 'O seleccione una cuenta de destino de la libreta de direcciones',
     input_a_destination_account: 'Ingrese una cuenta de destino',
     total: 'total',
+    remaining: 'restante',
   },
   wp_member_view: {
     approx_USD: '(Aprox. Xxxx USD)',
@@ -210,6 +224,14 @@ export default {
   worker_proposals: {
     APPROVED: 'APROBADO',
     OPEN: 'ABIERTO',
-  }
+  },
+  vote_custodians:{
+    loading_candidates: 'candidatos de carga',
+    candidate_list: 'Lista candidato',
+    my_votes: 'mi voto',
+    search: 'búsqueda',
+    submit_my_votes: 'ENVIAR mis votos',
+    description_main: 'La Junta de Depositarios maneja las operaciones y asuntos del DAC, incluidos, entre otros, el gobierno y la administración de los activos y pasivos del DAC. Los siguientes miembros de DAC otorgaron algunos de sus tokens para presentarse ellos mismos y los candidatos para un puesto en el consejo de custodia que duran 7 días. Cada 7 días, sus votos se vuelven a calcular para seleccionar quién formará parte de la próxima junta de custodia. ¡Votar es importante! Vota a menudo y mantente comprometido con el DAC para saber quién proporciona valor.',
+    description_side: 'Puede votar por hasta 5 candidatos custodios a la vez. Seleccione candidatos que crea que aportarán valor al DAC.',
+  },
 }
-
