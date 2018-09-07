@@ -1,10 +1,8 @@
-﻿export default {
-
- api: {
+export default {
+  api: {
     connection_to_endpoint_failed: 'La conncection au noeud n\'est pas fiable ou indisponible.',
     connection_to_endpoint_failed_details: 'Aller dans la section Paramètres pour choisir un noeud API différent.'
   },
-
   constitution: {
     loading_constitution: 'Chargement de la constitution',
     switch_contrast: 'Changer de Contraste',
@@ -21,6 +19,7 @@
     member_status: 'Statut du Membre',
     menu: 'Menu',
     not_registered: 'non enregistré',
+    pending: 'En Suspens',
     profile: 'Profil',
     registered: 'Inscrit',
     settings: 'Paramètres',
@@ -30,6 +29,7 @@
     wallet: 'Portefeuille',
     worker_proposals: 'Propositions des travailleurs',
     you_have_not_yet_registered: 'Vous n\'avez pas encore été enregistré en tant que membre. Veuillez signer la constitution pour utiliser le client membre.',
+    constitution_has_been_updated: 'La Constitution a été mise à jour. Veuillez signer la constitution mise à jour pour utiliser le client membre.',
     your_token_balance: 'Votre solde {tokenName}',
   },
   four_zero_four: {
@@ -70,6 +70,7 @@
     specify_your_own: 'Spécifiez votre propre noeud personnalisé en remplissant l\'entrée avec une URL et cliquez sur le bouton Connexion.',
   },
   profile: {
+    profile: 'Profil',
     about_me: 'À propos de moi',
     email_address: 'Adresse e-mail',
     familyName: 'Nom de famille',
@@ -84,20 +85,23 @@
     social_link: 'Lien social',
     social_profile_link: 'Lien du profil social',
     website: 'Site Internet',
+    bio: 'Biographie',
+    edit: 'Modifier',
+    download: 'Télécharger',
   },
   lang_selector: {
     choose_your_language: 'Choisissez votre langue',
     languages: {
-        chinese: 'Chinois simplifié',
-        english_gb: 'Anglais (GB)',
-        english_us: 'Anglais (US)',
-        french: 'Français',
-        german: 'Allemand',
-        italian: 'Italien',
-        japanese: 'Japonais',
-        korean: 'Coréen',
-        russian: 'Russe',
-        spanish: 'Espanol',
+      chinese: 'Chinois simplifié',
+      english_gb: 'Anglais (GB)',
+      english_us: 'Anglais (US)',
+      french: 'Français',
+      german: 'Allemand',
+      italian: 'Italien',
+      japanese: 'Japonais',
+      korean: 'Coréen',
+      russian: 'Russe',
+      spanish: 'Espanol',
     },
   },
   register: {
@@ -153,8 +157,11 @@
     REGISTERED: 'INSCRIT',
     settings: 'Paramètres',
     unregister_membership: 'Annuler l\'inscription',
+    user_preference: 'Paramètres utilisateur',
+    transaction_popup_label: 'Popups de transaction',
   },
   transaction: {
+    send: 'envoyer',
     action: 'action',
     by_completing_agree: 'En complétant cette transaction, j\'accepte les conditions suivantes.',
     cancel: 'Annuler',
@@ -198,6 +205,7 @@
     or_select_address_book: 'Ou sélectionner un compte destinataire à partir du carnet d\'adresses',
     input_a_destination_account: 'Entrer un compte destinataire',
     total: 'total',
+    remaining: 'restant',
   },
   wp_member_view: {
     approx_USD: '(Environ xxxx USD)',
@@ -216,5 +224,14 @@
   worker_proposals: {
     APPROVED: 'APPROUVÉ',
     OPEN: 'OUVRIR',
-  }
+  },
+  vote_custodians:{
+    loading_candidates: 'candidats de chargement',
+    candidate_list: 'Liste des candidats',
+    my_votes: 'mon vote',
+    search: 'recherche',
+    submit_my_votes: 'SOUMETTRE mes votes',
+    description_main: 'Le conseil de surveillance gère les opérations et les affaires du CAD, notamment la gouvernance et l\'administration des actifs et des passifs du CAD. Les membres suivants du CAD ont confié à certains de leurs jetons de se présenter et de présenter des candidats pour un poste au sein du conseil de surveillance, qui dure sept jours. Tous les 7 jours, vos votes sont recalculés pour sélectionner ceux qui feront partie du conseil d\'administration suivant. Le vote est important! S\'il vous plaît voter souvent et rester engagé au sein du CAD pour savoir qui fournit de la valeur.',
+    description_side: 'Vous pouvez voter pour un maximum de 5 candidats gardiens à la fois. Veuillez sélectionner les candidats qui, selon vous, apporteront de la valeur au CAD.',
+  },
 }

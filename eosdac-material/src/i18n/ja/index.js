@@ -1,4 +1,8 @@
 export default {
+  api: {
+    connection_to_endpoint_failed: 'エンドポイントへの接続が信頼できないか使用できない',
+    connection_to_endpoint_failed_details: '設定に行き、動作中のエンドポイントAPIを設定します。'
+  },
   constitution: {
     loading_constitution: '規約をロードしています',
     switch_contrast: 'コントラストを切り替え',
@@ -15,6 +19,7 @@ export default {
     member_status: 'メンバーステータス',
     menu: 'メニュー',
     not_registered: '未登録',
+    pending: '未定',
     profile: 'プロフィール',
     registered: '登録済み',
     settings: '設定',
@@ -24,6 +29,7 @@ export default {
     wallet: 'ウォレット',
     worker_proposals: 'ワーカープロポーザル',
     you_have_not_yet_registered: 'まだメンバーとして登録されていません。メンバークライアントを使用するためには規約に署名してください。',
+    constitution_has_been_updated: '憲法が更新されました。 更新された憲法に署名して、Member Clientを使用してください。',
     your_token_balance: '{tokenName}残高',
   },
   four_zero_four: {
@@ -64,6 +70,7 @@ export default {
     specify_your_own: 'URLを入力し、接続ボタンをクリックして、独自のカスタムエンドポイントを指定します。',
   },
   profile: {
+    profile: 'プロフィール',
     about_me: '登録情',
     email_address: 'メールアドレス',
     familyName: '姓',
@@ -78,6 +85,9 @@ export default {
     social_link: 'SNSリンク',
     social_profile_link: 'SNSプロフィールリンク',
     website: 'ウェブサイト',
+    bio: 'バイオグラフィー',
+    edit: '編集',
+    download: 'ダウンロード',
   },
   lang_selector: {
     choose_your_language: '言語を選択',
@@ -147,8 +157,11 @@ export default {
     REGISTERED: '登録済み',
     settings: '設定',
     unregister_membership: 'メンバーシップの登録を解除する',
+    user_preference: 'ユーザー設定',
+    transaction_popup_label: 'トランザクションポップアップ',
   },
   transaction: {
+    send: '送信する',
     action: 'アクション',
     by_completing_agree: 'この取引を完了することにより、私は以下の条件に同意します。',
     cancel: 'キャンセル',
@@ -192,6 +205,7 @@ export default {
     or_select_address_book: 'または、アドレス帳から宛先のアカウントを選択',
     input_a_destination_account: '宛先のアカウントを入力する',
     total: '合計',
+    remaining: '残り',
   },
   wp_member_view: {
     approx_USD: '(約 xxxx USD)',
@@ -210,5 +224,14 @@ export default {
   worker_proposals: {
     APPROVED: '承認済み',
     OPEN: 'オープン',
-  }
+  },
+  vote_custodians:{
+    loading_candidates: 'ロード候補',
+    candidate_list: '候補リスト',
+    my_votes: '私の投票',
+    search: '検索',
+    submit_my_votes: '私の票を提出',
+    description_main: 'カストディアン取締役会は、DACの資産および負債の統治および管理を含むがこれに限定されないDACの運営および業務を管理する。 次のDACメンバーは、7日間継続するカストディアン・ボード上の地位について、自分自身と候補者を提出するためにトークンの一部を権利確定している。 7日ごとに、あなたの投票は、次のカストディアンのボードに参加する人を選ぶために再計算されます。 投票は重要です！ 誰が価値を提供しているかを知るために、頻繁に投票してDACに参加してください。',
+    description_side: 'あなたは一度に最大5つのカストディアンの候補者に投票することができます。 DACに価値をもたらすと思う候補者を選んでください。',
+  },
 }
