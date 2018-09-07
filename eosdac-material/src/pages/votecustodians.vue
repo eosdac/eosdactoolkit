@@ -1,7 +1,8 @@
 <template>
-<q-page class="text-white q-pa-md">
-<Transaction ref="Transaction" v-on:done="votesdidchange=false" />
+<q-page class="text-white">
+<Transaction ref="Transaction" v-on:done="getMemberVotes()" />
 
+<div class="q-pa-md"> <!-- padding wrapper -->
 <div class="row gutter-md reverse-wrap">
   <!-- first column  -->
   <div class="col-lg-12 col-xl-8" >
@@ -83,12 +84,13 @@
           </transition-group>
         </q-list>
         <!-- <pre>{{getSelectedCand}}</pre> -->
-        <pre>{{votesdidchange}}</pre>
+        <!-- <pre>{{votesdidchange}}</pre> -->
       </q-card>
     </div>
   </div>
 </div><!-- end row -->
 <LoadingSpinner :visible="loading" :text="$t('vote_custodians.loading_candidates')" />
+</div><!-- end wrapper -->
 </q-page>
 </template>
 
@@ -193,17 +195,7 @@ export default {
 
       // console.log(temp)
       this.custodians = temp;
-      //select member votes
-      let votes = await this.$store.dispatch('api/getMemberVotes', {member: this.getAccountName});
-      if(votes && votes[0].candidates.length ){
-        this.oldvotes = votes[0].candidates;
-        this.oldvotes.forEach((vote) =>{
-          this.addToVoteList(vote);
-        })
-      }
-      else{
-        console.log(`${this.getAccountName} has not voted.`);
-      }
+      await this.getMemberVotes();
       this.loading = false;
     },
 
@@ -257,6 +249,19 @@ export default {
       }
       else{
         this.votesdidchange =  true;
+      }
+    },
+    async getMemberVotes(){
+      let votes = await this.$store.dispatch('api/getMemberVotes', {member: this.getAccountName});
+      if(votes){
+        this.votesdidchange = false;
+        this.oldvotes = votes[0].candidates;
+        this.oldvotes.forEach((vote) =>{
+          this.addToVoteList(vote);
+        })
+      }
+      else{
+        console.log(`${this.getAccountName} has not voted.`);
       }
     }
 
