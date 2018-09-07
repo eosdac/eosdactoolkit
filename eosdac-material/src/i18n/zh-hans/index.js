@@ -231,7 +231,7 @@ export default {
     my_votes: '我的投票',
     search: '搜索',
     submit_my_votes: '提交我的票',
-    description_main: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam libero urna, efficitur at laoreet fermentum, facilisis in ex. Proin luctus erat sem, ut mollis dui laoreet id. Curabitur eleifend ante in lacus rutrum dapibus. Nulla sit amet maximus metus, ac interdum dui. Aliquam placerat nisl eu bibendum dictum. Integer pharetra diam pretium felis venenatis, in aliquam ex imperdiet. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.',
-    description_side: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam libero urna, efficitur at laoreet fermentum, facilisis in ex. Proin luctus erat sem, ut mollis dui laoreet id.',
-  },  
+    description_main: '托管委员会负责管理发展援助委员会的运作和事务，包括但不限于发展援助委员会资产和负债的治理和管理。 以下发展援助委员会成员已将其部分代币归属于托管委员会，并持有7天的候选人。 每7天，您的投票将重新计算，以选择谁将成为下一个托管委员会的成员。 投票很重要！ 请经常投票并在DAC内保持参与，以了解谁在提供价值。',
+    description_side: '您一次最多可以投票给5名托管候选人。 请选择您认为会为DAC带来价值的候选人。',
+  },
 }

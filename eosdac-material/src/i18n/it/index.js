@@ -231,7 +231,7 @@ export default {
     my_votes: 'il mio voto',
     search: 'ricerca',
     submit_my_votes: 'Presentare il mio voto',
-    description_main: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam libero urna, efficitur at laoreet fermentum, facilisis in ex. Proin luctus erat sem, ut mollis dui laoreet id. Curabitur eleifend ante in lacus rutrum dapibus. Nulla sit amet maximus metus, ac interdum dui. Aliquam placerat nisl eu bibendum dictum. Integer pharetra diam pretium felis venenatis, in aliquam ex imperdiet. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.',
-    description_side: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam libero urna, efficitur at laoreet fermentum, facilisis in ex. Proin luctus erat sem, ut mollis dui laoreet id.',
-  },  
+    description_main: 'Il Consiglio di amministrazione custodisce le operazioni e gli affari del DAC, inclusi, a titolo esemplificativo ma non esaustivo, la governance e l\'amministrazione delle attività e delle passività del DAC. I seguenti membri del DAC hanno acquisito parte dei loro token per presentare se stessi e i candidati per una posizione nel consiglio di amministrazione che dura 7 giorni. Ogni 7 giorni, i tuoi voti vengono ricalcolati per selezionare chi farà parte della prossima commissione di custodia. La votazione è importante! Per favore, vota spesso e resta coinvolto nel DAC per sapere chi sta fornendo valore.',
+    description_side: 'Puoi votare fino a 5 candidati custodi alla volta. Si prega di selezionare i candidati che secondo voi porteranno valore al DAC.',
+  },
 }

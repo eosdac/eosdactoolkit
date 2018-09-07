@@ -231,7 +231,7 @@ export default {
     my_votes: '私の投票',
     search: '検索',
     submit_my_votes: '私の票を提出',
-    description_main: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam libero urna, efficitur at laoreet fermentum, facilisis in ex. Proin luctus erat sem, ut mollis dui laoreet id. Curabitur eleifend ante in lacus rutrum dapibus. Nulla sit amet maximus metus, ac interdum dui. Aliquam placerat nisl eu bibendum dictum. Integer pharetra diam pretium felis venenatis, in aliquam ex imperdiet. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.',
-    description_side: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam libero urna, efficitur at laoreet fermentum, facilisis in ex. Proin luctus erat sem, ut mollis dui laoreet id.',
-  },  
+    description_main: 'カストディアン取締役会は、DACの資産および負債の統治および管理を含むがこれに限定されないDACの運営および業務を管理する。 次のDACメンバーは、7日間継続するカストディアン・ボード上の地位について、自分自身と候補者を提出するためにトークンの一部を権利確定している。 7日ごとに、あなたの投票は、次のカストディアンのボードに参加する人を選ぶために再計算されます。 投票は重要です！ 誰が価値を提供しているかを知るために、頻繁に投票してDACに参加してください。',
+    description_side: 'あなたは一度に最大5つのカストディアンの候補者に投票することができます。 DACに価値をもたらすと思う候補者を選んでください。',
+  },
 }

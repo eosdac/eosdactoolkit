@@ -231,7 +231,7 @@ export default {
     my_votes: 'мой голос',
     search: 'поиск',
     submit_my_votes: 'ПОДАТЬ мои голоса',
-    description_main: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam libero urna, efficitur at laoreet fermentum, facilisis in ex. Proin luctus erat sem, ut mollis dui laoreet id. Curabitur eleifend ante in lacus rutrum dapibus. Nulla sit amet maximus metus, ac interdum dui. Aliquam placerat nisl eu bibendum dictum. Integer pharetra diam pretium felis venenatis, in aliquam ex imperdiet. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.',
-    description_side: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam libero urna, efficitur at laoreet fermentum, facilisis in ex. Proin luctus erat sem, ut mollis dui laoreet id.',
-  },  
+    description_main: 'Совет хранителя управляет операциями и делами КСР, включая, помимо прочего, управление и управление активами и обязательствами КСР. Следующие члены КСР наделили некоторые из своих токенов, чтобы представить себя и кандидатов на должность в кастодиальной плате, которая длится 7 дней. Каждые 7 дней ваши голоса пересчитываются, чтобы выбрать, кто будет частью следующей доски депозитария. Голосование важно! Пожалуйста, проголосуйте часто и продолжайте участвовать в КСР, чтобы знать, кто предоставляет ценность.',
+    description_side: 'Вы можете голосовать до 5 кандидатов-кастодиантов одновременно. Выберите кандидатов, которые, по вашему мнению, принесут ценность ЦАП.',
+  },
 }

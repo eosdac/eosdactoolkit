@@ -231,7 +231,7 @@ export default {
     my_votes: 'meine Stimme',
     search: 'Suche',
     submit_my_votes: 'Zustellen meine Stimmen',
-    description_main: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam libero urna, efficitur at laoreet fermentum, facilisis in ex. Proin luctus erat sem, ut mollis dui laoreet id. Curabitur eleifend ante in lacus rutrum dapibus. Nulla sit amet maximus metus, ac interdum dui. Aliquam placerat nisl eu bibendum dictum. Integer pharetra diam pretium felis venenatis, in aliquam ex imperdiet. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.',
-    description_side: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam libero urna, efficitur at laoreet fermentum, facilisis in ex. Proin luctus erat sem, ut mollis dui laoreet id.',
+    description_main: 'Die Depotbank verwaltet die Geschäfte und Angelegenheiten des DAC, einschließlich, aber nicht beschränkt auf, die Verwaltung und Verwaltung der Vermögenswerte und Verbindlichkeiten des DAC. Die folgenden DAC-Mitglieder haben einige ihrer Token zur Verfügung gestellt, um sich selbst und Kandidaten für eine Position auf der Depotbank, die für 7 Tage dauern, vorzulegen. Alle 7 Tage werden Ihre Stimmen neu berechnet, um auszuwählen, wer an der nächsten Depotbank teilnimmt. Abstimmung ist wichtig! Bitte wählen Sie häufig und bleiben Sie innerhalb des DAC engagiert, um zu wissen, wer einen Mehrwert bietet.',
+    description_side: 'Sie können für bis zu 5 Depotkandidaten gleichzeitig abstimmen. Bitte wählen Sie Kandidaten aus, von denen Sie glauben, dass sie einen Mehrwert für den DAC bringen.',
   },
 }

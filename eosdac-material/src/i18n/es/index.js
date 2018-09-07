@@ -231,7 +231,7 @@ export default {
     my_votes: 'mi voto',
     search: 'búsqueda',
     submit_my_votes: 'ENVIAR mis votos',
-    description_main: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam libero urna, efficitur at laoreet fermentum, facilisis in ex. Proin luctus erat sem, ut mollis dui laoreet id. Curabitur eleifend ante in lacus rutrum dapibus. Nulla sit amet maximus metus, ac interdum dui. Aliquam placerat nisl eu bibendum dictum. Integer pharetra diam pretium felis venenatis, in aliquam ex imperdiet. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.',
-    description_side: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam libero urna, efficitur at laoreet fermentum, facilisis in ex. Proin luctus erat sem, ut mollis dui laoreet id.',
-  },  
+    description_main: 'La Junta de Depositarios maneja las operaciones y asuntos del DAC, incluidos, entre otros, el gobierno y la administración de los activos y pasivos del DAC. Los siguientes miembros de DAC otorgaron algunos de sus tokens para presentarse ellos mismos y los candidatos para un puesto en el consejo de custodia que duran 7 días. Cada 7 días, sus votos se vuelven a calcular para seleccionar quién formará parte de la próxima junta de custodia. ¡Votar es importante! Vota a menudo y mantente comprometido con el DAC para saber quién proporciona valor.',
+    description_side: 'Puede votar por hasta 5 candidatos custodios a la vez. Seleccione candidatos que crea que aportarán valor al DAC.',
+  },
 }

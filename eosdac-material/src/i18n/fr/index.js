@@ -231,7 +231,7 @@ export default {
     my_votes: 'mon vote',
     search: 'recherche',
     submit_my_votes: 'SOUMETTRE mes votes',
-    description_main: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam libero urna, efficitur at laoreet fermentum, facilisis in ex. Proin luctus erat sem, ut mollis dui laoreet id. Curabitur eleifend ante in lacus rutrum dapibus. Nulla sit amet maximus metus, ac interdum dui. Aliquam placerat nisl eu bibendum dictum. Integer pharetra diam pretium felis venenatis, in aliquam ex imperdiet. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.',
-    description_side: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam libero urna, efficitur at laoreet fermentum, facilisis in ex. Proin luctus erat sem, ut mollis dui laoreet id.',
-  },  
+    description_main: 'Le conseil de surveillance gère les opérations et les affaires du CAD, notamment la gouvernance et l\'administration des actifs et des passifs du CAD. Les membres suivants du CAD ont confié à certains de leurs jetons de se présenter et de présenter des candidats pour un poste au sein du conseil de surveillance, qui dure sept jours. Tous les 7 jours, vos votes sont recalculés pour sélectionner ceux qui feront partie du conseil d\'administration suivant. Le vote est important! S\'il vous plaît voter souvent et rester engagé au sein du CAD pour savoir qui fournit de la valeur.',
+    description_side: 'Vous pouvez voter pour un maximum de 5 candidats gardiens à la fois. Veuillez sélectionner les candidats qui, selon vous, apporteront de la valeur au CAD.',
+  },
 }
