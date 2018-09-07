@@ -58,10 +58,11 @@
       <q-card class="q-pa-lg q-mt-md" style="background:#32363F;">
         <q-btn style="font-weight: 300;" v-bind:class="{'wiggle': votesdidchange}" class="full-width items-baseline" color="primary" size="xl" @click="voteForCandidates">
           <div style="width:55px;display:inlineblock">
-            <q-icon size="48px" class="float-left" name="icon-ui-3"></q-icon>
+            <q-icon size="40px" class="float-left" name="icon-ui-3"></q-icon>
           </div>
           <div style="display:inline-block" >
-            {{ $t('vote_custodians.submit_my_votes') }}
+            <span v-if="votesdidchange">{{ $t('vote_custodians.submit_my_votes') }}</span>
+            <span v-if="!votesdidchange">{{ $t('vote_custodians.my_votes') }}</span>
           </div>
         </q-btn>
         <q-list class="q-mt-md">
