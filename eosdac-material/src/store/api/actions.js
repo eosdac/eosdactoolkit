@@ -188,11 +188,15 @@ export async function getRegistered({
   }
 }
 
+//only use this function to check if the current logged in user is a candidate
 export async function getIsCandidate({
   state,
   commit,
   rootState
 }) {
+  if(configFile.network.custodianContract.name ===''){
+    return false;
+  };
   try {
     eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint
     let eos = Eos(eosConfig)
@@ -222,12 +226,14 @@ export async function getIsCandidate({
     throw error
   }
 }
+//todo getIsCustodian
 
 export async function getCustodians({
   state,
   commit,
 
 }, param) {
+
   try {
     console.log(param)
     eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint
@@ -259,7 +265,7 @@ export async function getMemberVotes({
   commit,
 }, param) {
   try {
-    console.log(param)
+
     eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint
     let eos = Eos(eosConfig)
     const votes = await eos.getTableRows({
