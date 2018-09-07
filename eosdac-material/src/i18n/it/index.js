@@ -87,7 +87,7 @@ export default {
     website: 'Sito web',
     bio: 'Biografía',
     edit: 'Modifica',
-    download: 'Scarica',    
+    download: 'Scarica',
   },
   lang_selector: {
     choose_your_language: 'Scegli la tua LINGUA',

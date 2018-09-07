@@ -87,7 +87,7 @@ export default {
     website: '网站',
     bio: '传',
     edit: '编辑',
-    download: '下载',    
+    download: '下载',
   },
   lang_selector: {
     choose_your_language: '选择您的语言',

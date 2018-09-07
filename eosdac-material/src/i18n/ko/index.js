@@ -70,7 +70,7 @@ export default {
     specify_your_own: '사용자가 직접 특정 엔드포인트를 지정하고 싶을 경우 URL을 입력하고 연결 버튼을 누르십시오.',
   },
   profile: {
-    profile: '윤곽',    
+    profile: '윤곽',
     about_me: '내 정보',
     email_address: '이메일 주소',
     familyName: '성',
@@ -87,7 +87,7 @@ export default {
     website: '웹사이트',
     bio: '전기',
     edit: '편집하다',
-    download: '다운로드',    
+    download: '다운로드',
   },
   lang_selector: {
     choose_your_language: '언어 선택',

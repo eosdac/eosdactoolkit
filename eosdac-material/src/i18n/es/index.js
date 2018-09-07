@@ -70,7 +70,7 @@ export default {
     specify_your_own: 'Especifique su endpoint personalizado rellenando el campo con una url y haga clic en el botón de conexión.',
   },
   profile: {
-    profile: 'Perfil',    
+    profile: 'Perfil',
     about_me: 'Sobre mi',
     email_address: 'Dirección de correo electrónico',
     familyName: 'Apellido',
@@ -158,7 +158,7 @@ export default {
     settings: 'Configuraciones',
     unregister_membership: 'Anular el registro de membresía',
     user_preference: 'Ajustes de usuario',
-    transaction_popup_label: 'Ventanas emergentes de transacción',    
+    transaction_popup_label: 'Ventanas emergentes de transacción',
   },
   transaction: {
     send: 'enviar',

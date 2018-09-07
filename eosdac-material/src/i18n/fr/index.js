@@ -158,7 +158,7 @@ export default {
     settings: 'Paramètres',
     unregister_membership: 'Annuler l\'inscription',
     user_preference: 'Paramètres utilisateur',
-    transaction_popup_label: 'Popups de transaction',    
+    transaction_popup_label: 'Popups de transaction',
   },
   transaction: {
     send: 'envoyer',

@@ -70,7 +70,7 @@ export default {
     specify_your_own: 'Укажите свою собственную конечную точку, заполнив ввод URL-адресом и нажмите кнопку подключения.',
   },
   profile: {
-    profile: 'Профиль',    
+    profile: 'Профиль',
     about_me: 'Обо мне',
     email_address: 'Адрес электронной почты',
     familyName: 'Фамилия',
@@ -87,7 +87,7 @@ export default {
     website: 'Веб-сайт',
     bio: 'биография',
     edit: 'редактировать',
-    download: 'Скачать',    
+    download: 'Скачать',
   },
   lang_selector: {
     choose_your_language: 'Выберите ваш язык',

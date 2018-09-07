@@ -158,7 +158,7 @@ export default {
     settings: '設定',
     unregister_membership: 'メンバーシップの登録を解除する',
     user_preference: 'ユーザー設定',
-    transaction_popup_label: 'トランザクションポップアップ',    
+    transaction_popup_label: 'トランザクションポップアップ',
   },
   transaction: {
     send: '送信する',
