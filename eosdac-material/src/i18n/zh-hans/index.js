@@ -1,4 +1,8 @@
 export default {
+  api: {
+    connection_to_endpoint_failed: '与端点的连接不可靠或不可用',
+    connection_to_endpoint_failed_details: '转到“设置”以设置有效的Endpoint API'
+  },
   constitution: {
     loading_constitution: '加载章程',
     switch_contrast: '切换对比度',
@@ -15,6 +19,7 @@ export default {
     member_status: '会员状态',
     menu: '菜单',
     not_registered: '未注册',
+    pending: '有待',
     profile: '个人资料',
     registered: '已注册',
     settings: '设置',
@@ -24,6 +29,7 @@ export default {
     wallet: '钱包',
     worker_proposals: '工作人员提案',
     you_have_not_yet_registered: '您尚未注册成为会员。 请签署章程以使用会员客户端。',
+    constitution_has_been_updated: '宪法已经更新。 请签署更新的章程以使用会员客户。',
     your_token_balance: '您的 {tokenName} 余额',
   },
   four_zero_four: {
@@ -64,6 +70,7 @@ export default {
     specify_your_own: '通过输入 URL 地址并单击连接按钮来指定您自己的自定义端点。',
   },
   profile: {
+    profile: '轮廓',
     about_me: '关于我',
     email_address: '电子邮件',
     familyName: '姓',
@@ -78,6 +85,9 @@ export default {
     social_link: '社交网络链接',
     social_profile_link: '社交账号链接',
     website: '网站',
+    bio: '传',
+    edit: '编辑',
+    download: '下载',    
   },
   lang_selector: {
     choose_your_language: '选择您的语言',
@@ -129,7 +139,7 @@ export default {
     permissions: '1. 转到“权限”',
     revoke_identity: '3. 撤销身份',
     select_domain: '2. 选择域',
-  unable_to_connect: '如果您无法连接到 Scatter，请按照以下步骤重置您的许可。',
+    unable_to_connect: '如果您无法连接到 Scatter，请按照以下步骤重置您的许可。',
   },
   settings: {
     API: 'API',
@@ -147,8 +157,11 @@ export default {
     REGISTERED: '已注册',
     settings: '设置',
     unregister_membership: '注销会员',
+    user_preference: '用户设置',
+    transaction_popup_label: '交易弹出窗口',
   },
   transaction: {
+    send: '发送',
     action: '操作',
     by_completing_agree: '通过完成此交易，我同意以下条款。',
     cancel: '取消',
@@ -192,6 +205,7 @@ export default {
     or_select_address_book: '或者从通讯录中选择接收方帐户',
     input_a_destination_account: '输入接收方帐户',
     total: '总数',
+    remaining: '其余',
   },
   wp_member_view: {
     approx_USD: '（约 xxxx 美元）',
@@ -210,5 +224,14 @@ export default {
   worker_proposals: {
     APPROVED: '已批准',
     OPEN: '待定',
-  }
+  },
+  vote_custodians:{
+    loading_candidates: '装载候选人',
+    candidate_list: '候选名单',
+    my_votes: '我的投票',
+    search: '搜索',
+    submit_my_votes: '提交我的票',
+    description_main: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam libero urna, efficitur at laoreet fermentum, facilisis in ex. Proin luctus erat sem, ut mollis dui laoreet id. Curabitur eleifend ante in lacus rutrum dapibus. Nulla sit amet maximus metus, ac interdum dui. Aliquam placerat nisl eu bibendum dictum. Integer pharetra diam pretium felis venenatis, in aliquam ex imperdiet. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.',
+    description_side: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam libero urna, efficitur at laoreet fermentum, facilisis in ex. Proin luctus erat sem, ut mollis dui laoreet id.',
+  },  
 }

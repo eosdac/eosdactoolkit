@@ -1,4 +1,8 @@
 export default {
+  api: {
+    connection_to_endpoint_failed: '끝점에 대한 연결을 신뢰할 수 없거나 사용할 수 없습니다.',
+    connection_to_endpoint_failed_details: '설정으로 이동하여 작동중인 종점 API를 설정합니다.'
+  },
   constitution: {
     loading_constitution: '헌법 불러오는 중',
     switch_contrast: '색상 대조',
@@ -15,6 +19,7 @@ export default {
     member_status: '회원 상태',
     menu: '메뉴',
     not_registered: '미등록',
+    pending: '보류',
     profile: '프로필',
     registered: '등록됨',
     settings: '설정',
@@ -24,6 +29,7 @@ export default {
     wallet: '지갑',
     worker_proposals: '작업자 제안',
     you_have_not_yet_registered: '귀하는 아직 회원 등록을 하지 않은 상태입니다. 회원 클라이언트를 이용하려면 헌법에 서명하십시오.',
+    constitution_has_been_updated: '헌법이 개정되었습니다. 회원 클라이언트를 사용하려면 업데이트 된 헌법에 서명하십시오.',
     your_token_balance: '{tokenName} 잔액',
   },
   four_zero_four: {
@@ -64,6 +70,7 @@ export default {
     specify_your_own: '사용자가 직접 특정 엔드포인트를 지정하고 싶을 경우 URL을 입력하고 연결 버튼을 누르십시오.',
   },
   profile: {
+    profile: '윤곽',    
     about_me: '내 정보',
     email_address: '이메일 주소',
     familyName: '성',
@@ -78,6 +85,9 @@ export default {
     social_link: '소셜 미디어 링크',
     social_profile_link: '소셜 프로필 링크',
     website: '웹사이트',
+    bio: '전기',
+    edit: '편집하다',
+    download: '다운로드',    
   },
   lang_selector: {
     choose_your_language: '언어 선택',
@@ -147,8 +157,11 @@ export default {
     REGISTERED: '등기',
     settings: '설정',
     unregister_membership: '회원 등록 취소',
+    user_preference: '사용자 설정',
+    transaction_popup_label: '트랜잭션 팝업',
   },
   transaction: {
+    send: '보내다',
     action: '액션',
     by_completing_agree: '이 거래를 완료함으로써 다음 조건에 동의합니다.',
     cancel: '취소',
@@ -192,6 +205,7 @@ export default {
     or_select_address_book: '또는 주소록에서 보낼 계정을 선택하십시오.',
     input_a_destination_account: '보낼 계정 입력',
     total: '총량',
+    remaining: '남은',
   },
   wp_member_view: {
     approx_USD: '(약 xxxx USD)',
@@ -210,5 +224,14 @@ export default {
   worker_proposals: {
     APPROVED: '승인됨',
     OPEN: '결정되지 않음',
-  }
+  },
+  vote_custodians:{
+    loading_candidates: '로딩 후보',
+    candidate_list: '후보 목록',
+    my_votes: '내 투표',
+    search: '수색',
+    submit_my_votes: '내 표를 제출',
+    description_main: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam libero urna, efficitur at laoreet fermentum, facilisis in ex. Proin luctus erat sem, ut mollis dui laoreet id. Curabitur eleifend ante in lacus rutrum dapibus. Nulla sit amet maximus metus, ac interdum dui. Aliquam placerat nisl eu bibendum dictum. Integer pharetra diam pretium felis venenatis, in aliquam ex imperdiet. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.',
+    description_side: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam libero urna, efficitur at laoreet fermentum, facilisis in ex. Proin luctus erat sem, ut mollis dui laoreet id.',
+  },  
 }

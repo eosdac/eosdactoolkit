@@ -1,4 +1,8 @@
 export default {
+  api: {
+    connection_to_endpoint_failed: 'La conexión al punto final no es confiable o no está disponible',
+    connection_to_endpoint_failed_details: 'Vaya a Configuración para configurar una API de Endpoint que funcione'
+  },
   constitution: {
     loading_constitution: 'Cargando constitución',
     switch_contrast: 'Cambiar Contraste',
@@ -15,6 +19,7 @@ export default {
     member_status: 'Estado',
     menu: 'Menú',
     not_registered: 'no registrado',
+    pending: 'Pendiente',
     profile: 'Perfil',
     registered: 'Registrado',
     settings: 'Configuracion',
@@ -24,6 +29,7 @@ export default {
     wallet: 'Billetera',
     worker_proposals: 'Propuestas de trabajo',
     you_have_not_yet_registered: 'Aun no registrado como miembro. Firme la constitución para ser un miembro.',
+    constitution_has_been_updated: 'La Constitución ha sido actualizada. Firme la Constitución actualizada para usar el Cliente miembro.',
     your_token_balance: 'Su saldo {tokenName}',
   },
   four_zero_four: {
@@ -64,6 +70,7 @@ export default {
     specify_your_own: 'Especifique su endpoint personalizado rellenando el campo con una url y haga clic en el botón de conexión.',
   },
   profile: {
+    profile: 'Perfil',    
     about_me: 'Sobre mi',
     email_address: 'Dirección de correo electrónico',
     familyName: 'Apellido',
@@ -78,6 +85,9 @@ export default {
     social_link: 'Link social',
     social_profile_link: 'Enlace de perfil social',
     website: 'Sitio web',
+    bio: 'Bio',
+    edit: 'Edit',
+    download: 'Download'
   },
   lang_selector: {
     choose_your_language: 'Elige tu idioma',
@@ -147,8 +157,11 @@ export default {
     REGISTERED: 'REGISTRADO',
     settings: 'Configuraciones',
     unregister_membership: 'Anular el registro de membresía',
+    user_preference: 'Ajustes de usuario',
+    transaction_popup_label: 'Ventanas emergentes de transacción',    
   },
   transaction: {
+    send: 'enviar',
     action: 'Aceptar',
     by_completing_agree: 'Al completar esta transacción, acepto los siguientes términos.',
     cancel: 'Cancelar',
@@ -192,6 +205,7 @@ export default {
     or_select_address_book: 'O seleccione una cuenta de destino de la libreta de direcciones',
     input_a_destination_account: 'Ingrese una cuenta de destino',
     total: 'total',
+    remaining: 'restante',
   },
   wp_member_view: {
     approx_USD: '(Aprox. Xxxx USD)',
@@ -210,6 +224,14 @@ export default {
   worker_proposals: {
     APPROVED: 'APROBADO',
     OPEN: 'ABIERTO',
-  }
+  },
+  vote_custodians:{
+    loading_candidates: 'candidatos de carga',
+    candidate_list: 'Lista candidato',
+    my_votes: 'mi voto',
+    search: 'búsqueda',
+    submit_my_votes: 'ENVIAR mis votos',
+    description_main: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam libero urna, efficitur at laoreet fermentum, facilisis in ex. Proin luctus erat sem, ut mollis dui laoreet id. Curabitur eleifend ante in lacus rutrum dapibus. Nulla sit amet maximus metus, ac interdum dui. Aliquam placerat nisl eu bibendum dictum. Integer pharetra diam pretium felis venenatis, in aliquam ex imperdiet. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.',
+    description_side: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam libero urna, efficitur at laoreet fermentum, facilisis in ex. Proin luctus erat sem, ut mollis dui laoreet id.',
+  },  
 }
-

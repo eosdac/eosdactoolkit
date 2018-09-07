@@ -1,4 +1,8 @@
 export default {
+  api: {
+    connection_to_endpoint_failed: 'Соединение с конечной точкой ненадежно или недоступно',
+    connection_to_endpoint_failed_details: 'Перейдите в «Настройки», чтобы настроить рабочий API конечной точки'
+  },
   constitution: {
     loading_constitution: 'Загрузка Конституции',
     switch_contrast: 'Переключение темы',
@@ -15,6 +19,7 @@ export default {
     member_status: 'Статус участника',
     menu: 'Меню',
     not_registered: 'Не зарегистрирован',
+    pending: 'в ожидании',
     profile: 'Профиль',
     registered: 'Зарегистрирован',
     settings: 'Настройки',
@@ -24,6 +29,7 @@ export default {
     wallet: 'Кошелек',
     worker_proposals: 'Рабочие предложения',
     you_have_not_yet_registered: 'Вы еще не зарегистрированы в качестве Участника. Пожалуйста, подпишите Конституцию, чтобы использовать клиента.',
+    constitution_has_been_updated: 'Конституция обновлена. Подпишитесь на обновленную Конституцию, чтобы использовать Клиент-член.',
     your_token_balance: 'Баланс {tokenName}',
   },
   four_zero_four: {
@@ -64,6 +70,7 @@ export default {
     specify_your_own: 'Укажите свою собственную конечную точку, заполнив ввод URL-адресом и нажмите кнопку подключения.',
   },
   profile: {
+    profile: 'Профиль',    
     about_me: 'Обо мне',
     email_address: 'Адрес электронной почты',
     familyName: 'Фамилия',
@@ -78,6 +85,9 @@ export default {
     social_link: 'Социальные сети',
     social_profile_link: 'Ссылка на профиль в социальных сетях',
     website: 'Веб-сайт',
+    bio: 'биография',
+    edit: 'редактировать',
+    download: 'Скачать',    
   },
   lang_selector: {
     choose_your_language: 'Выберите ваш язык',
@@ -147,8 +157,11 @@ export default {
     REGISTERED: 'ЗАРЕГИСТРИРОВАН',
     settings: 'Настройки',
     unregister_membership: 'Отменить регистрацию членства',
+    user_preference: 'Пользовательские настройки',
+    transaction_popup_label: 'Всплывающие окна транзакций',
   },
   transaction: {
+    send: 'Отправить',
     action: 'действие',
     by_completing_agree: 'Совершая эту транзакцию, я соглашаюсь на следующие условия.',
     cancel: 'Отмена',
@@ -192,6 +205,7 @@ export default {
     or_select_address_book: 'Или выберите учетную запись из адресной книги',
     input_a_destination_account: 'Введите учетную запись',
     total: 'Всего',
+    remaining: 'осталось',
   },
   wp_member_view: {
     approx_USD: '(Примерно хxxx USD)',
@@ -211,4 +225,13 @@ export default {
     APPROVED: 'УТВЕРЖДЕН',
     OPEN: 'ОТКРЫТ',
   },
+  vote_custodians:{
+    loading_candidates: 'кандидаты погрузочные',
+    candidate_list: 'кандидат Список',
+    my_votes: 'мой голос',
+    search: 'поиск',
+    submit_my_votes: 'ПОДАТЬ мои голоса',
+    description_main: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam libero urna, efficitur at laoreet fermentum, facilisis in ex. Proin luctus erat sem, ut mollis dui laoreet id. Curabitur eleifend ante in lacus rutrum dapibus. Nulla sit amet maximus metus, ac interdum dui. Aliquam placerat nisl eu bibendum dictum. Integer pharetra diam pretium felis venenatis, in aliquam ex imperdiet. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.',
+    description_side: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam libero urna, efficitur at laoreet fermentum, facilisis in ex. Proin luctus erat sem, ut mollis dui laoreet id.',
+  },  
 }

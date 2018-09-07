@@ -1,4 +1,8 @@
 export default {
+  api: {
+    connection_to_endpoint_failed: 'エンドポイントへの接続が信頼できないか使用できない',
+    connection_to_endpoint_failed_details: '設定に行き、動作中のエンドポイントAPIを設定します。'
+  },
   constitution: {
     loading_constitution: '規約をロードしています',
     switch_contrast: 'コントラストを切り替え',
@@ -15,6 +19,7 @@ export default {
     member_status: 'メンバーステータス',
     menu: 'メニュー',
     not_registered: '未登録',
+    pending: '未定',
     profile: 'プロフィール',
     registered: '登録済み',
     settings: '設定',
@@ -24,6 +29,7 @@ export default {
     wallet: 'ウォレット',
     worker_proposals: 'ワーカープロポーザル',
     you_have_not_yet_registered: 'まだメンバーとして登録されていません。メンバークライアントを使用するためには規約に署名してください。',
+    constitution_has_been_updated: '憲法が更新されました。 更新された憲法に署名して、Member Clientを使用してください。',
     your_token_balance: '{tokenName}残高',
   },
   four_zero_four: {
@@ -64,6 +70,7 @@ export default {
     specify_your_own: 'URLを入力し、接続ボタンをクリックして、独自のカスタムエンドポイントを指定します。',
   },
   profile: {
+    profile: 'プロフィール',
     about_me: '登録情',
     email_address: 'メールアドレス',
     familyName: '姓',
@@ -78,6 +85,9 @@ export default {
     social_link: 'SNSリンク',
     social_profile_link: 'SNSプロフィールリンク',
     website: 'ウェブサイト',
+    bio: 'バイオグラフィー',
+    edit: '編集',
+    download: 'ダウンロード',
   },
   lang_selector: {
     choose_your_language: '言語を選択',
@@ -147,8 +157,11 @@ export default {
     REGISTERED: '登録済み',
     settings: '設定',
     unregister_membership: 'メンバーシップの登録を解除する',
+    user_preference: 'ユーザー設定',
+    transaction_popup_label: 'トランザクションポップアップ',    
   },
   transaction: {
+    send: '送信する',
     action: 'アクション',
     by_completing_agree: 'この取引を完了することにより、私は以下の条件に同意します。',
     cancel: 'キャンセル',
@@ -192,6 +205,7 @@ export default {
     or_select_address_book: 'または、アドレス帳から宛先のアカウントを選択',
     input_a_destination_account: '宛先のアカウントを入力する',
     total: '合計',
+    remaining: '残り',
   },
   wp_member_view: {
     approx_USD: '(約 xxxx USD)',
@@ -210,5 +224,14 @@ export default {
   worker_proposals: {
     APPROVED: '承認済み',
     OPEN: 'オープン',
-  }
+  },
+  vote_custodians:{
+    loading_candidates: 'ロード候補',
+    candidate_list: '候補リスト',
+    my_votes: '私の投票',
+    search: '検索',
+    submit_my_votes: '私の票を提出',
+    description_main: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam libero urna, efficitur at laoreet fermentum, facilisis in ex. Proin luctus erat sem, ut mollis dui laoreet id. Curabitur eleifend ante in lacus rutrum dapibus. Nulla sit amet maximus metus, ac interdum dui. Aliquam placerat nisl eu bibendum dictum. Integer pharetra diam pretium felis venenatis, in aliquam ex imperdiet. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.',
+    description_side: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam libero urna, efficitur at laoreet fermentum, facilisis in ex. Proin luctus erat sem, ut mollis dui laoreet id.',
+  },  
 }

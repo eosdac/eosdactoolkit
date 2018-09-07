@@ -5,6 +5,7 @@ export default {
   },
   constitution: {
     loading_constitution: 'Lade Verfassung',
+    switch_contrast: 'Switch Contrast',
   },
   default: {
     account_name: 'Kontoname',
@@ -18,6 +19,7 @@ export default {
     member_status: 'Mitgliedsstatus',
     menu: 'Menü',
     not_registered: 'nicht registriert',
+    pending: 'Anstehend',
     profile: 'Profil',
     registered: 'Registriert',
     settings: 'Einstellungen',
@@ -68,6 +70,7 @@ export default {
     specify_your_own: 'Geben Sie Ihren eigenen benutzerdefinierten Endpunkt an, indem Sie die Eingabe mit einer URL füllen und auf die Schaltfläche Verbinden klicken.',
   },
   profile: {
+    profile: 'Profil',
     about_me: 'Über mich',
     email_address: 'E-Mail-Addresse',
     familyName: 'Familienname',
@@ -82,20 +85,23 @@ export default {
     social_link: 'Soziale Links',
     social_profile_link: 'URL zum Sozialen Profil',
     website: 'Webseite',
+    bio: 'Bio',
+    edit: 'Edit',
+    download: 'Download'
   },
   lang_selector: {
     choose_your_language: 'Wähle deine Sprache',
     languages: {
-        chinese: 'Vereinfachtes Chinesisch',
-        english_gb: 'Englisch',
-        english_us: 'Amerikanisches Englisch',
-        french: 'Französisch',
-        german: 'Deutsch',
-        italian: 'Italienisch',
-        japanese: 'Japanisch',
-        korean: 'Koreanisch',
-        russian: 'Russisch',
-        spanish: 'Spanisch',
+      chinese: 'Vereinfachtes Chinesisch',
+      english_gb: 'Englisch',
+      english_us: 'Amerikanisches Englisch',
+      french: 'Französisch',
+      german: 'Deutsch',
+      italian: 'Italienisch',
+      japanese: 'Japanisch',
+      korean: 'Koreanisch',
+      russian: 'Russisch',
+      spanish: 'Spanisch',
     },
   },
   register: {
@@ -151,6 +157,8 @@ export default {
     REGISTERED: 'REGISTRIERT',
     settings: 'Einstellungen',
     unregister_membership: 'Mitgliedschaft aufheben',
+    user_preference: 'Benutzereinstellungen',
+    transaction_popup_label: 'Transaktionspopups',
   },
   transaction: {
     send: 'Senden',
@@ -216,5 +224,14 @@ export default {
   worker_proposals: {
     APPROVED: 'GENEHMIGT',
     OPEN: 'OFFEN',
-  }
+  },
+  vote_custodians:{
+    loading_candidates: 'Laden Kandidaten',
+    candidate_list: 'Kandidatenliste',
+    my_votes: 'meine Stimme',
+    search: 'Suche',
+    submit_my_votes: 'Zustellen meine Stimmen',
+    description_main: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam libero urna, efficitur at laoreet fermentum, facilisis in ex. Proin luctus erat sem, ut mollis dui laoreet id. Curabitur eleifend ante in lacus rutrum dapibus. Nulla sit amet maximus metus, ac interdum dui. Aliquam placerat nisl eu bibendum dictum. Integer pharetra diam pretium felis venenatis, in aliquam ex imperdiet. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.',
+    description_side: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam libero urna, efficitur at laoreet fermentum, facilisis in ex. Proin luctus erat sem, ut mollis dui laoreet id.',
+  },
 }

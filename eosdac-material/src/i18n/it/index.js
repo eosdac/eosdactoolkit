@@ -1,4 +1,8 @@
 export default {
+  api: {
+    connection_to_endpoint_failed: 'La connessione all\'endpoint non è affidabile o non è disponibile',
+    connection_to_endpoint_failed_details: 'Vai su Impostazioni per configurare un\'API Endpoint funzionante'
+  },
   constitution: {
     loading_constitution: 'Caricamento costituzione',
     switch_contrast: 'Cambia Contrasto',
@@ -15,6 +19,7 @@ export default {
     member_status: 'Stato Membro',
     menu: 'Menu',
     not_registered: 'non registrato',
+    pending: 'In attesa di',
     profile: 'Profilo',
     registered: 'Registrato',
     settings: 'impostazioni',
@@ -24,6 +29,7 @@ export default {
     wallet: 'Portafoglio',
     worker_proposals: 'Proposte dei lavoratori',
     you_have_not_yet_registered: 'Non sei ancora registrato come membro. Si prega di firmare la costituzione per utilizzare il Cliente Membro.',
+    constitution_has_been_updated: 'La Costituzione è stata aggiornata. Si prega di firmare la Costituzione aggiornata per utilizzare il Cliente Membro.',
     your_token_balance: 'Il tuo saldo di {tokenName}',
   },
   four_zero_four: {
@@ -64,6 +70,7 @@ export default {
     specify_your_own: 'Specifica il tuo endpoint personalizzato compilando l\'input con un url e fai clic sul pulsante Connetti.',
   },
   profile: {
+    profile: 'Profilo',
     about_me: 'A proposito di me',
     email_address: 'Indirizzo email',
     familyName: 'Cognome',
@@ -78,20 +85,23 @@ export default {
     social_link: 'Collegamento sociale',
     social_profile_link: 'Link al profilo sociale',
     website: 'Sito web',
+    bio: 'Biografía',
+    edit: 'Modifica',
+    download: 'Scarica',    
   },
   lang_selector: {
     choose_your_language: 'Scegli la tua LINGUA',
     languages: {
-        chinese: 'Cinese semplificato)',
-        english_gb: 'Inglese (GB)',
-        english_us: 'Inglese (Stati Uniti)',
-        french: 'francese',
-        german: 'Tedesco',
-        italian: 'Italiano',
-        japanese: 'Giapponese',
-        korean: 'Coreano',
-        russian: 'Russo',
-        spanish: 'Spagnolo',
+      chinese: 'Cinese semplificato)',
+      english_gb: 'Inglese (GB)',
+      english_us: 'Inglese (Stati Uniti)',
+      french: 'francese',
+      german: 'Tedesco',
+      italian: 'Italiano',
+      japanese: 'Giapponese',
+      korean: 'Coreano',
+      russian: 'Russo',
+      spanish: 'Spagnolo',
     },
   },
   register: {
@@ -147,8 +157,11 @@ export default {
     REGISTERED: 'REGISTRATO',
     settings: 'impostazioni',
     unregister_membership: 'Annulla registrazione appartenenza',
+    user_preference: 'Impostazioni utente',
+    transaction_popup_label: 'Popup di transazione',
   },
   transaction: {
+    send: 'inviare',
     action: 'Azione',
     by_completing_agree: 'Completando questa transazione, accetto i seguenti termini.',
     cancel: 'Annulla',
@@ -192,6 +205,7 @@ export default {
     or_select_address_book: 'Oppure selezionare un account di destinazione da AddressBook',
     input_a_destination_account: 'Inserisci un account di destinazione',
     total: 'totale',
+    remaining: 'residuo',
   },
   wp_member_view: {
     approx_USD: '(Circa xxxx USD)',
@@ -210,5 +224,14 @@ export default {
   worker_proposals: {
     APPROVED: 'APPROVATO',
     OPEN: 'APERTO',
-  }
+  },
+  vote_custodians:{
+    loading_candidates: 'i candidati di carico',
+    candidate_list: 'candidate List',
+    my_votes: 'il mio voto',
+    search: 'ricerca',
+    submit_my_votes: 'Presentare il mio voto',
+    description_main: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam libero urna, efficitur at laoreet fermentum, facilisis in ex. Proin luctus erat sem, ut mollis dui laoreet id. Curabitur eleifend ante in lacus rutrum dapibus. Nulla sit amet maximus metus, ac interdum dui. Aliquam placerat nisl eu bibendum dictum. Integer pharetra diam pretium felis venenatis, in aliquam ex imperdiet. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.',
+    description_side: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam libero urna, efficitur at laoreet fermentum, facilisis in ex. Proin luctus erat sem, ut mollis dui laoreet id.',
+  },  
 }
