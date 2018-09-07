@@ -1,6 +1,6 @@
 <template>
 <q-page class="text-white q-pa-md">
-<Transaction ref="Transaction"/>
+<Transaction ref="Transaction" v-on:done="votesdidchange=false" />
 
 <div class="row gutter-md reverse-wrap">
   <!-- first column  -->
