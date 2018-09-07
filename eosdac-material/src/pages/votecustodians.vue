@@ -56,7 +56,7 @@
       <span class="q-display-1">{{ $t('vote_custodians.my_votes') }} <span class="text-dimwhite">- {{getSelectedCand.length}}/{{maxvotes}}</span></span>
       <p class="text-dimwhite q-body-1">{{ $t('vote_custodians.description_side') }}</p>
       <q-card class="q-pa-lg q-mt-md" style="background:#32363F;">
-        <q-btn style="font-weight: 300;" class="full-width items-baseline" color="primary" size="xl" @click="voteForCandidates">
+        <q-btn style="font-weight: 300;" v-bind:class="{'wiggle': votesdidchange}" class="full-width items-baseline" color="primary" size="xl" @click="voteForCandidates">
           <div style="width:55px;display:inlineblock">
             <q-icon size="48px" class="float-left" name="icon-ui-3"></q-icon>
           </div>
@@ -82,6 +82,7 @@
           </transition-group>
         </q-list>
         <!-- <pre>{{getSelectedCand}}</pre> -->
+        <pre>{{votesdidchange}}</pre>
       </q-card>
     </div>
   </div>
@@ -114,7 +115,9 @@ export default {
         items_per_page: 6
       },
       filter : '',
-      maxvotes : 5
+      maxvotes : 5,
+      oldvotes : [],
+      votesdidchange : false
     }
   },
 
@@ -141,6 +144,7 @@ export default {
 
       return filtered.slice((this.pagination.page-1) * this.pagination.items_per_page, this.pagination.page * this.pagination.items_per_page);
     }
+
   },
 
   created() {
@@ -191,7 +195,8 @@ export default {
       //select member votes
       let votes = await this.$store.dispatch('api/getMemberVotes', {member: this.getAccountName});
       if(votes && votes[0].candidates.length ){
-        votes[0].candidates.forEach((vote) =>{
+        this.oldvotes = votes[0].candidates;
+        this.oldvotes.forEach((vote) =>{
           this.addToVoteList(vote);
         })
       }
@@ -211,15 +216,18 @@ export default {
       let selected = this.custodians.filter(x => x.selected == true);
       if(selected.length < 5){
         this.custodians.find(x => x.candidate_name === name).selected =true;
+        this.checkVotesChanged();
       }
       else{
         console.log('reached max number of votes.')
       }
+
       
     },
 
     deleteFromVoteList(name){
       this.custodians.find(x => x.candidate_name === name).selected =false;
+      this.checkVotesChanged();
     },
 
     voteForCandidates() {
@@ -233,6 +241,20 @@ export default {
 
     addProfile(eventdata){
       this.custodians.find(x => x.candidate_name === eventdata.candidate_name).profile =eventdata.profile;
+    },
+    checkVotesChanged(){
+      let newvotes = this.custodians.filter(x => x.selected == true).map(c => c.candidate_name);
+      console.log(newvotes)
+      console.log(JSON.stringify(this.oldvotes) )
+      if(newvotes.length != this.oldvotes.length){
+        this.votesdidchange = true;
+      }
+      else if(newvotes.every(v => this.oldvotes.includes(v)) ){
+        this.votesdidchange =  false;
+      }
+      else{
+        this.votesdidchange =  true;
+      }
     }
 
   }
@@ -251,4 +273,21 @@ export default {
   opacity: 0;
   transform: translateY(30px);
 }
+@keyframes wiggle {
+    0% { transform: rotate(0deg); }
+   80% { transform: rotate(0deg); }
+   85% { transform: rotate(5deg); }
+   95% { transform: rotate(-5deg); }
+  100% { transform: rotate(0deg); }
+}
+
+.wiggle {
+  display: inline-block;
+  animation: wiggle 2.5s infinite;
+}
+
+.wiggle:hover {
+  animation: none;
+}
+
 </style>
