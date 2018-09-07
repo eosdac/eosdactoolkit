@@ -232,6 +232,9 @@ export default {
     },
 
     voteForCandidates() {
+      if(!this.votesdidchange){
+        return false;
+      }
       let votes = this.custodians.filter(x => x.selected == true).map(c => c.candidate_name);
 
       this.$refs.Transaction.newTransaction(this.$configFile.network.custodianContract.name, 'votecust', {
@@ -245,8 +248,7 @@ export default {
     },
     checkVotesChanged(){
       let newvotes = this.custodians.filter(x => x.selected == true).map(c => c.candidate_name);
-      console.log(newvotes)
-      console.log(JSON.stringify(this.oldvotes) )
+
       if(newvotes.length != this.oldvotes.length){
         this.votesdidchange = true;
       }
@@ -277,14 +279,14 @@ export default {
 @keyframes wiggle {
     0% { transform: rotate(0deg); }
    80% { transform: rotate(0deg); }
-   85% { transform: rotate(5deg); }
-   95% { transform: rotate(-5deg); }
+   85% { transform: rotate(2deg); }
+   95% { transform: rotate(-2deg); }
   100% { transform: rotate(0deg); }
 }
 
 .wiggle {
   display: inline-block;
-  animation: wiggle 2.5s infinite;
+  animation: wiggle 3s  infinite ease-in-out;
 }
 
 .wiggle:hover {
