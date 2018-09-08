@@ -281,7 +281,14 @@ export async function getMemberVotes({
     if (!votes.rows.length) {
       return false
     } else {
-      return votes.rows
+      console.log(votes.rows[0].voter +'---'+param.member)
+      if(votes.rows[0].voter === param.member){
+        return votes.rows
+      }
+      else{
+        return false;
+      }
+      
     }
     commit('SET_CURRENT_CONNECTION_STATUS', true)
   } catch (error) {

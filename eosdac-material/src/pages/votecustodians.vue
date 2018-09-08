@@ -13,7 +13,7 @@
     <div class="blur-details q-pa-md absolute-bottom" style="height:120px;margin-right:-16px;margin-left:-16px;">
       <div class="row justify-items q-px-md full-height">
         <span class="uppercase">Voting Progress <span class="text-dimwhite on-right"> {{voting_progress}}%</span></span>
-        <q-progress  id="dac_voting_progress" animate stripe style="height: 30px" color="positive" :percentage="voting_progress" />
+        <q-progress  id="dac_voting_progress" animate stripe class="round-borders" style="height: 30px" color="positive" :percentage="voting_progress" />
       </div>
     </div>
   </div>
@@ -28,7 +28,7 @@
   <!-- first column  -->
   <div class="col-lg-12 col-xl-8" >
     <div>
-      <span class="q-display-1 q-mt-none ">{{ $t('vote_custodians.candidate_list') }} <span class="text-dimwhite">- {{custodians.length}}</span></span>
+      <div class="q-display-1 q-mb-md ">{{ $t('vote_custodians.candidate_list') }} <span class="text-dimwhite">- {{custodians.length}}</span></div>
       <p class="text-dimwhite q-body-1">{{ $t('vote_custodians.description_main') }}</p>
 
       <div class="row bg-dark2 q-pa-md q-mb-md shadow-5 round-borders justify-between" v-if="!loading" >
@@ -75,7 +75,7 @@
   <!-- second column -->
   <div class="col-lg-12 col-xl-4" >
     <div>
-      <span class="q-display-1">{{ $t('vote_custodians.my_votes') }} <span class="text-dimwhite">- {{getSelectedCand.length}}/{{maxvotes}}</span></span>
+      <div class="q-display-1 q-mb-md">{{ $t('vote_custodians.my_votes') }} <span class="text-dimwhite">- {{getSelectedCand.length}}/{{maxvotes}}</span></div>
       <p class="text-dimwhite q-body-1">{{ $t('vote_custodians.description_side') }}</p>
       <q-card class="q-pa-lg q-mt-md" style="background:#32363F;">
         <q-btn style="font-weight: 300;" v-bind:class="{'wiggle': votesdidchange}" class="full-width items-baseline" color="primary" size="xl" @click="voteForCandidates">
@@ -104,7 +104,8 @@
             </q-item>
           </transition-group>
         </q-list>
-        <!-- <pre>{{getSelectedCand}}</pre> -->
+        <pre>{{getSelectedCand}}</pre>
+        <pre>{{getTokenBalance}}</pre>
         <!-- <pre>{{votesdidchange}}</pre> -->
       </q-card>
     </div>
@@ -149,6 +150,7 @@ export default {
   computed: {
     ...mapGetters({
       getAccountName: 'account/getAccountName',
+      getTokenBalance: 'account/getTokenBalance'
     }),
     getSelectedCand(){
       let selected = this.custodians.filter(x => x.selected == true);
@@ -227,12 +229,16 @@ export default {
       this.custodians = custodians
     },
   
-    addToVoteList(name){
+    addToVoteList(name, init=false){
       let selected = this.custodians.filter(x => x.selected == true);
       if(selected.length < 5){
         let cand = this.custodians.find(x => x.candidate_name === name);
         if(cand){
           cand.selected =true;
+          if(!init){
+            cand.total_votes = (cand.total_votes*1)+(this.getTokenBalance*10000);
+          }
+          
         }
         this.checkVotesChanged();
       }
@@ -244,7 +250,9 @@ export default {
     },
 
     deleteFromVoteList(name){
-      this.custodians.find(x => x.candidate_name === name).selected =false;
+      let cand = this.custodians.find(x => x.candidate_name === name);
+      cand.selected =false;
+      cand.total_votes = (cand.total_votes*1)-(this.getTokenBalance*10000);
       this.checkVotesChanged();
     },
 
@@ -277,12 +285,14 @@ export default {
       }
     },
     async getMemberVotes(){
+      console.log(this.getAccountName)
       let votes = await this.$store.dispatch('api/getMemberVotes', {member: this.getAccountName});
+      console.log(votes)
       if(votes){
         this.votesdidchange = false;
         this.oldvotes = votes[0].candidates;
         this.oldvotes.forEach((vote) =>{
-          this.addToVoteList(vote);
+          this.addToVoteList(vote,true);
         })
       }
       else{
