@@ -104,8 +104,8 @@
             </q-item>
           </transition-group>
         </q-list>
-        <pre>{{getSelectedCand}}</pre>
-        <pre>{{getTokenBalance}}</pre>
+        <!-- <pre>{{getSelectedCand}}</pre>
+        <pre>{{getTokenBalance}}</pre> -->
         <!-- <pre>{{votesdidchange}}</pre> -->
       </q-card>
     </div>
@@ -304,7 +304,16 @@ export default {
 }
 </script>
 
-<style>
+<style lang="stylus">
+@import '~variables'
+
+.gradient-bg-primary{
+  background-image linear-gradient(to right, $primary, $p-light);
+}
+.blur-details{
+  background rgba(255, 255, 255, 0.1);
+}
+
 .list-item {
   display: inline-block;
   margin-right: 10px;
