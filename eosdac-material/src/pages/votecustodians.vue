@@ -2,6 +2,27 @@
 <q-page class="text-white">
 <Transaction ref="Transaction" v-on:done="getMemberVotes()" />
 
+  <div class=" gradient-bg-primary q-px-md q-pt-md relative-position" style="min-height:260px; overflow:hidden">
+    <div class="row">
+      <div class="col-12">
+        <h4 class="q-display-1 q-mb-sm q-mt-none">{{ $t("vote_custodians.vote") }}</h4>
+      </div>
+    </div>
+
+
+    <div class="blur-details q-pa-md absolute-bottom" style="height:120px;margin-right:-16px;margin-left:-16px;">
+      <div class="row justify-items q-px-md full-height">
+        <span class="uppercase">Voting Progress <span class="text-dimwhite on-right"> {{voting_progress}}%</span></span>
+        <q-progress  id="dac_voting_progress" animate stripe style="height: 30px" color="positive" :percentage="voting_progress" />
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
 <div class="q-pa-md"> <!-- padding wrapper -->
 <div class="row gutter-md reverse-wrap">
   <!-- first column  -->
@@ -111,6 +132,7 @@ export default {
   data() {
     return {
       loading: false,
+      voting_progress: 30,
       custodians: [],
       pagination :{
         page:1,
@@ -208,7 +230,10 @@ export default {
     addToVoteList(name){
       let selected = this.custodians.filter(x => x.selected == true);
       if(selected.length < 5){
-        this.custodians.find(x => x.candidate_name === name).selected =true;
+        let cand = this.custodians.find(x => x.candidate_name === name);
+        if(cand){
+          cand.selected =true;
+        }
         this.checkVotesChanged();
       }
       else{
@@ -296,6 +321,9 @@ export default {
 
 .wiggle:hover {
   animation: none;
+}
+#dac_voting_progress .q-progress-track{
+  background:white;
 }
 
 </style>
