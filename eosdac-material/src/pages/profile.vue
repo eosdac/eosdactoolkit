@@ -9,7 +9,7 @@
     <div class="row  q-mt-md profile_header_top_row">
       <div class="col-xs-12">
         <div class="text-dimwhite q-caption uppercase">User Name</div>
-        <div class="q-display-1 text-weight-thin uppercase">kasperfish</div>
+        <div class="q-display-1 text-weight-thin uppercase">{{ $t('default.account_name') }}</div>
       </div>
     </div>
 

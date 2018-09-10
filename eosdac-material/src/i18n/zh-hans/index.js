@@ -229,6 +229,7 @@ export default {
     loading_candidates: '装载候选人',
     candidate_list: '候选名单',
     my_votes: '我的投票',
+    rows_per_page: '每页行数',
     search: '搜索',
     submit_my_votes: '提交我的票',
     description_main: '托管委员会负责管理发展援助委员会的运作和事务，包括但不限于发展援助委员会资产和负债的治理和管理。 以下发展援助委员会成员已将其部分代币归属于托管委员会，并持有7天的候选人。 每7天，您的投票将重新计算，以选择谁将成为下一个托管委员会的成员。 投票很重要！ 请经常投票并在DAC内保持参与，以了解谁在提供价值。',

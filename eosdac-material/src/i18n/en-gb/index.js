@@ -229,6 +229,7 @@ export default {
     loading_candidates: 'Loading candidates',
     candidate_list: 'Candidate List',
     my_votes: 'My Votes',
+    rows_per_page: 'Rows Per Page',
     search: 'Search',
     submit_my_votes: 'SUBMIT MY VOTES',
     description_main: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam libero urna, efficitur at laoreet fermentum, facilisis in ex. Proin luctus erat sem, ut mollis dui laoreet id. Curabitur eleifend ante in lacus rutrum dapibus. Nulla sit amet maximus metus, ac interdum dui. Aliquam placerat nisl eu bibendum dictum. Integer pharetra diam pretium felis venenatis, in aliquam ex imperdiet. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.',

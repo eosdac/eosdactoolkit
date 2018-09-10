@@ -229,6 +229,7 @@ export default {
     loading_candidates: 'candidatos de carga',
     candidate_list: 'Lista candidato',
     my_votes: 'mi voto',
+    rows_per_page: 'Filas por página',
     search: 'búsqueda',
     submit_my_votes: 'ENVIAR mis votos',
     description_main: 'La Junta de Depositarios maneja las operaciones y asuntos del DAC, incluidos, entre otros, el gobierno y la administración de los activos y pasivos del DAC. Los siguientes miembros de DAC otorgaron algunos de sus tokens para presentarse ellos mismos y los candidatos para un puesto en el consejo de custodia que duran 7 días. Cada 7 días, sus votos se vuelven a calcular para seleccionar quién formará parte de la próxima junta de custodia. ¡Votar es importante! Vota a menudo y mantente comprometido con el DAC para saber quién proporciona valor.',

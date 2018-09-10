@@ -229,6 +229,7 @@ export default {
     loading_candidates: 'candidats de chargement',
     candidate_list: 'Liste des candidats',
     my_votes: 'mon vote',
+    rows_per_page: 'Lignes par page',
     search: 'recherche',
     submit_my_votes: 'SOUMETTRE mes votes',
     description_main: 'Le conseil de surveillance gère les opérations et les affaires du CAD, notamment la gouvernance et l\'administration des actifs et des passifs du CAD. Les membres suivants du CAD ont confié à certains de leurs jetons de se présenter et de présenter des candidats pour un poste au sein du conseil de surveillance, qui dure sept jours. Tous les 7 jours, vos votes sont recalculés pour sélectionner ceux qui feront partie du conseil d\'administration suivant. Le vote est important! S\'il vous plaît voter souvent et rester engagé au sein du CAD pour savoir qui fournit de la valeur.',

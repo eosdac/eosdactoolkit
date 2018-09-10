@@ -229,6 +229,7 @@ export default {
     loading_candidates: '로딩 후보',
     candidate_list: '후보 목록',
     my_votes: '내 투표',
+    rows_per_page: '페이지 당 행 수',
     search: '수색',
     submit_my_votes: '내 표를 제출',
     description_main: '관리위원회 (Custodian Board)는 DAC의 운영 및 업무를 관리합니다. 여기에는 DAC의 자산 및 부채의 관리 및 관리가 포함됩니다 (이에 국한되지 않음). 다음의 DAC 회원들은 토큰 중 일부를 수령하여 자신과 후보자를 7 일 동안 보관하는 수탁자위원회의 직위를 제출해야합니다. 7 일마다 귀하의 득표 수를 재 계산하여 다음 관리위원회의 위원이 될 사람을 선택합니다. 투표가 중요합니다! 가치를 제공하는 사람을 알기 위해 DAC에 참여하고 자주 투표하십시오.',

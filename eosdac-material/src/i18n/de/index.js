@@ -229,6 +229,7 @@ export default {
     loading_candidates: 'Laden Kandidaten',
     candidate_list: 'Kandidatenliste',
     my_votes: 'meine Stimme',
+    rows_per_page: 'Zeilen pro Seite',
     search: 'Suche',
     submit_my_votes: 'Zustellen meine Stimmen',
     description_main: 'Die Depotbank verwaltet die Geschäfte und Angelegenheiten des DAC, einschließlich, aber nicht beschränkt auf, die Verwaltung und Verwaltung der Vermögenswerte und Verbindlichkeiten des DAC. Die folgenden DAC-Mitglieder haben einige ihrer Token zur Verfügung gestellt, um sich selbst und Kandidaten für eine Position auf der Depotbank, die für 7 Tage dauern, vorzulegen. Alle 7 Tage werden Ihre Stimmen neu berechnet, um auszuwählen, wer an der nächsten Depotbank teilnimmt. Abstimmung ist wichtig! Bitte wählen Sie häufig und bleiben Sie innerhalb des DAC engagiert, um zu wissen, wer einen Mehrwert bietet.',

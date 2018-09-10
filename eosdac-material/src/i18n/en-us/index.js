@@ -229,6 +229,7 @@ export default {
     loading_candidates: 'Loading candidates',
     candidate_list: 'Candidate List',
     my_votes: 'My Votes',
+    rows_per_page: 'Rows Per Page',
     search: 'Search',
     submit_my_votes: 'SUBMIT MY VOTES',
     description_main: 'The Custodian Board manages the operations and affairs of the DAC, including but not limited to the governance and administration of the assets and liabilities of the DAC. The following DAC members have vested some of their tokens to submit themselves and candidates for a position on the custodian board which last for 7 days. Every 7 days, your votes are recalculated to select who will be part of the next custodian board. Voting is important! Please vote often and stay engaged within the DAC to know who is providing value.',

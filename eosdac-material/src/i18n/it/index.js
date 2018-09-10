@@ -229,6 +229,7 @@ export default {
     loading_candidates: 'i candidati di carico',
     candidate_list: 'candidate List',
     my_votes: 'il mio voto',
+    rows_per_page: 'Righe per pagina',
     search: 'ricerca',
     submit_my_votes: 'Presentare il mio voto',
     description_main: 'Il Consiglio di amministrazione custodisce le operazioni e gli affari del DAC, inclusi, a titolo esemplificativo ma non esaustivo, la governance e l\'amministrazione delle attività e delle passività del DAC. I seguenti membri del DAC hanno acquisito parte dei loro token per presentare se stessi e i candidati per una posizione nel consiglio di amministrazione che dura 7 giorni. Ogni 7 giorni, i tuoi voti vengono ricalcolati per selezionare chi farà parte della prossima commissione di custodia. La votazione è importante! Per favore, vota spesso e resta coinvolto nel DAC per sapere chi sta fornendo valore.',
