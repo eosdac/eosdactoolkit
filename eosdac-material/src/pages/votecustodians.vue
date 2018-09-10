@@ -12,7 +12,7 @@
 
     <div class="blur-details q-pa-md absolute-bottom" style="height:120px;margin-right:-16px;margin-left:-16px;">
       <div class="row justify-items q-px-md full-height">
-        <span class="uppercase">Voting Progress <span class="text-dimwhite on-right"> {{voting_progress}}%</span></span>
+        <span class="uppercase">{{ $t("vote_custodians.voting_progress") }} <span class="text-dimwhite on-right"> {{ voting_progress }}%</span></span>
         <q-progress  id="dac_voting_progress" animate stripe class="round-borders" style="height: 30px" color="positive" :percentage="voting_progress" />
       </div>
     </div>

@@ -88,6 +88,7 @@ export default {
     bio: '전기',
     edit: '편집하다',
     download: '다운로드',
+    user_name: '사용자 이름',
   },
   lang_selector: {
     choose_your_language: '언어 선택',

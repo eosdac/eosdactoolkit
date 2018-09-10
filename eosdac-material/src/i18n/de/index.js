@@ -86,8 +86,9 @@ export default {
     social_profile_link: 'URL zum Sozialen Profil',
     website: 'Webseite',
     bio: 'Bio',
-    edit: 'Edit',
-    download: 'Download'
+    edit: 'Bearbeiten',
+    download: 'Herunterladen',
+    user_name: 'Nutzername',
   },
   lang_selector: {
     choose_your_language: 'Wähle deine Sprache',

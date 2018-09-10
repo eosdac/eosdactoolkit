@@ -88,6 +88,7 @@ export default {
     bio: 'バイオグラフィー',
     edit: '編集',
     download: 'ダウンロード',
+    user_name: 'ユーザー名',
   },
   lang_selector: {
     choose_your_language: '言語を選択',

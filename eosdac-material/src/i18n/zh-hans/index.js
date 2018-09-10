@@ -88,6 +88,7 @@ export default {
     bio: '传',
     edit: '编辑',
     download: '下载',
+    user_name: '用户名',
   },
   lang_selector: {
     choose_your_language: '选择您的语言',

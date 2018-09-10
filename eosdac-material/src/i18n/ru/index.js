@@ -88,6 +88,7 @@ export default {
     bio: 'биография',
     edit: 'редактировать',
     download: 'Скачать',
+    user_name: 'Имя пользователя',
   },
   lang_selector: {
     choose_your_language: 'Выберите ваш язык',
