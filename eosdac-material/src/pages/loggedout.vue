@@ -11,7 +11,7 @@
               <p>{{$t('index.description_p2')}}</p>
             </div>
             <div class="q-mb-lg">
-              <q-btn class="float-left q-px-xl" size="lg" color="primary" :label="$t('index.signin')" />
+              <q-btn  class="float-left q-px-xl" size="lg" color="primary" :label="$t('index.signin')" />
             </div>
           </div>
         </div>
@@ -111,6 +111,7 @@ export default {
   },
   
   computed: {
+
 
   },
 
