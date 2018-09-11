@@ -11,7 +11,7 @@ export default {
     account_name: 'Account Name',
     constitution: 'Constitution',
     constitution_has_been_updated: 'The Constitution has been updated. Please sign the updated Constitution to use the Member Client.',
-    custodians: 'Custodians',
+    custodians: 'Vote For Custodians',
     log_in: 'Log In',
     log_out: 'Log Out',
     logged_in: 'Logged-In',
@@ -23,6 +23,7 @@ export default {
     pending: 'Pending',
     profile: 'Profile',
     registered: 'Registered',
+    register_as_candidate: 'Register As Candidate',
     settings: 'Settings',
     sign_the_constitution: 'Sign the Constitution',
     status: 'Status',
@@ -31,6 +32,7 @@ export default {
     worker_proposals: 'Worker Proposals',
     you_have_not_yet_registered: 'You have not been registered as a Member yet. Please sign the constitution to use the Member Client.',
     your_token_balance: 'Your {tokenName} Balance',
+    
   },
   four_zero_four: {
     go_back: 'Go back',
@@ -235,5 +237,12 @@ export default {
     rows_per_page: 'Rows Per Page',
     search: 'Search',
     submit_my_votes: 'SUBMIT MY VOTES',
+    voting_progress: 'voting progress'
   },
+  regcandidate:{
+    loadconfig: 'Loading contract configuration',
+    register: 'register',
+    run_for_custodian: 'Run for Custodian',
+    unregister: 'unregister'
+  }
 }

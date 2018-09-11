@@ -116,7 +116,7 @@
         <q-btn round color="primary" class="float-right" @click="visible=false" icon="icon-plus" />
       </div>
       <div>
-        <q-input dark type="url" v-model="form.image" @input="loaded=false" class="q-mt-md " :float-label="$t('profile_picture_url')" placeholder="http://example.site/mypic.jpg" />
+        <q-input dark type="url" v-model="form.image" @input="loaded=false" class="q-mt-md " :float-label="$t('profile.profile_picture_url')" placeholder="http://example.site/mypic.jpg" />
       </div>
     </div>
   </q-modal>

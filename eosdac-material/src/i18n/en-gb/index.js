@@ -23,6 +23,7 @@ export default {
     pending: 'Pending',
     profile: 'Profile',
     registered: 'Registered',
+    register_as_candidate: 'Register As Candidate',
     settings: 'Settings',
     sign_the_constitution: 'Sign the Constitution',
     status: 'Status',
@@ -235,5 +236,6 @@ export default {
     rows_per_page: 'Rows Per Page',
     search: 'Search',
     submit_my_votes: 'SUBMIT MY VOTES',
+    voting_progress: 'voting progress'
   },
 }
