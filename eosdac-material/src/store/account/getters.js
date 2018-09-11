@@ -86,11 +86,9 @@ export const getAccount = (state) => {
   }
 }
 
-export const getLastUnlock= (state) => {
+export const getLastUnlock = (state) => {
   return state.lastUnlock
 }
-
-
 
 export const getUsesScatter = (state) => {
   return state.useScatter
@@ -116,7 +114,10 @@ export const getMemberRoles = (state) => {
   return state.memberRoles
 }
 
-
-export const getUnlocked= (state) => {
+export const getUnlocked = (state) => {
   return state.unlocked
+}
+
+export const getContacts = (state) => {
+  return state.contacts
 }

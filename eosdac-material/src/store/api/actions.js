@@ -288,7 +288,7 @@ export async function getMemberVotes({
       else{
         return false;
       }
-      
+
     }
     commit('SET_CURRENT_CONNECTION_STATUS', true)
   } catch (error) {
@@ -334,7 +334,7 @@ export async function registerCandidate({
                 actor: accountname,
                 permission: authority
               }],
-              data: Object.assign({cand : accountname}, payload.registerdata) 
+              data: Object.assign({cand : accountname}, payload.registerdata)
             },
           ]
         }
@@ -513,6 +513,27 @@ export async function getContractConfig({
       commit('SET_CONTRACT_CONFIG', {contract:payload.contract, config: config.rows[0]})
       return config.rows[0];
     }
+    commit('SET_CURRENT_CONNECTION_STATUS', true)
+  } catch (error) {
+    apiDown(error,commit)
+    throw error
+  }
+}
+
+export async function getRamPrice({
+  state,
+  commit
+}) {
+  try {
+    eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint
+    let eos = Eos(eosConfig)
+    const ramInfo = await eos.getTableRows({
+      json: true,
+      scope: configFile.network.systemContract.name,
+      code: configFile.network.systemContract.name,
+      table: 'rammarket'
+    })
+    return ramInfo.rows[0]
     commit('SET_CURRENT_CONNECTION_STATUS', true)
   } catch (error) {
     apiDown(error,commit)
