@@ -78,7 +78,7 @@
       <div class="q-display-1 q-mb-md">{{ $t('vote_custodians.my_votes') }} <span class="text-dimwhite">- {{getSelectedCand.length}}/{{maxvotes}}</span></div>
       <p class="text-dimwhite q-body-1">{{ $t('vote_custodians.description_side') }}</p>
       <q-card class="q-pa-lg q-mt-md" style="background:#32363F;">
-        <q-btn style="font-weight: 300;" v-bind:class="{'wiggle': votesdidchange, 'bg-warning': votesdidchange}" class="full-width items-baseline" color="primary" size="xl" @click="voteForCandidates">
+        <q-btn style="font-weight: 300;" v-bind:class="{'pulse': votesdidchange}" class="full-width items-baseline" color="primary" size="xl" @click="voteForCandidates">
           <div style="width:55px;display:inlineblock">
             <q-icon size="40px" class="float-left" name="icon-ui-3"></q-icon>
           </div>
@@ -338,6 +338,8 @@ export default {
   opacity: 0;
   transform: translateY(30px);
 }
+
+
 @keyframes wiggle {
     0% { transform: rotate(0deg); }
    80% { transform: rotate(0deg); }
@@ -356,6 +358,26 @@ export default {
 }
 #dac_voting_progress .q-progress-track{
   background:white;
+}
+
+.pulse{
+  background-color:$p-light !important;
+  -webkit-animation: pulse 1s infinite cubic-bezier(0.66, 0, 0, 1);
+  -moz-animation: pulse 1s infinite cubic-bezier(0.66, 0, 0, 1);
+  -ms-animation: pulse 1s infinite cubic-bezier(0.66, 0, 0, 1);
+  animation: pulse 1s infinite cubic-bezier(0.66, 0, 0, 1);
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 </style>
