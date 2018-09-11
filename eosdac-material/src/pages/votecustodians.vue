@@ -189,6 +189,7 @@ export default {
 
       while(lb !== null){
         let c = await this.$store.dispatch('api/getCustodians', {lb: lb});
+        console.log(c)
         if(c){
 
             if(lb === c[c.length-1].candidate_name){
@@ -205,6 +206,9 @@ export default {
               lb = c[c.length-1].candidate_name; 
               temp.push(...c);
             }
+        }
+        else{
+          lb = null;
         }
       }
       //sort by votes desc + add selected boolean to all candidates
