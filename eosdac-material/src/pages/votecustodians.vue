@@ -12,8 +12,8 @@
 
     <div class="blur-details q-pa-md absolute-bottom" style="height:120px;margin-right:-16px;margin-left:-16px;">
       <div class="row justify-items q-px-md full-height">
-        <span class="uppercase">{{ $t("vote_custodians.voting_progress") }} <span class="text-dimwhite on-right on-left"> {{ voting_progress }}%</span></span>
-        <span class="q-body-1 text-dimwhite text-italic">(The DAC will be activated at 15%)</span>
+        <!-- <span class="uppercase">{{ $t("vote_custodians.voting_progress") }} <span class="text-dimwhite on-right on-left"> {{ voting_progress }}%</span></span>
+        <span class="q-body-1 text-dimwhite text-italic">(The DAC will be activated at 15%)</span> -->
         <VotingProgress height="30px"/>
       </div>
     </div>
