@@ -362,6 +362,7 @@ export default {
 
 .pulse{
   background-color:$p-light !important;
+  transition: background-color 1000ms linear;
   -webkit-animation: pulse 1s infinite cubic-bezier(0.66, 0, 0, 1);
   -moz-animation: pulse 1s infinite cubic-bezier(0.66, 0, 0, 1);
   -ms-animation: pulse 1s infinite cubic-bezier(0.66, 0, 0, 1);
@@ -379,5 +380,9 @@ export default {
     transform: scale(1);
   }
 }
+
+
+keyframes pulse2 {to {box-shadow: 0 0 0 15px $primary;}}
+
 
 </style>
