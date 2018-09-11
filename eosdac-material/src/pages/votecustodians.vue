@@ -234,9 +234,16 @@ export default {
       if(selected.length < 5){
         let cand = this.custodians.find(x => x.candidate_name === name);
         if(cand){
-          cand.selected =true;
+          cand.selected = true;
           if(!init){
             cand.total_votes = (cand.total_votes*1)+(this.getTokenBalance*10000);
+            // if(cand.votes_changed === undefined){
+            //   cand.votes_changed = true;
+            // }
+            // else{
+            //   delete cand.votes_changed;
+            // }
+            
           }
           
         }
@@ -253,6 +260,13 @@ export default {
       let cand = this.custodians.find(x => x.candidate_name === name);
       cand.selected =false;
       cand.total_votes = (cand.total_votes*1)-(this.getTokenBalance*10000);
+      // if(cand.votes_changed === undefined){
+      //   cand.votes_changed = true;
+      // }
+      // else{
+      //   delete cand.votes_changed;
+      // }
+
       this.checkVotesChanged();
     },
 
@@ -272,12 +286,12 @@ export default {
       this.custodians.find(x => x.candidate_name === eventdata.candidate_name).profile =eventdata.profile;
     },
     checkVotesChanged(){
-      let newvotes = this.custodians.filter(x => x.selected == true).map(c => c.candidate_name);
+      let newvotes = this.custodians.filter(x => x.selected == true);
 
       if(newvotes.length != this.oldvotes.length){
         this.votesdidchange = true;
       }
-      else if(newvotes.every(v => this.oldvotes.includes(v)) ){
+      else if(newvotes.every(v => this.oldvotes.includes(v.candidate_name)) ){
         this.votesdidchange =  false;
       }
       else{
@@ -285,9 +299,8 @@ export default {
       }
     },
     async getMemberVotes(){
-      console.log(this.getAccountName)
+
       let votes = await this.$store.dispatch('api/getMemberVotes', {member: this.getAccountName});
-      console.log(votes)
       if(votes){
         this.votesdidchange = false;
         this.oldvotes = votes[0].candidates;

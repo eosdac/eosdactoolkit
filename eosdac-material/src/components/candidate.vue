@@ -16,7 +16,7 @@
         </div>
       </q-item-side>
       <q-item-main >
-        <div class="q-ml-lg">{{data.candidate_name}}<br>{{data.total_votes}}</div>
+        <div class="q-ml-lg">{{data.candidate_name}}<br><span :class="{'text-warning': data.votes_changed}">{{data.total_votes}}</span></div>
       </q-item-main>
     </template>
     <div class="q-pt-sm q-pt-none" style="border-top:1px solid grey">
