@@ -154,16 +154,14 @@
         <q-btn class="q-mt-sm" @click="$refs.Multi.init('sign')" text-color="blue" color="white">{{ $t('default.sign_the_constitution') }}</q-btn>
       </q-alert>
     </transition>
-    <router-view v-if="getAccountName" />
-    <!-- <router-view  /> -->
-    <h4 class="text-white q-ma-md" v-else>{{ $t('default.logged_out') }}</h4>
-    <!--<Initialize ref="Initialize" />-->
+    <router-view />
+
     <Notifier :drawer="leftDrawerOpen" />
 
   </q-page-container>
   <MultiModal ref="Multi" />
 
-  <q-btn v-back-to-top.animate="{offset: 500, duration: 200}" round color="primary" class="fixed-bottom-right animate-pop" style="margin: 0 20px 15px 0; z-index:9999">
+  <q-btn v-back-to-top.animate="{offset: 500, duration: 200}" round color="primary" class="fixed-bottom-right animate-pop z-max" style="margin: 0 20px 15px 0;">
     <q-icon name="keyboard_arrow_up" />
   </q-btn>
 
@@ -236,7 +234,7 @@ export default {
     async lockScatter() {
       this.getScatter.forgetIdentity()
       this.$store.commit('account/LOCK_ACCOUNT')
-      
+
     },
     async queryApis() {
       let now = Date.now()
@@ -255,7 +253,6 @@ export default {
       this.$refs.Multi.init('register')
     }
     setInterval(this.queryApis, 1000)
-
   },
   created() {
     //language detection
@@ -264,20 +261,16 @@ export default {
       if (lang) {
         this.$q.i18n.set(lang.default)
       }
-    });
-    
+    })
   },
-  // watch: {
-  //   getUnlocked: function (val) {
-  //     console.log(val);
-  //     if(!val){
-  //       this.$router.push('loggedout')
-  //     }
-  //     else{
-  //       this.$router.push('wallet')
-  //     }
-  //   }
-  // }
+  watch: {
+    getAccountName(val) {
+      if(!val){
+        console.log('logget out')
+        this.$router.push({ path: '/' })
+      }
+    }
+  }
 }
 </script>
 
