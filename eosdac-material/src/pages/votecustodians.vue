@@ -78,7 +78,7 @@
       <div class="q-display-1 q-mb-md">{{ $t('vote_custodians.my_votes') }} <span class="text-dimwhite">- {{getSelectedCand.length}}/{{maxvotes}}</span></div>
       <p class="text-dimwhite q-body-1">{{ $t('vote_custodians.description_side') }}</p>
       <q-card class="q-pa-lg q-mt-md" style="background:#32363F;">
-        <q-btn style="font-weight: 300;" v-bind:class="{'wiggle': votesdidchange}" class="full-width items-baseline" color="primary" size="xl" @click="voteForCandidates">
+        <q-btn style="font-weight: 300;" v-bind:class="{'wiggle': votesdidchange, 'bg-warning': votesdidchange}" class="full-width items-baseline" color="primary" size="xl" @click="voteForCandidates">
           <div style="width:55px;display:inlineblock">
             <q-icon size="40px" class="float-left" name="icon-ui-3"></q-icon>
           </div>
