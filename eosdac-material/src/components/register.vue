@@ -141,6 +141,7 @@ export default {
           this.hash = CryptoJS.MD5(getCt).toString()
           this.constitution = md.render(getCt)
           this.statusText = ''
+          
         }
       } catch (err) {
         console.log(err)

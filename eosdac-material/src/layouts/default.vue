@@ -154,8 +154,8 @@
         <q-btn class="q-mt-sm" @click="$refs.Multi.init('sign')" text-color="blue" color="white">{{ $t('default.sign_the_constitution') }}</q-btn>
       </q-alert>
     </transition>
-    <router-view v-if="getAccountName" />
-    <h4 class="text-white q-ma-md" v-else>{{ $t('default.logged_out') }}</h4>
+    <router-view  />
+    <!-- <h4 class="text-white q-ma-md" v-else>{{ $t('default.logged_out') }}</h4> -->
     <!--<Initialize ref="Initialize" />-->
     <Notifier :drawer="leftDrawerOpen" />
 
@@ -215,6 +215,7 @@ export default {
       getAutolockInterval: 'account/getAutolockInterval',
       getConnectionInterval: 'api/getConnectionInterval',
       getLastUnlock: 'account/getLastUnlock',
+      getUnlocked: 'account/getUnlocked',
       getTokenBalance: 'account/getTokenBalance',
       getAccount: 'account/getAccount',
       getMainCurrencyBalance: 'account/getMainCurrencyBalance',
@@ -234,6 +235,7 @@ export default {
     async lockScatter() {
       this.getScatter.forgetIdentity()
       this.$store.commit('account/LOCK_ACCOUNT')
+      
     },
     async queryApis() {
       let now = Date.now()
@@ -252,6 +254,7 @@ export default {
       this.$refs.Multi.init('register')
     }
     setInterval(this.queryApis, 1000)
+
   },
   created() {
     //language detection
@@ -260,7 +263,19 @@ export default {
       if (lang) {
         this.$q.i18n.set(lang.default)
       }
-    })
+    });
+    
+  },
+  watch: {
+    getUnlocked: function (val) {
+      if(!val){
+        this.$router.push('loggedout')
+      }
+      else{
+        //default to wallet
+        this.$router.push('wallet')
+      }
+    }
   }
 }
 </script>
