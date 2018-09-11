@@ -154,6 +154,7 @@
         <q-btn class="q-mt-sm" @click="$refs.Multi.init('sign')" text-color="blue" color="white">{{ $t('default.sign_the_constitution') }}</q-btn>
       </q-alert>
     </transition>
+    <!-- <router-view v-if="getAccountName" /> -->
     <router-view  />
     <!-- <h4 class="text-white q-ma-md" v-else>{{ $t('default.logged_out') }}</h4> -->
     <!--<Initialize ref="Initialize" />-->
@@ -268,12 +269,9 @@ export default {
   },
   watch: {
     getUnlocked: function (val) {
+      console.log(val);
       if(!val){
         this.$router.push('loggedout')
-      }
-      else{
-        //default to wallet
-        this.$router.push('wallet')
       }
     }
   }
