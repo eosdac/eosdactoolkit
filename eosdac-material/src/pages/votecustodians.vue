@@ -189,7 +189,6 @@ export default {
 
       while(lb !== null){
         let c = await this.$store.dispatch('api/getCustodians', {lb: lb});
-        console.log(c)
         if(c){
 
             if(lb === c[c.length-1].candidate_name){

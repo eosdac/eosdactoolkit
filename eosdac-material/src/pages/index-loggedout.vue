@@ -46,7 +46,7 @@
             </div>
           </div>
           <div class="q-mt-sm">
-            <q-btn class="float-right" color="dark" :label="$t('index.open_discord')" />
+            <q-btn class="float-right" color="dark" :label="$t('index.open_discord')" @click.native="openURL($configFile.external.discordUrl)"/>
           </div>
         </div>
       </div>
@@ -60,7 +60,7 @@
             </div>
           </div>
           <div class="q-mt-sm">
-            <q-btn class="float-right" color="dark" :label="$t('index.eosdac')" />
+            <q-btn class="float-right" color="dark" :label="$t('index.eosdac')" @click.native="openURL($configFile.external.homepage)" />
           </div>
         </div>
       </div>
