@@ -8,8 +8,8 @@
     </div>
     <div class="row  q-mt-md profile_header_top_row">
       <div class="col-xs-12">
-        <div class="text-dimwhite text-weight-light q-caption">User Name</div>
-        <div class="q-display-1 text-weight-thin uppercase">kasperfish</div>
+        <div class="text-dimwhite q-caption uppercase">{{ $t('profile.user_name') }}</div>
+        <div class="q-display-1 text-weight-thin uppercase">{{ getAccountName }}</div>
       </div>
     </div>
 
@@ -26,15 +26,15 @@
     <div class="blur-details q-pa-md absolute-bottom" style="height:120px;margin-right:-16px;margin-left:-16px;">
       <div class="row profile_header_bottom_row">
         <div class="col-md-2 col-xs-6 q-pr-sm" >
-          <div class="text-dimwhite text-weight-light q-caption">{{ $t('profile.givenName') }}</div>
+          <div class="text-dimwhite q-caption uppercase">{{ $t('profile.givenName') }}</div>
           <q-input color="white" dark :readonly="!edit" :hide-underline="!edit" v-model="form.givenName"/>
         </div>
         <div class="col-md-2 col-xs-6 q-pr-sm">
-          <div class="text-dimwhite text-weight-light q-caption">{{ $t('profile.familyName') }}</div>
-          <q-input color="white" dark :readonly="!edit" :hide-underline="!edit"  v-model="form.familyName"/>
+          <div class="text-dimwhite q-caption uppercase">{{ $t('profile.familyName') }}</div>
+          <q-input color="white"  dark :readonly="!edit" :hide-underline="!edit"  v-model="form.familyName" class="q-title"/>
         </div>
         <div class="col-md-2 col-xs-6 q-pr-sm">
-          <div class="text-dimwhite text-weight-light q-caption">{{ $t('profile.gender') }}</div>
+          <div class="text-dimwhite q-caption uppercase">{{ $t('profile.gender') }}</div>
            <q-select
               class=""
               color="white"
@@ -46,7 +46,7 @@
             />
         </div>
         <div class="col-md-2 col-xs-6">
-          <div class="text-dimwhite text-weight-light q-caption">Type</div>
+          <div class="text-dimwhite q-caption uppercase">Type</div>
           <div>Member</div>
         </div>
       </div>
@@ -60,7 +60,7 @@
         <div class="" style="height:100%">
           <div class="q-title q-mb-md">{{ $t('profile.bio') }}</div>
           <q-input v-if="edit" inverted rows="8" color="dark" type="textarea" v-model="form.description" dark />
-          <div class="text-dimwhite" v-if="!edit">{{form.description}}</div>
+          <div class="text-dimwhite q-body-1" v-if="!edit">{{form.description}}</div>
         </div>
       </div>
       <div class="col-md-4 col-sm-12 q-pa-md">
@@ -69,7 +69,7 @@
           <!-- on display -->
           <div v-if="!edit">
             <div class="q-title q-mb-md">{{ $t('profile.website') }}</div>
-            <div class="text-dimwhite">{{form.url}}</div>
+            <div class="text-dimwhite q-body-1">{{form.url}}</div>
             <div class="q-mt-md">
               <q-btn v-for="(social, i) in parseSocialLinks()"  class="on-left" :key ="i" round color="dark" @click.native="openURL(social.link)" >
                 <q-icon  :name="'icon-'+social.icon" />
