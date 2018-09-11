@@ -238,4 +238,10 @@ export default {
     submit_my_votes: 'SUBMIT MY VOTES',
     voting_progress: 'voting progress'
   },
+  regcandidate:{
+    loadconfig: 'Loading contract configuration',
+    register: 'register',
+    run_for_custodian: 'Run for Custodian',
+    unregister: 'unregister'
+  }
 }
