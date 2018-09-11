@@ -12,8 +12,9 @@
 
     <div class="blur-details q-pa-md absolute-bottom" style="height:120px;margin-right:-16px;margin-left:-16px;">
       <div class="row justify-items q-px-md full-height">
-        <span class="uppercase">{{ $t("vote_custodians.voting_progress") }} <span class="text-dimwhite on-right"> {{ voting_progress }}%</span></span>
-        <q-progress  id="dac_voting_progress" animate stripe class="round-borders" style="height: 30px" color="positive" :percentage="voting_progress" />
+        <span class="uppercase">{{ $t("vote_custodians.voting_progress") }} <span class="text-dimwhite on-right on-left"> {{ voting_progress }}%</span></span>
+        <span class="q-body-1 text-dimwhite text-italic">(The DAC will be activated at 15%)</span>
+        <VotingProgress height="30px"/>
       </div>
     </div>
   </div>
@@ -120,6 +121,7 @@
 import Candidate from 'components/candidate'
 import Transaction from 'components/transaction'
 import LoadingSpinner from 'components/loading-spinner'
+import VotingProgress from 'components/voting-progress'
 import {
   mapGetters
 } from 'vuex'
@@ -128,12 +130,13 @@ export default {
   components: {
     Transaction,
     Candidate,
-    LoadingSpinner
+    LoadingSpinner,
+    VotingProgress
   },
   data() {
     return {
       loading: false,
-      voting_progress: 30,
+      voting_progress: 14,
       custodians: [],
       pagination :{
         page:1,
@@ -355,9 +358,6 @@ export default {
 
 .wiggle:hover {
   animation: none;
-}
-#dac_voting_progress .q-progress-track{
-  background:white;
 }
 
 .pulse{
