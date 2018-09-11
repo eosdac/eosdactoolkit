@@ -194,7 +194,7 @@ export default {
     or_select_address_book: 'Oder wählen Sie ein Zielkonto aus dem Adressbuch',
     quantity_to_send: 'Betrag',
     RAM: 'RAM',
-    remaining: 'übrig'
+    remaining: 'übrig',
     select_from_list: 'Auswählen',
     select_token_to_send: 'Wählen Sie die Art des Tokens',
     send_tokens: 'Sende Tokens',
