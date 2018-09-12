@@ -11,8 +11,8 @@
               <p>{{$t('index.description_p2')}}</p>
             </div>
             <div class="q-mb-lg">
-              <q-btn  class="float-left q-px-xl" size="lg" color="primary" :label="$t('index.signin')" @click="signin"/>
-              <!-- <q-btn  v-else class="float-left q-px-xl" size="lg" color="primary" :label="$t('index.signout')" @click="signin"/> -->
+              <q-btn  v-if="!getAccountName" class="float-left q-px-xl" size="lg" color="primary" :label="$t('index.signin')" @click="signin"/>
+              <q-btn  v-else class="float-left q-px-xl" size="lg" color="primary" :label="$t('index.signout')" @click="logout"/>
             </div>
           </div>
         </div>
@@ -112,7 +112,11 @@ export default {
   },
   
   computed: {
-
+    ...mapGetters({
+      getAccountName: 'account/getAccountName',
+      getScatter: 'api/getScatter',
+    })
+    
 
 
   },
@@ -123,8 +127,8 @@ export default {
       this.$refs.Multi.init('signin')
     },
     async logout() {
-      // this.getScatter.forgetIdentity()
-      // this.$store.commit('account/LOCK_ACCOUNT')
+      this.getScatter.forgetIdentity()
+      this.$store.commit('account/LOCK_ACCOUNT')
 
     },
 

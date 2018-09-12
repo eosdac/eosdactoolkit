@@ -267,7 +267,7 @@ export default {
     getAccountName(val) {
       let current_path = this.$router.currentRoute.path;
       console.log(current_path)
-      if(!val){
+      if(!val && current_path !='/'){
         console.log('logget out')
         this.$router.push({ path: '/' })
       }
