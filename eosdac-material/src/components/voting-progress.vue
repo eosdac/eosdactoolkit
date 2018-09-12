@@ -39,7 +39,7 @@ export default {
     },
     intervaller (i){
       let oldi = i;
-      let int = setInterval(() => {
+      var int = setInterval(() => {
         this.update_in_seconds = i;
         i--;
         if(i == -1){
