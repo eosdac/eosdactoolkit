@@ -20,7 +20,8 @@ export default {
     return {
       voting_progress : 0,
       update_in_seconds:0,
-      loading : false
+      loading : false,
+      timer : false
       
     }
   },
@@ -39,11 +40,12 @@ export default {
     },
     intervaller (i){
       let oldi = i;
-      var int = setInterval(() => {
+      this.timer = setInterval(() => {
         this.update_in_seconds = i;
         i--;
         if(i == -1){
-          clearInterval(int);
+          clearInterval(this.timer);
+          this.timer = false;
           console.log('xxxx');
           this.getContractState();
           this.intervaller(oldi);
@@ -58,7 +60,12 @@ export default {
     this.getContractState();
     //update every 60 seconds
     this.intervaller(60);
-  }
+  },
+  beforeDestroy() {
+    clearInterval(this.timer);
+    this.timer = false;
+    
+  },
 
 }
 </script>

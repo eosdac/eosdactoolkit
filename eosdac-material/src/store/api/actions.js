@@ -524,7 +524,7 @@ export async function getContractState({
   state,
   commit,
 }, payload) {
-
+  console.log('getting contract state data');
   try {
     eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint
     let eos = Eos(eosConfig);
