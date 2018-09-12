@@ -116,7 +116,8 @@ module.exports = function(ctx) {
         'QPagination',
         'QSearch',
         'QSlider',
-        'QToggle'
+        'QToggle',
+        'QTooltip'
       ],
       directives: [
         'Ripple',
