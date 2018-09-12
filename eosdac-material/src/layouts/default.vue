@@ -113,7 +113,7 @@
         <q-item-main :label="$t('default.constitution')" sublabel="" />
       </q-item>
       <q-item to="/profile">
-        <q-item-side icon="icon-single-neutral-focus" />
+        <q-item-side icon="icon-menu-10" />
         <q-item-main :label="$t('default.profile')" sublabel="" />
       </q-item>
       <q-item to="/votecustodians">

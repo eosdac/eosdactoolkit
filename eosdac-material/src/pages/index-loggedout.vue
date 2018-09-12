@@ -12,7 +12,7 @@
             </div>
             <div class="q-mb-lg">
               <q-btn  class="float-left q-px-xl" size="lg" color="primary" :label="$t('index.signin')" @click="signin"/>
-              <!-- <q-btn  class="float-left q-px-xl" size="lg" color="primary" :label="$t('index.signout')" @click="signin"/> -->
+              <!-- <q-btn  v-else class="float-left q-px-xl" size="lg" color="primary" :label="$t('index.signout')" @click="signin"/> -->
             </div>
           </div>
         </div>
@@ -42,7 +42,7 @@
           <div>
             <div class="q-title q-mb-lg">{{$t('index.join_discord')}}</div>
             <div class="q-body-1 text-dimwhite relative-position">
-              <q-icon name="icon-social-instagram-com" size="48px" class="absolute-top-left" />
+              <q-icon name="icon-social-discord-com" size="48px" class="absolute-top-left" />
               <div style="display:inline-block;margin-left:55px;margin-top:-3px">{{$t('index.discord_description')}}</div>
             </div>
           </div>
@@ -56,7 +56,7 @@
           <div>
             <div class="q-title q-mb-lg">{{$t('index.visit_eosdac')}}</div>
             <div class="q-body-1 text-dimwhite relative-position">
-              <q-icon name="icon-menu-3" size="48px" class="absolute-top-left" />
+              <q-icon name="icon-ui-21" size="48px" class="absolute-top-left" />
               <div style="display:inline-block;margin-left:55px;margin-top:-3px">{{$t('index.discord_description')}}</div>
             </div>
           </div>
@@ -70,7 +70,7 @@
           <div>
             <div class="q-title q-mb-lg">{{$t('index.subscribe_newsletter')}}</div>
             <div class="q-body-1 text-dimwhite relative-position">
-              <q-icon name="icon-register-3" size="48px" class="absolute-top-left" />
+              <q-icon name="icon-ui-22" size="48px" class="absolute-top-left" />
               <div style="display:inline-block;margin-left:55px;margin-top:-3px">
                 <q-input dark class="q-mb-xs" color="white" v-model="email_address" stack-label="Your Email" />
                 <q-input dark color="white" v-model="language" stack-label="Your Language" />
@@ -112,9 +112,7 @@ export default {
   },
   
   computed: {
-      getScatter: 'api/getScatter',
-      getUnlocked: 'account/getUnlocked',
-      getAccountName: 'account/getAccountName',
+
 
 
   },
@@ -125,16 +123,13 @@ export default {
       this.$refs.Multi.init('signin')
     },
     async logout() {
-      this.getScatter.forgetIdentity()
-      this.$store.commit('account/LOCK_ACCOUNT')
+      // this.getScatter.forgetIdentity()
+      // this.$store.commit('account/LOCK_ACCOUNT')
 
     },
 
-  },
-
-  mounted: function(){
-
   }
+
 
 }
 </script>
