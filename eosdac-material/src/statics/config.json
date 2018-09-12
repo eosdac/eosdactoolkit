@@ -10,7 +10,8 @@
     "tokenContract": {
       "name": "kasdactokens",
       "token": "KASDAC",
-      "decimals": 4
+      "decimals": 4,
+      "totalSupply": 10000000000
     },
     "mainCurrencyContract": {
       "name": "eosio.token",

@@ -520,6 +520,32 @@ export async function getContractConfig({
   }
 }
 
+export async function getContractState({
+  state,
+  commit,
+}, payload) {
+
+  try {
+    eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint
+    let eos = Eos(eosConfig);
+    const cstate = await eos.getTableRows({
+      json: true,
+      scope: payload.contract,
+      code: payload.contract,
+      table: 'state'
+    })
+    if (!cstate.rows.length) {
+      return false;
+    } else {
+      return cstate.rows[0];
+    }
+    commit('SET_CURRENT_CONNECTION_STATUS', true)
+  } catch (error) {
+    apiDown(error,commit)
+    throw error
+  }
+}
+
 export async function getRamPrice({
   state,
   commit

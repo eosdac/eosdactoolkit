@@ -16,15 +16,28 @@ export default {
   },
   data () {
     return {
-      voting_progress : 77
+      voting_progress : 0
       
     }
   },
 
   methods:{
     //get voting progress from chain
+    async getContractState() {
+      let totalsupply = this.$configFile.network.tokenContract.totalSupply;
+      let state = await this.$store.dispatch('api/getContractState', {contract: this.$configFile.network.custodianContract.name})
+      if(state){
+        this.voting_progress = state.total_weight_of_votes/totalsupply/100;
+      }
+
+    },
+
+  },
+  mounted(){
+    this.getContractState()
 
   }
+
 }
 </script>
 
