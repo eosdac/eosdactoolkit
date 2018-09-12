@@ -265,6 +265,8 @@ export default {
   },
   watch: {
     getAccountName(val) {
+      let current_path = this.$router.currentRoute.path;
+      console.log(current_path)
       if(!val){
         console.log('logget out')
         this.$router.push({ path: '/' })

@@ -385,7 +385,7 @@
   <q-modal class="relative-position" v-model="manageAddressbook" content-classes="fit bg-dark2" :content-css="{maxWidth: '300px', maxHeight: '610px'}">
     <q-list dark no-border separator>
       <q-list-header>{{ $t('wallet.addressbook') }}</q-list-header>
-      <q-item v-for="(contact, index) in getContacts">
+      <q-item v-for="(contact, index) in getContacts" :key="index">
         <q-item-main :label="contact.value" />
         <q-item-side right>
           <q-btn icon="icon-ui-8" flat color="negative" @click="removeContact(contact.value)" />
