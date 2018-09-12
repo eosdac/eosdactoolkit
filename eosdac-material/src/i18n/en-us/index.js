@@ -249,12 +249,18 @@ export default {
     description_p1: 'eosDAC is a decentralized autonomous community which means it is owned and operated by the token holders who agree to the constitution and register as members of the community.',
     description_p2: 'When completed, this member client will allow you to read the constitution, register as a member, submit worker proposals, register as a custodian candidate, vote on custodians, transfer tokens, and more. If you have any questions, please reach out to us using the links below.',
     discord_description : 'hqs jh djgqjsd qhdgjh  jhgdsgqjsd j shjgd jqhgs qjshgd jqg qsjs dhg sqj qsshgd jqsgdgqshjdjqsdg jshdgq jddgqsqjdg djq j djhqssg djs ddj j qhsgddjqhgddjgqshdgggg   hqjsgd',
-    join_discord : 'Join our Community on discord',
+    join_discord : 'Join our Community on Discord',
     signin: 'sign-in',
     open_discord: 'open discord',
     eosdac: 'eosdac.io',
+    read_constitution: 'Constitution',
+    reg_as_member: 'Membership',
+    reg_as_cust_cand: 'Candidate Registration',
     subscribe: 'subscribe',
+    submit_wp: 'Worker Proposals',
     visit_eosdac: 'Visit our Website eosdac.io',
+    vote_cust: 'Vote Custodians',
+    wallet: 'Wallet',
     subscribe_newsletter: 'Subscribe to our Newsletter'
   }
 
