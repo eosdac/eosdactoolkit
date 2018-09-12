@@ -316,6 +316,7 @@ export default {
         })
       }
       else{
+        this.votesdidchange = false;
         console.log(`${this.getAccountName} has not voted.`);
       }
     }

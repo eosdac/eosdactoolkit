@@ -2,9 +2,9 @@
   <div class="full-width">
     <span class="uppercase">{{ $t("vote_custodians.voting_progress") }} <span class="text-dimwhite on-right on-left"> {{ voting_progress }}%</span></span>
     <span class="q-body-1 text-dimwhite text-italic">(The DAC will be activated at 15%)</span>
-    <q-progress animate stripe class="round-borders votingprogress_bar q-mt-md" :style="{height: height}" color="positive" :percentage="voting_progress" />
-    <span v-if="!loading" class="q-caption">update in {{update_in_seconds}} seconds</span>
-    <span v-else class="q-caption">loading...</span>
+    <q-progress animate stripe class="round-borders votingprogress_bar q-my-xs" :style="{height: height}" color="positive" :percentage="voting_progress" />
+    <span v-if="!loading" class="q-caption float-right">update in {{update_in_seconds}} seconds</span>
+    <span v-else class="q-caption float-right">loading...</span>
   </div>
 </template>
 
@@ -30,10 +30,10 @@ export default {
     //get voting progress from chain
     async getContractState() {
       this.loading = true;
-      let totalsupply = this.$configFile.network.tokenContract.totalSupply;
+      let totalsupply = this.$configFile.network.tokenContract.totalSupply*10000;
       let state = await this.$store.dispatch('api/getContractState', {contract: this.$configFile.network.custodianContract.name})
       if(state){
-        this.voting_progress = state.total_weight_of_votes/totalsupply/100;
+        this.voting_progress = state.total_weight_of_votes/totalsupply*100;
       }
       this.loading = false;
 
@@ -46,10 +46,9 @@ export default {
         if(i == -1){
           clearInterval(this.timer);
           this.timer = false;
-          console.log('xxxx');
           this.getContractState();
           this.intervaller(oldi);
-          // this.getContractState();
+
         }
       }, 1000);
 
