@@ -38,7 +38,7 @@
           <span>{{ $t('vote_custodians.rows_per_page') }}:</span>
            <q-select
               class="q-ml-md"
-              style="width:40px;"
+              style="width:45px;"
               hide-underline
               v-model="pagination.items_per_page"
               dark
@@ -62,7 +62,7 @@
           <span>{{ $t('vote_custodians.rows_per_page') }}:</span>
            <q-select
               class="q-ml-md"
-              style="width:40px;"
+              style="width:45px;"
               hide-underline
               v-model="pagination.items_per_page"
               dark
@@ -155,10 +155,12 @@ export default {
       getAccountName: 'account/getAccountName',
       getTokenBalance: 'account/getTokenBalance'
     }),
+
     getSelectedCand(){
       let selected = this.custodians.filter(x => x.selected == true);
       return selected;
     },
+
     paginate(){
       let filtered;
 
@@ -238,7 +240,7 @@ export default {
   
     addToVoteList(name, init=false){
       let selected = this.custodians.filter(x => x.selected == true);
-      if(selected.length < 5){
+      if(selected.length < 5){//todo get this var out of contract config
         let cand = this.custodians.find(x => x.candidate_name === name);
         if(cand){
           cand.selected = true;

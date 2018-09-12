@@ -14,15 +14,14 @@ export default {
 
   props: {
     height: String
-
   },
+
   data () {
     return {
       voting_progress : 0,
       update_in_seconds:0,
       loading : false,
-      timer : false
-      
+      timer : false 
     }
   },
 
@@ -36,8 +35,8 @@ export default {
         this.voting_progress = state.total_weight_of_votes/totalsupply*100;
       }
       this.loading = false;
-
     },
+
     intervaller (i){
       let oldi = i;
       this.timer = setInterval(() => {
@@ -48,22 +47,20 @@ export default {
           this.timer = false;
           this.getContractState();
           this.intervaller(oldi);
-
         }
       }, 1000);
-
     }
-
   },
+
   mounted(){
     this.getContractState();
     //update every 60 seconds
     this.intervaller(60);
   },
+
   beforeDestroy() {
     clearInterval(this.timer);
     this.timer = false;
-    
   },
 
 }
