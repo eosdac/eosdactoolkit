@@ -212,7 +212,7 @@ export async function getIsCandidate({
       commit('account/SET_MEMBER_ROLES', {candidate: false}, {root: true} );
       return false;
     } else {
-      if (candidate.rows[0].candidate_name === rootState.account.info.account_name) {
+      if (candidate.rows[0].candidate_name === rootState.account.info.account_name && candidate.rows[0].is_active) {
         commit('account/SET_MEMBER_ROLES', {candidate: true}, {root: true} );
         return candidate.rows[0];
       } else {

@@ -202,7 +202,7 @@ export default {
                 c.shift(); 
               }
               //set lower_bound to the last received candidate_name
-              lb = c[c.length-1].candidate_name; 
+              lb = c[c.length-1].candidate_name;
               temp.push(...c);
             }
         }
@@ -210,6 +210,7 @@ export default {
           lb = null;
         }
       }
+      temp = temp.filter(c => c.is_active == true)
       //sort by votes desc + add selected boolean to all candidates
       //this is less expensive compared to looping through it again.
       temp = temp.sort(function(a, b) {
