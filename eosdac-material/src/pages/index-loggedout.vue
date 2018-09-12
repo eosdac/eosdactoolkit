@@ -11,7 +11,8 @@
               <p>{{$t('index.description_p2')}}</p>
             </div>
             <div class="q-mb-lg">
-              <q-btn  class="float-left q-px-xl" size="lg" color="primary" :label="$t('index.signin')" />
+              <q-btn  class="float-left q-px-xl" size="lg" color="primary" :label="$t('index.signin')" @click="signin"/>
+              <!-- <q-btn  class="float-left q-px-xl" size="lg" color="primary" :label="$t('index.signout')" @click="signin"/> -->
             </div>
           </div>
         </div>
@@ -83,14 +84,14 @@
       </div>
     </div>
   </div>
-
+<MultiModal ref="Multi" />
 </q-page>
 </template>
 
 
 
 <script>
-
+import MultiModal from 'components/multi-modal'
 import {
   openURL
 } from 'quasar'
@@ -99,7 +100,7 @@ import {
 } from 'vuex'
 export default {
   components:{
-
+    MultiModal
   },
   data () {
     return {
@@ -111,18 +112,29 @@ export default {
   },
   
   computed: {
+      getScatter: 'api/getScatter',
+      getUnlocked: 'account/getUnlocked',
+      getAccountName: 'account/getAccountName',
 
 
   },
 
   methods:{
     openURL,
+    signin(){
+      this.$refs.Multi.init('signin')
+    },
+    async logout() {
+      this.getScatter.forgetIdentity()
+      this.$store.commit('account/LOCK_ACCOUNT')
+
+    },
 
   },
 
   mounted: function(){
 
-   }
+  }
 
 }
 </script>
