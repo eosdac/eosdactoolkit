@@ -2,9 +2,9 @@
 <q-page class="gradient-bg-primary q-pa-xl" style="overflow:hidden">
   <div class="relative-position">
     <div class="bg-dark2 round-borders loggedout_big_container shadow-14" style="min-height:600px; padding-bottom: 120px; overflow:hidden">
-      <div class="row q-px-lg" style="margin-bottom:-40px"><div class="col-xs-12 col-lg-6 q-display-3">Welcome <span class="text-weight-thin">to the <br>eos</span>DAC Member Client</div></div>
+      <div class="row q-px-xl" style="margin-bottom:-40px; padding-top:40px"><div class="col-xs-12 col-lg-6 q-display-3">Welcome <span class="text-weight-thin">to the <br>eos</span>DAC Member Client</div></div>
       <div class="row" >
-        <div class="col-xl-6 col-md-12 col-sm-12 col-xs-12  index_border_right_col q-px-lg" style="min-height:300px">
+        <div class="col-xl-6 col-md-12 col-sm-12 col-xs-12  index_border_right_col q-px-xl" style="min-height:300px">
           <div class="column justify-between full-height">
             <div class="q-title text-dimwhite" style="padding-top:50px">
               <p>{{$t('index.description_p1')}}</p>
@@ -16,7 +16,7 @@
             </div>
           </div>
         </div>
-        <div class="col-xl-6 col-md-12 col-sm-12 col-xs-12 q-px-lg" >
+        <div class="col-xl-6 col-md-12 col-sm-12 col-xs-12 q-px-xl" >
           <div class=" full-height" >
             <div class="q-headline q-mb-lg">Key Features</div>
             <div class="row">
