@@ -95,7 +95,7 @@
           <div v-if="allow_edit" class="row gutter-sm justify-end q-mt-md">
             <div >
               <q-btn v-if="!is_edit" size="md" class="animate-pop" color="primary" @click="is_edit =! is_edit" :label="$t('profile.edit')" />
-              <q-btn v-else size="md" class="animate-pop" color="positive" @click="saveProfile" :label="$t('profile.save')" />
+              <q-btn v-else size="md" class="animate-pop" color="positive" @click="is_edit =! is_edit" :label="$t('profile.save')" />
             </div>
             <div>
               <q-btn v-if="is_edit" size="md" class="animate-pop" color="red" @click="is_edit =! is_edit" :label="$t('profile.cancel')" />
@@ -105,6 +105,11 @@
         </div>
       </div>
     </div>
+
+<!--     <div class="q-pa-md q-mt-md shadow-5 bg-dark2">
+      <q-input color="white" dark v-model="dev_profile_url" placeholder="profile url"/>
+    </div> -->
+
   </div>
 
   <q-modal v-model="visible"  minimized @hide="handleModalClose"  :content-css="{width: '80vw'}" >
@@ -117,16 +122,15 @@
       </div>
     </div>
   </q-modal>
-  <Transaction ref="Transaction" v-on:done="" />
-  <LoadingSpinner :visible="profile_is_loading" :text="$t('profile.loading_text')" />
+
 </q-page>
 </template>
 
 
 
 <script>
-import Transaction from 'components/transaction'
-import LoadingSpinner from 'components/loading-spinner'
+const IPFS = require('ipfs-api');
+const ipfs = new IPFS({ host: 'ipfs.infura.io', port: 5001, protocol: 'https' });
 import {
   openURL
 } from 'quasar'
@@ -135,22 +139,22 @@ import {
 } from 'vuex'
 export default {
   components:{
-    LoadingSpinner,
-    Transaction
 
   },
   data () {
     return {
       account_name:'',
+      dev_profile_url: '',
+      ipfslink:'',
       is_edit:false,
       allow_edit: false,
-      profile_is_loading : false,
   
 
       visible:false,
       centerimage:true,
       setwidth: true,
       loaded:false,
+      isuploading: false,
       form:{
           "givenName": "unknown",
           "familyName": "unknown",
@@ -162,6 +166,8 @@ export default {
           "sameAs": [{link:'https://www.twitter.com/neonexchange'},{link:'https://www.facebook.com/DonaldTrump/'}, {link: 'https://plus.google.com/+LukeStokes'}, {link:'https://steemit.com/@suesa'} ],
           "timezone": new Date().getTimezoneOffset() //time-zone offset see: https://stackoverflow.com/questions/1091372/getting-the-clients-timezone-in-javascript
         }
+
+
     }
   },
   
@@ -193,18 +199,10 @@ export default {
     },
     //init profile page
     initProfile(){
-      this.profile_is_loading = true;
       this.account_name = this.$route.params.accountname;
       this.allow_edit = this.account_name === this.getAccountName ? true : false;
       //load profile
-      this.profile_is_loading = false;
-    },
 
-    saveProfile(){
-      this.$refs.Transaction.newTransaction(this.$configFile.network.custodianContract.name, 'storeprofile', {
-        cand: this.getAccountName,
-        profile: JSON.stringify(this.form),
-      })
     },
 
     parseSocialLinks(){
@@ -242,6 +240,7 @@ export default {
     },
 
     addSocial(){
+
       this.deleteEmptyLinks();
       this.form.sameAs.push({link:''});
     },
@@ -260,6 +259,55 @@ export default {
           this.form.image = '';
         }
       },300)
+    },
+
+    async saveProfile(){
+      this.isuploading = true;
+      let form_string = JSON.stringify(this.form);
+      const buffer = await Buffer.from(form_string); //try catch
+      // let ipfshash = await this.ipfsAdd(buffer);
+      // this.isuploading = false;
+
+      // if(ipfshash[0].hash != undefined){
+      //   this.ipfslink='https://ipfs.io/ipfs/'+ipfshash[0].hash;
+      // }
+      // else{
+      //   console.log('error getting hash from ipfs');
+      // }
+      let signedmsg = await this.signMessage(form_string);
+      let ipfshash = await this.ipfsAdd(buffer, false );
+      console.log(ipfshash);
+
+      this.isuploading = false;
+    },
+    signMessage(data){
+      let publicKey = this.getAccount.permissions[0].required_auth.keys[0].key;
+      let whatfor = 'Profile Upload';//do not translate
+
+      return this.getScatter.getArbitrarySignature(publicKey, data, whatfor, false)
+      .then(res => res).catch(e => {console.log(e); return false});
+    },
+
+
+    postToServer(data){
+      console.log('Start upload to server!');
+      return this.$axios.post(this.$configFile.api.profileStoreUrl, data)
+      .then(res => {
+         console.log(res);
+      }).catch(e =>{
+        console.log(e)
+      });
+    },
+
+    ipfsAdd(buffer, dont_upload=false){
+      return ipfs.add(buffer, {"onlyhash": dont_upload}).then(res => res).catch(e => {return false});
+    },
+
+    ipfsGet (hash) {
+      ipfs.cat(hash, {buffer: false}).then(content => {
+        console.log(content.toString() )
+      })
+      .catch(error => console.log(error) )
     },
 
     download(content, fileName, contentType) {

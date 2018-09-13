@@ -73,6 +73,7 @@ export default {
   },
   profile: {
     about_me: 'About Me',
+    account_name: 'account name',
     bio: 'Bio',
     download: 'Download',
     edit: 'Edit',

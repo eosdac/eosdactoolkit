@@ -19,7 +19,7 @@ export default [
       { path: 'dashboard', component: () => import('pages/dashboard'), beforeEnter: logInCheck },
       { path: 'workerproposals', component: () => import('pages/workerproposals'), beforeEnter: logInCheck },
       { path: 'votecustodians', component: () => import('pages/votecustodians'), beforeEnter: logInCheck },
-      { path: 'profile', component: () => import('pages/profile'), beforeEnter: logInCheck },
+      { path: 'profile/:accountname', component: () => import('pages/profile'), beforeEnter: logInCheck },
       { path: 'constitution', component: () => import('pages/constitution'), beforeEnter: logInCheck },
       { path: 'registercandidate', component: () => import('pages/registercandidate'), beforeEnter: logInCheck },
       { path: 'loggedout', component: () => import('pages/index-loggedout'), beforeEnter: logInCheck }

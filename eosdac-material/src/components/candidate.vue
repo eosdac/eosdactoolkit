@@ -16,7 +16,10 @@
         </div>
       </q-item-side>
       <q-item-main >
-        <div class="q-ml-lg">{{data.candidate_name}}<br><span :class="{'text-warning': data.votes_changed}">{{data.total_votes}}</span></div>
+        <div class="q-ml-lg">
+          <router-link class="q-headline" :to="{path: '/profile/' + data.candidate_name}" >{{ data.candidate_name }}</router-link><br>
+          <span><span class="text-dimwhite">votes:</span> {{data.total_votes}}</span>
+        </div>
       </q-item-main>
     </template>
     <div class="q-pt-sm q-pt-none" style="border-top:1px solid grey">
