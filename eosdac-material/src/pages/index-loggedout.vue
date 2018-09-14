@@ -6,7 +6,7 @@
       <div class="row" >
         <div class="col-xl-6 col-md-12 col-sm-12 col-xs-12  index_border_right_col q-px-xl" style="min-height:300px">
           <div class="column justify-between full-height">
-            <div class="q-title text-dimwhite" style="padding-top:50px">
+            <div class="q-title text-dimwhite regular" style="padding-top:50px">
               <p>{{$t('index.description_p1')}}</p>
               <p>{{$t('index.description_p2')}}</p>
             </div>
