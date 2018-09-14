@@ -226,7 +226,44 @@ export async function getIsCandidate({
     throw error
   }
 }
-//todo getIsCustodian
+//only use this function to check if the current logged in user is a custodian
+export async function getIsCustodian({
+  state,
+  commit,
+  rootState
+}) {
+  if(configFile.network.custodianContract.name ===''){
+    return false;
+  };
+  try {
+    eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint
+    let eos = Eos(eosConfig)
+    const custodian = await eos.getTableRows({
+      json: true,
+      scope: configFile.network.custodianContract.name,
+      code: configFile.network.custodianContract.name,
+      table: 'custodians',
+      lower_bound: rootState.account.info.account_name,
+      limit:1
+    })
+    if (!custodian.rows.length) {
+      commit('account/SET_MEMBER_ROLES', {custodian: false}, {root: true} );
+      return false;
+    } else {
+      if (custodian.rows[0].cust_name === rootState.account.info.account_name) {
+        commit('account/SET_MEMBER_ROLES', {custodian: true}, {root: true} );
+        return custodian.rows[0];
+      } else {
+        commit('account/SET_MEMBER_ROLES', {custodian: false}, {root: true} );
+        return false;
+      }
+    }
+    commit('SET_CURRENT_CONNECTION_STATUS', true)
+  } catch (error) {
+    apiDown(error,commit)
+    throw error
+  }
+}
 
 export async function getCustodians({
   state,

@@ -152,13 +152,8 @@ export default {
       }
     },
     async checkMemberRoles(){
-      try {
-        let iscandidate = await this.$store.dispatch('api/getIsCandidate');
-        console.log(iscandidate)
-        
-      } catch (err) {
-        throw err
-      }
+      this.$store.dispatch('api/getIsCandidate');
+      this.$store.dispatch('api/getIsCustodian');
     },
     registerMember() {
       this.$refs.Transaction.newTransaction(this.$configFile.network.tokenContract.name,'memberreg', {

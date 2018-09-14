@@ -128,10 +128,11 @@
         <q-item-side icon="icon-menu-12" />
         <q-item-main :label="$t('default.register_as_candidate')" sublabel="" />
       </q-item>
-      <!-- <q-item v-if="getMemberRoles.custodian" class="bg-positive" to="/test">
-        <q-item-side icon="icon-menu-12" />
-        <q-item-main label="I'm custodian" sublabel="" />
-      </q-item> -->
+
+      <q-item v-if="getMemberRoles.custodian" class="text-blue" to="/test">
+        <q-item-side class="text-blue" icon="icon-role-4" />
+        <q-item-main label="Custodian Dashboard" sublabel="" />
+      </q-item>
     </q-list>
     <q-list v-else no-border link inset-delimiter dark>
       <q-item @click.native="unlockAccount()">
