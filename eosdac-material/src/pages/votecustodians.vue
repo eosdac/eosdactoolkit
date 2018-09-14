@@ -1,6 +1,6 @@
 <template>
 <q-page class="text-white">
-<Transaction ref="Transaction" v-on:done="getMemberVotes()" />
+<Transaction ref="Transaction" v-on:done="getMemberVotes(); $refs.votebar.initProgressbar();" />
 
   <div class=" gradient-bg-primary q-px-md q-pt-md relative-position" style="min-height:260px; overflow:hidden">
     <div class="row">
@@ -12,7 +12,7 @@
 
     <div class="blur-details q-pa-md absolute-bottom" style="height:120px;margin-right:-16px;margin-left:-16px;">
       <div class="column  justify-center q-px-md full-height">
-        <VotingProgress height="30px"/>
+        <VotingProgress height="30px" ref="votebar"/>
       </div>
     </div>
   </div>
@@ -71,7 +71,7 @@
       <div class="q-display-1 q-mb-md">{{ $t('vote_custodians.my_votes') }} <span class="text-dimwhite">- {{getSelectedCand.length}}/{{maxvotes}}</span></div>
       <p class="text-dimwhite q-body-1">{{ $t('vote_custodians.description_side') }}</p>
       <q-card class="q-pa-lg q-mt-md" style="background:#32363F;">
-        <q-btn style="font-weight: 300;" v-bind:class="{'pulse': votesdidchange}" class="full-width items-baseline" color="primary" size="xl" @click="voteForCandidates">
+        <q-btn style="font-weight: 300;" v-bind:class="{'pulse': votesdidchange}" class="full-width items-baseline" color="primary" size="xl" @click="voteForCandidates();">
           <div style="width:55px;display:inlineblock">
             <q-icon size="40px" class="float-left" name="icon-ui-3"></q-icon>
           </div>
@@ -300,7 +300,6 @@ export default {
       }
     },
     async getMemberVotes(){
-
       let votes = await this.$store.dispatch('api/getMemberVotes', {member: this.getAccountName});
       if(votes){
         this.votesdidchange = false;
