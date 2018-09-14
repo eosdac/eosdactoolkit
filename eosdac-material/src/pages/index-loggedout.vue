@@ -78,7 +78,7 @@
             </div>
           </div>
           <div class="q-mt-sm">
-            <q-btn class="float-right" color="dark" :label="$t('index.subscribe')" />
+            <q-btn class="float-right" color="dark" :label="$t('index.subscribe')" @click="subscribeNewsletter" />
           </div>
         </div>
       </div>
@@ -131,6 +131,26 @@ export default {
       this.$store.commit('account/LOCK_ACCOUNT')
 
     },
+
+    subscribeNewsletter(){
+      let data = {
+        _mc4wp_form_element_id: 'mc4wp-form-1',
+        _mc4wp_form_id: 1015,
+        _mc4wp_honeypot: '',
+        _mc4wp_timestamp:	1536854160,
+        COUNTRY: 'Angola',
+        EMAIL: 'kasperkasperfish@gmail.com',
+        FNAME: 'dummy',
+        LNAME:'dummy',
+        LANGUAGE: 'English',
+        MESSAGE:''
+      };
+      this.$axios.post('https://eosdac.io/wp-admin/admin-ajax.php?action=mc4wp-form', data).then(x => {
+        console.log(x)
+      })
+      .catch(e => console.log(e));
+
+    }
 
   }
 

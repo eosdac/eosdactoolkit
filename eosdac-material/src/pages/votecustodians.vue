@@ -5,24 +5,17 @@
   <div class=" gradient-bg-primary q-px-md q-pt-md relative-position" style="min-height:260px; overflow:hidden">
     <div class="row">
       <div class="col-12">
+        <q-btn class="float-right" color="dark" to="/registercandidate" label="Candidate Registration" />
         <h4 class="q-display-1 q-mb-sm q-mt-none">{{ $t("default.custodians") }}</h4>
       </div>
     </div>
 
-
     <div class="blur-details q-pa-md absolute-bottom" style="height:120px;margin-right:-16px;margin-left:-16px;">
-      <div class="row justify-items q-px-md full-height">
-        <!-- <span class="uppercase">{{ $t("vote_custodians.voting_progress") }} <span class="text-dimwhite on-right on-left"> {{ voting_progress }}%</span></span>
-        <span class="q-body-1 text-dimwhite text-italic">(The DAC will be activated at 15%)</span> -->
+      <div class="column  justify-center q-px-md full-height">
         <VotingProgress height="30px"/>
       </div>
     </div>
   </div>
-
-
-
-
-
 
 <div class="q-pa-md"> <!-- padding wrapper -->
 <div class="row gutter-md reverse-wrap">
@@ -31,7 +24,6 @@
     <div>
       <div class="q-display-1 q-mb-md ">{{ $t('vote_custodians.candidate_list') }} <span class="text-dimwhite">- {{custodians.length}}</span></div>
       <p class="text-dimwhite q-body-1">{{ $t('vote_custodians.description_main') }}</p>
-
       <div class="row bg-dark2 q-pa-md q-mb-md shadow-5 round-borders justify-between" v-if="!loading" >
         <q-search dark color="primary"  v-model="filter" :placeholder="$t('vote_custodians.search')" />
         <div class="row inline items-center" style="font-size:12px;">

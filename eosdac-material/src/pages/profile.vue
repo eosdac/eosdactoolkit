@@ -152,8 +152,8 @@ export default {
       setwidth: true,
       loaded:false,
       form:{
-          "givenName": "unknown",
-          "familyName": "unknown",
+          "givenName": "",
+          "familyName": "",
           "gender": "other",
           "description": "no bio available",
           "email": "",
