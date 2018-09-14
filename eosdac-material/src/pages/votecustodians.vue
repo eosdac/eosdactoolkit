@@ -34,7 +34,7 @@
               hide-underline
               v-model="pagination.items_per_page"
               dark
-             :options="[{label:'2', value:2}, {label:'4', value:4}, {label:'6', value:6}, {label:'8', value:8}, {label:'10', value:10}]"
+             :options="[{label:'4', value:4}, {label:'8', value:8}, {label:'16', value:16}, {label:'24', value:24}, {label:'48', value:48}]"
             />
             <q-pagination  v-show="true" v-model="pagination.page" :min="1" :max="pagination.max" :max-pages="6" direction-links size="12px" />
         </div>
@@ -58,7 +58,7 @@
               hide-underline
               v-model="pagination.items_per_page"
               dark
-             :options="[{label:'2', value:2}, {label:'4', value:4}, {label:'6', value:6}, {label:'8', value:8}, {label:'10', value:10}]"
+             :options="[{label:'4', value:4}, {label:'8', value:8}, {label:'16', value:16}, {label:'24', value:24}, {label:'48', value:48}]"
             />
             <q-pagination  v-show="true" v-model="pagination.page" :min="1" :max="pagination.max" :max-pages="6" direction-links size="12px" />
         </div>
@@ -133,7 +133,7 @@ export default {
       pagination :{
         page:1,
         max:1,
-        items_per_page: 6
+        items_per_page: 24
       },
       filter : '',
       maxvotes : 5,
