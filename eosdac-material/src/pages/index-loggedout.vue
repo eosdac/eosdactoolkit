@@ -38,7 +38,7 @@
     </div>
     <div class="row gutter-md relative-position justify-center q-px-lg row_boxes_index_page" style="min-height:240px;">
       <div class="col-xl-4 col-md-12 col-sm-12 col-xs-12" style="min-width:200px">
-        <div class="column justify-between bg-primary shadow-14 round-borders full-height q-pa-md">
+        <div class="column justify-between bg-primary shadow-14 round-borders full-height q-pa-md animate-pop">
           <div>
             <div class="q-title q-mb-lg">{{$t('index.join_discord')}}</div>
             <div class="q-body-1 text-dimwhite relative-position">
@@ -52,7 +52,7 @@
         </div>
       </div>
       <div class="col-xl-4 col-md-12 col-sm-12 col-xs-12" style="min-width:200px">
-        <div class="column justify-between bg-primary shadow-14 round-borders full-height q-pa-md">
+        <div class="column justify-between bg-primary shadow-14 round-borders full-height q-pa-md animate-pop">
           <div>
             <div class="q-title q-mb-lg">{{$t('index.visit_eosdac')}}</div>
             <div class="q-body-1 text-dimwhite relative-position">
@@ -66,7 +66,7 @@
         </div>
       </div>
       <div class="col-xl-4 col-md-12 col-sm-12 col-xs-12" style="min-width:200px" >
-        <div class="column justify-between bg-primary shadow-14 round-borders full-height q-pa-md">
+        <div class="column justify-between bg-primary shadow-14 round-borders full-height q-pa-md animate-pop">
           <div>
             <div class="q-title q-mb-lg">{{$t('index.subscribe_newsletter')}}</div>
             <div class="q-body-1 text-dimwhite relative-position">
