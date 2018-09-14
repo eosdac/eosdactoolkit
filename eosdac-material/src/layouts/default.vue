@@ -195,7 +195,8 @@ export default {
   },
   data() {
     return {
-      leftDrawerOpen: this.$q.platform.is.desktop,
+      // leftDrawerOpen: this.$q.platform.is.desktop,
+      leftDrawerOpen: this.$router.currentRoute.path=='/' ? false : this.$q.platform.is.desktop,
       tokenName: this.$configFile.network.tokenContract.token,
       mainCurrencyName: this.$configFile.network.mainCurrencyContract.token,
       lastQuery: 0,
@@ -267,9 +268,13 @@ export default {
     getAccountName(val) {
       let current_path = this.$router.currentRoute.path;
       console.log(current_path)
-      if(!val && current_path !='/'){
+      if(!val){
         console.log('logget out')
-        this.$router.push({ path: '/' })
+        this.$router.push({ path: '/' });
+        this.leftDrawerOpen = false;
+      }
+      else{
+        this.leftDrawerOpen = this.$q.platform.is.desktop;
       }
     }
   }

@@ -452,6 +452,9 @@ export async function updateAccountInfo({
   rootState,
   commit
 }) {
+  if(rootState.account.info === null){
+    return false;
+  }
   try {
     eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint
     let eos = Eos(eosConfig)
