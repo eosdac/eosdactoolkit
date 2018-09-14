@@ -172,7 +172,7 @@ export default {
   background-image: url('../assets/background-logo-alpha-3-white.svg');
   background-repeat: no-repeat;
   background-size: 200%;
-  background-position: -20% 30%
+  background-position: -20% 30%;
 }
 .index_border_right_col{
   border-right:1px solid grey;
@@ -187,6 +187,11 @@ export default {
   .row_boxes_index_page{
     top:20px !important;
   }
+  .index_border_right_col{
+    border-right: none !important;
+  } 
+
 }
+
 
 </style>
