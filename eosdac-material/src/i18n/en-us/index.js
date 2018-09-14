@@ -264,6 +264,14 @@ export default {
     vote_cust: 'Vote Custodians',
     wallet: 'Wallet',
     subscribe_newsletter: 'Subscribe to our Newsletter'
+  },
+  votingprogress:{
+    activated_at: 'The DAC will be activated at 15%',
+    loading :'loading...',
+    refresh: 'Refresh',
+    update_in: 'update in',
+    seconds : 'seconds'
+    
   }
 
 }

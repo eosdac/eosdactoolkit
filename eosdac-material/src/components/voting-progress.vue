@@ -1,10 +1,13 @@
 <template>
   <div class="full-width">
     <span class="uppercase">{{ $t("vote_custodians.voting_progress") }} <span class="text-dimwhite on-right on-left"> {{ voting_progress }}%</span></span>
-    <span class="q-body-1 text-dimwhite text-italic">(The DAC will be activated at 15%)</span>
+    <span class="q-body-1 text-dimwhite text-italic">({{$t('votingprogress.activated_at')}})</span>
     <q-progress animate stripe class="round-borders votingprogress_bar q-my-xs" :style="{height: height}" color="positive" :percentage="voting_progress" />
-    <span v-if="!loading" class="q-caption float-right">update in {{update_in_seconds}} seconds <q-icon class="cursor-pointer" size="15px" name="refresh" @click.native="initProgressbar()"/></span>
-    <span v-else class="q-caption float-right">loading...</span>
+    <span v-if="!loading" class="q-caption float-right">
+      {{$t("votingprogress.update_in") }} {{update_in_seconds}} {{$t("votingprogress.seconds") }} 
+      <q-icon class="cursor-pointer" :title="$t('votingprogress.refresh')" name="refresh" @click.native="initProgressbar()"/>
+    </span>
+    <span v-else class="q-caption float-right">{{$t('votingprogress.loading')}}</span>
   </div>
 </template>
 
