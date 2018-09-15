@@ -204,7 +204,9 @@ export default {
           lb = null;
         }
       }
-      temp = temp.filter(c => c.is_active == true)
+      //filter only active candidates
+      temp = temp.filter(c => c.is_active == true);
+
       //sort by votes desc + add selected boolean to all candidates
       //this is less expensive compared to looping through it again.
       temp = temp.sort(function(a, b) {
@@ -218,18 +220,11 @@ export default {
           return t;
       });
 
-      // console.log(temp)
       this.custodians = temp;
       await this.getMemberVotes();
       this.loading = false;
     },
 
-    async getCustodians(lb='') {
-      let custodians = await this.$store.dispatch('api/getCustodians', {lb: lb})
-      // console.log(custodians)
-      this.custodians = custodians
-    },
-  
     addToVoteList(name, init=false){
       let selected = this.custodians.filter(x => x.selected == true);
       if(selected.length < 5){//todo get this var out of contract config
@@ -238,54 +233,41 @@ export default {
           cand.selected = true;
           if(!init){
             cand.total_votes = (cand.total_votes*1)+(this.getTokenBalance*10000);
-            // if(cand.votes_changed === undefined){
-            //   cand.votes_changed = true;
-            // }
-            // else{
-            //   delete cand.votes_changed;
-            // }
-            
           }
-          
         }
         this.checkVotesChanged();
       }
       else{
         console.log('reached max number of votes.')
-      }
-
-      
+      } 
     },
 
     deleteFromVoteList(name){
       let cand = this.custodians.find(x => x.candidate_name === name);
       cand.selected =false;
       cand.total_votes = (cand.total_votes*1)-(this.getTokenBalance*10000);
-      // if(cand.votes_changed === undefined){
-      //   cand.votes_changed = true;
-      // }
-      // else{
-      //   delete cand.votes_changed;
-      // }
-
       this.checkVotesChanged();
     },
 
+    //cast votes
     voteForCandidates() {
+      //only when votes changed
       if(!this.votesdidchange){
         return false;
       }
-      let votes = this.custodians.filter(x => x.selected == true).map(c => c.candidate_name);
 
+      let votes = this.custodians.filter(x => x.selected == true).map(c => c.candidate_name);
       this.$refs.Transaction.newTransaction(this.$configFile.network.custodianContract.name, 'votecust', {
         voter: this.getAccountName,
         newvotes: votes
       }, false)
     },
 
+    //add profile data to candidate
     addProfile(eventdata){
       this.custodians.find(x => x.candidate_name === eventdata.candidate_name).profile =eventdata.profile;
     },
+
     checkVotesChanged(){
       let newvotes = this.custodians.filter(x => x.selected == true);
 
@@ -299,6 +281,8 @@ export default {
         this.votesdidchange =  true;
       }
     },
+
+    //get current votes from member from chain
     async getMemberVotes(){
       let votes = await this.$store.dispatch('api/getMemberVotes', {member: this.getAccountName});
       if(votes){
@@ -333,30 +317,14 @@ export default {
   display: inline-block;
   margin-right: 10px;
 }
+
 .list-enter-active, .list-leave-active {
   transition: all 0.5s;
 }
-.list-enter, .list-leave-to /* .list-leave-active below version 2.1.8 */ {
+
+.list-enter, .list-leave-to{
   opacity: 0;
   transform: translateY(30px);
-}
-
-
-@keyframes wiggle {
-    0% { transform: rotate(0deg); }
-   80% { transform: rotate(0deg); }
-   85% { transform: rotate(2deg); }
-   95% { transform: rotate(-2deg); }
-  100% { transform: rotate(0deg); }
-}
-
-.wiggle {
-  display: inline-block;
-  animation: wiggle 3s  infinite ease-in-out;
-}
-
-.wiggle:hover {
-  animation: none;
 }
 
 .pulse{
@@ -379,9 +347,5 @@ export default {
     transform: scale(1);
   }
 }
-
-
-keyframes pulse2 {to {box-shadow: 0 0 0 15px $primary;}}
-
 
 </style>
