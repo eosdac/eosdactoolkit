@@ -27,7 +27,6 @@
       <div class="text-dimwhite" v-if="data.profile !== undefined">{{data.profile.description}}</div>
     </div>
   </q-collapsible>
-
 </div>
 
 </template>
@@ -67,6 +66,7 @@ export default {
         if( this.isUrl(r.data.image) ) {
           this.image_profile = r.data.image;
         }
+        //emit profile event to parent component/page
         this.$emit('profile', {candidate_name:this.data.candidate_name, profile: r.data});
       })
       .catch(e => console.log('could not load profile file from '+this.data.candidate_name))
@@ -78,6 +78,7 @@ export default {
     }
 
   },
+
   mounted:function(){
     this.getProfileData()
   }
@@ -87,15 +88,19 @@ export default {
 
 <style lang ="stylus">
 @import '~variables'
+
 .candidate_header{
   height:80px;
   border-radius:2px;
 }
+
 .selected_candidate{
   border:2px solid $positive;
   transition : border 400ms ease;
 }
+
 .unselected_candidate{
   border:2px solid transparent;
+  transition : border 400ms ease;
 }
 </style>
