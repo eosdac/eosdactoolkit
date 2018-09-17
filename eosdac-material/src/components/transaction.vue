@@ -22,8 +22,8 @@
       </q-item>
       <q-item v-else>
         <div class="q-item-label">{{key + ':'}}</div>
-          <q-scroll-area class="bg-dark2" style="width: 100%; height: 80px;">
-            <pre class="q-ma-none q-pa-sm">{{field}}</pre>
+          <q-scroll-area class="bg-dark2 q-ml-sm" style="width: 95%; height: 80px;">
+            <p class="no-margin q-pa-sm" style="word-break: break-all;">{{field}}</p>
         </q-scroll-area>
 
       </q-item>
