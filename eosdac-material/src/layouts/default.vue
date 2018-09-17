@@ -262,7 +262,9 @@ export default {
     if (!this.getImported) {
       this.$refs.Multi.init('register')
     } else {
-      this.$refs.Multi.init('signin')
+      if (!this.getUnlocked && this.getScatter) {
+        this.$refs.Multi.init('signin')
+      }
     }
     setInterval(this.queryApis, 1000)
   },
@@ -286,6 +288,11 @@ export default {
       }
       else{
         this.leftDrawerOpen = this.$q.platform.is.desktop;
+      }
+    },
+    getScatter(val) {
+      if (val && this.getImported && !this.getUnlocked) {
+        this.$refs.Multi.init('signin')
       }
     }
   }
