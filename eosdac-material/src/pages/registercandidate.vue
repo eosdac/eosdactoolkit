@@ -2,7 +2,13 @@
 <q-page class="text-white q-pa-md">
 <h4 class="q-display-1 q-mt-none q-mb-md">{{ $t("regcandidate.register_as_candidate") }}</h4>
 
-<div class="row q-mt-md gutters-md bg-dark2 round-corners shadow-5" style="min-height:265px">
+
+<div v-if="!profile_is_irrevirsible" class="bg-dark2 q-pa-md round-corners shadow-5">
+  For registering as a candidate you need a profile.
+  <span v-if="hasprofile">You submitted your profile but it is still unconfirmed on the blockchain.</span>
+</div>
+
+<div v-if="profile_is_irrevirsible" class="row q-mt-md gutters-md bg-dark2 round-corners shadow-5" style="min-height:265px">
       <div class="col-md-8 col-sm-12 q-pa-md">
         dddddddd
       </div>
@@ -47,12 +53,15 @@ export default {
     return{
       loading: false,
       init_loading: false,
+      hasprofile : false,
+      profile_is_irrevirsible: false,
       stakedata: { quantity: '2.0000 KASDAC', memo: 'dacelections'},
       registerdata: { bio:'', requestedpay :'100.0000 EOS'}
 
     }
   },
   created() {
+    this.getProfileData();
     this.getContractConfig();
     this.checkMemberRoles();
   },
@@ -128,6 +137,20 @@ export default {
       } catch (err) {
         throw err
       }
+    },
+
+    async getProfileData(){
+      let p = await this.$store.dispatch('api/getProfileData', {accountname: this.getAccountName} );
+      if(p && p.length){
+        this.hasprofile = true;
+        this.profile_is_irrevirsible = p[0].irrevirsible;
+      }
+      else{
+        this.profile_is_irrevirsible = false;
+      }
+ 
+      
+
     },
 
 

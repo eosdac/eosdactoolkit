@@ -161,7 +161,7 @@ export default {
           "email": "",
           "url": "http://google.com",
           "image": "",
-          "sameAs": [{link:'https://www.twitter.com/neonexchange'},{link:'https://www.facebook.com/DonaldTrump/'}, {link: 'https://plus.google.com/+LukeStokes'}, {link:'https://steemit.com/@suesa'} ],
+          "sameAs": [{link:''} ],
           "timezone": new Date().getTimezoneOffset() //time-zone offset see: https://stackoverflow.com/questions/1091372/getting-the-clients-timezone-in-javascript
         }
     }
@@ -197,7 +197,6 @@ export default {
     initProfile(){
       this.profile_is_loading = true;
       this.account_name = this.$route.params.accountname;
-      
       //load profile
       this.getProfileData();
       // this.profile_is_loading = false;
@@ -211,6 +210,9 @@ export default {
         this.profile_is_irrevirsible = p[0].irrevirsible;
         this.allow_edit = this.account_name === this.getAccountName && this.profile_is_irrevirsible ? true : false;
 
+      }
+      else{
+        this.allow_edit = this.account_name === this.getAccountName ? true : false;
       }
       this.profile_is_loading = false;
       
@@ -226,7 +228,7 @@ export default {
 
     parseSocialLinks(){
       let links = JSON.parse(JSON.stringify(this.form.sameAs));
-      console.log(links)
+      // console.log(links)
       if(links[0].link == ""){
         return[];
       }
