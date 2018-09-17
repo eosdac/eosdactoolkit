@@ -21,7 +21,7 @@ export default [
       { path: 'votecustodians', component: () => import('pages/votecustodians'), beforeEnter: logInCheck },
       { path: 'profile/:accountname', component: () => import('pages/profile'), beforeEnter: logInCheck },
       { path: 'constitution', component: () => import('pages/constitution'), beforeEnter: logInCheck },
-      { path: 'registercandidate', component: () => import('pages/registercandidate'), beforeEnter: logInCheck },
+      { path: 'managecandidateship', component: () => import('pages/registercandidate'), beforeEnter: logInCheck },
       { path: 'loggedout', component: () => import('pages/index-loggedout'), beforeEnter: logInCheck }
     ]
   },

@@ -28,6 +28,7 @@ export default {
     sign_the_constitution: 'Sign the Constitution',
     status: 'Status',
     token_explorer: 'Token Explorer',
+    unregister_as_candidate: 'Unregister As Candidate',
     wallet: 'Wallet',
     worker_proposals: 'Worker Proposals',
     you_have_not_yet_registered: 'You have not been registered as a Member yet. Please sign the constitution to use the Member Client.',
@@ -244,6 +245,7 @@ export default {
     loadconfig: 'Loading contract configuration',
     register: 'register',
     register_as_candidate: 'Register as Candidate',
+    unregister_as_candidate: 'Unregister as Candidate',
     unregister: 'unregister'
   },
   index:{

@@ -4,7 +4,8 @@
   <div class=" gradient-bg-primary q-px-md q-pt-md relative-position" style="min-height:260px; overflow:hidden">
     <div class="row">
       <div class="col-12">
-        <h4 class="q-display-1 q-mb-sm q-mt-none">{{ $t("regcandidate.register_as_candidate") }}</h4>
+        <h4 v-if="!getMemberRoles.candidate" class="q-display-1 q-mb-sm q-mt-none">{{ $t("regcandidate.register_as_candidate") }}</h4>
+        <h4 v-if="getMemberRoles.candidate" class="q-display-1 q-mb-sm q-mt-none">{{ $t("regcandidate.unregister_as_candidate") }}</h4>
       </div>
     </div>
 

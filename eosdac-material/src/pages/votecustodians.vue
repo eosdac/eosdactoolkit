@@ -5,7 +5,7 @@
   <div class=" gradient-bg-primary q-px-md q-pt-md relative-position" style="min-height:260px; overflow:hidden">
     <div class="row">
       <div class="col-12">
-        <q-btn class="float-right" color="dark" to="/registercandidate" label="Candidate Registration" />
+        <q-btn class="float-right" color="dark" to="/managecandidateship" label="Candidate Registration" />
         <h4 class="q-display-1 q-mb-sm q-mt-none">{{ $t("default.custodians") }}</h4>
       </div>
     </div>

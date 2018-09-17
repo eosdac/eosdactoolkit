@@ -124,9 +124,14 @@
         <q-item-side icon="icon-topmenu-6" />
         <q-item-main :label="$t('default.settings')" sublabel="" />
       </q-item>
-      <q-item to="/registercandidate">
+
+      <q-item v-if="!getMemberRoles.candidate" to="/managecandidateship">
         <q-item-side icon="icon-menu-12" />
         <q-item-main :label="$t('default.register_as_candidate')" sublabel="" />
+      </q-item>
+      <q-item v-if="getMemberRoles.candidate" to="/managecandidateship">
+        <q-item-side icon="icon-menu-12" />
+        <q-item-main :label="$t('default.unregister_as_candidate')" sublabel="" />
       </q-item>
 
       <!-- <q-item to="/workerproposals">
