@@ -1,6 +1,6 @@
 <template>
 <q-page class="text-white q-pa-md">
-<h4 class="q-display-1 q-mt-none q-mb-md">{{ $t("regcandidate.run_for_custodian") }}</h4>
+<h4 class="q-display-1 q-mt-none q-mb-md">{{ $t("regcandidate.register_as_candidate") }}</h4>
 
 <div class="row q-mt-md gutters-md bg-dark2 round-corners shadow-5" style="min-height:265px">
       <div class="col-md-8 col-sm-12 q-pa-md">

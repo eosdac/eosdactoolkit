@@ -1,6 +1,7 @@
 import Eos from 'eosjs'
 import Timeout from 'await-timeout'
 import configFile from '../../statics/config.json'
+import axios from 'axios'
 
 
 const eosConfig = {
@@ -605,4 +606,16 @@ export async function getRamPrice({
     apiDown(error,commit)
     throw error
   }
+}
+
+export async function getProfileData({}, payload){
+  console.log(payload.accountname)
+  let url = configFile.api.profileApiUrl+payload.accountname;
+
+  return axios.get(url).then(r => {
+      console.log(r.data)
+      return r.data;
+    }).catch(e => {
+      console.log('could not load profile file'); 
+      return false;});
 }

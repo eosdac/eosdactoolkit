@@ -17,7 +17,9 @@
       </q-item-side>
       <q-item-main >
         <div class="q-ml-lg">
-          <router-link class="q-headline" :to="{path: '/profile/' + data.candidate_name}" >{{ data.candidate_name }}</router-link><br>
+          <router-link class="q-headline" :to="{path: '/profile/' + data.candidate_name}" >
+            <q-icon title="Custodian" style="margin-top:-5px" v-if="data.position < 13" name="star_border" color="yellow" />{{ data.candidate_name }}
+          </router-link><br>
           <span><span class="text-dimwhite">votes:</span> {{data.total_votes}}</span>
         </div>
       </q-item-main>
@@ -39,15 +41,17 @@ export default {
   components: {
     ProfilePic
   },
+
   props: {
     data: Object,
-
   },
+
   data () {
     return {
       image_profile:'https://eosdac.io/wp-content/uploads/elementor/thumbs/female1-nqk9ciy87u6os74yatkpw2xi7qbjzjq3r5sl9wy0mm.jpg',
     }
   },
+  
   methods: {
     getProfileData(){
       if(this.data.profile !== undefined){

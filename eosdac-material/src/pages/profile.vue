@@ -3,6 +3,7 @@
   <div class=" gradient-bg-primary q-px-md q-pt-md relative-position" style="min-height:260px">
     <div class="row">
       <div class="col-12">
+        <q-btn v-if="!profile_is_irrevirsible" @click="initProfile" class="float-right" color="red" label="Not Confirmed" />
         <h4 class="q-display-1 q-mb-sm q-mt-none">{{ $t("profile.profile") }}</h4>
       </div>
     </div>
@@ -117,7 +118,7 @@
       </div>
     </div>
   </q-modal>
-  <Transaction ref="Transaction" v-on:done="" />
+  <Transaction ref="Transaction" v-on:done="allow_edit=false;is_edit=false;profile_is_irrevirsible=false" />
   <LoadingSpinner :visible="profile_is_loading" :text="$t('profile.loading_text')" />
 </q-page>
 </template>
@@ -145,6 +146,7 @@ export default {
       is_edit:false,
       allow_edit: false,
       profile_is_loading : false,
+      profile_is_irrevirsible : true,
   
 
       visible:false,
@@ -195,9 +197,24 @@ export default {
     initProfile(){
       this.profile_is_loading = true;
       this.account_name = this.$route.params.accountname;
-      this.allow_edit = this.account_name === this.getAccountName ? true : false;
+      
       //load profile
+      this.getProfileData();
+      // this.profile_is_loading = false;
+    },
+
+    async getProfileData(){
+      let p = await this.$store.dispatch('api/getProfileData', {accountname: this.account_name} );
+      console.log(p);
+      if(p && p.length){
+        this.form = p[0].profile;
+        this.profile_is_irrevirsible = p[0].irrevirsible;
+        this.allow_edit = this.account_name === this.getAccountName && this.profile_is_irrevirsible ? true : false;
+
+      }
       this.profile_is_loading = false;
+      
+
     },
 
     saveProfile(){
@@ -208,6 +225,11 @@ export default {
     },
 
     parseSocialLinks(){
+      let links = JSON.parse(JSON.stringify(this.form.sameAs));
+      console.log(links)
+      if(links[0].link == ""){
+        return[];
+      }
       //supported social networks
       const icons = ['social-youtube-com', 'social-linkedin-com', 'social-ask-fm', 'social-tumblr-com', 
                     'social-weibo-com', 'social-qzoneqq-com', 'social-flickr-com', 'social-instagram-com',
@@ -218,7 +240,7 @@ export default {
       
       let lookup = icons.map(icon=> { return icon.split('-')[1] } );
 
-      let links = JSON.parse(JSON.stringify(this.form.sameAs));
+      
       links.forEach((obj, index) => {
         
         

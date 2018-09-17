@@ -219,6 +219,7 @@ export default {
           let t = b.total_votes - a.total_votes;
           return t;
       });
+      temp = temp.map( (c, index) => { c.position = index+1; return c} );
 
       this.custodians = temp;
       await this.getMemberVotes();
@@ -267,6 +268,21 @@ export default {
     addProfile(eventdata){
       this.custodians.find(x => x.candidate_name === eventdata.candidate_name).profile =eventdata.profile;
     },
+
+    // getAllProfiles(){
+    //   let p = await this.$store.dispatch('api/getProfileData', {accountname: this.account_name} );
+    //   console.log(p);
+    //   if(p && p.length){
+    //     this.form = p[0].profile;
+    //     this.profile_is_irrevirsible = p[0].irrevirsible;
+    //     this.allow_edit = this.account_name === this.getAccountName && this.profile_is_irrevirsible ? true : false;
+
+    //   }
+    //   this.profile_is_loading = false;
+      
+
+  
+    // },
 
     checkVotesChanged(){
       let newvotes = this.custodians.filter(x => x.selected == true);

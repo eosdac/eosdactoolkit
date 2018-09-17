@@ -243,7 +243,7 @@ export default {
   regcandidate:{
     loadconfig: 'Loading contract configuration',
     register: 'register',
-    run_for_custodian: 'Run for Custodian',
+    register_as_candidate: 'Register as Candidate',
     unregister: 'unregister'
   },
   index:{

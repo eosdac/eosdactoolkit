@@ -95,6 +95,22 @@
         <q-item-side icon="icon-menu-1" />
         <q-item-main label="Dashboard" sublabel="" />
       </q-item>-->
+      <q-item v-if="getMemberRoles.custodian" class="text-blue" to="/test">
+        <q-item-side class="text-blue" icon="icon-role-4" />
+        <q-item-main label="Custodian Dashboard" sublabel="" />
+      </q-item>
+      <q-item to="/constitution">
+        <q-item-side icon="icon-register-3" />
+        <q-item-main :label="$t('default.constitution')" sublabel="" />
+      </q-item>
+      <q-item to="/votecustodians">
+        <q-item-side icon="icon-ui-3" />
+        <q-item-main :label="$t('default.custodians')" sublabel="" />
+      </q-item>
+      <q-item :to="'/profile/'+getAccountName">
+        <q-item-side icon="icon-menu-10" />
+        <q-item-main :label="$t('default.profile')" sublabel="" />
+      </q-item>
       <q-item to="/wallet">
         <q-item-side icon="icon-menu-6" />
         <q-item-main :label="$t('default.wallet')" sublabel="" />
@@ -108,31 +124,18 @@
         <q-item-side icon="icon-topmenu-6" />
         <q-item-main :label="$t('default.settings')" sublabel="" />
       </q-item>
-      <q-item to="/constitution">
-        <q-item-side icon="icon-register-3" />
-        <q-item-main :label="$t('default.constitution')" sublabel="" />
-      </q-item>
-      <q-item :to="'/profile/'+getAccountName">
-        <q-item-side icon="icon-menu-10" />
-        <q-item-main :label="$t('default.profile')" sublabel="" />
-      </q-item>
-      <q-item to="/votecustodians">
-        <q-item-side icon="icon-ui-3" />
-        <q-item-main :label="$t('default.custodians')" sublabel="" />
-      </q-item>
-      <q-item to="/workerproposals">
-        <q-item-side icon="icon-menu-8" />
-        <q-item-main :label="$t('default.worker_proposals')" sublabel="" />
-      </q-item>
       <q-item to="/registercandidate">
         <q-item-side icon="icon-menu-12" />
         <q-item-main :label="$t('default.register_as_candidate')" sublabel="" />
       </q-item>
 
-      <q-item v-if="getMemberRoles.custodian" class="text-blue" to="/test">
-        <q-item-side class="text-blue" icon="icon-role-4" />
-        <q-item-main label="Custodian Dashboard" sublabel="" />
-      </q-item>
+      <!-- <q-item to="/workerproposals">
+        <q-item-side icon="icon-menu-8" />
+        <q-item-main :label="$t('default.worker_proposals')" sublabel="" />
+      </q-item> -->
+
+
+
     </q-list>
     <q-list v-else no-border link inset-delimiter dark>
       <q-item @click.native="unlockAccount()">

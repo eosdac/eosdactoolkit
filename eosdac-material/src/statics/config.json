@@ -29,7 +29,7 @@
     "bpNodeApiUrl": "https://eosdac.io/topnodes.json",
     "mainCurrencyExplorerUrl": "https://www.bloks.io",
     "tokenExplorerUrl": "https://explorer.eosdac.io",
-    "profileStoreUrl": "dummy"
+    "profileApiUrl": "http://54.36.164.203:3000/profile/"
   },
   "external":{
     "homepage": "https://eosdac.io",
