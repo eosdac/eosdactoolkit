@@ -147,7 +147,7 @@ export default {
       allow_edit: false,
       profile_is_loading : false,
       profile_is_irrevirsible : true,
-  
+      rawprofiledata: false,
 
       visible:false,
       centerimage:true,
@@ -206,6 +206,7 @@ export default {
       let p = await this.$store.dispatch('api/getProfileData', {accountname: this.account_name} );
       console.log(p);
       if(p && p.length){
+        this.rawprofiledata = p[0];
         this.form = p[0].profile;
         this.profile_is_irrevirsible = p[0].irrevirsible;
         this.allow_edit = this.account_name === this.getAccountName && this.profile_is_irrevirsible ? true : false;
@@ -311,12 +312,12 @@ export default {
 <style lang="stylus">
 @import '~variables'
 
-.gradient-bg-primary{
-  background-image linear-gradient(to right, $primary, $p-light);
-}
-.blur-details{
-  background rgba(255, 255, 255, 0.1);
-}
+// .gradient-bg-primary{
+//   background-image linear-gradient(to right, $primary, $p-light);
+// }
+// .blur-details{
+//   background rgba(255, 255, 255, 0.1);
+// }
 
 .profile_header_bottom_row{
   margin-left:170px; 
