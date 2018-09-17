@@ -5,7 +5,7 @@
   <div class=" gradient-bg-primary q-px-md q-pt-md relative-position" style="min-height:260px; overflow:hidden">
     <div class="row">
       <div class="col-12">
-        <q-btn class="float-right" color="dark" to="/managecandidateship" label="Candidate Registration" />
+        <q-btn v-if="!getMemberRoles.candidate" class="float-right" color="dark" to="/managecandidateship" label="Candidate Registration" />
         <h4 class="q-display-1 q-mb-sm q-mt-none">{{ $t("default.custodians") }}</h4>
       </div>
     </div>
@@ -145,7 +145,8 @@ export default {
   computed: {
     ...mapGetters({
       getAccountName: 'account/getAccountName',
-      getTokenBalance: 'account/getTokenBalance'
+      getTokenBalance: 'account/getTokenBalance',
+      getMemberRoles: 'account/getMemberRoles'
     }),
 
     getSelectedCand(){

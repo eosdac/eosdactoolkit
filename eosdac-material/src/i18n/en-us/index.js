@@ -76,6 +76,7 @@ export default {
     about_me: 'About Me',
     account_name: 'account name',
     bio: 'Bio',
+    cancel : 'cancel',
     download: 'Download',
     edit: 'Edit',
     email_address: 'Email Address',
