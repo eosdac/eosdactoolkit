@@ -10,15 +10,15 @@
           <q-item-tile avatar style="margin-top:-2px">
             <img style="height:60px;width:60px;" class="q-mr-md" :src="image_profile" @click="getProfileData" :name="data.candidate_name+'_pic'">
           </q-item-tile>
-<!--           <q-item-tile style="margin-top:3px">
+          <!-- <q-item-tile style="margin-top:-2px">
             <ProfilePic :url="image_profile" size= "60px" />
           </q-item-tile> -->
         </div>
       </q-item-side>
       <q-item-main >
-        <div class="q-ml-lg">
+        <div class="q-ml-md">
           <router-link class="q-headline" :to="{path: '/profile/' + data.candidate_name}" >
-            <q-icon title="Custodian" style="margin-top:-5px" v-if="data.position < 13" name="star_border" color="yellow" />{{ data.candidate_name }}
+            <q-icon title="Nominated for next custodian board" style="margin-top:-5px" v-if="data.position < 13" name="star_border" color="yellow" />{{ data.candidate_name }}
           </router-link><br>
           <span><span class="text-dimwhite">votes:</span> {{data.total_votes}}</span>
         </div>
@@ -53,7 +53,7 @@ export default {
   },
   
   methods: {
-    getProfileData(){
+    getProfileData2(){
       if(this.data.profile !== undefined){
         if(this.isUrl(this.data.profile.image)){
           this.image_profile = this.data.profile.image;
@@ -74,6 +74,24 @@ export default {
         this.$emit('profile', {candidate_name:this.data.candidate_name, profile: r.data});
       })
       .catch(e => console.log('could not load profile file from '+this.data.candidate_name))
+    },
+    async getProfileData(){
+      
+      if(this.data.profile === undefined){
+        console.log(this.data.candidate_name)
+        let p = await this.$store.dispatch('api/getProfileData2', {accountname: [this.data.candidate_name] } );
+        console.log(p);
+        if(p && p.length){
+          if( this.isUrl(p[0].profile.image) ) {
+            console.log(p[0].profile.image);
+            this.image_profile = p[0].profile.image;
+          }
+          this.$emit('profile', {candidate_name:this.data.candidate_name, profile: p[0].profile});
+        }
+      }
+      else{
+        this.image_profile = this.data.profile.image;
+      }
     },
 
     isUrl(url){

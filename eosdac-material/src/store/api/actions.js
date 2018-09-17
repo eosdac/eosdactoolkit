@@ -610,9 +610,21 @@ export async function getRamPrice({
 
 export async function getProfileData({}, payload){
   console.log(payload.accountname)
-  let url = configFile.api.profileApiUrl+payload.accountname;
+  let url = configFile.api.profileApiUrl+'profile/'+payload.accountname;
 
   return axios.get(url).then(r => {
+      console.log(r.data)
+      return r.data;
+    }).catch(e => {
+      console.log('could not load profile file'); 
+      return false;});
+}
+
+export async function getProfileData2({}, payload){
+  console.log(payload.accountname)
+  let url = configFile.api.profileApiUrl+'profiles';
+
+  return axios.post(url, payload.accountname ).then(r => {
       console.log(r.data)
       return r.data;
     }).catch(e => {

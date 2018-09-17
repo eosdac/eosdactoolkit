@@ -203,8 +203,8 @@ export default {
     },
 
     async getProfileData(){
-      let p = await this.$store.dispatch('api/getProfileData', {accountname: this.account_name} );
-      console.log(p);
+      let p = await this.$store.dispatch('api/getProfileData2', {accountname: [this.account_name]} );
+      // console.log(p);
       if(p && p.length){
         this.rawprofiledata = p[0];
         this.form = p[0].profile;

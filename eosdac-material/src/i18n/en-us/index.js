@@ -84,6 +84,7 @@ export default {
     female: 'Female',
     gender: 'Gender',
     givenName: 'Name',
+    loading_text: 'Loading profile data...',
     male: 'Male',
     other: 'Other',
     placeholder_short_bio: 'This is my short bio...',

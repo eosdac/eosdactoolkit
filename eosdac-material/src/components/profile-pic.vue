@@ -1,8 +1,8 @@
 <template>
-  <div class="profile_pic_container bg-dark2" :style="{width: size, height: size }" >
+  <div class="profile_pic_container bg-dark2" v-show="imageIsLoaded" :style="{width: size, height: size }" >
     <!-- <transition name="fade"> -->
-      <img v-if="showCustomImage" v-show="imageIsLoaded" :class="fitcontainer" v-on:load="onLoaded" v-bind:src="setImage" />
-      <img v-if="!showCustomImage" class="profile_pic_fitwidth" src='https://eosdac.io/wp-content/uploads/elementor/thumbs/female1-nqk9ciy87u6os74yatkpw2xi7qbjzjq3r5sl9wy0mm.jpg'/>
+      <img v-if="showCustomImage" class="hack_center"  v-show="imageIsLoaded" :class="fitcontainer" v-on:load="onLoaded" v-bind:src="setImage" />
+      <!-- <img v-if="!showCustomImage" class="profile_pic_fitwidth " src='https://eosdac.io/wp-content/uploads/elementor/thumbs/female1-nqk9ciy87u6os74yatkpw2xi7qbjzjq3r5sl9wy0mm.jpg'/> -->
     <!-- </transition> -->
     {{setImage}}
   </div>
@@ -59,11 +59,20 @@ export default {
 .profile_pic_container{
   border-radius:50%;
   overflow:hidden;
+  position: relative;
 }
 .profile_pic_fitheight{
   height:100%;
 }
 .profile_pic_fitwidth{
   width:100%;
+}
+.hack_center{
+    position: absolute;
+    top: -9999px;
+    bottom: -9999px;
+    left: -9999px;
+    right: -9999px;
+    margin: auto;
 }
 </style>
