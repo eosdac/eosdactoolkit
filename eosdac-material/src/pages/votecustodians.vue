@@ -45,7 +45,8 @@
         :key="candidate.candidate_name" 
         :data="candidate" 
         @profile ="addProfile" 
-        @clickvotefor="addToVoteList(candidate.candidate_name)"  
+        @clickvotefor="addToVoteList(candidate.candidate_name)"
+        @clickunvotefor="deleteFromVoteList(candidate.candidate_name)" 
       /> 
 
       <div class="row bg-dark2 q-pa-md q-mb-md shadow-5 round-borders justify-between" v-if="!loading" >
@@ -169,7 +170,10 @@ export default {
       }
       this.pagination.max = Math.ceil(filtered.length/this.pagination.items_per_page);
 
-      return filtered.slice((this.pagination.page-1) * this.pagination.items_per_page, this.pagination.page * this.pagination.items_per_page);
+      filtered = filtered.slice((this.pagination.page-1) * this.pagination.items_per_page, this.pagination.page * this.pagination.items_per_page);
+      // let candidates_on_page = filtered.map(c => c.candidate_name);
+      // this.addProfiles()
+      return filtered;
     }
 
   },

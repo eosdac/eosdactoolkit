@@ -6,8 +6,8 @@
       <q-item-side left >
         <div class="row">
           <q-btn v-if="!data.selected" class="q-mr-md" icon="icon-plus" round color="primary" style="height:55px;width:55px;margin-top:0px;" @click="$emit('clickvotefor')" />
-          <q-btn v-else class="q-mr-md" icon="icon-ui-6" round color="positive" style="height:55px;width:55px;margin-top:0px;" />
-          <q-item-tile avatar style="margin-top:-2px">
+          <q-btn v-else class="q-mr-md" icon="icon-ui-6" round color="positive" style="height:55px;width:55px;margin-top:0px;" @click="$emit('clickunvotefor')"/>
+          <q-item-tile avatar style="margin-top:-2px;">
             <img style="height:60px;width:60px;" class="q-mr-md" :src="image_profile" @click="getProfileData" :name="data.candidate_name+'_pic'">
           </q-item-tile>
           <!-- <q-item-tile style="margin-top:-2px">
@@ -16,7 +16,7 @@
         </div>
       </q-item-side>
       <q-item-main >
-        <div class="q-ml-md">
+        <div class="q-ml-lg">
           <router-link class="q-headline" :to="{path: '/profile/' + data.candidate_name}" >
             <q-icon title="Nominated for next custodian board" style="margin-top:-5px" v-if="data.position < 13" name="star_border" color="yellow" />{{ data.candidate_name }}
           </router-link><br>
