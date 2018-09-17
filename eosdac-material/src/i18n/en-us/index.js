@@ -33,7 +33,7 @@ export default {
     worker_proposals: 'Worker Proposals',
     you_have_not_yet_registered: 'You have not been registered as a Member yet. Please sign the constitution to use the Member Client.',
     your_token_balance: 'Your {tokenName} Balance',
-    
+
   },
   four_zero_four: {
     go_back: 'Go back',
@@ -188,30 +188,49 @@ export default {
     warning_ricardian: 'The ricardian contract for this action could not be found. Are you sure you want to execute this transaction?',
   },
   wallet: {
+    action_type: 'Action Type',
+    add_to_addressbook: 'Add to Addressbook',
+    addressbook: 'Addressbook',
     amount: 'Amount',
+    buy: 'Buy',
+    bytes: 'bytes',
+    cancel: 'Cancel',
     CPU: 'CPU',
+    cycles: 'Cycles',
+    decrease: 'Decrease',
     destination: 'Destination',
     history: 'History',
+    increase_by: 'Increase by',
+    increase: 'Increase',
     input_a_destination_account: 'Input a Destination Account',
+    KB: 'KB',
     liquid: 'liquid',
+    loading: 'loading',
     manage_addressbook: 'Manage Addressbook',
     memo: 'Memo',
     network: 'Network',
     or_select_address_book: 'Or select a Destination Account from AddressBook',
     quantity_to_send: 'Quantity to send',
+    ram_price_per_kb: 'Ram Price per KB',
     RAM: 'RAM',
     remaining: 'remaining',
     select_from_list: 'Select from List',
     select_token_to_send: 'Select Token to send',
+    sell: 'Sell',
     send_tokens: 'Send Tokens',
     settings: 'Settings',
+    toggle_adjust_cpu_allocation: 'Toggle CPU allocation adjustment',
+    toggle_adjust_net_allocation: 'Toggle Network allocation adjustment',
+    toggle_adjust_ram_allocation: 'Toggle RAM allocation adjustment',
     token_selection_and_quantity: 'Token Selection and Quantity',
-    total: 'total',
+    total_cost: 'Total Cost',
     total_eos_balance: 'Total eos balance',
     total_staked: 'Total Staked',
-    transfer: 'Transfer',
+    total: 'total',
     transfer_to: 'Transfer to',
     transfer_tokens: 'Transfer Tokens',
+    transfer: 'Transfer',
+    used: 'Used',
     wallet: 'Wallet',
   },
   wp_member_view: {
@@ -275,7 +294,7 @@ export default {
     refresh: 'Refresh',
     update_in: 'update in',
     seconds : 'seconds'
-    
+
   }
 
 }

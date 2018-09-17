@@ -58,47 +58,47 @@
   <div class="row q-px-md gutter-md lg-hide md-hide sm-hide xs-hide" style="max-height:78px;">
     <div class="col-lg-12 col-xl-4">
       <q-card class="bg-dark2 relative-position shadow-5" style="margin-top:-43px;z-index:3;">
-        <q-btn dense @click="buyRamSlider = !buyRamSlider" flat class="float-right" icon="icon-topmenu-6">
+        <q-btn dense @click="ramslider = !ramslider" flat class="float-right" icon="icon-topmenu-6">
           <q-tooltip>
             {{$t('wallet.toggle_adjust_ram_allocation')}}
           </q-tooltip>
         </q-btn>
-        <q-item class="q-pr-none">
-          <q-item-side class="on-left">
+        <q-item class="q-pr-none q-py-none">
+          <q-item-side>
             <q-item-tile icon>
               <q-icon color="positive" style="font-size:50px;" name="icon-ui-13" />
             </q-item-tile>
           </q-item-side>
-          <q-item-main class="q-pa-sm no-margin relative-position">
-            <span class="q-subheading text-dimwhite uppercase">{{ $t('wallet.RAM') }}</span>
-            <p class="no-margin">{{getAccountResources.ram.available}} % {{ $t('wallet.remaining') }}<span class="text-dimwhite on-right">{{$t('wallet.used')}}: {{(getAccountResources.ram.raw.used / 1024).toFixed(2)}} / {{(getAccountResources.ram.raw.available / 1024).toFixed(2)}} {{$t('wallet.KB')}}</span></p>
-            <div v-if="buyRamSlider">
-              <q-slider v-if="ramSliderBuy" color="positive" v-model="buyRamVal" :min="0" :max="getMainCurrencyBalance" :step="0.0001" />
+          <q-item-main class="q-pa-sm no-margin">
+            <span class="q-subheading text-dimwhite uppercase q-pl-sm">{{ $t('wallet.RAM') }}</span>
+            <p class="no-margin q-pl-sm">{{getAccountResources.ram.available}} % {{ $t('wallet.remaining') }}</p>
+            <span class="text-dimwhite q-pl-sm">{{$t('wallet.used')}}: {{(getAccountResources.ram.raw.used / 1024).toFixed(2)}} / {{(getAccountResources.ram.raw.available / 1024).toFixed(2)}} {{$t('wallet.KB')}}</span>
+            <div v-if="ramslider">
+              <q-slider v-if="buyRam" color="positive" v-model="buyRamVal" :min="0" :max="getMainCurrencyBalance" :step="0.0001" />
               <q-slider v-else color="negative" v-model="sellRamVal" :min="0" :max="Math.round(getAccountResources.ram.raw.available)" :step="1" />
             </div>
             <q-slider v-else color="positive" readonly v-model="getAccountResources.ram.available" :min="0" :max="100" :step="1" />
           </q-item-main>
         </q-item>
         <q-slide-transition>
-          <div v-show="buyRamSlider" style="overflow:hidden;">
-            <q-list class="q-mx-sm no-padding" dense dark no-border>
+          <div v-show="ramslider" style="overflow:hidden;">
+            <q-list class="q-mx-sm no-padding" dark no-border>
               <q-item-separator />
               <div class="row">
                 <div class="col">
                   <div class="text-dimwhite q-body-1">{{$t('wallet.action_type')}}:</div>
                 </div>
                 <div class="col">
-                  <q-btn-toggle dense dark class="no-shadow float-right" v-model="ramSliderBuy" :toggle-color="(ramSliderBuy)? 'positive': 'negative'" :options="[{label: $t('wallet.buy'), value: true},{label: $t('wallet.sell'), value: false}]" />
+                  <q-btn-toggle dense size="sm" dark class="no-shadow float-right" v-model="buyRam" :toggle-color="(buyRam)? 'positive': 'negative'" :options="[{label: $t('wallet.buy'), value: true},{label: $t('wallet.sell'), value: false}]" />
                 </div>
               </div>
               <q-item-separator />
-              <div class="row" v-if="ramSliderBuy">
+              <div class="row" v-if="buyRam">
                 <div class="col-auto">
                   <div class="text-dimwhite q-body-1">{{$t('wallet.increase_by')}}:</div>
                 </div>
                 <div class="col text-right">
-                  ~{{((buyRamVal / ramPrice ) / 1024).toFixed(2)}}
-                  <div class="q-body-1">~{{getPercentageOf((buyRamVal / ramPrice) - ((buyRamVal / ramPrice) * 0.05), getAccountResources.ram.raw.available)}} % || ~{{(((buyRamVal / ramPrice ) - ((buyRamVal / ramPrice) * 0.05) ) / 1024).toFixed(2)}}
+                  <div class="q-body-1">~{{getPercentageOf(((buyRamVal - (buyRamVal * 0.05)) / ramPrice), getAccountResources.ram.raw.available)}} % || ~{{(((buyRamVal - (buyRamVal * 0.05)) / ramPrice) / 1024).toFixed(2)}}
                     {{$t('wallet.KB')}}</div>
                 </div>
               </div>
@@ -121,7 +121,7 @@
                 </div>
               </div>
               <q-item-separator />
-              <div class="row" v-if="ramSliderBuy">
+              <div class="row" v-if="buyRam">
                 <div class="col-auto">
                   <div class="text-dimwhite q-body-1">{{$t('wallet.total_cost')}}:</div>
                 </div>
@@ -138,16 +138,22 @@
                 </div>
               </div>
               <q-item-separator />
-              <q-btn color="primary" @click="(ramSliderBuy)?buyRam():sellRam()" class="no-shadow q-ma-sm float-right" :label="(ramSliderBuy)? $t('wallet.buy'): $t('wallet.sell')" />
-              <q-btn color="dark" @click="buyRamSlider = false" class="no-shadow q-ma-sm  float-right" :label="$t('wallet.cancel')" />
+              <q-btn color="primary" @click="(buyRam)?buyRamFunc():sellRam()" class="no-shadow q-ma-sm float-right" :label="(buyRam)? $t('wallet.buy'): $t('wallet.sell')" />
+              <q-btn color="dark" @click="ramslider = false" class="no-shadow q-ma-sm  float-right" :label="$t('wallet.cancel')" />
             </q-list>
+            <LoadingSpinner :visible="!ramPrice" :text="$t('wallet.loading')" />
           </div>
         </q-slide-transition>
       </q-card>
     </div>
     <div class="col-lg-12 col-xl-4">
-      <q-card class="bg-dark2 relative-position" style="margin-top:-43px;">
-        <q-item>
+      <q-card class="bg-dark2 relative-position shadow-5" style="margin-top:-43px;z-index:3;">
+        <q-btn dense @click="cpuSlider = !cpuSlider" flat class="float-right" icon="icon-topmenu-6">
+          <q-tooltip>
+            {{$t('wallet.toggle_adjust_cpu_allocation')}}
+          </q-tooltip>
+        </q-btn>
+        <q-item class="q-pr-none q-py-none">
           <q-item-side>
             <q-item-tile icon>
               <q-icon color="blue" style="font-size:50px;" name="icon-ui-9" />
@@ -156,14 +162,59 @@
           <q-item-main class="q-pa-sm no-margin">
             <span class="q-subheading text-dimwhite uppercase q-pl-sm">{{ $t('wallet.CPU') }}</span>
             <p class="no-margin q-pl-sm">{{getAccountResources.cpu.available}} % {{ $t('wallet.remaining') }}</p>
-            <q-slider color="blue" readonly v-model="getAccountResources.cpu.available" :min="0" :max="100" :step="1" label snap />
+            <span class="text-dimwhite q-pl-sm">{{$t('wallet.used')}}: {{(getAccountResources.cpu.raw.used).toFixed(2)}} / {{(getAccountResources.cpu.raw.available).toFixed(2)}} {{$t('wallet.cycles')}}</span>
+            <div v-if="cpuSlider">
+              <q-slider v-if="incCpu" color="positive" v-model="incCpuVal" :min="0" :max="getMainCurrencyBalance" :step="0.0001" />
+              <q-slider v-else color="negative" v-model="decCpuVal" :min="0" :max="parseFloat(getAccount.self_delegated_bandwidth.cpu_weight)" :step="0.0001" />
+            </div>
+            <q-slider v-else color="blue" readonly v-model="getAccountResources.cpu.available" :min="0" :max="100" :step="1" />
           </q-item-main>
         </q-item>
+        <q-slide-transition>
+          <div v-show="cpuSlider" style="overflow:hidden;">
+            <q-list class="q-mx-sm no-padding" dark no-border>
+              <q-item-separator />
+              <div class="row">
+                <div class="col">
+                  <div class="text-dimwhite q-body-1">{{$t('wallet.action_type')}}:</div>
+                </div>
+                <div class="col">
+                  <q-btn-toggle dense size="sm" dark class="no-shadow float-right" v-model="incCpu" :toggle-color="(incCpu)? 'positive': 'negative'" :options="[{label: $t('wallet.increase'), value: true},{label: $t('wallet.decrease'), value: false}]" />
+                </div>
+              </div>
+              <q-item-separator />
+              <div class="row" v-if="incCpu">
+                <div class="col-auto">
+                  <div class="text-dimwhite q-body-1">{{$t('wallet.increase_by')}}:</div>
+                </div>
+                <div class="col text-right">
+                  <div class="q-body-1">{{getPercentageOf(incCpuVal, parseFloat(getAccount.self_delegated_bandwidth.cpu_weight))}} % || {{incCpuVal}} {{mainCurrencyName}}</div>
+                </div>
+              </div>
+              <div class="row" v-else>
+                <div class="col-auto">
+                  <div class="text-dimwhite q-body-1">{{$t('wallet.decrease_by')}}:</div>
+                </div>
+                <div class="col text-right">
+                  <div class="q-body-1">{{getPercentageOf(decCpuVal, parseFloat(getAccount.self_delegated_bandwidth.cpu_weight))}} % || {{decCpuVal}} {{mainCurrencyName}}</div>
+                </div>
+              </div>
+              <q-item-separator />
+              <q-btn color="primary" @click="(incCpu)?increaseCpu():decreaseCpu()" class="no-shadow q-ma-sm float-right" :label="(incCpu)? $t('wallet.increase'): $t('wallet.decrease')" />
+              <q-btn color="dark" @click="cpuSlider = false" class="no-shadow q-ma-sm  float-right" :label="$t('wallet.cancel')" />
+            </q-list>
+          </div>
+        </q-slide-transition>
       </q-card>
     </div>
     <div class="col-lg-12 col-xl-4">
-      <q-card class="bg-dark2 relative-position" style="margin-top:-43px;">
-        <q-item>
+      <q-card class="bg-dark2 relative-position shadow-5" style="margin-top:-43px;z-index:3;">
+        <q-btn dense @click="netSlider = !netSlider" flat class="float-right" icon="icon-topmenu-6">
+          <q-tooltip>
+            {{$t('wallet.toggle_adjust_net_allocation')}}
+          </q-tooltip>
+        </q-btn>
+        <q-item class="q-pr-none q-py-none">
           <q-item-side>
             <q-item-tile icon>
               <q-icon color="red" style="font-size:50px;" name="icon-ui-14" />
@@ -172,68 +223,96 @@
           <q-item-main class="q-pa-sm no-margin">
             <span class="q-subheading text-dimwhite uppercase q-pl-sm">{{ $t('wallet.network') }}</span>
             <p class="no-margin q-pl-sm">{{getAccountResources.net.available}} % {{ $t('wallet.remaining') }}</p>
-            <q-slider color="red" readonly v-model="getAccountResources.net.available" :min="0" :max="100" :step="0.001" label snap />
-          </q-item-main>
-        </q-item>
-      </q-card>
-    </div>
-  </div>
-  <div class="row xl-hide">
-    <div class="col-12">
-      <!--<q-item>
-        <q-item-side>
-          <q-item-tile icon>
-            <q-icon color="positive" style="font-size:50px;" name="icon-type-8" />
-          </q-item-tile>
-        </q-item-side>
-        <q-item-main class="q-pa-sm no-margin">
-          <span class="q-subheading text-dimwhite uppercase q-pl-sm">{{ $t("wallet.RAM") }}</span>
-          <p class="no-margin q-pl-sm">{{getAccountResources.ram.available}} % {{ $t('wallet.remaining') }}</p>
-          <q-slider color="positive" readonly v-model="getAccountResources.ram.available" :min="0" :max="100" :step="1" />
-        </q-item-main>
-      </q-item>-->
-      <q-card class="bg-dark2 relative-position shadow-5" style="margin-top:-43px;z-index:3;">
-        <q-btn dense @click="buyRamSlider = !buyRamSlider" flat class="float-right" icon="icon-topmenu-6">
-          <q-tooltip>
-            {{$t('wallet.toggle_adjust_ram_allocation')}}
-          </q-tooltip>
-        </q-btn>
-        <q-item class="q-pr-none">
-          <q-item-side class="on-left">
-            <q-item-tile icon>
-              <q-icon color="positive" style="font-size:50px;" name="icon-ui-13" />
-            </q-item-tile>
-          </q-item-side>
-          <q-item-main class="q-pa-sm no-margin relative-position">
-            <span class="q-subheading text-dimwhite uppercase">{{ $t('wallet.RAM') }}</span>
-            <p class="no-margin">{{getAccountResources.ram.available}} % {{ $t('wallet.remaining') }}<span class="text-dimwhite on-right">{{$t('wallet.used')}}: {{(getAccountResources.ram.raw.used / 1024).toFixed(2)}} / {{(getAccountResources.ram.raw.available / 1024).toFixed(2)}} {{$t('wallet.KB')}}</span></p>
-            <div v-if="buyRamSlider">
-              <q-slider v-if="ramSliderBuy" color="positive" v-model="buyRamVal" :min="0" :max="getMainCurrencyBalance" :step="0.0001" />
-              <q-slider v-else color="negative" v-model="sellRamVal" :min="0" :max="Math.round(getAccountResources.ram.raw.available)" :step="1" />
+            <span class="text-dimwhite q-pl-sm">{{$t('wallet.used')}}: {{(getAccountResources.net.raw.used).toFixed(2)}} / {{(getAccountResources.net.raw.available).toFixed(2)}} {{$t('wallet.bytes')}}</span>
+            <div v-if="netSlider">
+              <q-slider v-if="incNet" color="positive" v-model="incNetVal" :min="0" :max="getMainCurrencyBalance" :step="0.0001" />
+              <q-slider v-else color="negative" v-model="decNetVal" :min="0" :max="parseFloat(getAccount.self_delegated_bandwidth.net_weight)" :step="0.0001" />
             </div>
-            <q-slider v-else color="positive" readonly v-model="getAccountResources.ram.available" :min="0" :max="100" :step="1" />
+            <q-slider v-else color="red" readonly v-model="getAccountResources.net.available" :min="0" :max="100" :step="1" />
           </q-item-main>
         </q-item>
         <q-slide-transition>
-          <div v-show="buyRamSlider" style="overflow:hidden;">
-            <q-list class="q-mx-sm no-padding" dense dark no-border>
+          <div v-show="netSlider" style="overflow:hidden;">
+            <q-list class="q-mx-sm no-padding" dark no-border>
               <q-item-separator />
               <div class="row">
                 <div class="col">
                   <div class="text-dimwhite q-body-1">{{$t('wallet.action_type')}}:</div>
                 </div>
                 <div class="col">
-                  <q-btn-toggle dense dark class="no-shadow float-right" v-model="ramSliderBuy" :toggle-color="(ramSliderBuy)? 'positive': 'negative'" :options="[{label: $t('wallet.buy'), value: true},{label: $t('wallet.sell'), value: false}]" />
+                  <q-btn-toggle dense size="sm" dark class="no-shadow float-right" v-model="incNet" :toggle-color="(incNet)? 'positive': 'negative'" :options="[{label: $t('wallet.increase'), value: true},{label: $t('wallet.decrease'), value: false}]" />
                 </div>
               </div>
               <q-item-separator />
-              <div class="row" v-if="ramSliderBuy">
+              <div class="row" v-if="incNet">
                 <div class="col-auto">
                   <div class="text-dimwhite q-body-1">{{$t('wallet.increase_by')}}:</div>
                 </div>
                 <div class="col text-right">
-                  ~{{((buyRamVal / ramPrice ) / 1024).toFixed(2)}}
-                  <div class="q-body-1">~{{getPercentageOf((buyRamVal / ramPrice) - ((buyRamVal / ramPrice) * 0.05), getAccountResources.ram.raw.available)}} % || ~{{(((buyRamVal / ramPrice ) - ((buyRamVal / ramPrice) * 0.05) ) / 1024).toFixed(2)}}
+                  <div class="q-body-1">{{getPercentageOf(incNetVal, parseFloat(getAccount.self_delegated_bandwidth.net_weight))}} % || {{incNetVal}} {{mainCurrencyName}}</div>
+                </div>
+              </div>
+              <div class="row" v-else>
+                <div class="col-auto">
+                  <div class="text-dimwhite q-body-1">{{$t('wallet.decrease_by')}}:</div>
+                </div>
+                <div class="col text-right">
+                  <div class="q-body-1">{{getPercentageOf(decNetVal, parseFloat(getAccount.self_delegated_bandwidth.net_weight))}} % || {{decNetVal}} {{mainCurrencyName}}</div>
+                </div>
+              </div>
+              <q-item-separator />
+              <q-btn color="primary" @click="(incNet)?increaseNet():decreaseNet()" class="no-shadow q-ma-sm float-right" :label="(incNet)? $t('wallet.increase'): $t('wallet.decrease')" />
+              <q-btn color="dark" @click="netSlider = false" class="no-shadow q-ma-sm  float-right" :label="$t('wallet.cancel')" />
+            </q-list>
+          </div>
+        </q-slide-transition>
+      </q-card>
+    </div>
+  </div>
+  <div class="row xl-hide">
+    <div class="col-12">
+      <q-card class="bg-dark2 relative-position shadow-5">
+        <q-btn dense @click="ramslider = !ramslider" flat class="float-right" icon="icon-topmenu-6">
+          <q-tooltip>
+            {{$t('wallet.toggle_adjust_ram_allocation')}}
+          </q-tooltip>
+        </q-btn>
+        <q-item class="q-pr-none q-py-none">
+          <q-item-side>
+            <q-item-tile icon>
+              <q-icon color="positive" style="font-size:50px;" name="icon-ui-13" />
+            </q-item-tile>
+          </q-item-side>
+          <q-item-main class="q-pa-sm no-margin">
+            <span class="q-subheading text-dimwhite uppercase q-pl-sm">{{ $t('wallet.RAM') }}</span>
+            <p class="no-margin q-pl-sm">{{getAccountResources.ram.available}} % {{ $t('wallet.remaining') }}</p>
+            <span class="text-dimwhite q-pl-sm">{{$t('wallet.used')}}: {{(getAccountResources.ram.raw.used / 1024).toFixed(2)}} / {{(getAccountResources.ram.raw.available / 1024).toFixed(2)}} {{$t('wallet.KB')}}</span>
+            <div v-if="ramslider">
+              <q-slider v-if="buyRam" color="positive" v-model="buyRamVal" :min="0" :max="getMainCurrencyBalance" :step="0.0001" />
+              <q-slider v-else color="negative" v-model="sellRamVal" :min="0" :max="Math.round(getAccountResources.ram.raw.available)" :step="1" />
+            </div>
+            <q-slider v-else color="positive" readonly v-model="getAccountResources.ram.available" :min="0" :max="100" :step="1" />
+          </q-item-main>
+        </q-item>
+        <q-slide-transition>
+          <div v-show="ramslider" style="overflow:hidden;">
+            <q-list class="q-mx-sm no-padding" dark no-border>
+              <q-item-separator />
+              <div class="row">
+                <div class="col">
+                  <div class="text-dimwhite q-body-1">{{$t('wallet.action_type')}}:</div>
+                </div>
+                <div class="col">
+                  <q-btn-toggle dense size="sm" dark class="no-shadow float-right" v-model="buyRam" :toggle-color="(buyRam)? 'positive': 'negative'" :options="[{label: $t('wallet.buy'), value: true},{label: $t('wallet.sell'), value: false}]" />
+                </div>
+              </div>
+              <q-item-separator />
+              <div class="row" v-if="buyRam">
+                <div class="col-auto">
+                  <div class="text-dimwhite q-body-1">{{$t('wallet.increase_by')}}:</div>
+                </div>
+                <div class="col text-right">
+                  <div class="q-body-1">~{{getPercentageOf(((buyRamVal - (buyRamVal * 0.05)) / ramPrice), getAccountResources.ram.raw.available)}} % || ~{{(((buyRamVal - (buyRamVal * 0.05)) / ramPrice) / 1024).toFixed(2)}}
                     {{$t('wallet.KB')}}</div>
                 </div>
               </div>
@@ -256,7 +335,7 @@
                 </div>
               </div>
               <q-item-separator />
-              <div class="row" v-if="ramSliderBuy">
+              <div class="row" v-if="buyRam">
                 <div class="col-auto">
                   <div class="text-dimwhite q-body-1">{{$t('wallet.total_cost')}}:</div>
                 </div>
@@ -273,36 +352,135 @@
                 </div>
               </div>
               <q-item-separator />
-              <q-btn color="primary" @click="(ramSliderBuy)?buyRam():sellRam()" class="no-shadow q-ma-sm float-right" :label="(ramSliderBuy)? $t('wallet.buy'): $t('wallet.sell')" />
-              <q-btn color="dark" @click="buyRamSlider = false" class="no-shadow q-ma-sm  float-right" :label="$t('wallet.cancel')" />
+              <q-btn color="primary" @click="(buyRam)?buyRamFunc():sellRam()" class="no-shadow q-ma-sm float-right" :label="(buyRam)? $t('wallet.buy'): $t('wallet.sell')" />
+              <q-btn color="dark" @click="ramslider = false" class="no-shadow q-ma-sm  float-right" :label="$t('wallet.cancel')" />
+            </q-list>
+            <LoadingSpinner :visible="!ramPrice" :text="$t('wallet.loading')" />
+          </div>
+        </q-slide-transition>
+      </q-card>
+    </div>
+    <div class="col-12">
+      <q-card class="bg-dark2 relative-position shadow-5">
+        <q-btn dense @click="cpuSlider = !cpuSlider" flat class="float-right" icon="icon-topmenu-6">
+          <q-tooltip>
+            {{$t('wallet.toggle_adjust_cpu_allocation')}}
+          </q-tooltip>
+        </q-btn>
+        <q-item class="q-pr-none q-py-none">
+          <q-item-side>
+            <q-item-tile icon>
+              <q-icon color="blue" style="font-size:50px;" name="icon-ui-9" />
+            </q-item-tile>
+          </q-item-side>
+          <q-item-main class="q-pa-sm no-margin">
+            <span class="q-subheading text-dimwhite uppercase q-pl-sm">{{ $t('wallet.CPU') }}</span>
+            <p class="no-margin q-pl-sm">{{getAccountResources.cpu.available}} % {{ $t('wallet.remaining') }}</p>
+            <span class="text-dimwhite q-pl-sm">{{$t('wallet.used')}}: {{(getAccountResources.cpu.raw.used).toFixed(2)}} / {{(getAccountResources.cpu.raw.available).toFixed(2)}} {{$t('wallet.cycles')}}</span>
+            <div v-if="cpuSlider">
+              <q-slider v-if="incCpu" color="positive" v-model="incCpuVal" :min="0" :max="getMainCurrencyBalance" :step="0.0001" />
+              <q-slider v-else color="negative" v-model="decCpuVal" :min="0" :max="parseFloat(getAccount.self_delegated_bandwidth.cpu_weight)" :step="0.0001" />
+            </div>
+            <q-slider v-else color="blue" readonly v-model="getAccountResources.cpu.available" :min="0" :max="100" :step="1" />
+          </q-item-main>
+        </q-item>
+        <q-slide-transition>
+          <div v-show="cpuSlider" style="overflow:hidden;">
+            <q-list class="q-mx-sm no-padding" dark no-border>
+              <q-item-separator />
+              <div class="row">
+                <div class="col">
+                  <div class="text-dimwhite q-body-1">{{$t('wallet.action_type')}}:</div>
+                </div>
+                <div class="col">
+                  <q-btn-toggle dense size="sm" dark class="no-shadow float-right" v-model="incCpu" :toggle-color="(incCpu)? 'positive': 'negative'" :options="[{label: $t('wallet.increase'), value: true},{label: $t('wallet.decrease'), value: false}]" />
+                </div>
+              </div>
+              <q-item-separator />
+              <div class="row" v-if="incCpu">
+                <div class="col-auto">
+                  <div class="text-dimwhite q-body-1">{{$t('wallet.increase_by')}}:</div>
+                </div>
+                <div class="col text-right">
+                  <div class="q-body-1">{{getPercentageOf(incCpuVal, parseFloat(getAccount.self_delegated_bandwidth.cpu_weight))}} % || {{incCpuVal}} {{mainCurrencyName}}</div>
+                </div>
+              </div>
+              <div class="row" v-else>
+                <div class="col-auto">
+                  <div class="text-dimwhite q-body-1">{{$t('wallet.decrease_by')}}:</div>
+                </div>
+                <div class="col text-right">
+                  <div class="q-body-1">{{getPercentageOf(decCpuVal, parseFloat(getAccount.self_delegated_bandwidth.cpu_weight))}} % || {{decCpuVal}} {{mainCurrencyName}}</div>
+                </div>
+              </div>
+              <q-item-separator />
+              <q-btn color="primary" @click="(incCpu)?increaseCpu():decreaseCpu()" class="no-shadow q-ma-sm float-right" :label="(incCpu)? $t('wallet.increase'): $t('wallet.decrease')" />
+              <q-btn color="dark" @click="cpuSlider = false" class="no-shadow q-ma-sm  float-right" :label="$t('wallet.cancel')" />
             </q-list>
           </div>
         </q-slide-transition>
       </q-card>
-      <q-item>
-        <q-item-side>
-          <q-item-tile icon>
-            <q-icon color="blue" style="font-size:50px;" name="icon-ui-9" />
-          </q-item-tile>
-        </q-item-side>
-        <q-item-main class="q-pa-sm no-margin">
-          <span class="q-subheading text-dimwhite uppercase q-pl-sm">{{ $t("wallet.CPU") }}</span>
-          <p class="no-margin q-pl-sm">{{getAccountResources.cpu.available}} % {{ $t('wallet.remaining') }}</p>
-          <q-slider color="blue" readonly v-model="getAccountResources.cpu.available" :min="0" :max="100" :step="1" />
-        </q-item-main>
-      </q-item>
-      <q-item>
-        <q-item-side>
-          <q-item-tile icon>
-            <q-icon color="red" style="font-size:50px;" name="icon-ui-10" />
-          </q-item-tile>
-        </q-item-side>
-        <q-item-main class="q-pa-sm no-margin">
-          <span class="q-subheading text-dimwhite uppercase q-pl-sm">{{ $t("wallet.network") }}</span>
-          <p class="no-margin q-pl-sm">{{getAccountResources.net.available}} % {{ $t('wallet.remaining') }}</p>
-          <q-slider color="red" readonly v-model="getAccountResources.net.available" :min="0" :max="100" :step="1" />
-        </q-item-main>
-      </q-item>
+    </div>
+    <div class="col-12">
+      <q-card class="bg-dark2 relative-position shadow-5">
+        <q-btn dense @click="netSlider = !netSlider" flat class="float-right" icon="icon-topmenu-6">
+          <q-tooltip>
+            {{$t('wallet.toggle_adjust_net_allocation')}}
+          </q-tooltip>
+        </q-btn>
+        <q-item class="q-pr-none q-py-none">
+          <q-item-side>
+            <q-item-tile icon>
+              <q-icon color="red" style="font-size:50px;" name="icon-ui-14" />
+            </q-item-tile>
+          </q-item-side>
+          <q-item-main class="q-pa-sm no-margin">
+            <span class="q-subheading text-dimwhite uppercase q-pl-sm">{{ $t('wallet.network') }}</span>
+            <p class="no-margin q-pl-sm">{{getAccountResources.net.available}} % {{ $t('wallet.remaining') }}</p>
+            <span class="text-dimwhite q-pl-sm">{{$t('wallet.used')}}: {{(getAccountResources.net.raw.used).toFixed(2)}} / {{(getAccountResources.net.raw.available).toFixed(2)}} {{$t('wallet.bytes')}}</span>
+            <div v-if="netSlider">
+              <q-slider v-if="incNet" color="positive" v-model="incNetVal" :min="0" :max="getMainCurrencyBalance" :step="0.0001" />
+              <q-slider v-else color="negative" v-model="decNetVal" :min="0" :max="parseFloat(getAccount.self_delegated_bandwidth.net_weight)" :step="0.0001" />
+            </div>
+            <q-slider v-else color="red" readonly v-model="getAccountResources.net.available" :min="0" :max="100" :step="1" />
+          </q-item-main>
+        </q-item>
+        <q-slide-transition>
+          <div v-show="netSlider" style="overflow:hidden;">
+            <q-list class="q-mx-sm no-padding" dark no-border>
+              <q-item-separator />
+              <div class="row">
+                <div class="col">
+                  <div class="text-dimwhite q-body-1">{{$t('wallet.action_type')}}:</div>
+                </div>
+                <div class="col">
+                  <q-btn-toggle dense size="sm" dark class="no-shadow float-right" v-model="incNet" :toggle-color="(incNet)? 'positive': 'negative'" :options="[{label: $t('wallet.increase'), value: true},{label: $t('wallet.decrease'), value: false}]" />
+                </div>
+              </div>
+              <q-item-separator />
+              <div class="row" v-if="incNet">
+                <div class="col-auto">
+                  <div class="text-dimwhite q-body-1">{{$t('wallet.increase_by')}}:</div>
+                </div>
+                <div class="col text-right">
+                  <div class="q-body-1">{{getPercentageOf(incNetVal, parseFloat(getAccount.self_delegated_bandwidth.net_weight))}} % || {{incNetVal}} {{mainCurrencyName}}</div>
+                </div>
+              </div>
+              <div class="row" v-else>
+                <div class="col-auto">
+                  <div class="text-dimwhite q-body-1">{{$t('wallet.decrease_by')}}:</div>
+                </div>
+                <div class="col text-right">
+                  <div class="q-body-1">{{getPercentageOf(decNetVal, parseFloat(getAccount.self_delegated_bandwidth.net_weight))}} % || {{decNetVal}} {{mainCurrencyName}}</div>
+                </div>
+              </div>
+              <q-item-separator />
+              <q-btn color="primary" @click="(incNet)?increaseNet():decreaseNet()" class="no-shadow q-ma-sm float-right" :label="(incNet)? $t('wallet.increase'): $t('wallet.decrease')" />
+              <q-btn color="dark" @click="netSlider = false" class="no-shadow q-ma-sm  float-right" :label="$t('wallet.cancel')" />
+            </q-list>
+          </div>
+        </q-slide-transition>
+      </q-card>
     </div>
   </div>
   <div class="row q-mt-xl q-px-md md-hide sm-hide xs-hide">
@@ -383,15 +561,20 @@
     </div>
   </div>
   <q-modal class="relative-position" v-model="manageAddressbook" content-classes="fit bg-dark2" :content-css="{maxWidth: '300px', maxHeight: '610px'}">
-    <q-list dark no-border separator>
-      <q-list-header>{{ $t('wallet.addressbook') }}</q-list-header>
-      <q-item v-for="(contact, index) in getContacts" :key="index">
-        <q-item-main :label="contact.value" />
-        <q-item-side right>
-          <q-btn icon="icon-ui-8" flat color="negative" @click="removeContact(contact.value)" />
-        </q-item-side>
-      </q-item>
-    </q-list>
+    <q-scroll-area style="width: 100%; height: 100%;">
+      <q-list class="relative-position" dark no-border separator link dense>
+        <q-btn class="float-right q-mr-sm no-shadow" dense flat size="lg" icon="icon-ui-8" color="white" @click="manageAddressbook = false" />
+        <q-list-header class="q-title">{{ $t('wallet.addressbook') }}</q-list-header>
+
+        <q-search class="q-mt-sm" dark v-model="contactSearch" />
+        <q-item v-for="(contact, index) in filterContacts" :key="index">
+          <q-item-main @click.native="transferTo = String(contact.value); manageAddressbook = false" :label="String(contact.value)" />
+          <q-item-side right>
+            <q-btn icon="icon-ui-8" flat color="negative" @click="removeContact(contact.value);" />
+          </q-item-side>
+        </q-item>
+      </q-list>
+    </q-scroll-area>
   </q-modal>
   <Transaction ref="Transaction" v-on:done="lookupTokenBalance()" />
   <LoadingSpinner :visible="loading" :text="loadingText" />
@@ -436,16 +619,38 @@ export default {
       showValue: false,
       total: 0,
       addContact: true,
-      buyRamSlider: false,
-      ramPrice: 1,
+      ramslider: false,
+      ramPrice: 0,
       ramPriceUpdateInterval: null,
-      ramSliderBuy: true,
+      buyRam: true,
       sellRamVal: 0,
       buyRamVal: 0,
-      manageAddressbook: false
+      cpuSlider: false,
+      incCpu: true,
+      decCpuVal: 0,
+      incCpuVal: 0,
+      netSlider: false,
+      incNet: true,
+      decNetVal: 0,
+      incNetVal: 0,
+      manageAddressbook: false,
+      contactSearch: ''
     }
   },
   computed: {
+    filterContacts() {
+      if (this.contactSearch.length > 0 && this.getContacts.length > 0) {
+        let retArray = []
+        for (let i = 0; i < this.getContacts.length; i++) {
+          if (String(this.getContacts[i].value).includes(String(this.contactSearch))) {
+            retArray.push(this.getContacts[i])
+          }
+        }
+        return retArray
+      } else {
+        return this.getContacts
+      }
+    },
     ...mapGetters({
       getAccountName: 'account/getAccountName',
       getTokenBalance: 'account/getTokenBalance',
@@ -494,7 +699,43 @@ export default {
         this.showValue = false
       }
     },
-    buyRam() {
+    increaseCpu() {
+      this.$refs.Transaction.newTransaction(this.$configFile.network.systemContract.name, 'delegatebw', {
+        from: this.getAccountName,
+        receiver: this.getAccountName,
+        stake_net_quantity: this.getAccount.self_delegated_bandwidth.net_weight,
+        stake_cpu_quantity: this.incCpuVal.toFixed(this.$configFile.network.mainCurrencyContract.decimals) + ' ' + this.$configFile.network.mainCurrencyContract.token,
+        transfer: 0
+      })
+    },
+    decreaseCpu() {
+      this.$refs.Transaction.newTransaction(this.$configFile.network.systemContract.name, 'delegatebw', {
+        from: this.getAccountName,
+        receiver: this.getAccountName,
+        stake_net_quantity: this.getAccount.self_delegated_bandwidth.net_weight,
+        stake_cpu_quantity: this.decCpuVal.toFixed(this.$configFile.network.mainCurrencyContract.decimals) + ' ' + this.$configFile.network.mainCurrencyContract.token,
+        transfer: 0
+      })
+    },
+    increaseNet() {
+      this.$refs.Transaction.newTransaction(this.$configFile.network.systemContract.name, 'delegatebw', {
+        from: this.getAccountName,
+        receiver: this.getAccountName,
+        stake_net_quantity: this.incNetVal.toFixed(this.$configFile.network.mainCurrencyContract.decimals) + ' ' + this.$configFile.network.mainCurrencyContract.token,
+        stake_cpu_quantity: this.getAccount.self_delegated_bandwidth.cpu_weight,
+        transfer: 0
+      })
+    },
+    decreaseNet() {
+      this.$refs.Transaction.newTransaction(this.$configFile.network.systemContract.name, 'delegatebw', {
+        from: this.getAccountName,
+        receiver: this.getAccountName,
+        stake_net_quantity: this.decNetVal.toFixed(this.$configFile.network.mainCurrencyContract.decimals) + ' ' + this.$configFile.network.mainCurrencyContract.token,
+        stake_cpu_quantity: this.getAccount.self_delegated_bandwidth.cpu_weight,
+        transfer: 0
+      })
+    },
+    buyRamFunc() {
       this.$refs.Transaction.newTransaction(this.$configFile.network.systemContract.name, 'buyram', {
         payer: this.getAccountName,
         receiver: this.getAccountName,
@@ -556,7 +797,7 @@ export default {
     }
   },
   watch: {
-    buyRamSlider(val) {
+    ramslider(val) {
       if (val && !this.ramPriceUpdateInterval) {
         this.getRamPrice()
         this.ramPriceUpdateInterval = setInterval(this.getRamPrice, 10000)
