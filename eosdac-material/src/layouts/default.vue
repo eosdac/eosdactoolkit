@@ -261,6 +261,8 @@ export default {
   mounted() {
     if (!this.getImported) {
       this.$refs.Multi.init('register')
+    } else {
+      this.$refs.Multi.init('signin')
     }
     setInterval(this.queryApis, 1000)
   },
