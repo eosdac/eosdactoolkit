@@ -264,7 +264,7 @@ export default {
       console.log(links)
       links.forEach((obj, index) => {
 
-        if(!obj || !this.isUrl(obj.link) || obj.link == undefined){
+        if(!obj || !this.$helper.isUrl(obj.link) ){
           links[index]= {link :''}
           return false;
         }
