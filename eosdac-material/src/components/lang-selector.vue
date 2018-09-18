@@ -1,6 +1,7 @@
 <template>
   <q-field :label="$t('lang_selector.choose_your_language')" label-width="12" dark>
   <q-select
+  color="p-light"
   dark
     :options="[
       { label: $t('lang_selector.languages.chinese') + ' - 中文',    value: 'zh-hans' },

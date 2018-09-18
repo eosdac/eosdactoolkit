@@ -19,7 +19,7 @@
       <div class="fit profile_image_inner_wrap">
         <transition name="fade">
           <img  :class="{ 'hack_center': centerimage, 'full-width': setwidth, 'full-height': !setwidth }" v-bind:src="setImgSrc" v-on:load="onLoaded" v-show="loaded" ref="profile_pic">
-        </transition> 
+        </transition>
         <q-spinner-oval color="white" class="hack_center" v-if="!loaded" size="139px" />
       </div>
     </div>
@@ -39,7 +39,7 @@
            <q-select
               class=""
               color="white"
-              :readonly="!is_edit" 
+              :readonly="!is_edit"
               :hide-underline="!is_edit"
               v-model="form.gender"
               dark
@@ -66,7 +66,7 @@
       </div>
       <div class="col-md-4 col-xs-12 q-pa-md">
         <div class="column justify-between" style="height:100%">
-          
+
           <!-- on display -->
           <div v-if="!is_edit">
             <div class="q-title q-mb-md">{{ $t('profile.website') }}</div>
@@ -81,14 +81,14 @@
           <!-- on is_edit -->
           <div v-if="is_edit">
             <div class="q-title q-mb-md">{{ $t('profile.website') }}</div>
-            <q-input dark type="url" v-model="form.url"  placeholder="http://example.com" />
-            <q-input dark type="url"
+            <q-input color="p-light" dark type="url" v-model="form.url"  placeholder="http://example.com" />
+            <q-input color="p-light" dark type="url"
               class="q-mt-md q-mb-md"
               v-model="social.link"
               v-for="(social, i) in form.sameAs"
               :key = i
               :float-label="`${$t('profile.social_link')} ${i+1}`"
-             
+
               :placeholder="$t('profile.social_profile_link')"
             />
             <q-btn  round  color="primary" @click="addSocial" icon="icon-plus" />
@@ -167,7 +167,7 @@ export default {
         }
     }
   },
-  
+
   computed: {
     ...mapGetters({
       getAccountName: 'account/getAccountName',
@@ -217,7 +217,7 @@ export default {
         this.allow_edit = this.account_name === this.getAccountName ? true : false;
       }
       this.profile_is_loading = false;
-      
+
 
     },
 
@@ -229,25 +229,25 @@ export default {
     },
 
     parseSocialLinks(){
-     
+
       let links = JSON.parse(JSON.stringify(this.form.sameAs));
       // console.log(links)
       if(links[0].link == ""){
         return[];
       }
       //supported social networks
-      const icons = ['social-youtube-com', 'social-linkedin-com', 'social-ask-fm', 'social-tumblr-com', 
+      const icons = ['social-youtube-com', 'social-linkedin-com', 'social-ask-fm', 'social-tumblr-com',
                     'social-weibo-com', 'social-qzoneqq-com', 'social-flickr-com', 'social-instagram-com',
                     'social-facebook-com', 'social-plusgoogle-com', 'social-meetup-com', 'social-ok-ru',
                     'social-reddit-com', 'social-twitter-com', 'social-vk-com', 'social-pinterest-com',
                     'social-behance-net', 'social-dribble-com', 'social-github-com', 'social-medium-com',
                     'social-steemit-com', 'social-general'];
-      
+
       let lookup = icons.map(icon=> { return icon.split('-')[1] } );
 
       console.log(links)
       links.forEach((obj, index) => {
-        
+
         if(!obj || !this.isUrl(obj.link) || obj.link == undefined){
           links[index]= {link :''}
           return false;
@@ -270,7 +270,7 @@ export default {
       });
       return links;
     },
-  
+
     isUrl(url){
       const re = /^(?:(?:https?|ftp):\/\/)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:\/\S*)?$/;
       return re.test(url);
@@ -281,7 +281,7 @@ export default {
       if(this.form.sameAs.length < 4 ){
         this.form.sameAs.push({link:''});
       }
-      
+
     },
 
     deleteEmptyLinks(){
@@ -291,7 +291,7 @@ export default {
         return item.link !='' && self.isUrl(item.link);
       });
 
-      
+
     },
 
     handleModalClose(){
@@ -335,8 +335,8 @@ export default {
 // }
 
 .profile_header_bottom_row{
-  margin-left:170px; 
-  margin-right:16px; 
+  margin-left:170px;
+  margin-right:16px;
   background:none
 
 }
@@ -346,18 +346,18 @@ export default {
 
 }
 .profile_image_inner_wrap{
-  border-radius:50%; 
-  border:4px solid white; 
+  border-radius:50%;
+  border:4px solid white;
   background: #7c41ba;
   overflow:hidden;
   position:relative;
 
 }
 .profile_image_outer_wrap{
-  position:absolute; 
+  position:absolute;
   z-index:1;
   height:140px;
-  width:140px; 
+  width:140px;
   top:70px;
   transition: all .2s ease-in-out;
 }

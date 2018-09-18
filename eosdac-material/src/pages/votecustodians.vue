@@ -25,7 +25,7 @@
       <div class="q-display-1 q-mb-md ">{{ $t('vote_custodians.candidate_list') }} <span class="text-dimwhite">- {{custodians.length}}</span></div>
       <p class="text-dimwhite q-body-1">{{ $t('vote_custodians.description_main') }}</p>
       <div class="row bg-dark2 q-pa-md q-mb-md shadow-5 round-borders justify-between" v-if="!loading" >
-        <q-search dark color="primary"  v-model="filter" :placeholder="$t('vote_custodians.search')" />
+        <q-search dark color="p-light"  v-model="filter" :placeholder="$t('vote_custodians.search')" />
         <div class="row inline items-center" style="font-size:12px;">
           <span>{{ $t('vote_custodians.rows_per_page') }}:</span>
            <q-select
@@ -40,14 +40,14 @@
         </div>
       </div>
 
-      <Candidate 
-        v-for="candidate in paginate" 
-        :key="candidate.candidate_name" 
-        :data="candidate" 
-        @profile ="addProfile" 
+      <Candidate
+        v-for="candidate in paginate"
+        :key="candidate.candidate_name"
+        :data="candidate"
+        @profile ="addProfile"
         @clickvotefor="addToVoteList(candidate.candidate_name)"
-        @clickunvotefor="deleteFromVoteList(candidate.candidate_name)" 
-      /> 
+        @clickunvotefor="deleteFromVoteList(candidate.candidate_name)"
+      />
 
       <div class="row bg-dark2 q-pa-md q-mb-md shadow-5 round-borders justify-between" v-if="!loading" >
         <q-search dark color="primary"  v-model="filter" :placeholder="$t('vote_custodians.search')" />
@@ -200,7 +200,7 @@ export default {
             else{
               if(lb != ''){
                 //remove first entry except for the first run
-                c.shift(); 
+                c.shift();
               }
               //set lower_bound to the last received candidate_name
               lb = c[c.length-1].candidate_name;
@@ -247,7 +247,7 @@ export default {
       }
       else{
         console.log('reached max number of votes.')
-      } 
+      }
     },
 
     deleteFromVoteList(name){
@@ -286,9 +286,9 @@ export default {
 
     //   }
     //   this.profile_is_loading = false;
-      
 
-  
+
+
     // },
 
     checkVotesChanged(){

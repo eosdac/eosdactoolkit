@@ -503,13 +503,13 @@
             </q-card-title>
             <q-card-main>
               <q-field class="q-mb-md" :label="$t('wallet.select_token_to_send')" label-width="12" dark>
-                <q-select dark :placeholder="$t('wallet.select_from_list')" :options="[
+                <q-select color="p-light" dark :placeholder="$t('wallet.select_from_list')" :options="[
                   { label: mainCurrencyName,  value: mainCurrencyName },
                   { label: tokenName, value: tokenName }
                 ]" v-model="tokenSelection" />
               </q-field>
               <q-field :label="$t('wallet.quantity_to_send')" :error="transferAmountError" :error-label="transferAmountErrorText" label-width="12">
-                <q-input :error="transferAmountError" placeholder="0.0000" v-model="transferAmount" type="number" :decimals="(tokenSelection === mainCurrencyName)?transferMainAmountDecimals : transferAmountDecimals" dark />
+                <q-input color="p-light" :error="transferAmountError" placeholder="0.0000" v-model="transferAmount" type="number" :decimals="(tokenSelection === mainCurrencyName)?transferMainAmountDecimals : transferAmountDecimals" dark />
               </q-field>
             </q-card-main>
           </q-card>
@@ -522,7 +522,7 @@
             <q-card-main>
               <q-field class="q-mb-md relative-position" :label="$t('wallet.input_a_destination_account')" :error="transferToError" :error-label="transferToErrorText" label-width="12">
                 <q-checkbox color="white" left-label class="float-right" :label="$t('wallet.add_to_addressbook')" v-model="addContact" />
-                <q-input :error="transferToError" dark v-model="transferTo">
+                <q-input color="p-light" :error="transferToError" dark v-model="transferTo">
                   <q-autocomplete :min-characters="0" :max-results="999999" :static-data="{field: 'value',list: getContacts}" />
                 </q-input>
               </q-field>
