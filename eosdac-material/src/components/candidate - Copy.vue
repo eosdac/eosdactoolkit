@@ -4,10 +4,15 @@
   <q-collapsible  label="First"  icon-toggle header-class="candidate_header" collapse-icon="icon-ui-11">
     <template slot="header" >
       <q-item-side left >
-        <div class="row full-height items-center">
-          <q-btn v-if="!data.selected" class="q-mr-md float-left" icon="icon-plus" round color="primary" style="height:55px;width:55px;margin-top:0px;" @click="$emit('clickvotefor')" />
+        <div class="row">
+          <q-btn v-if="!data.selected" class="q-mr-md" icon="icon-plus" round color="primary" style="height:55px;width:55px;margin-top:0px;" @click="$emit('clickvotefor')" />
           <q-btn v-else class="q-mr-md" icon="icon-ui-6" round color="positive" style="height:55px;width:55px;margin-top:0px;" @click="$emit('clickunvotefor')"/>
-          <div class="profile_image_test float-left"  v-bind:style="{ 'background-image': 'url(' + image_profile + ')' }" ></div>
+          <q-item-tile avatar style="margin-top:-2px;">
+            <img style="height:60px;width:60px;" class="q-mr-md" :src="image_profile" @click="getProfileData" :name="data.candidate_name+'_pic'">
+          </q-item-tile>
+          <!-- <q-item-tile style="margin-top:-2px">
+            <ProfilePic :url="image_profile" size= "60px" />
+          </q-item-tile> -->
         </div>
       </q-item-side>
       <q-item-main >
@@ -119,13 +124,5 @@ export default {
 .unselected_candidate{
   border:2px solid transparent;
   transition : border 400ms ease;
-}
-.profile_image_test{
-    display: inline-block;
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    background-position: center center;
-    background-size: cover;
 }
 </style>
