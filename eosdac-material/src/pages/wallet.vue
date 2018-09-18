@@ -566,7 +566,7 @@
         <q-btn class="float-right q-mr-sm no-shadow" dense flat size="lg" icon="icon-ui-8" color="white" @click="manageAddressbook = false" />
         <q-list-header class="q-title">{{ $t('wallet.addressbook') }}</q-list-header>
 
-        <q-search class="q-mt-sm" dark v-model="contactSearch" />
+        <q-search color="p-light" class="q-mx-md q-mt-sm" dark v-model="contactSearch" />
         <q-item v-for="(contact, index) in filterContacts" :key="index">
           <q-item-main @click.native="transferTo = String(contact.value); manageAddressbook = false" :label="String(contact.value)" />
           <q-item-side right>
