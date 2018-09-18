@@ -503,13 +503,14 @@
             </q-card-title>
             <q-card-main>
               <q-field class="q-mb-md" :label="$t('wallet.select_token_to_send')" label-width="12" dark>
-                <q-select dark :placeholder="$t('wallet.select_from_list')" :options="[
+                <q-select color="p-light" dark :placeholder="$t('wallet.select_from_list')" :options="[
                   { label: mainCurrencyName,  value: mainCurrencyName },
                   { label: tokenName, value: tokenName }
-                ]" v-model="tokenSelection" />
+                ]"
+                  v-model="tokenSelection" />
               </q-field>
               <q-field :label="$t('wallet.quantity_to_send')" :error="transferAmountError" :error-label="transferAmountErrorText" label-width="12">
-                <q-input :error="transferAmountError" placeholder="0.0000" v-model="transferAmount" type="number" :decimals="(tokenSelection === mainCurrencyName)?transferMainAmountDecimals : transferAmountDecimals" dark />
+                <q-input color="p-light" :error="transferAmountError" placeholder="0.0000" v-model="transferAmount" type="number" :decimals="(tokenSelection === mainCurrencyName)?transferMainAmountDecimals : transferAmountDecimals" dark />
               </q-field>
             </q-card-main>
           </q-card>
@@ -522,7 +523,7 @@
             <q-card-main>
               <q-field class="q-mb-md relative-position" :label="$t('wallet.input_a_destination_account')" :error="transferToError" :error-label="transferToErrorText" label-width="12">
                 <q-checkbox color="white" left-label class="float-right" :label="$t('wallet.add_to_addressbook')" v-model="addContact" />
-                <q-input :error="transferToError" dark v-model="transferTo">
+                <q-input color="p-light" :error="transferToError" dark v-model="transferTo">
                   <q-autocomplete :min-characters="0" :max-results="999999" :static-data="{field: 'value',list: getContacts}" />
                 </q-input>
               </q-field>
@@ -561,12 +562,31 @@
     </div>
   </div>
   <q-modal class="relative-position" v-model="manageAddressbook" content-classes="fit bg-dark2" :content-css="{maxWidth: '300px', maxHeight: '610px'}">
-    <q-scroll-area style="width: 100%; height: 100%;">
-      <q-list class="relative-position" dark no-border separator link dense>
-        <q-btn class="float-right q-mr-sm no-shadow" dense flat size="lg" icon="icon-ui-8" color="white" @click="manageAddressbook = false" />
+    <q-scroll-area style="width: 100%; height: 90%;">
+      <q-list class="relative-position q-pa-sm" dark no-border separator link dense>
+        <q-btn class="float-right no-shadow" dense flat size="lg" icon="icon-ui-8" color="white" @click="manageAddressbook = false" />
         <q-list-header class="q-title">{{ $t('wallet.addressbook') }}</q-list-header>
-
-        <q-search class="q-mt-sm" dark v-model="contactSearch" />
+        <q-search color="p-light" class="q-mx-sm q-mt-sm" dark v-model="contactSearch" />
+        <div class="row">
+          <div class="col-12 text-center q-pa-sm relative-position">
+            <q-btn v-if="!addContactSlide" class="no-shadow" :label="$t('wallet.add')" icon="icon-plus" color="primary" @click="addContactSlide = true" />
+          </div>
+        </div>
+        <q-slide-transition>
+          <q-card v-show="addContactSlide" class="bg-dark q-pa-sm">
+            <q-card-title class="no-padding">
+              <q-btn class="no-shadow float-right" icon="icon-ui-8" color="primary" @click="addContactSlide = false" />
+            </q-card-title>
+            <q-card-main>
+              <q-field :label="$t('wallet.account_name')"label-width="12">
+                <q-input color="p-light" v-model="accountToAdd" type="text"  dark />
+              </q-field>
+            </q-card-main>
+            <q-card-actions align="center">
+              <q-btn class="no-shadow" :label="$t('wallet.confirm')" color="primary" @click="addToAddressbook();addContactSlide = false" />
+            </q-card-actions>
+          </q-card>
+        </q-slide-transition>
         <q-item v-for="(contact, index) in filterContacts" :key="index">
           <q-item-main @click.native="transferTo = String(contact.value); manageAddressbook = false" :label="String(contact.value)" />
           <q-item-side right>
@@ -634,7 +654,9 @@ export default {
       decNetVal: 0,
       incNetVal: 0,
       manageAddressbook: false,
-      contactSearch: ''
+      contactSearch: '',
+      addContactSlide: false,
+      accountToAdd: ''
     }
   },
   computed: {
@@ -675,6 +697,9 @@ export default {
     }
   },
   methods: {
+    addToAddressbook() {
+      this.$store.commit('account/ADD_CONTACT', this.accountToAdd)
+    },
     removeContact(name) {
       this.$store.commit('account/REMOVE_CONTACT', name)
     },

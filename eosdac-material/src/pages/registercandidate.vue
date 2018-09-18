@@ -30,9 +30,9 @@
           dddddddd
         </div>
         <div class="col-md-4 col-sm-12 q-pa-md">
-          <q-input dark type="text" v-model="stakedata.quantity" float-label="Stake Amount" placeholder="1.0000 KASDAC" />
+          <q-input color="p-light" dark type="text" v-model="stakedata.quantity" float-label="Stake Amount" placeholder="1.0000 KASDAC" />
           <!-- <q-input dark  type="hidden" v-model="registerdata.bio"  float-label="Profile JSON url" placeholder="http://example.com/myjsonprofile.json" /> -->
-          <q-input dark type="text" v-model="registerdata.requestedpay" float-label="Requested Pay" placeholder="requested pay in EOS" />
+          <q-input color="p-light" dark type="text" v-model="registerdata.requestedpay" float-label="Requested Pay" placeholder="requested pay in EOS" />
           <q-btn size="md" v-if="!getMemberRoles.candidate" class="animate-pop" :loading="loading" color="primary" @click="registerAsCandidate" :label="$t('regcandidate.register')">
             <q-spinner slot="loading" />
           </q-btn>
@@ -121,7 +121,7 @@ export default {
               message: 'Error: ' + err.type,
               detail: ''
             })
-          } 
+          }
           else {
             this.$store.commit('api/NOTIFY', {
               icon: 'error',
@@ -167,8 +167,8 @@ export default {
       else{
         this.profile_is_irrevirsible = false;
       }
- 
-      
+
+
 
     },
 
