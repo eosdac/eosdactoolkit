@@ -367,7 +367,7 @@ export async function registerCandidate({
             },
             {
               account: configFile.network.custodianContract.name,
-              name: 'regcandidate',
+              name: 'nominatecand',
               authorization: [{
                 actor: accountname,
                 permission: authority

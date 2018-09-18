@@ -72,11 +72,12 @@
             <div class="q-title q-mb-md">{{ $t('profile.website') }}</div>
             <div class="text-dimwhite q-body-1">{{form.url}}</div>
             <div class="q-mt-md">
-              <q-btn v-for="(social, i) in parseSocialLinks()"  class="on-left" :key ="i" round color="dark" @click.native="openURL(social.link)" >
+              <q-btn v-if="social.link!=''" v-for="(social, i) in parseSocialLinks()"  class="on-left" :key ="i" round color="dark" @click.native="openURL(social.link)" >
                 <q-icon  :name="'icon-'+social.icon" />
               </q-btn>
             </div>
           </div>
+          <pre>{{parseSocialLinks()}}</pre>
           <!-- on is_edit -->
           <div v-if="is_edit">
             <div class="q-title q-mb-md">{{ $t('profile.website') }}</div>
@@ -87,7 +88,7 @@
               v-for="(social, i) in form.sameAs"
               :key = i
               :float-label="`${$t('profile.social_link')} ${i+1}`"
-              @input="deleteEmptyLinks"
+             
               :placeholder="$t('profile.social_profile_link')"
             />
             <q-btn  round  color="primary" @click="addSocial" icon="icon-plus" />
@@ -228,6 +229,7 @@ export default {
     },
 
     parseSocialLinks(){
+     
       let links = JSON.parse(JSON.stringify(this.form.sameAs));
       // console.log(links)
       if(links[0].link == ""){
@@ -243,10 +245,13 @@ export default {
       
       let lookup = icons.map(icon=> { return icon.split('-')[1] } );
 
-      
+      console.log(links)
       links.forEach((obj, index) => {
         
-        
+        if(!obj || !this.isUrl(obj.link) || obj.link == undefined){
+          links[index]= {link :''}
+          return false;
+        }
         let urlparts = new URL(obj.link);//does not work in IE
         let hostparts = urlparts.hostname.split('.');
 
@@ -265,18 +270,28 @@ export default {
       });
       return links;
     },
+  
+    isUrl(url){
+      const re = /^(?:(?:https?|ftp):\/\/)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:\/\S*)?$/;
+      return re.test(url);
+    },
 
     addSocial(){
       this.deleteEmptyLinks();
-      this.form.sameAs.push({link:''});
+      if(this.form.sameAs.length < 4 ){
+        this.form.sameAs.push({link:''});
+      }
+      
     },
 
     deleteEmptyLinks(){
-      if(this.form.sameAs.length > 1 ){
-        this.form.sameAs = this.form.sameAs.filter(function(item){
-          return item.link !='';
-        });
-      }
+      var self =this;
+
+      this.form.sameAs = this.form.sameAs.filter(function(item){
+        return item.link !='' && self.isUrl(item.link);
+      });
+
+      
     },
 
     handleModalClose(){
