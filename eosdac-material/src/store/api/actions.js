@@ -621,11 +621,11 @@ export async function getProfileData({}, payload){
 }
 
 export async function getProfileData2({}, payload){
-  console.log(payload.accountname)
+  // console.log(payload.accountname)
   let url = configFile.api.profileApiUrl+'profiles';
 
   return axios.post(url, payload.accountname ).then(r => {
-      console.log(r.data)
+      // console.log(r.data)
       return r.data;
     }).catch(e => {
       console.log('could not load profile file'); 

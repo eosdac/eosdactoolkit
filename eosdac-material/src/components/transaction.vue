@@ -177,6 +177,7 @@ export default {
               detail: ''
             })
           } else {
+            console.log(err)
             this.$store.commit('api/NOTIFY', {
               icon: 'error',
               color: 'red',

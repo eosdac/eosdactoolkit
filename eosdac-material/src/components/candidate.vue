@@ -78,12 +78,12 @@ export default {
     async getProfileData(){
       
       if(this.data.profile === undefined){
-        console.log(this.data.candidate_name)
+        // console.log(this.data.candidate_name)
         let p = await this.$store.dispatch('api/getProfileData2', {accountname: [this.data.candidate_name] } );
-        console.log(p);
+        // console.log(p);
         if(p && p.length){
           if( this.isUrl(p[0].profile.image) ) {
-            console.log(p[0].profile.image);
+            // console.log(p[0].profile.image);
             this.image_profile = p[0].profile.image;
           }
           this.$emit('profile', {candidate_name:this.data.candidate_name, profile: p[0].profile});

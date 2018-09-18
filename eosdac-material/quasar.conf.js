@@ -10,7 +10,8 @@ module.exports = function(ctx) {
       'eosdac-iconfont',
       'ipfs',
       'scatter',
-      'consolemessage'
+      'consolemessage',
+      'helper'
     ],
     css: [
       'app.styl',

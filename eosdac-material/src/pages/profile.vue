@@ -206,8 +206,9 @@ export default {
     async getProfileData(){
       let p = await this.$store.dispatch('api/getProfileData2', {accountname: [this.account_name]} );
       // console.log(p);
-      if(p && p.length){
+      if(p && p.length && this.validateProfile(p[0].profile)){
         this.rawprofiledata = p[0];
+        //todo validate profile
         this.form = p[0].profile;
         this.profile_is_irrevirsible = p[0].irrevirsible;
         this.allow_edit = this.account_name === this.getAccountName && this.profile_is_irrevirsible ? true : false;
@@ -221,8 +222,23 @@ export default {
 
     },
 
+    validateProfile(profile) {
+      let validkeys = Object.keys(this.form);
+      console.log(validkeys)
+      let valid =  validkeys.every(function (key) {
+          return profile.hasOwnProperty(key);
+      });
+      if(valid){
+        console.log('Fetched profile is valid');
+      }
+      else{
+        console.log('Fetched profile is not valid');
+      }
+      return valid;
+    },
+
     saveProfile(){
-      this.$refs.Transaction.newTransaction(this.$configFile.network.custodianContract.name, 'storeprofile', {
+      this.$refs.Transaction.newTransaction(this.$configFile.network.custodianContract.name, 'stprofileuns', {
         cand: this.getAccountName,
         profile: JSON.stringify(this.form),
       })
