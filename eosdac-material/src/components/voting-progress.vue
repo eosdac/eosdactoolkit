@@ -1,5 +1,6 @@
 <template>
-  <div class="full-width">
+<span>
+  <div v-if="!met_initial_votes_threshold" class="full-width">
     <span class="uppercase">
       {{ $t("vote_custodians.voting_progress") }} 
       <span class="text-dimwhite on-right on-left"> {{ voting_progress }}%</span>
@@ -12,6 +13,10 @@
     </span>
     <span v-else class="q-caption float-right">{{$t('votingprogress.loading')}}</span>
   </div>
+
+  <div v-if="met_initial_votes_threshold">Voting threshold of 15% met. eosDac is unlocked.</div>
+</span>
+
 </template>
 
 <script>
@@ -27,7 +32,8 @@ export default {
       voting_progress : 0,
       update_in_seconds:0,
       loading : false,
-      timer : false 
+      timer : false,
+      met_initial_votes_threshold: true
     }
   },
 
@@ -42,9 +48,11 @@ export default {
       this.resetTimer();
       this.loading = true;
       let totalsupply = this.$configFile.network.tokenContract.totalSupply*10000;
-      let state = await this.$store.dispatch('api/getContractState', {contract: this.$configFile.network.custodianContract.name})
+      let state = await this.$store.dispatch('api/getContractState', {contract: this.$configFile.network.custodianContract.name});
+      console.log(state)
       if(state){
         this.voting_progress = state.total_weight_of_votes/totalsupply*100;
+        this.met_initial_votes_threshold = state.met_initial_votes_threshold;
       }
       this.loading = false;
     },
