@@ -1,6 +1,6 @@
 <template>
 <span>
-  <div v-if="!met_initial_votes_threshold" class="full-width">
+  <div v-if="!met_initial_votes_threshold && !loading" class="full-width">
     <span class="uppercase">
       {{ $t("vote_custodians.voting_progress") }} 
       <span class="text-dimwhite on-right on-left"> {{ voting_progress }}%</span>
@@ -14,7 +14,7 @@
     <span v-else class="q-caption float-right">{{$t('votingprogress.loading')}}</span>
   </div>
 
-  <div v-if="met_initial_votes_threshold">Voting threshold of 15% met. eosDac is unlocked.</div>
+  <div v-if="met_initial_votes_threshold && !loading">Voting threshold of 15% met. eosDac is unlocked.</div>
 </span>
 
 </template>
@@ -33,7 +33,7 @@ export default {
       update_in_seconds:0,
       loading : false,
       timer : false,
-      met_initial_votes_threshold: true
+      met_initial_votes_threshold: false
     }
   },
 
@@ -49,7 +49,7 @@ export default {
       this.loading = true;
       let totalsupply = this.$configFile.network.tokenContract.totalSupply*10000;
       let state = await this.$store.dispatch('api/getContractState', {contract: this.$configFile.network.custodianContract.name});
-      console.log(state)
+      // console.log(state)
       if(state){
         this.voting_progress = state.total_weight_of_votes/totalsupply*100;
         this.met_initial_votes_threshold = state.met_initial_votes_threshold;
@@ -58,6 +58,9 @@ export default {
     },
 
     intervaller (i){
+      if(this.met_initial_votes_threshold){
+        return false;
+      }
       let oldi = i;
       this.timer = setInterval(() => {
         this.update_in_seconds = i;
