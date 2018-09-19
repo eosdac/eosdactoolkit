@@ -273,7 +273,7 @@ export async function getCustodians({
 }, param) {
 
   try {
-    console.log(param)
+    // console.log(param)
     eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint
     let eos = Eos(eosConfig)
     const custodians = await eos.getTableRows({
@@ -319,7 +319,7 @@ export async function getMemberVotes({
     if (!votes.rows.length) {
       return false
     } else {
-      console.log(votes.rows[0].voter +'---'+param.member)
+      // console.log(votes.rows[0].voter +'---'+param.member)
       if(votes.rows[0].voter === param.member){
         return votes.rows
       }
@@ -609,11 +609,11 @@ export async function getRamPrice({
 }
 
 export async function getProfileData({}, payload){
-  console.log(payload.accountname)
+  // console.log(payload.accountname)
   let url = configFile.api.profileApiUrl+'profile/'+payload.accountname;
 
   return axios.get(url).then(r => {
-      console.log(r.data)
+      // console.log(r.data)
       return r.data;
     }).catch(e => {
       console.log('could not load profile file'); 

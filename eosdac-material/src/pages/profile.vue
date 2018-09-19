@@ -62,6 +62,7 @@
           <div class="q-title q-mb-md">{{ $t('profile.bio') }}</div>
           <q-input v-if="is_edit" inverted rows="8" color="dark" type="textarea" v-model="form.description" dark />
           <div class="text-dimwhite q-body-1" v-if="!is_edit">{{form.description}}</div>
+          
         </div>
       </div>
       <div class="col-md-4 col-xs-12 q-pa-md">
@@ -72,12 +73,10 @@
             <div class="q-title q-mb-md">{{ $t('profile.website') }}</div>
             <div class="text-dimwhite q-body-1">{{form.url}}</div>
             <div class="q-mt-md">
-              <q-btn v-if="social.link!=''" v-for="(social, i) in parseSocialLinks()"  class="on-left" :key ="i" round color="dark" @click.native="openURL(social.link)" >
-                <q-icon  :name="'icon-'+social.icon" />
-              </q-btn>
+              <SocialLinks :links="form.sameAs.map(x => x.link)" />
             </div>
           </div>
-          <pre>{{parseSocialLinks()}}</pre>
+
           <!-- on is_edit -->
           <div v-if="is_edit">
             <div class="q-title q-mb-md">{{ $t('profile.website') }}</div>
@@ -129,6 +128,7 @@
 <script>
 import Transaction from 'components/transaction'
 import LoadingSpinner from 'components/loading-spinner'
+import SocialLinks from 'components/social-links'
 import {
   openURL
 } from 'quasar'
@@ -138,7 +138,8 @@ import {
 export default {
   components:{
     LoadingSpinner,
-    Transaction
+    Transaction,
+    SocialLinks
 
   },
   data () {
@@ -180,7 +181,6 @@ export default {
         image = this.form.image;
       }
       return image;
-
     }
   },
 
@@ -188,7 +188,7 @@ export default {
     openURL,
      onLoaded() {
         let img = this.$refs.profile_pic;
-        this.$consoleMsg('Profile image size: '+img.width +' x '+ img.height);
+        // this.$consoleMsg('Profile image size: '+img.width +' x '+ img.height);
         this.setwidth = img.width <= img.height ? true : false;
         this.centerimage = img.width == img.height ? false : true;
         this.visible = false;
@@ -218,13 +218,11 @@ export default {
         this.allow_edit = this.account_name === this.getAccountName ? true : false;
       }
       this.profile_is_loading = false;
-
-
     },
 
     validateProfile(profile) {
       let validkeys = Object.keys(this.form);
-      console.log(validkeys)
+      // console.log(validkeys)
       let valid =  validkeys.every(function (key) {
           return profile.hasOwnProperty(key);
       });
@@ -244,70 +242,19 @@ export default {
       })
     },
 
-    parseSocialLinks(){
-
-      let links = JSON.parse(JSON.stringify(this.form.sameAs));
-      // console.log(links)
-      if(links[0].link == ""){
-        return[];
-      }
-      //supported social networks
-      const icons = ['social-youtube-com', 'social-linkedin-com', 'social-ask-fm', 'social-tumblr-com',
-                    'social-weibo-com', 'social-qzoneqq-com', 'social-flickr-com', 'social-instagram-com',
-                    'social-facebook-com', 'social-plusgoogle-com', 'social-meetup-com', 'social-ok-ru',
-                    'social-reddit-com', 'social-twitter-com', 'social-vk-com', 'social-pinterest-com',
-                    'social-behance-net', 'social-dribble-com', 'social-github-com', 'social-medium-com',
-                    'social-steemit-com', 'social-general'];
-
-      let lookup = icons.map(icon=> { return icon.split('-')[1] } );
-
-      console.log(links)
-      links.forEach((obj, index) => {
-
-        if(!obj || !this.$helper.isUrl(obj.link) ){
-          links[index]= {link :''}
-          return false;
-        }
-        let urlparts = new URL(obj.link);//does not work in IE
-        let hostparts = urlparts.hostname.split('.');
-
-        if(hostparts[0] ==='www'){
-          delete hostparts[0];
-        }
-        hostparts.pop();//remove TLD
-        let host = hostparts.join('');
-        let i = lookup.indexOf(host);
-        if(i > -1){
-          links[index]['icon'] = icons[i];
-        }
-        else{
-          links[index]['icon'] = 'social-general'
-        }
-      });
-      return links;
-    },
-
-    isUrl(url){
-      const re = /^(?:(?:https?|ftp):\/\/)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:\/\S*)?$/;
-      return re.test(url);
-    },
-
     addSocial(){
       this.deleteEmptyLinks();
       if(this.form.sameAs.length < 4 ){
         this.form.sameAs.push({link:''});
       }
-
     },
 
     deleteEmptyLinks(){
       var self =this;
 
       this.form.sameAs = this.form.sameAs.filter(function(item){
-        return item.link !='' && self.isUrl(item.link);
+        return item.link !='' && self.$helper.isUrl(item.link);
       });
-
-
     },
 
     handleModalClose(){
@@ -325,7 +272,6 @@ export default {
         a.download = fileName;
         a.click();
     }
-
   },
 
   mounted: function(){
@@ -343,24 +289,17 @@ export default {
 <style lang="stylus">
 @import '~variables'
 
-// .gradient-bg-primary{
-//   background-image linear-gradient(to right, $primary, $p-light);
-// }
-// .blur-details{
-//   background rgba(255, 255, 255, 0.1);
-// }
-
 .profile_header_bottom_row{
   margin-left:170px;
   margin-right:16px;
   background:none
-
 }
+
 .profile_header_top_row{
   margin-left:154px;
   background:none
-
 }
+
 .profile_image_inner_wrap{
   border-radius:50%;
   border:4px solid white;

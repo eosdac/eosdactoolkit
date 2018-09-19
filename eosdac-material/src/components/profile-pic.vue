@@ -46,7 +46,7 @@ export default {
      onLoaded(e) {
         let img = e.target;
         this.fitcontainer = img.width <= img.height ? 'profile_pic_fitwidth' : 'profile_pic_fitheight';
-        console.log(img.width +' '+ img.height);
+        // console.log(img.width +' '+ img.height);
         this.imageIsLoaded = true;
         // this.visible = false;
         // this.loaded = true;
