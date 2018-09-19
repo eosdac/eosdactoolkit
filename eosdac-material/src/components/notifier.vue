@@ -1,7 +1,6 @@
 <template>
-<transition v-if="visible && getAccount" appear enter-active-class="animated fadeInUp" leave-active-class="animated fadeOutDown">
-  <div>
-    <q-alert class="notifier fixed-bottom z-max drawer-margin" v-bind:class="{ 'drawer-margin': drawer }" :color="color" :text-color="textColor">
+  <div v-if="visible && getAccount">
+    <q-alert class="notifier fixed-bottom z-max" v-bind:class="{ 'drawer-margin': drawer }" :color="color" :text-color="textColor">
       <div class="row">
         <div class="col-md-2 col-lg-1">
           <q-icon flat size="30px" class="float-left on-left q-ma-sm" :name="icon"></q-icon>
@@ -17,7 +16,6 @@
       </div>
     </q-alert>
   </div>
-</transition>
 </template>
 
 <script>
