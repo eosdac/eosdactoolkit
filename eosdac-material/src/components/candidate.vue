@@ -7,7 +7,7 @@
         <div class="row full-height items-center">
           <q-btn v-if="!data.selected" class="q-mr-md float-left" icon="icon-plus" round color="primary" style="height:55px;width:55px;margin-top:0px;" @click="$emit('clickvotefor')" />
           <q-btn v-else class="q-mr-md" icon="icon-ui-6" round color="positive" style="height:55px;width:55px;margin-top:0px;" @click="$emit('clickunvotefor')"/>
-          <div class="profile_image_test float-left"  v-bind:style="{ 'background-image': 'url(' + image_profile + ')' }" ></div>
+          <div class="center_background_image float-left"  style="width: 60px; height:60px" v-bind:style="{ 'background-image': 'url(' + image_profile + ')' }" ></div>
         </div>
       </q-item-side>
       <q-item-main >
@@ -120,12 +120,5 @@ export default {
   border:2px solid transparent;
   transition : border 400ms ease;
 }
-.profile_image_test{
-    display: inline-block;
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    background-position: center center;
-    background-size: cover;
-}
+
 </style>
