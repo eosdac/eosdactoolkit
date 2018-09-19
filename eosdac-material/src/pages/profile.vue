@@ -169,7 +169,7 @@ export default {
     }),
     setImgSrc(){
       let image = 'https://i0.wp.com/www.hylandfishandchips.ca/wp-content/uploads/2015/11/Sad-Fish-300x243.png'; //default image
-      if(this.form.image != ''){
+      if(this.$helper.isUrl(this.form.image)){
         image = this.form.image;
       }
       return image;
