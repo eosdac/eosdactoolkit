@@ -154,7 +154,8 @@ export default {
               message: 'transaction.transaction_successful',
               details: res.transaction_id,
               linkText: 'transaction.view_in_explorer',
-              linkUrl: this.$configFile.api.mainCurrencyExplorerUrl + '/transaction/' + res.transaction_id
+              linkUrl: this.$configFile.api.mainCurrencyExplorerUrl + '/transaction/' + res.transaction_id,
+              autoclose: 10
             })
           } else {
             this.$store.commit('api/NOTIFY', {
@@ -163,7 +164,8 @@ export default {
               message: 'transaction.transaction_successful',
               details: res.transaction_id,
               linkText: 'transaction.view_in_explorer',
-              linkUrl: this.$configFile.api.tokenExplorerUrl + '/transaction/' + res.transaction_id
+              linkUrl: this.$configFile.api.tokenExplorerUrl + '/transaction/' + res.transaction_id,
+              autoclose: 10
             })
           }
           this.loading = false
@@ -174,7 +176,8 @@ export default {
               icon: 'error',
               color: 'red',
               message: 'Error: ' + err.type,
-              detail: ''
+              detail: '',
+              autoclose: 10
             })
           } else {
             console.log(err)
@@ -182,7 +185,8 @@ export default {
               icon: 'error',
               color: 'red',
               message: 'Error: ' + JSON.parse(err).error.details[0].message || JSON.parse(err),
-              detail: ''
+              detail: '',
+              autoclose: 10
             })
           }
           this.loading = false

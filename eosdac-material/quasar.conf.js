@@ -137,7 +137,7 @@ module.exports = function(ctx) {
       i18n: 'en-us'
     },
     // animations: 'all' --- includes all animations
-    animations: ['fadeInDown', 'fadeOutUp'],
+    animations: ['fadeInDown', 'fadeOutUp', 'fadeInUp', 'fadeOutDown'],
     pwa: {
       // workboxPluginMode: 'InjectManifest',
       // workboxOptions: {},
