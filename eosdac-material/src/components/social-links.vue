@@ -1,9 +1,9 @@
 <template>
-<div>
-  <q-btn v-if="social.link!=''" v-for="(social, i) in parseLinks"  class="on-left" :key ="i" round color="dark" @click.native="openURL(social.link)" >
-    <q-icon  :name="'icon-'+social.icon" />
-  </q-btn>
-</div>
+  <div>
+    <q-btn v-if="social.link!=''" v-for="(social, i) in parseLinks"  class="on-left" :key ="i" round color="dark" @click.native="openURL(social.link)" >
+      <q-icon  :name="'icon-'+social.icon" />
+    </q-btn>
+  </div>
 </template>
 
 <script>
@@ -34,7 +34,6 @@ export default {
 
   methods:{
     openURL,
-
     matchSocialIcon(link){
       //supported social networks
       const icons = ['social-youtube-com', 'social-linkedin-com', 'social-ask-fm', 'social-tumblr-com',
@@ -57,12 +56,10 @@ export default {
       let i = lookup.indexOf(host);
       if(i > -1){
         return {link: link, icon: icons[i]};
-
       }
       else{
         return {link: link, icon: 'social-general'};
       }
-  
     }
   }
 }

@@ -68,6 +68,7 @@ export default {
       }
       else{
         this.image_profile = this.data.profile.image;
+        this.sociallinks = this.data.profile.sameAs.map(x => x.link);
       }
     },
 

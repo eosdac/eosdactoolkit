@@ -129,6 +129,8 @@
 import Transaction from 'components/transaction'
 import LoadingSpinner from 'components/loading-spinner'
 import SocialLinks from 'components/social-links'
+import ProfileTemplate from '../statics/profile.template.json'
+
 import {
   openURL
 } from 'quasar'
@@ -155,17 +157,7 @@ export default {
       centerimage:true,
       setwidth: true,
       loaded:false,
-      form:{
-          "givenName": "",
-          "familyName": "",
-          "gender": "other",
-          "description": "no bio available",
-          "email": "",
-          "url": "http://google.com",
-          "image": "",
-          "sameAs": [{link:''} ],
-          "timezone": new Date().getTimezoneOffset() //time-zone offset see: https://stackoverflow.com/questions/1091372/getting-the-clients-timezone-in-javascript
-        }
+      form:ProfileTemplate
     }
   },
 
@@ -221,9 +213,11 @@ export default {
     },
 
     validateProfile(profile) {
-      let validkeys = Object.keys(this.form);
+      
+      // let validkeys = Object.keys(this.form);
+      let validkeys = Object.keys(ProfileTemplate);
       // console.log(validkeys)
-      let valid =  validkeys.every(function (key) {
+      let valid = validkeys.every(function (key) {
           return profile.hasOwnProperty(key);
       });
       if(valid){
@@ -236,6 +230,7 @@ export default {
     },
 
     saveProfile(){
+      this.form.timezone = new Date().getTimezoneOffset();
       this.$refs.Transaction.newTransaction(this.$configFile.network.custodianContract.name, 'stprofileuns', {
         cand: this.getAccountName,
         profile: JSON.stringify(this.form),
