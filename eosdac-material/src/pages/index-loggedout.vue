@@ -57,7 +57,7 @@
             <div class="q-title q-mb-lg">{{$t('index.visit_eosdac')}}</div>
             <div class="q-body-1 text-dimwhite relative-position">
               <q-icon name="icon-ui-21" size="48px" class="absolute-top-left" />
-              <div style="display:inline-block;margin-left:55px;margin-top:-3px">{{$t('index.discord_description')}}</div>
+              <div style="display:inline-block;margin-left:55px;margin-top:-3px">{{$t('index.website_description')}}</div>
             </div>
           </div>
           <div class="q-mt-sm">
@@ -72,8 +72,24 @@
             <div class="q-body-1 text-dimwhite relative-position">
               <q-icon name="icon-ui-22" size="48px" class="absolute-top-left" />
               <div style="display:inline-block;margin-left:55px;margin-top:-3px">
-                <q-input dark class="q-mb-xs" color="white" v-model="email_address" stack-label="Your Email" />
-                <q-input dark color="white" v-model="language" stack-label="Your Language" />
+                <q-input dark class="q-mb-xs" color="white" v-model="email_address" :stack-label="$t('index.your_email')" />
+                <q-select
+                color="white"
+                :float-label="$t('index.your_language')"
+                dark
+                  :options="[
+                    { label: $t('lang_selector.languages.chinese') + ' - 中文',    value: 'Chinese' },
+                    { label: $t('lang_selector.languages.english_us') + ' - English', value: 'English' },
+                    { label: $t('lang_selector.languages.french') + ' - Français',     value: 'French' },
+                    { label: $t('lang_selector.languages.german') + ' - Deutsch',     value: 'Dutch' },
+                    { label: $t('lang_selector.languages.italian') + ' - Italiano',    value: 'Italian' },
+                    { label: $t('lang_selector.languages.japanese') + ' - 日本語',   value: 'Japanese' },
+                    { label: $t('lang_selector.languages.korean') + ' - 한국어',     value: 'Korean' },
+                    { label: $t('lang_selector.languages.russian') + ' - Pусский',    value: 'Russian' },
+                    { label: $t('lang_selector.languages.spanish') + ' - Español',    value: 'Spanish (Mexico)' },
+                  ]"
+                  v-model="language"
+                />
               </div>
             </div>
           </div>
