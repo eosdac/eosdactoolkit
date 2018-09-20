@@ -95,7 +95,7 @@
         <q-item-side icon="icon-menu-1" />
         <q-item-main label="Dashboard" sublabel="" />
       </q-item>-->
-      <q-item v-if="getMemberRoles.custodian" class="text-blue" to="/test">
+      <q-item v-if="getMemberRoles.custodian" class="text-blue" to="/custodiandashboard">
         <q-item-side class="text-blue" icon="icon-role-4" />
         <q-item-main label="Custodian Dashboard" sublabel="" />
       </q-item>

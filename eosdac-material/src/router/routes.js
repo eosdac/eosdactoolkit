@@ -7,6 +7,15 @@ function logInCheck (to, from, next) {
     next()
   }
 }
+
+function custodianCheck (to, from, next) {
+  let roles = store.getters['account/getMemberRoles'];
+  if (!roles.custodian) {
+    next({ path: '' })
+  } else {
+    next()
+  }
+}
 export default [
   {
     // path: '/:lang',
@@ -22,7 +31,8 @@ export default [
       { path: 'profile/:accountname', component: () => import('pages/profile'), beforeEnter: logInCheck },
       { path: 'constitution', component: () => import('pages/constitution'), beforeEnter: logInCheck },
       { path: 'managecandidateship', component: () => import('pages/registercandidate'), beforeEnter: logInCheck },
-      { path: 'loggedout', component: () => import('pages/index-loggedout'), beforeEnter: logInCheck }
+      { path: 'loggedout', component: () => import('pages/index-loggedout'), beforeEnter: logInCheck },
+      { path: 'custodiandashboard', component: () => import('pages/custodian-dashboard'), beforeEnter: custodianCheck }
     ]
   },
 
