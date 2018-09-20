@@ -4,7 +4,7 @@
 
 <script>
 import sanitizeHtml from 'sanitize-html'
-import MarkdownIt from 'markdown-it'
+import marked from 'marked'
 export default {
   name: 'MarkdownViewer',
   props: {
@@ -20,7 +20,6 @@ export default {
   },
   computed: {
     convertedAndSanitizedHtml() {
-      let md = new MarkdownIt()
       let allowedHtmlTags = ['h3', 'h4', 'h5', 'h6', 'blockquote', 'p', 'a', 'ul', 'ol',
         'nl', 'li', 'b', 'i', 'strong', 'em', 'strike', 'code', 'hr', 'br',
         'table', 'thead', 'caption', 'tbody', 'tr', 'th', 'td', 'pre'
@@ -34,7 +33,7 @@ export default {
           allowedHtmlTags = this.tags
         }
       }
-      return sanitizeHtml(md.render(this.text), {
+      return sanitizeHtml(marked(this.text, { sanitize: true }), {
         allowedTags: allowedHtmlTags
       })
     }

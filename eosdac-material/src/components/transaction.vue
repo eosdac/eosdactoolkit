@@ -47,7 +47,7 @@
 </template>
 
 <script>
-import MarkdownIt from 'markdown-it'
+import marked from 'marked'
 import LoadingSpinner from 'components/loading-spinner'
 import {
   mapGetters
@@ -107,8 +107,7 @@ export default {
         return ricardianAction.name === this.action
       })
       if (ricardianAction && ricardianAction.ricardian_contract) {
-        let md = new MarkdownIt()
-        let ric = md.render(ricardianAction.ricardian_contract)
+        let ric = marked(ricardianAction.ricardian_contract, {sanitize: true})
         this.replaceVars(ric)
       } else {
         this.ricardianError = true
