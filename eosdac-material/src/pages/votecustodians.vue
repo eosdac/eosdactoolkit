@@ -174,13 +174,21 @@ export default {
 
       filtered = filtered.slice((this.pagination.page-1) * this.pagination.items_per_page, this.pagination.page * this.pagination.items_per_page);
       // let candidates_on_page = filtered.map(c => c.candidate_name);
-      // this.addProfiles()
+      // this.addProfiles(filtered, candidates_on_page); 
       return filtered;
     }
 
   },
+  // watch:{
+  //   async paginate(val){
+  //     let candidates_on_page = val.map(c => c.candidate_name);
+  //     await this.addProfiles(this.custodians, candidates_on_page);
+  //   }
 
-  created() {
+  // },
+
+  mounted() {
+    
     this.getAllCandidates();
   },
 
@@ -230,7 +238,10 @@ export default {
       });
       temp = temp.map( (c, index) => { c.position = index+1; return c} );
 
+      let candidates_names = temp.map(c => c.candidate_name);
+      await this.addProfiles(temp, candidates_names); 
       this.custodians = temp;
+      
       await this.getMemberVotes();
       this.loading = false;
     },
@@ -275,23 +286,32 @@ export default {
 
     //add profile data to candidate
     addProfile(eventdata){
-      this.custodians.find(x => x.candidate_name === eventdata.candidate_name).profile =eventdata.profile;
+      // let cand = this.custodians.find(x => x.candidate_name === eventdata.candidate_name);
+      // if(cand.profile === undefined){
+      //   cand.profile =eventdata.profile;
+      // }
     },
 
-    // getAllProfiles(){
-    //   let p = await this.$store.dispatch('api/getProfileData', {accountname: this.account_name} );
-    //   console.log(p);
-    //   if(p && p.length){
-    //     this.form = p[0].profile;
-    //     this.profile_is_irrevirsible = p[0].irrevirsible;
-    //     this.allow_edit = this.account_name === this.getAccountName && this.profile_is_irrevirsible ? true : false;
+    async addProfiles(to, candlist){
+      if(!Array.isArray(candlist) ){
+        console.log('This method needs an array of candidate names');
+        return false;
+      }
+      let p = await this.$store.dispatch('api/getProfileData2', {accountname: candlist} );
+      
+      if(p.length){
+        p.forEach(pdb =>{
+          let cand = to.find(x => x.candidate_name === pdb._id);
+          if(cand.profile === undefined){
+            cand.profile =pdb.profile;
+          }
+        })
+      }
+      else{
+        
+      }
 
-    //   }
-    //   this.profile_is_loading = false;
-
-
-
-    // },
+    },
 
     checkVotesChanged(){
       let newvotes = this.custodians.filter(x => x.selected == true);

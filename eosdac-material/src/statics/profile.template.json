@@ -1,10 +1,10 @@
 {
     "givenName": "",
     "familyName": "",
-    "gender": "other",
-    "description": "no bio available",
+    "gender": "",
+    "description": "",
     "email": "",
-    "url": "http://google.com",
+    "url": "",
     "image": "",
     "sameAs": [],
     "timezone": ""

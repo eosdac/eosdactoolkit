@@ -214,12 +214,12 @@ export default {
 
     validateProfile(profile) {
       
-      // let validkeys = Object.keys(this.form);
       let validkeys = Object.keys(ProfileTemplate);
-      // console.log(validkeys)
+
       let valid = validkeys.every(function (key) {
           return profile.hasOwnProperty(key);
       });
+      //loop over keys to see if types match
       if(valid){
         console.log('Fetched profile is valid');
       }

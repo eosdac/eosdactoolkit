@@ -51,25 +51,36 @@ export default {
   
   methods: {
 
-    async getProfileData(){
+    // async getProfileData(){
       
-      if(this.data.profile === undefined){
+    //   if(this.data.profile === undefined){
+
+    //     let p = await this.$store.dispatch('api/getProfileData2', {accountname: [this.data.candidate_name] } );
+
+    //     if(p && p.length){
+    //       if( this.isUrl(p[0].profile.image) ) {
+
+    //         this.image_profile = p[0].profile.image;
+    //         this.sociallinks = p[0].profile.sameAs.map(x => x.link);
+    //       }
+    //       this.$emit('profile', {candidate_name:this.data.candidate_name, profile: p[0].profile});
+    //     }
+    //   }
+    //   else{
+    //     this.image_profile = this.data.profile.image;
+    //     this.sociallinks = this.data.profile.sameAs.map(x => x.link);
+    //   }
+    // },
+
+      async getProfileData(){
+      
+      if(this.data.profile !== undefined){
         // console.log(this.data.candidate_name)
-        let p = await this.$store.dispatch('api/getProfileData2', {accountname: [this.data.candidate_name] } );
-        // console.log(p);
-        if(p && p.length){
-          if( this.isUrl(p[0].profile.image) ) {
-            // console.log(p[0].profile.image);
-            this.image_profile = p[0].profile.image;
-            this.sociallinks = p[0].profile.sameAs.map(x => x.link);
-          }
-          this.$emit('profile', {candidate_name:this.data.candidate_name, profile: p[0].profile});
-        }
-      }
-      else{
         this.image_profile = this.data.profile.image;
         this.sociallinks = this.data.profile.sameAs.map(x => x.link);
       }
+      
+
     },
 
     isUrl(url){
