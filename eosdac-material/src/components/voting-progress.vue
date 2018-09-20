@@ -14,7 +14,7 @@
     <span v-else class="q-caption float-right">{{$t('votingprogress.loading')}}</span>
   </div>
 
-  <div v-if="met_initial_votes_threshold && !loading">Voting threshold of 15% met. eosDac is unlocked.</div>
+  <div v-if="met_initial_votes_threshold && !loading">{{$t('votingprogress.threshold_met')}}</div>
 </span>
 
 </template>
@@ -38,8 +38,8 @@ export default {
   },
 
   methods:{
-    initProgressbar(){
-      this.getContractState();
+    async initProgressbar(){
+      await this.getContractState();
       this.intervaller(60);
     },
 

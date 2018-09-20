@@ -266,6 +266,8 @@ export default {
     voting_progress: 'voting progress'
   },
   regcandidate:{
+    profile_not_confirmed: 'You submitted your profile but it is still unconfirmed on the blockchain, please wait and try again.',
+    profile_required: 'For registering as a candidate you need a profile.',
     loadconfig: 'Loading contract configuration',
     register: 'register',
     register_as_candidate: 'Register as Candidate',
@@ -296,7 +298,8 @@ export default {
     loading :'loading...',
     refresh: 'Refresh',
     update_in: 'update in',
-    seconds : 'seconds'
+    seconds : 'seconds',
+    threshold_met : 'Voting threshold of 15% met. eosDac is unlocked.'
 
   }
 

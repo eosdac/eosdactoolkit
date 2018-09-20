@@ -21,8 +21,8 @@
 
 <div class="q-pa-md">
   <div v-if="!profile_is_irrevirsible" class="bg-dark2 q-pa-md round-corners shadow-5">
-    For registering as a candidate you need a profile.
-    <span v-if="hasprofile">You submitted your profile but it is still unconfirmed on the blockchain, please wait and try again.</span>
+    {{ $t("regcandidate.profile_required") }}
+    <span v-if="hasprofile">{{ $t("regcandidate.profile_not_confirmed") }}</span>
   </div>
 
   <div v-if="profile_is_irrevirsible" class="row q-mt-md gutters-md bg-dark2 round-corners shadow-5" style="min-height:265px">
