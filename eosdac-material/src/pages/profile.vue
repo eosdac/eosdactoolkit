@@ -61,7 +61,7 @@
         <div class="" style="height:100%">
           <div class="q-title q-mb-md">{{ $t('profile.bio') }}</div>
           <q-input v-if="is_edit" inverted rows="8" color="dark" type="textarea" v-model="form.description" dark />
-          <div class="text-dimwhite q-body-1" v-if="!is_edit">{{form.description}}</div>
+          <div class="text-dimwhite q-body-1" style="overflow:hidden" v-if="!is_edit">{{form.description}}</div>
           
         </div>
       </div>
@@ -71,7 +71,7 @@
           <!-- on display -->
           <div v-if="!is_edit">
             <div class="q-title q-mb-md">{{ $t('profile.website') }}</div>
-            <div class="text-dimwhite q-body-1">{{form.url}}</div>
+            <div v-if="$helper.isUrl(form.url)" class="text-dimwhite q-body-1"><a target="_blank" :href="form.url">{{form.url}}</a></div>
             <div class="q-mt-md">
               <SocialLinks :links="form.sameAs.map(x => x.link)" />
             </div>
