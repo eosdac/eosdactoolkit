@@ -1,5 +1,5 @@
 <template>
-  <div v-html="convertedAndSanitizedHtml" class="markdown-body" v-bind:class="{ overwrite: dark }"></div>
+<div v-html="convertedAndSanitizedHtml" class="markdown-body" v-bind:class="{ overwrite: dark }"></div>
 </template>
 
 <script>
@@ -9,16 +9,34 @@ export default {
   name: 'MarkdownViewer',
   props: {
     text: String,
-    dark: Boolean
+    dark: Boolean,
+    blackList: Boolean,
+    tags: Array
   },
-  data () {
+  data() {
     return {
+      allowedDefaultTags: sanitizeHtml.defaults.allowedTags
     }
   },
   computed: {
     convertedAndSanitizedHtml() {
       let md = new MarkdownIt()
-      return md.render(sanitizeHtml(this.text))
+      let allowedHtmlTags = ['h3', 'h4', 'h5', 'h6', 'blockquote', 'p', 'a', 'ul', 'ol',
+        'nl', 'li', 'b', 'i', 'strong', 'em', 'strike', 'code', 'hr', 'br',
+        'table', 'thead', 'caption', 'tbody', 'tr', 'th', 'td', 'pre'
+      ]
+      if (this.tags && this.tags.length) {
+        if (this.blackList) {
+          for (let i = 0; i < this.tags.length; i++) {
+            allowedHtmlTags.splice(allowedHtmlTags.indexOf(this.tags[i]), 1)
+          }
+        } else {
+          allowedHtmlTags = this.tags
+        }
+      }
+      return sanitizeHtml(md.render(this.text), {
+        allowedTags: allowedHtmlTags
+      })
     }
   }
 }
