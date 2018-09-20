@@ -18,6 +18,7 @@
     "ipfs-api": "^23.0.0",
     "markdown-it": "^8.4.1",
     "request": "^2.87.0",
+    "sanitize-html": "^1.19.0",
     "scatter-js": "^2.4.0",
     "vue-i18n": "^7.3.3",
     "vuex-persistedstate": "^2.5.4",
