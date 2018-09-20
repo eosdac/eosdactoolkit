@@ -8,7 +8,6 @@ module.exports = function(ctx) {
       'axios',
       'configloader',
       'eosdac-iconfont',
-      'ipfs',
       'scatter',
       'consolemessage',
       'helper'
