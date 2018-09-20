@@ -44,7 +44,7 @@ export default {
 
   data () {
     return {
-      image_profile:'https://eosdac.io/wp-content/uploads/elementor/thumbs/female1-nqk9ciy87u6os74yatkpw2xi7qbjzjq3r5sl9wy0mm.jpg',
+      image_profile:'../assets/default-avatar.png',
       sociallinks : []
     }
   },

@@ -168,7 +168,7 @@ export default {
       getScatter: 'api/getScatter',
     }),
     setImgSrc(){
-      let image = 'https://i0.wp.com/www.hylandfishandchips.ca/wp-content/uploads/2015/11/Sad-Fish-300x243.png'; //default image
+      let image = '../assets/default-avatar.png'; //default image
       if(this.$helper.isUrl(this.form.image)){
         image = this.form.image;
       }
