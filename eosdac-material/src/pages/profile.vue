@@ -168,7 +168,7 @@ export default {
       getScatter: 'api/getScatter',
     }),
     setImgSrc(){
-      let image = '../assets/default-avatar.png'; //default image
+      let image = '../statics/img/default-avatar.png'; //default image
       if(this.$helper.isUrl(this.form.image)){
         image = this.form.image;
       }

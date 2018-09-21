@@ -44,7 +44,7 @@ export default {
 
   data () {
     return {
-      image_profile:'../assets/default-avatar.png',
+      image_profile:'../statics/img/default-avatar.png',
       sociallinks : []
     }
   },
