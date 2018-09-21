@@ -621,8 +621,14 @@ export async function getProfileData({}, payload){
 }
 
 export async function getProfileData2({}, payload){
-  // console.log(payload.accountname)
-  let url = configFile.api.profileApiUrl+'profiles';
+
+  let url = configFile.api.profileApiUrl;
+  if (url.substr(-1) != '/'){
+    url += '/profiles';
+  }
+  else{
+    url += 'profiles';
+  }
 
   return axios.post(url, payload.accountname ).then(r => {
       // console.log(r.data)
