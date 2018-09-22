@@ -85,6 +85,7 @@ export default {
       korean: '韩文',
       russian: '俄文',
       spanish: '西班牙文',
+      vietnamese: '越南',
     },
   },
   multi_modal: {

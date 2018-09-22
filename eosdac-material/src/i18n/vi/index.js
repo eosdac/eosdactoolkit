@@ -85,6 +85,7 @@ export default {
       korean: 'Hàn Quốc',
       russian: 'Nga',
       spanish: 'Tây Ban Nha',
+      vietnamese: 'Tiếng Việt',
     },
   },
   multi_modal: {
@@ -284,7 +285,7 @@ export default {
     toggle_adjust_net_allocation: 'Toggle Network allocation adjustment',
     toggle_adjust_ram_allocation: 'Toggle RAM allocation adjustment',
     token_selection_and_quantity: 'Chọn Token và Số Lượng',
-    total: 'tổng'
+    total: 'tổng',
     total_cost: 'Total Cost',
     total_eos_balance: 'Tổng số dư eos',
     total_staked: 'Tổng Đặt Cọc',

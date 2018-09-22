@@ -14,6 +14,7 @@
       { label: $t('lang_selector.languages.korean') + ' - 한국어',     value: 'ko' },
       { label: $t('lang_selector.languages.russian') + ' - Pусский',    value: 'ru' },
       { label: $t('lang_selector.languages.spanish') + ' - Español',    value: 'es' },
+      { label: $t('lang_selector.languages.vietnamese') + ' - Vietnamese',    value: 'vi' },
     ]"
     v-model="lang"
   />

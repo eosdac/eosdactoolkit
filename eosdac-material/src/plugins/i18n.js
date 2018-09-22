@@ -33,6 +33,7 @@ export default ({
       'ja': messages['ja'],
       'ko': messages['ko'],
       'ru': messages['ru'],
+      'vi': messages['vi'],
       'zh-hans': messages['zh-hans'],
     }
   })
