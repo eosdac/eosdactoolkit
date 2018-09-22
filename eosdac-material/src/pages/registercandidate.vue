@@ -11,7 +11,6 @@
 
     <div class="blur-details q-pa-md absolute-bottom" style="height:120px;margin-right:-16px;margin-left:-16px;">
       <div class="column  justify-center q-px-md full-height">
-        <pre>{{iscandidatedata}}</pre>
       </div>
     </div>
   </div>
@@ -24,16 +23,17 @@
 
   <div v-if="profile_is_irrevirsible" class="row q-mt-md gutters-md bg-dark2 round-corners shadow-5" style="min-height:265px">
 
-        <div class="col-md-8 col-sm-12 q-pa-md">
-          <div v-if="!getMemberRoles.candidate" >{{$t('regcandidate.page_description_unregistered') }}</div>
-          <div v-if="getMemberRoles.candidate" >
-            {{ $t('regcandidate.page_description_registered') }}
+        <div class="col-md-8 col-sm-12 q-pa-md text-dimwhite">
+          <span v-if="!getMemberRoles.candidate" >{{$t('regcandidate.page_description_unregistered') }}</span>
+          <span v-if="getMemberRoles.candidate" >
+            {{$t('regcandidate.page_description_registered') }}
             <ul>
               <li>{{ $t('regcandidate.stake_amount') }}: {{ iscandidatedata.locked_tokens }}</li>
               <li>{{ $t('regcandidate.requested_pay') }}: {{ iscandidatedata.requestedpay }}</li>
             </ul>
-          </div>
-          <div v-if="getMemberRoles.custodian">{{ $t('regcandidate.page_description_active_custodian') }}</div>
+            <!-- <pre>{{iscandidatedata}}</pre> -->
+          </span>
+          <span v-if="getMemberRoles.custodian">{{ $t('regcandidate.page_description_active_custodian') }}</span>
         </div>
 
         <div class="col-md-4 col-sm-12 q-pa-md">
