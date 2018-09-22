@@ -38,7 +38,7 @@ export default {
     go_back: 'Go back',
     sorry_nothing_here: 'Sorry, nothing here...',
   },
-  index:{
+  index: {
     description_p1: 'eosDAC is a decentralized autonomous community which means it is owned and operated by the token holders who agree to the constitution and register as members of the community.',
     description_p2: 'When completed, this member client will allow you to read the constitution, register as a member, submit worker proposals, register as a custodian candidate, vote on custodians, transfer tokens, and more. If you have any questions, please reach out to us using the links below.',
     discord_description : 'eosDAC exists as an active, engaged community building tools to enable other DACs. Discord is where we bring our skills together and coordinate our activites.',
