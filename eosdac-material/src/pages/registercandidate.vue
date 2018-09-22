@@ -16,9 +16,6 @@
     </div>
   </div>
 
-
-
-
 <div class="q-pa-md">
   <div v-if="!profile_is_irrevirsible" class="bg-dark2 q-pa-md round-corners shadow-5">
     {{ $t("regcandidate.profile_required") }}
@@ -26,13 +23,23 @@
   </div>
 
   <div v-if="profile_is_irrevirsible" class="row q-mt-md gutters-md bg-dark2 round-corners shadow-5" style="min-height:265px">
-        <div class="col-md-8 col-sm-12 q-pa-md">
-          dddddddd
+        <div v-if="!getMemberRoles.candidate" class="col-md-8 col-sm-12 q-pa-md">
+          {{ $t('regcandidate.page_description_unregistered') }}
+        </div>
+        <div v-if="getMemberRoles.candidate" class="col-md-8 col-sm-12 q-pa-md">
+          {{ $t('regcandidate.page_description_registered') }}
+          <ul>
+            <li>{{ $t('regcandidate.stake_amount') }}: {{ iscandidatedata.locked_tokens }}</li>
+            <li>{{ $t('regcandidate.requested_pay') }}: {{ iscandidatedata.requestedpay }}</li>
+          </ul>
+        </div>
+        <div v-if="getMemberRoles.custodian" class="col-md-8 col-sm-12 q-pa-md">
+          {{ $t('regcandidate.page_description_active_custodian') }}
         </div>
         <div class="col-md-4 col-sm-12 q-pa-md">
-          <q-input color="p-light" dark type="text" v-model="stakedata.quantity" float-label="Stake Amount" placeholder="1.0000 KASDAC" />
+          <q-input color="p-light" dark type="text" v-model="stakedata.quantity" :float-label="$t('regcandidate.stake_amount')" :placeholder="$t('regcandidate.amount_to_stake_placeholder')" />
           <!-- <q-input dark  type="hidden" v-model="registerdata.bio"  float-label="Profile JSON url" placeholder="http://example.com/myjsonprofile.json" /> -->
-          <q-input color="p-light" dark type="text" v-model="registerdata.requestedpay" float-label="Requested Pay" placeholder="requested pay in EOS" />
+          <q-input color="p-light" dark type="text" v-model="registerdata.requestedpay" :float-label="$t('regcandidate.requested_pay')" :placeholder="$t('regcandidate.requested_custodian_pay_placeholder')" />
           <q-btn size="md" v-if="!getMemberRoles.candidate" class="animate-pop" :loading="loading" color="primary" @click="registerAsCandidate" :label="$t('regcandidate.register')">
             <q-spinner slot="loading" />
           </q-btn>

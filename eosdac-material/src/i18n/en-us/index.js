@@ -263,16 +263,23 @@ export default {
     rows_per_page: 'Rows Per Page',
     search: 'Search',
     submit_my_votes: 'SUBMIT MY VOTES',
-    voting_progress: 'voting progress'
+    voting_progress: 'voting progress',
   },
   regcandidate:{
+    amount_to_stake_placeholder: 'amount to stake EOSDAC',
+    loadconfig: 'Loading contract configuration',
+    page_description_active_custodian: 'You are currently active as an eosDAC custodian board member.',
+    page_description_registered: 'Thank you for registering as a candidate to serve on the eosDAC custodian board. As part of your candidacy registration, some of your tokens have been staked.',
+    page_description_unregistered: 'This page is for registering as a candidate for a position on the custodian board. This position comes with responsibiliies outlined in the eosDAC Constitution. Please, do not register as a candidate unless you fully understand and can meet the responsibilites of an eosDAC custodian board member. Please review section 5 of the constitution carefully before registering.',
     profile_not_confirmed: 'You submitted your profile but it is still unconfirmed on the blockchain, please wait and try again.',
     profile_required: 'For registering as a candidate you need a profile.',
-    loadconfig: 'Loading contract configuration',
     register: 'register',
     register_as_candidate: 'Register as Candidate',
+    requested_custodian_pay_placeholder: 'requested pay in EOS',
+    requested_pay: 'Requested Pay',
+    stake_amount: 'Stake Amount',
+    unregister: 'unregister',
     unregister_as_candidate: 'Unregister as Candidate',
-    unregister: 'unregister'
   },
   index:{
     description_p1: 'eosDAC is a decentralized autonomous community which means it is owned and operated by the token holders who agree to the constitution and register as members of the community.',
