@@ -134,7 +134,7 @@ export default {
     user_name: 'Nom d\'utilisateur',
     website: 'Site Internet',
   },
-  regcandidate:{
+  regcandidate: {
     amount_to_stake_placeholder: 'amount to stake EOSDAC',
     loadconfig: 'Loading contract configuration',
     page_description_active_custodian: 'You are currently active as an eosDAC custodian board member.',
@@ -226,7 +226,7 @@ export default {
     warning_ram: 'Faible RAM. Il reste moins de 10% de votre allocation de mémoire vive. La transaction peut échouer.',
     warning_ricardian: 'Le contrat ricardien pour cette action n\'a pu être trouvé. Êtes-vous sûr de vouloir exécuter cette transaction?',
   },
-  vote_custodians:{
+  vote_custodians: {
     candidate_list: 'Liste des candidats',
     description_main: 'Le conseil de surveillance gère les opérations et les affaires du CAD, notamment la gouvernance et l\'administration des actifs et des passifs du CAD. Les membres suivants du CAD ont confié à certains de leurs jetons de se présenter et de présenter des candidats pour un poste au sein du conseil de surveillance, qui dure sept jours. Tous les 7 jours, vos votes sont recalculés pour sélectionner ceux qui feront partie du conseil d\'administration suivant. Le vote est important! S\'il vous plaît voter souvent et rester engagé au sein du CAD pour savoir qui fournit de la valeur.',
     description_side: 'Vous pouvez voter pour un maximum de 5 candidats gardiens à la fois. Veuillez sélectionner les candidats qui, selon vous, apporteront de la valeur au CAD.',
@@ -237,7 +237,7 @@ export default {
     submit_my_votes: 'SOUMETTRE mes votes',
     voting_progress: 'voting progress',
   },
-  votingprogress:{
+  votingprogress: {
     activated_at: 'The DAC will be activated at 15%',
     loading :'loading...',
     refresh: 'Refresh',

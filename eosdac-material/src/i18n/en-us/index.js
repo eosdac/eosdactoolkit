@@ -134,7 +134,7 @@ export default {
     user_name: 'User Name',
     website: 'Website',
   },
-  regcandidate:{
+  regcandidate: {
     amount_to_stake_placeholder: 'amount to stake EOSDAC',
     loadconfig: 'Loading contract configuration',
     page_description_active_custodian: 'You are currently active as an eosDAC custodian board member.',
@@ -226,7 +226,7 @@ export default {
     warning_ram: 'Low RAM. Your RAM allocation has less than 10% remaining. The Transaction might fail.',
     warning_ricardian: 'The ricardian contract for this action could not be found. Are you sure you want to execute this transaction?',
   },
-  vote_custodians:{
+  vote_custodians: {
     candidate_list: 'Candidate List',
     description_main: 'The Custodian Board manages the operations and affairs of the DAC, including but not limited to the governance and administration of the assets and liabilities of the DAC. The following DAC members have vested some of their tokens to submit themselves and candidates for a position on the custodian board which last for 7 days. Every 7 days, your votes are recalculated to select who will be part of the next custodian board. Voting is important! Please vote often and stay engaged within the DAC to know who is providing value.',
     description_side: 'You can vote for up to 5 custodian candidates at a time. Please select candidates who you think will bring value to the DAC.',
@@ -237,7 +237,7 @@ export default {
     submit_my_votes: 'SUBMIT MY VOTES',
     voting_progress: 'voting progress',
   },
-  votingprogress:{
+  votingprogress: {
     activated_at: 'The DAC will be activated at 15%',
     loading :'loading...',
     refresh: 'Refresh',

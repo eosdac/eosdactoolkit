@@ -134,7 +134,7 @@ export default {
     user_name: 'Nombre de usuario',
     website: 'Sitio web',
   },
-  regcandidate:{
+  regcandidate: {
     amount_to_stake_placeholder: 'amount to stake EOSDAC',
     loadconfig: 'Loading contract configuration',
     page_description_active_custodian: 'You are currently active as an eosDAC custodian board member.',
@@ -226,7 +226,7 @@ export default {
     warning_ram: 'Baja RAM. Su asignación de RAM tiene menos del 10%. La transacción puede fallar',
     warning_ricardian: 'El contrato ricardiano para esta acción no pudo ser encontrado. ¿Estás seguro de que deseas ejecutar esta transacción?',
   },
-  vote_custodians:{
+  vote_custodians: {
     candidate_list: 'Lista candidato',
     description_main: 'La Junta de Depositarios maneja las operaciones y asuntos del DAC, incluidos, entre otros, el gobierno y la administración de los activos y pasivos del DAC. Los siguientes miembros de DAC otorgaron algunos de sus tokens para presentarse ellos mismos y los candidatos para un puesto en el consejo de custodia que duran 7 días. Cada 7 días, sus votos se vuelven a calcular para seleccionar quién formará parte de la próxima junta de custodia. ¡Votar es importante! Vota a menudo y mantente comprometido con el DAC para saber quién proporciona valor.',
     description_side: 'Puede votar por hasta 5 candidatos custodios a la vez. Seleccione candidatos que crea que aportarán valor al DAC.',
@@ -237,7 +237,7 @@ export default {
     submit_my_votes: 'ENVIAR mis votos',
     voting_progress: 'voting progress',
   },
-  votingprogress:{
+  votingprogress: {
     activated_at: 'The DAC will be activated at 15%',
     loading :'loading...',
     refresh: 'Refresh',

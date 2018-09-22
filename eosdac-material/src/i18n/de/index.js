@@ -134,7 +134,7 @@ export default {
     user_name: 'Nutzername',
     website: 'Webseite',
   },
-  regcandidate:{
+  regcandidate: {
     amount_to_stake_placeholder: 'amount to stake EOSDAC',
     loadconfig: 'Loading contract configuration',
     page_description_active_custodian: 'You are currently active as an eosDAC custodian board member.',
@@ -226,7 +226,7 @@ export default {
     warning_ram: 'Niedriger Arbeitsspeicher. Ihre RAM-Zuweisung hat weniger als 10% übrig. Die Transaktion schlägt möglicherweise fehl.',
     warning_ricardian: 'Der ricardianische Vertrag für diese Aktion konnte nicht gefunden werden. Möchten Sie diese Transaktion wirklich ausführen?',
   },
-  vote_custodians:{
+  vote_custodians: {
     candidate_list: 'Kandidatenliste',
     description_main: 'Die Depotbank verwaltet die Geschäfte und Angelegenheiten des DAC, einschließlich, aber nicht beschränkt auf, die Verwaltung und Verwaltung der Vermögenswerte und Verbindlichkeiten des DAC. Die folgenden DAC-Mitglieder haben einige ihrer Token zur Verfügung gestellt, um sich selbst und Kandidaten für eine Position auf der Depotbank, die für 7 Tage dauern, vorzulegen. Alle 7 Tage werden Ihre Stimmen neu berechnet, um auszuwählen, wer an der nächsten Depotbank teilnimmt. Abstimmung ist wichtig! Bitte wählen Sie häufig und bleiben Sie innerhalb des DAC engagiert, um zu wissen, wer einen Mehrwert bietet.',
     description_side: 'Sie können für bis zu 5 Depotkandidaten gleichzeitig abstimmen. Bitte wählen Sie Kandidaten aus, von denen Sie glauben, dass sie einen Mehrwert für den DAC bringen.',
@@ -237,7 +237,7 @@ export default {
     submit_my_votes: 'Zustellen meine Stimmen',
     voting_progress: 'voting progress',
   },
-  votingprogress:{
+  votingprogress: {
     activated_at: 'The DAC will be activated at 15%',
     loading :'loading...',
     refresh: 'Refresh',
