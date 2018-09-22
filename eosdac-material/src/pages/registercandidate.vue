@@ -23,19 +23,19 @@
   </div>
 
   <div v-if="profile_is_irrevirsible" class="row q-mt-md gutters-md bg-dark2 round-corners shadow-5" style="min-height:265px">
-        <div v-if="!getMemberRoles.candidate" class="col-md-8 col-sm-12 q-pa-md">
-          {{ $t('regcandidate.page_description_unregistered') }}
+
+        <div class="col-md-8 col-sm-12 q-pa-md">
+          <div v-if="!getMemberRoles.candidate" >{{$t('regcandidate.page_description_unregistered') }}</div>
+          <div v-if="getMemberRoles.candidate" >
+            {{ $t('regcandidate.page_description_registered') }}
+            <ul>
+              <li>{{ $t('regcandidate.stake_amount') }}: {{ iscandidatedata.locked_tokens }}</li>
+              <li>{{ $t('regcandidate.requested_pay') }}: {{ iscandidatedata.requestedpay }}</li>
+            </ul>
+          </div>
+          <div v-if="getMemberRoles.custodian">{{ $t('regcandidate.page_description_active_custodian') }}</div>
         </div>
-        <div v-if="getMemberRoles.candidate" class="col-md-8 col-sm-12 q-pa-md">
-          {{ $t('regcandidate.page_description_registered') }}
-          <ul>
-            <li>{{ $t('regcandidate.stake_amount') }}: {{ iscandidatedata.locked_tokens }}</li>
-            <li>{{ $t('regcandidate.requested_pay') }}: {{ iscandidatedata.requestedpay }}</li>
-          </ul>
-        </div>
-        <div v-if="getMemberRoles.custodian" class="col-md-8 col-sm-12 q-pa-md">
-          {{ $t('regcandidate.page_description_active_custodian') }}
-        </div>
+
         <div class="col-md-4 col-sm-12 q-pa-md">
           <q-input color="p-light" dark type="text" v-model="stakedata.quantity" :float-label="$t('regcandidate.stake_amount')" :placeholder="$t('regcandidate.amount_to_stake_placeholder')" />
           <!-- <q-input dark  type="hidden" v-model="registerdata.bio"  float-label="Profile JSON url" placeholder="http://example.com/myjsonprofile.json" /> -->
