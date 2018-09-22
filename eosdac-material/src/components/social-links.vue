@@ -1,15 +1,14 @@
 <template>
   <div>
-    <q-btn v-if="social.link!=''" v-for="(social, i) in parseLinks"  class="on-left" :key ="i" round color="dark" @click.native="openURL(social.link)" >
-      <q-icon  :name="'icon-'+social.icon" />
-    </q-btn>
+    <a v-if="social.link!=''" v-for="(social, i) in parseLinks"  class="on-left" :key ="i" :href="social.link" target="_blank">
+        <q-btn  round color="dark" >
+          <q-icon  :name="'icon-'+social.icon" />
+        </q-btn>
+    </a>
   </div>
 </template>
 
 <script>
-import {
-  openURL
-} from 'quasar'
 export default {
   name: 'SocialLinks',
 
@@ -33,7 +32,7 @@ export default {
   },
 
   methods:{
-    openURL,
+
     matchSocialIcon(link){
       //supported social networks
       const icons = ['social-youtube-com', 'social-linkedin-com', 'social-ask-fm', 'social-tumblr-com',

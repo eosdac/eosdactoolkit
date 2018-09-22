@@ -48,7 +48,7 @@
         @clickvotefor="addToVoteList(candidate.candidate_name)"
         @clickunvotefor="deleteFromVoteList(candidate.candidate_name)"
       />
-
+ 
       <div class="row bg-dark2 q-pa-md q-mb-md shadow-5 round-borders justify-between" v-if="!loading" >
         <q-search dark color="primary"  v-model="filter" :placeholder="$t('vote_custodians.search')" />
         <div class="row inline items-center" style="font-size:12px;">
@@ -173,8 +173,10 @@ export default {
       this.pagination.max = Math.ceil(filtered.length/this.pagination.items_per_page);
 
       filtered = filtered.slice((this.pagination.page-1) * this.pagination.items_per_page, this.pagination.page * this.pagination.items_per_page);
+
       // let candidates_on_page = filtered.map(c => c.candidate_name);
       // this.addProfiles(filtered, candidates_on_page); 
+
       return filtered;
     }
 
@@ -240,6 +242,7 @@ export default {
 
       let candidates_names = temp.map(c => c.candidate_name);
       await this.addProfiles(temp, candidates_names); 
+      
       this.custodians = temp;
       
       await this.getMemberVotes();

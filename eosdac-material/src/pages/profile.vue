@@ -61,7 +61,10 @@
         <div class="" style="height:100%">
           <div class="q-title q-mb-md">{{ $t('profile.bio') }}</div>
           <q-input v-if="is_edit" inverted rows="8" color="dark" type="textarea" v-model="form.description" dark />
-          <div class="text-dimwhite q-body-1" style="overflow:hidden" v-if="!is_edit">{{form.description}}</div>
+          <div class="text-dimwhite q-body-1" style="overflow:hidden" v-if="!is_edit">
+            {{form.description}}
+            <!-- <pre>{{rawprofiledata}}</pre> -->
+          </div>
           
         </div>
       </div>
