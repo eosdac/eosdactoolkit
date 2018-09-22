@@ -95,6 +95,26 @@
         <q-item-side icon="icon-menu-1" />
         <q-item-main label="Dashboard" sublabel="" />
       </q-item>-->
+      <!-- 
+      <q-item v-if="getMemberRoles.custodian" class="text-blue" to="/custodiandashboard">
+        <q-item-side class="text-blue" icon="icon-role-4" />
+        <q-item-main label="Custodian Dashboard" sublabel="" />
+      </q-item>
+      -->
+      <q-item to="/constitution">
+        <q-item-side icon="icon-register-3" />
+        <q-item-main :label="$t('default.constitution')" sublabel="" />
+      </q-item>
+      <!-- 
+      <q-item to="/votecustodians">
+        <q-item-side icon="icon-ui-3" />
+        <q-item-main :label="$t('default.custodians')" sublabel="" />
+      </q-item>
+      <q-item :to="'/profile/'+getAccountName">
+        <q-item-side icon="icon-menu-10" />
+        <q-item-main :label="$t('default.profile')" sublabel="" />
+      </q-item>
+      -->
       <q-item to="/wallet">
         <q-item-side icon="icon-menu-6" />
         <q-item-main :label="$t('default.wallet')" sublabel="" />
@@ -108,28 +128,25 @@
         <q-item-side icon="icon-topmenu-6" />
         <q-item-main :label="$t('default.settings')" sublabel="" />
       </q-item>
-      <q-item to="/constitution">
-        <q-item-side icon="icon-register-3" />
-        <q-item-main :label="$t('default.constitution')" sublabel="" />
-      </q-item>
-      <!--
-      <q-item to="/profile">
-        <q-item-side icon="icon-single-neutral-focus" />
-        <q-item-main :label="$t('default.profile')" sublabel="" />
-      </q-item>
-      <q-item to="/votecustodians">
-        <q-item-side icon="icon-ui-3" />
-        <q-item-main :label="$t('default.custodians')" sublabel="" />
-      </q-item>
-      <q-item to="/workerproposals">
-        <q-item-side icon="icon-menu-8" />
-        <q-item-main :label="$t('default.worker_proposals')" sublabel="" />
-      </q-item>
-      <q-item to="/registercandidate">
+
+      <!-- 
+      <q-item v-if="!getMemberRoles.candidate" to="/managecandidateship">
         <q-item-side icon="icon-menu-12" />
         <q-item-main :label="$t('default.register_as_candidate')" sublabel="" />
       </q-item>
+      <q-item v-if="getMemberRoles.candidate" to="/managecandidateship">
+        <q-item-side icon="icon-menu-12" />
+        <q-item-main :label="$t('default.unregister_as_candidate')" sublabel="" />
+      </q-item>
       -->
+
+      <!-- <q-item to="/workerproposals">
+        <q-item-side icon="icon-menu-8" />
+        <q-item-main :label="$t('default.worker_proposals')" sublabel="" />
+      </q-item> -->
+
+
+
     </q-list>
     <q-list v-else no-border link inset-delimiter dark>
       <q-item @click.native="unlockAccount()">
@@ -152,15 +169,14 @@
         <q-btn class="q-mt-sm" @click="$refs.Multi.init('sign')" text-color="blue" color="white">{{ $t('default.sign_the_constitution') }}</q-btn>
       </q-alert>
     </transition>
-    <router-view v-if="getAccountName" />
-    <h4 class="text-white q-ma-md" v-else>{{ $t('default.logged_out') }}</h4>
-    <!--<Initialize ref="Initialize" />-->
+    <router-view />
+
     <Notifier :drawer="leftDrawerOpen" />
 
   </q-page-container>
   <MultiModal ref="Multi" />
 
-  <q-btn v-back-to-top.animate="{offset: 500, duration: 200}" round color="primary" class="fixed-bottom-right animate-pop" style="margin: 0 20px 15px 0; z-index:9999">
+  <q-btn v-back-to-top.animate="{offset: 500, duration: 200}" round color="primary" class="fixed-bottom-right animate-pop z-max" style="margin: 0 20px 15px 0;">
     <q-icon name="keyboard_arrow_up" />
   </q-btn>
 
@@ -194,7 +210,8 @@ export default {
   },
   data() {
     return {
-      leftDrawerOpen: this.$q.platform.is.desktop,
+      // leftDrawerOpen: this.$q.platform.is.desktop,
+      leftDrawerOpen: this.$router.currentRoute.path=='/' ? false : this.$q.platform.is.desktop,
       tokenName: this.$configFile.network.tokenContract.token,
       mainCurrencyName: this.$configFile.network.mainCurrencyContract.token,
       lastQuery: 0,
@@ -213,11 +230,13 @@ export default {
       getAutolockInterval: 'account/getAutolockInterval',
       getConnectionInterval: 'api/getConnectionInterval',
       getLastUnlock: 'account/getLastUnlock',
+      getUnlocked: 'account/getUnlocked',
       getTokenBalance: 'account/getTokenBalance',
       getAccount: 'account/getAccount',
       getMainCurrencyBalance: 'account/getMainCurrencyBalance',
       getLanguage: 'usersettings/getLanguage',
-      getRegisteredVersionUpdate: 'account/getRegisteredVersionUpdate'
+      getRegisteredVersionUpdate: 'account/getRegisteredVersionUpdate',
+      getMemberRoles: 'account/getMemberRoles'
     })
   },
   methods: {
@@ -231,6 +250,7 @@ export default {
     async lockScatter() {
       this.getScatter.forgetIdentity()
       this.$store.commit('account/LOCK_ACCOUNT')
+
     },
     async queryApis() {
       let now = Date.now()
@@ -247,6 +267,10 @@ export default {
   mounted() {
     if (!this.getImported) {
       this.$refs.Multi.init('register')
+    } else {
+      if (!this.getUnlocked && this.getScatter) {
+        this.$refs.Multi.init('signin')
+      }
     }
     setInterval(this.queryApis, 1000)
   },
@@ -258,6 +282,25 @@ export default {
         this.$q.i18n.set(lang.default)
       }
     })
+  },
+  watch: {
+    getAccountName(val) {
+      let current_path = this.$router.currentRoute.path;
+      console.log(current_path)
+      if(!val){
+        console.log('logget out')
+        this.$router.push({ path: '/' });
+        this.leftDrawerOpen = false;
+      }
+      else{
+        this.leftDrawerOpen = this.$q.platform.is.desktop;
+      }
+    },
+    getScatter(val) {
+      if (val && this.getImported && !this.getUnlocked) {
+        this.$refs.Multi.init('signin')
+      }
+    }
   }
 }
 </script>

@@ -33,7 +33,7 @@
 </style>
 
 <script>
-import MarkdownIt from 'markdown-it'
+import marked from 'marked'
 import LoadingSpinner from 'components/loading-spinner'
 
 export default {
@@ -55,12 +55,11 @@ export default {
   methods: {
 
     async getConstitution() {
-      let md = new MarkdownIt();
       this.isloading = true;
       try {
         let latestMemberTerms = await this.$store.dispatch('api/getMemberTerms');
         let getCt = await this.loadConstitutionFromGithub(latestMemberTerms.terms);
-        this.constitution = md.render(getCt);
+        this.constitution = marked(getCt, {sanitize: true})
         this.isloading = false;
 
       } catch (e) {

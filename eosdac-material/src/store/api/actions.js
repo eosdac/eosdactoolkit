@@ -1,6 +1,7 @@
 import Eos from 'eosjs'
 import Timeout from 'await-timeout'
 import configFile from '../../statics/config.json'
+import axios from 'axios'
 
 
 const eosConfig = {
@@ -212,7 +213,7 @@ export async function getIsCandidate({
       commit('account/SET_MEMBER_ROLES', {candidate: false}, {root: true} );
       return false;
     } else {
-      if (candidate.rows[0].candidate_name === rootState.account.info.account_name) {
+      if (candidate.rows[0].candidate_name === rootState.account.info.account_name && candidate.rows[0].is_active) {
         commit('account/SET_MEMBER_ROLES', {candidate: true}, {root: true} );
         return candidate.rows[0];
       } else {
@@ -226,7 +227,44 @@ export async function getIsCandidate({
     throw error
   }
 }
-//todo getIsCustodian
+//only use this function to check if the current logged in user is a custodian
+export async function getIsCustodian({
+  state,
+  commit,
+  rootState
+}) {
+  if(configFile.network.custodianContract.name ===''){
+    return false;
+  };
+  try {
+    eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint
+    let eos = Eos(eosConfig)
+    const custodian = await eos.getTableRows({
+      json: true,
+      scope: configFile.network.custodianContract.name,
+      code: configFile.network.custodianContract.name,
+      table: 'custodians',
+      lower_bound: rootState.account.info.account_name,
+      limit:1
+    })
+    if (!custodian.rows.length) {
+      commit('account/SET_MEMBER_ROLES', {custodian: false}, {root: true} );
+      return false;
+    } else {
+      if (custodian.rows[0].cust_name === rootState.account.info.account_name) {
+        commit('account/SET_MEMBER_ROLES', {custodian: true}, {root: true} );
+        return custodian.rows[0];
+      } else {
+        commit('account/SET_MEMBER_ROLES', {custodian: false}, {root: true} );
+        return false;
+      }
+    }
+    commit('SET_CURRENT_CONNECTION_STATUS', true)
+  } catch (error) {
+    apiDown(error,commit)
+    throw error
+  }
+}
 
 export async function getCustodians({
   state,
@@ -235,7 +273,7 @@ export async function getCustodians({
 }, param) {
 
   try {
-    console.log(param)
+    // console.log(param)
     eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint
     let eos = Eos(eosConfig)
     const custodians = await eos.getTableRows({
@@ -281,7 +319,14 @@ export async function getMemberVotes({
     if (!votes.rows.length) {
       return false
     } else {
-      return votes.rows
+      // console.log(votes.rows[0].voter +'---'+param.member)
+      if(votes.rows[0].voter === param.member){
+        return votes.rows
+      }
+      else{
+        return false;
+      }
+
     }
     commit('SET_CURRENT_CONNECTION_STATUS', true)
   } catch (error) {
@@ -322,12 +367,12 @@ export async function registerCandidate({
             },
             {
               account: configFile.network.custodianContract.name,
-              name: 'regcandidate',
+              name: 'nominatecand',
               authorization: [{
                 actor: accountname,
                 permission: authority
               }],
-              data: Object.assign({cand : accountname}, payload.registerdata) 
+              data: Object.assign({cand : accountname}, payload.registerdata)
             },
           ]
         }
@@ -445,6 +490,9 @@ export async function updateAccountInfo({
   rootState,
   commit
 }) {
+  if(rootState.account.info === null){
+    return false;
+  }
   try {
     eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint
     let eos = Eos(eosConfig)
@@ -511,4 +559,81 @@ export async function getContractConfig({
     apiDown(error,commit)
     throw error
   }
+}
+
+export async function getContractState({
+  state,
+  commit,
+}, payload) {
+  console.log('getting contract state data');
+  try {
+    eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint
+    let eos = Eos(eosConfig);
+    const cstate = await eos.getTableRows({
+      json: true,
+      scope: payload.contract,
+      code: payload.contract,
+      table: 'state'
+    })
+    if (!cstate.rows.length) {
+      return false;
+    } else {
+      return cstate.rows[0];
+    }
+    commit('SET_CURRENT_CONNECTION_STATUS', true)
+  } catch (error) {
+    apiDown(error,commit)
+    throw error
+  }
+}
+
+export async function getRamPrice({
+  state,
+  commit
+}) {
+  try {
+    eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint
+    let eos = Eos(eosConfig)
+    const ramInfo = await eos.getTableRows({
+      json: true,
+      scope: configFile.network.systemContract.name,
+      code: configFile.network.systemContract.name,
+      table: 'rammarket'
+    })
+    return ramInfo.rows[0]
+    commit('SET_CURRENT_CONNECTION_STATUS', true)
+  } catch (error) {
+    apiDown(error,commit)
+    throw error
+  }
+}
+
+export async function getProfileData({}, payload){
+  // console.log(payload.accountname)
+  let url = configFile.api.profileApiUrl+'profile/'+payload.accountname;
+
+  return axios.get(url).then(r => {
+      // console.log(r.data)
+      return r.data;
+    }).catch(e => {
+      console.log('could not load profile file'); 
+      return false;});
+}
+
+export async function getProfileData2({}, payload){
+
+  let url = configFile.api.profileApiUrl;
+  if (url.substr(-1) != '/'){
+    url += '/profiles';
+  }
+  else{
+    url += 'profiles';
+  }
+
+  return axios.post(url, payload.accountname ).then(r => {
+      // console.log(r.data)
+      return r.data;
+    }).catch(e => {
+      console.log('could not load profile file'); 
+      return false;});
 }

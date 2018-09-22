@@ -8,9 +8,9 @@ module.exports = function(ctx) {
       'axios',
       'configloader',
       'eosdac-iconfont',
-      'ipfs',
       'scatter',
-      'consolemessage'
+      'consolemessage',
+      'helper'
     ],
     css: [
       'app.styl',
@@ -116,7 +116,10 @@ module.exports = function(ctx) {
         'QPagination',
         'QSearch',
         'QSlider',
-        'QToggle'
+        'QToggle',
+        'QTooltip',
+        'QAutocomplete',
+        'QBtnToggle'
       ],
       directives: [
         'Ripple',
@@ -133,7 +136,7 @@ module.exports = function(ctx) {
       i18n: 'en-us'
     },
     // animations: 'all' --- includes all animations
-    animations: ['fadeInDown', 'fadeOutUp'],
+    animations: ['fadeInDown', 'fadeOutUp', 'fadeInUp', 'fadeOutDown'],
     pwa: {
       // workboxPluginMode: 'InjectManifest',
       // workboxOptions: {},

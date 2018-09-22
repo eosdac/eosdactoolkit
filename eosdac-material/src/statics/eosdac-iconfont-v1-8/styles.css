@@ -1,19 +1,19 @@
 @charset "UTF-8";
 
 @font-face {
-  font-family: "eosdac-iconfont-v1-6";
-  src:url("fonts/eosdac-iconfont-v1-6.eot");
-  src:url("fonts/eosdac-iconfont-v1-6.eot?#iefix") format("embedded-opentype"),
-    url("fonts/eosdac-iconfont-v1-6.woff") format("woff"),
-    url("fonts/eosdac-iconfont-v1-6.ttf") format("truetype"),
-    url("fonts/eosdac-iconfont-v1-6.svg#eosdac-iconfont-v1-6") format("svg");
+  font-family: "eosdac-iconfont-v1-8";
+  src:url("fonts/eosdac-iconfont-v1-8.eot");
+  src:url("fonts/eosdac-iconfont-v1-8.eot?#iefix") format("embedded-opentype"),
+    url("fonts/eosdac-iconfont-v1-8.woff") format("woff"),
+    url("fonts/eosdac-iconfont-v1-8.ttf") format("truetype"),
+    url("fonts/eosdac-iconfont-v1-8.svg#eosdac-iconfont-v1-8") format("svg");
   font-weight: normal;
   font-style: normal;
 
 }
 
 [data-icon]:before {
-  font-family: "eosdac-iconfont-v1-6" !important;
+  font-family: "eosdac-iconfont-v1-8" !important;
   content: attr(data-icon);
   font-style: normal !important;
   font-weight: normal !important;
@@ -27,7 +27,7 @@
 
 [class^="icon-"]:before,
 [class*=" icon-"]:before {
-  font-family: "eosdac-iconfont-v1-6" !important;
+  font-family: "eosdac-iconfont-v1-8" !important;
   font-style: normal !important;
   font-weight: normal !important;
   font-variant: normal !important;
@@ -242,11 +242,8 @@
 .icon-menu-9:before {
   content: "\22";
 }
-.icon-topmenu-7:before {
+.icon-role-1:before {
   content: "\28";
-}
-.icon-menu-10:before {
-  content: "\29";
 }
 .icon-menu-11:before {
   content: "\27";
@@ -272,9 +269,30 @@
 .icon-ui-20:before {
   content: "\3b";
 }
-.icon-single-neutral-actions-check-2:before {
+.icon-role-3:before {
   content: "\2a";
 }
 .icon-social-ono-chat:before {
   content: "\3c";
+}
+.icon-menu-10:before {
+  content: "\29";
+}
+.icon-menu-12:before {
+  content: "\3d";
+}
+.icon-role-4:before {
+  content: "\3e";
+}
+.icon-role-2:before {
+  content: "\3f";
+}
+.icon-social-discord-com:before {
+  content: "\40";
+}
+.icon-ui-22:before {
+  content: "\5b";
+}
+.icon-ui-21:before {
+  content: "\5d";
 }

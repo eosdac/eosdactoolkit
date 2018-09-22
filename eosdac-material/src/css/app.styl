@@ -1,7 +1,25 @@
 // app global css
-
+.gradient-bg-primary{
+  background-image linear-gradient(to right, $primary, $p-light);
+}
+.blur-details{
+  background rgba(255, 255, 255, 0.1);
+}
+.center_background_image{
+    display: inline-block;
+    border-radius: 50%;
+    background-position: center center;
+    background-size: cover;
+}
 // font labels and forms
-
+a {
+  text-decoration: none;
+  color: #7c41ba;
+  transition: all .2s ease-in-out;
+}
+a:hover{
+  color: white;
+}
 .q-item-label{
 font-size:14px;
 }
@@ -26,13 +44,21 @@ font-size:14px;
 
 // font Headlines
 
+.regular {
+  font-weight: 400;
+}
+
+
 .drawer-margin {
   margin-left:300px;
 }
 
-.dark2 {
+.text-dark2 {
+  color: #1E2128;
+}
+
+.bg-dark2 {
   background: #1E2128;
-  color: #fff;
 }
 
 .text-dimwhite{
@@ -165,6 +191,7 @@ styles*/
     margin-left: 100px !important;
   }
 
+
 }
 
 /*sm  768px Small sized window*/
@@ -175,6 +202,8 @@ styles*/
       margin-bottom:15px !important;
       padding-top:20px !important;
   }*/
+
+
 }
 /*md  992px Medium-sized window*/
 @media only screen and (min-width: 768px) and (max-width: 991px) {
@@ -191,6 +220,7 @@ styles*/
   .shrink_balance {
     font-size: 27px;
   }
+
 }
 
 /*xl+*/

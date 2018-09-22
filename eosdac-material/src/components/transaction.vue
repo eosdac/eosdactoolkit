@@ -22,8 +22,8 @@
       </q-item>
       <q-item v-else>
         <div class="q-item-label">{{key + ':'}}</div>
-          <q-scroll-area class="bg-dark2" style="width: 100%; height: 80px;">
-            <pre class="q-ma-none q-pa-sm">{{field}}</pre>
+          <q-scroll-area class="bg-dark2 q-ml-sm" style="width: 95%; height: 80px;">
+            <p class="no-margin q-pa-sm" style="word-break: break-all;">{{field}}</p>
         </q-scroll-area>
 
       </q-item>
@@ -47,7 +47,7 @@
 </template>
 
 <script>
-import MarkdownIt from 'markdown-it'
+import marked from 'marked'
 import LoadingSpinner from 'components/loading-spinner'
 import {
   mapGetters
@@ -107,8 +107,7 @@ export default {
         return ricardianAction.name === this.action
       })
       if (ricardianAction && ricardianAction.ricardian_contract) {
-        let md = new MarkdownIt()
-        let ric = md.render(ricardianAction.ricardian_contract)
+        let ric = marked(ricardianAction.ricardian_contract, {sanitize: true})
         this.replaceVars(ric)
       } else {
         this.ricardianError = true
@@ -154,7 +153,8 @@ export default {
               message: 'transaction.transaction_successful',
               details: res.transaction_id,
               linkText: 'transaction.view_in_explorer',
-              linkUrl: this.$configFile.api.mainCurrencyExplorerUrl + '/transaction/' + res.transaction_id
+              linkUrl: this.$configFile.api.mainCurrencyExplorerUrl + '/transaction/' + res.transaction_id,
+              autoclose: 10
             })
           } else {
             this.$store.commit('api/NOTIFY', {
@@ -163,7 +163,8 @@ export default {
               message: 'transaction.transaction_successful',
               details: res.transaction_id,
               linkText: 'transaction.view_in_explorer',
-              linkUrl: this.$configFile.api.tokenExplorerUrl + '/transaction/' + res.transaction_id
+              linkUrl: this.$configFile.api.tokenExplorerUrl + '/transaction/' + res.transaction_id,
+              autoclose: 10
             })
           }
           this.loading = false
@@ -174,14 +175,17 @@ export default {
               icon: 'error',
               color: 'red',
               message: 'Error: ' + err.type,
-              detail: ''
+              detail: '',
+              autoclose: 10
             })
           } else {
+            console.log(err)
             this.$store.commit('api/NOTIFY', {
               icon: 'error',
               color: 'red',
               message: 'Error: ' + JSON.parse(err).error.details[0].message || JSON.parse(err),
-              detail: ''
+              detail: '',
+              autoclose: 10
             })
           }
           this.loading = false
