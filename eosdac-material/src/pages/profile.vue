@@ -65,6 +65,7 @@
             {{form.description}}
             <!-- <pre>{{rawprofiledata}}</pre> -->
           </div>
+          <TimeZone  :offset="form.timezone" />
           
         </div>
       </div>
@@ -132,6 +133,7 @@
 import Transaction from 'components/transaction'
 import LoadingSpinner from 'components/loading-spinner'
 import SocialLinks from 'components/social-links'
+import TimeZone from 'components/time-zone'
 import ProfileTemplate from '../statics/profile.template.json'
 
 import {
@@ -144,7 +146,8 @@ export default {
   components:{
     LoadingSpinner,
     Transaction,
-    SocialLinks
+    SocialLinks,
+    TimeZone
 
   },
   data () {
