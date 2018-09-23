@@ -65,9 +65,10 @@
             {{form.description}}
             <!-- <pre>{{rawprofiledata}}</pre> -->
           </div>
-          <TimeZone  :offset="form.timezone" />
+          
           
         </div>
+        
       </div>
       <div class="col-md-4 col-xs-12 q-pa-md">
         <div class="column justify-between" style="height:100%">
@@ -110,6 +111,9 @@
         </div>
       </div>
     </div>
+  </div>
+  <div v-if="rawprofiledata" class="q-pa-md text-dimwhite">
+    <TimeZone :offset="form.timezone" />
   </div>
 
   <q-modal v-model="visible"  minimized @hide="handleModalClose"  :content-css="{width: '80vw'}" >
