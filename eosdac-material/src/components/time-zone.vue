@@ -1,6 +1,6 @@
 <template>
   <div>
-    <span>Timezone: {{timedif}}</span>
+    <span class="q-caption float-right" >Timezone: {{timedif}} compared to you.</span>
   </div>
 </template>
 
