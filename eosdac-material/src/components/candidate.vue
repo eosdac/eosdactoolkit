@@ -20,7 +20,7 @@
       </template>
       <div class="q-pt-sm q-pt-none" style="border-top:1px solid grey">
         <span>BIO</span>
-        <div class="text-dimwhite" style="overflow:hidden" v-if="data.profile !== undefined">{{data.profile.description}}</div>
+        <div class="text-dimwhite" style="overflow:hidden; white-space: pre-wrap;" v-if="data.profile !== undefined">{{data.profile.description}}</div>
         <SocialLinks class="q-mt-md" :links="sociallinks" />
       </div>
     </q-collapsible>

@@ -135,6 +135,7 @@ export default {
       loading: false,
       voting_progress: 14,
       custodians: [],
+      contractstate: [],
       pagination :{
         page:1,
         max:1,
@@ -226,6 +227,11 @@ export default {
       //filter only active candidates
       temp = temp.filter(c => c.is_active == true);
 
+      if(!temp.length){
+        this.loading = false;
+        return false;
+      }
+
       //sort by votes desc + add selected boolean to all candidates
       //this is less expensive compared to looping through it again.
       temp = temp.sort(function(a, b) {
@@ -244,10 +250,20 @@ export default {
       await this.addProfiles(temp, candidates_names); 
       
       this.custodians = temp;
-      
       await this.getMemberVotes();
+      // await setContractState();
+
       this.loading = false;
     },
+
+    // async setContractState(){
+    //   let state = await this.$store.dispatch('api/getContractState', {contract: this.$configFile.network.custodianContract.name});
+    //   console.log(state)
+    //   if(state){
+    //     this.contractstate = state;
+    //   }
+      
+    // },
 
     addToVoteList(name, init=false){
       let selected = this.custodians.filter(x => x.selected == true);

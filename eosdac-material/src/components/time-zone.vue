@@ -1,6 +1,9 @@
 <template>
   <div>
-    <span class="q-caption float-right" >Timezone: {{timedif}} compared to you.</span>
+    <span class="q-caption float-right" >
+      <q-icon name="access_time"/>
+      Timezone: {{timedif}} compared to you.
+      </span>
   </div>
 </template>
 
@@ -30,14 +33,6 @@ export default {
 
       return rel
     }
-  },
-
-  methods:{
-
- 
-  },
-  mounted:{
-
   }
 }
 </script>
