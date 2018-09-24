@@ -19,7 +19,7 @@
         </q-item-main>
       </template>
       <div class="q-pt-sm q-pt-none" style="border-top:1px solid grey">
-        <q-scroll-area 
+        <q-scroll-area
           style="width: 100%; height: 300px;"
           :thumb-style="{
             right: '-13px',
@@ -30,8 +30,9 @@
           }"
         >
         <div class="q-my-md">BIO</div>
-        <div class="text-dimwhite q-body-1" style="overflow:hidden; white-space: pre-wrap;" v-if="data.profile !== undefined">{{data.profile.description}}</div>
-        
+        <!--<div class="text-dimwhite q-body-1" style="overflow:hidden; white-space: pre-wrap;" v-if="data.profile !== undefined">{{data.profile.description}}</div>-->
+        <MarkdownViewer v-if="data.profile !== undefined" :tags="['h1', 'h2', 'h3', 'italic', 'bold', 'underline', 'strikethrough', 'subscript',
+          'superscript', 'anchor', 'orderedlist', 'unorderedlist']" class="bg-dark2" dark :text="data.profile.description" />
         </q-scroll-area>
         <div class="row justify-between items-center full-height q-pb-sm">
           <div class="q-mb-md" style="border-bottom:1px solid grey; width:100%;height:5px"></div>
@@ -45,11 +46,12 @@
 
 <script>
 import SocialLinks from 'components/social-links'
-
+import MarkdownViewer from 'components/markdown-viewer'
 export default {
   name: 'Candidate',
   components: {
-    SocialLinks
+    SocialLinks,
+    MarkdownViewer
   },
 
   props: {
@@ -63,11 +65,11 @@ export default {
       website : false
     }
   },
-  
+
   methods: {
 
     setProfileData(){
-      
+
       if(this.data.profile !== undefined){
         // console.log(this.data.candidate_name)
         this.image_profile = this.data.profile.image;
