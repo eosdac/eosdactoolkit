@@ -21,10 +21,10 @@
 <div class="row gutter-md reverse-wrap">
   <!-- first column  -->
   <div class="col-lg-12 col-xl-8" >
-    <div>
+    <div >
       <div class="q-display-1 q-mb-md ">{{ $t('vote_custodians.candidate_list') }} <span class="text-dimwhite">- {{custodians.length}}</span></div>
       <p class="text-dimwhite q-body-1">{{ $t('vote_custodians.description_main') }}</p>
-      <div class="row bg-dark2 q-pa-md q-mb-md shadow-5 round-borders justify-between" v-if="!loading" >
+      <div  class="row bg-dark2 q-pa-md q-mb-md shadow-5 round-borders justify-between" v-if="!loading" >
         <q-search dark color="p-light"  v-model="filter" :placeholder="$t('vote_custodians.search')" />
         <div class="row inline items-center" style="font-size:12px;">
           <span>{{ $t('vote_custodians.rows_per_page') }}:</span>
@@ -71,7 +71,7 @@
     <div>
       <div class="q-display-1 q-mb-md">{{ $t('vote_custodians.my_votes') }} <span class="text-dimwhite">- {{getSelectedCand.length}}/{{maxvotes}}</span></div>
       <p class="text-dimwhite q-body-1">{{ $t('vote_custodians.description_side') }}</p>
-      <q-card class="q-pa-lg q-mt-md" style="background:#32363F;">
+      <q-card id="votebox" class="q-pa-lg q-mt-md" style="">
         <q-btn style="font-weight: 300;" v-bind:class="{'pulse': votesdidchange}" class="full-width items-baseline" color="primary" size="xl" @click="voteForCandidates();">
           <div style="width:55px;display:inlineblock">
             <q-icon size="40px" class="float-left" name="icon-ui-3"></q-icon>
@@ -112,11 +112,21 @@
   </div>
 </div><!-- end row -->
 <LoadingSpinner :visible="loading" :text="$t('vote_custodians.loading_candidates')" />
+<q-scroll-observable @scroll="userHasScrolled" />
 </div><!-- end wrapper -->
 </q-page>
 </template>
 
 <script>
+	function offset(el) {
+	    var rect = el.getBoundingClientRect(),
+	    scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,
+	    scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+	    return { top: rect.top + scrollTop, left: rect.left + scrollLeft }
+	}
+
+
+
 import Candidate from 'components/candidate'
 import Transaction from 'components/transaction'
 import LoadingSpinner from 'components/loading-spinner'
@@ -363,6 +373,16 @@ export default {
         this.votesdidchange = false;
         console.log(`${this.getAccountName} has not voted.`);
       }
+    },
+
+    userHasScrolled(scroll){
+      const votebox = document.getElementById('votebox');
+      if(scroll.position < 477 || window.innerWidth < 1200){
+        votebox.style.top = '0px';
+        return false;
+      }
+      console.log(`votebox: ${offset(votebox).top} scroll: ${scroll.position}`);
+      votebox.style.top = (scroll.position-400)+'px';
     }
 
   }
@@ -412,6 +432,13 @@ export default {
   100% {
     transform: scale(1);
   }
+}
+
+#votebox{
+  background:#32363F;
+  position:relative;
+  transition: all 1s ease 0s;
+  top: 0;
 }
 
 </style>
