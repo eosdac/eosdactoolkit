@@ -20,7 +20,7 @@
 <div class="q-pa-md"> <!-- padding wrapper -->
 <div class="row gutter-md reverse-wrap">
   <!-- first column  -->
-  <div class="col-lg-12 col-xl-8" >
+  <div class="col-xs-12 col-xl-8" >
     <div >
       <div class="q-display-1 q-mb-md ">{{ $t('vote_custodians.candidate_list') }} <span class="text-dimwhite">- {{custodians.length}}</span></div>
       <p class="text-dimwhite q-body-1">{{ $t('vote_custodians.description_main') }}</p>
@@ -67,7 +67,7 @@
     </div>
   </div>
   <!-- second column -->
-  <div class="col-lg-12 col-xl-4" >
+  <div class="col-xs-12 col-xl-4" >
     <div>
       <div class="q-display-1 q-mb-md">{{ $t('vote_custodians.my_votes') }} <span class="text-dimwhite">- {{getSelectedCand.length}}/{{maxvotes}}</span></div>
       <p class="text-dimwhite q-body-1">{{ $t('vote_custodians.description_side') }}</p>
@@ -381,8 +381,8 @@ export default {
         votebox.style.top = '0px';
         return false;
       }
-      console.log(`votebox: ${offset(votebox).top} scroll: ${scroll.position}`);
-      votebox.style.top = (scroll.position-400)+'px';
+      // console.log(`votebox: ${offset(votebox).top} scroll: ${scroll.position}`);
+      votebox.style.top = (scroll.position-375)+'px';
     }
 
   }
