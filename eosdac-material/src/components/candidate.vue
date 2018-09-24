@@ -33,10 +33,11 @@
         <div class="text-dimwhite q-body-1" style="overflow:hidden; white-space: pre-wrap;" v-if="data.profile !== undefined">{{data.profile.description}}</div>
         
         </q-scroll-area>
-        <div class="row justify-between items-center">
+        <div class="row justify-between items-center" style="border-top:1px solid grey">
           <SocialLinks class="q-mt-md" :links="sociallinks" />
-          <a :href="website" >{{website}}</a></div>
+          <a target="_blank" :href="website" class="a2" >{{website}}</a>
         </div>
+      </div>
     </q-collapsible>
   </div>
 </template>
