@@ -58,7 +58,7 @@
   <div class="row q-px-md gutter-md lg-hide md-hide sm-hide xs-hide" style="max-height:78px;">
     <div class="col-lg-12 col-xl-4">
       <q-card class="bg-dark2 relative-position shadow-5" style="margin-top:-43px;z-index:3;">
-        <q-btn dense @click="ramslider = !ramslider" flat class="float-right" icon="icon-topmenu-6">
+        <q-btn dense @click="ramslider = !ramslider" flat class="float-right" icon="icon-topmenu-6 q-pa-sm">
           <q-tooltip>
             {{$t('wallet.toggle_adjust_ram_allocation')}}
           </q-tooltip>
@@ -148,7 +148,7 @@
     </div>
     <div class="col-lg-12 col-xl-4">
       <q-card class="bg-dark2 relative-position shadow-5" style="margin-top:-43px;z-index:3;">
-        <q-btn dense @click="cpuSlider = !cpuSlider" flat class="float-right" icon="icon-topmenu-6">
+        <q-btn dense @click="cpuSlider = !cpuSlider" flat class="float-right" icon="icon-topmenu-6 q-pa-sm">
           <q-tooltip>
             {{$t('wallet.toggle_adjust_cpu_allocation')}}
           </q-tooltip>
@@ -209,7 +209,7 @@
     </div>
     <div class="col-lg-12 col-xl-4">
       <q-card class="bg-dark2 relative-position shadow-5" style="margin-top:-43px;z-index:3;">
-        <q-btn dense @click="netSlider = !netSlider" flat class="float-right" icon="icon-topmenu-6">
+        <q-btn dense @click="netSlider = !netSlider" flat class="float-right" icon="icon-topmenu-6 q-pa-sm">
           <q-tooltip>
             {{$t('wallet.toggle_adjust_net_allocation')}}
           </q-tooltip>
