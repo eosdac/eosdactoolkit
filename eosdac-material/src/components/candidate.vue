@@ -19,8 +19,20 @@
         </q-item-main>
       </template>
       <div class="q-pt-sm q-pt-none" style="border-top:1px solid grey">
+        <q-scroll-area 
+          style="width: 100%; height: 300px;"
+          :thumb-style="{
+            right: '-12px',
+            borderRadius: '2px',
+            background: '#7c41ba',
+            width: '10px',
+            opacity: 0.8
+          }"
+        >
         <div class="q-my-md">BIO</div>
         <div class="text-dimwhite q-body-1" style="overflow:hidden; white-space: pre-wrap;" v-if="data.profile !== undefined">{{data.profile.description}}</div>
+        
+        </q-scroll-area>
         <SocialLinks class="q-mt-md" :links="sociallinks" />
       </div>
     </q-collapsible>
