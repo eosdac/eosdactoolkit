@@ -33,8 +33,10 @@
         <div class="text-dimwhite q-body-1" style="overflow:hidden; white-space: pre-wrap;" v-if="data.profile !== undefined">{{data.profile.description}}</div>
         
         </q-scroll-area>
-        <SocialLinks class="q-mt-md" :links="sociallinks" />
-      </div>
+        <div class="row justify-between items-center">
+          <SocialLinks class="q-mt-md" :links="sociallinks" />
+          <a :href="website" >{{website}}</a></div>
+        </div>
     </q-collapsible>
   </div>
 </template>
@@ -55,7 +57,8 @@ export default {
   data () {
     return {
       image_profile:'../statics/img/default-avatar.png',
-      sociallinks : []
+      sociallinks : [],
+      website : false
     }
   },
   
@@ -67,6 +70,7 @@ export default {
         // console.log(this.data.candidate_name)
         this.image_profile = this.data.profile.image;
         this.sociallinks = this.data.profile.sameAs.map(x => x.link);
+        this.website = this.data.profile.url
       }
     }
 
