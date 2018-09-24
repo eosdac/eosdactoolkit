@@ -64,14 +64,14 @@
           <div class="text-dimwhite q-body-1" style="overflow:hidden; white-space: pre-wrap;" v-if="!is_edit">{{form.description}}</div>
         </div>
       </div>
-      
+
       <div class="col-md-4 col-xs-12 q-pa-md">
         <div class="column justify-between" style="height:100%">
 
           <!-- on display -->
           <div v-if="!is_edit">
             <div class="q-title q-mb-md">{{ $t('profile.website') }}</div>
-            <div v-if="$helper.isUrl(form.url)" class="text-dimwhite q-body-1"><a target="_blank" :href="form.url">{{form.url}}</a></div>
+            <div v-if="$helper.isUrl(form.url)" class="q-body-1 a2"><a target="_blank" :href="form.url">{{form.url}}</a></div>
             <div class="q-mt-md">
               <SocialLinks :links="form.sameAs.map(x => x.link)" />
             </div>

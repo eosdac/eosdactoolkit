@@ -1,6 +1,6 @@
 <template>
   <div class="q-mb-md bg-dark2 round-borders"  v-bind:class="{ 'selected_candidate': data.selected, 'unselected_candidate':!data.selected, 'shadow-5':!data.selected}">
-    <q-collapsible  label="First"  icon-toggle header-class="candidate_header" collapse-icon="icon-ui-11">
+    <q-collapsible  label="First" group="candidates" icon-toggle header-class="candidate_header" collapse-icon="icon-ui-11">
       <template slot="header" >
         <q-item-side left >
           <div class="row full-height items-center">
