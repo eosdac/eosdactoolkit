@@ -66,7 +66,7 @@
         <q-item class="q-pr-none q-py-none">
           <q-item-side>
             <q-item-tile icon>
-              <q-icon color="positive" style="font-size:50px;" name="icon-ui-13" />
+              <q-icon color="positive" style="font-size:48px;" name="icon-ui-13" />
             </q-item-tile>
           </q-item-side>
           <q-item-main class="q-pa-sm no-margin">
@@ -156,7 +156,7 @@
         <q-item class="q-pr-none q-py-none">
           <q-item-side>
             <q-item-tile icon>
-              <q-icon color="blue" style="font-size:50px;" name="icon-ui-9" />
+              <q-icon color="blue" style="font-size:48px;" name="icon-ui-9" />
             </q-item-tile>
           </q-item-side>
           <q-item-main class="q-pa-sm no-margin">
@@ -217,7 +217,7 @@
         <q-item class="q-pr-none q-py-none">
           <q-item-side>
             <q-item-tile icon>
-              <q-icon color="red" style="font-size:50px;" name="icon-ui-14" />
+              <q-icon color="red" style="font-size:48px;" name="icon-ui-14" />
             </q-item-tile>
           </q-item-side>
           <q-item-main class="q-pa-sm no-margin">
