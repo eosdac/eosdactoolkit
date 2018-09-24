@@ -72,7 +72,7 @@
           <q-item-main class="q-pa-sm no-margin">
             <span class="q-subheading text-dimwhite uppercase q-pl-sm">{{ $t('wallet.RAM') }}</span>
             <p class="no-margin q-pl-sm">{{getAccountResources.ram.available}} % {{ $t('wallet.remaining') }}</p>
-            <span class="text-dimwhite q-pl-sm">{{$t('wallet.used')}}: {{(getAccountResources.ram.raw.used / 1024).toFixed(2)}} / {{(getAccountResources.ram.raw.available / 1024).toFixed(2)}} {{$t('wallet.KB')}}</span>
+            <span class="text-dimwhite q-pl-sm q-body-1">{{$t('wallet.used')}}: {{(getAccountResources.ram.raw.used / 1024).toFixed(2)}} / {{(getAccountResources.ram.raw.available / 1024).toFixed(2)}} {{$t('wallet.KB')}}</span>
             <div v-if="ramslider">
               <q-slider v-if="buyRam" color="positive" v-model="buyRamVal" :min="0" :max="getMainCurrencyBalance" :step="0.0001" />
               <q-slider v-else color="negative" v-model="sellRamVal" :min="0" :max="Math.round(getAccountResources.ram.raw.available)" :step="1" />
@@ -162,7 +162,7 @@
           <q-item-main class="q-pa-sm no-margin">
             <span class="q-subheading text-dimwhite uppercase q-pl-sm">{{ $t('wallet.CPU') }}</span>
             <p class="no-margin q-pl-sm">{{getAccountResources.cpu.available}} % {{ $t('wallet.remaining') }}</p>
-            <span class="text-dimwhite q-pl-sm">{{$t('wallet.used')}}: {{(getAccountResources.cpu.raw.used).toFixed(2)}} / {{(getAccountResources.cpu.raw.available).toFixed(2)}} {{$t('wallet.cycles')}}</span>
+            <span class="text-dimwhite q-pl-sm q-body-1">{{$t('wallet.used')}}: {{(getAccountResources.cpu.raw.used).toFixed(2)}} / {{(getAccountResources.cpu.raw.available).toFixed(2)}} {{$t('wallet.cycles')}}</span>
             <div v-if="cpuSlider">
               <q-slider v-if="incCpu" color="positive" v-model="incCpuVal" :min="0" :max="getMainCurrencyBalance" :step="0.0001" />
               <q-slider v-else color="negative" v-model="decCpuVal" :min="0" :max="parseFloat(getAccount.self_delegated_bandwidth.cpu_weight)" :step="0.0001" />
@@ -223,7 +223,7 @@
           <q-item-main class="q-pa-sm no-margin">
             <span class="q-subheading text-dimwhite uppercase q-pl-sm">{{ $t('wallet.network') }}</span>
             <p class="no-margin q-pl-sm">{{getAccountResources.net.available}} % {{ $t('wallet.remaining') }}</p>
-            <span class="text-dimwhite q-pl-sm">{{$t('wallet.used')}}: {{(getAccountResources.net.raw.used).toFixed(2)}} / {{(getAccountResources.net.raw.available).toFixed(2)}} {{$t('wallet.bytes')}}</span>
+            <span class="text-dimwhite q-pl-sm q-body-1">{{$t('wallet.used')}}: {{(getAccountResources.net.raw.used).toFixed(2)}} / {{(getAccountResources.net.raw.available).toFixed(2)}} {{$t('wallet.bytes')}}</span>
             <div v-if="netSlider">
               <q-slider v-if="incNet" color="positive" v-model="incNetVal" :min="0" :max="getMainCurrencyBalance" :step="0.0001" />
               <q-slider v-else color="negative" v-model="decNetVal" :min="0" :max="parseFloat(getAccount.self_delegated_bandwidth.net_weight)" :step="0.0001" />
@@ -280,13 +280,13 @@
         <q-item class="q-pr-none q-py-none">
           <q-item-side>
             <q-item-tile icon>
-              <q-icon color="positive" style="font-size:50px;" name="icon-ui-13" />
+              <q-icon color="positive" style="font-size:48px;" name="icon-ui-13" />
             </q-item-tile>
           </q-item-side>
           <q-item-main class="q-pa-sm no-margin">
             <span class="q-subheading text-dimwhite uppercase q-pl-sm">{{ $t('wallet.RAM') }}</span>
             <p class="no-margin q-pl-sm">{{getAccountResources.ram.available}} % {{ $t('wallet.remaining') }}</p>
-            <span class="text-dimwhite q-pl-sm">{{$t('wallet.used')}}: {{(getAccountResources.ram.raw.used / 1024).toFixed(2)}} / {{(getAccountResources.ram.raw.available / 1024).toFixed(2)}} {{$t('wallet.KB')}}</span>
+            <span class="text-dimwhite q-pl-sm q-body-1">{{$t('wallet.used')}}: {{(getAccountResources.ram.raw.used / 1024).toFixed(2)}} / {{(getAccountResources.ram.raw.available / 1024).toFixed(2)}} {{$t('wallet.KB')}}</span>
             <div v-if="ramslider">
               <q-slider v-if="buyRam" color="positive" v-model="buyRamVal" :min="0" :max="getMainCurrencyBalance" :step="0.0001" />
               <q-slider v-else color="negative" v-model="sellRamVal" :min="0" :max="Math.round(getAccountResources.ram.raw.available)" :step="1" />
@@ -370,13 +370,13 @@
         <q-item class="q-pr-none q-py-none">
           <q-item-side>
             <q-item-tile icon>
-              <q-icon color="blue" style="font-size:50px;" name="icon-ui-9" />
+              <q-icon color="blue" style="font-size:48px;" name="icon-ui-9" />
             </q-item-tile>
           </q-item-side>
           <q-item-main class="q-pa-sm no-margin">
             <span class="q-subheading text-dimwhite uppercase q-pl-sm">{{ $t('wallet.CPU') }}</span>
             <p class="no-margin q-pl-sm">{{getAccountResources.cpu.available}} % {{ $t('wallet.remaining') }}</p>
-            <span class="text-dimwhite q-pl-sm">{{$t('wallet.used')}}: {{(getAccountResources.cpu.raw.used).toFixed(2)}} / {{(getAccountResources.cpu.raw.available).toFixed(2)}} {{$t('wallet.cycles')}}</span>
+            <span class="text-dimwhite q-pl-sm q-body-1">{{$t('wallet.used')}}: {{(getAccountResources.cpu.raw.used).toFixed(2)}} / {{(getAccountResources.cpu.raw.available).toFixed(2)}} {{$t('wallet.cycles')}}</span>
             <div v-if="cpuSlider">
               <q-slider v-if="incCpu" color="positive" v-model="incCpuVal" :min="0" :max="getMainCurrencyBalance" :step="0.0001" />
               <q-slider v-else color="negative" v-model="decCpuVal" :min="0" :max="parseFloat(getAccount.self_delegated_bandwidth.cpu_weight)" :step="0.0001" />
@@ -431,13 +431,13 @@
         <q-item class="q-pr-none q-py-none">
           <q-item-side>
             <q-item-tile icon>
-              <q-icon color="red" style="font-size:50px;" name="icon-ui-14" />
+              <q-icon color="red" style="font-size:48px;" name="icon-ui-14" />
             </q-item-tile>
           </q-item-side>
           <q-item-main class="q-pa-sm no-margin">
             <span class="q-subheading text-dimwhite uppercase q-pl-sm">{{ $t('wallet.network') }}</span>
             <p class="no-margin q-pl-sm">{{getAccountResources.net.available}} % {{ $t('wallet.remaining') }}</p>
-            <span class="text-dimwhite q-pl-sm">{{$t('wallet.used')}}: {{(getAccountResources.net.raw.used).toFixed(2)}} / {{(getAccountResources.net.raw.available).toFixed(2)}} {{$t('wallet.bytes')}}</span>
+            <span class="text-dimwhite q-pl-sm q-body-1">{{$t('wallet.used')}}: {{(getAccountResources.net.raw.used).toFixed(2)}} / {{(getAccountResources.net.raw.available).toFixed(2)}} {{$t('wallet.bytes')}}</span>
             <div v-if="netSlider">
               <q-slider v-if="incNet" color="positive" v-model="incNetVal" :min="0" :max="getMainCurrencyBalance" :step="0.0001" />
               <q-slider v-else color="negative" v-model="decNetVal" :min="0" :max="parseFloat(getAccount.self_delegated_bandwidth.net_weight)" :step="0.0001" />
