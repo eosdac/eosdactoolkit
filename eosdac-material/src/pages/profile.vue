@@ -111,7 +111,7 @@
       </div>
     </div>
   </div>
-  <div v-if="rawprofiledata" class="q-pa-md text-dimwhite">
+  <div v-if="rawprofiledata" class="q-pa-md q-my-md text-dimwhite">
     <TimeZone :offset="form.timezone" />
   </div>
 
