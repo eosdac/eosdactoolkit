@@ -60,8 +60,12 @@
       <div class="col-md-8 col-xs-12 q-pa-md">
         <div class="" style="height:100%">
           <div class="q-title q-mb-md">{{ $t('profile.bio') }}</div>
-          <q-input v-if="is_edit" inverted rows="8" color="dark" type="textarea" v-model="form.description" dark />
+          <!--<q-input v-if="is_edit" inverted rows="8" color="dark" type="textarea" v-model="form.description" dark />
           <div class="text-dimwhite q-body-1" style="overflow:hidden; white-space: pre-wrap;" v-if="!is_edit">{{form.description}}</div>
+        </div>-->
+          <MarkdownViewer :tags="['h1', 'h2', 'h3', 'italic', 'bold', 'underline', 'strikethrough', 'subscript',
+            'superscript', 'anchor', 'orderedlist', 'unorderedlist']" class="bg-dark" :edit="is_edit" dark :text="form.description" v-on:update="updateText" />
+
         </div>
       </div>
 
@@ -134,7 +138,7 @@ import LoadingSpinner from 'components/loading-spinner'
 import SocialLinks from 'components/social-links'
 import TimeZone from 'components/time-zone'
 import ProfileTemplate from '../statics/profile.template.json'
-
+import MarkdownViewer from 'components/markdown-viewer'
 import {
   openURL
 } from 'quasar'
@@ -146,7 +150,8 @@ export default {
     LoadingSpinner,
     Transaction,
     SocialLinks,
-    TimeZone
+    TimeZone,
+    MarkdownViewer
 
   },
   data () {
@@ -183,6 +188,9 @@ export default {
 
   methods:{
     openURL,
+    updateText (val) {
+      this.form.description = val
+    },
      onLoaded() {
         let img = this.$refs.profile_pic;
         // this.$consoleMsg('Profile image size: '+img.width +' x '+ img.height);
@@ -218,7 +226,7 @@ export default {
     },
 
     validateProfile(profile) {
-      
+
       let validkeys = Object.keys(ProfileTemplate);
 
       let valid = validkeys.every(function (key) {
