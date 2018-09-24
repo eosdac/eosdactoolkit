@@ -93,7 +93,9 @@
                 </q-item-tile>
               </q-item-side>
               <q-item-main>
-                <h6 class="q-ma-none">{{cand.candidate_name}}</h6>
+                <router-link class="q-headline a2" :to="{path: '/profile/' + cand.candidate_name}" >
+                  <h6 class="q-ma-none">{{cand.candidate_name}}</h6>
+                </router-link>
               </q-item-main>
               <q-item-side right>
                 <q-btn dense round color="primary" icon="icon-ui-8" @click="deleteFromVoteList(cand.candidate_name)" />
