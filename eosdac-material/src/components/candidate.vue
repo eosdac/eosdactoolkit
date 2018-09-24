@@ -19,7 +19,7 @@
         </q-item-main>
       </template>
       <div class="q-pt-sm q-pt-none" style="border-top:1px solid grey">
-        <span>BIO</span>
+        <div class="q-my-md">BIO</div>
         <div class="text-dimwhite q-body-1" style="overflow:hidden; white-space: pre-wrap;" v-if="data.profile !== undefined">{{data.profile.description}}</div>
         <SocialLinks class="q-mt-md" :links="sociallinks" />
       </div>
