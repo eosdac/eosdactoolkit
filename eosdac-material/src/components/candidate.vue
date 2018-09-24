@@ -22,7 +22,7 @@
         <q-scroll-area 
           style="width: 100%; height: 300px;"
           :thumb-style="{
-            right: '-12px',
+            right: '-13px',
             borderRadius: '2px',
             background: '#7c41ba',
             width: '10px',

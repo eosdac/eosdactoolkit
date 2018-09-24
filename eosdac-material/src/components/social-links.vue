@@ -1,7 +1,7 @@
 <template>
   <div>
     <a v-if="social.link!=''" v-for="(social, i) in parseLinks"  class="on-left" :key ="i" :href="social.link" target="_blank">
-        <q-btn  round color="dark" >
+        <q-btn  class="hvr-grow" round color="dark" >
           <q-icon  :name="'icon-'+social.icon" />
         </q-btn>
     </a>
@@ -65,5 +65,20 @@ export default {
 </script>
 
 <style>
-
+/* Grow */
+.hvr-grow {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-property: transform;
+  transition-property: transform;
+}
+.hvr-grow:hover, .hvr-grow:focus, .hvr-grow:active {
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+}
 </style>
