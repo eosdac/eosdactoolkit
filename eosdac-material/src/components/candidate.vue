@@ -33,9 +33,9 @@
         <div class="text-dimwhite q-body-1" style="overflow:hidden; white-space: pre-wrap;" v-if="data.profile !== undefined">{{data.profile.description}}</div>
         
         </q-scroll-area>
-        <div class="row justify-between items-center" style="">
-          <div style="border-bottom:1px solid grey; width:100%;height:5px"></div>
-          <SocialLinks class="q-mt-md" :links="sociallinks" />
+        <div class="row justify-between items-center full-height q-pb-sm">
+          <div class="q-mb-md" style="border-bottom:1px solid grey; width:100%;height:5px"></div>
+          <SocialLinks :links="sociallinks" />
           <a target="_blank" :href="website" class="a2" >{{website}}</a>
         </div>
       </div>
