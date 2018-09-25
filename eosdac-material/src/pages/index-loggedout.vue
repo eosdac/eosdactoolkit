@@ -72,10 +72,11 @@
             <div class="q-body-1 text-dimwhite relative-position">
               <q-icon name="icon-ui-22" size="48px" class="absolute-top-left" />
               <div style="display:inline-block;margin-left:55px;margin-top:-3px;">
-                <q-input dark class="q-mb-xs" color="white" v-model="email_address" :stack-label="$t('index.your_email')" />
+                <q-input dark class="q-mb-xs" color="white" v-model="email_address" :stack-label="$t('index.your_email')" @focus="onsubscribemsg=''" />
                 <q-select
                 color="white"
                 :float-label="$t('index.your_language')"
+                 @focus="onsubscribemsg=''"
                 dark
                   :options="[
                     { label: $t('lang_selector.languages.chinese') + ' - 中文',    value: 'Chinese' },
@@ -93,8 +94,9 @@
               </div>
             </div>
           </div>
-          <div class="q-mt-sm">
-            <q-btn class="float-right" color="dark" :label="$t('index.subscribe')" @click="subscribeNewsletter" />
+          <div class="q-mt-sm row justify-between items-center" style="min-height:50px">
+            <span class=" q-caption q-my-md">{{onsubscribemsg}}</span>
+            <q-btn class="" color="dark" :label="$t('index.subscribe')" @click="subscribeNewsletter" />
           </div>
         </div>
       </div>
@@ -121,7 +123,8 @@ export default {
   data () {
     return {
       email_address:'',
-      language: ''
+      language: '',
+      onsubscribemsg:''
 
 
     }
@@ -148,24 +151,37 @@ export default {
 
     },
 
-    subscribeNewsletter(){
-      let data = {
-        _mc4wp_form_element_id: 'mc4wp-form-1',
-        _mc4wp_form_id: 1015,
-        _mc4wp_honeypot: '',
-        _mc4wp_timestamp:	1536854160,
-        COUNTRY: 'Angola',
-        EMAIL: 'kasperkasperfish@gmail.com',
-        FNAME: 'dummy',
-        LNAME:'dummy',
-        LANGUAGE: 'English',
-        MESSAGE:''
-      };
-      this.$axios.post('https://eosdac.io/wp-admin/admin-ajax.php?action=mc4wp-form', data).then(x => {
-        console.log(x)
-      })
-      .catch(e => console.log(e));
+    async subscribeNewsletter(){
+      this.onsubscribemsg ='';
+      let data = {email: this.email_address, language: this.language};
 
+      if(!this.$helper.isEmail(this.email_address) || this.language == ''){
+        this.onsubscribemsg = 'Valid input required!';
+        return false;
+      }
+      let url = this.$configFile.api.profileApiUrl;
+
+      if (url.substr(-1) != '/'){
+        url += '/subscribe';
+      }
+      else{
+        url += 'subscribe';
+      }
+
+      try{
+        let result = await this.$axios.post(url, data);
+        this.onsubscribemsg = result.data.message;
+        console.log(result);
+      }catch(e){
+        this.onsubscribemsg = 'Error';
+        console.log(e);
+      }
+      this.clearForm();
+    },
+
+    clearForm(){
+      this.email_address ='';
+      this.language = '';
     }
 
   }
