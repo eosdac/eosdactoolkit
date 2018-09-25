@@ -95,7 +95,7 @@
             </div>
           </div>
           <div class="q-mt-sm row justify-between items-center" style="min-height:50px">
-            <span class=" q-caption q-my-md">{{onsubscribemsg}}</span>
+            <span class=" q-caption q-my-md"><q-spinner v-if="loading" /> {{onsubscribemsg}}</span>
             <q-btn class="" color="dark" :label="$t('index.subscribe')" @click="subscribeNewsletter" />
           </div>
         </div>
@@ -124,7 +124,8 @@ export default {
     return {
       email_address:'',
       language: '',
-      onsubscribemsg:''
+      onsubscribemsg:'',
+      loading : false
 
 
     }
@@ -167,7 +168,7 @@ export default {
       else{
         url += 'subscribe';
       }
-
+      this.loading =true;
       try{
         let result = await this.$axios.post(url, data);
         this.onsubscribemsg = result.data.message;
@@ -180,6 +181,7 @@ export default {
     },
 
     clearForm(){
+      this.loading =false;
       this.email_address ='';
       this.language = '';
     }
