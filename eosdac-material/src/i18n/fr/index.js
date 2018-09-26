@@ -177,6 +177,7 @@ export default {
     identity_request_denied: 'La demande d\'identification a été refusée. Veuillez réessayer et accepter la demande.',
     scatter_is_locked: 'Scatter est verrouillé. Veuillez déverrouiller pour continuer.',
     scatter_is_not_available: 'Scatter n\'est pas disponible. Si vous avez installé Scatter, actualisez ou accédez à Autorisations, supprimez l\'autorisation pour ce site et réessayez.',
+    scatter_is_outdated: 'Your Scatter is outdated. Please update your Scatter and try again.',
     sign_in: 'SE CONNECTER',
     waiting_for_scatter: 'En attente de Scatter...',
   },

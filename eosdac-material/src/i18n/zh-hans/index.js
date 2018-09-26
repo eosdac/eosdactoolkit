@@ -177,6 +177,7 @@ export default {
     identity_request_denied: '身份请求被拒绝。请再试一次并接受请求。',
     scatter_is_locked: 'Scatter 已锁定。请解锁以继续操作。',
     scatter_is_not_available: 'Scatter 不可用。如果您安装了 Scatter，请刷新或转到“权限”，删除此站点的权限，然后重试。',
+    scatter_is_outdated: 'Your Scatter is outdated. Please update your Scatter and try again.',
     sign_in: '登录',
     waiting_for_scatter: '正在等待 Scatter……',
   },

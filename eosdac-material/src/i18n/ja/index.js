@@ -177,6 +177,7 @@ export default {
     identity_request_denied: 'IDリクエストが拒否されました。もう一度お試しください。',
     scatter_is_locked: 'Scatterがロックされています。続行するにはロックを解除してください。',
     scatter_is_not_available: 'Scatterが利用できません。Scatterがインストールされている場合、更新するか、Permissionメニューから当サイトへのpermissionを削除して、もう一度お試しください。',
+    scatter_is_outdated: 'Your Scatter is outdated. Please update your Scatter and try again.',
     sign_in: 'サインイン',
     waiting_for_scatter: 'Scatterを待機しています...',
   },

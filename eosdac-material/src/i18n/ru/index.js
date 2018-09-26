@@ -176,6 +176,7 @@ export default {
     identity_request_denied: 'Идентификационный запрос был отклонен. Повторите попытку и примите запрос.',
     scatter_is_locked: 'Scatter заблокирован. Разблокируйте, чтобы продолжить.',
     scatter_is_not_available: 'Scatter недоступен. Если у вас установлен Scatter, обновите его или перейдите в раздел «Разрешения», удалите разрешение для этого сайта и повторите попытку.',
+    scatter_is_outdated: 'Your Scatter is outdated. Please update your Scatter and try again.',
     sign_in: 'ВОЙТИ В СИСТЕМУ',
     waiting_for_scatter: 'Ожидание Scatter...',
   },

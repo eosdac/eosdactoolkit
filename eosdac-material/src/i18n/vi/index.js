@@ -177,6 +177,7 @@ export default {
     identity_request_denied: 'Không xác minh được. Vui lòng thử lại và chấp nhận yêu cầu.',
     scatter_is_locked: 'Scatter đang khóa. Vui lòng mở khóa để tiếp tục.',
     scatter_is_not_available: 'Scatter không có. Nếu bạn đã cài Scatter, vui lòng thử lại hoặc vào Permissions, xóa permission cho trang này, và thử lại.',
+    scatter_is_outdated: 'Your Scatter is outdated. Please update your Scatter and try again.',
     sign_in: 'ĐĂNG NHẬP',
     waiting_for_scatter: 'Đang chờ scatter...',
   },

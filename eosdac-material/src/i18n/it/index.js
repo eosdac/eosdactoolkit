@@ -177,6 +177,7 @@ export default {
     identity_request_denied: 'La richiesta di identità è stata negata. Per favore riprova e accetta la richiesta.',
     scatter_is_locked: 'Scatter è bloccato. Si prega di sbloccare per continuare.',
     scatter_is_not_available: 'Scatter non è disponibile. Se hai installato Scatter, aggiorna o vai su Autorizzazioni, rimuovi l\'autorizzazione per questo sito e riprova.',
+    scatter_is_outdated: 'Your Scatter is outdated. Please update your Scatter and try again.',
     sign_in: 'REGISTRATI',
     waiting_for_scatter: 'In attesa di dispersione ...',
   },
