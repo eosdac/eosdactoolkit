@@ -88,6 +88,9 @@ export default {
       vietnamese: 'Vietnamien',
     },
   },
+  markdown_viewer: {
+    select_text_to_edit: 'Highlight the text you want to edit.'
+  },
   multi_modal: {
     register_as_dac_member: 'S\'INSCRIRE EN TANT QUE MEMBRE DU DAC',
     registration: 'Inscription',

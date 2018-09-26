@@ -88,6 +88,9 @@ export default {
       vietnamese: 'Tiếng Việt',
     },
   },
+  markdown_viewer: {
+    select_text_to_edit: 'Highlight the text you want to edit.'
+  },
   multi_modal: {
     register_as_dac_member: 'ĐĂNG KÝ THÀNH VIÊN DAC',
     registration: 'Đăng Ký',

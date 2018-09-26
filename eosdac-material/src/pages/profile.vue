@@ -64,7 +64,7 @@
           <div class="text-dimwhite q-body-1" style="overflow:hidden; white-space: pre-wrap;" v-if="!is_edit">{{form.description}}</div>
         </div>-->
           <MarkdownViewer :tags="['h1', 'h2', 'h3', 'italic', 'bold', 'underline', 'strikethrough', 'subscript',
-            'superscript', 'anchor', 'orderedlist', 'unorderedlist']" class="bg-dark" :edit="is_edit" dark :text="form.description" v-on:update="updateText" />
+            'superscript', 'anchor', 'orderedlist', 'unorderedlist']" class="bg-dark2" :edit="is_edit" dark :text="form.description" v-on:update="updateText" />
 
         </div>
       </div>

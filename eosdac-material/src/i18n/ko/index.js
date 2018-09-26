@@ -88,6 +88,9 @@ export default {
       vietnamese: '베트남 사람',
     },
   },
+  markdown_viewer: {
+    select_text_to_edit: 'Highlight the text you want to edit.'
+  },
   multi_modal: {
     register_as_dac_member: 'DAC 회원으로 등록',
     registration: '등록',

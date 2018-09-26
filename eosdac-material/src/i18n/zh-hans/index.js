@@ -88,6 +88,9 @@ export default {
       vietnamese: '越南',
     },
   },
+  markdown_viewer: {
+    select_text_to_edit: 'Highlight the text you want to edit.'
+  },
   multi_modal: {
     register_as_dac_member: '注册成为 DAC 会员',
     注册: '注册',

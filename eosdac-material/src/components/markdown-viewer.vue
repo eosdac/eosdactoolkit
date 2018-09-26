@@ -1,9 +1,9 @@
 <template>
 <div>
-  <div v-if="!edit" v-html="convertedAndSanitizedHtml" class="markdown-body" v-bind:class="{ overwrite: dark }"></div>
+  <div v-if="!edit" v-html="convertedAndSanitizedHtml" class="markdown-body q-body-ow" v-bind:class="{ overwritemd: dark }"></div>
   <div v-else class="relative-position q-pb-lg">
-  <medium-editor ref="markeditor" id="markeditor" class="markdown-body" v-bind:class="{ overwrite: dark }" :text='editText' custom-tag='div' :options="options" v-on:edit='applyTextEdit' />
-  <div class="absolute-bottom bg-dark2">{{ $t('markdown-viewer.select_text_to_edit') }}</div>
+  <medium-editor ref="markeditor" id="markeditor" class="markdown-body q-body-ow" v-bind:class="{ overwritemd: dark }" :text='editText' custom-tag='div' :options="options" v-on:edit='applyTextEdit' />
+  <div class="absolute-bottom bg-dark2">{{ $t('markdown_viewer.select_text_to_edit') }}</div>
   </div>
 </div>
 </template>
@@ -92,7 +92,9 @@ export default {
   computed: {
     convertedAndSanitizedHtml() {
       return sanitizeHtml(marked(this.text, {
-        sanitize: true
+        sanitize: true,
+        gfm: true,
+        smartLists: true
       }), {
         allowedTags: this.buttonsToTags(this.options.toolbar.buttons)
       })
@@ -116,7 +118,9 @@ export default {
     edit(val) {
       if (val) {
         this.editText = sanitizeHtml(marked(this.text, {
-          sanitize: false
+          sanitize: false,
+          gfm: true,
+          smartLists: true
         }), {
           allowedTags: this.buttonsToTags(this.options.toolbar.buttons)
         })
@@ -131,19 +135,24 @@ export default {
 .medium-editor-toolbar {
   background-color: $dark
 }
-.overwrite {
+.overwritemd {
   background: none !important;
-  color: rgba(255,255,255,0.8) !important;
-  // transition: all 0.1s linear;
+  color: $dimwhite !important;
+  opacity: .87 !important;
 }
-.overwrite h1, .overwrite h2{
+.overwritemd h1, .overwritemd h2{
   color: #fff;
-  // transition: all 0.1s linear;
 }
-.overwrite td, .overwrite th {
+.overwritemd td, .overwritemd th {
   background: $dark !important;
-  // transition: all 0.1s linear;
 }
+
+.q-body-ow {
+  font-size: 14px !important;
+  font-weight: 400 !important;
+  line-height:20px !important;
+}
+
 .medium-toolbar-arrow-under:after {
   border-color: #000 transparent transparent transparent;
   top: 40px; }

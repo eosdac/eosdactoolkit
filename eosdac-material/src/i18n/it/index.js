@@ -88,6 +88,9 @@ export default {
       vietnamese: 'Vietnamita',
     },
   },
+  markdown_viewer: {
+    select_text_to_edit: 'Highlight the text you want to edit.'
+  },
   multi_modal: {
     register_as_dac_member: 'REGISTRATI COME MEMBRO DEL DAC',
     registration: 'Registrazione',
@@ -293,7 +296,7 @@ export default {
     transfer_to: 'Trasferire a',
     transfer_tokens: 'Token di Rrasferimento',
     used: 'Used',
-    wallet: 'Portafoglio', 
+    wallet: 'Portafoglio',
   },
   wp_member_view: {
     approx_USD: '(Circa xxxx USD)',
