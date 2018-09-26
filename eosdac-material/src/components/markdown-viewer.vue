@@ -92,9 +92,7 @@ export default {
   computed: {
     convertedAndSanitizedHtml() {
       return sanitizeHtml(marked(this.text, {
-        sanitize: true,
-        gfm: true,
-        smartLists: true
+        sanitize: true
       }), {
         allowedTags: this.buttonsToTags(this.options.toolbar.buttons)
       })
@@ -118,9 +116,7 @@ export default {
     edit(val) {
       if (val) {
         this.editText = sanitizeHtml(marked(this.text, {
-          sanitize: false,
-          gfm: true,
-          smartLists: true
+          sanitize: false
         }), {
           allowedTags: this.buttonsToTags(this.options.toolbar.buttons)
         })
