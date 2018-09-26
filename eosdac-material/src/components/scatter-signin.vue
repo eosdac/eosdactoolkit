@@ -79,12 +79,12 @@ export default {
         port: current.httpEndpoint.split(':')[2] || pp
       }
       try {
-        if (this.getScatter.getVersion) { //is desktop
+        if (typeof this.getScatter.getVersion === 'function') { //is desktop
           let version = await this.getScatter.getVersion()
           if (this.versionCompare(version, '6.1.10') < 0) {
             throw Error('outdated')
           }
-        } else if (this.getScatter.requireVersion) { // is extension
+        } else if (typeof this.getScatter.requireVersion === 'function') { // is extension
           this.getScatter.requireVersion(6.1)
         }
 
