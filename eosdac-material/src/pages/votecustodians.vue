@@ -21,6 +21,7 @@
 <div class="row gutter-md reverse-wrap">
   <!-- first column  -->
   <div class="col-xs-12 col-xl-8" >
+     <!-- <pre>{{getSelectedCand}}</pre> -->
     <div >
       <div class="q-display-1 q-mb-md ">{{ $t('vote_custodians.candidate_list') }} <span class="text-dimwhite">- {{custodians.length}}</span></div>
       <p class="text-dimwhite q-body-1">{{ $t('vote_custodians.description_main') }}</p>
@@ -86,8 +87,8 @@
             <q-item class="bg-dark2" style="height:66px;margin-bottom:1px;" v-for="(cand, i) in getSelectedCand" :key="i">
               <q-item-side>
                 <q-item-tile style="height:36px;width:36px;" class="q-mr-sm">
-                  <div v-if="cand.profile" class="center_background_image" style="width: 36px; height:36px" v-bind:style="{ 'background-image': 'url(' + cand.profile.image + ')' }"></div>
-                  <div v-if="!cand.profile" class="center_background_image" style="width: 36px; height:36px" v-bind:style="{ 'background-image': 'url(../statics/img/default-avatar.png)' }"></div>
+                  <div v-if="$helper.isUrl(cand.profile.image)" class="center_background_image" style="width: 36px; height:36px" v-bind:style="{ 'background-image': 'url(' + cand.profile.image + ')' }"></div>
+                  <div v-else class="center_background_image" style="width: 36px; height:36px" v-bind:style="{ 'background-image': 'url(../statics/img/default-avatar.png)' }"></div>
                   <!-- <img v-if="!cand.profile" style="height:36px;width:36px;border-radius:50%;" class="q-mr-md responsive" src="https://eosdac.io/wp-content/uploads/elementor/thumbs/female1-nqk9ciy87u6os74yatkpw2xi7qbjzjq3r5sl9wy0mm.jpg">
                   <img v-if="cand.profile" style="height:36px;width:36px;border-radius:50%;" class="q-mr-md responsive" :src="cand.profile.image"> -->
                 </q-item-tile>
@@ -104,8 +105,8 @@
           </transition-group>
         </q-list>
         <!-- <pre>{{getSelectedCand}}</pre> -->
-        <!-- <pre>{{getSelectedCand}}</pre>
-        <pre>{{getTokenBalance}}</pre> -->
+        
+        <!-- <pre>{{getTokenBalance}}</pre> -->
         <!-- <pre>{{votesdidchange}}</pre> -->
       </q-card>
     </div>
