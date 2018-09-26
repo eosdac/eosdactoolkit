@@ -72,7 +72,7 @@ export default {
 
       if(this.data.profile !== undefined){
         // console.log(this.data.candidate_name)
-        this.image_profile = this.data.profile.image;
+        this.image_profile = this.$helper.isUrl(this.data.profile.image) ? this.data.profile.image : this.image_profile;
         this.sociallinks = this.data.profile.sameAs.map(x => x.link);
         this.website = this.data.profile.url
       }
