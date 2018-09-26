@@ -32,7 +32,26 @@
 <style lang="stylus">
 @import '~variables'
 .no-line
+  > .q-stepper-step
+    background $dark2;
   > .q-stepper-header
+    > .q-stepper-tab.step-waiting
+      color: white !important;
+    > .q-stepper-tab.step-done
+      color $positive
+    > .q-stepper-tab.step-done.step-colored
+      > .q-stepper-dot
+        > span
+          > i
+            color $positive
+      > .q-stepper-line:after
+        background $positive
+      > .q-stepper-line:before
+        background $positive
+    > .q-stepper-tab
+      > .q-stepper-dot
+        background none
+        size 24px
     > .q-stepper-tab:last-child
       > .q-stepper-line:after
         display none
@@ -88,7 +107,7 @@ export default {
     }
   },
   watch: {
-    getCurrentConnectionStatus (val) {
+    getCurrentConnectionStatus(val) {
       if (!val) {
         this.step = 'step1'
       }
