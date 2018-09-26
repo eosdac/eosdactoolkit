@@ -1,12 +1,12 @@
 <template>
-<q-modal class="relative-position" @hide="close()" :no-route-dismiss="!getImported" :no-backdrop-dismiss="!getImported" :no-esc-dismiss="!getImported" v-model="active" content-classes="fit bg-dark2" :content-css="{maxWidth: '900px', maxHeight: '610px'}">
+<q-modal class="relative-position" @hide="close()" v-model="active" content-classes="fit bg-dark2" :content-css="{maxWidth: '900px', maxHeight: '610px'}">
   <q-scroll-area class="fit" :thumb-style="{background: '#4A1289', opacity: 0.5}">
     <div class="row full-height">
       <div class="col-12">
         <q-tabs v-model="selectedTab" no-pane-border align="left">
           <q-tab v-show="initialmode === 'signin'" @click.native="initialmode === 'signin' ? mode = 'signin': mode = mode" slot="title" name="signin" :label="$t('multi_modal.sign_in')" />
           <q-tab @click.native="mode = 'register'" slot="title" name="register" :label="$t('multi_modal.register_as_dac_member')" />
-          <q-tab class="absolute-right" v-if="getImported" @click.native="close()" slot="title" name="close" icon="icon-ui-8" />
+          <q-tab class="absolute-right" @click.native="close()" slot="title" name="close" icon="icon-ui-8" />
         </q-tabs>
         <q-stepper v-model="step" color="white" ref="stepper" contractable no-header-navigation class="bg-dark no-shadow no-line" v-bind:class="{'registered-step': getRegistered && step === 'step3' }">
           <!--node-->
