@@ -13,6 +13,9 @@
     },
     "custodianContract": {
       "name": ""
+    },
+    "systemContract": {
+      "name": "eosio"
     }
   },
   "api": {
