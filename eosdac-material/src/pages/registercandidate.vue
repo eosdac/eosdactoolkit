@@ -37,16 +37,18 @@
         </div>
 
         <div class="col-md-4 col-sm-12 q-pa-md">
+          <span v-if="!getMemberRoles.candidate">
           <q-input color="p-light" dark type="text" v-model="stakedata.quantity" :float-label="$t('regcandidate.stake_amount')" :placeholder="$t('regcandidate.amount_to_stake_placeholder')" />
           <!-- <q-input dark  type="hidden" v-model="registerdata.bio"  float-label="Profile JSON url" placeholder="http://example.com/myjsonprofile.json" /> -->
-          <q-input color="p-light" dark type="text" v-model="registerdata.requestedpay" :float-label="$t('regcandidate.requested_pay')" :placeholder="$t('regcandidate.requested_custodian_pay_placeholder')" />
-          <q-btn size="md" v-if="!getMemberRoles.candidate" class="animate-pop" :loading="loading" color="primary" @click="registerAsCandidate" :label="$t('regcandidate.register')">
+          <q-input class="q-my-md" color="p-light" dark type="text" v-model="registerdata.requestedpay" :float-label="$t('regcandidate.requested_pay')" :placeholder="$t('regcandidate.requested_custodian_pay_placeholder')" />
+          <q-btn size="md"  class="animate-pop" :loading="loading" color="primary" @click="registerAsCandidate" :label="$t('regcandidate.register')">
             <q-spinner slot="loading" />
           </q-btn>
+          </span>
           <q-btn size="md" v-if="getMemberRoles.candidate" class="animate-pop" :loading="loading" color="primary" @click="unregisterAsCandidtate" :label="$t('regcandidate.unregister')">
             <q-spinner slot="loading" />
           </q-btn>
-          <pre>{{getMemberRoles}}</pre>
+          <!-- <pre>{{getMemberRoles}}</pre> -->
         </div>
   </div>
 </div>

@@ -172,7 +172,7 @@ export default {
       try{
         let result = await this.$axios.post(url, data);
         this.onsubscribemsg = result.data.message;
-        console.log(result);
+        // console.log(result);
       }catch(e){
         this.onsubscribemsg = 'Error';
         console.log(e);
