@@ -79,6 +79,7 @@ export default {
         port: current.httpEndpoint.split(':')[2] || pp
       }
       try {
+        await this.getScatter.requireVersion(6.1)
         let suggest = await this.getScatter.suggestNetwork(network2)
         let identity = await this.getScatter.getIdentity({
           accounts: [{
