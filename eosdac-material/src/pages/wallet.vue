@@ -756,7 +756,7 @@ export default {
         from: this.getAccountName,
         receiver: this.getAccountName,
         unstake_net_quantity: this.decNetVal.toFixed(this.$configFile.network.mainCurrencyContract.decimals) + ' ' + this.$configFile.network.mainCurrencyContract.token,
-        unstake_cpu_quantity: '0 ' + this.$configFile.network.mainCurrencyContract.token,
+        unstake_cpu_quantity: (0).toFixed(this.$configFile.network.mainCurrencyContract.decimals) + ' ' + this.$configFile.network.mainCurrencyContract.token,
         transfer: 0
       })
     },
