@@ -728,7 +728,7 @@ export default {
       this.$refs.Transaction.newTransaction(this.$configFile.network.systemContract.name, 'delegatebw', {
         from: this.getAccountName,
         receiver: this.getAccountName,
-        stake_net_quantity: this.getAccount.self_delegated_bandwidth.net_weight,
+        stake_net_quantity: (0).toFixed(this.$configFile.network.mainCurrencyContract.decimals) + ' ' + this.$configFile.network.mainCurrencyContract.token,
         stake_cpu_quantity: this.incCpuVal.toFixed(this.$configFile.network.mainCurrencyContract.decimals) + ' ' + this.$configFile.network.mainCurrencyContract.token,
         transfer: 0
       })
@@ -747,7 +747,7 @@ export default {
         from: this.getAccountName,
         receiver: this.getAccountName,
         stake_net_quantity: this.incNetVal.toFixed(this.$configFile.network.mainCurrencyContract.decimals) + ' ' + this.$configFile.network.mainCurrencyContract.token,
-        stake_cpu_quantity: this.getAccount.self_delegated_bandwidth.cpu_weight,
+        stake_cpu_quantity: (0).toFixed(this.$configFile.network.mainCurrencyContract.decimals) + ' ' + this.$configFile.network.mainCurrencyContract.token,
         transfer: 0
       })
     },
