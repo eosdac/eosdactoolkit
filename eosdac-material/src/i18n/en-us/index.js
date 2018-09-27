@@ -128,6 +128,7 @@ export default {
     givenName: 'Name',
     loading_text: 'Loading profile data...',
     male: 'Male',
+    not_confirmed: 'not confirmed',
     other: 'Other',
     placeholder_short_bio: 'This is my short bio...',
     profile: 'Profile',

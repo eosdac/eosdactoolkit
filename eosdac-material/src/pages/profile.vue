@@ -3,7 +3,7 @@
   <div class=" gradient-bg-primary q-px-md q-pt-md relative-position" style="min-height:260px">
     <div class="row">
       <div class="col-12">
-        <q-btn v-if="!profile_is_irrevirsible" @click="initProfile" class="float-right" color="red" label="Not Confirmed" />
+        <q-btn v-if="!profile_is_irrevirsible" @click="initProfile" class="float-right" color="red" :label="$t('profile.not_confirmed')" />
         <h4 class="q-display-1 q-mb-sm q-mt-none">{{ $t("profile.profile") }}</h4>
       </div>
     </div>
