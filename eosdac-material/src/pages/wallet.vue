@@ -734,13 +734,6 @@ export default {
       })
     },
     decreaseCpu() {
-      console.log({
-        from: this.getAccountName,
-        receiver: this.getAccountName,
-        unstake_net_quantity: (0).toFixed(this.$configFile.network.mainCurrencyContract.decimals) + ' ' + this.$configFile.network.mainCurrencyContract.token,
-        unstake_cpu_quantity: this.decCpuVal.toFixed(this.$configFile.network.mainCurrencyContract.decimals) + ' ' + this.$configFile.network.mainCurrencyContract.token,
-        transfer: 0
-      })
       this.$refs.Transaction.newTransaction(this.$configFile.network.systemContract.name, 'undelegatebw', {
         from: this.getAccountName,
         receiver: this.getAccountName,
