@@ -729,16 +729,23 @@ export default {
         from: this.getAccountName,
         receiver: this.getAccountName,
         stake_net_quantity: this.getAccount.self_delegated_bandwidth.net_weight,
-        stake_cpu_quantity: (this.incCpuVal + parseFloat(this.getAccount.self_delegated_bandwidth.cpu_weight)).toFixed(this.$configFile.network.mainCurrencyContract.decimals) + ' ' + this.$configFile.network.mainCurrencyContract.token,
+        stake_cpu_quantity: this.incCpuVal.toFixed(this.$configFile.network.mainCurrencyContract.decimals) + ' ' + this.$configFile.network.mainCurrencyContract.token,
         transfer: 0
       })
     },
     decreaseCpu() {
-      this.$refs.Transaction.newTransaction(this.$configFile.network.systemContract.name, 'delegatebw', {
+      console.log({
         from: this.getAccountName,
         receiver: this.getAccountName,
-        stake_net_quantity: this.getAccount.self_delegated_bandwidth.net_weight,
-        stake_cpu_quantity: (parseFloat(this.getAccount.self_delegated_bandwidth.cpu_weight) - this.decCpuVal).toFixed(this.$configFile.network.mainCurrencyContract.decimals) + ' ' + this.$configFile.network.mainCurrencyContract.token,
+        unstake_net_quantity: (0).toFixed(this.$configFile.network.mainCurrencyContract.decimals) + ' ' + this.$configFile.network.mainCurrencyContract.token,
+        unstake_cpu_quantity: this.decCpuVal.toFixed(this.$configFile.network.mainCurrencyContract.decimals) + ' ' + this.$configFile.network.mainCurrencyContract.token,
+        transfer: 0
+      })
+      this.$refs.Transaction.newTransaction(this.$configFile.network.systemContract.name, 'undelegatebw', {
+        from: this.getAccountName,
+        receiver: this.getAccountName,
+        unstake_net_quantity: (0).toFixed(this.$configFile.network.mainCurrencyContract.decimals) + ' ' + this.$configFile.network.mainCurrencyContract.token,
+        unstake_cpu_quantity: this.decCpuVal.toFixed(this.$configFile.network.mainCurrencyContract.decimals) + ' ' + this.$configFile.network.mainCurrencyContract.token,
         transfer: 0
       })
     },
@@ -746,17 +753,17 @@ export default {
       this.$refs.Transaction.newTransaction(this.$configFile.network.systemContract.name, 'delegatebw', {
         from: this.getAccountName,
         receiver: this.getAccountName,
-        stake_net_quantity: (parseFloat(this.getAccount.self_delegated_bandwidth.net_weight) + this.incNetVal).toFixed(this.$configFile.network.mainCurrencyContract.decimals) + ' ' + this.$configFile.network.mainCurrencyContract.token,
+        stake_net_quantity: this.incNetVal.toFixed(this.$configFile.network.mainCurrencyContract.decimals) + ' ' + this.$configFile.network.mainCurrencyContract.token,
         stake_cpu_quantity: this.getAccount.self_delegated_bandwidth.cpu_weight,
         transfer: 0
       })
     },
     decreaseNet() {
-      this.$refs.Transaction.newTransaction(this.$configFile.network.systemContract.name, 'delegatebw', {
+      this.$refs.Transaction.newTransaction(this.$configFile.network.systemContract.name, 'undelegatebw', {
         from: this.getAccountName,
         receiver: this.getAccountName,
-        stake_net_quantity: (parseFloat(this.getAccount.self_delegated_bandwidth.net_weight) - this.decNetVal).toFixed(this.$configFile.network.mainCurrencyContract.decimals) + ' ' + this.$configFile.network.mainCurrencyContract.token,
-        stake_cpu_quantity: this.getAccount.self_delegated_bandwidth.cpu_weight,
+        unstake_net_quantity: this.decNetVal.toFixed(this.$configFile.network.mainCurrencyContract.decimals) + ' ' + this.$configFile.network.mainCurrencyContract.token,
+        unstake_cpu_quantity: '0 ' + this.$configFile.network.mainCurrencyContract.token,
         transfer: 0
       })
     },
