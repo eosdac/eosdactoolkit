@@ -79,10 +79,15 @@ export default {
         port: current.httpEndpoint.split(':')[2] || pp
       }
       try {
-        let version = await this.getScatter.getVersion()
-        if (this.versionCompare(version, '6.1.10') < 0) {
-          throw Error('outdated')
+        if (typeof this.getScatter.getVersion === 'function') { //is desktop
+          let version = await this.getScatter.getVersion()
+          if (this.versionCompare(version, '6.1.10') < 0) {
+            throw Error('outdated')
+          }
+        } else if (typeof this.getScatter.requireVersion === 'function') { // is extension
+          this.getScatter.requireVersion(6.1)
         }
+
         let suggest = await this.getScatter.suggestNetwork(network2)
         let identity = await this.getScatter.getIdentity({
           accounts: [{
@@ -101,7 +106,6 @@ export default {
         this.loading = false
         this.$emit('done')
       } catch (err) {
-        console.log(err.message)
         this.loading = false
         if (err.type === 'locked') {
           this.scatterError = true
