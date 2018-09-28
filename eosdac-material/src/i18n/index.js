@@ -7,6 +7,7 @@ import it from './it'
 import ja from './ja'
 import ko from './ko'
 import ru from './ru'
+import vi from './vi'
 import zhHANS from './zh-hans'
 export default {
   'de': de,
@@ -18,5 +19,6 @@ export default {
   'ja': ja,
   'ko': ko,
   'ru': ru,
+  'vi': vi,
   'zh-hans': zhHANS
 }

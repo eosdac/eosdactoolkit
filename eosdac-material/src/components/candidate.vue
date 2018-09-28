@@ -1,82 +1,98 @@
 <template>
-
-<div class="q-mb-md bg-dark2 round-borders"  v-bind:class="{ 'selected_candidate': data.selected, 'unselected_candidate':!data.selected, 'shadow-5':!data.selected}">
-  <q-collapsible  label="First"  icon-toggle header-class="candidate_header" collapse-icon="icon-ui-11">
-    <template slot="header" >
-      <q-item-side left >
-        <div class="row">
-          <q-btn v-if="!data.selected" class="q-mr-md" icon="icon-plus" round color="primary" style="height:55px;width:55px;margin-top:0px;" @click="$emit('clickvotefor')" />
-          <q-btn v-else class="q-mr-md" icon="icon-ui-6" round color="positive" style="height:55px;width:55px;margin-top:0px;" />
-          <q-item-tile avatar style="margin-top:-2px">
-            <img style="height:60px;width:60px;" class="q-mr-md" :src="image_profile" @click="getProfileData" :name="data.candidate_name+'_pic'">
-          </q-item-tile>
-<!--           <q-item-tile style="margin-top:3px">
-            <ProfilePic :url="image_profile" size= "60px" />
-          </q-item-tile> -->
+  <div class="q-mb-md bg-dark2 round-borders"  v-bind:class="{ 'selected_candidate': data.selected, 'unselected_candidate':!data.selected, 'shadow-5':!data.selected}">
+    <q-collapsible  label="First" group="candidates" icon-toggle header-class="candidate_header" collapse-icon="icon-ui-11">
+      <template slot="header" >
+        <q-item-side left >
+          <div class="row full-height items-center">
+            <q-btn v-if="!data.selected" class="q-mr-md float-left" icon="icon-plus" round color="primary" style="height:55px;width:55px;margin-top:0px;" @click="$emit('clickvotefor')" />
+            <q-btn v-else class="q-mr-md" icon="icon-ui-6" round color="positive" style="height:55px;width:55px;margin-top:0px;" @click="$emit('clickunvotefor')"/>
+            <div class="center_background_image float-left"  style="width: 60px; height:60px" v-bind:style="{ 'background-image': 'url(' + image_profile + ')' }" ></div>
+          </div>
+        </q-item-side>
+        <q-item-main >
+          <div class="q-ml-lg">
+            <router-link class="q-headline" :to="{path: '/profile/' + data.candidate_name}" >
+              <q-icon title="Nominated for next custodian board" style="margin-top:-5px" v-if="data.position < 13" name="star_border" color="yellow" />{{ data.candidate_name }}
+            </router-link><br>
+            <span><span class="text-dimwhite">votes:</span> {{data.total_votes/10000}}</span>
+          </div>
+        </q-item-main>
+      </template>
+      <div class="q-pt-sm q-pt-none" style="border-top:1px solid grey">
+        <q-scroll-area
+          style="width: 100%; height: 300px;"
+          :thumb-style="{
+            right: '-13px',
+            borderRadius: '2px',
+            background: '#7c41ba',
+            width: '10px',
+            opacity: 0.8
+          }"
+        >
+        <div class="q-my-md">BIO</div>
+        <!--<div class="text-dimwhite q-body-1" style="overflow:hidden; white-space: pre-wrap;" v-if="data.profile !== undefined">{{data.profile.description}}</div>-->
+        <MarkdownViewer v-if="data.profile !== undefined" :tags="['h1', 'h2', 'h3', 'italic', 'bold', 'underline', 'strikethrough', 'subscript',
+          'superscript', 'anchor', 'orderedlist', 'unorderedlist']" class="bg-dark2" dark :text="data.profile.description" />
+        </q-scroll-area>
+        <div class="row justify-between items-center full-height q-pb-sm">
+          <div class="q-mb-md" style="border-bottom:1px solid grey; width:100%;height:5px"></div>
+          <SocialLinks :links="sociallinks" />
+          <a target="_blank" :href="website" class="a2" >{{website}}</a>
         </div>
-      </q-item-side>
-      <q-item-main >
-        <div class="q-ml-lg">{{data.candidate_name}}<br>xxxxxx</div>
-      </q-item-main>
-    </template>
-    <div class="q-pt-sm q-pt-none" style="border-top:1px solid grey">
-      <span>BIO</span>
-      <div class="text-dimwhite" v-if="data.profile !== undefined">{{data.profile.description}}</div>
-    </div>
-  </q-collapsible>
-
-</div>
-
+      </div>
+    </q-collapsible>
+  </div>
 </template>
 
 <script>
-import ProfilePic from 'components/profile-pic'
-
+import SocialLinks from 'components/social-links'
+import MarkdownViewer from 'components/markdown-viewer'
 export default {
   name: 'Candidate',
   components: {
-    ProfilePic
+    SocialLinks,
+    MarkdownViewer
   },
+
   props: {
     data: Object,
-
   },
+
   data () {
     return {
-      image_profile:'https://eosdac.io/wp-content/uploads/elementor/thumbs/female1-nqk9ciy87u6os74yatkpw2xi7qbjzjq3r5sl9wy0mm.jpg',
+      image_profile:'../statics/img/default-avatar.png',
+      sociallinks : [],
+      website : false
     }
   },
+
   methods: {
-    getProfileData(){
+
+    setProfileData(){
+
       if(this.data.profile !== undefined){
-        if(this.isUrl(this.data.profile.image)){
-          this.image_profile = this.data.profile.image;
-        }
-        console.log('profile already fetched');
-        return false;
+        // console.log(this.data.candidate_name)
+        this.image_profile = this.$helper.isUrl(this.data.profile.image) ? this.data.profile.image : this.image_profile;
+        this.sociallinks = this.data.profile.sameAs.map(x => x.link);
+        this.website = this.data.profile.url
       }
-
-      if(!this.isUrl(this.data.bio) ){
-          console.log('no profile available');
-          return false;
-      }
-      this.$axios.get(this.data.bio).then(r => {
-        if( this.isUrl(r.data.image) ) {
-          this.image_profile = r.data.image;
-        }
-        this.$emit('profile', {candidate_name:this.data.candidate_name, profile: r.data});
-      })
-      .catch(e => console.log('could not load profile file from'+this.data.candidate_name))
-    },
-
-    isUrl(url){
-      const re = /^(?:(?:https?|ftp):\/\/)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:\/\S*)?$/;
-      return re.test(url);
     }
 
   },
+
+  // watch: {
+  //   data: {
+  //     // immediate: true,
+  //     deep: true,
+  //     handler(newValue, oldValue) {
+  //       this.image_profile = newValue.profile.image;
+  //       this.sociallinks = newValue.profile.sameAs.map(x => x.link);
+  //     }
+  //   }
+  // },
+
   mounted:function(){
-    this.getProfileData()
+    this.setProfileData()
   }
 
 }
@@ -84,15 +100,20 @@ export default {
 
 <style lang ="stylus">
 @import '~variables'
+
 .candidate_header{
   height:80px;
   border-radius:2px;
 }
+
 .selected_candidate{
   border:2px solid $positive;
   transition : border 400ms ease;
 }
+
 .unselected_candidate{
   border:2px solid transparent;
+  transition : border 400ms ease;
 }
+
 </style>

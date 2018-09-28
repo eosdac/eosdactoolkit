@@ -1,7 +1,7 @@
 {
   "network": {
     "chainId": "038f4b0fc8ff18a4f0842a8f0564611f6e96e8535901dd45e43ac8691a1c4dca",
-    
+
     "tokenContracts":{
       "eosio.token":[{"token": "EOS", "decimals": 4 }],
       "kasdactokens":[{"token": "KASDAC", "decimals": 4}]
@@ -19,6 +19,9 @@
     },
     "custodianContract": {
       "name": "dacelections"
+    },
+    "systemContract": {
+      "name": "eosio"
     }
   },
   "api": {
@@ -26,5 +29,11 @@
     "mainCurrencyExplorerUrl": "https://www.bloks.io",
     "tokenExplorerUrl": "https://explorer.eosdac.io",
     "profileStoreUrl": "dummy"
+  },
+  "external":{
+    "homepage": "https://eosdac.io",
+    "discordUrl": "https://discord.io/eosdac",
+    "subscribeNewsletter" :""
+
   }
 }

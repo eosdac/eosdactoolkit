@@ -14,11 +14,18 @@
     </q-list>
     <q-list dark striped>
       <q-list-header>{{ $t('transaction.fields') }}</q-list-header>
-      <q-item v-for="(field, key) in fields" :key="key">
+      <q-item v-for="(field, key) in fields" :key="key" v-if="String(field).length < 20">
         <q-item-main :label="key + ':'" />
         <q-item-side right>
           {{field}}
         </q-item-side>
+      </q-item>
+      <q-item v-else>
+        <div class="q-item-label">{{key + ':'}}</div>
+          <q-scroll-area class="bg-dark2 q-ml-sm" style="width: 95%; height: 80px;">
+            <p class="no-margin q-pa-sm" style="word-break: break-all;">{{field}}</p>
+        </q-scroll-area>
+
       </q-item>
     </q-list>
     <q-alert v-if="getAccountResources.cpu.warning" :message="$t('transaction.warning_cpu')" class="text-truncate" text-color="black" icon="icon-ui-9" color="warning" />
@@ -31,7 +38,7 @@
       </div>
     </q-scroll-area>
     <div class="relative-position q-pa-sm">
-      <q-btn color="primary" @click="transact()">Send</q-btn>
+      <q-btn color="primary" @click="transact()">{{ $t('transaction.send') }}</q-btn>
       <q-btn class="on-right" v-if="!cancelable" color="negative" @click="close()">{{ $t('transaction.cancel') }}</q-btn>
     </div>
     <LoadingSpinner :visible="loading" :text="$t(loadingText)" />
@@ -40,7 +47,7 @@
 </template>
 
 <script>
-import MarkdownIt from 'markdown-it'
+import marked from 'marked'
 import LoadingSpinner from 'components/loading-spinner'
 import {
   mapGetters
@@ -78,7 +85,7 @@ export default {
     async newTransaction(contract, action, fields, cancelable) {
       Object.assign(this.$data, this.$options.data())
       this.cancelable = cancelable
-      this.visible = this.getTransactionPopup //boolean 
+      this.visible = this.getTransactionPopup //boolean
       this.loading = this.getTransactionPopup //boolean
       this.loadingText = 'transaction.loading_abi'
       this.action = action
@@ -100,8 +107,7 @@ export default {
         return ricardianAction.name === this.action
       })
       if (ricardianAction && ricardianAction.ricardian_contract) {
-        let md = new MarkdownIt()
-        let ric = md.render(ricardianAction.ricardian_contract)
+        let ric = marked(ricardianAction.ricardian_contract, {sanitize: true})
         this.replaceVars(ric)
       } else {
         this.ricardianError = true
@@ -147,7 +153,8 @@ export default {
               message: 'transaction.transaction_successful',
               details: res.transaction_id,
               linkText: 'transaction.view_in_explorer',
-              linkUrl: this.$configFile.api.mainCurrencyExplorerUrl + '/transaction/' + res.transaction_id
+              linkUrl: this.$configFile.api.mainCurrencyExplorerUrl + '/transaction/' + res.transaction_id,
+              autoclose: 10
             })
           } else {
             this.$store.commit('api/NOTIFY', {
@@ -156,7 +163,8 @@ export default {
               message: 'transaction.transaction_successful',
               details: res.transaction_id,
               linkText: 'transaction.view_in_explorer',
-              linkUrl: this.$configFile.api.tokenExplorerUrl + '/transaction/' + res.transaction_id
+              linkUrl: this.$configFile.api.tokenExplorerUrl + '/transaction/' + res.transaction_id,
+              autoclose: 10
             })
           }
           this.loading = false
@@ -167,14 +175,17 @@ export default {
               icon: 'error',
               color: 'red',
               message: 'Error: ' + err.type,
-              detail: ''
+              detail: '',
+              autoclose: 10
             })
           } else {
+            console.log(err)
             this.$store.commit('api/NOTIFY', {
               icon: 'error',
               color: 'red',
               message: 'Error: ' + JSON.parse(err).error.details[0].message || JSON.parse(err),
-              detail: ''
+              detail: '',
+              autoclose: 10
             })
           }
           this.loading = false

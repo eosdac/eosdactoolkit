@@ -14,7 +14,7 @@
         <q-icon name="icon-register-1"  color="white"  size="24px" />
       </q-item-side>
       <q-item-main >
-        <span>{{ $tc('settings.API_endpoint') }}</span>
+        <span>{{ $t('settings.API_endpoint') }}</span>
         <span class="q-ml-lg text-dimwhite" >{{ $t("settings.current_connection") }}:</span>
         <span v-if="getCurrentEndpoint.lastConnectionStatus" class="q-ml-md text-positive">{{getCurrentEndpoint.httpEndpoint}}</span>
         <span v-else class="q-ml-md text-negative">{{getCurrentEndpoint.httpEndpoint}}</span>
@@ -30,7 +30,8 @@
   <q-collapsible  label="First"  separator  header-class="bg-dark2"  collapse-icon="icon-ui-11">
     <template slot="header" >
       <q-item-side left >
-        <q-icon name="icon-type-4"  color="white"  size="24px" />
+        <q-icon v-if="getRegistered" name="icon-role-3" color="white"  size="24px" />
+        <q-icon v-else name="icon-role-1" color="white"  size="24px" />
       </q-item-side>
       <q-item-main >
         <span>{{ $t("settings.member_status") }}</span>
@@ -64,7 +65,7 @@
   <q-collapsible  label="First" separator header-class="bg-dark2" collapse-icon="icon-ui-11">
     <template slot="header" >
       <q-item-side left >
-        <q-icon name="icon-ui-10"  color="white"  size="24px" />
+        <q-icon name="icon-ui-18"  color="white"  size="24px" />
       </q-item-side>
       <q-item-main >
         <span>{{ $t('settings.language_preference') }}</span>
@@ -84,19 +85,26 @@
   <q-collapsible  label="First" separator header-class="bg-dark2" collapse-icon="icon-ui-11">
     <template slot="header" >
       <q-item-side left >
-        <q-icon name="icon-ui-10"  color="white"  size="24px" />
+        <q-icon name="icon-ui-20"  color="white"  size="24px" />
       </q-item-side>
       <q-item-main >
         <span>{{ $t('settings.user_preference') }}</span>
-        <span class="q-ml-lg text-dimwhite" >xxxxxxxxxxxx:</span>
-        <span v-if="true" class="q-ml-md text-positive">xxxxxxxxxxxxxxxxx</span>
+        <span class="q-ml-lg text-dimwhite" ></span>
+        <span v-if="true" class="q-ml-md text-positive"></span>
       </q-item-main>
       <span class="hack_height"></span>
     </template>
-    <div class="q-pa-md">
-      <q-toggle  class="float-right" v-model="transactionpopup" left-label :label="$t('settings.transaction_popup')" />
-      {{transactionpopup}}
+
+    <div class="row ">
+      <div class="col-sm-12 col-lg-4 q-pa-md relative-position" >
+        <p class="q-title" ></p>
+        <div class="q-mt-lg">
+          <q-toggle  class="float-left" v-model="transactionpopup" color="p-light" left-label :label="$t('settings.transaction_popup_label')" />
+          <!-- <q-toggle  class="float-left" v-model="consolemessage" color="p-light" left-label :label="$t('settings.console_message_label')" /> -->
+        </div>
+      </div>
     </div>
+    
   </q-collapsible>
 </div>
 
@@ -133,11 +141,13 @@ export default {
   },
   data (){
     return{
-      transactionpopup: ''
+      transactionpopup: '',
+      consolemessage: ''
     }
   },
   mounted() {
     this.transactionpopup = this.getTransactionPopup
+    this.consolemessage = this.getConsoleMessage
 
   },
   computed: {
@@ -145,7 +155,8 @@ export default {
       getAccountName: 'account/getAccountName',
       getRegistered: 'account/getRegistered',
       getCurrentEndpoint: 'api/getCurrentEndpoint',
-      getTransactionPopup: 'usersettings/getTransactionPopup'
+      getTransactionPopup: 'usersettings/getTransactionPopup',
+      getConsoleMessage: 'usersettings/getConsoleMessage'
     })
   },
   methods:{
@@ -159,6 +170,9 @@ export default {
   watch: {
     transactionpopup (bool) {
       this.$store.commit('usersettings/SET_TRANSACTIONPOPUP', bool)
+    },
+    consolemessage (bool) {
+      this.$store.commit('usersettings/SET_CONSOLEMESSAGE', bool)
     }
   }
 }

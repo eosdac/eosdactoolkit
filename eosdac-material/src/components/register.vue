@@ -28,7 +28,7 @@
       <LoadingSpinner :visible="loading" :text="$t(loadingText)" />
     </div>
     <div v-else class="col-lg-12 col-xl-8 relative-position">
-      <q-alert :actions="[{ label: $t('register.try_again'), handler: () => { checkRegistered() } }]" message=$t('register.could_not_retrieve_member_status') class="text-truncate q-ma-xl" icon="info" color="grey" />
+      <q-alert :actions="[{ label: $t('register.try_again'), handler: () => { checkRegistered() } }]" :message="$t('register.could_not_retrieve_member_status')" class="text-truncate q-ma-xl" icon="info" color="grey" />
     </div>
   </div>
   <div class="row q-px-sm" v-else>
@@ -44,7 +44,7 @@
 
 <script>
 import CryptoJS from 'crypto-js'
-import MarkdownIt from 'markdown-it'
+import marked from 'marked'
 import LoadingSpinner from 'components/loading-spinner'
 import {
   mapGetters
@@ -92,14 +92,14 @@ export default {
   },
   methods: {
     init() {
-      this.checkRegistered()
+      this.checkRegistered();
+
     },
     sleep(ms) {
       return new Promise(resolve => setTimeout(resolve, ms))
     },
     async checkRegistered(wait) {
       try {
-        let md = new MarkdownIt()
         this.loading = true
         this.loadingText = 'register.checking_status'
         this.queryError = false
@@ -113,6 +113,7 @@ export default {
         let memberterms = latestMemberTerms
         if (memberRegistration) {
           if (memberterms.version === memberRegistration.agreedterms) { //is regsitered
+            this.checkMemberRoles();///////////////////////// WIP add this to dedicated component!
             if (this.getFirstReg) {
               this.altMessage = true
               console.log('First time registration')
@@ -128,7 +129,7 @@ export default {
             this.loadingText = 'register.loading_latest_constitution'
             let getCt = await this.loadConstitutionFromGithub(memberterms.terms)
             this.hash = CryptoJS.MD5(getCt).toString()
-            this.constitution = md.render(getCt)
+            this.constitution = marked(getCt, {sanitize: true})
             this.statusText = 'register.updated_constitution'
           }
         } else { // not regsitered
@@ -137,8 +138,9 @@ export default {
           this.loadingText = 'register.loading_latest_constitution'
           let getCt = await this.loadConstitutionFromGithub(memberterms.terms)
           this.hash = CryptoJS.MD5(getCt).toString()
-          this.constitution = md.render(getCt)
+          this.constitution = marked(getCt, {sanitize: true})
           this.statusText = ''
+
         }
       } catch (err) {
         console.log(err)
@@ -147,6 +149,10 @@ export default {
         this.loading = false
         this.$emit('done')
       }
+    },
+    async checkMemberRoles(){
+      this.$store.dispatch('api/getIsCandidate');
+      this.$store.dispatch('api/getIsCustodian');
     },
     registerMember() {
       this.$refs.Transaction.newTransaction(this.$configFile.network.tokenContract.name,'memberreg', {

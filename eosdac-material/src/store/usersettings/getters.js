@@ -6,3 +6,7 @@ export const getLanguage = (state) => {
 export const getTransactionPopup = (state) => {
   return state.transactionPopup
 }
+
+export const getConsoleMessage = (state) => {
+  return state.consoleMessage
+}

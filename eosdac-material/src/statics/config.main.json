@@ -12,7 +12,10 @@
       "decimals": 4
     },
     "custodianContract": {
-      "name": "dacelections"
+      "name": ""
+    },
+    "systemContract": {
+      "name": "eosio"
     }
   },
   "api": {
@@ -20,5 +23,11 @@
     "mainCurrencyExplorerUrl": "https://www.bloks.io",
     "tokenExplorerUrl": "https://explorer.eosdac.io",
     "profileStoreUrl": "dummy"
+  },
+  "external":{
+    "homepage": "https://eosdac.io",
+    "discordUrl": "https://discord.io/eosdac",
+    "subscribeNewsletter" :""
+
   }
 }

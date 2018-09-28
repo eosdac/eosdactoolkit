@@ -3,7 +3,7 @@
   <div class="row justify-center q-mt-sm">
     <div class="col-lg-12 col-xl-auto shadow-5">
       <div class="bg-dark2 q-pa-md">
-        <q-toggle class="float-right" v-model="white_constitution" left-label :label="$t('constitution.switch_contrast')" /></div>
+        <q-toggle class="float-right" color="p-light" v-model="white_constitution" left-label :label="$t('constitution.switch_contrast')" /></div>
       <div v-if="!isloading" class="q-pt-md round-borders  bg-dark2">
         <div v-bind:class="{ overwrite: !white_constitution }" class="markdown-body" v-html="constitution"></div>
       </div>
@@ -33,7 +33,7 @@
 </style>
 
 <script>
-import MarkdownIt from 'markdown-it'
+import marked from 'marked'
 import LoadingSpinner from 'components/loading-spinner'
 
 export default {
@@ -55,12 +55,11 @@ export default {
   methods: {
 
     async getConstitution() {
-      let md = new MarkdownIt();
       this.isloading = true;
       try {
         let latestMemberTerms = await this.$store.dispatch('api/getMemberTerms');
         let getCt = await this.loadConstitutionFromGithub(latestMemberTerms.terms);
-        this.constitution = md.render(getCt);
+        this.constitution = marked(getCt, {sanitize: true})
         this.isloading = false;
 
       } catch (e) {

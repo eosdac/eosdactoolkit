@@ -5,6 +5,11 @@ export default {
     version: null,
     memberterms: null
   },
+  memberRoles:{
+    candidate: false,
+    custodian: false,
+    worker: false
+  },
   firstReg: true,
   useScatter: false,
   info: {},
