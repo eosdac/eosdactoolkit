@@ -340,6 +340,7 @@ export default {
         })
       }
       else{
+        console.log('Unable to fetch profiles')
         
       }
 

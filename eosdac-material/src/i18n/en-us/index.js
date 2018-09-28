@@ -26,6 +26,7 @@ export default {
     register_as_candidate: 'Register As Candidate',
     settings: 'Settings',
     sign_the_constitution: 'Sign the Constitution',
+    support: 'Support & Feedback',
     status: 'Status',
     token_explorer: 'Token Explorer',
     unregister_as_candidate: 'Unregister As Candidate',
