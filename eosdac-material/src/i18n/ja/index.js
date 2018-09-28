@@ -88,6 +88,9 @@ export default {
       vietnamese: 'ベトナム語',
     },
   },
+  markdown_viewer: {
+    select_text_to_edit: 'Highlight the text you want to edit.'
+  },
   multi_modal: {
     register_as_dac_member: 'DACメンバーとしての登録',
     registration: '登録',
@@ -174,6 +177,7 @@ export default {
     identity_request_denied: 'IDリクエストが拒否されました。もう一度お試しください。',
     scatter_is_locked: 'Scatterがロックされています。続行するにはロックを解除してください。',
     scatter_is_not_available: 'Scatterが利用できません。Scatterがインストールされている場合、更新するか、Permissionメニューから当サイトへのpermissionを削除して、もう一度お試しください。',
+    scatter_is_outdated: 'Your Scatter is outdated. Please update your Scatter and try again.',
     sign_in: 'サインイン',
     waiting_for_scatter: 'Scatterを待機しています...',
   },
@@ -260,6 +264,7 @@ export default {
     CPU: 'CPU',
     cycles: 'Cycles',
     decrease: 'Decrease',
+    decrease_by: 'Decrease by',
     destination: '宛先',
     history: '履歴',
     increase: 'Increase',
@@ -288,6 +293,7 @@ export default {
     total: '合計',
     total_cost: 'Total Cost',
     total_eos_balance: 'eos残高合計',
+    total_refund: 'Total Refund',
     total_staked: 'ステーク総量',
     transfer: '送金',
     transfer_to: '送金先',

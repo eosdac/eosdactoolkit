@@ -10,11 +10,13 @@ module.exports = function(ctx) {
       'eosdac-iconfont',
       'scatter',
       'consolemessage',
-      'helper'
+      'helper',
+      'medium-editor'
     ],
     css: [
       'app.styl',
-      'github-markdown.css'
+      'github-markdown.css',
+      '~medium-editor/dist/css/medium-editor.min.css'
     ],
     extras: [
       ctx.theme.mat ? 'roboto-font' : null,
@@ -119,7 +121,8 @@ module.exports = function(ctx) {
         'QToggle',
         'QTooltip',
         'QAutocomplete',
-        'QBtnToggle'
+        'QBtnToggle',
+        'QScrollObservable'
       ],
       directives: [
         'Ripple',

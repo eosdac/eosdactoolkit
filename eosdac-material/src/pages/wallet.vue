@@ -58,7 +58,7 @@
   <div class="row q-px-md gutter-md lg-hide md-hide sm-hide xs-hide" style="max-height:78px;">
     <div class="col-lg-12 col-xl-4">
       <q-card class="bg-dark2 relative-position shadow-5" style="margin-top:-43px;z-index:3;">
-        <q-btn dense @click="ramslider = !ramslider" flat class="float-right" icon="icon-topmenu-6">
+        <q-btn dense @click="ramslider = !ramslider" flat class="float-right" icon="icon-topmenu-6 q-pa-sm">
           <q-tooltip>
             {{$t('wallet.toggle_adjust_ram_allocation')}}
           </q-tooltip>
@@ -66,13 +66,13 @@
         <q-item class="q-pr-none q-py-none">
           <q-item-side>
             <q-item-tile icon>
-              <q-icon color="positive" style="font-size:50px;" name="icon-ui-13" />
+              <q-icon color="positive" style="font-size:48px;" name="icon-ui-13" />
             </q-item-tile>
           </q-item-side>
           <q-item-main class="q-pa-sm no-margin">
             <span class="q-subheading text-dimwhite uppercase q-pl-sm">{{ $t('wallet.RAM') }}</span>
             <p class="no-margin q-pl-sm">{{getAccountResources.ram.available}} % {{ $t('wallet.remaining') }}</p>
-            <span class="text-dimwhite q-pl-sm">{{$t('wallet.used')}}: {{(getAccountResources.ram.raw.used / 1024).toFixed(2)}} / {{(getAccountResources.ram.raw.available / 1024).toFixed(2)}} {{$t('wallet.KB')}}</span>
+            <span class="text-dimwhite q-pl-sm q-body-1">{{$t('wallet.used')}}: {{(getAccountResources.ram.raw.used / 1024).toFixed(2)}} / {{(getAccountResources.ram.raw.available / 1024).toFixed(2)}} {{$t('wallet.KB')}}</span>
             <div v-if="ramslider">
               <q-slider v-if="buyRam" color="positive" v-model="buyRamVal" :min="0" :max="getMainCurrencyBalance" :step="0.0001" />
               <q-slider v-else color="negative" v-model="sellRamVal" :min="0" :max="Math.round(getAccountResources.ram.raw.available)" :step="1" />
@@ -148,7 +148,7 @@
     </div>
     <div class="col-lg-12 col-xl-4">
       <q-card class="bg-dark2 relative-position shadow-5" style="margin-top:-43px;z-index:3;">
-        <q-btn dense @click="cpuSlider = !cpuSlider" flat class="float-right" icon="icon-topmenu-6">
+        <q-btn dense @click="cpuSlider = !cpuSlider" flat class="float-right" icon="icon-topmenu-6 q-pa-sm">
           <q-tooltip>
             {{$t('wallet.toggle_adjust_cpu_allocation')}}
           </q-tooltip>
@@ -156,13 +156,13 @@
         <q-item class="q-pr-none q-py-none">
           <q-item-side>
             <q-item-tile icon>
-              <q-icon color="blue" style="font-size:50px;" name="icon-ui-9" />
+              <q-icon color="blue" style="font-size:48px;" name="icon-ui-9" />
             </q-item-tile>
           </q-item-side>
           <q-item-main class="q-pa-sm no-margin">
             <span class="q-subheading text-dimwhite uppercase q-pl-sm">{{ $t('wallet.CPU') }}</span>
             <p class="no-margin q-pl-sm">{{getAccountResources.cpu.available}} % {{ $t('wallet.remaining') }}</p>
-            <span class="text-dimwhite q-pl-sm">{{$t('wallet.used')}}: {{(getAccountResources.cpu.raw.used).toFixed(2)}} / {{(getAccountResources.cpu.raw.available).toFixed(2)}} {{$t('wallet.cycles')}}</span>
+            <span class="text-dimwhite q-pl-sm q-body-1">{{$t('wallet.used')}}: {{(getAccountResources.cpu.raw.used).toFixed(2)}} / {{(getAccountResources.cpu.raw.available).toFixed(2)}} {{$t('wallet.cycles')}}</span>
             <div v-if="cpuSlider">
               <q-slider v-if="incCpu" color="positive" v-model="incCpuVal" :min="0" :max="getMainCurrencyBalance" :step="0.0001" />
               <q-slider v-else color="negative" v-model="decCpuVal" :min="0" :max="parseFloat(getAccount.self_delegated_bandwidth.cpu_weight)" :step="0.0001" />
@@ -209,7 +209,7 @@
     </div>
     <div class="col-lg-12 col-xl-4">
       <q-card class="bg-dark2 relative-position shadow-5" style="margin-top:-43px;z-index:3;">
-        <q-btn dense @click="netSlider = !netSlider" flat class="float-right" icon="icon-topmenu-6">
+        <q-btn dense @click="netSlider = !netSlider" flat class="float-right" icon="icon-topmenu-6 q-pa-sm">
           <q-tooltip>
             {{$t('wallet.toggle_adjust_net_allocation')}}
           </q-tooltip>
@@ -217,13 +217,13 @@
         <q-item class="q-pr-none q-py-none">
           <q-item-side>
             <q-item-tile icon>
-              <q-icon color="red" style="font-size:50px;" name="icon-ui-14" />
+              <q-icon color="red" style="font-size:48px;" name="icon-ui-14" />
             </q-item-tile>
           </q-item-side>
           <q-item-main class="q-pa-sm no-margin">
             <span class="q-subheading text-dimwhite uppercase q-pl-sm">{{ $t('wallet.network') }}</span>
             <p class="no-margin q-pl-sm">{{getAccountResources.net.available}} % {{ $t('wallet.remaining') }}</p>
-            <span class="text-dimwhite q-pl-sm">{{$t('wallet.used')}}: {{(getAccountResources.net.raw.used).toFixed(2)}} / {{(getAccountResources.net.raw.available).toFixed(2)}} {{$t('wallet.bytes')}}</span>
+            <span class="text-dimwhite q-pl-sm q-body-1">{{$t('wallet.used')}}: {{(getAccountResources.net.raw.used).toFixed(2)}} / {{(getAccountResources.net.raw.available).toFixed(2)}} {{$t('wallet.bytes')}}</span>
             <div v-if="netSlider">
               <q-slider v-if="incNet" color="positive" v-model="incNetVal" :min="0" :max="getMainCurrencyBalance" :step="0.0001" />
               <q-slider v-else color="negative" v-model="decNetVal" :min="0" :max="parseFloat(getAccount.self_delegated_bandwidth.net_weight)" :step="0.0001" />
@@ -280,13 +280,13 @@
         <q-item class="q-pr-none q-py-none">
           <q-item-side>
             <q-item-tile icon>
-              <q-icon color="positive" style="font-size:50px;" name="icon-ui-13" />
+              <q-icon color="positive" style="font-size:48px;" name="icon-ui-13" />
             </q-item-tile>
           </q-item-side>
           <q-item-main class="q-pa-sm no-margin">
             <span class="q-subheading text-dimwhite uppercase q-pl-sm">{{ $t('wallet.RAM') }}</span>
             <p class="no-margin q-pl-sm">{{getAccountResources.ram.available}} % {{ $t('wallet.remaining') }}</p>
-            <span class="text-dimwhite q-pl-sm">{{$t('wallet.used')}}: {{(getAccountResources.ram.raw.used / 1024).toFixed(2)}} / {{(getAccountResources.ram.raw.available / 1024).toFixed(2)}} {{$t('wallet.KB')}}</span>
+            <span class="text-dimwhite q-pl-sm q-body-1">{{$t('wallet.used')}}: {{(getAccountResources.ram.raw.used / 1024).toFixed(2)}} / {{(getAccountResources.ram.raw.available / 1024).toFixed(2)}} {{$t('wallet.KB')}}</span>
             <div v-if="ramslider">
               <q-slider v-if="buyRam" color="positive" v-model="buyRamVal" :min="0" :max="getMainCurrencyBalance" :step="0.0001" />
               <q-slider v-else color="negative" v-model="sellRamVal" :min="0" :max="Math.round(getAccountResources.ram.raw.available)" :step="1" />
@@ -370,13 +370,13 @@
         <q-item class="q-pr-none q-py-none">
           <q-item-side>
             <q-item-tile icon>
-              <q-icon color="blue" style="font-size:50px;" name="icon-ui-9" />
+              <q-icon color="blue" style="font-size:48px;" name="icon-ui-9" />
             </q-item-tile>
           </q-item-side>
           <q-item-main class="q-pa-sm no-margin">
             <span class="q-subheading text-dimwhite uppercase q-pl-sm">{{ $t('wallet.CPU') }}</span>
             <p class="no-margin q-pl-sm">{{getAccountResources.cpu.available}} % {{ $t('wallet.remaining') }}</p>
-            <span class="text-dimwhite q-pl-sm">{{$t('wallet.used')}}: {{(getAccountResources.cpu.raw.used).toFixed(2)}} / {{(getAccountResources.cpu.raw.available).toFixed(2)}} {{$t('wallet.cycles')}}</span>
+            <span class="text-dimwhite q-pl-sm q-body-1">{{$t('wallet.used')}}: {{(getAccountResources.cpu.raw.used).toFixed(2)}} / {{(getAccountResources.cpu.raw.available).toFixed(2)}} {{$t('wallet.cycles')}}</span>
             <div v-if="cpuSlider">
               <q-slider v-if="incCpu" color="positive" v-model="incCpuVal" :min="0" :max="getMainCurrencyBalance" :step="0.0001" />
               <q-slider v-else color="negative" v-model="decCpuVal" :min="0" :max="parseFloat(getAccount.self_delegated_bandwidth.cpu_weight)" :step="0.0001" />
@@ -431,13 +431,13 @@
         <q-item class="q-pr-none q-py-none">
           <q-item-side>
             <q-item-tile icon>
-              <q-icon color="red" style="font-size:50px;" name="icon-ui-14" />
+              <q-icon color="red" style="font-size:48px;" name="icon-ui-14" />
             </q-item-tile>
           </q-item-side>
           <q-item-main class="q-pa-sm no-margin">
             <span class="q-subheading text-dimwhite uppercase q-pl-sm">{{ $t('wallet.network') }}</span>
             <p class="no-margin q-pl-sm">{{getAccountResources.net.available}} % {{ $t('wallet.remaining') }}</p>
-            <span class="text-dimwhite q-pl-sm">{{$t('wallet.used')}}: {{(getAccountResources.net.raw.used).toFixed(2)}} / {{(getAccountResources.net.raw.available).toFixed(2)}} {{$t('wallet.bytes')}}</span>
+            <span class="text-dimwhite q-pl-sm q-body-1">{{$t('wallet.used')}}: {{(getAccountResources.net.raw.used).toFixed(2)}} / {{(getAccountResources.net.raw.available).toFixed(2)}} {{$t('wallet.bytes')}}</span>
             <div v-if="netSlider">
               <q-slider v-if="incNet" color="positive" v-model="incNetVal" :min="0" :max="getMainCurrencyBalance" :step="0.0001" />
               <q-slider v-else color="negative" v-model="decNetVal" :min="0" :max="parseFloat(getAccount.self_delegated_bandwidth.net_weight)" :step="0.0001" />
@@ -728,18 +728,17 @@ export default {
       this.$refs.Transaction.newTransaction(this.$configFile.network.systemContract.name, 'delegatebw', {
         from: this.getAccountName,
         receiver: this.getAccountName,
-        stake_net_quantity: this.getAccount.self_delegated_bandwidth.net_weight,
+        stake_net_quantity: (0).toFixed(this.$configFile.network.mainCurrencyContract.decimals) + ' ' + this.$configFile.network.mainCurrencyContract.token,
         stake_cpu_quantity: this.incCpuVal.toFixed(this.$configFile.network.mainCurrencyContract.decimals) + ' ' + this.$configFile.network.mainCurrencyContract.token,
         transfer: 0
       })
     },
     decreaseCpu() {
-      this.$refs.Transaction.newTransaction(this.$configFile.network.systemContract.name, 'delegatebw', {
+      this.$refs.Transaction.newTransaction(this.$configFile.network.systemContract.name, 'undelegatebw', {
         from: this.getAccountName,
         receiver: this.getAccountName,
-        stake_net_quantity: this.getAccount.self_delegated_bandwidth.net_weight,
-        stake_cpu_quantity: this.decCpuVal.toFixed(this.$configFile.network.mainCurrencyContract.decimals) + ' ' + this.$configFile.network.mainCurrencyContract.token,
-        transfer: 0
+        unstake_net_quantity: (0).toFixed(this.$configFile.network.mainCurrencyContract.decimals) + ' ' + this.$configFile.network.mainCurrencyContract.token,
+        unstake_cpu_quantity: this.decCpuVal.toFixed(this.$configFile.network.mainCurrencyContract.decimals) + ' ' + this.$configFile.network.mainCurrencyContract.token
       })
     },
     increaseNet() {
@@ -747,17 +746,16 @@ export default {
         from: this.getAccountName,
         receiver: this.getAccountName,
         stake_net_quantity: this.incNetVal.toFixed(this.$configFile.network.mainCurrencyContract.decimals) + ' ' + this.$configFile.network.mainCurrencyContract.token,
-        stake_cpu_quantity: this.getAccount.self_delegated_bandwidth.cpu_weight,
+        stake_cpu_quantity: (0).toFixed(this.$configFile.network.mainCurrencyContract.decimals) + ' ' + this.$configFile.network.mainCurrencyContract.token,
         transfer: 0
       })
     },
     decreaseNet() {
-      this.$refs.Transaction.newTransaction(this.$configFile.network.systemContract.name, 'delegatebw', {
+      this.$refs.Transaction.newTransaction(this.$configFile.network.systemContract.name, 'undelegatebw', {
         from: this.getAccountName,
         receiver: this.getAccountName,
-        stake_net_quantity: this.decNetVal.toFixed(this.$configFile.network.mainCurrencyContract.decimals) + ' ' + this.$configFile.network.mainCurrencyContract.token,
-        stake_cpu_quantity: this.getAccount.self_delegated_bandwidth.cpu_weight,
-        transfer: 0
+        unstake_net_quantity: this.decNetVal.toFixed(this.$configFile.network.mainCurrencyContract.decimals) + ' ' + this.$configFile.network.mainCurrencyContract.token,
+        unstake_cpu_quantity: (0).toFixed(this.$configFile.network.mainCurrencyContract.decimals) + ' ' + this.$configFile.network.mainCurrencyContract.token
       })
     },
     buyRamFunc() {

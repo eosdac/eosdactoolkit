@@ -87,6 +87,9 @@ export default {
       spanish: 'Испанский',
     },
   },
+  markdown_viewer: {
+    select_text_to_edit: 'Highlight the text you want to edit.'
+  },
   multi_modal: {
     register_as_dac_member: 'ЗАРЕГИСТРИРОВАТЬСЯ КАК УЧАСТНИК DAC',
     registration: 'Регистрация',
@@ -173,6 +176,7 @@ export default {
     identity_request_denied: 'Идентификационный запрос был отклонен. Повторите попытку и примите запрос.',
     scatter_is_locked: 'Scatter заблокирован. Разблокируйте, чтобы продолжить.',
     scatter_is_not_available: 'Scatter недоступен. Если у вас установлен Scatter, обновите его или перейдите в раздел «Разрешения», удалите разрешение для этого сайта и повторите попытку.',
+    scatter_is_outdated: 'Your Scatter is outdated. Please update your Scatter and try again.',
     sign_in: 'ВОЙТИ В СИСТЕМУ',
     waiting_for_scatter: 'Ожидание Scatter...',
   },
@@ -259,6 +263,7 @@ export default {
     CPU: 'ЦПУ',
     cycles: 'Cycles',
     decrease: 'Decrease',
+    decrease_by: 'Decrease by',
     destination: 'Адрес',
     history: 'История',
     increase: 'Increase',
@@ -287,6 +292,7 @@ export default {
     total: 'Всего',
     total_cost: 'Total Cost',
     total_eos_balance: 'Общий баланс EOS',
+    total_refund: 'Total Refund',
     total_staked: 'Общее количество заблокировано',
     transfer: 'Перевод',
     transfer_to: 'Перевести',

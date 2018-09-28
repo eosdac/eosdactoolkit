@@ -88,6 +88,9 @@ export default {
       vietnamese: 'Vietnamita',
     },
   },
+  markdown_viewer: {
+    select_text_to_edit: 'Highlight the text you want to edit.'
+  },
   multi_modal: {
     register_as_dac_member: 'REGÍSTRESE COMO MIEMBRO DE LA DAC',
     registration: 'Registro',
@@ -174,6 +177,7 @@ export default {
     identity_request_denied: 'La solicitud de identidad fue denegada Por favor intente de nuevo y acepte la solicitud.',
     scatter_is_locked: 'Scatter está bloqueado. Desbloquealo para continuar.',
     scatter_is_not_available: 'Scatter no está disponible. Si tiene instalado Scatter, actualice o vaya a Permisos, asigne el permiso para este sitio y vuelva a intentarlo.',
+    scatter_is_outdated: 'Your Scatter is outdated. Please update your Scatter and try again.',
     sign_in: 'REGISTRARSE',
     waiting_for_scatter: 'Esperando a Scatter ...',
   },
@@ -260,6 +264,7 @@ export default {
     CPU: 'CPU',
     cycles: 'Cycles',
     decrease: 'Decrease',
+    decrease_by: 'Decrease by',
     destination: 'Destino',
     history: 'Historia',
     increase: 'Increase',
@@ -287,6 +292,7 @@ export default {
     token_selection_and_quantity: 'Selección de testigos y cantidad',
     total: 'total',
     total_eos_balance: 'Equilibrio total eos',
+    total_refund: 'Total Refund',
     total_staked: 'Total Estacado',
     transfer: 'Transfer',
     transfer: 'Transferir',

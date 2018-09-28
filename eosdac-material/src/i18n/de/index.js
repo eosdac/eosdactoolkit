@@ -88,6 +88,9 @@ export default {
       vietnamese: 'Vietnamesisch',
     },
   },
+  markdown_viewer: {
+    select_text_to_edit: 'Markieren Sie den Text den Sie bearbeiten möchten.'
+  },
   multi_modal: {
     register_as_dac_member: 'ALS DAC-MITGLIED REGISTRIEREN',
     registration: 'Anmeldung',
@@ -174,6 +177,7 @@ export default {
     identity_request_denied: 'Identitätsanfrage wurde abgelehnt. Bitte versuchen Sie es erneut und akzeptieren Sie die Anfrage.',
     scatter_is_locked: 'Scatter ist gesperrt. Bitte entsperren, um fortzufahren.',
     scatter_is_not_available: 'Scatter ist nicht verfügbar. Wenn Sie Scatter installiert haben, aktualisieren Sie oder gehen Sie zu Berechtigungen, entfernen Sie die Berechtigung für diese Seite und versuchen Sie es erneut.',
+    scatter_is_outdated: 'Your Scatter is outdated. Please update your Scatter and try again.',
     sign_in: 'ANMELDEN',
     waiting_for_scatter: 'Warte auf Scatter ...',
   },
@@ -260,6 +264,7 @@ export default {
     CPU: 'CPU',
     cycles: 'Cycles',
     decrease: 'Verringern',
+    decrease_by: 'Decrease by',
     destination: 'Zielkonto',
     history: 'Verlauf',
     increase: 'Erhöhen',
@@ -287,6 +292,7 @@ export default {
     token_selection_and_quantity: 'Token Auswahl und Menge',
     total: 'Total',
     total_eos_balance: 'Total eos-Guthaben',
+    total_refund: 'Total Refund',
     total_staked: 'Total Staked',
     transfer: 'Transfer',
     transfer: 'Überweisung',

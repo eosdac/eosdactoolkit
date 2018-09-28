@@ -144,6 +144,11 @@
         <q-item-side icon="icon-menu-8" />
         <q-item-main :label="$t('default.worker_proposals')" sublabel="" />
       </q-item> -->
+      <q-item @click.native="openURL($configFile.external.discordUrl)">
+        <q-item-side icon="icon-menu-11" />
+        <q-item-main :label="$t('default.support')" sublabel="" />
+        <q-item-side right icon="icon-transfer-out" />
+      </q-item>
 
 
 

@@ -3,7 +3,7 @@
   <div class=" gradient-bg-primary q-px-md q-pt-md relative-position" style="min-height:260px">
     <div class="row">
       <div class="col-12">
-        <q-btn v-if="!profile_is_irrevirsible" @click="initProfile" class="float-right" color="red" label="Not Confirmed" />
+        <q-btn v-if="!profile_is_irrevirsible" @click="initProfile" class="float-right" color="red" :label="$t('profile.not_confirmed')" />
         <h4 class="q-display-1 q-mb-sm q-mt-none">{{ $t("profile.profile") }}</h4>
       </div>
     </div>
@@ -60,21 +60,22 @@
       <div class="col-md-8 col-xs-12 q-pa-md">
         <div class="" style="height:100%">
           <div class="q-title q-mb-md">{{ $t('profile.bio') }}</div>
-          <q-input v-if="is_edit" inverted rows="8" color="dark" type="textarea" v-model="form.description" dark />
-          <div class="text-dimwhite q-body-1" style="overflow:hidden" v-if="!is_edit">
-            {{form.description}}
-            <!-- <pre>{{rawprofiledata}}</pre> -->
-          </div>
-          
+          <!--<q-input v-if="is_edit" inverted rows="8" color="dark" type="textarea" v-model="form.description" dark />
+          <div class="text-dimwhite q-body-1" style="overflow:hidden; white-space: pre-wrap;" v-if="!is_edit">{{form.description}}</div>
+        </div>-->
+          <MarkdownViewer :tags="['h1', 'h2', 'h3', 'italic', 'bold', 'underline', 'strikethrough', 'subscript',
+            'superscript', 'anchor', 'orderedlist', 'unorderedlist']" class="bg-dark2" :edit="is_edit" dark :text="form.description" v-on:update="updateText" />
+
         </div>
       </div>
+
       <div class="col-md-4 col-xs-12 q-pa-md">
         <div class="column justify-between" style="height:100%">
 
           <!-- on display -->
           <div v-if="!is_edit">
             <div class="q-title q-mb-md">{{ $t('profile.website') }}</div>
-            <div v-if="$helper.isUrl(form.url)" class="text-dimwhite q-body-1"><a target="_blank" :href="form.url">{{form.url}}</a></div>
+            <div v-if="$helper.isUrl(form.url)" class="q-body-1 a2"><a target="_blank" :href="form.url">{{form.url}}</a></div>
             <div class="q-mt-md">
               <SocialLinks :links="form.sameAs.map(x => x.link)" />
             </div>
@@ -110,6 +111,9 @@
       </div>
     </div>
   </div>
+  <div v-if="rawprofiledata" class="q-pa-md q-my-md text-dimwhite">
+    <TimeZone :offset="form.timezone" />
+  </div>
 
   <q-modal v-model="visible"  minimized @hide="handleModalClose"  :content-css="{width: '80vw'}" >
     <div  class="bg-dark round-borders q-pa-md">
@@ -132,8 +136,9 @@
 import Transaction from 'components/transaction'
 import LoadingSpinner from 'components/loading-spinner'
 import SocialLinks from 'components/social-links'
+import TimeZone from 'components/time-zone'
 import ProfileTemplate from '../statics/profile.template.json'
-
+import MarkdownViewer from 'components/markdown-viewer'
 import {
   openURL
 } from 'quasar'
@@ -144,7 +149,9 @@ export default {
   components:{
     LoadingSpinner,
     Transaction,
-    SocialLinks
+    SocialLinks,
+    TimeZone,
+    MarkdownViewer
 
   },
   data () {
@@ -181,6 +188,9 @@ export default {
 
   methods:{
     openURL,
+    updateText (val) {
+      this.form.description = val
+    },
      onLoaded() {
         let img = this.$refs.profile_pic;
         // this.$consoleMsg('Profile image size: '+img.width +' x '+ img.height);
@@ -216,7 +226,7 @@ export default {
     },
 
     validateProfile(profile) {
-      
+
       let validkeys = Object.keys(ProfileTemplate);
 
       let valid = validkeys.every(function (key) {

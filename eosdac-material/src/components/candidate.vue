@@ -1,6 +1,6 @@
 <template>
   <div class="q-mb-md bg-dark2 round-borders"  v-bind:class="{ 'selected_candidate': data.selected, 'unselected_candidate':!data.selected, 'shadow-5':!data.selected}">
-    <q-collapsible  label="First"  icon-toggle header-class="candidate_header" collapse-icon="icon-ui-11">
+    <q-collapsible  label="First" group="candidates" icon-toggle header-class="candidate_header" collapse-icon="icon-ui-11">
       <template slot="header" >
         <q-item-side left >
           <div class="row full-height items-center">
@@ -19,9 +19,26 @@
         </q-item-main>
       </template>
       <div class="q-pt-sm q-pt-none" style="border-top:1px solid grey">
-        <span>BIO</span>
-        <div class="text-dimwhite" style="overflow:hidden" v-if="data.profile !== undefined">{{data.profile.description}}</div>
-        <SocialLinks class="q-mt-md" :links="sociallinks" />
+        <q-scroll-area
+          style="width: 100%; height: 300px;"
+          :thumb-style="{
+            right: '-13px',
+            borderRadius: '2px',
+            background: '#7c41ba',
+            width: '10px',
+            opacity: 0.8
+          }"
+        >
+        <div class="q-my-md">BIO</div>
+        <!--<div class="text-dimwhite q-body-1" style="overflow:hidden; white-space: pre-wrap;" v-if="data.profile !== undefined">{{data.profile.description}}</div>-->
+        <MarkdownViewer v-if="data.profile !== undefined" :tags="['h1', 'h2', 'h3', 'italic', 'bold', 'underline', 'strikethrough', 'subscript',
+          'superscript', 'anchor', 'orderedlist', 'unorderedlist']" class="bg-dark2" dark :text="data.profile.description" />
+        </q-scroll-area>
+        <div class="row justify-between items-center full-height q-pb-sm">
+          <div class="q-mb-md" style="border-bottom:1px solid grey; width:100%;height:5px"></div>
+          <SocialLinks :links="sociallinks" />
+          <a target="_blank" :href="website" class="a2" >{{website}}</a>
+        </div>
       </div>
     </q-collapsible>
   </div>
@@ -29,11 +46,12 @@
 
 <script>
 import SocialLinks from 'components/social-links'
-
+import MarkdownViewer from 'components/markdown-viewer'
 export default {
   name: 'Candidate',
   components: {
-    SocialLinks
+    SocialLinks,
+    MarkdownViewer
   },
 
   props: {
@@ -43,18 +61,20 @@ export default {
   data () {
     return {
       image_profile:'../statics/img/default-avatar.png',
-      sociallinks : []
+      sociallinks : [],
+      website : false
     }
   },
-  
+
   methods: {
 
     setProfileData(){
-      
+
       if(this.data.profile !== undefined){
         // console.log(this.data.candidate_name)
-        this.image_profile = this.data.profile.image;
+        this.image_profile = this.$helper.isUrl(this.data.profile.image) ? this.data.profile.image : this.image_profile;
         this.sociallinks = this.data.profile.sameAs.map(x => x.link);
+        this.website = this.data.profile.url
       }
     }
 

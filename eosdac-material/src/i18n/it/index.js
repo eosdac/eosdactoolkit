@@ -88,6 +88,9 @@ export default {
       vietnamese: 'Vietnamita',
     },
   },
+  markdown_viewer: {
+    select_text_to_edit: 'Highlight the text you want to edit.'
+  },
   multi_modal: {
     register_as_dac_member: 'REGISTRATI COME MEMBRO DEL DAC',
     registration: 'Registrazione',
@@ -174,6 +177,7 @@ export default {
     identity_request_denied: 'La richiesta di identità è stata negata. Per favore riprova e accetta la richiesta.',
     scatter_is_locked: 'Scatter è bloccato. Si prega di sbloccare per continuare.',
     scatter_is_not_available: 'Scatter non è disponibile. Se hai installato Scatter, aggiorna o vai su Autorizzazioni, rimuovi l\'autorizzazione per questo sito e riprova.',
+    scatter_is_outdated: 'Your Scatter is outdated. Please update your Scatter and try again.',
     sign_in: 'REGISTRATI',
     waiting_for_scatter: 'In attesa di dispersione ...',
   },
@@ -260,6 +264,7 @@ export default {
     CPU: 'processore',
     cycles: 'Cycles',
     decrease: 'Decrease',
+    decrease_by: 'Decrease by',
     destination: 'Destinazione',
     history: 'Storia',
     increase: 'Increase',
@@ -287,13 +292,14 @@ export default {
     token_selection_and_quantity: 'Selezione e quantità di token',
     total: 'totale',
     total_eos_balance: 'Bilancio complessivo di EOS',
+    total_refund: 'Total Refund',
     total_staked: 'Total Staked',
     transfer: 'Transfer',
     transfer: 'Trasferimento',
     transfer_to: 'Trasferire a',
     transfer_tokens: 'Token di Rrasferimento',
     used: 'Used',
-    wallet: 'Portafoglio', 
+    wallet: 'Portafoglio',
   },
   wp_member_view: {
     approx_USD: '(Circa xxxx USD)',

@@ -20,6 +20,16 @@ a {
 a:hover{
   color: white;
 }
+
+.a2{
+  text-decoration: none;
+  color: white;
+  transition: all .2s ease-in-out;
+}
+.a2:hover{
+  color: #7c41ba;
+}
+
 .q-item-label{
 font-size:14px;
 }
@@ -65,6 +75,10 @@ font-size:14px;
   color: rgba(255,255,255,0.6);
 }
 
+.bg-dimwhite {
+  color: rgba(255,255,255,0.6);
+}
+
 .bg-p-light {
   color: #7c41ba;
 }
@@ -73,7 +87,7 @@ font-size:14px;
   color: #7c41ba;
 }
 
-p-light {
+.p-light {
   color: #7c41ba;
 }
 
@@ -107,6 +121,7 @@ p-light {
         max-width: 980px;
         padding: 0px 45px 45px 45px;
         background: white;
+        font-size: 14px!important;
     }
 
     @media (max-width: 767px) {
@@ -115,33 +130,7 @@ p-light {
         }
     }
 
-.q-stepper-step {
-  background: #1E2128;
-}
 
-.q-stepper-dot {
-  background: none;
-  font-size: 24px;
-}
-.q-stepper-tab.step-done {
-  color: var(--q-color-positive);
-}
-
-.q-stepper-tab.step-done.step-colored > .q-stepper-line:after {
-background: var(--q-color-positive);
-}
-
-.q-stepper-tab.step-done.step-colored > .q-stepper-line:before {
-background: var(--q-color-positive);
-}
-
-.q-stepper-tab.step-waiting {
-color : var(--q-color-white);
-}
-
-.q-stepper-tab.step-done.step-colored > .q-stepper-dot > span > i {
-  color: var(--q-color-positive);
-}
 
 .q-tabs-position-top .q-tabs-bar {
     top: 0;
@@ -157,7 +146,7 @@ color : var(--q-color-white);
 
 }
 .q-pagination .q-btn div{
-  color:white;
+  color: white;
 }
 
 // fade transition
@@ -171,6 +160,10 @@ color : var(--q-color-white);
 
 .fade-enter {
   opacity: 0;
+}
+
+.markdown-body  li > p {
+  margin:0 !important;
 }
 
 /*these are the default quasar breakpoints
