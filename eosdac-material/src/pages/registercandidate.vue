@@ -31,9 +31,11 @@
               <li>{{ $t('regcandidate.stake_amount') }}: {{ iscandidatedata.locked_tokens }}</li>
               <li>{{ $t('regcandidate.requested_pay') }}: {{ iscandidatedata.requestedpay }}</li>
             </ul>
-            <!-- <pre>{{iscandidatedata}}</pre> -->
+            
           </div>
+
           <div v-if="getMemberRoles.custodian">{{ $t('regcandidate.page_description_active_custodian') }}</div>
+          <pre>{{iscandidatedata}}</pre>
         </div>
 
         <div class="col-md-4 col-sm-12 q-pa-md">
@@ -84,7 +86,7 @@ export default {
       profile_is_irrevirsible: false,
       iscandidatedata : false,
       stakedata: { quantity: '2.0000 KASDAC', memo: 'dacelections'},
-      registerdata: { bio:'', requestedpay :'100.0000 EOS'}
+      registerdata: { requestedpay :'100.0000 EOS'}
 
     }
   },
