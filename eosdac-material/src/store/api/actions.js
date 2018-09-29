@@ -218,7 +218,13 @@ export async function getIsCandidate({
         return candidate.rows[0];
       } else {
         commit('account/SET_MEMBER_ROLES', {candidate: false}, {root: true} );
-        return candidate.rows[0];
+        if(candidate.rows[0].candidate_name === rootState.account.info.account_name){
+          return candidate.rows[0];
+        }
+        else{
+          return false;
+        }
+        
       }
     }
     commit('SET_CURRENT_CONNECTION_STATUS', true)
