@@ -373,7 +373,7 @@ export async function registerCandidate({
           }],
           data: Object.assign({cand : accountname}, payload.registerdata)
       };
-      let alreadyStaked = false;
+      let alreadyStaked = payload.staked_enough;
       let actions = [];
       if(alreadyStaked){
         actions = [nominateCandAction];
