@@ -129,6 +129,7 @@ export default {
     givenName: 'Name',
     loading_text: 'Loading profile data...',
     male: 'Male',
+    maxLinksmsg: 'Sorry, max {number_allowed_links} links allowed.',
     not_confirmed: 'not confirmed',
     other: 'Other',
     placeholder_short_bio: 'This is my short bio...',
