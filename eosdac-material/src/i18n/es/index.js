@@ -1,7 +1,7 @@
 export default {
   api: {
-    connection_to_endpoint_failed: 'La conexión al endpoint no es confiable o no está disponible',
-    connection_to_endpoint_failed_details: 'Vaya a Configuración para configurar una API con un endpoint que funcione'
+    connection_to_endpoint_failed: 'La conexión al punto final no es confiable o no está disponible',
+    connection_to_endpoint_failed_details: 'Vaya a Configuración para configurar una API de Endpoint que funcione'
   },
   constitution: {
     loading_constitution: 'Cargando constitución',
@@ -10,12 +10,12 @@ export default {
   default: {
     account_name: 'Nombre de cuenta',
     constitution: 'Constitución',
-    custodians: 'Representantes',
+    custodians: 'Guardianes',
     log_in: 'Iniciar sesión',
     log_out: 'Cerrar sesión',
     logged_in: 'Conectado',
     logged_out: 'Desconectado',
-    member_client: 'Miembro',
+    member_client: 'miembro',
     member_status: 'Estado',
     menu: 'Menú',
     not_registered: 'no registrado',
@@ -28,8 +28,8 @@ export default {
     token_explorer: 'Token Explorer',
     wallet: 'Billetera',
     worker_proposals: 'Propuestas de trabajo',
-    you_have_not_yet_registered: 'Aun no registrado como Miembro. Firme la Constitución para ser un Miembro.',
-    constitution_has_been_updated: 'La Constitución ha sido actualizada. Firme la Constitución actualizada para usar el portal de Miembros.',
+    you_have_not_yet_registered: 'Aun no registrado como miembro. Firme la constitución para ser un miembro.',
+    constitution_has_been_updated: 'La Constitución ha sido actualizada. Firme la Constitución actualizada para usar el Cliente miembro.',
     your_token_balance: 'Su saldo {tokenName}',
   },
   four_zero_four: {
@@ -105,10 +105,10 @@ export default {
     },
   },
   register: {
-    already_registered: 'Ya estás registrado como Miembro de eosDAC.',
-    checking_status: 'Comprobando el estado del Miembro ...',
+    already_registered: 'Ya estás registrado como miembro de eosDAC.',
+    checking_status: 'Comprobando el estado del miembro ...',
     close: 'Cerrar',
-    congratulations_registered: '¡Felicidades! Ya está registrado como Miembro de eosDAC.',
+    congratulations_registered: '¡Felicidades! Ya está registrado como miembro de eosDAC.',
     constitution_hash: 'Hash de constitución',
     could_not_retrieve_member_status: 'No se pudo recuperar el estado del miembro',
     fullscreen: 'Pantalla completa',
@@ -121,7 +121,7 @@ export default {
     updated_constitution: 'La constitución ha sido actualizada. Por favor firme la constitución para continuar.',
   },
   scatter_signin: {
-    choose_authentication_type: 'Elija un tipo de autenticación para iniciar sesión en el portal de Miermbos eosDAC.',
+    choose_authentication_type: 'Elija un tipo de autenticación para iniciar sesión en eosDAC Member Client.',
     choose_connection_type: 'Elija el tipo de conexión',
     connection_type: 'Tipo de conección',
     identity_request_denied: 'La solicitud de identidad fue denegada Por favor intente de nuevo y acepte la solicitud.',
@@ -168,7 +168,7 @@ export default {
     fields: 'Campos',
     from: 'De',
     loading_abi: 'Cargando ABI ...',
-    memo: 'Memo',
+    memo: 'Memorándum',
     pushing_transaction: 'Generando Transacción ...',
     quantity: 'Cantidad',
     to: 'A',
@@ -196,7 +196,7 @@ export default {
     send_tokens: 'Enviar Tokens',
     total_eos_balance: 'Saldo total eos',
     liquid: 'líquido',
-    token_selection_and_quantity: 'Selección de token y cantidad',
+    token_selection_and_quantity: 'Selección de testigos y cantidad',
     select_token_to_send: 'Seleccionar Token para enviar',
     select_from_list: 'Seleccionar de la lista',
     quantity_to_send: 'Cantidad para enviar',
@@ -226,12 +226,12 @@ export default {
     OPEN: 'ABIERTO',
   },
   vote_custodians:{
-    loading_candidates: 'Cargando Candidatos',
-    candidate_list: 'Lista de Candidatos',
+    loading_candidates: 'candidatos de carga',
+    candidate_list: 'Lista candidato',
     my_votes: 'mi voto',
     search: 'búsqueda',
     submit_my_votes: 'ENVIAR mis votos',
-    description_main: 'El Consejo de Representantes maneja las operaciones y asuntos del DAC, incluidos, entre otros, el gobierno y la administración de los activos y pasivos del DAC. Los siguientes miembros de la DAC otorgaron algunos de sus tokens para presentarse ellos mismos y los candidatos para un puesto en el Consejo de Representantes que duran 7 días. Cada 7 días, sus votos se vuelven a calcular para seleccionar quién formará parte del próximo Consejo de Representantes. ¡Votar es importante! Vota a menudo y mantente comprometido con la DAC para saber quién proporciona valor.',
-    description_side: 'Puede votar por hasta 5 candidatos a Representante a la vez. Seleccione candidatos que crea que aportarán valor al DAC.',
+    description_main: 'La Junta de Depositarios maneja las operaciones y asuntos del DAC, incluidos, entre otros, el gobierno y la administración de los activos y pasivos del DAC. Los siguientes miembros de DAC otorgaron algunos de sus tokens para presentarse ellos mismos y los candidatos para un puesto en el consejo de custodia que duran 7 días. Cada 7 días, sus votos se vuelven a calcular para seleccionar quién formará parte de la próxima junta de custodia. ¡Votar es importante! Vota a menudo y mantente comprometido con el DAC para saber quién proporciona valor.',
+    description_side: 'Puede votar por hasta 5 candidatos custodios a la vez. Seleccione candidatos que crea que aportarán valor al DAC.',
   },
 }
