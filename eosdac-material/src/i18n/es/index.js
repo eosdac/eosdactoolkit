@@ -290,7 +290,7 @@ export default {
     toggle_adjust_cpu_allocation: 'Toggle CPU allocation adjustment',
     toggle_adjust_net_allocation: 'Toggle Network allocation adjustment',
     toggle_adjust_ram_allocation: 'Toggle RAM allocation adjustment',
-    token_selection_and_quantity: 'Selección de testigos y cantidad',
+    token_selection_and_quantity: 'Selección de token y cantidad',
     total: 'total',
     total_eos_balance: 'Saldo total eos',
     total_refund: 'Total Refund',
