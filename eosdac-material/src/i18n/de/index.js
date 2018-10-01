@@ -53,7 +53,7 @@ export default {
     signout: 'Abmelden',
     submit_wp: 'Kostenvoranschläge',
     subscribe: 'Abonnieren',
-    subscribe_newsletter: 'Nesletter abonieren',
+    subscribe_newsletter: 'Nesletter abonnieren',
     visit_eosdac: 'Besuche unsere Website eosdac.io',
     vote_cust: 'Verwalter wählen',
     wallet: 'Wallet',
