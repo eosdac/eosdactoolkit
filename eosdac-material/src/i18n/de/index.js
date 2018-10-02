@@ -236,10 +236,10 @@ export default {
     description_main: 'Die Depotbank verwaltet die Geschäfte und Angelegenheiten des DAC, einschließlich, aber nicht beschränkt auf, die Verwaltung und Verwaltung der Vermögenswerte und Verbindlichkeiten des DAC. Die folgenden DAC-Mitglieder haben einige ihrer Token zur Verfügung gestellt, um sich selbst und Kandidaten für eine Position auf der Depotbank, die für 7 Tage dauern, vorzulegen. Alle 7 Tage werden Ihre Stimmen neu berechnet, um auszuwählen, wer an der nächsten Depotbank teilnimmt. Abstimmung ist wichtig! Bitte wählen Sie häufig und bleiben Sie innerhalb des DAC engagiert, um zu wissen, wer einen Mehrwert bietet.',
     description_side: 'Sie können bis zu 5 Verwalter wählen. Bitte wählen Sie Kandidaten, von denen Sie glauben, dass sie einen Mehrwert für eosDAC erbringen.',
     loading_candidates: 'Lade Kandidaten',
-    my_votes: 'meine Stimme',
+    my_votes: 'Meine Stimme',
     rows_per_page: 'Zeilen pro Seite',
     search: 'Suche',
-    submit_my_votes: 'Meine Wahl übermitteln',
+    submit_my_votes: 'Stimme abgeben',
     voting_progress: 'Fortschritt Wahl',
   },
   votingprogress: {
