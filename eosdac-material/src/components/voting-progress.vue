@@ -1,6 +1,6 @@
 <template>
 <span>
-  <div v-if="!met_initial_votes_threshold && !loading" class="full-width">
+  <div v-if="!met_initial_votes_threshold" class="full-width">
     <span class="uppercase">
       {{ $t("vote_custodians.voting_progress") }} 
       <span class="text-dimwhite on-right on-left"> {{ voting_progress }}%</span>

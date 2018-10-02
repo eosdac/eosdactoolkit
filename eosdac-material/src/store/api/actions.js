@@ -218,7 +218,13 @@ export async function getIsCandidate({
         return candidate.rows[0];
       } else {
         commit('account/SET_MEMBER_ROLES', {candidate: false}, {root: true} );
-        return false
+        if(candidate.rows[0].candidate_name === rootState.account.info.account_name){
+          return candidate.rows[0];
+        }
+        else{
+          return false;
+        }
+        
       }
     }
     commit('SET_CURRENT_CONNECTION_STATUS', true)
@@ -344,39 +350,45 @@ export async function registerCandidate({
   try {
     eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint
     eosConfig.keyProvider = rootState.account.pkeysArray
-    let eos = Eos(eosConfig)
+    let eos = Eos(eosConfig);
     if (payload.scatter) {
       const network = await scatterNetwork(state)
       const identity = await state.scatter.getIdentity({
         accounts: [network]
       })
       eos = state.scatter.eos(network, Eos, eosConfig);
-      let authority = identity.accounts[0].authority
-      let accountname = identity.accounts[0].name
-      let res = await eos.transaction(
-        {
-          actions: [
-            {
-              account: configFile.network.tokenContract.name,
-              name: 'transfer',
-              authorization: [{
-                actor: accountname,
-                permission: authority
-              }],
-              data: Object.assign({from : accountname, to: configFile.network.custodianContract.name}, payload.stakedata)
-            },
-            {
-              account: configFile.network.custodianContract.name,
-              name: 'nominatecand',
-              authorization: [{
-                actor: accountname,
-                permission: authority
-              }],
-              data: Object.assign({cand : accountname}, payload.registerdata)
-            },
-          ]
-        }
-      )
+      let authority = identity.accounts[0].authority;
+      let accountname = identity.accounts[0].name;
+
+      let transferAction = {
+          account: configFile.network.tokenContract.name,
+          name: 'transfer',
+          authorization: [{
+            actor: accountname,
+            permission: authority
+          }],
+          data: Object.assign({from : accountname, to: configFile.network.custodianContract.name}, payload.stakedata)
+      };
+      
+      let nominateCandAction = {
+          account: configFile.network.custodianContract.name,
+          name: 'nominatecand',
+          authorization: [{
+            actor: accountname,
+            permission: authority
+          }],
+          data: Object.assign({cand : accountname}, payload.registerdata)
+      };
+      let alreadyStaked = payload.staked_enough;
+      let actions = [];
+      if(alreadyStaked){
+        actions = [nominateCandAction];
+      }
+      else{
+        actions = [transferAction, nominateCandAction];
+      }
+
+      let res = await eos.transaction( { actions: actions } );
       return res
       commit('SET_CURRENT_CONNECTION_STATUS', true)
     }

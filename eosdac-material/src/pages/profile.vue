@@ -94,7 +94,8 @@
 
               :placeholder="$t('profile.social_profile_link')"
             />
-            <q-btn  round  color="primary" @click="addSocial" icon="icon-plus" />
+            <q-btn  round  color="primary" @click="addSocial" icon="icon-plus" @blur.native="maxLinksmsg=''" />
+            <span v-if="maxLinksmsg !=''" class="animate-fade on-right">{{maxLinksmsg}}</span>
           </div>
 
           <div v-if="allow_edit" class="row gutter-sm justify-end q-mt-md">
@@ -167,7 +168,8 @@ export default {
       centerimage:true,
       setwidth: true,
       loaded:false,
-      form:ProfileTemplate
+      form:ProfileTemplate,
+      maxLinksmsg: ''
     }
   },
 
@@ -251,10 +253,16 @@ export default {
     },
 
     addSocial(){
+      let max = 4;
       this.deleteEmptyLinks();
-      if(this.form.sameAs.length < 4 ){
+      if(this.form.sameAs.length < max ){
         this.form.sameAs.push({link:''});
       }
+      else{
+          this.maxLinksmsg = this.$t('profile.maxLinksmsg', {number_allowed_links : max});
+
+      }
+
     },
 
     deleteEmptyLinks(){
