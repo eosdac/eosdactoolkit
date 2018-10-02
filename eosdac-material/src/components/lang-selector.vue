@@ -1,6 +1,7 @@
 <template>
   <q-field :label="$t('lang_selector.choose_your_language')" label-width="12" dark>
   <q-select
+  color="p-light"
   dark
     :options="[
       { label: $t('lang_selector.languages.chinese') + ' - 中文',    value: 'zh-hans' },
@@ -13,6 +14,7 @@
       { label: $t('lang_selector.languages.korean') + ' - 한국어',     value: 'ko' },
       { label: $t('lang_selector.languages.russian') + ' - Pусский',    value: 'ru' },
       { label: $t('lang_selector.languages.spanish') + ' - Español',    value: 'es' },
+      { label: $t('lang_selector.languages.vietnamese') + ' - Vietnamese',    value: 'vi' },
     ]"
     v-model="lang"
   />

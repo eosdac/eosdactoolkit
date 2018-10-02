@@ -44,7 +44,7 @@
 
 <script>
 import CryptoJS from 'crypto-js'
-import MarkdownIt from 'markdown-it'
+import marked from 'marked'
 import LoadingSpinner from 'components/loading-spinner'
 import {
   mapGetters
@@ -93,14 +93,13 @@ export default {
   methods: {
     init() {
       this.checkRegistered();
-      
+
     },
     sleep(ms) {
       return new Promise(resolve => setTimeout(resolve, ms))
     },
     async checkRegistered(wait) {
       try {
-        let md = new MarkdownIt()
         this.loading = true
         this.loadingText = 'register.checking_status'
         this.queryError = false
@@ -130,7 +129,7 @@ export default {
             this.loadingText = 'register.loading_latest_constitution'
             let getCt = await this.loadConstitutionFromGithub(memberterms.terms)
             this.hash = CryptoJS.MD5(getCt).toString()
-            this.constitution = md.render(getCt)
+            this.constitution = marked(getCt, {sanitize: true})
             this.statusText = 'register.updated_constitution'
           }
         } else { // not regsitered
@@ -139,8 +138,9 @@ export default {
           this.loadingText = 'register.loading_latest_constitution'
           let getCt = await this.loadConstitutionFromGithub(memberterms.terms)
           this.hash = CryptoJS.MD5(getCt).toString()
-          this.constitution = md.render(getCt)
+          this.constitution = marked(getCt, {sanitize: true})
           this.statusText = ''
+
         }
       } catch (err) {
         console.log(err)
@@ -151,13 +151,8 @@ export default {
       }
     },
     async checkMemberRoles(){
-      try {
-        let iscandidate = await this.$store.dispatch('api/getIsCandidate');
-        console.log(iscandidate)
-        
-      } catch (err) {
-        throw err
-      }
+      this.$store.dispatch('api/getIsCandidate');
+      this.$store.dispatch('api/getIsCustodian');
     },
     registerMember() {
       this.$refs.Transaction.newTransaction(this.$configFile.network.tokenContract.name,'memberreg', {

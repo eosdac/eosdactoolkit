@@ -20,6 +20,7 @@ export default ({
   }
   store.commit('usersettings/SET_LANGUAGE', lang)
   app.i18n = new VueI18n({
+    silentTranslationWarn: false,
     locale: lang,
     fallbackLocale: 'en-us',
     messages: {
@@ -32,6 +33,7 @@ export default ({
       'ja': messages['ja'],
       'ko': messages['ko'],
       'ru': messages['ru'],
+      'vi': messages['vi'],
       'zh-hans': messages['zh-hans'],
     }
   })
