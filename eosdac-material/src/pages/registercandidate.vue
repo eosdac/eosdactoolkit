@@ -1,7 +1,7 @@
 <template>
 <q-page class="text-white ">
 
-  <div class=" gradient-bg-primary q-px-md q-pt-md relative-position" style="min-height:260px; overflow:hidden">
+  <!-- <div class=" gradient-bg-primary q-px-md q-pt-md relative-position" style="min-height:260px; overflow:hidden">
     <div class="row">
       <div class="col-12">
         <h4 v-if="!getMemberRoles.candidate" class="q-display-1 q-mb-sm q-mt-none">{{ $t("regcandidate.register_as_candidate") }}</h4>
@@ -13,9 +13,13 @@
       <div class="column  justify-center q-px-md full-height">
       </div>
     </div>
-  </div>
+  </div> -->
 
 <div class="q-pa-md">
+
+        <h4 v-if="!getMemberRoles.candidate" class="q-display-1 q-mb-sm q-mt-none">{{ $t("regcandidate.register_as_candidate") }}</h4>
+        <h4 v-if="getMemberRoles.candidate" class="q-display-1 q-mb-sm q-mt-none">{{ $t("regcandidate.unregister_as_candidate") }}</h4>
+
   <div v-if="!profile_is_irrevirsible" class="bg-dark2 q-pa-md round-corners shadow-5">
     {{ $t("regcandidate.profile_required") }}
     <span v-if="hasprofile">{{ $t("regcandidate.profile_not_confirmed") }}</span>
@@ -35,8 +39,8 @@
           </div>
 
           <div v-if="getMemberRoles.custodian">{{ $t('regcandidate.page_description_active_custodian') }}</div>
-          <pre>{{iscandidatedata}}</pre>
-          <pre>{{stakeRequirementMet}}</pre>
+          <!-- <pre>{{iscandidatedata}}</pre>
+          <pre>{{stakeRequirementMet}}</pre> -->
         </div>
 
         <div class="col-md-4 col-sm-12 q-pa-md">
