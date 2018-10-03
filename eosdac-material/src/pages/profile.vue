@@ -116,6 +116,10 @@
     <TimeZone :offset="form.timezone" />
   </div>
 
+
+  <!-- <q-input color="p-light" dark type="url" v-model="profileUrl" />
+  <q-btn size="md" class="animate-pop"  color="primary" @click="saveProfileUrl" :label="$t('profile.save_url')" /> -->
+
   <q-modal v-model="visible"  minimized @hide="handleModalClose"  :content-css="{width: '80vw'}" >
     <div  class="bg-dark round-borders q-pa-md">
       <div style="overflow: auto;">
@@ -163,6 +167,7 @@ export default {
       profile_is_loading : false,
       profile_is_irrevirsible : true,
       rawprofiledata: false,
+      profileUrl: '',
 
       visible:false,
       centerimage:true,
@@ -212,7 +217,13 @@ export default {
 
     async getProfileData(){
       let p = await this.$store.dispatch('api/getProfileData2', {accountname: [this.account_name]} );
-      // console.log(p);
+      console.log(p);
+
+      if(this.$helper.isUrl(p[0].profile)){
+        //todo fetch profileurl
+        p = false;
+      }
+
       if(p && p.length && this.validateProfile(p[0].profile)){
         this.rawprofiledata = p[0];
         //todo validate profile
@@ -251,6 +262,19 @@ export default {
         profile: JSON.stringify(this.form),
       })
     },
+
+    saveProfileUrl(){
+      // this.form.timezone = new Date().getTimezoneOffset();
+      if(!this.$helper.isUrl(this.profileUrl)){
+        console.log('this is not a valid url');
+        return false;
+      }
+      this.$refs.Transaction.newTransaction(this.$configFile.network.custodianContract.name, 'stprofile', {
+        cand: this.getAccountName,
+        profile: this.profileUrl,
+      })
+    },
+
 
     addSocial(){
       let max = 4;
