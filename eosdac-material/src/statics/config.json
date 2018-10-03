@@ -29,8 +29,6 @@
   },
   "external":{
     "homepage": "https://eosdac.io",
-    "discordUrl": "https://discord.io/eosdac",
-    "subscribeNewsletter" :""
-
+    "discordUrl": "https://discord.io/eosdac"
   }
 }
