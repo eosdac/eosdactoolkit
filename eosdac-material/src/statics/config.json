@@ -1,7 +1,7 @@
 {
   "network": {
     "chainId": "aca376f206b8fc25a6ed44dbdc66547c36c6c33e3a119ffbeaef943642f0e906",
-    
+
     "tokenContracts":{
       "eosio.token":[{"token": "EOS", "decimals": 4 }],
       "eosdactokens":[{"token": "EOSDAC", "decimals": 4}]
@@ -10,7 +10,8 @@
     "tokenContract": {
       "name": "eosdactokens",
       "token": "EOSDAC",
-      "decimals": 4
+      "decimals": 4,
+      "totalSupply": 994895254.9762
     },
     "mainCurrencyContract": {
       "name": "eosio.token",
@@ -18,14 +19,17 @@
       "decimals": 4
     },
     "custodianContract": {
-      "name": ""
+      "name": "daccustodian"
+    },
+    "systemContract": {
+      "name": "eosio"
     }
   },
   "api": {
     "bpNodeApiUrl": "https://eosdac.io/topnodes.json",
     "mainCurrencyExplorerUrl": "https://www.bloks.io",
     "tokenExplorerUrl": "https://explorer.eosdac.io",
-    "profileStoreUrl": "dummy"
+    "profileApiUrl": "http://ns3119712.ip-51-38-42.eu:3000/"
   },
   "external":{
     "homepage": "https://eosdac.io",
