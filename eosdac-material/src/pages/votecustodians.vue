@@ -114,6 +114,18 @@
 </div><!-- end row -->
 <LoadingSpinner :visible="loading" :text="$t('vote_custodians.loading_candidates')" />
 <q-scroll-observable @scroll="userHasScrolled" />
+
+  <q-modal v-model="modal_visible"  minimized  :content-css="{width: '50%'}" >
+    <div  class="bg-dark round-borders q-pa-md">
+      <div style="overflow: auto;">
+        <q-btn round color="primary" class="float-right" @click="modal_visible=false" icon="icon-plus" />
+      </div>
+      <div class="q-mb-xl q-mt-md">{{$t('vote_custodians.voting_disabled')}}</div>
+    </div>
+  </q-modal>
+
+
+
 </div><!-- end wrapper -->
 </q-page>
 </template>
@@ -145,6 +157,7 @@ export default {
   },
   data() {
     return {
+      modal_visible:true,
       loading: false,
       voting_progress: 14,
       custodians: [],
@@ -304,6 +317,9 @@ export default {
 
     //cast votes
     voteForCandidates() {
+      this.modal_visible = true;
+      this.votesdidchange = false;
+      return false;
       //only when votes changed
       if(!this.votesdidchange){
         return false;
