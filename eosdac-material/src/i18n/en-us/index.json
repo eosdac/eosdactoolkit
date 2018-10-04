@@ -244,6 +244,8 @@
     "rows_per_page": "Rows Per Page",
     "search": "Search",
     "submit_my_votes": "SUBMIT MY VOTES",
+    "voting_disabled_text": "Voting is currently disabled. You are able to test out the graphical interface but your votes won't be submitted to the chain. Voting will be enabled shortly.",
+    "voting_disabled_title": "Voting Disabled",
     "voting_progress": "voting progress"
   },
   "votingprogress": {
@@ -279,6 +281,7 @@
     "loading": "loading",
     "manage_addressbook": "Manage Addressbook",
     "memo": "Memo",
+    "microseconds": "Microseconds",
     "network": "Network",
     "or_select_address_book": "Or select a Destination Account from AddressBook",
     "quantity_to_send": "Quantity to send",
