@@ -583,7 +583,7 @@
               <q-btn class="no-shadow float-right" icon="icon-ui-8" color="primary" @click="addContactSlide = false" />
             </q-card-title>
             <q-card-main>
-              <q-field :label="$t('wallet.account_name')"label-width="12">
+              <q-field :label="$t('wallet.account_name')" label-width="12">
                 <q-input color="p-light" v-model="accountToAdd" type="text"  dark />
               </q-field>
             </q-card-main>
