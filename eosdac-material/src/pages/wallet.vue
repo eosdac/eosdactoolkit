@@ -294,7 +294,7 @@
             <span class="text-dimwhite q-pl-sm q-body-1">{{$t('wallet.used')}}: {{(getAccountResources.ram.raw.used / 1024).toFixed(2)}} / {{(getAccountResources.ram.raw.available / 1024).toFixed(2)}} {{$t('wallet.KB')}}</span>
             <div v-if="ramslider">
               <q-slider v-if="buyRam" color="positive" v-model="buyRamVal" :min="0" :max="getMainCurrencyBalance" :step="0.0001" />
-              <q-slider v-else color="negative" v-model="sellRamVal" :min="0" :max="Math.round(getAccountResources.ram.raw.available)" :step="1" />
+              <q-slider v-else color="negative" v-model="sellRamVal" :min="0" :max="Math.round(getAccountResources.ram.raw.available - getAccountResources.ram.raw.used)" :step="1" />
             </div>
             <q-slider v-else color="positive" readonly v-model="getAccountResources.ram.available" :min="0" :max="100" :step="1" />
           </q-item-main>
