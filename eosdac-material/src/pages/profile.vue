@@ -200,6 +200,9 @@ export default {
     },
      onLoaded() {
         let img = this.$refs.profile_pic;
+        if(img == undefined){
+          return false;
+        }
         // this.$consoleMsg('Profile image size: '+img.width +' x '+ img.height);
         this.setwidth = img.width <= img.height ? true : false;
         this.centerimage = img.width == img.height ? false : true;
