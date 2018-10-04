@@ -10,8 +10,18 @@
     </div>
 
     <div class="blur-details q-pa-md absolute-bottom" style="height:120px;margin-right:-16px;margin-left:-16px;">
-      <div class="column  justify-center q-px-md full-height">
+
+      <div v-if="iscandidatedata" class="row  items-center q-px-md full-height">
+        <div class="q-mr-lg">
+          <div class="text-dimwhite q-caption uppercase q-mb-sm">LOCKED TOKENS</div>
+          <div class="q-title"><span class="text-dimwhite">{{iscandidatedata.locked_tokens.split(' ')[0]}}</span><span> {{iscandidatedata.locked_tokens.split(' ')[1]}}</span></div>
+        </div>
+        <div >
+          <div class="text-dimwhite q-caption uppercase q-mb-sm">REQUESTED PAY</div>
+          <div class="q-title" ><span class="text-dimwhite">{{iscandidatedata.requestedpay.split(' ')[0]}}</span><span> {{iscandidatedata.requestedpay.split(' ')[1]}}</span></div>
+        </div>
       </div>
+
     </div>
   </div>
 
@@ -28,15 +38,10 @@
           <div v-if="!getMemberRoles.candidate" >{{$t('regcandidate.page_description_unregistered') }}</div>
           <div v-if="getMemberRoles.candidate" >
             <span>{{$t('regcandidate.page_description_registered') }}</span>
-            <ul>
-              <li>{{ $t('regcandidate.stake_amount') }}: {{ iscandidatedata.locked_tokens }}</li>
-              <li>{{ $t('regcandidate.requested_pay') }}: {{ iscandidatedata.requestedpay }}</li>
-            </ul>
-            
           </div>
 
           <div v-if="getMemberRoles.custodian">{{ $t('regcandidate.page_description_active_custodian') }}</div>
-          <pre>{{iscandidatedata}}</pre>
+          <!-- <pre>{{iscandidatedata}}</pre> -->
           <!-- <pre>{{stakeRequirementMet}}</pre> -->
         </div>
 
@@ -44,7 +49,7 @@
           <div class="text-dimwhite" v-if="!getMemberRoles.candidate">
 
             <div class="q-mb-lg " v-if="!stakeRequirementMet">
-              <p>Some text to explain the stake quantity. you can stake more but the minimum is xxx etc {{stakedata.quantity}}</p>
+              <p>Some text to explain the stake quantity. you can stake more but the minimum is {{stakedata.quantity}}</p>
               <q-input  color="p-light" dark type="text" v-model="stakedata.quantity" :float-label="$t('regcandidate.stake_amount')" :placeholder="$t('regcandidate.amount_to_stake_placeholder')" />
             </div>
             <!-- <q-input dark  type="hidden" v-model="registerdata.bio"  float-label="Profile JSON url" placeholder="http://example.com/myjsonprofile.json" /> -->
@@ -97,9 +102,9 @@ export default {
       hasprofile : false,
       profile_is_irrevirsible: false,
       iscandidatedata : false,
-      stakedata: { quantity: '2.0000 KASDAC', memo: 'dacelections'},
+      stakedata: { quantity: '', memo: 'dacelections'},
       requested_pay_max : false,
-       requestedpay : '',
+      requestedpay : '',
       userMsg: ''
 
     }
@@ -128,6 +133,24 @@ export default {
           return false;
         }
       }
+
+    },
+    formatcanddata(){
+      let data = {
+        staked:{
+          value: 0.0000,
+          symbol : this.$configFile.network.tokenContract.token
+        },
+        reqpay:{
+          value: 0.0000,
+          symbol : this.$configFile.network.mainCurrencyContract.token
+        }
+      };
+      if(this.iscandidatedata){
+        data.staked.value = iscandidatedata.locked_tokens.split(' ')[0];
+        data.reqpay.value = iscandidatedata.requestedpay.split(' ')[0];
+      }
+      return data;
 
     }
   },
