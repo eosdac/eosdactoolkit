@@ -213,7 +213,7 @@ export default {
     async getContractConfig() {
       this.init_loading = true;
       let config = await this.$store.dispatch('api/getContractConfig', {contract: this.$configFile.network.custodianContract.name});
-      console.log(config)
+      // console.log(config)
       if(config){
         this.stakedata.quantity = config.lockupasset;
         this.requested_pay_max = config.requested_pay_max;

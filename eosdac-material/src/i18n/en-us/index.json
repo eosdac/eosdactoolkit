@@ -244,7 +244,8 @@
     "rows_per_page": "Rows Per Page",
     "search": "Search",
     "submit_my_votes": "SUBMIT MY VOTES",
-    "voting_disabled": "Voting is currently disabled. You are able to test out the graphical interface but your votes won't be submitted to the chain. Voting will be enabled shortly.",
+    "voting_disabled_text": "Voting is currently disabled. You are able to test out the graphical interface but your votes won't be submitted to the chain. Voting will be enabled shortly.",
+    "voting_disabled_title": "Voting Disabled",
     "voting_progress": "voting progress"
   },
   "votingprogress": {

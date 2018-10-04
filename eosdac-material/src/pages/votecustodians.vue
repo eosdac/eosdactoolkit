@@ -120,7 +120,11 @@
       <div style="overflow: auto;">
         <q-btn round color="primary" class="float-right" @click="modal_visible=false" icon="icon-plus" />
       </div>
-      <div class="q-mb-xl q-mt-md">{{$t('vote_custodians.voting_disabled')}}</div>
+      
+      <div class="q-mb-xl q-mt-md">
+        <div class="q-pb-md q-mb-md" style="border-bottom:1px solid grey">{{$t('vote_custodians.voting_disabled_title')}}</div>
+        <p class="text-dimwhite">{{$t('vote_custodians.voting_disabled_text')}}</p>
+      </div>
     </div>
   </q-modal>
 

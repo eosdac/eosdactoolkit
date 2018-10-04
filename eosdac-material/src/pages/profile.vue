@@ -287,7 +287,6 @@ export default {
       }
       else{
           this.maxLinksmsg = this.$t('profile.maxLinksmsg', {number_allowed_links : max});
-
       }
 
     },
