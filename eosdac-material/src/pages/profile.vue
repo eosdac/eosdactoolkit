@@ -219,10 +219,10 @@ export default {
       let p = await this.$store.dispatch('api/getProfileData2', {accountname: [this.account_name]} );
       console.log(p);
 
-      if(this.$helper.isUrl(p[0].profile)){
-        //todo fetch profileurl
-        p = false;
-      }
+      // if(this.$helper.isUrl(p[0].profile)){
+      //   //todo fetch profileurl
+      //   p = false;
+      // }
 
       if(p && p.length && this.validateProfile(p[0].profile)){
         this.rawprofiledata = p[0];
