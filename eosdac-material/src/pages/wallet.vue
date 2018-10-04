@@ -843,7 +843,6 @@ export default {
       if (val && !this.ramPriceUpdateInterval) {
         this.getRamPrice()
         this.ramPriceUpdateInterval = setInterval(this.getRamPrice, 10000)
-        this.sellRamVal = this.getAccountResources.ram.raw.available
       } else {
         clearInterval(this.ramPriceUpdateInterval)
         this.ramPriceUpdateInterval = null
