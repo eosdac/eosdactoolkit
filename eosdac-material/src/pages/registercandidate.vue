@@ -102,7 +102,7 @@ export default {
       hasprofile : false,
       profile_is_irrevirsible: false,
       iscandidatedata : false,
-      stakedata: { quantity: '', memo: 'dacelections'},
+      stakedata: { quantity: '', memo: this.$configFile.network.custodianContract.memo},
       requested_pay_max : false,
       requestedpay : '',
       userMsg: ''
