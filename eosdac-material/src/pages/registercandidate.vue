@@ -13,11 +13,11 @@
 
       <div v-if="iscandidatedata" class="row  items-center q-px-md full-height">
         <div class="q-mr-lg">
-          <div class="text-dimwhite q-caption uppercase q-mb-sm">LOCKED TOKENS</div>
+          <div class="text-dimwhite q-caption uppercase q-mb-sm">{{$t('regcandidate.locked_tokens')}}</div>
           <div class="q-title"><span class="text-dimwhite">{{iscandidatedata.locked_tokens.split(' ')[0]}}</span><span> {{iscandidatedata.locked_tokens.split(' ')[1]}}</span></div>
         </div>
         <div >
-          <div class="text-dimwhite q-caption uppercase q-mb-sm">REQUESTED PAY</div>
+          <div class="text-dimwhite q-caption uppercase q-mb-sm">{{$t('regcandidate.requested_pay')}}</div>
           <div class="q-title" ><span class="text-dimwhite">{{iscandidatedata.requestedpay.split(' ')[0]}}</span><span> {{iscandidatedata.requestedpay.split(' ')[1]}}</span></div>
         </div>
       </div>

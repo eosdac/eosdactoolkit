@@ -259,6 +259,7 @@ export default {
     },
 
     saveProfile(){
+      this.deleteEmptyLinks();
       this.form.timezone = new Date().getTimezoneOffset();
       this.$refs.Transaction.newTransaction(this.$configFile.network.custodianContract.name, 'stprofileuns', {
         cand: this.getAccountName,
