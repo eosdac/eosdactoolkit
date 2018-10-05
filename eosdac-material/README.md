@@ -19,7 +19,7 @@ npm install -g quasar-cli
 ```
 git clone https://github.com/eosdac/eosdactoolkit.git
 ```
-**4. Install modules**
+**4. Install modules (on windows yarn is recommended)**
 ```
 # in project directory
 yarn install
