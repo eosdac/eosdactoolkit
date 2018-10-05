@@ -19,7 +19,8 @@
       "decimals": 4
     },
     "custodianContract": {
-      "name": "dacelections"
+      "name": "dacelections",
+      "memo": "dacelections"
     },
     "systemContract": {
       "name": "eosio"
