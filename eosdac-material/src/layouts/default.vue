@@ -95,17 +95,14 @@
         <q-item-side icon="icon-menu-1" />
         <q-item-main label="Dashboard" sublabel="" />
       </q-item>-->
-      <!-- 
       <q-item v-if="getMemberRoles.custodian" class="text-blue" to="/custodiandashboard">
         <q-item-side class="text-blue" icon="icon-role-4" />
         <q-item-main label="Custodian Dashboard" sublabel="" />
       </q-item>
-      -->
       <q-item to="/constitution">
         <q-item-side icon="icon-register-3" />
         <q-item-main :label="$t('default.constitution')" sublabel="" />
       </q-item>
-      <!-- 
       <q-item to="/votecustodians">
         <q-item-side icon="icon-ui-3" />
         <q-item-main :label="$t('default.custodians')" sublabel="" />
@@ -114,7 +111,6 @@
         <q-item-side icon="icon-menu-10" />
         <q-item-main :label="$t('default.profile')" sublabel="" />
       </q-item>
-      -->
       <q-item to="/wallet">
         <q-item-side icon="icon-menu-6" />
         <q-item-main :label="$t('default.wallet')" sublabel="" />
@@ -129,7 +125,6 @@
         <q-item-main :label="$t('default.settings')" sublabel="" />
       </q-item>
 
-      <!-- 
       <q-item v-if="!getMemberRoles.candidate" to="/managecandidateship">
         <q-item-side icon="icon-menu-12" />
         <q-item-main :label="$t('default.register_as_candidate')" sublabel="" />
@@ -138,7 +133,6 @@
         <q-item-side icon="icon-menu-12" />
         <q-item-main :label="$t('default.unregister_as_candidate')" sublabel="" />
       </q-item>
-      -->
 
       <!-- <q-item to="/workerproposals">
         <q-item-side icon="icon-menu-8" />

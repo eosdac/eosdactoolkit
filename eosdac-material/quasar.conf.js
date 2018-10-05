@@ -125,6 +125,7 @@ module.exports = function(ctx) {
         'QAutocomplete',
         'QBtnToggle',
         'QScrollObservable'
+
       ],
       directives: [
         'Ripple',
