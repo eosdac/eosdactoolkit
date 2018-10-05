@@ -49,12 +49,12 @@
           <div class="text-dimwhite" v-if="!getMemberRoles.candidate">
 
             <div class="q-mb-lg " v-if="!stakeRequirementMet">
-              <p>Some text to explain the stake quantity. you can stake more but the minimum is {{stakedata.quantity}}</p>
+              <p>{{$t('regcandidate.stake_description', {minimum_stake: stakedata.quantity}) }}</p>
               <q-input  color="p-light" dark type="text" v-model="stakedata.quantity" :float-label="$t('regcandidate.stake_amount')" :placeholder="$t('regcandidate.amount_to_stake_placeholder')" />
             </div>
             <!-- <q-input dark  type="hidden" v-model="registerdata.bio"  float-label="Profile JSON url" placeholder="http://example.com/myjsonprofile.json" /> -->
             <div >
-              <p >Please fill in The amount you want to receive for being a custodian during one period. The maximum amount is {{requested_pay_max}}</p>
+              <p >{{$t('regcandidate.pay_description', {requested_pay: requested_pay_max}) }}</p>
               <q-input class="q-my-md" color="p-light" dark type="number" :max="requested_pay_max.split(' ')[0]" v-model="requestedpay" :float-label="$t('regcandidate.requested_pay')" :placeholder="$t('regcandidate.requested_custodian_pay_placeholder')" />
               <q-btn size="md"  class="animate-pop" :loading="loading" color="primary" @blur.native="userMsg=''" @click="registerAsCandidate" :label="$t('regcandidate.register')">
                 <q-spinner slot="loading" />
