@@ -5,7 +5,7 @@ export default {
   },
   constitution: {
     loading_constitution: 'Cargando constitución',
-    switch_contrast: 'cambiar contraste',
+    switch_contrast: 'Cambiar Contraste',
   },
   default: {
     account_name: 'Nombre de cuenta',
@@ -16,7 +16,7 @@ export default {
     log_out: 'Cerrar sesión',
     logged_in: 'Conectado',
     logged_out: 'Desconectado',
-    member_client: 'miembro',
+    member_client: 'Miembro',
     member_status: 'Estado',
     menu: 'Menú',
     not_registered: 'no registrado',
@@ -36,7 +36,7 @@ export default {
     your_token_balance: 'Su saldo {tokenName}',
   },
   four_zero_four: {
-    go_back: 'Volver',
+    go_back: 'Voler',
     sorry_nothing_here: 'Lo siento, nada por aquí ...',
   },
   index: {
@@ -65,7 +65,7 @@ export default {
   },
   initialize: {
     authentication_method: 'método de autentificación',
-    connect_with_scatter: 'conectarse con Scatter',
+    connect_with_scatter: 'Conectarse con Scatter',
     identity_request_denied: 'La solicitud de identidad fue denegada Por favor, inténtelo de nuevo y acepte la solicitud',
     import_private_keys: 'Importar claves privadas',
     loading_text: 'cargando...',
@@ -99,8 +99,8 @@ export default {
   },
   nodeselector: {
     automatic_connection: 'Conexión automática',
-    choose_endpoint: 'Listado de endpoints',
-    click_connect_below: 'Haga clic en <b> Conectar </b> para conectarse automáticamente al endpoint más rápido según la ubicación seleccionada entre los productores de bloques EOS.',
+    choose_endpoint: 'Elegir endpoint',
+    click_connect_below: 'Haga clic en <b> Conectar </ b> para conectarse automáticamente al endpoint más rápido según la ubicación seleccionada entre los productores de bloques EOS.',
     connect: 'Conectar',
     connecting: 'Conectando ...',
     custom_endpoint: 'Endpoint personalizado',
@@ -112,8 +112,8 @@ export default {
     gathering_endpoints: 'Buscando endpoints ...',
     manual_connection: 'Conexión manual',
     select_endpoint: 'Seleccionar un endpoint de la lista',
-    select_the_endpoint_you_would_like: 'Seleccione el endpoint que le gustaría usar y haga clic en <b> Conectar </b>. Se mostraron los endpoints de los principales productores de bloques, pero también puede especificar un endpoint personalizado completando el campo con una url y presionando <b> Conectar </ b>.',
-    specify_your_own: 'Especifique su endpoint personalizado rellenando el campo con la dirección y haga clic en el botón de conexión.',
+    select_the_endpoint_you_would_like: 'Seleccione el endpoint que le gustaría usar y haga clic en <b> Conectar </ b>. Se mostraron los endpoints de los principales productores de bloques, pero también puede especificar un endpoint personalizado completando el campo con una url y presionando <b> Conectar </ b>.',
+    specify_your_own: 'Especifique su endpoint personalizado rellenando el campo con una url y haga clic en el botón de conexión.',
   },
   profile: {
     about_me: 'Sobre mi',
@@ -167,7 +167,7 @@ export default {
     loading_latest_constitution: 'Cargando la última constitución ...',
     must_sign_constitution: 'Para convertirse en miembro de eosDAC, debe aceptar y firmar la Constitución.',
     register: 'Registro',
-    registration_sign_the_constitution: 'Registro - Firma de la Constitución',
+    registration_sign_the_constitution: 'Registro - Firme la Constitución',
     try_again: 'Inténtalo nuevamente',
     updated_constitution: 'La constitución ha sido actualizada. Por favor firme la constitución para continuar.',
   },
@@ -189,14 +189,14 @@ export default {
     import_identity_instructions: 'Vaya a la sección Identidades. <br> En su Identidad, haga clic en el ícono del lápiz. <br> Dentro de su Identidad, vaya a la sección "Cuenta". <br> Ahora elija su cuenta importada de la lista. <br> Guarde su Identidad con el botón Guardar en la esquina superior derecha.',
     make_sure_active_key: 'Asegúrese de tener su clave activa para su cuenta importada en scatter.',
     permissions: '1. Ir a permisos',
-    revoke_identity: '3. Revocar la identidad',
+    revoke_identity: '3. Revoca la identidad',
     select_domain: '2. Seleccione el dominio',
     unable_to_connect: 'Si no puede conectarse a Scatter, siga los pasos a continuación para restablecer sus permisos.',
   },
   settings: {
     API: 'API',
     API_endpoint: 'Endpoint de la API',
-    click_below_to_unregister_membership: 'Haga clic en el botón a continuación para cancelar su membresía eosDAC',
+    click_below_to_unregister_membership: 'Haga clic en el botón a continuación para cancelar el registro de su membresía eosDAC',
     click_register_now: 'Haga clic en "Registrarse ahora" para convertirse en miembro de eosDAC.',
     current_connection: 'Conexión actual',
     current_language: 'Idioma actual',
