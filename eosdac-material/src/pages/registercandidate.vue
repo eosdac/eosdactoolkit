@@ -1,7 +1,7 @@
 <template>
 <q-page class="text-white ">
 
-  <!-- <div class=" gradient-bg-primary q-px-md q-pt-md relative-position" style="min-height:260px; overflow:hidden">
+  <div class=" gradient-bg-primary q-px-md q-pt-md relative-position" style="min-height:260px; overflow:hidden">
     <div class="row">
       <div class="col-12">
         <h4 v-if="!getMemberRoles.candidate" class="q-display-1 q-mb-sm q-mt-none">{{ $t("regcandidate.register_as_candidate") }}</h4>
@@ -10,15 +10,22 @@
     </div>
 
     <div class="blur-details q-pa-md absolute-bottom" style="height:120px;margin-right:-16px;margin-left:-16px;">
-      <div class="column  justify-center q-px-md full-height">
+
+      <div v-if="iscandidatedata" class="row  items-center q-px-md full-height">
+        <div class="q-mr-lg">
+          <div class="text-dimwhite q-caption uppercase q-mb-sm">{{$t('regcandidate.locked_tokens')}}</div>
+          <div class="q-title"><span class="text-dimwhite">{{iscandidatedata.locked_tokens.split(' ')[0]}}</span><span> {{iscandidatedata.locked_tokens.split(' ')[1]}}</span></div>
+        </div>
+        <div >
+          <div class="text-dimwhite q-caption uppercase q-mb-sm">{{$t('regcandidate.requested_pay')}}</div>
+          <div class="q-title" ><span class="text-dimwhite">{{iscandidatedata.requestedpay.split(' ')[0]}}</span><span> {{iscandidatedata.requestedpay.split(' ')[1]}}</span></div>
+        </div>
       </div>
+
     </div>
-  </div> -->
+  </div>
 
 <div class="q-pa-md">
-
-        <h4 v-if="!getMemberRoles.candidate" class="q-display-1 q-mb-sm q-mt-none">{{ $t("regcandidate.register_as_candidate") }}</h4>
-        <h4 v-if="getMemberRoles.candidate" class="q-display-1 q-mb-sm q-mt-none">{{ $t("regcandidate.unregister_as_candidate") }}</h4>
 
   <div v-if="!profile_is_irrevirsible" class="bg-dark2 q-pa-md round-corners shadow-5">
     {{ $t("regcandidate.profile_required") }}
@@ -31,30 +38,35 @@
           <div v-if="!getMemberRoles.candidate" >{{$t('regcandidate.page_description_unregistered') }}</div>
           <div v-if="getMemberRoles.candidate" >
             <span>{{$t('regcandidate.page_description_registered') }}</span>
-            <ul>
-              <li>{{ $t('regcandidate.stake_amount') }}: {{ iscandidatedata.locked_tokens }}</li>
-              <li>{{ $t('regcandidate.requested_pay') }}: {{ iscandidatedata.requestedpay }}</li>
-            </ul>
-            
           </div>
 
           <div v-if="getMemberRoles.custodian">{{ $t('regcandidate.page_description_active_custodian') }}</div>
-          <!-- <pre>{{iscandidatedata}}</pre>
-          <pre>{{stakeRequirementMet}}</pre> -->
+          <!-- <pre>{{iscandidatedata}}</pre> -->
+          <!-- <pre>{{stakeRequirementMet}}</pre> -->
         </div>
 
         <div class="col-md-4 col-sm-12 q-pa-md">
-          <span v-if="!getMemberRoles.candidate">
-          <q-input v-if="!stakeRequirementMet" color="p-light" dark type="text" v-model="stakedata.quantity" :float-label="$t('regcandidate.stake_amount')" :placeholder="$t('regcandidate.amount_to_stake_placeholder')" />
-          <!-- <q-input dark  type="hidden" v-model="registerdata.bio"  float-label="Profile JSON url" placeholder="http://example.com/myjsonprofile.json" /> -->
-          <q-input class="q-my-md" color="p-light" dark type="text" v-model="registerdata.requestedpay" :float-label="$t('regcandidate.requested_pay')" :placeholder="$t('regcandidate.requested_custodian_pay_placeholder')" />
-          <q-btn size="md"  class="animate-pop" :loading="loading" color="primary" @click="registerAsCandidate" :label="$t('regcandidate.register')">
+          <div class="text-dimwhite" v-if="!getMemberRoles.candidate">
+
+            <div class="q-mb-lg " v-if="!stakeRequirementMet">
+              <p>Some text to explain the stake quantity. you can stake more but the minimum is {{stakedata.quantity}}</p>
+              <q-input  color="p-light" dark type="text" v-model="stakedata.quantity" :float-label="$t('regcandidate.stake_amount')" :placeholder="$t('regcandidate.amount_to_stake_placeholder')" />
+            </div>
+            <!-- <q-input dark  type="hidden" v-model="registerdata.bio"  float-label="Profile JSON url" placeholder="http://example.com/myjsonprofile.json" /> -->
+            <div >
+              <p >Please fill in The amount you want to receive for being a custodian during one period. The maximum amount is {{requested_pay_max}}</p>
+              <q-input class="q-my-md" color="p-light" dark type="number" :max="requested_pay_max.split(' ')[0]" v-model="requestedpay" :float-label="$t('regcandidate.requested_pay')" :placeholder="$t('regcandidate.requested_custodian_pay_placeholder')" />
+              <q-btn size="md"  class="animate-pop" :loading="loading" color="primary" @blur.native="userMsg=''" @click="registerAsCandidate" :label="$t('regcandidate.register')">
+                <q-spinner slot="loading" />
+              </q-btn>
+            </div>
+
+          </div>
+
+          <q-btn size="md" v-if="getMemberRoles.candidate" class="animate-pop" :loading="loading" color="primary" @blur.native="userMsg=''" @click="unregisterAsCandidtate" :label="$t('regcandidate.unregister')">
             <q-spinner slot="loading" />
           </q-btn>
-          </span>
-          <q-btn size="md" v-if="getMemberRoles.candidate" class="animate-pop" :loading="loading" color="primary" @click="unregisterAsCandidtate" :label="$t('regcandidate.unregister')">
-            <q-spinner slot="loading" />
-          </q-btn>
+          <div class="q-mt-md text-dimwhite animate-fade" v-if="userMsg != ''">{{userMsg}}</div>
           <!-- <pre>{{getMemberRoles}}</pre> -->
         </div>
   </div>
@@ -90,8 +102,10 @@ export default {
       hasprofile : false,
       profile_is_irrevirsible: false,
       iscandidatedata : false,
-      stakedata: { quantity: '2.0000 KASDAC', memo: 'dacelections'},
-      registerdata: { requestedpay :'100.0000 EOS'}
+      stakedata: { quantity: '', memo: 'dacelections'},
+      requested_pay_max : false,
+      requestedpay : '',
+      userMsg: ''
 
     }
   },
@@ -120,15 +134,40 @@ export default {
         }
       }
 
+    },
+    formatcanddata(){
+      let data = {
+        staked:{
+          value: 0.0000,
+          symbol : this.$configFile.network.tokenContract.token
+        },
+        reqpay:{
+          value: 0.0000,
+          symbol : this.$configFile.network.mainCurrencyContract.token
+        }
+      };
+      if(this.iscandidatedata){
+        data.staked.value = iscandidatedata.locked_tokens.split(' ')[0];
+        data.reqpay.value = iscandidatedata.requestedpay.split(' ')[0];
+      }
+      return data;
+
     }
   },
   methods:{
     registerAsCandidate() {
+        let requestedpay = this.requestedpay;
+        if(requestedpay == ''){
+          this.userMsg = 'please fill in a payment amount.'
+          return false;
+        }
+        requestedpay = requestedpay.toFixed(4)+ ' EOS';
+
         this.loading = true;
         this.$store.dispatch('api/registerCandidate', {
           scatter: true,
           stakedata: this.stakedata,
-          registerdata : this.registerdata,
+          registerdata : {requestedpay : requestedpay},
           staked_enough: this.stakeRequirementMet
         })
         .then(res => {
@@ -173,9 +212,11 @@ export default {
 
     async getContractConfig() {
       this.init_loading = true;
-      let config = await this.$store.dispatch('api/getContractConfig', {contract: this.$configFile.network.custodianContract.name})
+      let config = await this.$store.dispatch('api/getContractConfig', {contract: this.$configFile.network.custodianContract.name});
+      // console.log(config)
       if(config){
         this.stakedata.quantity = config.lockupasset;
+        this.requested_pay_max = config.requested_pay_max;
       }
       this.init_loading = false;
     },

@@ -157,7 +157,7 @@ export default {
       let data = {email: this.email_address, language: this.language};
 
       if(!this.$helper.isEmail(this.email_address) || this.language == ''){
-        this.onsubscribemsg = 'Valid input required!';
+        this.onsubscribemsg = this.$t('index.valid_input_required');
         return false;
       }
       let url = this.$configFile.api.profileApiUrl;
@@ -171,10 +171,10 @@ export default {
       this.loading =true;
       try{
         let result = await this.$axios.post(url, data);
-        this.onsubscribemsg = result.data.message;
+        this.onsubscribemsg = this.$t('index.'+result.data.message);
         // console.log(result);
       }catch(e){
-        this.onsubscribemsg = 'Error';
+        this.onsubscribemsg = this.$t('index.error_occured');
         console.log(e);
       }
       this.clearForm();
