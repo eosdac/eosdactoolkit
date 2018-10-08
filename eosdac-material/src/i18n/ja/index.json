@@ -22,12 +22,12 @@
     "not_registered": "未登録",
     "pending": "未定",
     "profile": "プロフィール",
-    "registered": "登録済み",
     "register_as_candidate": "候補者として登録する",
+    "registered": "登録済み",
     "settings": "設定",
     "sign_the_constitution": "規約に署名する",
-    "support": "Support & Feedback",
     "status": "ステータス",
+    "support": "Support & Feedback",
     "token_explorer": "トークンエクスプローラー",
     "unregister_as_candidate": "候補者としての登録を解除する",
     "wallet": "ウォレット",
@@ -40,7 +40,7 @@
     "sorry_nothing_here": "申し訳ありません、リクエストが見つかりませんでした"
   },
   "index": {
-    "already_subscribed" :"Already subscribed!",
+    "already_subscribed": "Already subscribed!",
     "description_p1": "eosDACは、規約に合意し、コミュニティのメンバーとして登録されたトークン保有者によって運営される分散自立コミュニティです。",
     "description_p2": "完了したら、メンバークライアントを使用して、規約の確認、ワーカープロポーザルの提出、カストディアン候補としての登録、カストディアンへの投票、トークンの転送などができるようになります。質問がある場合は、以下のリンクからご連絡下さい。",
     "discord_description": "eosDACは、他のDACsを実現するためのツールを精力的に開発するコミュニティです。活動は主にDiscord上で行われています。",
@@ -54,10 +54,10 @@
     "reg_as_member": "メンバーシップ",
     "signin": "Scatterでログイン",
     "signout": "・ログアウト",
-    "subscribed_successfully": "Subscribed successfully!",
     "submit_wp": "ワーカープロポーザル",
     "subscribe": "購読",
     "subscribe_newsletter": "ニュースレターを購読",
+    "subscribed_successfully": "Subscribed successfully!",
     "valid_input_required": "Valid input required",
     "visit_eosdac": "ウェブサイト(eosdac.io)を見る",
     "vote_cust": "カストディアンへの投票",
@@ -148,7 +148,7 @@
   "regcandidate": {
     "amount_to_stake_placeholder": "ステークしているEOSDACの総量",
     "loadconfig": "コントラクト設定を読み込んでいます",
-    "locked_tokens" :"locked tokens",
+    "locked_tokens": "locked tokens",
     "page_description_active_custodian": "現在、カストディアンボードのアクティブメンバーです。",
     "page_description_registered": "eosDACのカストディアン候補へのご登録ありがとうございます。候補登録の一環として、いくつかのトークンがステークされます。",
     "page_description_unregistered": "このページは、カストディアンボードのメンバー候補への登録ページです。カストディアンボードのメンバーは、規約で概説されている責任を負います。カストディアンボードのメンバーとしての責任を理解し、それを全うできる場合にのみ、候補者登録をしてください。登録前に、規約のセクション5を入念に確認して下さい。",
@@ -205,6 +205,8 @@
   "settings": {
     "API": "API",
     "API_endpoint": "APIエンドポイント",
+    "NOT_REGISTERED": "未登録",
+    "REGISTERED": "登録済み",
     "click_below_to_unregister_membership": "eosDACのメンバー登録を解除するには、下のボタンをクリックしてください",
     "click_register_now": "eosDACのメンバーになるには、\"登録する\"をクリックしてください。",
     "current_connection": "現在のコネクション",
@@ -212,10 +214,8 @@
     "current_status": "現在のステータス",
     "language_preference": "言語の設定",
     "member_status": "メンバーステータス",
-    "NOT_REGISTERED": "未登録",
     "register_as_member": "メンバー登録",
     "register_now": "登録する",
-    "REGISTERED": "登録済み",
     "settings": "設定",
     "transaction_popup_label": "トランザクションポップアップ",
     "unregister_membership": "メンバーシップの登録を解除する",
@@ -264,6 +264,9 @@
     "update_in": "更新まで"
   },
   "wallet": {
+    "CPU": "CPU",
+    "KB": "KB",
+    "RAM": "RAM",
     "account_name": "アカウント名",
     "action_type": "アクションタイプ",
     "add": "追加",
@@ -274,7 +277,6 @@
     "bytes": "bytes",
     "cancel": "キャンセル",
     "confirm": "承認",
-    "CPU": "CPU",
     "cycles": "サイクル",
     "decrease": "減量",
     "decrease_by": "減量",
@@ -283,7 +285,6 @@
     "increase": "増量",
     "increase_by": "増量",
     "input_a_destination_account": "宛先のアカウントを入力する",
-    "KB": "KB",
     "liquid": "流動残高",
     "loading": "読み込み中",
     "manage_addressbook": "アドレス帳を管理する",
@@ -292,7 +293,6 @@
     "network": "ネットワーク",
     "or_select_address_book": "または、アドレス帳から宛先のアカウントを選択",
     "quantity_to_send": "送信する数量",
-    "RAM": "RAM",
     "ram_price_per_kb": "KBごとのRAM価格",
     "remaining": "残り",
     "select_from_list": "リストから選択",
@@ -315,6 +315,10 @@
     "used": "使用済み",
     "wallet": "ウォレット"
   },
+  "worker_proposals": {
+    "APPROVED": "承認済み",
+    "OPEN": "オープン"
+  },
   "wp_member_view": {
     "approx_USD": "(約 xxxx USD)",
     "deadline": "締切",
@@ -328,6 +332,5 @@
     "votes": "投票",
     "worker_proposal_by": "ワーカープロポーザル",
     "yes": "はい"
-  },
-  "worker_proposals": {"APPROVED": "承認済み", "OPEN": "オープン"}
+  }
 }

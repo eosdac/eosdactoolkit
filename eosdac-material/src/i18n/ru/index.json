@@ -22,12 +22,12 @@
     "not_registered": "Не зарегистрирован",
     "pending": "в ожидании",
     "profile": "Профиль",
-    "registered": "Зарегистрирован",
     "register_as_candidate": "Регистрация в качестве кандидата",
+    "registered": "Зарегистрирован",
     "settings": "Настройки",
     "sign_the_constitution": "Подпишите Конституцию",
-    "support": "Support & Feedback",
     "status": "Статус",
+    "support": "Support & Feedback",
     "token_explorer": "Обозреватель токенов",
     "unregister_as_candidate": "Отмена регистрации в качестве кандидата",
     "wallet": "Кошелек",
@@ -40,7 +40,7 @@
     "sorry_nothing_here": "Извините, здесь ничего нет..."
   },
   "index": {
-    "already_subscribed" :"Already subscribed!",
+    "already_subscribed": "Already subscribed!",
     "description_p1": "eosDAC – это децентрализованное автономное сообщество, принадлежащее и управляемое владельцами токенов, которые приняли Конституцию и зарегистрировались в качестве Участников сообщества.",
     "description_p2": "После завершения тестирования этот клиент позволит вам прочитать Конституцию, зарегистрироваться в качестве Участника, представить ваши рабочие предложения, зарегистрироваться в качестве кандидата Хранителя, голосовать за Хранителей, передавать токены и многое другое. Если у вас есть какие-либо вопросы, вы можете обратиться к нам, воспользовавшись ссылками ниже.",
     "discord_description": "eosDAC является активным участником разработки инструментов для создания других DAC. В Discord мы объединяем навыки нашей команды и координируем всю деятельность.",
@@ -54,10 +54,10 @@
     "reg_as_member": "Членство",
     "signin": "Подписать в Scatter",
     "signout": "Выйти",
-    "subscribed_successfully": "Subscribed successfully!",
     "submit_wp": "Рабочие Предложения",
     "subscribe": "подписаться",
     "subscribe_newsletter": "Новостная рассылка",
+    "subscribed_successfully": "Subscribed successfully!",
     "valid_input_required": "Valid input required",
     "visit_eosdac": "Посетите наш сайт eosdac.io",
     "vote_cust": "Голосование за Хранителей",
@@ -148,7 +148,7 @@
   "regcandidate": {
     "amount_to_stake_placeholder": "сумма ставки EOSDAC",
     "loadconfig": "Загрузка конфигурации контракта",
-    "locked_tokens" :"locked tokens",
+    "locked_tokens": "locked tokens",
     "page_description_active_custodian": "В настоящее время вы являетесь активным участником совета Хранителей eosDAC.",
     "page_description_registered": "Благодарим Вас за регистрацию в качестве кандидата в совет Хранителей eosDAC. В рамках регистрации вашей кандидатуры некоторые из ваших токенов были стэкированы.",
     "page_description_unregistered": "Эта страница предназначена для регистрации в качестве кандидата на должность в совете Хранителей. Эта позиция связана с обязанностями, изложенными в Конституции eosDAC. Пожалуйста, не регистрируйтесь в качестве кандидата, если вы полностью не понимаете и не cможете выполнять обязанности Хранителя совета eosDAC. Пожалуйста, внимательно ознакомьтесь с разделом 5 Конституции перед регистрацией.",
@@ -205,6 +205,8 @@
   "settings": {
     "API": "API",
     "API_endpoint": "Конечная точка API",
+    "NOT_REGISTERED": "НЕ ЗАРЕГИСТРИРОВАН",
+    "REGISTERED": "ЗАРЕГИСТРИРОВАН",
     "click_below_to_unregister_membership": "Нажмите кнопку ниже, чтобы отменить регистрацию членства в eosDAC.",
     "click_register_now": "Нажмите «Зарегистрироваться сейчас», чтобы стать членом eosDAC.",
     "current_connection": "Текущее соединение",
@@ -212,10 +214,8 @@
     "current_status": "Текущее состояние",
     "language_preference": "Языковое предпочтение",
     "member_status": "Статус участника",
-    "NOT_REGISTERED": "НЕ ЗАРЕГИСТРИРОВАН",
     "register_as_member": "Регистрация в качестве участника",
     "register_now": "Зарегистрируйтесь сейчас",
-    "REGISTERED": "ЗАРЕГИСТРИРОВАН",
     "settings": "Настройки",
     "transaction_popup_label": "Всплывающие окна транзакций",
     "unregister_membership": "Отменить регистрацию членства",
@@ -264,6 +264,9 @@
     "update_in": "обновить"
   },
   "wallet": {
+    "CPU": "Процессор",
+    "KB": "KB",
+    "RAM": "Память",
     "account_name": "Имя учетной записи",
     "action_type": "Выбор действия",
     "add": "Добавить",
@@ -274,7 +277,6 @@
     "bytes": "байты",
     "cancel": "Отмена",
     "confirm": "Подтвердить",
-    "CPU": "Процессор",
     "cycles": "Циклы",
     "decrease": "Уменьшить",
     "decrease_by": "Уменьшился на",
@@ -283,7 +285,6 @@
     "increase": "Увеличить",
     "increase_by": "Увеличился на",
     "input_a_destination_account": "Введите учетную запись",
-    "KB": "KB",
     "liquid": "Ликвидность",
     "loading": "загрузка",
     "manage_addressbook": "Управление адресной книгой",
@@ -292,7 +293,6 @@
     "network": "Сеть",
     "or_select_address_book": "Или выберите учетную запись из адресной книги",
     "quantity_to_send": "Количество для отправки",
-    "RAM": "Память",
     "ram_price_per_kb": "Цена памяти за KB",
     "remaining": "осталось",
     "select_from_list": "Выберите из списка",
@@ -315,6 +315,10 @@
     "used": "Использовано",
     "wallet": "Кошелек"
   },
+  "worker_proposals": {
+    "APPROVED": "УТВЕРЖДЕН",
+    "OPEN": "ОТКРЫТ"
+  },
   "wp_member_view": {
     "approx_USD": "(Примерно хxxx USD)",
     "deadline": "Крайний срок",
@@ -328,6 +332,5 @@
     "votes": "Голоса",
     "worker_proposal_by": "По рабочим предложениям",
     "yes": "да"
-  },
-  "worker_proposals": {"APPROVED": "УТВЕРЖДЕН", "OPEN": "ОТКРЫТ"}
+  }
 }

@@ -26,8 +26,8 @@
     "registered": "Đã đăng ký",
     "settings": "Cài Đặt",
     "sign_the_constitution": "Ký Hiến Pháp",
-    "support": "Support & Feedback",
     "status": "Trạng Thái",
+    "support": "Support & Feedback",
     "token_explorer": "Tra Cứu Token",
     "unregister_as_candidate": "Hủy Đăng Ký Ứng Viên",
     "wallet": "Ví",
@@ -40,7 +40,7 @@
     "sorry_nothing_here": "Xin lỗi, không có gì cả..."
   },
   "index": {
-    "already_subscribed" :"Already subscribed!",
+    "already_subscribed": "Already subscribed!",
     "description_p1": "eosDAC là một cộng đồng tự trị phi tập trung được sở hữu và vận hành bởi những người sở hữu token, đồng ý với hiến pháp và đã đăng ký thành viên cộng đồng.",
     "description_p2": "Khi hoàn tất, bộ công cụ thành viên sẽ cho phép bạn đọc hiến pháp, đăng ký thành viên, nộp đề xuất công việc, đăng ký ứng viên người giám hộ, bầu ra người giám hộ, chuyển nhượng token và nhiều chức năng khác. Nếu bạn có bất kỳ câu hỏi gì, vui lòng liên hệ chúng tôi theo các đường link bên dưới.",
     "discord_description": "eosDAC là một cộng đồng năng động và tích cực xây dựng các công cụ để kích hoạt các DAC khác. Discord là nơi chúng tôi trao đổi, giới thiệu và hợp các hoạt động cùng nhau.",
@@ -54,10 +54,10 @@
     "reg_as_member": "Tư Cách Thành Viên",
     "signin": "đăng nhập bằng Scatter",
     "signout": "đăng xuất",
-    "subscribed_successfully": "Subscribed successfully!",
     "submit_wp": "Đề Xuất Công Việc",
     "subscribe": "đăng ký",
     "subscribe_newsletter": "Đăng Ký Nhận Tin Mới của chúng tôi.",
+    "subscribed_successfully": "Subscribed successfully!",
     "valid_input_required": "Valid input required",
     "visit_eosdac": "Truy cập website của chúng tôi eosdac.io",
     "vote_cust": "Bầu Người Giám Hộ",
@@ -148,7 +148,7 @@
   "regcandidate": {
     "amount_to_stake_placeholder": "số lượng đặt cọc EOSDAC",
     "loadconfig": "Đang tải cấu hình hợp đồng",
-    "locked_tokens" :"locked tokens",
+    "locked_tokens": "locked tokens",
     "page_description_active_custodian": "Bạn hiện đang là một thành viên hội đồng giám hộ eosDAC.",
     "page_description_registered": "Cám ơn bạn đã đăng ký làm ứng viên để phục vụ trong hội đồng giám hộ eosDAC. Như một phần đăng ký ứng cử của bạn, một lượng token của bạn đã được đặt cọc.",
     "page_description_unregistered": "Trang này để đăng ký làm ứng viên cho một vị trí trong hội đồng giám hộ. Vị trí này đi kèm với những trách nhiệm được nêu trong Hiến Pháp eosDAC. Xin vui lòng không đăng ký ứng viên trừ khi bạn hoàn toàn hiểu rõ và có thể đáp ứng các trách nhiệm của một thành viên hội đồng giám hộ eosDAC. Vui lòng xem lại cẩn thận mục 5 trong hiến pháp trước khi đăng ký.",
@@ -205,6 +205,8 @@
   "settings": {
     "API": "API",
     "API_endpoint": "API Điểm Kết Nối",
+    "NOT_REGISTERED": "CHƯA ĐĂNG KÝ",
+    "REGISTERED": "ĐÃ ĐĂNG KÝ",
     "click_below_to_unregister_membership": "Ấn vào nút bên dưới để hủy tư cách thành viên eosDAC",
     "click_register_now": "Ấn \"Đăng Ký Ngay\" để trở thành thành viên eosDAC.",
     "current_connection": "Kết Nối Hiện Tại",
@@ -212,10 +214,8 @@
     "current_status": "Trạng Thái Hiện Tại",
     "language_preference": "Tùy Chọn Ngôn Ngữ",
     "member_status": "Trạng Thái Thành Viên",
-    "NOT_REGISTERED": "CHƯA ĐĂNG KÝ",
     "register_as_member": "Đăng ký Thành Viên",
     "register_now": "Đăng Ký Ngay",
-    "REGISTERED": "ĐÃ ĐĂNG KÝ",
     "settings": "Cài Đặt",
     "transaction_popup_label": "Thông Báo Giao Dịch",
     "unregister_membership": "Hủy Tư Cách Thành Viên",
@@ -264,6 +264,9 @@
     "update_in": "cập nhật"
   },
   "wallet": {
+    "CPU": "CPU",
+    "KB": "KB",
+    "RAM": "RAM",
     "account_name": "Tên Tài Khoản",
     "action_type": "Thao Tác",
     "add": "Thêm",
@@ -274,7 +277,6 @@
     "bytes": "bytes",
     "cancel": "Hủy Bỏ",
     "confirm": "Xác Nhận",
-    "CPU": "CPU",
     "cycles": "Vòng Lặp",
     "decrease": "Giảm",
     "decrease_by": "Giảm",
@@ -283,7 +285,6 @@
     "increase": "Tăng",
     "increase_by": "Tăng",
     "input_a_destination_account": "Nhập Tài Khoản Nhận",
-    "KB": "KB",
     "liquid": "có sẵn",
     "loading": "đang tải",
     "manage_addressbook": "Quản Lý Sổ Địa Chỉ",
@@ -292,7 +293,6 @@
     "network": "Network",
     "or_select_address_book": "Hoặc lựa chọn Tài Khoản Nhận từ Sổ Địa Chỉ",
     "quantity_to_send": "Số Lượng để chuyển",
-    "RAM": "RAM",
     "ram_price_per_kb": "Giá Ram mỗi KB",
     "remaining": "còn lại",
     "select_from_list": "Lựa Chọn từ Danh Sách",
@@ -315,6 +315,10 @@
     "used": "Đã sử dụng",
     "wallet": "Ví"
   },
+  "worker_proposals": {
+    "APPROVED": "ĐÃ DUYỆT",
+    "OPEN": "ĐANG MỞ"
+  },
   "wp_member_view": {
     "approx_USD": "(Khoảng xxxx USD)",
     "deadline": "Hạn Chót",
@@ -328,6 +332,5 @@
     "votes": "Phiếu Bầu",
     "worker_proposal_by": "Đề Xuất Công Việc bởi",
     "yes": "Đồng Ý"
-  },
-  "worker_proposals": {"APPROVED": "ĐÃ DUYỆT", "OPEN": "ĐANG MỞ"}
+  }
 }
