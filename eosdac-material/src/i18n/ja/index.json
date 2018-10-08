@@ -26,6 +26,7 @@
     "register_as_candidate": "候補者として登録する",
     "settings": "設定",
     "sign_the_constitution": "規約に署名する",
+    "support": "Support & Feedback",
     "status": "ステータス",
     "token_explorer": "トークンエクスプローラー",
     "unregister_as_candidate": "候補者としての登録を解除する",
@@ -39,10 +40,12 @@
     "sorry_nothing_here": "申し訳ありません、リクエストが見つかりませんでした"
   },
   "index": {
+    "already_subscribed" :"Already subscribed!",
     "description_p1": "eosDACは、規約に合意し、コミュニティのメンバーとして登録されたトークン保有者によって運営される分散自立コミュニティです。",
     "description_p2": "完了したら、メンバークライアントを使用して、規約の確認、ワーカープロポーザルの提出、カストディアン候補としての登録、カストディアンへの投票、トークンの転送などができるようになります。質問がある場合は、以下のリンクからご連絡下さい。",
     "discord_description": "eosDACは、他のDACsを実現するためのツールを精力的に開発するコミュニティです。活動は主にDiscord上で行われています。",
     "eosdac": "eosdac.io",
+    "error_occured": "Something went wrong!",
     "join_discord": "DiscordのeosDACコミュニティに是非参加して下さい",
     "key_features": "主要な機能",
     "open_discord": "Discordを開く",
@@ -51,9 +54,11 @@
     "reg_as_member": "メンバーシップ",
     "signin": "Scatterでログイン",
     "signout": "・ログアウト",
+    "subscribed_successfully": "Subscribed successfully!",
     "submit_wp": "ワーカープロポーザル",
     "subscribe": "購読",
     "subscribe_newsletter": "ニュースレターを購読",
+    "valid_input_required": "Valid input required",
     "visit_eosdac": "ウェブサイト(eosdac.io)を見る",
     "vote_cust": "カストディアンへの投票",
     "wallet": "ウォレット",
@@ -128,6 +133,8 @@
     "givenName": "名",
     "loading_text": "プロフィールデータを読み込んでいます...",
     "male": "男性",
+    "maxLinksmsg": "Sorry, max {number_allowed_links} links allowed.",
+    "not_confirmed": "not confirmed",
     "other": "その他",
     "placeholder_short_bio": "これは私の簡単なプロフィールです...",
     "profile": "プロフィール",
@@ -141,9 +148,11 @@
   "regcandidate": {
     "amount_to_stake_placeholder": "ステークしているEOSDACの総量",
     "loadconfig": "コントラクト設定を読み込んでいます",
+    "locked_tokens" :"locked tokens",
     "page_description_active_custodian": "現在、カストディアンボードのアクティブメンバーです。",
     "page_description_registered": "eosDACのカストディアン候補へのご登録ありがとうございます。候補登録の一環として、いくつかのトークンがステークされます。",
     "page_description_unregistered": "このページは、カストディアンボードのメンバー候補への登録ページです。カストディアンボードのメンバーは、規約で概説されている責任を負います。カストディアンボードのメンバーとしての責任を理解し、それを全うできる場合にのみ、候補者登録をしてください。登録前に、規約のセクション5を入念に確認して下さい。",
+    "pay_description": "Please fill in The amount you want to receive for being a custodian during one period. The maximum amount is {requested_pay}.",
     "profile_not_confirmed": "プロフィールを送信しましたが、まだブロックチェーン上で承認されていません。少し時間を置いてから再度お試し下さい。",
     "profile_required": "候補者として登録するにはプロフィールが必要です。",
     "register": "登録",
@@ -151,6 +160,7 @@
     "requested_custodian_pay_placeholder": "希望報酬額(EOS)",
     "requested_pay": "希望報酬額",
     "stake_amount": "ステーク総量",
+    "stake_description": "Please specify the amaont of tokens you want to stake. The minimum amount is {minimum_stake}.",
     "unregister": "登録解除",
     "unregister_as_candidate": "候補者としての登録を解除"
   },
@@ -233,6 +243,7 @@
   },
   "vote_custodians": {
     "candidate_list": "候補リスト",
+    "candidate_registration": "Candidate Registration",
     "description_main": "カストディアン取締役会は、DACの資産および負債の統治および管理を含むがこれに限定されないDACの運営および業務を管理する。 次のDACメンバーは、7日間継続するカストディアン・ボード上の地位について、自分自身と候補者を提出するためにトークンの一部を権利確定している。 7日ごとに、あなたの投票は、次のカストディアンのボードに参加する人を選ぶために再計算されます。 投票は重要です！ 誰が価値を提供しているかを知るために、頻繁に投票してDACに参加してください。",
     "description_side": "あなたは一度に最大5つのカストディアンの候補者に投票することができます。 DACに価値をもたらすと思う候補者を選んでください。",
     "loading_candidates": "ロード候補",
@@ -240,6 +251,8 @@
     "rows_per_page": "ページあたりの行数",
     "search": "検索",
     "submit_my_votes": "私の票を提出",
+    "voting_disabled_text": "Voting is currently disabled. You are able to test out the graphical interface but your votes won't be submitted to the chain. Voting will be enabled shortly.",
+    "voting_disabled_title": "Voting Disabled",
     "voting_progress": "voting progress"
   },
   "votingprogress": {
