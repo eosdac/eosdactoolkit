@@ -51,7 +51,7 @@
     > .q-stepper-tab
       > .q-stepper-dot
         background none
-        size 24px
+        font-size 24px
     > .q-stepper-tab:last-child
       > .q-stepper-line:after
         display none
