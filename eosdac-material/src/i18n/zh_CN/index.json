@@ -22,12 +22,12 @@
     "not_registered": "未注册",
     "pending": "待定",
     "profile": "个人资料",
-    "registered": "已注册",
     "register_as_candidate": "注册成为候选人",
+    "registered": "已注册",
     "settings": "设置",
     "sign_the_constitution": "签署章程",
-    "support": "Support & Feedback",
     "status": "状态",
+    "support": "Support & Feedback",
     "token_explorer": "代币探测器",
     "unregister_as_candidate": "注销成为候选人",
     "wallet": "钱包",
@@ -40,7 +40,7 @@
     "sorry_nothing_here": "抱歉，这里什么也没有......"
   },
   "index": {
-    "already_subscribed" :"Already subscribed!",
+    "already_subscribed": "Already subscribed!",
     "description_p1": "eosDAC 是一个去中心化自治社区，这意味着它由同意章程并注册成为会员的代币持有者共同拥有和运营。",
     "description_p2": "在开发完成后，这个会员客户端将可以让您阅读章程、注册成为会员、提交工作人员提案、注册成为候选托管人、转移代币等。如果您有任何疑问，请使用以下的链接联络我们。",
     "discord_description": "eosDAC 是一个活跃且忙碌的社区，旨在创造工具来推动其他 DAC 的实现。Discord 是我们展示技能并合作完成目标的地方。",
@@ -54,10 +54,10 @@
     "reg_as_member": "会员身份",
     "signin": "使用 Scatter 登录",
     "signout": "登出",
-    "subscribed_successfully": "Subscribed successfully!",
     "submit_wp": "工作人员提案",
     "subscribe": "订阅",
     "subscribe_newsletter": "订阅我们的新闻快报",
+    "subscribed_successfully": "Subscribed successfully!",
     "valid_input_required": "Valid input required",
     "visit_eosdac": "访问我们的网站 eosdac.io",
     "vote_cust": "选举托管人",
@@ -148,7 +148,7 @@
   "regcandidate": {
     "amount_to_stake_placeholder": "用于权益押注的 EOSDAC 数量",
     "loadconfig": "正在载入合约配置",
-    "locked_tokens" :"locked tokens",
+    "locked_tokens": "locked tokens",
     "page_description_active_custodian": "您目前是一名在任的 eosDAC 托管人董事会成员。",
     "page_description_registered": "感谢您注册成为 eosDAC 托管人董事会的成员候选人。作为候选人注册的一部分，您的部分代币已被用于权益押注。",
     "page_description_unregistered": "这一页面是用于注册成为候选人来争取在托管人董事会任职。该职位需要承担 eosDAC 章程中列举的种种责任。请在完全理解并有能力承担作为一名 eosDAC 托管人董事会成员所需承担职责的前提下注册成为候选人。请在注册前仔细阅读章程第 5 节的内容。",
@@ -205,6 +205,8 @@
   "settings": {
     "API": "API",
     "API_endpoint": "API 端点",
+    "NOT_REGISTERED": "未注册",
+    "REGISTERED": "已注册",
     "click_below_to_unregister_membership": "点击下面的按钮注销您的 eosDAC 会员资格",
     "click_register_now": "点击“立即注册”成为 eosDAC 的会员。",
     "current_connection": "当前连接",
@@ -212,10 +214,8 @@
     "current_status": "当前状态",
     "language_preference": "语言首选项",
     "member_status": "会员状态",
-    "NOT_REGISTERED": "未注册",
     "register_as_member": "注册成为会员",
     "register_now": "立即注册",
-    "REGISTERED": "已注册",
     "settings": "设置",
     "transaction_popup_label": "事务弹出窗口",
     "unregister_membership": "注销会员",
@@ -264,6 +264,9 @@
     "update_in": "更新倒数"
   },
   "wallet": {
+    "CPU": "CPU",
+    "KB": "KB",
+    "RAM": "RAM",
     "account_name": "账户名",
     "action_type": "操作类型",
     "add": "加入",
@@ -274,7 +277,6 @@
     "bytes": "字节",
     "cancel": "取消",
     "confirm": "确认",
-    "CPU": "CPU",
     "cycles": "周期",
     "decrease": "减少",
     "decrease_by": "减少百分比",
@@ -283,7 +285,6 @@
     "increase": "增加",
     "increase_by": "增加百分比",
     "input_a_destination_account": "输入接收方帐户",
-    "KB": "KB",
     "liquid": "流动代币",
     "loading": "正在载入",
     "manage_addressbook": "管理通讯录",
@@ -292,7 +293,6 @@
     "network": "网络",
     "or_select_address_book": "或者从通讯录中选择接收方帐户",
     "quantity_to_send": "要发送的数量",
-    "RAM": "RAM",
     "ram_price_per_kb": "每 KB 的 Ram 价格",
     "remaining": "剩余",
     "select_from_list": "从列表中选择",
@@ -315,6 +315,10 @@
     "used": "已用",
     "wallet": "钱包"
   },
+  "worker_proposals": {
+    "APPROVED": "已批准",
+    "OPEN": "待定"
+  },
   "wp_member_view": {
     "approx_USD": "（约 xxxx 美元）",
     "deadline": "截止日期",
@@ -328,6 +332,5 @@
     "votes": "投票",
     "worker_proposal_by": "提案申请人",
     "yes": "是"
-  },
-  "worker_proposals": {"APPROVED": "已批准", "OPEN": "待定"}
+  }
 }

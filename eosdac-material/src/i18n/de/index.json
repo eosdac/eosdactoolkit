@@ -26,8 +26,8 @@
     "registered": "Registriert",
     "settings": "Einstellungen",
     "sign_the_constitution": "Unterschreiben Sie die Verfassung",
-    "support": "Support & Feedback",
     "status": "Status",
+    "support": "Support & Feedback",
     "token_explorer": "Token Explorer",
     "unregister_as_candidate": "Registrierung als Verwalter zurückziehen",
     "wallet": "Konto",
@@ -40,7 +40,7 @@
     "sorry_nothing_here": "Entschuldigung, nichts hier ..."
   },
   "index": {
-    "already_subscribed" :"Already subscribed!",
+    "already_subscribed": "Already subscribed!",
     "description_p1": "eosDAC ist eine Dezentrale Autonome Community. Diese gehört und wird geleitet von den eosDAC Token Besitzern die der eosDAC Verfassung zugestimmt haben und als Mitglied der Community registriert sind.",
     "description_p2": "Die Endgültige Version des MemberClients wird folgende Funktionen beinhalten. Lesen der Satzung, Registrierung als Mitglied, Einreichung von Kostvoranschlägen, Registrierung als Verwalter und zudem die Möglichkeit Tokens zu versenden (Wallet). Wenn Sie Fragen haben, erreichen Sie uns über Discord oder unsere Webseite.",
     "discord_description": "eosDAC existiert um Tools zur Verfügung zu stellen die es ermöglichen werden andere DAC´s zu erstellen. Discord ist der Ort, wo wir unsere Fähigkeiten zusammenbringen und unsere Aktivitäten koordinieren.",
@@ -54,10 +54,10 @@
     "reg_as_member": "Mitgliedschaft verwalten",
     "signin": "Mit Scatter anmelden",
     "signout": "Abmelden",
-    "subscribed_successfully": "Subscribed successfully!",
     "submit_wp": "Kostenvoranschläge",
     "subscribe": "Abonnieren",
     "subscribe_newsletter": "Nesletter abonnieren",
+    "subscribed_successfully": "Subscribed successfully!",
     "valid_input_required": "Valid input required",
     "visit_eosdac": "Besuche unsere Website eosdac.io",
     "vote_cust": "Verwalter wählen",
@@ -148,7 +148,7 @@
   "regcandidate": {
     "amount_to_stake_placeholder": "amount to stake EOSDAC",
     "loadconfig": "Loading contract configuration",
-    "locked_tokens" :"locked tokens",
+    "locked_tokens": "locked tokens",
     "page_description_active_custodian": "You are currently active as an eosDAC custodian board member.",
     "page_description_registered": "Thank you for registering as a candidate to serve on the eosDAC custodian board. As part of your candidacy registration, some of your tokens have been staked.",
     "page_description_unregistered": "This page is for registering as a candidate for a position on the custodian board. This position comes with responsibiliies outlined in the eosDAC Constitution. Please, do not register as a candidate unless you fully understand and can meet the responsibilites of an eosDAC custodian board member. Please review section 5 of the constitution carefully before registering.",
@@ -205,6 +205,8 @@
   "settings": {
     "API": "API",
     "API_endpoint": "API-Endpunkt",
+    "NOT_REGISTERED": "NICHT REGISTRIERT",
+    "REGISTERED": "REGISTRIERT",
     "click_below_to_unregister_membership": "Klicken Sie auf die Schaltfläche unten, um die Registrierung Ihrer eosDAC-Mitgliedschaft aufzuheben",
     "click_register_now": "Klicken Sie auf \"Jetzt registrieren\", um Mitglied von eosDAC zu werden.",
     "current_connection": "Aktuelle Verbindung",
@@ -212,10 +214,8 @@
     "current_status": "Aktueller Status",
     "language_preference": "Spracheinstellung",
     "member_status": "Mitgliedsstatus",
-    "NOT_REGISTERED": "NICHT REGISTRIERT",
     "register_as_member": "Registrieren Sie sich als Mitglied",
     "register_now": "Jetzt registrieren",
-    "REGISTERED": "REGISTRIERT",
     "settings": "Einstellungen",
     "transaction_popup_label": "Transaktionspopups",
     "unregister_membership": "Mitgliedschaft aufheben",
@@ -264,6 +264,9 @@
     "update_in": "Aktualisierung in"
   },
   "wallet": {
+    "CPU": "CPU",
+    "KB": "KB",
+    "RAM": "RAM",
     "account_name": "Kontoname",
     "action_type": "Aktion",
     "add": "Hinzufügen",
@@ -274,7 +277,6 @@
     "bytes": "bytes",
     "cancel": "Abbrechen",
     "confirm": "Bestätigen",
-    "CPU": "CPU",
     "cycles": "Cycles",
     "decrease": "Verringern",
     "decrease_by": "Verringern um",
@@ -283,7 +285,6 @@
     "increase": "Erhöhen",
     "increase_by": "Erhöhen um",
     "input_a_destination_account": "Geben Sie ein Zielkonto ein",
-    "KB": "KB",
     "liquid": "Verfügbar",
     "loading": "lade",
     "manage_addressbook": "Adressbuch verwalten",
@@ -292,7 +293,6 @@
     "network": "Netzwerk",
     "or_select_address_book": "Oder wählen Sie ein Zielkonto aus dem Adressbuch",
     "quantity_to_send": "Betrag",
-    "RAM": "RAM",
     "ram_price_per_kb": "Ram Preis pro KB",
     "remaining": "übrig",
     "select_from_list": "Auswählen",
@@ -315,6 +315,10 @@
     "used": "Genutzt",
     "wallet": "Konto"
   },
+  "worker_proposals": {
+    "APPROVED": "GENEHMIGT",
+    "OPEN": "OFFEN"
+  },
   "wp_member_view": {
     "approx_USD": "(Ungef. Xxxx USD)",
     "deadline": "Frist",
@@ -328,6 +332,5 @@
     "votes": "Stimmen",
     "worker_proposal_by": "Angebot von",
     "yes": "Ja"
-  },
-  "worker_proposals": {"APPROVED": "GENEHMIGT", "OPEN": "OFFEN"}
+  }
 }
