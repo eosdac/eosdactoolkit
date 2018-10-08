@@ -3,7 +3,10 @@
     "connection_to_endpoint_failed": "与端点的连接不可靠或不可用",
     "connection_to_endpoint_failed_details": "转到“设置”来设置有效的 API 端点"
   },
-  "constitution": {"loading_constitution": "加载章程", "switch_contrast": "切换背景色"},
+  "constitution": {
+    "loading_constitution": "加载章程",
+    "switch_contrast": "切换背景色"
+  },
   "default": {
     "account_name": "账户名",
     "constitution": "章程",
@@ -90,7 +93,9 @@
       "vietnamese": "越南文"
     }
   },
-  "markdown_viewer": {"select_text_to_edit": "选中您想要修改的文字。"},
+  "markdown_viewer": {
+    "select_text_to_edit": "选中您想要修改的文字。"
+  },
   "multi_modal": {
     "register_as_dac_member": "注册成为 DAC 会员",
     "registration": "注册",
@@ -161,7 +166,6 @@
   },
   "register": {
     "already_registered": "您已经注册成为 eosDAC 会员。",
-    "can_not_retrieve_member_status": "无法获取会员状态",
     "checking_status": "正在检查会员状态......",
     "close": "关闭",
     "congratulations_registered": "恭喜！您现已注册成为 eosDAC 会员。",

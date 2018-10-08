@@ -22,12 +22,12 @@ function array_diff_key_recursive ($a1, $a2) {
     return $r;
 }
 
-$enus_json = getJson('en-us');
+$enus_json = getJson('en_US');
 
 $dirs = array_filter(glob('*'), 'is_dir');
 
 foreach ($dirs as $dir) {
-    if ($dir != 'en-us') {
+    if ($dir != 'en_US') {
         print " ==== COMPARING $dir ====:\n";
         $json = getJson($dir);
         $difference = array_diff_key_recursive($enus_json, $json);
