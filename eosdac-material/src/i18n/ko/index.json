@@ -3,6 +3,10 @@
     "connection_to_endpoint_failed": "엔드포인트 연결을 할 수 없거나 신뢰할 수 없습니다.",
     "connection_to_endpoint_failed_details": "설정에서 작동 중인 엔드포인트 API를 설정하십시오."
   },
+  "candidate": {
+    "staked": "스테이킹됨",
+    "votes": "표"
+  },
   "constitution": {
     "loading_constitution": "헌법 불러오는 중",
     "switch_contrast": "색상 대조"
@@ -44,7 +48,7 @@
     "description_p1": "eosDAC은 탈중앙화된 자율 커뮤니티로서 eosDAC 헌법에 동의하고 정회원 등록을 한 토큰 홀더가 소유하고 운영합니다.",
     "description_p2": "완성된 회원 클라이언트 기능: eosDAC 헌법 읽기, 회원 등록, 작업자 제안 제출, 관리인 후보 등록, 관리인 투표, 토큰 전송 등. 문의 사항은 하단의 링크를 통해 연락주십시오.",
     "discord_description": "eosDAC은 다른 DAC들의 출범을 도와주는 툴을 개발하기 위해 적극적이고 활발하게 활동하는 커뮤니티로서 존재합니다. Discord에서 여러분의 재능과 능력을 증명하고 eosDAC 활동을 함께 해나갈 수 있습니다.",
-    "eosdac": "eosdac.io",
+    "eosdac": "eosdac.io/ko",
     "error_occured": "오류가 발생했습니다!",
     "join_discord": "Discord 커뮤니티 가입하기",
     "key_features": "중요 기능",
@@ -187,7 +191,7 @@
     "identity_request_denied": "신원 인증 요청이 거부되었습니다. 다시 시도하고 요청을 수락하십시오.",
     "scatter_is_locked": "Scatter가 잠금 상태입니다. 계속하려면 해제하십시오.",
     "scatter_is_not_available": "Scatter를 이용할 수 없습니다. Scatter를 이미 설치했다면 새로고침이나 권한 > 이 사이트의 권한 제거 후 다시 시도하십시오.",
-    "scatter_is_outdated": "Scatter가 지난 버전입니다. Scatter를 업데이트한 후 다시 시도하십시오",
+    "scatter_is_outdated": "Scatter가 최신 버전이 아닙니다. Scatter를 업데이트한 후 다시 시도하십시오",
     "sign_in": "로그인",
     "waiting_for_scatter": "Scatter 기다리는 중 ..."
   },
