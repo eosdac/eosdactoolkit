@@ -118,7 +118,7 @@
   <q-modal v-model="modal_visible"  minimized  :content-css="{width: '50%'}" >
     <div  class="bg-dark round-borders q-pa-md">
       <div style="overflow: auto;">
-        <q-btn round color="primary" class="float-right" @click="modal_visible=false" icon="icon-plus" />
+        <q-btn round color="primary" class="float-right" @click="modal_visible=false" icon="icon-ui-8" />
       </div>
       
       <div class="q-mb-xl q-mt-md">
