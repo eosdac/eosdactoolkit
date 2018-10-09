@@ -31,7 +31,7 @@
                 </q-card-title>
                 <q-card-main>
                   <q-list dense no-border>
-                    <q-item v-for="i in 4" key="i">
+                    <q-item v-for="i in 4" :key="i">
                       <q-item-side>
                         <q-item-tile avatar>
                           <img src="statics/quasar-logo.png">
@@ -59,7 +59,7 @@
                 </q-card-title>
                 <q-card-main>
                   <q-list dense no-border>
-                    <q-item v-for="i in 4" key="i">
+                    <q-item v-for="i in 4" :key="i">
                       <q-item-side>
                         <q-item-tile avatar>
                           <img src="statics/quasar-logo.png">

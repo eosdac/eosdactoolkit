@@ -1,4 +1,3 @@
-
 export const IMPORT_ACCOUNT = (state, payload) => {
   state.info = payload.info
   state.imported = true
@@ -63,5 +62,37 @@ export const ADD_TRANSFER_HISTORY = (state, payload) => {
 }
 
 export const RESET_STATE = (state) => {
-    Object.assign(state, getDefaultState())
+  Object.assign(state, getDefaultState())
+}
+
+export const SET_MEMBER_ROLES = (state, roles) => {
+  //role must be an  object for example {candidate: true} or {candidate: false, custodian: true, worker: true}
+  //the role key must exist (ie being hardcoded) in the state
+  if (Object.keys(roles).every(k => Object.keys(state.memberRoles).includes(k))) {
+    Object.assign(state.memberRoles, roles);
+  } else {
+    console.log('One or more role keys are not allowed.')
+  }
+
+}
+
+export const ADD_CONTACT = (state, payload) => {
+  let findContact = state.contacts.find(findContact => {
+    return findContact.value === payload
+  })
+  if (!findContact) {
+    state.contacts.push({
+      label: payload,
+      value: payload
+    })
+  }
+}
+
+export const REMOVE_CONTACT = (state, payload) => {
+  for (let i = 0; i < state.contacts.length; i++) {
+    if (state.contacts[i].value === payload) {
+      state.contacts.splice(i, 1)
+      break
+    }
+  }
 }

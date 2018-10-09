@@ -1,4 +1,3 @@
-import configFile from '../../statics/config.json'
 
 export const getCurrentEndpoint = (state) => {
   if (state.endpoints[state.activeEndpointIndex]) {
@@ -20,6 +19,10 @@ export const getCurrentConnectionStatus = (state) => {
 
 export const getChainId = (state) => {
   return state.chainId
+}
+
+export const getScatterChainId = (state) => {
+  return state.scatterChainId
 }
 
 export const getEndpoints = (state) => {
@@ -56,4 +59,8 @@ export const getNotification = (state) => {
 
 export const getConfig = (state) => {
   return state.clientConfig
+}
+
+export const getContractConfig = (state) => {
+  return state.contractConfigs
 }

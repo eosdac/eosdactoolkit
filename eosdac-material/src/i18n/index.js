@@ -1,13 +1,14 @@
 import de from './de'
-import enGB from './en-gb'
-import enUS from './en-us'
+import enGB from './en_GB'
+import enUS from './en_US'
 import es from './es'
 import fr from './fr'
 import it from './it'
 import ja from './ja'
 import ko from './ko'
 import ru from './ru'
-import zhHANS from './zh-hans'
+import vi from './vi'
+import zhHANS from './zh_CN'
 export default {
   'de': de,
   'en-gb': enGB,
@@ -18,5 +19,6 @@ export default {
   'ja': ja,
   'ko': ko,
   'ru': ru,
+  'vi': vi,
   'zh-hans': zhHANS
 }

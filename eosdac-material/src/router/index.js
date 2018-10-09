@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Quasar from 'quasar'
-console.log(Quasar.i18n.getLocale())
+// import Quasar from 'quasar'
+// console.log(Quasar.i18n.getLocale())
 
 import routes from './routes'
 

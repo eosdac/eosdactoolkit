@@ -1,3 +1,4 @@
+//test
 import Vue from 'vue'
 import Vuex from 'vuex'
 import createPersistedState from 'vuex-persistedstate'
@@ -23,7 +24,8 @@ const store = new Vuex.Store({
       'account.autolock',
       'account.autolockIntervalSec',
       'account.proposalDraft',
-      'account.firstReg'
+      'account.firstReg',
+      'account.contacts'
     ],
     //filter: mutation => (mutation.payload.save)? true : false
   }), createPersistedState({
@@ -33,14 +35,17 @@ const store = new Vuex.Store({
       'api.activeEndpointIndex',
       'api.checkIntervalMilSec',
       'api.connectionTimeoutMilSec',
-      'api.endpoints'
+      'api.endpoints',
+      'api.scatterChainId'
     ],
     //filter: mutation => (mutation.payload.save)? true : false
     //filter: mutation => console.log(mutation)
   }), createPersistedState({
     key: 'usersettings',
     paths: [
-      'usersettings.language'
+      'usersettings.language',
+      'usersettings.transactionPopup',
+      'usersettings.consoleMessage'
     ],
     //filter: mutation => (mutation.payload.save)? true : false
   })]

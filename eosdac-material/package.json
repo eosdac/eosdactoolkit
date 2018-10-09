@@ -1,10 +1,10 @@
 {
   "name": "eosdac-material",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Toolkit GUI for eosDAC",
   "productName": "eosDAC Member Client",
   "cordovaId": "org.cordova.quasar.app",
-  "author": "nanonano7 <nanonano@protonmail.com>",
+  "author": "eosDAC <hello@eosdac.io>",
   "private": true,
   "scripts": {
     "lint": "eslint --ext .js,.vue src",
@@ -14,12 +14,15 @@
     "await-timeout": "^0.2.0",
     "axios": "^0.18.0",
     "crypto-js": "^3.1.9-1",
-    "eosjs": "^15.0.3",
-    "ipfs-api": "^23.0.0",
-    "markdown-it": "^8.4.1",
+    "eosjs": "^16.0.8",
+    "marked": "^0.5.0",
+    "medium-editor": "^5.23.3",
     "request": "^2.87.0",
+    "sanitize-html": "^1.19.0",
     "scatter-js": "^2.4.0",
+    "turndown": "^5.0.1",
     "vue-i18n": "^7.3.3",
+    "vue2-medium-editor": "^1.1.5",
     "vuex-persistedstate": "^2.5.4",
     "yallist": "^3.0.2"
   },
@@ -39,7 +42,8 @@
     "eslint-plugin-promise": "^3.7.0",
     "eslint-plugin-standard": "^3.0.1",
     "eslint-plugin-vue": "^4.3.0",
-    "quasar-cli": "^0.16.0"
+    "quasar-cli": "^0.17.10",
+    "strip-ansi": "=3.0.1"
   },
   "engines": {
     "node": ">= 8.9.0",

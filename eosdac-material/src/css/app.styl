@@ -1,15 +1,81 @@
 // app global css
+.gradient-bg-primary{
+  background-image linear-gradient(to right, $primary, $p-light);
+}
+.blur-details{
+  background rgba(255, 255, 255, 0.1);
+}
+.center_background_image{
+    display: inline-block;
+    border-radius: 50%;
+    background-position: center center;
+    background-size: cover;
+}
+// font labels and forms
+a {
+  text-decoration: none;
+  color: #7c41ba;
+  transition: all .2s ease-in-out;
+}
+a:hover{
+  color: white;
+}
+
+.a2{
+  text-decoration: none;
+  color: white;
+  transition: all .2s ease-in-out;
+}
+.a2:hover{
+  color: #7c41ba;
+}
+
+.q-item-label{
+font-size:14px;
+}
+
+.q-field-label{
+font-size:14px;
+}
+
+.q-input-target{
+font-size:14px;
+}
+
+.q-option-label{
+font-size:14px!important;
+}
+
+.q-item-side{
+font-size:14px;
+}
+
+
+
+// font Headlines
+
+.regular {
+  font-weight: 400;
+}
+
 
 .drawer-margin {
   margin-left:300px;
 }
 
-.dark2 {
+.text-dark2 {
+  color: #1E2128;
+}
+
+.bg-dark2 {
   background: #1E2128;
-  color: #fff;
 }
 
 .text-dimwhite{
+  color: rgba(255,255,255,0.6);
+}
+
+.bg-dimwhite {
   color: rgba(255,255,255,0.6);
 }
 
@@ -21,7 +87,7 @@
   color: #7c41ba;
 }
 
-p-light {
+.p-light {
   color: #7c41ba;
 }
 
@@ -55,6 +121,7 @@ p-light {
         max-width: 980px;
         padding: 0px 45px 45px 45px;
         background: white;
+        font-size: 14px!important;
     }
 
     @media (max-width: 767px) {
@@ -63,33 +130,7 @@ p-light {
         }
     }
 
-.q-stepper-step {
-  background: #1E2128;
-}
 
-.q-stepper-dot {
-  background: none;
-  font-size: 24px;
-}
-.q-stepper-tab.step-done {
-  color: var(--q-color-positive);
-}
-
-.q-stepper-tab.step-done.step-colored > .q-stepper-line:after {
-background: var(--q-color-positive);
-}
-
-.q-stepper-tab.step-done.step-colored > .q-stepper-line:before {
-background: var(--q-color-positive);
-}
-
-.q-stepper-tab.step-waiting {
-color : var(--q-color-white);
-}
-
-.q-stepper-tab.step-done.step-colored > .q-stepper-dot > span > i {
-  color: var(--q-color-positive);
-}
 
 .q-tabs-position-top .q-tabs-bar {
     top: 0;
@@ -105,12 +146,12 @@ color : var(--q-color-white);
 
 }
 .q-pagination .q-btn div{
-  color:white;
+  color: white;
 }
 
 // fade transition
 .fade-enter-active {
-  transition: opacity 0.6s ease-in-out;
+  transition: opacity 0.4s ease-in-out;
 }
 
 .fade-enter-to {
@@ -121,12 +162,28 @@ color : var(--q-color-white);
   opacity: 0;
 }
 
+.markdown-body  li > p {
+  margin:0 !important;
+}
+
 /*these are the default quasar breakpoints
 use these when you need to change additional
 styles*/
 
 /*xs  576px Extra small sized window*/
 @media only screen and (max-width: 575px) {
+  .profile_image_outer_wrap{
+    transform: scale(0.5);
+    top:25px !important;
+    left:-10px
+  }
+  .profile_header_bottom_row{
+    margin-left:16px !important;
+  }
+  .profile_header_top_row{
+    margin-left: 100px !important;
+  }
+
 
 }
 
@@ -138,6 +195,8 @@ styles*/
       margin-bottom:15px !important;
       padding-top:20px !important;
   }*/
+
+
 }
 /*md  992px Medium-sized window*/
 @media only screen and (min-width: 768px) and (max-width: 991px) {
@@ -154,6 +213,7 @@ styles*/
   .shrink_balance {
     font-size: 27px;
   }
+
 }
 
 /*xl+*/

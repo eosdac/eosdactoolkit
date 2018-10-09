@@ -19,14 +19,18 @@ npm install -g quasar-cli
 ```
 git clone https://github.com/eosdac/eosdactoolkit.git
 ```
-**4. Install modules**
+**4. Install modules (on windows yarn is recommended)**
 ```
 # in project directory
 yarn install
 or:
 npm install
 ```
-**5. Run dev server with material theme**
+**5. Copy the config file you want to use (jungle or mainnet)**
+```
+cp src/statics/config.jungle.json src/statics/config.json
+```
+**6. Run dev server with material theme**
 ```
 quasar dev
 ```
