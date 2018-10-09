@@ -3,6 +3,10 @@
     "connection_to_endpoint_failed": "Connection to endpoint is unreliable or unavailable",
     "connection_to_endpoint_failed_details": "Go to Settings to setup a working API Endpoint"
   },
+  "candidate": {
+    "staked": "Staked",
+    "votes": "Votes"
+  },
   "constitution": {
     "loading_constitution": "Loading constitution",
     "switch_contrast": "Switch Contrast"
@@ -154,7 +158,7 @@
     "page_description_unregistered": "This page is for registering as a candidate for a position on the custodian board. This position comes with responsibiliies outlined in the eosDAC Constitution. Please, do not register as a candidate unless you fully understand and can meet the responsibilites of an eosDAC custodian board member. Please review section 5 of the constitution carefully before registering.",
     "pay_description": "Please fill in The amount you want to receive for being a custodian during one period. The maximum amount is {requested_pay}.",
     "profile_not_confirmed": "You submitted your profile but it is still unconfirmed on the blockchain, please wait and try again.",
-    "profile_required": "For registering as a candidate you need a profile.",
+    "profile_required": "To register as a candidate you need a confirmed profile.",
     "register": "register",
     "register_as_candidate": "Register as Candidate",
     "requested_custodian_pay_placeholder": "requested pay in EOS",
