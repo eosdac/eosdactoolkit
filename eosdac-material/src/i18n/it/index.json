@@ -39,7 +39,7 @@
     "sorry_nothing_here": "Scusa, niente qui ..."
   },
   "index": {
-    "eosdac": "eosdac.io",
+    "eosdac": "eosdac.io"
   },
   "initialize": {
     "authentication_method": "Metodo di autenticazione",
@@ -201,7 +201,7 @@
     "my_votes": "il mio voto",
     "rows_per_page": "Righe per pagina",
     "search": "ricerca",
-    "submit_my_votes": "Presentare il mio voto",
+    "submit_my_votes": "Presentare il mio voto"
   },
   "votingprogress": {
   },
