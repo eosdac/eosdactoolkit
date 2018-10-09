@@ -163,15 +163,14 @@ export default {
     registerAsCandidate() {
         let requestedpay = this.requestedpay;
         if(requestedpay == ''){
-          this.userMsg = 'please fill in a payment amount.'
+          this.userMsg = this.$t('regcandidate.msg_reqpay_error');
           return false;
         }
         requestedpay = requestedpay.toFixed(4)+ ' EOS';
 
         let stake = this.stakeamount;
-        console.log(stake)
         if(!stake && !this.stakeRequirementMet){
-          this.userMsg = 'please specify your stake amount.'
+          this.userMsg = this.$t('regcandidate.msg_stake_error');
           stake = 0;
           return false;
         }
