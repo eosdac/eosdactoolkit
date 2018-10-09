@@ -49,8 +49,8 @@
           <div class="text-dimwhite" v-if="!getMemberRoles.candidate">
 
             <div class="q-mb-lg " v-if="!stakeRequirementMet">
-              <p>{{$t('regcandidate.stake_description', {minimum_stake: stakedata.quantity}) }}</p>
-              <q-input  color="p-light" dark type="text" v-model="stakedata.quantity" :float-label="$t('regcandidate.stake_amount')" :placeholder="$t('regcandidate.amount_to_stake_placeholder')" />
+              <p>{{$t('regcandidate.stake_description', {minimum_stake: minStakeAmount}) }}</p>
+              <q-input  color="p-light" dark type="number" v-model="stakeamount" :float-label="$t('regcandidate.stake_amount')" :placeholder="$t('regcandidate.amount_to_stake_placeholder')" />
             </div>
             <!-- <q-input dark  type="hidden" v-model="registerdata.bio"  float-label="Profile JSON url" placeholder="http://example.com/myjsonprofile.json" /> -->
             <div >
@@ -102,9 +102,10 @@ export default {
       hasprofile : false,
       profile_is_irrevirsible: false,
       iscandidatedata : false,
-      stakedata: { quantity: '', memo: this.$configFile.network.custodianContract.memo},
+      stakeamount: 0,
       requested_pay_max : false,
-      requestedpay : '',
+      requestedpay : 0,
+      minStakeAmount:'',
       userMsg: ''
 
     }
@@ -125,8 +126,12 @@ export default {
     stakeRequirementMet(){
       if(this.iscandidatedata){
         let stake = this.iscandidatedata.locked_tokens.split(" ")[0];
-        let required_stake = this.stakedata.quantity.split(" ")[0];
-        if(stake >= required_stake){
+        let required_stake = this.minStakeAmount;
+
+        if(stake ==''){
+          return false;
+        }
+        if(stake >= required_stake ){
           return true;
         }
         else{
@@ -163,10 +168,19 @@ export default {
         }
         requestedpay = requestedpay.toFixed(4)+ ' EOS';
 
+        let stake = this.stakeamount;
+        console.log(stake)
+        if(!stake && !this.stakeRequirementMet){
+          this.userMsg = 'please specify your stake amount.'
+          stake = 0;
+          return false;
+        }
+        stake = stake.toFixed(4)+' '+this.$configFile.network.tokenContract.token;
+
         this.loading = true;
         this.$store.dispatch('api/registerCandidate', {
           scatter: true,
-          stakedata: this.stakedata,
+          stakedata: { quantity: stake, memo: this.$configFile.network.custodianContract.memo},
           registerdata : {requestedpay : requestedpay},
           staked_enough: this.stakeRequirementMet
         })
@@ -215,7 +229,8 @@ export default {
       let config = await this.$store.dispatch('api/getContractConfig', {contract: this.$configFile.network.custodianContract.name});
       // console.log(config)
       if(config){
-        this.stakedata.quantity = config.lockupasset;
+        this.minStakeAmount = config.lockupasset;
+        // this.stakeamount = config.lockupasset;
         this.requested_pay_max = config.requested_pay_max;
       }
       this.init_loading = false;
