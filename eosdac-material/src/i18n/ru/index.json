@@ -27,7 +27,7 @@
     "settings": "Настройки",
     "sign_the_constitution": "Подпишите Конституцию",
     "status": "Статус",
-    "support": "Support & Feedback",
+    "support": "Поддержка и обратная связь",
     "token_explorer": "Обозреватель токенов",
     "unregister_as_candidate": "Отмена регистрации в качестве кандидата",
     "wallet": "Кошелек",
@@ -40,12 +40,12 @@
     "sorry_nothing_here": "Извините, здесь ничего нет..."
   },
   "index": {
-    "already_subscribed": "Already subscribed!",
+    "already_subscribed": "Вы уже подписаны!",
     "description_p1": "eosDAC – это децентрализованное автономное сообщество, принадлежащее и управляемое владельцами токенов, которые приняли Конституцию и зарегистрировались в качестве Участников сообщества.",
     "description_p2": "После завершения тестирования этот клиент позволит вам прочитать Конституцию, зарегистрироваться в качестве Участника, представить ваши рабочие предложения, зарегистрироваться в качестве кандидата Хранителя, голосовать за Хранителей, передавать токены и многое другое. Если у вас есть какие-либо вопросы, вы можете обратиться к нам, воспользовавшись ссылками ниже.",
     "discord_description": "eosDAC является активным участником разработки инструментов для создания других DAC. В Discord мы объединяем навыки нашей команды и координируем всю деятельность.",
     "eosdac": "eosdac.io",
-    "error_occured": "Something went wrong!",
+    "error_occured": "Что-то пошло не так!",
     "join_discord": "Мы в Discord",
     "key_features": "Ключевые особенности",
     "open_discord": "Открыть Discord",
@@ -57,8 +57,8 @@
     "submit_wp": "Рабочие Предложения",
     "subscribe": "подписаться",
     "subscribe_newsletter": "Новостная рассылка",
-    "subscribed_successfully": "Subscribed successfully!",
-    "valid_input_required": "Valid input required",
+    "subscribed_successfully": "Вы успешно подписались!",
+    "valid_input_required": "Недопустимый ввод",
     "visit_eosdac": "Посетите наш сайт eosdac.io",
     "vote_cust": "Голосование за Хранителей",
     "wallet": "Кошелек",
@@ -90,7 +90,7 @@
       "korean": "Корейский",
       "russian": "Русский",
       "spanish": "Испанский",
-      "vietnamese": "Vietnamese"
+      "vietnamese": "Bьетнамский"
     }
   },
   "markdown_viewer": {
@@ -133,8 +133,8 @@
     "givenName": "имя",
     "loading_text": "Загрузка данных профиля...",
     "male": "Мужчина",
-    "maxLinksmsg": "Sorry, max {number_allowed_links} links allowed.",
-    "not_confirmed": "not confirmed",
+    "maxLinksmsg": "Извините, максимальное разрешенное количество ссылок {number_allowed_links}.",
+    "not_confirmed": "не подтверждено",
     "other": "Другое",
     "placeholder_short_bio": "Короткая биография ...",
     "profile": "Профиль",
@@ -148,11 +148,11 @@
   "regcandidate": {
     "amount_to_stake_placeholder": "сумма ставки EOSDAC",
     "loadconfig": "Загрузка конфигурации контракта",
-    "locked_tokens": "locked tokens",
+    "locked_tokens": "заблокированные токены",
     "page_description_active_custodian": "В настоящее время вы являетесь активным участником совета Хранителей eosDAC.",
     "page_description_registered": "Благодарим Вас за регистрацию в качестве кандидата в совет Хранителей eosDAC. В рамках регистрации вашей кандидатуры некоторые из ваших токенов были стэкированы.",
     "page_description_unregistered": "Эта страница предназначена для регистрации в качестве кандидата на должность в совете Хранителей. Эта позиция связана с обязанностями, изложенными в Конституции eosDAC. Пожалуйста, не регистрируйтесь в качестве кандидата, если вы полностью не понимаете и не cможете выполнять обязанности Хранителя совета eosDAC. Пожалуйста, внимательно ознакомьтесь с разделом 5 Конституции перед регистрацией.",
-    "pay_description": "Please fill in The amount you want to receive for being a custodian during one period. The maximum amount is {requested_pay}.",
+    "pay_description": "Заполните, пожалуйста, сумму, которую вы хотели бы получить, как Хранитель в течение одного периода времени. Максимальная сумма {requested_pay}.",
     "profile_not_confirmed": "Вы отправили свой профиль, но он все еще не подтвержден на блокчейне, пожалуйста, подождите и попробуйте еще раз.",
     "profile_required": "Для регистрации в качестве кандидата, вам нужно зарегистрироваться.",
     "register": "зарегистрировать",
@@ -160,7 +160,7 @@
     "requested_custodian_pay_placeholder": "запросить оплату в EOS",
     "requested_pay": "Запрашиваемая оплата",
     "stake_amount": "Сумма ставки",
-    "stake_description": "Please specify the amaont of tokens you want to stake. The minimum amount is {minimum_stake}.",
+    "stake_description": "Пожалуйста, укажите количество токенов, которое вы хотите поставить в стекинг. Минимальная сумма {minimum_stake}.",
     "unregister": "разрегистрировать",
     "unregister_as_candidate": "Отмена регистрации в качестве кандидата"
   },
@@ -243,7 +243,7 @@
   },
   "vote_custodians": {
     "candidate_list": "Список кандидатов",
-    "candidate_registration": "Candidate Registration",
+    "candidate_registration": "Регистрация Кандидатов",
     "description_main": "Совет Хранителей управляет операциями и делами DAC, включая, помимо прочего, управление активами и обязательствами. Следующие Участники DAC застэкировали свои токены на 7 дней, чтобы представить себя или кандидатов на должность в Совет Хранителей. Каждые 7 дней ваши голоса пересчитываются, чтобы выбрать того, кто будет избран в следующей совет Хранителей. Голосование важно! Пожалуйста, голосуйте каждую неделю и продолжайте участвовать в жизни DAC, чтобы выбирать лучших Кандидатов.",
     "description_side": "Вы можете проголосовать за 5 кандидатов в Хранители одновременно. Выберите кандидатов, которые, по вашему мнению, достойны представлять DAC.",
     "loading_candidates": "Загрузка списка Кандидатов",
@@ -251,8 +251,8 @@
     "rows_per_page": "Строк на страницу",
     "search": "поиск",
     "submit_my_votes": "ОТПРАВИТЬ мои голоса",
-    "voting_disabled_text": "Voting is currently disabled. You are able to test out the graphical interface but your votes won't be submitted to the chain. Voting will be enabled shortly.",
-    "voting_disabled_title": "Voting Disabled",
+    "voting_disabled_text": "Голосование в настоящее время отключено. Вы можете протестировать графический интерфейс, но ваши голоса не будут отправлены в блокчейн. Голосование будет включено в ближайшее время.",
+    "voting_disabled_title": "Голосование отключено",
     "voting_progress": "ход голосования"
   },
   "votingprogress": {
