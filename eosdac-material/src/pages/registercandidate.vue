@@ -164,6 +164,7 @@ export default {
         let requestedpay = this.requestedpay;
         if(requestedpay == ''){
           this.userMsg = this.$t('regcandidate.msg_reqpay_error');
+          requestedpay = 0;
           return false;
         }
         requestedpay = requestedpay.toFixed(4)+ ' EOS';
