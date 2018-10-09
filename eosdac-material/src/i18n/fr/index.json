@@ -27,7 +27,6 @@
     "settings": "Paramètres",
     "sign_the_constitution": "Signature de la Constitution",
     "status": "Statut",
-    "support": "Support & Feedback",
     "token_explorer": "Token explorer",
     "unregister_as_candidate": "Non enregistré en tant que Candidat",
     "wallet": "Portefeuille",
@@ -40,12 +39,10 @@
     "sorry_nothing_here": "Désolé, aucun contenu n'est disponible sur cette page..."
   },
   "index": {
-    "already_subscribed": "Already subscribed!",
     "description_p1": "eosDAC est une communauté décentralisée et autonome, ce qui signifie qu'elle appartient et est gérée par les personnes qui détiennent des tokens, qui acceptent de respecter la constitution et qui se sont inscrit en tant que membre de la communauté.",
     "description_p2": "Une fois complété, ce client membre vous permettra de lire la constitution, de vous enregistrer en tant que membre, soumettre des propositions de travail, vous inscrire pour devenir candidat, voter pour les délégués, transférer des tokens, et plus. Si vous avez des questions, cliquez sur le lien ci-dessous.",
     "discord_description": "eosDAC se présente comme étant une communauté active et engagée, un outil qui sert à développer d'autres DACs. Discord est l'endroit où nous rassemblons nos compétences et coordonnons nos activités.",
     "eosdac": "eosdac.io",
-    "error_occured": "Something went wrong!",
     "join_discord": "Rejoingé notre communauté sur Discord",
     "key_features": "Key Features",
     "open_discord": "ouvrir discord",
@@ -57,8 +54,6 @@
     "submit_wp": "Propositions de travail",
     "subscribe": "s'abonner",
     "subscribe_newsletter": "S'abonner à notre newsletter",
-    "subscribed_successfully": "Subscribed successfully!",
-    "valid_input_required": "Valid input required",
     "visit_eosdac": "Visité notre site internet eosdac.io",
     "vote_cust": "Voter Délégués",
     "wallet": "Portefeuille",
@@ -133,7 +128,6 @@
     "givenName": "prénom",
     "loading_text": "Chargement des donnés du profil...",
     "male": "Homme",
-    "maxLinksmsg": "Sorry, max {number_allowed_links} links allowed.",
     "not_confirmed": "non confirmé",
     "other": "Autre",
     "placeholder_short_bio": "Voici ma courte biographie ...",
@@ -148,11 +142,9 @@
   "regcandidate": {
     "amount_to_stake_placeholder": "quantité pour *stake* EOSDAC",
     "loadconfig": "Chargement de la configuration du contrat",
-    "locked_tokens": "locked tokens",
     "page_description_active_custodian": "Vous êtes actuellement actif en tant que membre du conseil des Délégués d'eosDAC.",
     "page_description_registered": "Merci pour vous êtes inscris en tant que candidat pour servir au conseil des Délégués d'eosDAC. Dans le cadre de votre conditature, certains de vos tokens ont été *stake*.",
     "page_description_unregistered": "Cette page sert à s'inscrire en tant que candidat au conseil des délégués. Cette position s'accompagne de responsabilités qui sont également mentionées dans la constitution d'eosDAC. S'il-vous-plaît, inscrivez-vous seulement en tant que candidat si vous avez entièrement compris les responsabilités d'un membre du conseil des délégués d'eosDAC. Vous pouvez vous référer à la partie 5 pour plus d'information.",
-    "pay_description": "Please fill in The amount you want to receive for being a custodian during one period. The maximum amount is {requested_pay}.",
     "profile_not_confirmed": "Vous avez soumis votre profil mais il n'est toujours pas confirmé sur la blockchain, attendez un cours instant s'il-vous-plaît et réessayez à nouveau.",
     "profile_required": "Afin de pouvoir vous présenter comme candidat, vous devez d'abord avoir un profil.",
     "register": "Inscription",
@@ -160,7 +152,6 @@
     "requested_custodian_pay_placeholder": "Demande de la rémunération en EOS",
     "requested_pay": "Demande de rémunération",
     "stake_amount": "Nombre de Stake ",
-    "stake_description": "Please specify the amaont of tokens you want to stake. The minimum amount is {minimum_stake}.",
     "unregister": "Non inscrit",
     "unregister_as_candidate": "Non enregistré en tant que Candidat"
   },
@@ -251,8 +242,6 @@
     "rows_per_page": "Lignes par page",
     "search": "recherche",
     "submit_my_votes": "SOUMETTRE mes votes",
-    "voting_disabled_text": "Voting is currently disabled. You are able to test out the graphical interface but your votes won't be submitted to the chain. Voting will be enabled shortly.",
-    "voting_disabled_title": "Voting Disabled",
     "voting_progress": "Progression du vote"
   },
   "votingprogress": {
