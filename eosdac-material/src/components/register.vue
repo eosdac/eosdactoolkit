@@ -155,10 +155,14 @@ export default {
       this.$store.dispatch('api/getIsCustodian');
     },
     registerMember() {
-      this.$refs.Transaction.newTransaction(this.$configFile.network.tokenContract.name,'memberreg', {
-        sender: this.getAccountName,
-        agreedterms: this.hash
-      }, false)
+      this.$refs.Transaction.newTransaction([{
+        contract: this.$configFile.network.tokenContract.name,
+        action: 'memberreg',
+        fields: {
+          sender: this.getAccountName,
+          agreedterms: this.hash
+        }
+      }], false)
     },
     async loadConstitutionFromGithub(url) {
       try {

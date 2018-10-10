@@ -261,10 +261,14 @@ export default {
     saveProfile(){
       this.deleteEmptyLinks();
       this.form.timezone = new Date().getTimezoneOffset();
-      this.$refs.Transaction.newTransaction(this.$configFile.network.custodianContract.name, 'stprofileuns', {
-        cand: this.getAccountName,
-        profile: JSON.stringify(this.form),
-      })
+      this.$refs.Transaction.newTransaction([{
+        contract: this.$configFile.network.custodianContract.name,
+        action: 'stprofileuns',
+        fields: {
+          cand: this.getAccountName,
+          profile: JSON.stringify(this.form)
+        }
+      }])
     },
 
     saveProfileUrl(){
@@ -273,10 +277,15 @@ export default {
         console.log('this is not a valid url');
         return false;
       }
-      this.$refs.Transaction.newTransaction(this.$configFile.network.custodianContract.name, 'stprofile', {
-        cand: this.getAccountName,
-        profile: this.profileUrl,
-      })
+      this.$refs.Transaction.newTransaction([{
+        contract: this.$configFile.network.custodianContract.name,
+        action: 'stprofile',
+        fields: {
+          cand: this.getAccountName,
+          profile: this.profileUrl
+        }
+      }])
+
     },
 
 

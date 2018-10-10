@@ -205,9 +205,13 @@ export default {
     },
 
     unregisterAsCandidtate(){
-        this.$refs.Transaction.newTransaction(this.$configFile.network.custodianContract.name,'withdrawcand', {
-        cand: this.getAccountName
-      }, false)
+        this.$refs.Transaction.newTransaction([{
+          contract: this.$configFile.network.custodianContract.name,
+          action: 'withdrawcand',
+          fields: {
+            cand: this.getAccountName
+          }
+        }], false)
     },
 
     async getContractConfig() {
