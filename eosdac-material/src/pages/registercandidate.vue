@@ -162,21 +162,19 @@ export default {
   },
   methods:{
     registerAsCandidate(){
-        let requestedpay = this.requestedpay;
-        if(requestedpay == ''){
+        if(this.requestedpay == '' || this.requestedpay ==undefined){
           this.userMsg = this.$t('regcandidate.msg_reqpay_error');
-          requestedpay = 0;
+          this.requestedpay = 0;
           return false;
         }
-        requestedpay = requestedpay.toFixed(4)+ ' EOS';
+        let requestedpay = this.requestedpay.toFixed(4)+ ' EOS';
 
-        let stake = this.stakeamount;
-        if(!stake && !this.stakeRequirementMet){
+        if(!this.stakeamount && !this.stakeRequirementMet){
           this.userMsg = this.$t('regcandidate.msg_stake_error');
-          stake = 0;
+          this.stakeamount = 0;
           return false;
         }
-        stake = stake.toFixed(4)+' '+this.$configFile.network.tokenContract.token;
+        let stake = this.stakeamount.toFixed(4)+' '+this.$configFile.network.tokenContract.token;
 
         let stakeTransfer = {
           contract: this.$configFile.network.tokenContract.name, 
