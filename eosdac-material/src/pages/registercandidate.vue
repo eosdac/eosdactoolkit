@@ -51,7 +51,7 @@
             <div class="q-mb-lg " v-if="!stakeRequirementMet">
               <p>{{$t('regcandidate.stake_description', {minimum_stake: minStakeAmount}) }}</p>
               <q-input  color="p-light" dark type="number" v-model="stakeamount" :float-label="$t('regcandidate.stake_amount')" :placeholder="$t('regcandidate.amount_to_stake_placeholder')" />
-              <pre>{{stakeRequirementMet}}</pre>
+              <!-- <pre>{{stakeRequirementMet}}</pre> -->
             </div>
             <!-- <q-input dark  type="hidden" v-model="registerdata.bio"  float-label="Profile JSON url" placeholder="http://example.com/myjsonprofile.json" /> -->
             <div >
