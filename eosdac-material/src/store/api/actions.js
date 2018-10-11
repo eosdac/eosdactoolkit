@@ -200,15 +200,22 @@ export async function getRegistered({
   }
 }
 
-//only use this function to check if the current logged in user is a candidate
+//This function queries the table to see if the accountname is a candidate. if payload.accountname is NOT specified
+//then rootState.account.info.account_name is used as query parameter. in this case it will also update the store.
 export async function getIsCandidate({
   state,
   commit,
   rootState
-}) {
+}, payload={}) {
   if(configFile.network.custodianContract.name ===''){
+    console.log('no custodian contract specified in config file.')
     return false;
   };
+  let account_to_query = rootState.account.info.account_name;
+  const flag_other_account = payload.accountname != undefined ? true : false;
+  if(flag_other_account){
+    account_to_query = payload.accountname;
+  }
   try {
     eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint
     let eos = Eos(eosConfig)
@@ -217,27 +224,27 @@ export async function getIsCandidate({
       scope: configFile.network.custodianContract.name,
       code: configFile.network.custodianContract.name,
       table: 'candidates',
-      lower_bound: rootState.account.info.account_name,
+      lower_bound: account_to_query,
       limit:1
     })
-    if (!candidate.rows.length) {
-      commit('account/SET_MEMBER_ROLES', {candidate: false}, {root: true} );
-      return false;
-    } else {
-      if (candidate.rows[0].candidate_name === rootState.account.info.account_name && candidate.rows[0].is_active) {
-        commit('account/SET_MEMBER_ROLES', {candidate: true}, {root: true} );
-        return candidate.rows[0];
+      if (!candidate.rows.length) {
+        if(!flag_other_account) commit('account/SET_MEMBER_ROLES', {candidate: false}, {root: true} );
+        return false;
       } else {
-        commit('account/SET_MEMBER_ROLES', {candidate: false}, {root: true} );
-        if(candidate.rows[0].candidate_name === rootState.account.info.account_name){
+        if (candidate.rows[0].candidate_name === account_to_query && candidate.rows[0].is_active) {
+          if(!flag_other_account) commit('account/SET_MEMBER_ROLES', {candidate: true}, {root: true} );
           return candidate.rows[0];
-        }
-        else{
-          return false;
-        }
+        } else {
+          if(!flag_other_account) commit('account/SET_MEMBER_ROLES', {candidate: false}, {root: true} );
+          if(candidate.rows[0].candidate_name === account_to_query){
+            return candidate.rows[0];
+          }
+          else{
+            return false;
+          }
 
+        }
       }
-    }
     commit('SET_CURRENT_CONNECTION_STATUS', true)
   } catch (error) {
     apiDown(error,commit)

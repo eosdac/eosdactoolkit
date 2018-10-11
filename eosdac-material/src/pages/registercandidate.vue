@@ -128,7 +128,7 @@ export default {
       if(this.iscandidatedata){
         let stake = this.iscandidatedata.locked_tokens.split(" ")[0];
         let required_stake = this.minStakeAmount.split(" ")[0];
-        console.log(stake, required_stake)
+        // console.log(stake, required_stake)
         if(stake ==''){
           return false;
         }
@@ -196,12 +196,12 @@ export default {
         }
         let actions=[];
         if(this.stakeRequirementMet){
-          actions = [nominateCand]
+          actions = [nominateCand];
         }
         else{
-          actions = [stakeTransfer, nominateCand]
+          actions = [stakeTransfer, nominateCand];
         }
-        this.$refs.Transaction.newTransaction(actions, false)
+        this.$refs.Transaction.newTransaction(actions, false);
     },
 
     unregisterAsCandidtate(){
