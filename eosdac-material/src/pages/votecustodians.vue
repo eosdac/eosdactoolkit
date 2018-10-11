@@ -49,7 +49,7 @@
         @clickvotefor="addToVoteList(candidate.candidate_name)"
         @clickunvotefor="deleteFromVoteList(candidate.candidate_name)"
       />
- 
+
       <div class="row bg-dark2 q-pa-md q-mb-md shadow-5 round-borders justify-between" v-if="!loading" >
         <q-search dark color="primary"  v-model="filter" :placeholder="$t('vote_custodians.search')" />
         <div class="row inline items-center" style="font-size:12px;">
@@ -105,7 +105,7 @@
           </transition-group>
         </q-list>
         <!-- <pre>{{getSelectedCand}}</pre> -->
-        
+
         <!-- <pre>{{getTokenBalance}}</pre> -->
         <!-- <pre>{{votesdidchange}}</pre> -->
       </q-card>
@@ -120,7 +120,7 @@
       <div style="overflow: auto;">
         <q-btn round color="primary" class="float-right" @click="modal_visible=false" icon="icon-ui-8" />
       </div>
-      
+
       <div class="q-mb-xl q-mt-md">
         <div class="q-pb-md q-mb-md" style="border-bottom:1px solid grey">{{$t('vote_custodians.voting_disabled_title')}}</div>
         <p class="text-dimwhite">{{$t('vote_custodians.voting_disabled_text')}}</p>
@@ -206,7 +206,7 @@ export default {
       filtered = filtered.slice((this.pagination.page-1) * this.pagination.items_per_page, this.pagination.page * this.pagination.items_per_page);
 
       // let candidates_on_page = filtered.map(c => c.candidate_name);
-      // this.addProfiles(filtered, candidates_on_page); 
+      // this.addProfiles(filtered, candidates_on_page);
 
       return filtered;
     }
@@ -221,7 +221,7 @@ export default {
   // },
 
   mounted() {
-    
+
     this.getAllCandidates();
   },
 
@@ -277,8 +277,8 @@ export default {
       temp = temp.map( (c, index) => { c.position = index+1; return c} );
 
       let candidates_names = temp.map(c => c.candidate_name);
-      await this.addProfiles(temp, candidates_names); 
-      
+      await this.addProfiles(temp, candidates_names);
+
       this.custodians = temp;
       await this.getMemberVotes();
       // await setContractState();
@@ -292,7 +292,7 @@ export default {
     //   if(state){
     //     this.contractstate = state;
     //   }
-      
+
     // },
 
     addToVoteList(name, init=false){
@@ -330,10 +330,15 @@ export default {
       }
 
       let votes = this.custodians.filter(x => x.selected == true).map(c => c.candidate_name);
-      this.$refs.Transaction.newTransaction(this.$configFile.network.custodianContract.name, 'votecust', {
-        voter: this.getAccountName,
-        newvotes: votes
-      }, false)
+      this.$refs.Transaction.newTransaction([{
+        contract: this.$configFile.network.custodianContract.name,
+        action: 'votecust',
+        fields: {
+          voter: this.getAccountName,
+          newvotes: votes
+        }
+      }], false)
+
     },
 
     //add profile data to candidate
@@ -350,7 +355,7 @@ export default {
         return false;
       }
       let p = await this.$store.dispatch('api/getProfileData2', {accountname: candlist} );
-      
+
       if(p.length){
         p.forEach(pdb =>{
           let cand = to.find(x => x.candidate_name === pdb._id);
@@ -361,7 +366,7 @@ export default {
       }
       else{
         console.log('Unable to fetch profiles')
-        
+
       }
 
     },

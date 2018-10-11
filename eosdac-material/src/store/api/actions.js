@@ -69,25 +69,36 @@ export async function getActionHistory({
 }
 
 export async function transaction({
-rootState,
-commit
-}, payload) { //scatter, contract, action, data
+  state,
+  rootState,
+  commit
+}, payload) {
   try {
-    eosConfig.httpEndpoint = rootState.api.endpoints[rootState.api.activeEndpointIndex].httpEndpoint
+    eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint
     let eos = Eos(eosConfig)
     if (payload.scatter) {
-      const network = await scatterNetwork(rootState.api)
-      const identity = await rootState.api.scatter.getIdentity({
+      const network = await scatterNetwork(state)
+      const identity = await state.scatter.getIdentity({
         accounts: [network]
       })
+      eos = state.scatter.eos(network, Eos, eosConfig)
       let authority = identity.accounts[0].authority
       let accountname = identity.accounts[0].name
-      let auth = { authorization: [ accountname+'@'+authority ] }
-      eos = rootState.api.scatter.eos(network, Eos, eosConfig)
-      const contract = await eos.contract(payload.contract)
-      const res = await contract[payload.action](payload.data, auth)
-      commit('SET_CURRENT_CONNECTION_STATUS', true)
+      let actions = []
+      for(let i = 0; i < payload.actions.length; i ++) {
+        actions.push({
+            account: payload.actions[i].contract,
+            name: payload.actions[i].action,
+            authorization: [{
+              actor: accountname,
+              permission: authority
+            }],
+            data: payload.actions[i].fields
+        })
+      }
+      let res = await eos.transaction( { actions: actions } )
       return res
+      commit('SET_CURRENT_CONNECTION_STATUS', true)
     }
   } catch (error) {
     apiDown(error,commit)
@@ -224,7 +235,7 @@ export async function getIsCandidate({
         else{
           return false;
         }
-        
+
       }
     }
     commit('SET_CURRENT_CONNECTION_STATUS', true)
@@ -369,7 +380,7 @@ export async function registerCandidate({
           }],
           data: Object.assign({from : accountname, to: configFile.network.custodianContract.name}, payload.stakedata)
       };
-      
+
       let nominateCandAction = {
           account: configFile.network.custodianContract.name,
           name: 'nominatecand',
@@ -628,7 +639,7 @@ export async function getProfileData({}, payload){
       // console.log(r.data)
       return r.data;
     }).catch(e => {
-      console.log('could not load profile file'); 
+      console.log('could not load profile file');
       return false;});
 }
 
@@ -646,6 +657,6 @@ export async function getProfileData2({}, payload){
       // console.log(r.data)
       return r.data;
     }).catch(e => {
-      console.log('could not load profile file'); 
+      console.log('could not load profile file');
       return false;});
 }

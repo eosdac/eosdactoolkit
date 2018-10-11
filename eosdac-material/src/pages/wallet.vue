@@ -601,7 +601,7 @@
       </q-list>
     </q-scroll-area>
   </q-modal>
-  <Transaction ref="Transaction" v-on:done="lookupTokenBalance()" />
+  <Transaction ref="Transaction" v-on:done="lookupTokenBalance(); clearTransaction()" />
   <LoadingSpinner :visible="loading" :text="loadingText" />
 </q-page>
 </template>
@@ -716,6 +716,13 @@ export default {
     }
   },
   methods: {
+    clearTransaction() {
+      this.tokenSelection = ''
+      this.transferAmount = 0
+      this.transferTo = ''
+      this.transferMemo = ''
+      this.transferToError = false
+    },
     addToAddressbook() {
       this.$store.commit('account/ADD_CONTACT', this.accountToAdd)
     },
@@ -744,70 +751,102 @@ export default {
       }
     },
     increaseCpu() {
-      this.$refs.Transaction.newTransaction(this.$configFile.network.systemContract.name, 'delegatebw', {
-        from: this.getAccountName,
-        receiver: this.getAccountName,
-        stake_net_quantity: (0).toFixed(this.$configFile.network.mainCurrencyContract.decimals) + ' ' + this.$configFile.network.mainCurrencyContract.token,
-        stake_cpu_quantity: this.incCpuVal.toFixed(this.$configFile.network.mainCurrencyContract.decimals) + ' ' + this.$configFile.network.mainCurrencyContract.token,
-        transfer: 0
-      })
+      this.$refs.Transaction.newTransaction([{
+        contract: this.$configFile.network.systemContract.name,
+        action: 'delegatebw',
+        fields: {
+          from: this.getAccountName,
+          receiver: this.getAccountName,
+          stake_net_quantity: (0).toFixed(this.$configFile.network.mainCurrencyContract.decimals) + ' ' + this.$configFile.network.mainCurrencyContract.token,
+          stake_cpu_quantity: this.incCpuVal.toFixed(this.$configFile.network.mainCurrencyContract.decimals) + ' ' + this.$configFile.network.mainCurrencyContract.token,
+          transfer: 0
+        }
+      }])
     },
     decreaseCpu() {
-      this.$refs.Transaction.newTransaction(this.$configFile.network.systemContract.name, 'undelegatebw', {
-        from: this.getAccountName,
-        receiver: this.getAccountName,
-        unstake_net_quantity: (0).toFixed(this.$configFile.network.mainCurrencyContract.decimals) + ' ' + this.$configFile.network.mainCurrencyContract.token,
-        unstake_cpu_quantity: this.decCpuVal.toFixed(this.$configFile.network.mainCurrencyContract.decimals) + ' ' + this.$configFile.network.mainCurrencyContract.token
-      })
+      this.$refs.Transaction.newTransaction([{
+        contract: this.$configFile.network.systemContract.name,
+        action: 'undelegatebw',
+        fields: {
+          from: this.getAccountName,
+          receiver: this.getAccountName,
+          unstake_net_quantity: (0).toFixed(this.$configFile.network.mainCurrencyContract.decimals) + ' ' + this.$configFile.network.mainCurrencyContract.token,
+          unstake_cpu_quantity: this.decCpuVal.toFixed(this.$configFile.network.mainCurrencyContract.decimals) + ' ' + this.$configFile.network.mainCurrencyContract.token
+        }
+      }])
     },
     increaseNet() {
-      this.$refs.Transaction.newTransaction(this.$configFile.network.systemContract.name, 'delegatebw', {
-        from: this.getAccountName,
-        receiver: this.getAccountName,
-        stake_net_quantity: this.incNetVal.toFixed(this.$configFile.network.mainCurrencyContract.decimals) + ' ' + this.$configFile.network.mainCurrencyContract.token,
-        stake_cpu_quantity: (0).toFixed(this.$configFile.network.mainCurrencyContract.decimals) + ' ' + this.$configFile.network.mainCurrencyContract.token,
-        transfer: 0
-      })
+      this.$refs.Transaction.newTransaction([{
+        contract: this.$configFile.network.systemContract.name,
+        action: 'delegatebw',
+        fields: {
+          from: this.getAccountName,
+          receiver: this.getAccountName,
+          stake_net_quantity: this.incNetVal.toFixed(this.$configFile.network.mainCurrencyContract.decimals) + ' ' + this.$configFile.network.mainCurrencyContract.token,
+          stake_cpu_quantity: (0).toFixed(this.$configFile.network.mainCurrencyContract.decimals) + ' ' + this.$configFile.network.mainCurrencyContract.token,
+          transfer: 0
+        }
+      }])
     },
     decreaseNet() {
-      this.$refs.Transaction.newTransaction(this.$configFile.network.systemContract.name, 'undelegatebw', {
-        from: this.getAccountName,
-        receiver: this.getAccountName,
-        unstake_net_quantity: this.decNetVal.toFixed(this.$configFile.network.mainCurrencyContract.decimals) + ' ' + this.$configFile.network.mainCurrencyContract.token,
-        unstake_cpu_quantity: (0).toFixed(this.$configFile.network.mainCurrencyContract.decimals) + ' ' + this.$configFile.network.mainCurrencyContract.token
-      })
+      this.$refs.Transaction.newTransaction([{
+        contract: this.$configFile.network.systemContract.name,
+        action: 'undelegatebw',
+        fields: {
+          from: this.getAccountName,
+          receiver: this.getAccountName,
+          unstake_net_quantity: this.decNetVal.toFixed(this.$configFile.network.mainCurrencyContract.decimals) + ' ' + this.$configFile.network.mainCurrencyContract.token,
+          unstake_cpu_quantity: (0).toFixed(this.$configFile.network.mainCurrencyContract.decimals) + ' ' + this.$configFile.network.mainCurrencyContract.token
+        }
+      }])
     },
     buyRamFunc() {
-      this.$refs.Transaction.newTransaction(this.$configFile.network.systemContract.name, 'buyram', {
-        payer: this.getAccountName,
-        receiver: this.getAccountName,
-        quant: this.buyRamVal.toFixed(this.$configFile.network.mainCurrencyContract.decimals) + ' ' + this.$configFile.network.mainCurrencyContract.token
-      })
+      this.$refs.Transaction.newTransaction([{
+        contract: this.$configFile.network.systemContract.name,
+        action: 'buyram',
+        fields: {
+          payer: this.getAccountName,
+          receiver: this.getAccountName,
+          quant: this.buyRamVal.toFixed(this.$configFile.network.mainCurrencyContract.decimals) + ' ' + this.$configFile.network.mainCurrencyContract.token
+        }
+      }])
     },
     sellRam() {
-      this.$refs.Transaction.newTransaction(this.$configFile.network.systemContract.name, 'sellram', {
-        account: this.getAccountName,
-        bytes: this.sellRamVal
-      })
+      this.$refs.Transaction.newTransaction([{
+        contract: this.$configFile.network.systemContract.name,
+        action: 'sellram',
+        fields: {
+          account: this.getAccountName,
+          bytes: this.sellRamVal
+        }
+      }])
     },
     transfer() {
       if (this.addContact) {
         this.$store.commit('account/ADD_CONTACT', this.transferTo)
       }
       if (this.tokenSelection === this.tokenName) {
-        this.$refs.Transaction.newTransaction(this.$configFile.network.tokenContract.name, 'transfer', {
-          from: this.getAccountName,
-          to: this.transferTo,
-          quantity: this.transferAmount.toFixed(this.$configFile.network.tokenContract.decimals) + ' ' + this.$configFile.network.tokenContract.token,
-          memo: this.transferMemo
-        })
+        this.$refs.Transaction.newTransaction([{
+          contract: this.$configFile.network.tokenContract.name,
+          action: 'transfer',
+          fields: {
+            from: this.getAccountName,
+            to: this.transferTo,
+            quantity: this.transferAmount.toFixed(this.$configFile.network.tokenContract.decimals) + ' ' + this.$configFile.network.tokenContract.token,
+            memo: this.transferMemo
+          }
+        }])
       } else {
-        this.$refs.Transaction.newTransaction(this.$configFile.network.mainCurrencyContract.name, 'transfer', {
-          from: this.getAccountName,
-          to: this.transferTo,
-          quantity: this.transferAmount.toFixed(this.$configFile.network.mainCurrencyContract.decimals) + ' ' + this.$configFile.network.mainCurrencyContract.token,
-          memo: this.transferMemo
-        })
+        this.$refs.Transaction.newTransaction([{
+          contract: this.$configFile.network.mainCurrencyContract.name,
+          action: 'transfer',
+          fields: {
+            from: this.getAccountName,
+            to: this.transferTo,
+            quantity: this.transferAmount.toFixed(this.$configFile.network.mainCurrencyContract.decimals) + ' ' + this.$configFile.network.mainCurrencyContract.token,
+            memo: this.transferMemo
+          }
+        }])
       }
     },
     async lookupTokenBalance() {

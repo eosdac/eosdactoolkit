@@ -104,7 +104,7 @@
         </div>
       </div>
     </div>
-    
+
   </q-collapsible>
 </div>
 
@@ -161,9 +161,13 @@ export default {
   },
   methods:{
     unRegisterMember() {
-      this.$refs.Transaction.newTransaction(this.$configFile.network.tokenContract.name, 'memberunreg', {
-        sender: this.getAccountName
-      }, false)
+      this.$refs.Transaction.newTransaction([{
+        contract: this.$configFile.network.tokenContract.name,
+        action: 'memberunreg',
+        fields: {
+          sender: this.getAccountName
+        }
+      }], false)  
     },
 
   },
