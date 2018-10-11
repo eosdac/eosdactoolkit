@@ -1,6 +1,6 @@
 import Eos from 'eosjs'
 import Timeout from 'await-timeout'
-import configFile from '../../statics/config.jungle.json'
+import configFile from '../../statics/config.json'
 import axios from 'axios'
 
 
