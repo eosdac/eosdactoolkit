@@ -206,7 +206,7 @@ export async function getIsCandidate({
   state,
   commit,
   rootState
-}, payload={}) {
+}, payload = {}) {
   if(configFile.network.custodianContract.name ===''){
     console.log('no custodian contract specified in config file.')
     return false;
@@ -251,15 +251,22 @@ export async function getIsCandidate({
     throw error
   }
 }
-//only use this function to check if the current logged in user is a custodian
+
+//This function queries the table to see if the accountname is a custodian. if payload.accountname is NOT specified
+//then rootState.account.info.account_name is used as query parameter. in this case it will also update the store.
 export async function getIsCustodian({
   state,
   commit,
   rootState
-}) {
+}, payload = {}) {
   if(configFile.network.custodianContract.name ===''){
     return false;
   };
+  let account_to_query = rootState.account.info.account_name;
+  const flag_other_account = payload.accountname != undefined ? true : false;
+  if(flag_other_account){
+    account_to_query = payload.accountname;
+  }
   try {
     eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint
     let eos = Eos(eosConfig)
@@ -268,18 +275,18 @@ export async function getIsCustodian({
       scope: configFile.network.custodianContract.name,
       code: configFile.network.custodianContract.name,
       table: 'custodians',
-      lower_bound: rootState.account.info.account_name,
+      lower_bound: account_to_query,
       limit:1
     })
     if (!custodian.rows.length) {
-      commit('account/SET_MEMBER_ROLES', {custodian: false}, {root: true} );
+      if(!flag_other_account) commit('account/SET_MEMBER_ROLES', {custodian: false}, {root: true} );
       return false;
     } else {
-      if (custodian.rows[0].cust_name === rootState.account.info.account_name) {
-        commit('account/SET_MEMBER_ROLES', {custodian: true}, {root: true} );
+      if (custodian.rows[0].cust_name === account_to_query) {
+        if(!flag_other_account) commit('account/SET_MEMBER_ROLES', {custodian: true}, {root: true} );
         return custodian.rows[0];
       } else {
-        commit('account/SET_MEMBER_ROLES', {custodian: false}, {root: true} );
+        if(!flag_other_account) commit('account/SET_MEMBER_ROLES', {custodian: false}, {root: true} );
         return false;
       }
     }
