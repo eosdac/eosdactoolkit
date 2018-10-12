@@ -3,6 +3,10 @@
     "connection_to_endpoint_failed": "与端点的连接不可靠或不可用",
     "connection_to_endpoint_failed_details": "转到“设置”来设置有效的 API 端点"
   },
+  "candidate": {
+    "staked": "押注",
+    "votes": "票数"
+  },
   "constitution": {
     "loading_constitution": "加载章程",
     "switch_contrast": "切换背景色"
@@ -149,6 +153,8 @@
     "amount_to_stake_placeholder": "用于权益押注的 EOSDAC 数量",
     "loadconfig": "正在载入合约配置",
     "locked_tokens": "被锁的代币",
+    "msg_stake_error": "请指定您想要用于权益押注的数量。",
+    "msg_reqpay_error": "请填写希望获得的酬劳。",
     "page_description_active_custodian": "您目前是一名在任的 eosDAC 托管人董事会成员。",
     "page_description_registered": "感谢您注册成为 eosDAC 托管人董事会的成员候选人。作为候选人注册的一部分，您的部分代币已被用于权益押注。",
     "page_description_unregistered": "这一页面是用于注册成为候选人来争取在托管人董事会任职。该职位需要承担 eosDAC 章程中列举的种种责任。请在完全理解并有能力承担作为一名 eosDAC 托管人董事会成员所需承担职责的前提下注册成为候选人。请在注册前仔细阅读章程第 5 节的内容。",
