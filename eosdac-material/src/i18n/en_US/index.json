@@ -228,6 +228,7 @@
     "register_as_member": "Register as Member",
     "register_now": "Register Now",
     "settings": "Settings",
+    "transaction_popup_desc" : "Enable/disable transaction popups",
     "transaction_popup_label": "Transaction Popups",
     "unregister_membership": "Unregister Membership",
     "user_preference": "User Settings"
