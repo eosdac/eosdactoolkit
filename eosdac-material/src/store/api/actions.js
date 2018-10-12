@@ -344,8 +344,6 @@ export async function getMemberVotes({
       table: 'votes',
       lower_bound: param.member,
       limit:1
-      // key_type: 'i64',
-      // index_position:1
     })
     if (!votes.rows.length) {
       return false
@@ -365,63 +363,6 @@ export async function getMemberVotes({
     throw error
   }
 }
-
-
-// export async function registerCandidate({
-//   state,
-//   rootState,
-//   commit
-// }, payload) {
-//   try {
-//     eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint
-//     eosConfig.keyProvider = rootState.account.pkeysArray
-//     let eos = Eos(eosConfig);
-//     if (payload.scatter) {
-//       const network = await scatterNetwork(state)
-//       const identity = await state.scatter.getIdentity({
-//         accounts: [network]
-//       })
-//       eos = state.scatter.eos(network, Eos, eosConfig);
-//       let authority = identity.accounts[0].authority;
-//       let accountname = identity.accounts[0].name;
-
-//       let transferAction = {
-//           account: configFile.network.tokenContract.name,
-//           name: 'transfer',
-//           authorization: [{
-//             actor: accountname,
-//             permission: authority
-//           }],
-//           data: Object.assign({from : accountname, to: configFile.network.custodianContract.name}, payload.stakedata)
-//       };
-
-//       let nominateCandAction = {
-//           account: configFile.network.custodianContract.name,
-//           name: 'nominatecand',
-//           authorization: [{
-//             actor: accountname,
-//             permission: authority
-//           }],
-//           data: Object.assign({cand : accountname}, payload.registerdata)
-//       };
-//       let alreadyStaked = payload.staked_enough;
-//       let actions = [];
-//       if(alreadyStaked){
-//         actions = [nominateCandAction];
-//       }
-//       else{
-//         actions = [transferAction, nominateCandAction];
-//       }
-
-//       let res = await eos.transaction( { actions: actions } );
-//       return res
-//       commit('SET_CURRENT_CONNECTION_STATUS', true)
-//     }
-//   } catch (error) {
-//     apiDown(error,commit)
-//     throw error
-//   }
-// }
 
 export async function getMemberTerms({
   state,
