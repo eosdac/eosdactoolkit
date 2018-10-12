@@ -200,15 +200,22 @@ export async function getRegistered({
   }
 }
 
-//only use this function to check if the current logged in user is a candidate
+//This function queries the table to see if the accountname is a candidate. if payload.accountname is NOT specified
+//then rootState.account.info.account_name is used as query parameter. in this case it will also update the store.
 export async function getIsCandidate({
   state,
   commit,
   rootState
-}) {
+}, payload = {}) {
   if(configFile.network.custodianContract.name ===''){
+    console.log('no custodian contract specified in config file.')
     return false;
   };
+  let account_to_query = rootState.account.info.account_name;
+  const flag_other_account = payload.accountname != undefined ? true : false;
+  if(flag_other_account){
+    account_to_query = payload.accountname;
+  }
   try {
     eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint
     let eos = Eos(eosConfig)
@@ -217,42 +224,49 @@ export async function getIsCandidate({
       scope: configFile.network.custodianContract.name,
       code: configFile.network.custodianContract.name,
       table: 'candidates',
-      lower_bound: rootState.account.info.account_name,
+      lower_bound: account_to_query,
       limit:1
     })
-    if (!candidate.rows.length) {
-      commit('account/SET_MEMBER_ROLES', {candidate: false}, {root: true} );
-      return false;
-    } else {
-      if (candidate.rows[0].candidate_name === rootState.account.info.account_name && candidate.rows[0].is_active) {
-        commit('account/SET_MEMBER_ROLES', {candidate: true}, {root: true} );
-        return candidate.rows[0];
+      if (!candidate.rows.length) {
+        if(!flag_other_account) commit('account/SET_MEMBER_ROLES', {candidate: false}, {root: true} );
+        return false;
       } else {
-        commit('account/SET_MEMBER_ROLES', {candidate: false}, {root: true} );
-        if(candidate.rows[0].candidate_name === rootState.account.info.account_name){
+        if (candidate.rows[0].candidate_name === account_to_query && candidate.rows[0].is_active) {
+          if(!flag_other_account) commit('account/SET_MEMBER_ROLES', {candidate: true}, {root: true} );
           return candidate.rows[0];
-        }
-        else{
-          return false;
-        }
+        } else {
+          if(!flag_other_account) commit('account/SET_MEMBER_ROLES', {candidate: false}, {root: true} );
+          if(candidate.rows[0].candidate_name === account_to_query){
+            return candidate.rows[0];
+          }
+          else{
+            return false;
+          }
 
+        }
       }
-    }
     commit('SET_CURRENT_CONNECTION_STATUS', true)
   } catch (error) {
     apiDown(error,commit)
     throw error
   }
 }
-//only use this function to check if the current logged in user is a custodian
+
+//This function queries the table to see if the accountname is a custodian. if payload.accountname is NOT specified
+//then rootState.account.info.account_name is used as query parameter. in this case it will also update the store.
 export async function getIsCustodian({
   state,
   commit,
   rootState
-}) {
+}, payload = {}) {
   if(configFile.network.custodianContract.name ===''){
     return false;
   };
+  let account_to_query = rootState.account.info.account_name;
+  const flag_other_account = payload.accountname != undefined ? true : false;
+  if(flag_other_account){
+    account_to_query = payload.accountname;
+  }
   try {
     eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint
     let eos = Eos(eosConfig)
@@ -261,18 +275,18 @@ export async function getIsCustodian({
       scope: configFile.network.custodianContract.name,
       code: configFile.network.custodianContract.name,
       table: 'custodians',
-      lower_bound: rootState.account.info.account_name,
+      lower_bound: account_to_query,
       limit:1
     })
     if (!custodian.rows.length) {
-      commit('account/SET_MEMBER_ROLES', {custodian: false}, {root: true} );
+      if(!flag_other_account) commit('account/SET_MEMBER_ROLES', {custodian: false}, {root: true} );
       return false;
     } else {
-      if (custodian.rows[0].cust_name === rootState.account.info.account_name) {
-        commit('account/SET_MEMBER_ROLES', {custodian: true}, {root: true} );
+      if (custodian.rows[0].cust_name === account_to_query) {
+        if(!flag_other_account) commit('account/SET_MEMBER_ROLES', {custodian: true}, {root: true} );
         return custodian.rows[0];
       } else {
-        commit('account/SET_MEMBER_ROLES', {custodian: false}, {root: true} );
+        if(!flag_other_account) commit('account/SET_MEMBER_ROLES', {custodian: false}, {root: true} );
         return false;
       }
     }
@@ -330,8 +344,6 @@ export async function getMemberVotes({
       table: 'votes',
       lower_bound: param.member,
       limit:1
-      // key_type: 'i64',
-      // index_position:1
     })
     if (!votes.rows.length) {
       return false
@@ -346,63 +358,6 @@ export async function getMemberVotes({
 
     }
     commit('SET_CURRENT_CONNECTION_STATUS', true)
-  } catch (error) {
-    apiDown(error,commit)
-    throw error
-  }
-}
-
-
-export async function registerCandidate({
-  state,
-  rootState,
-  commit
-}, payload) {
-  try {
-    eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint
-    eosConfig.keyProvider = rootState.account.pkeysArray
-    let eos = Eos(eosConfig);
-    if (payload.scatter) {
-      const network = await scatterNetwork(state)
-      const identity = await state.scatter.getIdentity({
-        accounts: [network]
-      })
-      eos = state.scatter.eos(network, Eos, eosConfig);
-      let authority = identity.accounts[0].authority;
-      let accountname = identity.accounts[0].name;
-
-      let transferAction = {
-          account: configFile.network.tokenContract.name,
-          name: 'transfer',
-          authorization: [{
-            actor: accountname,
-            permission: authority
-          }],
-          data: Object.assign({from : accountname, to: configFile.network.custodianContract.name}, payload.stakedata)
-      };
-
-      let nominateCandAction = {
-          account: configFile.network.custodianContract.name,
-          name: 'nominatecand',
-          authorization: [{
-            actor: accountname,
-            permission: authority
-          }],
-          data: Object.assign({cand : accountname}, payload.registerdata)
-      };
-      let alreadyStaked = payload.staked_enough;
-      let actions = [];
-      if(alreadyStaked){
-        actions = [nominateCandAction];
-      }
-      else{
-        actions = [transferAction, nominateCandAction];
-      }
-
-      let res = await eos.transaction( { actions: actions } );
-      return res
-      commit('SET_CURRENT_CONNECTION_STATUS', true)
-    }
   } catch (error) {
     apiDown(error,commit)
     throw error

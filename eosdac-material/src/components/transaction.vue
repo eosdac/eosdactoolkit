@@ -114,7 +114,12 @@ export default {
         console.log(transactionActions[i].ricardian)
       }
       this.actions = transactionActions
-      this.loading = false
+      if(!this.getTransactionPopup){
+        this.transact();
+      }else{
+        this.loading = false
+      }
+      
     },
     replaceVars(ric, fields, action, contract) {
       let findVars = ric.match(/\{{.*?\}}/g)

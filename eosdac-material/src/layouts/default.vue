@@ -199,6 +199,8 @@ import Notifier from 'components/notifier'
 import MenuDropdown from 'components/menu-dropdown'
 import MultiModal from 'components/multi-modal'
 export default {
+
+
   name: 'LayoutDefault',
   components: {
     Initialize,

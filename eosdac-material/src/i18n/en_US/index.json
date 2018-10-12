@@ -1,4 +1,9 @@
 {
+  "app":{
+    "title": "eosDac Member Client",
+    "meta_description": "this is the description of our memberclient that get parsed in to the corresponding meta tags",
+    "meta_keywords": "autonomous, decentralized, community, voting "
+  },
   "api": {
     "connection_to_endpoint_failed": "Connection to endpoint is unreliable or unavailable",
     "connection_to_endpoint_failed_details": "Go to Settings to setup a working API Endpoint"

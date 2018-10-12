@@ -51,6 +51,7 @@
             <div class="q-mb-lg " v-if="!stakeRequirementMet">
               <p>{{$t('regcandidate.stake_description', {minimum_stake: minStakeAmount}) }}</p>
               <q-input  color="p-light" dark type="number" v-model="stakeamount" :float-label="$t('regcandidate.stake_amount')" :placeholder="$t('regcandidate.amount_to_stake_placeholder')" />
+              <!-- <pre>{{stakeRequirementMet}}</pre> -->
             </div>
             <!-- <q-input dark  type="hidden" v-model="registerdata.bio"  float-label="Profile JSON url" placeholder="http://example.com/myjsonprofile.json" /> -->
             <div >
@@ -126,8 +127,8 @@ export default {
     stakeRequirementMet(){
       if(this.iscandidatedata){
         let stake = this.iscandidatedata.locked_tokens.split(" ")[0];
-        let required_stake = this.minStakeAmount;
-
+        let required_stake = this.minStakeAmount.split(" ")[0];
+        // console.log(stake, required_stake)
         if(stake ==''){
           return false;
         }
@@ -160,62 +161,47 @@ export default {
     }
   },
   methods:{
-    registerAsCandidate() {
-        let requestedpay = this.requestedpay;
-        if(requestedpay == ''){
+    registerAsCandidate(){
+        if(this.requestedpay == '' || this.requestedpay ==undefined){
           this.userMsg = this.$t('regcandidate.msg_reqpay_error');
-          requestedpay = 0;
+          this.requestedpay = 0;
           return false;
         }
-        requestedpay = requestedpay.toFixed(4)+ ' EOS';
+        let requestedpay = this.requestedpay.toFixed(4)+ ' EOS';
 
-        let stake = this.stakeamount;
-        if(!stake && !this.stakeRequirementMet){
+        if(!this.stakeamount && !this.stakeRequirementMet){
           this.userMsg = this.$t('regcandidate.msg_stake_error');
-          stake = 0;
+          this.stakeamount = 0;
           return false;
         }
-        stake = stake.toFixed(4)+' '+this.$configFile.network.tokenContract.token;
+        let stake = this.stakeamount.toFixed(4)+' '+this.$configFile.network.tokenContract.token;
 
-        this.loading = true;
-        this.$store.dispatch('api/registerCandidate', {
-          scatter: true,
-          stakedata: { quantity: stake, memo: this.$configFile.network.custodianContract.memo},
-          registerdata : {requestedpay : requestedpay},
-          staked_enough: this.stakeRequirementMet
-        })
-        .then(res => {
-          this.$store.commit('api/NOTIFY', {
-            icon: 'icon-ui-6',
-            color: 'positive',
-            message: 'transaction.transaction_successful',
-            details: res.transaction_id,
-            linkText: 'transaction.view_in_explorer',
-            linkUrl: this.$configFile.api.tokenExplorerUrl + '/transaction/' + res.transaction_id
-          })
-          this.loading = false;
-          this.checkMemberRoles();
-
-        }).catch(err => {
-
-          if (err.type) {
-            this.$store.commit('api/NOTIFY', {
-              icon: 'error',
-              color: 'red',
-              message: 'Error: ' + err.type,
-              detail: ''
-            })
-          }
-          else {
-            this.$store.commit('api/NOTIFY', {
-              icon: 'error',
-              color: 'red',
-              message: 'Error: ' + JSON.parse(err).error.details[0].message || JSON.parse(err),
-              detail: ''
-            })
-          }
-          this.loading = false;
-        });
+        let stakeTransfer = {
+          contract: this.$configFile.network.tokenContract.name, 
+          action: 'transfer', 
+          fields: {
+            from : this.getAccountName, 
+            to: this.$configFile.network.custodianContract.name,
+            quantity: stake,
+            memo: this.$configFile.network.custodianContract.memo
+            }
+        }
+        let nominateCand = {
+          contract: this.$configFile.network.custodianContract.name, 
+          action: 'nominatecand', 
+          fields: {
+            cand : this.getAccountName, 
+            requestedpay:requestedpay,
+            }
+        }
+        let actions=[];
+        if(this.stakeRequirementMet){
+          actions = [nominateCand];
+        }
+        else{
+          actions = [stakeTransfer, nominateCand];
+        }
+        this.$refs.Transaction.newTransaction(actions, false);
     },
 
     unregisterAsCandidtate(){
