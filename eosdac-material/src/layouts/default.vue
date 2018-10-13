@@ -146,7 +146,7 @@
       </q-item>
 
     
-      <q-collapsible  dark icon="explore" header-class=""  label="Test Test">
+      <q-collapsible  dark icon="explore" @hide="submenuheader_open = false" @show="submenuheader_open = true" :header-class="{submenuheader: submenuheader_open}"  label="Test Test">
         <div class="bg-dark">
           <q-item class="q-pl-lg" link to="/settings">
             <q-item-side icon="icon-topmenu-6" />
@@ -236,7 +236,8 @@ export default {
       mainCurrencyName: this.$configFile.network.mainCurrencyContract.token,
       lastQuery: 0,
       memberStatus: 0,
-      showBanner: true
+      showBanner: true,
+      submenuheader_open: false
     }
   },
   computed: {
@@ -326,6 +327,9 @@ export default {
 </script>
 
 <style>
+.submenuheader{
+  background: #383A3F;
+}
 .q-collapsible-sub-item{
   padding:0;
   width:100%
