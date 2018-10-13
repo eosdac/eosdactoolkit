@@ -148,16 +148,14 @@
     
       <q-collapsible  dark icon="explore" header-class=""  label="Test Test">
         <div class="bg-dark ">
-  
-          <q-item link to="/settings">
+          <q-item class="q-pl-lg" link to="/settings">
             <q-item-side icon="icon-topmenu-6" />
             <q-item-main :label="$t('default.settings')" sublabel="" />
           </q-item>
-          <q-item to="/settings">
+          <q-item class="q-pl-lg" to="/settings">
             <q-item-side icon="icon-topmenu-6" />
             <q-item-main :label="$t('default.settings')" sublabel="" />
           </q-item>
-
         </div>
       </q-collapsible>
  
