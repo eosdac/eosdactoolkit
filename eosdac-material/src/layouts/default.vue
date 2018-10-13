@@ -158,12 +158,6 @@
           </q-item>
         </div>
       </q-collapsible>
- 
-  
-
-  
-
-
 
     </q-list>
     <q-list v-else no-border link inset-delimiter dark>
@@ -283,9 +277,15 @@ export default {
           this.$store.dispatch('api/updateAccountInfo')
         }
       }
+    },
+    //wip
+    async getActiveCustodians(){
+      let c = await this.$store.dispatch('api/getCustodians');
+      // console.log(c)
     }
   },
   mounted() {
+    this.getActiveCustodians();
     if (!this.getImported) {
       this.$refs.Multi.init('register')
     } else {

@@ -297,7 +297,7 @@ export async function getIsCustodian({
   }
 }
 
-export async function getCustodians({
+export async function getCandidates({
   state,
   commit,
 
@@ -614,4 +614,34 @@ export async function getProfileData2({}, payload){
     }).catch(e => {
       console.log('could not load profile file');
       return false;});
+}
+
+export async function getCustodians({
+  state,
+  commit,
+
+}) {
+  console.log('getting all custodians from chain.')
+  try {
+    // console.log(param)
+    eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint
+    let eos = Eos(eosConfig)
+    const custodians = await eos.getTableRows({
+      json: true,
+      scope: configFile.network.custodianContract.name,
+      code: configFile.network.custodianContract.name,
+      table: 'custodians',
+      limit:12
+    });
+    if (!custodians.rows.length) {
+      return false
+    } else {
+      commit('SET_ACTIVE_CUSTODIANS', custodians.rows)
+      return custodians.rows
+    }
+    commit('SET_CURRENT_CONNECTION_STATUS', true)
+  } catch (error) {
+    apiDown(error,commit)
+    throw error
+  }
 }
