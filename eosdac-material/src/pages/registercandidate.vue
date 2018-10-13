@@ -56,7 +56,7 @@
             <!-- <q-input dark  type="hidden" v-model="registerdata.bio"  float-label="Profile JSON url" placeholder="http://example.com/myjsonprofile.json" /> -->
             <div >
               <p >{{$t('regcandidate.pay_description', {requested_pay: requested_pay_max}) }}</p>
-              <q-input class="q-my-md" color="p-light" dark type="number" :max="requested_pay_max.split(' ')[0]" v-model="requestedpay" :float-label="$t('regcandidate.requested_pay')" :placeholder="$t('regcandidate.requested_custodian_pay_placeholder')" />
+              <q-input v-if ="requested_pay_max" class="q-my-md" color="p-light" dark type="number" :max="requested_pay_max.split(' ')[0]" v-model="requestedpay" :float-label="$t('regcandidate.requested_pay')" :placeholder="$t('regcandidate.requested_custodian_pay_placeholder')" />
               <q-btn size="md"  class="animate-pop" :loading="loading" color="primary" @blur.native="userMsg=''" @click="registerAsCandidate" :label="$t('regcandidate.register')">
                 <q-spinner slot="loading" />
               </q-btn>

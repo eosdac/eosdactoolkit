@@ -138,11 +138,32 @@
         <q-item-side icon="icon-menu-8" />
         <q-item-main :label="$t('default.worker_proposals')" sublabel="" />
       </q-item> -->
+
       <q-item @click.native="openURL($configFile.external.discordUrl)">
         <q-item-side icon="icon-menu-11" />
         <q-item-main :label="$t('default.support')" sublabel="" />
         <q-item-side right icon="icon-transfer-out" />
       </q-item>
+
+    
+      <q-collapsible  dark icon="explore" header-class=""  label="Test Test">
+        <div class="bg-dark ">
+  
+          <q-item link to="/settings">
+            <q-item-side icon="icon-topmenu-6" />
+            <q-item-main :label="$t('default.settings')" sublabel="" />
+          </q-item>
+          <q-item to="/settings">
+            <q-item-side icon="icon-topmenu-6" />
+            <q-item-main :label="$t('default.settings')" sublabel="" />
+          </q-item>
+
+        </div>
+      </q-collapsible>
+ 
+  
+
+  
 
 
 
@@ -307,4 +328,8 @@ export default {
 </script>
 
 <style>
+.q-collapsible-sub-item{
+  padding:0;
+  width:100%
+}
 </style>
