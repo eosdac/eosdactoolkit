@@ -115,8 +115,6 @@
     "user_name": "Nome utente",
     "website": "Sito web"
   },
-  "regcandidate": {
-  },
   "register": {
     "already_registered": "Sei già registrato come membro eosDAC.",
     "checking_status": "Verifica dello stato membro ...",
@@ -202,8 +200,6 @@
     "rows_per_page": "Righe per pagina",
     "search": "ricerca",
     "submit_my_votes": "Presentare il mio voto"
-  },
-  "votingprogress": {
   },
   "wallet": {
     "CPU": "processore",
