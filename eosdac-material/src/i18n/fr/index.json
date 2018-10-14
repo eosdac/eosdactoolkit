@@ -3,6 +3,15 @@
     "connection_to_endpoint_failed": "La conncection au point final n'est pas fiable ou indisponible.",
     "connection_to_endpoint_failed_details": "Aller dans la section Paramètres pour choisir un point final API différent."
   },
+  "app": {
+    "meta_description": "Voici la description de notre client membre qui est analysé dans les tags correspondants",
+    "meta_keywords": "autonome, décentralisée, communauté, vote",
+    "title": "eosDAC Membre Client"
+  },
+  "candidate": {
+    "staked": "Investi",
+    "votes": "Vote"
+  },
   "constitution": {
     "loading_constitution": "Chargement de la constitution",
     "switch_contrast": "Changer de Contraste"
@@ -27,6 +36,7 @@
     "settings": "Paramètres",
     "sign_the_constitution": "Signature de la Constitution",
     "status": "Statut",
+    "support": "Soutien & Retours",
     "token_explorer": "Token explorer",
     "unregister_as_candidate": "Non enregistré en tant que Candidat",
     "wallet": "Portefeuille",
@@ -39,10 +49,12 @@
     "sorry_nothing_here": "Désolé, aucun contenu n'est disponible sur cette page..."
   },
   "index": {
+    "already_subscribed": "Déjà abonné !",
     "description_p1": "eosDAC est une communauté décentralisée et autonome, ce qui signifie qu'elle appartient et est gérée par les personnes qui détiennent des tokens, qui acceptent de respecter la constitution et qui se sont inscrit en tant que membre de la communauté.",
     "description_p2": "Une fois complété, ce client membre vous permettra de lire la constitution, de vous enregistrer en tant que membre, soumettre des propositions de travail, vous inscrire pour devenir candidat, voter pour les délégués, transférer des tokens, et plus. Si vous avez des questions, cliquez sur le lien ci-dessous.",
     "discord_description": "eosDAC se présente comme étant une communauté active et engagée, un outil qui sert à développer d'autres DACs. Discord est l'endroit où nous rassemblons nos compétences et coordonnons nos activités.",
     "eosdac": "eosdac.io",
+    "error_occured": "Quelque chose ne n'est pas bien passé !",
     "join_discord": "Rejoingé notre communauté sur Discord",
     "key_features": "Key Features",
     "open_discord": "ouvrir discord",
@@ -54,6 +66,8 @@
     "submit_wp": "Propositions de travail",
     "subscribe": "s'abonner",
     "subscribe_newsletter": "S'abonner à notre newsletter",
+    "subscribed_successfully": "Abonné avec succès !",
+    "valid_input_required": "Entrée valide requise",
     "visit_eosdac": "Visité notre site internet eosdac.io",
     "vote_cust": "Voter Délégués",
     "wallet": "Portefeuille",
@@ -128,6 +142,7 @@
     "givenName": "prénom",
     "loading_text": "Chargement des donnés du profil...",
     "male": "Homme",
+    "maxLinksmsg": "Désolé, le nombre maximum de liens authorisés est de {number_allowed_links}.",
     "not_confirmed": "non confirmé",
     "other": "Autre",
     "placeholder_short_bio": "Voici ma courte biographie ...",
@@ -142,9 +157,13 @@
   "regcandidate": {
     "amount_to_stake_placeholder": "quantité pour *stake* EOSDAC",
     "loadconfig": "Chargement de la configuration du contrat",
+    "locked_tokens": "tokens bloqués",
+    "msg_reqpay_error": "Veuillez remplir le montant du paiement.",
+    "msg_stake_error": "Veuillez spécifier le montant de votre mise.",
     "page_description_active_custodian": "Vous êtes actuellement actif en tant que membre du conseil des Délégués d'eosDAC.",
     "page_description_registered": "Merci pour vous êtes inscris en tant que candidat pour servir au conseil des Délégués d'eosDAC. Dans le cadre de votre conditature, certains de vos tokens ont été *stake*.",
     "page_description_unregistered": "Cette page sert à s'inscrire en tant que candidat au conseil des délégués. Cette position s'accompagne de responsabilités qui sont également mentionées dans la constitution d'eosDAC. S'il-vous-plaît, inscrivez-vous seulement en tant que candidat si vous avez entièrement compris les responsabilités d'un membre du conseil des délégués d'eosDAC. Vous pouvez vous référer à la partie 5 pour plus d'information.",
+    "pay_description": "veuillez indiquer le montant que vous souhaitez recevoir en tant que Délégué pendant une période. Le montant maximum est {requested_pay}.",
     "profile_not_confirmed": "Vous avez soumis votre profil mais il n'est toujours pas confirmé sur la blockchain, attendez un cours instant s'il-vous-plaît et réessayez à nouveau.",
     "profile_required": "Afin de pouvoir vous présenter comme candidat, vous devez d'abord avoir un profil.",
     "register": "Inscription",
@@ -152,6 +171,7 @@
     "requested_custodian_pay_placeholder": "Demande de la rémunération en EOS",
     "requested_pay": "Demande de rémunération",
     "stake_amount": "Nombre de Stake ",
+    "stake_description": "Veuillez indiquer le nombre de token que vous souhaitez placer. Le nombre minimum est de {minimum_stake}.",
     "unregister": "Non inscrit",
     "unregister_as_candidate": "Non enregistré en tant que Candidat"
   },
@@ -242,6 +262,8 @@
     "rows_per_page": "Lignes par page",
     "search": "recherche",
     "submit_my_votes": "SOUMETTRE mes votes",
+    "voting_disabled_text": "Le vote est actuellement désactivé. Vous pouvez tester l'interface graphique, mais vos votes ne seront pas soumis sur la chaïne. Le vote sera activé sous peu",
+    "voting_disabled_title": "Vote désactivé",
     "voting_progress": "Progression du vote"
   },
   "votingprogress": {
@@ -294,7 +316,7 @@
     "toggle_adjust_ram_allocation": "Changer l'ajustement de l'allocation RAM",
     "token_selection_and_quantity": "Sélection du token et quantité",
     "total": "total",
-    "total_cost": "Total Cost",
+    "total_cost": "Coût total",
     "total_eos_balance": "Solde total eos",
     "total_refund": "Total Remboursé",
     "total_staked": "Total Attribué",
