@@ -1,12 +1,12 @@
 {
-  "app":{
-    "title": "eosDac Member Client",
-    "meta_description": "this is the description of our memberclient that get parsed in to the corresponding meta tags",
-    "meta_keywords": "autonomous, decentralized, community, voting "
-  },
   "api": {
     "connection_to_endpoint_failed": "Connection to endpoint is unreliable or unavailable",
     "connection_to_endpoint_failed_details": "Go to Settings to setup a working API Endpoint"
+  },
+  "app": {
+    "meta_description": "this is the description of our memberclient that get parsed in to the corresponding meta tags",
+    "meta_keywords": "autonomous, decentralized, community, voting",
+    "title": "eosDac Member Client"
   },
   "candidate": {
     "staked": "Staked",
@@ -158,8 +158,8 @@
     "amount_to_stake_placeholder": "amount to stake EOSDAC",
     "loadconfig": "Loading contract configuration",
     "locked_tokens": "locked tokens",
-    "msg_stake_error": "please specify your stake amount.",
     "msg_reqpay_error": "please fill in a payment amount.",
+    "msg_stake_error": "please specify your stake amount.",
     "page_description_active_custodian": "You are currently active as an eosDAC custodian board member.",
     "page_description_registered": "Thank you for registering as a candidate to serve on the eosDAC custodian board. As part of your candidacy registration, some of your tokens have been staked.",
     "page_description_unregistered": "This page is for registering as a candidate for a position on the custodian board. This position comes with responsibiliies outlined in the eosDAC Constitution. Please, do not register as a candidate unless you fully understand and can meet the responsibilites of an eosDAC custodian board member. Please review section 5 of the constitution carefully before registering.",

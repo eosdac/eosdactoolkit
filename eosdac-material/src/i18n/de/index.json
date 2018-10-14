@@ -132,8 +132,6 @@
     "user_name": "Nutzername",
     "website": "Webseite"
   },
-  "regcandidate": {
-  },
   "register": {
     "already_registered": "Sie sind bereits als eosDAC-Mitglied registriert.",
     "checking_status": "Mitgliedsstatus wird überprüft ...",
