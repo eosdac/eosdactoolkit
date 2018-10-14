@@ -146,15 +146,11 @@
       </q-item>
 
     
-      <q-collapsible  dark icon="explore" @hide="submenuheader_open = false" @show="submenuheader_open = true" :header-class="{submenuheader: submenuheader_open}"  label="Test Test">
+      <q-collapsible  dark icon="explore" @hide="submenuheader_open = false" @show="submenuheader_open = true" :header-class="{submenuheader: submenuheader_open}"  label="Custodian Tools">
         <div class="bg-dark">
-          <q-item class="q-pl-lg" link to="/settings">
+          <q-item class="q-pl-lg" link to="/proposals">
             <q-item-side icon="icon-topmenu-6" />
-            <q-item-main label="settings test" sublabel="" />
-          </q-item>
-          <q-item class="q-pl-lg" to="/managecandidateship">
-            <q-item-side icon="icon-topmenu-6" />
-            <q-item-main label="regcand test" sublabel="" />
+            <q-item-main label="Proposals" sublabel="" />
           </q-item>
         </div>
       </q-collapsible>

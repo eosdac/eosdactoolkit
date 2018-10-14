@@ -11,9 +11,9 @@ const Guards = {
   custodianCheck (to, from, next) {
     let roles = store.getters['account/getMemberRoles'];
     if (!roles.custodian) {
-      next({ path: '' })
+      next({path: '/notallowed'})
     } else {
-      next()
+      next();
     }
   }
 };
@@ -33,9 +33,18 @@ export default [
       { path: 'constitution', component: () => import('pages/constitution'), beforeEnter: Guards.logInCheck },
       { path: 'managecandidateship', component: () => import('pages/registercandidate'), beforeEnter: Guards.logInCheck },
       { path: 'loggedout', component: () => import('pages/index-loggedout'), beforeEnter: Guards.logInCheck },
-      { path: 'custodiandashboard', component: () => import('pages/custodian-dashboard'), beforeEnter: Guards.custodianCheck }
+      { path: 'custodiandashboard', component: () => import('pages/custodian-dashboard'), beforeEnter: Guards.custodianCheck },
+      { path: 'proposals', component: () => import('pages/custodians/proposals'), beforeEnter: Guards.custodianCheck },
+      { path: 'notallowed', component: () => import('pages/notallowed')}
     ]
   },
+//   {path: '/custodians',
+//   component: () => import('layouts/default'),
+//   children: [
+//     { path: 'proposals', component: () => import('pages/custodians/proposals'), beforeEnter: Guards.custodianCheck },
+
+//   ]
+// },
 
   { // Always leave this as last one
     path: '*',
