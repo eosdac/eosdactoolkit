@@ -1,10 +1,12 @@
 <template>
 <q-page class="text-white q-ma-lg">
   <div>proposals</div>
+  <Transaction ref="Transaction" v-on:done="" />
 </q-page>
 </template>
 
 <script>
+import Transaction from 'components/transaction'
 import {
   mapGetters
 } from 'vuex'
@@ -17,7 +19,8 @@ export default {
   },
   computed: {
     ...mapGetters({
-      getactiveCustodians: 'api/getActiveCustodians'
+      getactiveCustodians: 'api/getActiveCustodians',
+      getAccountName: 'account/getAccountName'
       })
 
   },
@@ -29,6 +32,18 @@ export default {
         console.log(p)
       });
       
+    },
+    approveProposal(proposer, proposal_name, permission="active"){
+        this.$refs.Transaction.newTransaction([{
+        contract: 'eosio.msig',
+        action: 'approve',
+        fields: {
+          proposer: proposer,
+          proposal_name: proposal_name,
+          level: { "actor": this.getAccountName, "permission": permission },
+         
+        }
+      }])
     }
   },
   mounted(){
