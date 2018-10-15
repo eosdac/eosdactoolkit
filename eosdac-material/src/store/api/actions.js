@@ -645,3 +645,33 @@ export async function getCustodians({
     throw error
   }
 }
+
+export async function getProposalsFromAccount({
+  state,
+  commit,
+
+}, account) {
+
+  try {
+    // console.log(param)
+
+    eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint
+    let eos = Eos(eosConfig)
+    const proposals = await eos.getTableRows({
+      json: true,
+      scope: account,
+      code: 'eosio.msig',
+      table: 'proposal',
+      limit:0
+    });
+    if (!proposals.rows.length) {
+      return false
+    } else {
+      return proposals.rows
+    }
+    commit('SET_CURRENT_CONNECTION_STATUS', true)
+  } catch (error) {
+    apiDown(error,commit)
+    throw error
+  }
+}
