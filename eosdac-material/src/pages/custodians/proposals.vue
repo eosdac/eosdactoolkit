@@ -5,18 +5,34 @@
 </template>
 
 <script>
+import {
+  mapGetters
+} from 'vuex'
 export default {
   name: 'Proposals',
+  data() {
+    return {
+
+    }
+  },
+  computed: {
+    ...mapGetters({
+      getactiveCustodians: 'api/getActiveCustodians'
+      })
+
+  },
   methods:{
-    async getProposalsFromAccount(){
-      let p = await this.$store.dispatch('api/getProposalsFromAccount', "kas");
-      if(p){
-        console.log(p);
-      }
+    async getProposalsFromAllCustodians(){
+      console.log(this.getactiveCustodians);
+      this.getactiveCustodians.forEach(async c => {
+        let p = await this.$store.dispatch('api/getProposalsFromAccount', c.cust_name);
+        console.log(p)
+      });
+      
     }
   },
   mounted(){
-    this.getProposalsFromAccount();
+    this.getProposalsFromAllCustodians();
   }
 
 }

@@ -654,7 +654,10 @@ export async function getProposalsFromAccount({
 
   try {
     // console.log(param)
-
+    if(account == undefined){
+      console.log('specify an accountname as argument');
+      return false;
+    }
     eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint
     let eos = Eos(eosConfig)
     const proposals = await eos.getTableRows({
