@@ -677,4 +677,5 @@ export async function getProposalsFromAccount({
     apiDown(error,commit)
     throw error
   }
+  
 }

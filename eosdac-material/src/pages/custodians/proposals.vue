@@ -12,6 +12,9 @@ import {
 } from 'vuex'
 export default {
   name: 'Proposals',
+  components: {
+      Transaction
+  },
   data() {
     return {
 
@@ -43,7 +46,7 @@ export default {
           level: { "actor": this.getAccountName, "permission": permission },
          
         }
-      }])
+      }]);
     }
   },
   mounted(){
