@@ -5,7 +5,7 @@
   },
   "app": {
     "meta_description": "this is the description of our memberclient that get parsed in to the corresponding meta tags",
-    "meta_keywords": "autonomous, decentralized, community, voting",
+    "meta_keywords": "autonomous, decentralized, community, voting ",
     "title": "eosDac Member Client"
   },
   "candidate": {
@@ -30,6 +30,7 @@
     "menu": "Menu",
     "not_registered": "not registered",
     "pending": "Pending",
+    "permission_denied_message": "Sorry, you do not have permission to view this page.",
     "profile": "Profile",
     "register_as_candidate": "Register As Candidate",
     "registered": "Registered",
@@ -225,9 +226,12 @@
     "current_status": "Current Status",
     "language_preference": "Language Preference",
     "member_status": "Member Status",
+    "off": "off",
+    "on": "on",
     "register_as_member": "Register as Member",
     "register_now": "Register Now",
     "settings": "Settings",
+    "transaction_popup_desc": "Enable/disable transaction popups",
     "transaction_popup_label": "Transaction Popups",
     "unregister_membership": "Unregister Membership",
     "user_preference": "User Settings"

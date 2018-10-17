@@ -1,7 +1,10 @@
 import {
   configFile
 } from './configloader.js'
-import ScatterJS from 'scatter-js/dist/scatter.cjs'
+// import ScatterJS from 'scatter-js/dist/scatter.cjs'
+import ScatterJS from 'scatterjs-core';
+import ScatterEOS from 'scatterjs-plugin-eosjs';
+ScatterJS.plugins( new ScatterEOS() );
 
 export default ({
   store,

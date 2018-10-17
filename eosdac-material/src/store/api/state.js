@@ -12,6 +12,7 @@ export default {
   lastGetInfo: {},
   ricardians: {},
   contractConfigs : [],
+  activeCustodians: null,
   notification: {
     icon: '',
     color: '',

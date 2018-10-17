@@ -74,6 +74,7 @@ export default {
         this.useScatter()
       }
     },
+
     async useScatter() {
       this.loading = true
       this.loadingText = 'waiting_for_scatter'

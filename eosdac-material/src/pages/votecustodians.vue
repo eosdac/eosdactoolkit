@@ -161,7 +161,7 @@ export default {
   },
   data() {
     return {
-      voting_disabled_modal:false, //set to true for disabling voting
+      voting_disabled_modal: !this.$configFile.network.custodianContract.enable_voting,
       loading: false,
       voting_progress: 14,
       custodians: [],
@@ -232,7 +232,7 @@ export default {
       let temp = [];
 
       while(lb !== null){
-        let c = await this.$store.dispatch('api/getCustodians', {lb: lb});
+        let c = await this.$store.dispatch('api/getCandidates', {lb: lb});
         if(c){
 
             if(lb === c[c.length-1].candidate_name){
@@ -322,8 +322,9 @@ export default {
     //cast votes
     voteForCandidates() {
 
-      if(this.voting_disabled_modal){
+      if(!this.$configFile.network.custodianContract.enable_voting){
         this.votesdidchange = false;
+        this.voting_disabled_modal = true;
         return false;
       }
       if(!this.votesdidchange){

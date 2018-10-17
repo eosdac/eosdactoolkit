@@ -152,7 +152,7 @@ export default {
           linkUrl: this.$configFile.api.mainCurrencyExplorerUrl + '/transaction/' + trx.transaction_id,
           autoclose: 10
         })
-        this.$emit('done')
+        this.$emit('done', trx)
         this.close()
       } catch (err) {
         if (err.type) {

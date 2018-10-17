@@ -20,7 +20,8 @@
     },
     "custodianContract": {
       "name": "daccustodian",
-      "memo": "daccustodian"
+      "memo": "daccustodian",
+      "enable_voting" : false
     },
     "systemContract": {
       "name": "eosio"
