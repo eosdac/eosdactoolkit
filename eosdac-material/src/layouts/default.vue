@@ -145,7 +145,7 @@
         <q-item-side right icon="icon-transfer-out" />
       </q-item>
 
-    
+      <!--
       <q-collapsible  dark icon="explore" @hide="submenuheader_open = false" @show="submenuheader_open = true" :header-class="{submenuheader: submenuheader_open}"  label="Custodian Tools">
         <div class="bg-dark">
           <q-item class="q-pl-lg" link to="/proposals">
@@ -154,6 +154,7 @@
           </q-item>
         </div>
       </q-collapsible>
+      -->
 
     </q-list>
     <q-list v-else no-border link inset-delimiter dark>

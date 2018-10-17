@@ -34,7 +34,7 @@ export default [
       { path: 'managecandidateship', component: () => import('pages/registercandidate'), beforeEnter: Guards.logInCheck },
       { path: 'loggedout', component: () => import('pages/index-loggedout'), beforeEnter: Guards.logInCheck },
       { path: 'custodiandashboard', component: () => import('pages/custodian-dashboard'), beforeEnter: Guards.custodianCheck },
-      { path: 'proposals', component: () => import('pages/custodians/proposals'), beforeEnter: Guards.custodianCheck },
+      //{ path: 'proposals', component: () => import('pages/custodians/proposals'), beforeEnter: Guards.custodianCheck },
       { path: 'notallowed', component: () => import('pages/notallowed')}
     ]
   },
