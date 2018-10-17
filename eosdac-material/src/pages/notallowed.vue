@@ -1,6 +1,7 @@
 <template>
 <q-page class="text-white q-ma-lg">
-  <div>Sorry you have not the permission to view this page.</div>
+  <div>{{ $t('default.permission_denied_message') }}</div>
+  
 </q-page>
 </template>
 
