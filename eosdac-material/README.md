@@ -2,7 +2,7 @@
 A frontend user interface to the eosDAC Member Client web application.
 
 # Technical Details
-The member's client uses **Vue.js** as the frontend framework and **Quasar** as the server side rendering framework which then connects to the EOS mainnet (depending on the configuration file). In order to change the Member Client to interface with you DAC, you want to follow the instructions and general guidelines below.
+The member's client uses **Vue.js** and **Quasar** as the frontend framework to create a Single Page Application which then connects to the EOS mainnet (depending on the configuration file). In order to change the Member Client to interface with your DAC, you want to follow the instructions and general guidelines below.
 
 ## How to Install
 
@@ -36,7 +36,6 @@ npm install
 ```
 cp src/statics/config.jungle.json src/statics/config.json
 ```
-*Please note that you may need to change the parameters of the jungle testnet config file periodically.*
 
 **6. Run dev server with material theme**
 ```
@@ -50,9 +49,9 @@ Since eosDAC is making this open source software for the use of creating other D
 - `src/i18n`
 - `src/statics/config.json`
 
-`statics` is the main repository where you will want to change the files to better coincide with your DAC. Replace the files and retain the file names so you do not have to go through the other areas of the code to update the file names. You will also need to update the `i18n` directory for proper messaging and translations for the DAC's written content. The `config.json` file aligns with the proper deployed smart contract and you will need to change this file and the templates towards your DAC's smart contract.
+`statics` is the main repository where you will want to change branding assets. Replace the files and retain the file names so you do not have to go through the other areas of the code to update the file names. You will also need to update the `i18n` directory for proper messaging and translations for the DAC's written content. The `config.json` file aligns with the proper deployed smart contract and you will need to change this file and the templates towards your DAC's smart contract.
 
-The main `package.json` file and other odd ball files may need to be changed by on the whole the `statics` and `i18n` folders and where you will want to make your changes.
+Other odd ball files may need to be changed by your team.
 
 # Author
 The eosDAC Team. Join us on our Discord channel if you have any questions. https://discord.io/eosdac
