@@ -62,5 +62,9 @@ export const getConfig = (state) => {
 }
 
 export const getContractConfig = (state) => {
-  return state.contractConfigs
+  return state.contractConfigs;
+}
+
+export const getActiveCustodians = (state) => {
+  return state.activeCustodians;
 }

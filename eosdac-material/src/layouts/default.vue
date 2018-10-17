@@ -138,13 +138,22 @@
         <q-item-side icon="icon-menu-8" />
         <q-item-main :label="$t('default.worker_proposals')" sublabel="" />
       </q-item> -->
+
       <q-item @click.native="openURL($configFile.external.discordUrl)">
         <q-item-side icon="icon-menu-11" />
         <q-item-main :label="$t('default.support')" sublabel="" />
         <q-item-side right icon="icon-transfer-out" />
       </q-item>
 
-
+    
+      <q-collapsible  dark icon="explore" @hide="submenuheader_open = false" @show="submenuheader_open = true" :header-class="{submenuheader: submenuheader_open}"  label="Custodian Tools">
+        <div class="bg-dark">
+          <q-item class="q-pl-lg" link to="/proposals">
+            <q-item-side icon="icon-topmenu-6" />
+            <q-item-main label="Proposals" sublabel="" />
+          </q-item>
+        </div>
+      </q-collapsible>
 
     </q-list>
     <q-list v-else no-border link inset-delimiter dark>
@@ -217,7 +226,8 @@ export default {
       mainCurrencyName: this.$configFile.network.mainCurrencyContract.token,
       lastQuery: 0,
       memberStatus: 0,
-      showBanner: true
+      showBanner: true,
+      submenuheader_open: false
     }
   },
   computed: {
@@ -263,9 +273,15 @@ export default {
           this.$store.dispatch('api/updateAccountInfo')
         }
       }
+    },
+    //wip
+    async getActiveCustodians(){
+      let c = await this.$store.dispatch('api/getCustodians');
+      // console.log(c)
     }
   },
   mounted() {
+    this.getActiveCustodians();
     if (!this.getImported) {
       this.$refs.Multi.init('register')
     } else {
@@ -307,4 +323,11 @@ export default {
 </script>
 
 <style>
+.submenuheader{
+  background: #383A3F;
+}
+.q-collapsible-sub-item{
+  padding:0;
+  width:100%
+}
 </style>

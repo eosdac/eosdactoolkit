@@ -232,7 +232,7 @@ export default {
       let temp = [];
 
       while(lb !== null){
-        let c = await this.$store.dispatch('api/getCustodians', {lb: lb});
+        let c = await this.$store.dispatch('api/getCandidates', {lb: lb});
         if(c){
 
             if(lb === c[c.length-1].candidate_name){
