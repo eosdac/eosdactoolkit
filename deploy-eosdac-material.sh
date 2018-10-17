@@ -60,6 +60,7 @@ then
 fi
 git fetch --tags
 git checkout "$2"
+git pull
 cd eosdac-material
 
 if $LOCAL_DEV ;
