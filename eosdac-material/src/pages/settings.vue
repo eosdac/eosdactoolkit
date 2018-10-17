@@ -97,7 +97,7 @@
 
     <div class="row ">
       <div class="col-sm-12 col-lg-4 q-pa-md relative-position" >
-        <div>{{$t('settings.transaction_popup_desc')}} <span v-if="transactionpopup" class="text-positive">on</span><span v-if="!transactionpopup"  class="text-negative">off</span></div>
+        <div>{{$t('settings.transaction_popup_desc')}} <span v-if="transactionpopup" class="text-positive">{{ $t('settings.on') }}</span><span v-if="!transactionpopup"  class="text-negative">{{ $t('settings.off') }}</span></div>
         <div class="q-mt-lg">
           <q-toggle  class="float-left" v-model="transactionpopup" color="p-light" left-label :label="$t('settings.transaction_popup_label')" />
           <!-- <q-toggle  class="float-left" v-model="consolemessage" color="p-light" left-label :label="$t('settings.console_message_label')" /> -->
