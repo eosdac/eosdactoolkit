@@ -80,7 +80,7 @@ export default {
       this.linkText = this.getNotification.linkText
       this.linkUrl = this.getNotification.linkUrl
       if (this.getNotification.autoclose) {
-        this.sleep(this.getNotification.autoclose * 10000).then(() => {
+        this.sleep(this.getNotification.autoclose * 1000).then(() => {
           this.markSeen()
         })
       }
