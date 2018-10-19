@@ -4,7 +4,7 @@
 <Transaction ref="Transaction" v-on:done="$refs.Register.checkRegistered(true)" />
 <Register ref="Register" />
 
-<h4 class="q-display-1 q-mt-none q-mb-md">{{ $t("settings.settings") }}</h4>
+<h4 class="q-display-1 q-mt-none q-mb-md">{{ $t("settings.settings") }} V{{app_version}}</h4>
 
 <!-- api endpoints -->
 <div class="shadow-5" style="background:#2F333D">
@@ -120,7 +120,7 @@
 </style>
 
 <script>
-
+import packageJson from '../../package.json';
 import Transaction from 'components/transaction'
 import Register from 'components/register'
 import MultiModal from 'components/multi-modal'
@@ -142,7 +142,8 @@ export default {
   data (){
     return{
       transactionpopup: '',
-      consolemessage: ''
+      consolemessage: '',
+      app_version: packageJson.version
     }
   },
   mounted() {
