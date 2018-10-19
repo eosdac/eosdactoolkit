@@ -146,9 +146,9 @@ export default {
         this.$store.commit('api/NOTIFY', {
           icon: 'icon-ui-6',
           color: 'positive',
-          message: 'transaction.transaction_successful',
+          message: this.$t('transaction.transaction_successful'),
           details: trx.transaction_id,
-          linkText: 'transaction.view_in_explorer',
+          linkText: this.$t('transaction.view_in_explorer'),
           linkUrl: this.$configFile.api.mainCurrencyExplorerUrl + '/transaction/' + trx.transaction_id,
           autoclose: 10
         })
@@ -159,7 +159,7 @@ export default {
           this.$store.commit('api/NOTIFY', {
             icon: 'error',
             color: 'red',
-            message: 'Error: ' + err.type,
+            message: this.$t('transaction.error')+': ' + err.type,
             detail: '',
             autoclose: 10
           })
@@ -168,7 +168,8 @@ export default {
           this.$store.commit('api/NOTIFY', {
             icon: 'error',
             color: 'red',
-            message: 'Error: ' + JSON.parse(err).error.details[0].message || JSON.parse(err),
+            // message: 'Error: ' + JSON.parse(err).error.details[0].message || JSON.parse(err),
+            message: this.$t('transaction.error')+': ' +this.parseError(err),
             detail: '',
             autoclose: 10
           })
@@ -176,6 +177,17 @@ export default {
       } finally {
         this.loading = false
       }
+    },
+    parseError(err){
+// assertion failure with message: ERR::UNSTAKE_CANNOT_UNSTAKE_FROM_ACTIVE_CAND::Cannot unstake tokens for an active candidate. Call withdrawcand first.
+      err = JSON.parse(err);
+      if(err.error.details[0].message){
+        err = err.error.details[0].message.substr(err.error.details[0].message.indexOf('ERR::'));
+        let t = 'contract_errors.'+err.split('::')[1];
+        err = this.$t(t);
+      }
+      return err;
+
     }
   }
 }

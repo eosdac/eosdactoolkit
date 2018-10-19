@@ -67,6 +67,9 @@
           <q-btn size="md" v-if="getMemberRoles.candidate" class="animate-pop" :loading="loading" color="primary" @blur.native="userMsg=''" @click="unregisterAsCandidtate" :label="$t('regcandidate.unregister')">
             <q-spinner slot="loading" />
           </q-btn>
+          <q-btn size="md"  class="animate-pop"  color="primary"  @click="unstake" label="test unstake">
+            
+          </q-btn>
           <div class="q-mt-md text-dimwhite animate-fade" v-if="userMsg != ''">{{userMsg}}</div>
           <!-- <pre>{{getMemberRoles}}</pre> -->
         </div>
@@ -212,6 +215,16 @@ export default {
             cand: this.getAccountName
           }
         }], false)
+    },
+    unstake(){
+        this.$refs.Transaction.newTransaction([{
+          contract: this.$configFile.network.custodianContract.name,
+          action: 'unstake',
+          fields: {
+            cand: this.getAccountName
+          }
+        }], false)
+
     },
 
     async getContractConfig() {
