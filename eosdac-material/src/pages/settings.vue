@@ -4,7 +4,7 @@
 <Transaction ref="Transaction" v-on:done="$refs.Register.checkRegistered(true)" />
 <Register ref="Register" />
 
-<h4 class="q-display-1 q-mt-none q-mb-md">{{ $t("settings.settings") }} V{{app_version}}</h4>
+<h4 class="q-display-1 q-mt-none q-mb-md">{{ $t("settings.settings") }} <span class="text-dimwhite q-title">v{{app_version}}</span></h4>
 
 <!-- api endpoints -->
 <div class="shadow-5" style="background:#2F333D">
