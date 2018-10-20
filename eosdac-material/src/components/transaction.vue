@@ -186,6 +186,9 @@ export default {
         let t = 'contract_errors.'+err.split('::')[1];
         err = this.$t(t);
       }
+      else{
+        err = err.error.details[0].message;
+      }
       return err;
 
     }
