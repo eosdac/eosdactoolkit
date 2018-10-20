@@ -95,7 +95,7 @@
       <span class="hack_height"></span>
     </template>
 
-    <div class="row ">
+    <div class="row q-mb-lg">
       <div class="col-sm-12 col-lg-4 q-pa-md relative-position" >
         <div>{{$t('settings.transaction_popup_desc')}} <span v-if="transactionpopup" class="text-positive">{{ $t('settings.on') }}</span><span v-if="!transactionpopup"  class="text-negative">{{ $t('settings.off') }}</span></div>
         <div class="q-mt-lg">
@@ -106,7 +106,9 @@
     </div>
 
   </q-collapsible>
+  
 </div>
+<div class="q-mt-lg q-pb-md"><span class="float-right text-dimwhite q-title text-weight-thin">eosDAC v{{app_version}}</span></div>
 
 <MultiModal ref="Multi" />
 </q-page>
@@ -120,7 +122,7 @@
 </style>
 
 <script>
-
+import packageJson from '../../package.json';
 import Transaction from 'components/transaction'
 import Register from 'components/register'
 import MultiModal from 'components/multi-modal'
@@ -142,7 +144,8 @@ export default {
   data (){
     return{
       transactionpopup: '',
-      consolemessage: ''
+      consolemessage: '',
+      app_version: packageJson.version
     }
   },
   mounted() {

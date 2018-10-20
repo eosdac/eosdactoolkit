@@ -1,6 +1,9 @@
 <template>
 <q-page class="text-white q-ma-lg">
-  <div>proposals</div>
+  <div>proposals by current active custodians</div>
+  <div v-for="(proposal, index) in proposals" :key="index" >
+    <pre>{{getactiveCustodians[index].cust_name}} - {{proposal}}</pre>
+  </div>
   <Transaction ref="Transaction" v-on:done="" />
 </q-page>
 </template>
@@ -17,6 +20,7 @@ export default {
   },
   data() {
     return {
+      proposals: []
 
     }
   },
@@ -28,11 +32,15 @@ export default {
 
   },
   methods:{
-    async getProposalsFromAllCustodians(){
+    getProposalsFromAllCustodians(){
       console.log(this.getactiveCustodians);
-      this.getactiveCustodians.forEach(async c => {
-        let p = await this.$store.dispatch('api/getProposalsFromAccount', c.cust_name);
-        console.log(p)
+      let proms = [];
+      this.getactiveCustodians.forEach( c => {
+        let p =  this.$store.dispatch('api/getProposalsFromAccount', c.cust_name);
+        proms.push(p);
+      });
+      Promise.all(proms).then(values => {
+        this.proposals = values;
       });
       
     },
