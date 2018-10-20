@@ -178,6 +178,7 @@ export default {
         this.loading = false
       }
     },
+    
     parseError(err){
 // assertion failure with message: ERR::UNSTAKE_CANNOT_UNSTAKE_FROM_ACTIVE_CAND::Cannot unstake tokens for an active candidate. Call withdrawcand first.
       err = JSON.parse(err);
