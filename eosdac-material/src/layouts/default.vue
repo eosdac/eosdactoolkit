@@ -227,7 +227,7 @@ export default {
       lastQuery: 0,
       memberStatus: 0,
       showBanner: true,
-      submenuheader_open: false
+      submenuheader_open: false 
     }
   },
   computed: {

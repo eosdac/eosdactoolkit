@@ -21,7 +21,7 @@
           </div>
         </q-item-main>
       </template>
-      <div class="q-pt-sm q-pt-none" style="border-top:1px solid grey">
+      <div class="q-pt-sm q-px-md" style="border-top:1px solid grey; overflow-x: hidden">
         <q-scroll-area
           style="width: 100%; height: 300px;"
           :thumb-style="{
