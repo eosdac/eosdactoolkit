@@ -89,7 +89,8 @@ export default {
       getCurrentConnectionStatus: 'api/getCurrentConnectionStatus',
       getAccountName: 'account/getAccountName',
       getRegistered: 'account/getRegistered',
-      getImported: 'account/getImported'
+      getImported: 'account/getImported',
+
     })
   },
   data() {

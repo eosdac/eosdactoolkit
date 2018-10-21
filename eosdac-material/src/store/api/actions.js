@@ -624,6 +624,9 @@ export async function getCustodians({
   console.log('getting all custodians from chain.')
   try {
     // console.log(param)
+    if(!state.endpoints[state.activeEndpointIndex]){
+      return false;
+    }
     eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint
     let eos = Eos(eosConfig)
     const custodians = await eos.getTableRows({
