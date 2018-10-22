@@ -17,14 +17,13 @@ class NodeSelector {
 				}catch(e){};//no need to catch the error here
 			}
 			//return false if node api error
-			if(!this.nodelist){
-				console.log('error getting node list!');
-				return false
+			if(!this.nodelist || !this.nodelist.length){
+				console.log('error getting node list from api server!');
+				return false;
 			}
 
 			return new Promise(async function(resolve, reject){
 				let flag = true;
-				let winners = [];
 				while(flag){
 					try{
 						let winner = await self._start_race();
