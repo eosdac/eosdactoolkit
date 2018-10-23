@@ -1,10 +1,34 @@
 <template>
-<q-page class="text-white q-ma-lg">
-  <div>proposals by current active custodians</div>
-  <div v-for="(proposal, index) in proposals" :key="index" >
-    <pre>{{getactiveCustodians[index].cust_name}} - {{proposal}}</pre>
+<q-page class="text-white q-pa-md">
+  <h4 class="q-display-1 q-mt-none q-mb-md">Manage Msig Proposals</h4>
+
+
+  <div v-for="(msig, index) in msigproposals" class="q-mb-md bg-dark2 round-borders shadow-5" :key="index">
+    <q-collapsible  label="First" group="msigproposals" icon-toggle header-class="msigproposal_header" collapse-icon="icon-ui-11">
+      <template slot="header" >
+        <q-item-side left >
+          <div class="row full-height items-center">
+            {{msig.type}}
+          </div>
+        </q-item-side>
+        <q-item-main >
+          <div class="q-ml-lg">
+            <span>{{msig.title}}</span>
+          </div>
+        </q-item-main>
+      </template>
+      <div class="q-px-md q-pb-md" >
+        <div  class="q-pt-md" style="border-top:1px solid grey;">
+          {{msig.description}}
+        </div>
+      </div>
+    </q-collapsible>
   </div>
-  <Transaction ref="Transaction" v-on:done="" />
+
+
+
+
+  <Transaction ref="Transaction"  />
 </q-page>
 </template>
 
@@ -14,13 +38,25 @@ import {
   mapGetters
 } from 'vuex'
 export default {
-  name: 'Proposals',
+  name: 'MsigProposals',
   components: {
       Transaction
   },
   data() {
     return {
-      proposals: []
+      proposals: [],
+      msigproposals:[
+        {
+          title: 'this is a title of a proposal',
+          type: 'transfer',
+          description: 'this is a description about this msig transaction'
+        },
+        {
+          title: 'this is an other title',
+          type: 'transfer',
+          description: 'this is yet an other one'
+        }
+      ]
 
     }
   },
@@ -58,11 +94,14 @@ export default {
     }
   },
   mounted(){
-    this.getProposalsFromAllCustodians();
+
   }
 
 }
 </script>
 
 <style>
+.msigproposal_header{
+  height:80px
+}
 </style>
