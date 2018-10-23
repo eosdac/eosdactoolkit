@@ -3,31 +3,40 @@
     <div>
       <q-input dark stack-label="Proposal name" v-model="msigtemplate.proposal_name" />
       <div class="q-my-md">expiration</div>
-      <q-datetime-picker minimal dark v-model="msigtemplate.trx.expiration" type="date" />
+      <q-datetime-picker minimal dark  v-model="msigtemplate.trx.expiration" type="date" />
+    </div>
+    <div>
+      <q-btn label="propose" color="primary" @click="proposeMsig" />
     </div>
     <pre>{{msigtemplate}}</pre>
+    <Transaction ref="Transaction"  />
   </div>
 </template>
 
 <script>
+import Transaction from './transaction'
+import {
+  Quasar
+} from 'quasar'
 import {
   mapGetters
 } from 'vuex'
 export default {
   name: 'Msigcreator',
   components: {
-
+    Transaction
   },
 
 
   data () {
     return {
+
       msigtemplate: { 
         proposer: '',
         proposal_name: '',
         requested: [],
         trx: { 
-            expiration: '', 
+            expiration: this.parseDate, 
             ref_block_num: 0, 
             ref_block_prefix: 0, 
             max_net_usage_words: 0, 
@@ -36,10 +45,10 @@ export default {
             context_free_actions: [], 
             actions: [ 
                 { 
-                account: '', 
+                account: 'eosio.token', 
                 name: 'transfer', 
                 authorization: [ { actor: 'kas', permission: 'active' } ], 
-                data: {} 
+                data: {from:'kas', to:'kasperkasper', quantity: '1.0000 EOS', memo:'testmsig'} 
                 }
             ], 
             transaction_extensions: [] 
@@ -64,7 +73,18 @@ export default {
         return req;
       });
 
-    }
+    },
+    proposeMsig(){
+      this.msigtemplate.trx.expiration = this.msigtemplate.trx.expiration.split('.')[0];
+      let actions = [{
+        contract: 'eosio.msig', 
+        action: 'propose', 
+        fields: this.msigtemplate
+      }];
+      this.$refs.Transaction.newTransaction(actions, false);
+    },
+
+  
 
   },
 
