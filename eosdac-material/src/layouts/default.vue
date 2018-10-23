@@ -148,7 +148,7 @@
     
       <q-collapsible  dark icon="explore" @hide="submenuheader_open = false" @show="submenuheader_open = true" :header-class="{submenuheader: submenuheader_open}"  label="Custodian Tools">
         <div class="bg-dark">
-          <q-item class="q-pl-lg" link to="/proposals">
+          <q-item class="q-pl-lg" link to="/msigproposals">
             <q-item-side icon="icon-topmenu-6" />
             <q-item-main label="Proposals" sublabel="" />
           </q-item>
