@@ -36,7 +36,7 @@ export default {
         proposal_name: '',
         requested: [],
         trx: { 
-            expiration: this.parseDate, 
+            expiration: '', 
             ref_block_num: 0, 
             ref_block_prefix: 0, 
             max_net_usage_words: 0, 
