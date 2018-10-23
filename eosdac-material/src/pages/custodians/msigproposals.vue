@@ -13,9 +13,19 @@
         </q-item-side>
         <q-item-main >
           <div class="q-ml-lg">
-            <span>{{msig.title}}</span>
+            <div class="q-title q-mb-xs">{{msig.title}}</div>
+            <div class="q-caption">
+              <span class="text-dimwhite">Submitted by: </span>
+              <router-link :to="{path: '/profile/' + msig.proposer}" >
+                {{ msig.proposer }}
+              </router-link>
+            </div>
           </div>
         </q-item-main>
+        <q-item-side right >
+          <div class="q-caption text-dimwhite" >Received Approvals:</div>
+          <div class="text-white q-display-1"><span class="text-p-light">5</span> / 12</div>
+        </q-item-side>
       </template>
       <div class="q-px-md q-pb-md" >
         <div  class="q-pt-md" style="border-top:1px solid grey;">
@@ -24,7 +34,7 @@
             <span class="text-dimwhite">{{key}}:</span><span> {{msig.data[key]}}</span>
           </div>
           <div style="height:35px">
-            <q-btn class="float-right" color="primary" label="Approve" />
+            <q-btn class="float-right" color="positive" label="Approve" />
           </div>
         </div>
       </div>
@@ -54,12 +64,14 @@ export default {
       msigproposals:[
         {
           title: 'this is a title of a multisig proposal',
+          proposer: 'kas',
           type: 'transfer',
           description: 'this is a description about this msig transaction',
           data: {from: 'kas', to: 'evilmikehere', amount: '20 KASDAC', memo: ''}
         },
         {
           title: 'this is an other title',
+          proposer: 'evilmikehere',
           type: 'transfer',
           description: 'this is yet an other one',
           data: {from: 'kas', to: 'evilmikehere', amount: '20 KASDAC', memo: ''}
