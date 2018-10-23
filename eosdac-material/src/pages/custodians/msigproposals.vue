@@ -19,7 +19,13 @@
       </template>
       <div class="q-px-md q-pb-md" >
         <div  class="q-pt-md" style="border-top:1px solid grey;">
-          {{msig.description}}
+          <div class="q-pb-md">{{msig.description}}</div>
+          <div v-for="(key, i) in Object.keys(msig.data)" :key="i">
+            <span class="text-dimwhite">{{key}}:</span><span> {{msig.data[key]}}</span>
+          </div>
+          <div style="height:35px">
+            <q-btn class="float-right" color="primary" label="Approve" />
+          </div>
         </div>
       </div>
     </q-collapsible>
@@ -47,14 +53,16 @@ export default {
       proposals: [],
       msigproposals:[
         {
-          title: 'this is a title of a proposal',
+          title: 'this is a title of a multisig proposal',
           type: 'transfer',
-          description: 'this is a description about this msig transaction'
+          description: 'this is a description about this msig transaction',
+          data: {from: 'kas', to: 'evilmikehere', amount: '20 KASDAC', memo: ''}
         },
         {
           title: 'this is an other title',
           type: 'transfer',
-          description: 'this is yet an other one'
+          description: 'this is yet an other one',
+          data: {from: 'kas', to: 'evilmikehere', amount: '20 KASDAC', memo: ''}
         }
       ]
 
