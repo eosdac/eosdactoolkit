@@ -124,7 +124,8 @@ module.exports = function(ctx) {
         'QTooltip',
         'QAutocomplete',
         'QBtnToggle',
-        'QScrollObservable'
+        'QScrollObservable',
+        'QDatetimePicker'
 
       ],
       directives: [

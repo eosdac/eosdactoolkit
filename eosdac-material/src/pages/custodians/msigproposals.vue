@@ -1,6 +1,8 @@
 <template>
 <q-page class="text-white q-pa-md">
-  <h4 class="q-display-1 q-mt-none q-mb-md">Manage Msig Proposals</h4>
+  <h4 class="q-display-1 q-mt-none q-mb-md">Create Msig Transaction</h4>
+  <MsigCreator />
+  <h4 class="q-display-1 q-mt-none q-mb-md">Review Msig Transactions</h4>
 
 
   <div v-for="(msig, index) in msigproposals" class="q-mb-md bg-dark2 round-borders shadow-5" :key="index">
@@ -50,13 +52,15 @@
 
 <script>
 import Transaction from 'components/transaction'
+import MsigCreator from 'components/msigcreator'
 import {
   mapGetters
 } from 'vuex'
 export default {
   name: 'MsigProposals',
   components: {
-      Transaction
+      Transaction,
+      MsigCreator
   },
   data() {
     return {
