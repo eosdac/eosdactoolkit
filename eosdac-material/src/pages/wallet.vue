@@ -908,9 +908,14 @@ export default {
     },
     transferTo(val) {
       if (!/(^[a-z1-5.]{0,11}[a-z1-5]$)|(^[a-z1-5.]{12}[a-j1-5]$)/.test(val)) {
-        this.transferToError = true
-        this.transferToErrorText = 'Invalid account name'
-        this.badTransferTo = true
+        if (val === '') {
+          this.transferToError = false
+        } else {
+          this.transferToError = true
+          this.transferToErrorText = 'Invalid account name'
+          this.badTransferTo = true
+        }
+        
       } else {
         this.transferToError = false
         this.transferToErrorText = ''
