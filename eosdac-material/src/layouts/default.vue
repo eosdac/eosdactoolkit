@@ -95,10 +95,18 @@
         <q-item-side icon="icon-menu-1" />
         <q-item-main label="Dashboard" sublabel="" />
       </q-item>-->
-      <q-item v-if="getMemberRoles.custodian" class="text-blue" to="/custodiandashboard">
+      <!-- <q-item v-if="getMemberRoles.custodian" class="text-blue" to="/custodiandashboard">
         <q-item-side class="text-blue" icon="icon-role-4" />
         <q-item-main label="Custodian Dashboard" sublabel="" />
-      </q-item>
+      </q-item> -->
+      <q-collapsible  dark icon="icon-role-4" @hide="submenuheader_open = false" @show="submenuheader_open = true" :header-class="{submenuheader: submenuheader_open}"  label="Custodian Tools">
+        <div class="bg-dark">
+          <q-item class="q-pl-lg" link to="/msigproposals">
+            <q-item-side icon="icon-topmenu-6" />
+            <q-item-main label="Msig Proposals" sublabel="" />
+          </q-item>
+        </div>
+      </q-collapsible>
       <q-item to="/constitution">
         <q-item-side icon="icon-register-3" />
         <q-item-main :label="$t('default.constitution')" sublabel="" />
@@ -144,16 +152,6 @@
         <q-item-main :label="$t('default.support')" sublabel="" />
         <q-item-side right icon="icon-transfer-out" />
       </q-item>
-
-    
-      <q-collapsible  dark icon="explore" @hide="submenuheader_open = false" @show="submenuheader_open = true" :header-class="{submenuheader: submenuheader_open}"  label="Custodian Tools">
-        <div class="bg-dark">
-          <q-item class="q-pl-lg" link to="/msigproposals">
-            <q-item-side icon="icon-topmenu-6" />
-            <q-item-main label="Proposals" sublabel="" />
-          </q-item>
-        </div>
-      </q-collapsible>
 
     </q-list>
     <q-list v-else no-border link inset-delimiter dark>

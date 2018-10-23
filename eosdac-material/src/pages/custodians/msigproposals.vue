@@ -8,7 +8,7 @@
       <template slot="header" >
         <q-item-side left >
           <div class="row full-height items-center">
-            {{msig.type}}
+            <q-icon size="24px" name="icon-transfers" class="q-mr-xs" /><span> {{msig.type}}</span>
           </div>
         </q-item-side>
         <q-item-main >
@@ -29,7 +29,7 @@
       </template>
       <div class="q-px-md q-pb-md" >
         <div  class="q-pt-md" style="border-top:1px solid grey;">
-          <div class="q-pb-md">{{msig.description}}</div>
+          <div class="q-pb-md text-dimwhite">{{msig.description}}</div>
           <div v-for="(key, i) in Object.keys(msig.data)" :key="i">
             <span class="text-dimwhite">{{key}}:</span><span> {{msig.data[key]}}</span>
           </div>
@@ -63,16 +63,16 @@ export default {
       proposals: [],
       msigproposals:[
         {
-          title: 'this is a title of a multisig proposal',
+          title: 'This is a title of a multisig proposal',
           proposer: 'kas',
-          type: 'transfer',
-          description: 'this is a description about this msig transaction',
+          type: 'Transfer',
+          description: 'This is a description about this msig transaction. Everyone knows that descriptions are most of the time super boring. But this one isn\'t because it\'s a little longer. Decide for yourself if this is true or not. Thank you :-)',
           data: {from: 'kas', to: 'evilmikehere', amount: '20 KASDAC', memo: ''}
         },
         {
-          title: 'this is an other title',
+          title: 'This is an other title',
           proposer: 'evilmikehere',
-          type: 'transfer',
+          type: 'Transfer',
           description: 'this is yet an other one',
           data: {from: 'kas', to: 'evilmikehere', amount: '20 KASDAC', memo: ''}
         }
