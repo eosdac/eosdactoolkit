@@ -1,7 +1,7 @@
 <template>
 <q-page class="text-white q-pa-md">
   <h4 class="q-display-1 q-mt-none q-mb-md">Create Msig Transaction</h4>
-  <MsigCreator />
+  <!-- <MsigCreator /> -->
   <h4 class="q-display-1 q-mt-none q-mb-md">Review Msig Transactions</h4>
 
 
@@ -30,15 +30,26 @@
         </q-item-side>
       </template>
       <div class="q-px-md q-pb-md" >
-        <div  class="q-pt-md" style="border-top:1px solid grey;">
-          <div class="q-pb-md text-dimwhite">{{msig.description}}</div>
-          <div v-for="(key, i) in Object.keys(msig.data)" :key="i">
-            <span class="text-dimwhite">{{key}}:</span><span> {{msig.data[key]}}</span>
-          </div>
-          <div style="height:35px">
-            <q-btn class="float-right" color="positive" label="Approve" />
+        <div style="border-top:1px solid grey;">
+          <div class="row gutter-md q-pt-md">
+            <div class="col-md-4 col-xs-12" >
+              <div style="background:none">
+                <div v-for="(key, i) in Object.keys(msig.data)" :key="i" style="border-bottom: 1px solid grey">
+                  <span class="text-dimwhite ">{{key}}:</span><span class=""> {{msig.data[key]}}</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-8 col-xs-12" >
+              <div style="background:none">
+                <span class="text-dimwhite">{{msig.description}}</span>
+                <div style="height:35px">
+                  <q-btn class="float-right" color="positive" label="Approve" />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
+
       </div>
     </q-collapsible>
   </div>
