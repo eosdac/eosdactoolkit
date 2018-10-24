@@ -45,10 +45,10 @@ export default {
             context_free_actions: [], 
             actions: [ 
                 { 
-                account: 'eosio.token', 
+                account: 'kasdactokens', 
                 name: 'transfer', 
                 authorization: [ { actor: 'kas', permission: 'active' } ], 
-                data: {from:'kas', to:'kasperkasper', quantity: '1.0000 EOS', memo:'testmsig'} 
+                data: {from:'kas', to:'kasperkasper', quantity: '1.0000 KASDAC', memo:'testmsig'} 
                 }
             ], 
             transaction_extensions: [] 

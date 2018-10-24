@@ -81,7 +81,13 @@ export async function transaction({
       const identity = await state.scatter.getIdentity({
         accounts: [network]
       })
-      eos = state.scatter.eos(network, Eos, eosConfig)
+
+      eos =  state.scatter.eos(network, Eos, eosConfig)
+
+      // const contract = await eos.getAbi('kasdactokens');
+      // console.log(eos.fc.abiCache.abi)
+      // eos.fc.abiCache.abi('kasdactokens', contract.abi)
+
       let authority = identity.accounts[0].authority
       let accountname = identity.accounts[0].name
       let actions = []
@@ -393,7 +399,8 @@ export async function getContractRicardian({
   try {
     eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint
     let eos = Eos(eosConfig)
-    const contract = await eos.getAbi(payload)
+    const contract = await eos.getAbi(payload);
+    
     let ricardian = contract.abi.actions
     if (ricardian) {
       commit('ADD_CONTRACT_RICARDIAN', {
