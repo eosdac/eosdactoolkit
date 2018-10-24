@@ -84,9 +84,8 @@ export async function transaction({
 
       eos =  state.scatter.eos(network, Eos, eosConfig)
 
-      // const contract = await eos.getAbi('kasdactokens');
-      // console.log(eos.fc.abiCache.abi)
-      // eos.fc.abiCache.abi('kasdactokens', contract.abi)
+      const contract = await eos.getAbi('kasdactokens');
+      eos.fc.abiCache.abi('kasdactokens', contract.abi)
 
       let authority = identity.accounts[0].authority
       let accountname = identity.accounts[0].name
