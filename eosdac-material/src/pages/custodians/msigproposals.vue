@@ -1,7 +1,7 @@
 <template>
 <q-page class="text-white q-pa-md">
   <h4 class="q-display-1 q-mt-none q-mb-md">Create Msig Transaction</h4>
-  <!-- <MsigCreator /> -->
+  <div class="q-mb-lg"><MsigCreator /></div>
   <h4 class="q-display-1 q-mt-none q-mb-md">Review Msig Transactions</h4>
 
 

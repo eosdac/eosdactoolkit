@@ -1,14 +1,21 @@
 <template>
-  <div class="q-pa-md q-mb-xl bg-dark2 round-borders shadow-5" style="min-height:500px">
-    <div>
+  <div class="row  bg-dark2 round-borders shadow-5" style="">
+    <div class="col-md-6 col-xs-12 q-pa-md">
       <q-input dark stack-label="Proposal name" v-model="msigtemplate.proposal_name" />
-      <div class="q-my-md">expiration</div>
+      <div class="q-my-md">Expiration</div>
       <q-datetime-picker minimal dark  v-model="msigtemplate.trx.expiration" type="date" />
     </div>
-    <div>
-      <q-btn label="propose" color="primary" @click="proposeMsig" />
+    <div class="col-md-6 col-xs-12 q-pa-md ">
+      <div class="column full-height justify-between">
+        <div>
+          Add action
+        </div>
+        <div style="height:30px">
+          <q-btn class="float-right" label="propose" color="primary" @click="proposeMsig" />
+        </div>
+      </div>
     </div>
-    <pre>{{msigtemplate}}</pre>
+    <!-- <pre>{{msigtemplate}}</pre> -->
     <Transaction ref="Transaction"  />
   </div>
 </template>
