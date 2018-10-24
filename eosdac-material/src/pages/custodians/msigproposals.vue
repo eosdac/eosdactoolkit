@@ -34,14 +34,14 @@
           <div class="row gutter-md q-pt-md">
             <div class="col-md-4 col-xs-12" >
               <div style="background:none">
-                <div v-for="(key, i) in Object.keys(msig.data)" :key="i" style="border-bottom: 1px solid grey">
+                <div class="row justify-between q-py-md" v-for="(key, i) in Object.keys(msig.data)" :key="i" style="border-bottom: 1px solid grey">
                   <span class="text-dimwhite ">{{key}}:</span><span class=""> {{msig.data[key]}}</span>
                 </div>
               </div>
             </div>
             <div class="col-md-8 col-xs-12" >
-              <div style="background:none">
-                <span class="text-dimwhite">{{msig.description}}</span>
+              <div class="column justify-between full-height" style="background:none">
+                <div class="text-dimwhite">{{msig.description}}</div>
                 <div style="height:35px">
                   <q-btn class="float-right" color="positive" label="Approve" />
                 </div>
