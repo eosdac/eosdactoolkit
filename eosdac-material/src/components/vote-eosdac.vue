@@ -17,15 +17,16 @@
       <div class="q-pa-md">
         <div v-if="myvotes[0]" >
           <div>{{modal_msg}} </div>
-          <div class="relative-position row justify-between  q-pa-md q-mt-md bg-dark2 round-borders">
-             <div class="q-mb-md full-width text-dimwhite">Votes <span>{{myvotes[0].producers.length}}/30</span></div>
+          <div class="relative-position row justify-between q-pa-md q-mt-md bg-dark2 round-borders mygrid">
+            <div class="q-mb-md full-width text-dimwhite">Votes <span>{{myvotes[0].producers.length}}/30</span></div>
             <span v-for="(prod, i) in myvotes[0].producers" :key="i">
-              <q-chip v-if="prod == eosdacBP" class="q-ma-xs"  tag  color="positive">{{prod}}</q-chip>
-              <q-chip v-else class="q-ma-xs"  tag  color="dark">{{prod}}</q-chip>
+              <q-chip v-if="prod == eosdacBP" class="q-ma-xs" closable @hide="removeVote(i)" color="positive">{{prod}}</q-chip>
+              <q-chip v-else class="q-ma-xs"  closable @hide="removeVote(i)" color="dark">{{prod}}</q-chip>
             </span>
           </div>
-          <div class="q-mt-md" style="height:30px">
-            <q-btn class="q-mb-md float-right" label="vote" color="primary" @click="castVotes" />
+          <div class="row justify-end q-mt-md items-center" style="height:30px">
+            <div  class="on-left animate-fade" v-if="btn_feedback">{{btn_feedback}}</div>
+            <q-btn label="vote" color="primary" @click="castVotes" @blur.native="btn_feedback=''" />
           </div>
         </div>
       </div>
@@ -64,7 +65,8 @@ export default {
       hasVotedForUs: false,
       eosdacBP : '',
       votedecay: true,
-      votedecay_percent: 0
+      votedecay_percent: 0,
+      btn_feedback:''
 
     }
   },
@@ -97,6 +99,10 @@ export default {
 
     castVotes(){
         let votes = this.myvotes[0].producers;
+        if(votes.length >30){
+          this.btn_feedback = 'Please remove one of your votes.';
+          return false;
+        }
         this.$refs.Transaction.newTransaction([{
         contract: 'eosio',
         action: 'voteproducer',
@@ -113,6 +119,9 @@ export default {
       else{
         this.modal_msg = `Thank you for voting for"${this.eosdacBP}"`;
       }
+    },
+    removeVote(i){
+      this.myvotes[0].producers.splice(i, 1)
     },
   
     _calculateVoteWeight(stakeamount){
@@ -177,5 +186,8 @@ export default {
 </script>
 
 <style>
-
+.mygrid::after {
+  content: "";
+  flex: auto;
+}
 </style>
