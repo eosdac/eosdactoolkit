@@ -10,7 +10,6 @@
     <div class="bg-dark">
       <!-- header -->
       <div style="height:50px" class="bg-dark2 row justify-end">
-        <div>vote decay: {{votedecay_percent}}%</div>
         <q-btn color="dark" icon="icon-ui-8" @click="votemodal = false" />
       </div>
       <!-- content -->
@@ -18,7 +17,10 @@
         <div v-if="myvotes[0]" >
           <div>{{modal_msg}} </div>
           <div class="relative-position row justify-between q-pa-md q-mt-md bg-dark2 round-borders mygrid">
-            <div class="q-mb-md full-width text-dimwhite">Votes <span>{{myvotes[0].producers.length}}/30</span></div>
+            <div class="q-mb-md row inline full-width justify-between items-center text-dimwhite">
+              <div class="col-xs-12 col-md-2">Votes <span>{{myvotes[0].producers.length}}/30</span></div>
+              <div class="col-xs-12 col-md-4">Voting Power {{100-votedecay_percent}}%<q-progress :percentage="100-votedecay_percent" /></div>
+            </div>
             <span v-for="(prod, i) in myvotes[0].producers" :key="i">
               <q-chip v-if="prod == eosdacBP" class="q-ma-xs" closable @hide="removeVote(i)" color="positive">{{prod}}</q-chip>
               <q-chip v-else class="q-ma-xs"  closable @hide="removeVote(i)" color="dark">{{prod}}</q-chip>
@@ -121,7 +123,7 @@ export default {
         }
       }
       else{
-        this.modal_msg = `Thank you for voting for"${this.eosdacBP}"`;
+        this.modal_msg = `Thank you for voting for "${this.eosdacBP}"`;
       }
     },
     removeVote(i){
