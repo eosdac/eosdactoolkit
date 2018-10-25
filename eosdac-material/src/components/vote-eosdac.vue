@@ -1,17 +1,20 @@
 <template>
-<div>
-  <q-btn color="blue"  @click="votemodal = true" >
+<div v-if="getAccountName">
+  <q-btn color="dark" class="animate-pop" @click="votemodal = true" >
     <q-icon name="icon-menu-3" class="on-left text-dimwhite"/> 
     <span>Vote For eosDAC</span>
   </q-btn>
 
   <q-modal minimized v-model="votemodal" >
     <div class="bg-dark">
-      <q-btn color="primary" @click="votemodal = false" label="Close" />
+      <div style="height:50px" class="bg-dark2 row justify-end">
+        <q-btn color="dark" icon="icon-ui-8" @click="votemodal = false" />
+      </div>
+      
       <div v-if="myvotes[0]">
-        <h4>Your Votes <span>{{myvotes[0].producers.length}}</span></h4>
+        <div>Your Votes <span>{{myvotes[0].producers.length}}</span></div>
         <div class="relative-position">
-          <q-chip class="q-ma-xs" floating tag v-for="(prod, i) in myvotes[0].producers" :key="i" color="primary">{{prod}}</q-chip>
+          <q-chip class="q-ma-xs"  tag v-for="(prod, i) in myvotes[0].producers" :key="i" color="primary">{{prod}}</q-chip>
         </div>
       </div>
       
