@@ -1,9 +1,10 @@
 <template>
 <div v-if="getAccountName">
-  <q-btn color="dark" class="animate-pop" @click="votemodal = true" >
+  <q-btn v-if="!hasVotedForUs" color="dark" class="animate-pop" @click="openModal" >
     <q-icon name="icon-menu-3" class="on-left text-dimwhite"/> 
     <span>Vote For eosDAC</span>
   </q-btn>
+  <div v-else><q-icon name="icon-ui-6" class="on-left text-dimwhite" style="margin-top:-5px"/><span>Thank you for your vote!</span></div>
 
   <q-modal minimized v-model="votemodal" >
     <div class="bg-dark">
@@ -15,10 +16,10 @@
         <div>Your Votes <span>{{myvotes[0].producers.length}}</span></div>
         <div class="relative-position">
           <q-chip class="q-ma-xs"  tag v-for="(prod, i) in myvotes[0].producers" :key="i" color="primary">{{prod}}</q-chip>
+
         </div>
       </div>
       
-      <span>{{myvotes}}</span>
       <q-btn class="q-mb-md" label="vote" color="primary" @click="castVotes" />
     </div> 
   </q-modal>
@@ -95,7 +96,9 @@ export default {
       loading: false,
       loadingText: '',
       myvotes:[],
-      votemodal: false
+      votemodal: false,
+      hasVotedForUs: false,
+      eosdacBP : 'eosdacserval'
 
     }
   },
@@ -108,7 +111,10 @@ export default {
   },
   methods:{
     async init(){
+      
       this.myvotes = await this.$store.dispatch('api/getProducerVotes', {member: this.getAccountName});
+      this.hasVotedForUs = this.myvotes[0].producers.indexOf(this.eosdacBP) >= 0 ? true : false;
+
     },
 
     castVotes(){
@@ -118,6 +124,13 @@ export default {
         action: 'voteproducer',
         fields: {"voter": this.getAccountName,"proxy":"","producers": votes.sort()}
       }]);
+    },
+    openModal(){
+      this.votemodal = true;
+      if(!this.hasVotedForUs){
+        this.myvotes[0].producers.push(this.eosdacBP);
+        this.myvotes[0].producers.sort();
+      }
     },
   
     _calculateVoteWeight(stakeamount){
