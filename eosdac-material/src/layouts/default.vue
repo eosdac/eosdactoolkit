@@ -152,10 +152,6 @@
         <q-item-main :label="$t('default.support')" sublabel="" />
         <q-item-side right icon="icon-transfer-out" />
       </q-item>
-      <q-item to="/voteproducers" class="bg-blue">
-        <q-item-side icon="icon-topmenu-6" />
-        <q-item-main label="Vote For Producers" sublabel="mainnet" />
-      </q-item>
 
     </q-list>
     <q-list v-else no-border link inset-delimiter dark>
@@ -166,7 +162,7 @@
         <q-item-main :label="$t('default.log_in')" sublabel="" />
       </q-item>
     </q-list>
-    
+    <div class="absolute-bottom q-py-md row justify-center"><VoteEosdac /></div>
   </q-layout-drawer>
   <q-page-container>
     <transition appear enter-active-class="animated fadeInDown">
@@ -210,6 +206,7 @@ import Register from 'components/register'
 import Notifier from 'components/notifier'
 import MenuDropdown from 'components/menu-dropdown'
 import MultiModal from 'components/multi-modal'
+import VoteEosdac from 'components/vote-eosdac'
 export default {
 
 
@@ -219,7 +216,8 @@ export default {
     Register,
     Notifier,
     MenuDropdown,
-    MultiModal
+    MultiModal,
+    VoteEosdac
   },
   data() {
     return {

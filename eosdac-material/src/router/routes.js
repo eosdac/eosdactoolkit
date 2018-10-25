@@ -30,7 +30,6 @@ export default [
       { path: 'workerproposals', component: () => import('pages/workerproposals'), beforeEnter: Guards.logInCheck },
       { path: 'votecustodians', component: () => import('pages/votecustodians'), beforeEnter: Guards.logInCheck },
       { path: 'profile/:accountname', component: () => import('pages/profile') },
-      { path: 'voteproducers', component: () => import('pages/voteproducers') },
       { path: 'constitution', component: () => import('pages/constitution'), beforeEnter: Guards.logInCheck },
       { path: 'managecandidateship', component: () => import('pages/registercandidate'), beforeEnter: Guards.logInCheck },
       { path: 'loggedout', component: () => import('pages/index-loggedout'), beforeEnter: Guards.logInCheck },

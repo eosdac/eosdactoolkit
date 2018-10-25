@@ -1,7 +1,31 @@
 <template>
-<q-page class="text-white q-pa-md">
- vote producers
-    <q-btn class="q-mb-md" label="vote" color="primary" @click="castVotes" />
+<div>
+  <q-btn color="blue"  @click="votemodal = true" >
+    <q-icon name="icon-menu-3" class="on-left text-dimwhite"/> 
+    <span>Vote For eosDAC</span>
+  </q-btn>
+
+  <q-modal minimized v-model="votemodal" >
+    <div class="bg-dark">
+      <q-btn color="primary" @click="votemodal = false" label="Close" />
+      <div v-if="myvotes[0]">
+        <h4>Your Votes <span>{{myvotes[0].producers.length}}</span></h4>
+        <div class="relative-position">
+          <q-chip class="q-ma-xs" floating tag v-for="(prod, i) in myvotes[0].producers" :key="i" color="primary">{{prod}}</q-chip>
+        </div>
+      </div>
+      
+      <span>{{myvotes}}</span>
+      <q-btn class="q-mb-md" label="vote" color="primary" @click="castVotes" />
+    </div> 
+  </q-modal>
+
+  <Transaction ref="Transaction"  />
+  <LoadingSpinner :visible="loading" :text="loadingText" />
+</div>
+
+
+    <!-- <q-btn class="q-mb-md" label="vote" color="primary" @click="castVotes" />
    <div v-for="(prod, index) in producers" class="q-mb-md bg-dark2 round-borders shadow-5" :key="index">
     <q-collapsible  label="First" group="producers" icon-toggle header-class="" collapse-icon="icon-ui-11">
       <template slot="header" >
@@ -43,11 +67,10 @@ ccccccccccccccc
 
       </div>
     </q-collapsible>
-  </div>
+  </div> -->
 
-  <Transaction ref="Transaction"  />
-  <LoadingSpinner :visible="loading" :text="loadingText" />
-</q-page>
+
+
 </template>
 
 <script>
@@ -58,7 +81,7 @@ import {
   mapGetters
 } from 'vuex'
 export default {
-  name: 'voteproducers',
+  name: 'voteeosdac',
   components: {
       Transaction,
       LoadingSpinner
@@ -68,8 +91,8 @@ export default {
     return {
       loading: false,
       loadingText: '',
-      producers: [],
-      total_votes: 0
+      myvotes:[],
+      votemodal: false
 
     }
   },
@@ -81,65 +104,75 @@ export default {
 
   },
   methods:{
-    async getProducers(){
-      try{
-      var p =  await this.$store.dispatch('api/getProducers');
-      var myvotes = await this.$store.dispatch('api/getProducerVotes', {member: this.getAccountName});
-      }catch(e){
-        console.log(e)
-      }
-
-      p.sort(function(a, b) {
-          return parseFloat(b.total_votes) - parseFloat(a.total_votes);
-      });
-      
- 
-      this.total_votes = p.reduce((total, obj) => parseInt(obj.total_votes) + total, 0);
-      p = p.map(pr => {
-        pr.percentage = pr.total_votes/this.total_votes*100;
-        pr.selected = myvotes[0].producers.indexOf(pr.owner) >= 0 ? true : false;
-        return pr; 
-      })
-      this.producers = p;
+    async init(){
+      this.myvotes = await this.$store.dispatch('api/getProducerVotes', {member: this.getAccountName});
     },
 
-    addVote(prod){
-      if(this.getNewVotes().length < 30){
-        this.producers.find( p => p.owner === prod).selected = true;
-      }
-      else{
-        alert(this.getNewVotes().length)
-      }
-      
-    },
-
-    removeVote(prod){
-      this.producers.find(p => p.owner === prod).selected = false;
-    },
-    getNewVotes(){
-      return this.producers.filter(p => p.selected == true ).map(s => s.owner);
-    },
     castVotes(){
-        let votes = this.getNewVotes();
-        console.log(votes)
+        let votes = this.myvotes[0].producers;
         this.$refs.Transaction.newTransaction([{
         contract: 'eosio',
         action: 'voteproducer',
         fields: {"voter": this.getAccountName,"proxy":"","producers": votes.sort()}
       }]);
     },
-
+  
     _calculateVoteWeight(stakeamount){
         const epoch = 946684800000; 
         const seconds_per_day = 86400;
         let now = new Date().getTime()/1000; //in seconds
         let weight = parseInt( (now - (epoch / 1000)) / (seconds_per_day * 7) )/52 ;
         return (stakeamount*Math.pow(2, weight)).toFixed(17);
-    }
+    },
+    // async getProducers(){
+    //   try{
+    //   var p =  await this.$store.dispatch('api/getProducers');
+    //   this.myvotes = await this.$store.dispatch('api/getProducerVotes', {member: this.getAccountName});
+    //   console.log(this.myvotes)
+    //   }catch(e){
+    //     console.log(e)
+    //   }
+
+    //   p.sort(function(a, b) {
+    //       return parseFloat(b.total_votes) - parseFloat(a.total_votes);
+    //   });
+      
+ 
+    //   this.total_votes = p.reduce((total, obj) => parseInt(obj.total_votes) + total, 0);
+    //   p = p.map(pr => {
+    //     pr.percentage = pr.total_votes/this.total_votes*100;
+    //     pr.selected = this.myvotes[0].producers.indexOf(pr.owner) >= 0 ? true : false;
+    //     return pr; 
+    //   })
+    //   this.producers = p;
+    // },
+        // addVote(prod){
+    //   if(this.getNewVotes().length < 30){
+    //     this.producers.find( p => p.owner === prod).selected = true;
+    //   }
+    //   else{
+    //     alert(this.getNewVotes().length)
+    //   }
+      
+    // },
+
+    // removeVote(prod){
+    //   this.producers.find(p => p.owner === prod).selected = false;
+    // },
+    // getNewVotes(){
+    //   return this.producers.filter(p => p.selected == true ).map(s => s.owner);
+    // },
 
   },
-  mounted(){
-    this.getProducers();
+  created(){
+
+  },
+  watch:{
+    getAccountName(v){
+      if(v){
+        this.init();
+      }
+    }
   }
 
 }

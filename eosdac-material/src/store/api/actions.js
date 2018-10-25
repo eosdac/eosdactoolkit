@@ -735,14 +735,14 @@ export async function getProducerVotes({
       limit:1
     });
     if (!votes.rows.length) {
-      return false
+      return []
     } else {
       // console.log(votes.rows[0].voter +'---'+param.member)
       if(votes.rows[0].owner === param.member){
         return votes.rows
       }
       else{
-        return false;
+        return [];
       }
 
     }
