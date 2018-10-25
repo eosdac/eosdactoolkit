@@ -26,7 +26,7 @@
           </div>
           <div class="row justify-end q-mt-md items-center" style="height:30px">
             <div  class="on-left animate-fade" v-if="btn_feedback">{{btn_feedback}}</div>
-            <q-btn label="vote" color="primary" @click="castVotes" @blur.native="btn_feedback=''" />
+            <q-btn label="confirm" color="primary" @click="castVotes" @blur.native="btn_feedback=''" />
           </div>
         </div>
       </div>
@@ -114,7 +114,11 @@ export default {
       if(!this.hasVotedForUs){
         this.myvotes[0].producers.push(this.eosdacBP);
         this.myvotes[0].producers.sort();
-        this.modal_msg = `"${this.eosdacBP}" added to vote list`;
+        this.modal_msg = `Our BP is added to your vote list. `;
+        //move this to html
+        if(this.myvotes[0].producers.length >30){
+          this.modal_msg += `Please delete a vote to replace with ${this.eosdacBP}`;
+        }
       }
       else{
         this.modal_msg = `Thank you for voting for"${this.eosdacBP}"`;
