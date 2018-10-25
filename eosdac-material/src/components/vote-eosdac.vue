@@ -16,14 +16,15 @@
       <!-- content -->
       <div class="q-pa-md">
         <div v-if="myvotes[0]" >
-          <div>{{modal_msg}} Your Votes <span>{{myvotes[0].producers.length}}</span></div>
-          <div class="relative-position">
+          <div>{{modal_msg}} </div>
+          <div class="relative-position row justify-between  q-pa-md q-mt-md bg-dark2 round-borders">
+             <div class="q-mb-md full-width text-dimwhite">Votes <span>{{myvotes[0].producers.length}}/30</span></div>
             <span v-for="(prod, i) in myvotes[0].producers" :key="i">
               <q-chip v-if="prod == eosdacBP" class="q-ma-xs"  tag  color="positive">{{prod}}</q-chip>
-              <q-chip v-else class="q-ma-xs"  tag  color="dark2">{{prod}}</q-chip>
+              <q-chip v-else class="q-ma-xs"  tag  color="dark">{{prod}}</q-chip>
             </span>
           </div>
-          <div style="height:30px">
+          <div class="q-mt-md" style="height:30px">
             <q-btn class="q-mb-md float-right" label="vote" color="primary" @click="castVotes" />
           </div>
         </div>
@@ -61,7 +62,7 @@ export default {
       votemodal: false,
       modal_msg: '',
       hasVotedForUs: false,
-      eosdacBP : 'eosdacserval',
+      eosdacBP : '',
       votedecay: true,
       votedecay_percent: 0
 
@@ -76,7 +77,12 @@ export default {
   },
   methods:{
     async init(){
-      
+      if(this.$configFile.network.tokenContract.name=="kasdactokens"){
+        this.eosdacBP = 'eosdacserval';
+      }
+      else{
+        this.eosdacBP = 'eosdacserver';
+      }
       this.myvotes = await this.$store.dispatch('api/getProducerVotes', {member: this.getAccountName});
       console.log(this.myvotes)
       this.hasVotedForUs = this.myvotes[0].producers.indexOf(this.eosdacBP) >= 0 ? true : false;
@@ -105,7 +111,7 @@ export default {
         this.modal_msg = `"${this.eosdacBP}" added to vote list`;
       }
       else{
-        this.modal_msg = `"${this.eosdacBP}" already in vote list`;
+        this.modal_msg = `Thank you for voting for"${this.eosdacBP}"`;
       }
     },
   
