@@ -162,7 +162,7 @@
         <q-item-main :label="$t('default.log_in')" sublabel="" />
       </q-item>
     </q-list>
-    <div class="absolute-bottom row bg-dark2 justify-center q-pa-md" style="border-top: 1px solid #272B35" ><VoteEosdac /></div>
+    <div class="absolute-bottom row  bg-dark2 justify-center q-pa-md" style="border-top: 1px solid #272B35;margin-left:-20px" ><VoteEosdac /></div>
   </q-layout-drawer>
   <q-page-container>
     <transition appear enter-active-class="animated fadeInDown">

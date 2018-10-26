@@ -9,8 +9,9 @@
   <q-modal minimized v-model="votemodal" >
     <div class="bg-dark">
       <!-- header -->
-      <div style="height:50px" class="bg-dark2 row justify-end">
-        <q-btn color="dark" icon="icon-ui-8" @click="votemodal = false" />
+      <div style="height:50px" class="bg-dark2 row items-center justify-between q-px-md">
+        <span>dddddd</span>
+        <q-icon class=" cursor-pointer" name="icon-ui-8" @click.native="votemodal = false" />
       </div>
       <!-- content -->
       <div class="q-pa-md">
@@ -19,7 +20,10 @@
           <div class="relative-position row justify-between q-pa-md q-mt-md bg-dark2 round-borders mygrid">
             <div class="q-mb-md row inline full-width justify-between items-center text-dimwhite">
               <div class="col-xs-12 col-md-2">Votes <span>{{myvotes[0].producers.length}}/30</span></div>
-              <div class="col-xs-12 col-md-4">Voting Power {{100-votedecay_percent}}%<q-progress :percentage="100-votedecay_percent" /></div>
+              <div class="col-xs-12 col-md-4">
+                <div class="q-caption q-my-xs">Voting Power <span>{{(100-votedecay_percent).toFixed(2)}}%</span></div>
+                <q-progress :percentage="100-votedecay_percent" />
+              </div>
             </div>
             <span v-for="(prod, i) in myvotes[0].producers" :key="i">
               <q-chip v-if="prod == eosdacBP" class="q-ma-xs" closable @hide="removeVote(i)" color="positive">{{prod}}</q-chip>
