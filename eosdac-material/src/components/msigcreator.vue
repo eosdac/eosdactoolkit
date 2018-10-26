@@ -9,18 +9,23 @@
     <div class="col-md-6 col-xs-12 q-pa-md ">
       <div class="column full-height justify-between">
         <div>
-<q-tabs>
-  <!-- Tabs - notice slot="title" -->
+          <q-tabs>
+            <!-- Tabs - notice slot="title" -->
 
-  <q-tab slot="title" default name="tab-4"  label="Add Action" />
-  <q-tab slot="title" name="rawmsigtr" label="raw" />
+            <q-tab slot="title" default name="tab-4"  label="transfer eos" />
+            <q-tab slot="title" name="rawmsigtr" label="raw" />
 
-  <!-- Targets -->
-  <q-tab-pane class="bg-dark" name="tab-4">add action to msig</q-tab-pane>
-  <q-tab-pane class="bg-dark" name="rawmsigtr">
-    <pre>{{msigtemplate.trx}}</pre>
-  </q-tab-pane>
-</q-tabs>
+            <!-- Targets -->
+            <q-tab-pane class="bg-dark" name="tab-4">
+              <q-input dark stack-label="From" v-model="msigtemplate.trx.actions[0].data.from"/>
+              <q-input dark stack-label="To" v-model="msigtemplate.trx.actions[0].data.to"/>
+              <q-input dark stack-label="Quantity" v-model="msigtemplate.trx.actions[0].data.quantity"/>
+              <q-input dark stack-label="Memo" v-model="msigtemplate.trx.actions[0].data.memo"/>
+            </q-tab-pane>
+            <q-tab-pane class="bg-dark" name="rawmsigtr">
+              <pre>{{msigtemplate}}</pre>
+            </q-tab-pane>
+          </q-tabs>
         </div>
         <div class="q-mt-md" style="height:30px">
           <q-btn class="float-right" label="propose" color="primary" @click="proposeMsig" />
@@ -49,7 +54,7 @@ export default {
   data () {
     return {
 
-      msigtemplate: { 
+      msigtemplate: {
         proposer: '',
         proposal_name: '',
         requested: [],
@@ -63,10 +68,10 @@ export default {
             context_free_actions: [], 
             actions: [ 
                 { 
-                account: 'kasdactokens', 
+                account: 'eosio.token', 
                 name: 'transfer', 
-                authorization: [ { actor: 'kas', permission: 'active' } ], 
-                data: {from:'kas', to:'kasperkasper', quantity: '1.0000 KASDAC', memo:'testmsig'} 
+                authorization: [ { actor: '', permission: 'active' } ], 
+                data: {from:'', to:'', quantity: '', memo:''} 
                 }
             ], 
             transaction_extensions: [] 
@@ -90,6 +95,7 @@ export default {
         let req = {actor: c.cust_name, permission: 'active'};
         return req;
       });
+      this.msigtemplate.trx.actions[0].authorization[0].actor = this.getAccountName;
 
     },
     proposeMsig(){
