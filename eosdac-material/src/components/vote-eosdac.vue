@@ -17,7 +17,7 @@
       <div class="q-pa-md">
         <div v-if="myvotes[0]" >
           <div>{{modal_msg}} </div>
-          <div class="relative-position row justify-between q-pa-md q-mt-md bg-dark2 round-borders mygrid">
+          <div class="relative-position justify-start row q-pa-md q-mt-md bg-dark2 round-borders">
             <div class="q-mb-md row inline full-width justify-between items-center text-dimwhite">
               <div class="col-xs-12 col-md-2">Votes <span>{{myvotes[0].producers.length}}/30</span></div>
               <div class="col-xs-12 col-md-4">
@@ -26,8 +26,8 @@
               </div>
             </div>
             <span v-for="(prod, i) in myvotes[0].producers" :key="i">
-              <q-chip v-if="prod == eosdacBP" class="q-ma-xs" closable @hide="removeVote(i)" color="positive">{{prod}}</q-chip>
-              <q-chip v-else class="q-ma-xs"  closable @hide="removeVote(i)" color="dark">{{prod}}</q-chip>
+              <q-chip v-if="prod == eosdacBP" style="width:150px" class="text-center q-ma-xs" closable @hide="removeVote(i)" color="positive">{{prod}}</q-chip>
+              <q-chip v-else style="width:150px" class="text-center q-ma-xs"  closable @hide="removeVote(i)" color="dark">{{prod}}</q-chip>
             </span>
           </div>
           <div class="row justify-end q-mt-md items-center" style="height:30px">

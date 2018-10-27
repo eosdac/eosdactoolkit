@@ -125,7 +125,8 @@ module.exports = function(ctx) {
         'QAutocomplete',
         'QBtnToggle',
         'QScrollObservable',
-        'QDatetimePicker'
+        'QDatetimePicker',
+        'QVideo'
 
       ],
       directives: [

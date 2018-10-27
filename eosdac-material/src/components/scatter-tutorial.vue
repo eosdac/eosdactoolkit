@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-dark q-pa-md">
+  <!-- <div class="bg-dark q-pa-md">
     <div>
       <p class="text-white">{{ $t('scatter_tutorial.if_you_are_unable_to_choose_an_identity') }}</p>
       <q-collapsible :header-style="{fontWeight: 'bold', fontSize:'20px'}" class="text-white text-center" group="tut" :label="$t('scatter_tutorial.import_account')">
@@ -26,6 +26,11 @@
         <img src="statics/img/revoke_identity_confirmed.png" style="max-width:250px;" />
       </q-collapsible>
     </div>
+  </div> -->
+  <div class="text-center">
+  <div class="q-video" style="width:400px;height:300px; display:inline-block">
+    <iframe  src="https://www.youtube.com/embed/ekU2VEWzsng" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+  </div>
   </div>
 </template>
 
