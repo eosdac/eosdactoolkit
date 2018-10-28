@@ -70,7 +70,7 @@ export default {
       modal_msg: '',
       hasVotedForUs: false,
       eosdacBP : '',
-      votedecay: true,
+      votedecay: false,
       votedecay_percent: 0,
       btn_feedback:''
 
@@ -97,9 +97,11 @@ export default {
 
       let vote_weight_now = this._calculateVoteWeight(this.myvotes[0].staked)*100000000000000000;
       let last_vote_weight = this.myvotes[0].last_vote_weight*100000000000000000;
-      console.log(vote_weight_now, last_vote_weight)
 
       this.votedecay_percent = (Math.abs((last_vote_weight) - (vote_weight_now)) /(((last_vote_weight)+(vote_weight_now))/2))*100;
+      if(this.votedecay_percent > 0){
+        this.votedecay = true;
+      }
 
     },
 
