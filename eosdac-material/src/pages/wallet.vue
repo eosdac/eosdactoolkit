@@ -891,14 +891,14 @@ export default {
       if (this.tokenSelection === this.tokenName) {
         if (val > this.getTokenBalance || ((val + "").match(/\./g) || []).length > 1 || val < 0 || !val) {
           this.transferAmountError = true
-          this.transferAmountErrorText = 'Invalid amount'
+          this.transferAmountErrorText = this.$t('wallet.invalid_amount');
         } else {
           this.transferAmountError = false
         }
       } else if (this.tokenSelection === this.mainCurrencyName) {
         if (val > this.getMainCurrencyBalance || ((val + "").match(/\./g) || []).length > 1 || val < 0 || !val) {
           this.transferAmountError = true
-          this.transferAmountErrorText = 'Invalid amount'
+          this.transferAmountErrorText = this.$t('wallet.invalid_amount');
         } else {
           this.transferAmountError = false
         }
@@ -908,9 +908,14 @@ export default {
     },
     transferTo(val) {
       if (!/(^[a-z1-5.]{0,11}[a-z1-5]$)|(^[a-z1-5.]{12}[a-j1-5]$)/.test(val)) {
-        this.transferToError = true
-        this.transferToErrorText = 'Invalid account name'
-        this.badTransferTo = true
+        if (val === '') {
+          this.transferToError = false
+        } else {
+          this.transferToError = true
+          this.transferToErrorText = this.$t('wallet.invalid_account_name');
+          this.badTransferTo = true
+        }
+        
       } else {
         this.transferToError = false
         this.transferToErrorText = ''
