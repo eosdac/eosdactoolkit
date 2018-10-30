@@ -320,6 +320,8 @@
     "increase": "Increase",
     "increase_by": "Increase by",
     "input_a_destination_account": "Input a Destination Account",
+    "invalid_account_name": "Invalid account name",
+    "invalid_amount": "Invalid amount",
     "liquid": "liquid",
     "loading": "loading",
     "manage_addressbook": "Manage Addressbook",
