@@ -18,7 +18,7 @@
         </q-stepper>
       </div>
       <div class="col-12">
-        <NodeSelector v-if="initialmode !== 'sign' && active && step === 'step1'" setup v-on:done="step ='step2'" />
+        
         <ScatterSignIn :skipSelection="initialmode === 'signin'" v-if="step === 'step2'" v-on:done="ifReg()" />
         <Register v-if="step === 'step3'" :visible="selectedTab === 'register'" ref="reg" v-on:done="(mode === 'signin')? close(): ''" />
       </div>
@@ -72,14 +72,13 @@ import {
   mapGetters
 } from 'vuex'
 import LoadingSpinner from 'components/loading-spinner'
-import NodeSelector from 'components/nodeselector'
+
 import ScatterSignIn from 'components/scatter-signin'
 import Register from 'components/register'
 export default {
   name: 'MultiModal',
   components: {
     LoadingSpinner,
-    NodeSelector,
     ScatterSignIn,
     Register
   },
@@ -116,11 +115,12 @@ export default {
   },
   methods: {
     init(mode) {
-      this.active = true
+      // this.active = true;
       this.mode = mode
       this.initialmode = mode
       if (this.mode !== 'sign') {
         if (this.mode === 'register') {
+          
           this.selectTab('register')
         } else {
           this.selectTab('signin')
@@ -136,6 +136,7 @@ export default {
           }
         }
       } else {
+        this.active = true;
         this.selectTab('register')
         this.$refs.stepper.goToStep('step3')
       }

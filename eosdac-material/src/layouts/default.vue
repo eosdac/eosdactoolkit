@@ -183,6 +183,7 @@
     <Notifier :drawer="leftDrawerOpen" />
 
   </q-page-container>
+  <NodeSelector setup  />
   <MultiModal ref="Multi" />
 
   <q-btn v-back-to-top.animate="{offset: 500, duration: 200}" round color="primary" class="fixed-bottom-right animate-pop z-max" style="margin: 0 20px 15px 0;">
@@ -203,6 +204,7 @@ import {
 import {
   Quasar
 } from 'quasar'
+import NodeSelector from 'components/nodeselector'
 import Initialize from 'components/initialize'
 import Register from 'components/register'
 import Notifier from 'components/notifier'
@@ -219,7 +221,8 @@ export default {
     Notifier,
     MenuDropdown,
     MultiModal,
-    VoteEosdac
+    VoteEosdac,
+    NodeSelector
   },
   data() {
     return {

@@ -95,7 +95,7 @@ export default {
     },
     async newTransaction(transactionActions, cancelable = false) {
       if(!this.getAccountName){
-        this.$refs.Multi.init('signin');
+        alert('please sign in')
         return false;
       }
 
