@@ -3,6 +3,7 @@ import store from '../store'
 const Guards = {
   logInCheck (to, from, next) {
     if (!store.getters['account/getAccountName']) {
+      alert('Please login.');
       next({ path: '' })
     } else {
       next()

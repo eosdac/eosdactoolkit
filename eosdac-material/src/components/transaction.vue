@@ -1,5 +1,5 @@
 <template>
-<div>
+
 <q-modal class="text-white z-max" v-model="visible" :content-css="{maxWidth: '30vw'}">
   <q-card v-for="(action, index) in actions" :key="index" v-show="index === showAction" dark class="bg-dark">
     <q-card-title>
@@ -47,13 +47,11 @@
     
   </q-card>
 </q-modal>
-<MultiModal ref="Multi" />
-</div>
+
 </template>
 
 <script>
 import marked from 'marked'
-import MultiModal from './multi-modal'
 import LoadingSpinner from 'components/loading-spinner'
 import {
   mapGetters
@@ -61,8 +59,8 @@ import {
 export default {
   name: 'Transaction',
   components: {
-    LoadingSpinner,
-    MultiModal
+    LoadingSpinner
+    
   },
   data() {
     return {

@@ -53,7 +53,7 @@
   </q-layout-header>
   <q-layout-drawer v-model="leftDrawerOpen" content-class="bg-dark2">
     <!-- login button -->
-    <q-list no-border link inset-delimiter dark>
+    <q-list v-if="!getAccountName" no-border link inset-delimiter dark>
       <q-item @click.native="unlockAccount()">
         <q-item-side>
           <q-item-tile color="positive" icon="icon-topmenu-1" />
@@ -124,7 +124,7 @@
         <q-item-side icon="icon-ui-3" />
         <q-item-main :label="$t('default.custodians')" sublabel="" />
       </q-item>
-      <q-item :to="'/profile/'+getAccountName">
+      <q-item v-if="getAccountName" :to="'/profile/'+getAccountName">
         <q-item-side icon="icon-menu-10" />
         <q-item-main :label="$t('default.profile')" sublabel="" />
       </q-item>
