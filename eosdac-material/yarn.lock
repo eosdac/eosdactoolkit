@@ -6795,7 +6795,7 @@ qs@6.5.2, qs@~6.5.2:
   version "6.5.2"
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.5.2.tgz#cb3ae806e8740444584ef154ce8ee98d403f3e36"
 
-quasar-cli@^0.17.10:
+quasar-cli@^0.17.20:
   version "0.17.20"
   resolved "https://registry.yarnpkg.com/quasar-cli/-/quasar-cli-0.17.20.tgz#d61d2421d99b5e74159d2a6362a324a8424a52d8"
   dependencies:
@@ -7379,9 +7379,9 @@ scatterjs-core@2.3.4:
     es6-promise "^4.2.4"
     get-random-values "^1.2.0"
 
-scatterjs-plugin-eosjs@^1.3.6:
-  version "1.3.6"
-  resolved "https://registry.yarnpkg.com/scatterjs-plugin-eosjs/-/scatterjs-plugin-eosjs-1.3.6.tgz#e8f45cfc5ce4ddf11a10558fba9e21e807f1f8b8"
+scatterjs-plugin-eosjs@1.3.8:
+  version "1.3.8"
+  resolved "https://registry.yarnpkg.com/scatterjs-plugin-eosjs/-/scatterjs-plugin-eosjs-1.3.8.tgz#45c47bb6aa506d2b80f829024935ecebe08e7a15"
   dependencies:
     eosjs "^16.0.6"
 

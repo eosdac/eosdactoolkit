@@ -24,17 +24,17 @@ export default [
     component: () => import('layouts/default'),
     children: [
       { path: '', component: () => import('pages/index-loggedout') },
-      { path: 'wallet', component: () => import('pages/wallet'), beforeEnter: Guards.logInCheck },
+      { path: 'wallet', component: () => import('pages/wallet'), beforeEnter: Guards.logInCheck},
       { path: 'settings', component: () => import('pages/settings'), beforeEnter: Guards.logInCheck },
       { path: 'dashboard', component: () => import('pages/dashboard'), beforeEnter: Guards.logInCheck },
       { path: 'workerproposals', component: () => import('pages/workerproposals'), beforeEnter: Guards.logInCheck },
-      { path: 'votecustodians', component: () => import('pages/votecustodians'), beforeEnter: Guards.logInCheck },
+      { path: 'votecustodians', component: () => import('pages/votecustodians') },
       { path: 'profile/:accountname', component: () => import('pages/profile') },
-      { path: 'constitution', component: () => import('pages/constitution'), beforeEnter: Guards.logInCheck },
+      { path: 'constitution', component: () => import('pages/constitution') },
       { path: 'managecandidateship', component: () => import('pages/registercandidate'), beforeEnter: Guards.logInCheck },
-      { path: 'loggedout', component: () => import('pages/index-loggedout'), beforeEnter: Guards.logInCheck },
+      { path: 'loggedout', component: () => import('pages/index-loggedout')},
       { path: 'custodiandashboard', component: () => import('pages/custodian-dashboard'), beforeEnter: Guards.custodianCheck },
-      { path: 'proposals', component: () => import('pages/custodians/proposals'), beforeEnter: Guards.custodianCheck },
+      { path: 'msigproposals', component: () => import('pages/custodians/msigproposals') },
       { path: 'notallowed', component: () => import('pages/notallowed')}
     ]
   },

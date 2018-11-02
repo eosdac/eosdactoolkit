@@ -81,7 +81,7 @@ import LoadingSpinner from 'components/loading-spinner'
 import NodeSelector from 'components/modules/nodeselector.js'
 import {
   mapGetters
-} from 'vuex'
+} from 'vuex' 
 export default {
   name: 'NodeSelector',
   props: {

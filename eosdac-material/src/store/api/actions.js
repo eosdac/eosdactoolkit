@@ -81,7 +81,12 @@ export async function transaction({
       const identity = await state.scatter.getIdentity({
         accounts: [network]
       })
-      eos = state.scatter.eos(network, Eos, eosConfig)
+
+      eos =  state.scatter.eos(network, Eos, eosConfig)
+
+      // const contract = await eos.getAbi('kasdactokens');
+      // eos.fc.abiCache.abi('kasdactokens', contract.abi)
+
       let authority = identity.accounts[0].authority
       let accountname = identity.accounts[0].name
       let actions = []
@@ -393,7 +398,8 @@ export async function getContractRicardian({
   try {
     eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint
     let eos = Eos(eosConfig)
-    const contract = await eos.getAbi(payload)
+    const contract = await eos.getAbi(payload);
+    
     let ricardian = contract.abi.actions
     if (ricardian) {
       commit('ADD_CONTRACT_RICARDIAN', {
@@ -681,4 +687,68 @@ export async function getProposalsFromAccount({
     throw error
   }
   
+}
+
+export async function getProducers({
+  state,
+  commit,
+
+}, param) {
+
+  try {
+    // console.log(param)
+    eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint
+    let eos = Eos(eosConfig)
+    const producers = await eos.getTableRows({
+      json: true,
+      scope: 'eosio',
+      code: 'eosio',
+      table: 'producers',
+      limit:0
+    })
+    if (!producers.rows.length) {
+      return false
+    } else {
+      return producers.rows
+    }
+    commit('SET_CURRENT_CONNECTION_STATUS', true)
+  } catch (error) {
+    apiDown(error,commit)
+    throw error
+  }
+}
+
+export async function getProducerVotes({
+  state,
+  commit,
+}, param) {
+  try {
+
+    eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint
+    let eos = Eos(eosConfig)
+    const votes = await eos.getTableRows({
+      json: true,
+      scope: 'eosio',
+      code: 'eosio',
+      table: 'voters',
+      lower_bound: param.member,
+      limit:1
+    });
+    if (!votes.rows.length) {
+      return []
+    } else {
+      // console.log(votes.rows[0].voter +'---'+param.member)
+      if(votes.rows[0].owner === param.member){
+        return votes.rows
+      }
+      else{
+        return [];
+      }
+
+    }
+    commit('SET_CURRENT_CONNECTION_STATUS', true)
+  } catch (error) {
+    apiDown(error,commit)
+    throw error
+  }
 }

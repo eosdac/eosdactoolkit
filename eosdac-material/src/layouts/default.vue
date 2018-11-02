@@ -52,7 +52,16 @@
     </q-toolbar>
   </q-layout-header>
   <q-layout-drawer v-model="leftDrawerOpen" content-class="bg-dark2">
-    <q-list v-if="getAccountName" no-border link inset-delimiter dark>
+    <!-- login button -->
+    <q-list no-border link inset-delimiter dark>
+      <q-item @click.native="unlockAccount()">
+        <q-item-side>
+          <q-item-tile color="positive" icon="icon-topmenu-1" />
+        </q-item-side>
+        <q-item-main :label="$t('default.log_in')" sublabel="" />
+      </q-item>
+    </q-list>
+    <q-list no-border link inset-delimiter dark>
       <q-item class="lg-hide xl-hide" @click.native="lockScatter()">
         <q-item-side>
           <q-item-tile color="negative" icon="icon-topmenu-4" />
@@ -95,10 +104,18 @@
         <q-item-side icon="icon-menu-1" />
         <q-item-main label="Dashboard" sublabel="" />
       </q-item>-->
-      <q-item v-if="getMemberRoles.custodian" class="text-blue" to="/custodiandashboard">
+      <!-- <q-item v-if="getMemberRoles.custodian" class="text-blue" to="/custodiandashboard">
         <q-item-side class="text-blue" icon="icon-role-4" />
         <q-item-main label="Custodian Dashboard" sublabel="" />
-      </q-item>
+      </q-item> -->
+      <q-collapsible  dark icon="icon-role-4" @hide="submenuheader_open = false" @show="submenuheader_open = true" :header-class="{submenuheader: submenuheader_open}"  label="Custodian Tools">
+        <div class="bg-dark">
+          <q-item class="q-pl-lg" link to="/msigproposals">
+            <q-item-side icon="icon-topmenu-6" />
+            <q-item-main label="Msig Proposals" sublabel="" />
+          </q-item>
+        </div>
+      </q-collapsible>
       <q-item to="/constitution">
         <q-item-side icon="icon-register-3" />
         <q-item-main :label="$t('default.constitution')" sublabel="" />
@@ -145,25 +162,9 @@
         <q-item-side right icon="icon-transfer-out" />
       </q-item>
 
-    
-      <q-collapsible  dark icon="explore" @hide="submenuheader_open = false" @show="submenuheader_open = true" :header-class="{submenuheader: submenuheader_open}"  label="Custodian Tools">
-        <div class="bg-dark">
-          <q-item class="q-pl-lg" link to="/proposals">
-            <q-item-side icon="icon-topmenu-6" />
-            <q-item-main label="Proposals" sublabel="" />
-          </q-item>
-        </div>
-      </q-collapsible>
+    </q-list>
 
-    </q-list>
-    <q-list v-else no-border link inset-delimiter dark>
-      <q-item @click.native="unlockAccount()">
-        <q-item-side>
-          <q-item-tile color="positive" icon="icon-topmenu-1" />
-        </q-item-side>
-        <q-item-main :label="$t('default.log_in')" sublabel="" />
-      </q-item>
-    </q-list>
+    <div class="absolute-bottom row  bg-dark2 justify-center q-pa-md" style="border-top: 1px solid #272B35;margin-left:-20px" ><VoteEosdac /></div>
   </q-layout-drawer>
   <q-page-container>
     <transition appear enter-active-class="animated fadeInDown">
@@ -207,6 +208,7 @@ import Register from 'components/register'
 import Notifier from 'components/notifier'
 import MenuDropdown from 'components/menu-dropdown'
 import MultiModal from 'components/multi-modal'
+import VoteEosdac from 'components/vote-eosdac'
 export default {
 
 
@@ -216,7 +218,8 @@ export default {
     Register,
     Notifier,
     MenuDropdown,
-    MultiModal
+    MultiModal,
+    VoteEosdac
   },
   data() {
     return {

@@ -1,4 +1,5 @@
 <template>
+<div>
 <q-modal class="text-white z-max" v-model="visible" :content-css="{maxWidth: '30vw'}">
   <q-card v-for="(action, index) in actions" :key="index" v-show="index === showAction" dark class="bg-dark">
     <q-card-title>
@@ -43,12 +44,16 @@
 
     </div>
     <LoadingSpinner :visible="loading" :text="$t(loadingText)" />
+    
   </q-card>
 </q-modal>
+<MultiModal ref="Multi" />
+</div>
 </template>
 
 <script>
 import marked from 'marked'
+import MultiModal from './multi-modal'
 import LoadingSpinner from 'components/loading-spinner'
 import {
   mapGetters
@@ -56,7 +61,8 @@ import {
 export default {
   name: 'Transaction',
   components: {
-    LoadingSpinner
+    LoadingSpinner,
+    MultiModal
   },
   data() {
     return {
@@ -84,11 +90,17 @@ export default {
   },
 
   methods: {
+
     close() {
       Object.assign(this.$data, this.$options.data())
       this.visible = false
     },
     async newTransaction(transactionActions, cancelable = false) {
+      if(!this.getAccountName){
+        this.$refs.Multi.init('signin');
+        return false;
+      }
+
       Object.assign(this.$data, this.$options.data())
       this.cancelable = cancelable
       this.visible = this.getTransactionPopup //boolean
@@ -181,6 +193,7 @@ export default {
     
     parseError(err){
 // assertion failure with message: ERR::UNSTAKE_CANNOT_UNSTAKE_FROM_ACTIVE_CAND::Cannot unstake tokens for an active candidate. Call withdrawcand first.
+      // console.log(err)
       err = JSON.parse(err);
       if(err.error.details[0].message && err.error.details[0].message.indexOf('ERR::') > -1){
         err = err.error.details[0].message.substr(err.error.details[0].message.indexOf('ERR::'));

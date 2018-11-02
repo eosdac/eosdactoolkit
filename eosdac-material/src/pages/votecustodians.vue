@@ -1,6 +1,6 @@
 <template>
 <q-page class="text-white">
-<Transaction ref="Transaction" v-on:done="getMemberVotes(); $refs.votebar.initProgressbar();" />
+<Transaction ref="Transaction" v-on:done="getMemberVotes(); $refs.votebar.initProgressbar(); sortCandidatesByVotes()" />
 
   <div class=" gradient-bg-primary q-px-md q-pt-md relative-position" style="min-height:260px; overflow:hidden">
     <div class="row">
@@ -340,6 +340,13 @@ export default {
           newvotes: votes
         }
       }], false)
+
+    },
+    sortCandidatesByVotes(){
+      this.custodians = this.custodians.sort(function(a, b) {
+          let t = b.total_votes - a.total_votes;
+          return t;
+      });
 
     },
 
