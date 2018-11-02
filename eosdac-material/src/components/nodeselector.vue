@@ -1,6 +1,6 @@
 <template>
 <div v-if="setup">
-  <div v-if="setupError" class="row justify-center">
+  <div v-if="setupError && successEndpoint" class="row justify-center">
     <div class="col-sm-12 text-center">
       <div class="row justify-center">
         <div class="col-sm-12 q-pa-sm text-center">
@@ -92,6 +92,8 @@ export default {
   },
   computed: {
     ...mapGetters({
+      
+      getAccountName: 'account/getAccountName',
       getCurrentEndpoint: 'api/getCurrentEndpoint'
     })
   },

@@ -115,7 +115,10 @@ export default {
   },
   methods: {
     init(mode) {
-      // this.active = true;
+      // if(!this.getCurrentEndpoint){
+      //   this.active = true;
+      // }
+      
       this.mode = mode
       this.initialmode = mode
       if (this.mode !== 'sign') {

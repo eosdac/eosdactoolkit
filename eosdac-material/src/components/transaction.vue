@@ -121,7 +121,7 @@ export default {
         } else {
           transactionActions[i].ricardianError = true
         }
-        console.log(transactionActions[i].ricardian)
+        // console.log(transactionActions[i].ricardian)
       }
       this.actions = transactionActions
       if(!this.getTransactionPopup){
