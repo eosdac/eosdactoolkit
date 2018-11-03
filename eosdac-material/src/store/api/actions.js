@@ -177,6 +177,7 @@ export async function getRegistered({
   commit,
   rootState
 }) {
+  console.log('Query member registration');
   try {
     eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint
     let eos = Eos(eosConfig)
@@ -375,6 +376,7 @@ export async function getMemberTerms({
   state,
   commit
 }) {
+  console.log('Query latest terms');
   try {
     eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint
     let eos = Eos(eosConfig)
@@ -510,6 +512,7 @@ export async function getAccount({
     const account = await eos.getAccount({
       account_name: payload.account_name
     })
+    commit('account/IMPORT_ACCOUNT', {info: account, scatter: true}, {root: true})
     return account
     commit('SET_CURRENT_CONNECTION_STATUS', true)
   } catch (error) {

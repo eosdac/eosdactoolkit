@@ -14,7 +14,7 @@
         <MenuDropdown class="no-pointer-events" v-if="getAccountName && getRegistered && !getTokenBalance" iconColor="white" :label="$t('default.member_status')" :statusLabel="3" :sublabel="$t('default.pending')" icon="icon-role-2" />
         <MenuDropdown v-close-overlay v-if="getAccountName && !getRegistered" iconColor="white" :label="$t('default.member_status')" :statusLabel="2" :sublabel="$t('default.not_registered')" icon="icon-role-1" :iconRight="true">
           <q-list class="bg-dark2" dark link>
-            <q-item @click.native="$refs.Multi.init('sign')" dark>
+            <q-item @click.native="alert('sign')" dark>
               <q-item-side>
                 <q-item-tile icon="icon-register-3">
                 </q-item-tile>
@@ -89,7 +89,7 @@
         </q-item-side>
         <q-popover v-if="!getRegistered" class="lg-hide xl-hide" fit>
           <q-list class="bg-dark2" dark link>
-            <q-item @click.native="$refs.Multi.init('sign')" dark>
+            <q-item @click.native="alert('sign')" dark>
               <q-item-side>
                 <q-item-tile icon="icon-register-3">
                 </q-item-tile>
@@ -175,7 +175,7 @@
         </div>
         <span v-if="!getRegisteredVersionUpdate" class="on-left">{{ $t('default.you_have_not_yet_registered') }}</span>
         <span v-else class="on-left">{{ $t('default.constitution_has_been_updated') }}</span>
-        <q-btn class="q-mt-sm" @click="$refs.Multi.init('sign')" text-color="blue" color="white">{{ $t('default.sign_the_constitution') }}</q-btn>
+        <q-btn class="q-mt-sm" @click="alert('xxxxxxxxxxxxxxxx')" text-color="blue" color="white">{{ $t('default.sign_the_constitution') }}</q-btn>
       </q-alert>
     </transition>
     <router-view />
@@ -184,7 +184,8 @@
 
   </q-page-container>
   <NodeSelector setup />
-  <ScatterInterface ref="scatter_interface"/>
+  <InitInterface autorun ref="init_interface"/>
+  <!-- depricated multimodal -->
   <!-- <MultiModal ref="Multi" /> -->
 
   <q-btn v-back-to-top.animate="{offset: 500, duration: 200}" round color="primary" class="fixed-bottom-right animate-pop z-max" style="margin: 0 20px 15px 0;">
@@ -205,9 +206,8 @@ import {
 import {
   Quasar
 } from 'quasar'
-import ScatterInterface from 'components/scatter-interface'
+import InitInterface from 'components/init-interface'
 import NodeSelector from 'components/nodeselector'
-import Initialize from 'components/initialize'
 import Register from 'components/register'
 import Notifier from 'components/notifier'
 import MenuDropdown from 'components/menu-dropdown'
@@ -218,14 +218,13 @@ export default {
 
   name: 'LayoutDefault',
   components: {
-    Initialize,
     Register,
     Notifier,
     MenuDropdown,
     MultiModal,
     VoteEosdac,
     NodeSelector,
-    ScatterInterface
+    InitInterface
   },
   data() {
     return {
@@ -262,7 +261,7 @@ export default {
   methods: {
     openURL,
     unlockAccount() {
-      this.$refs.scatter_interface.pairScatter()
+      this.$refs.init_interface.pairScatter()
     },
     lockAccount() {
       this.$store.commit('account/LOCK_ACCOUNT')
@@ -325,7 +324,7 @@ export default {
     },
     getScatter(val) {
       if (val && this.getImported && !this.getUnlocked) {
-        this.$refs.Multi.init('signin')
+        this.$refs.init_interface.pairScatter()
       }
     }
   }

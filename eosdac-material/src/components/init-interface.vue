@@ -9,19 +9,19 @@ import {
 
 import ScatterTutorial from 'components/scatter-tutorial'
 export default {
-  name: 'ScatterInterface',
+  name: 'InitInterface',
   components: {
 
     ScatterTutorial
   },
   props: {
-    skipSelection: Boolean
+    autorun: Boolean
   },
   data() {
     return {
       scatterError: false,
       scatterErrorText: '',
-      connectionMethod: 'Scatter'
+      connectionMethod: 'scatter'
     }
   },
   computed: {
@@ -33,7 +33,20 @@ export default {
     })
   },
   mounted() {
-    this.pairScatter()
+    //preparation for multiple login interfaces
+    switch (this.connectionMethod) {
+      case 'scatter':
+        if(this.autorun && this.hasScatter){
+          console.log('Pair scatter automatically.');
+          this.pairScatter();
+        }
+        break;
+    
+      default:
+        break;
+    }
+
+    
 
   },
   methods: {
@@ -71,24 +84,14 @@ export default {
             chainId: current.chainId
           }]
         })
-        let queryAccount = await this.$store.dispatch('api/getAccount', {
-          account_name: identity.accounts[0].name
-        })
-        this.$store.commit('account/IMPORT_ACCOUNT', {
-          info: queryAccount,
-          scatter: true
-        })
-        ///////////////////////////////////
-        let memberRegistration = await this.$store.dispatch('api/getRegistered')
-        console.log('Query member registration')
-        let latestMemberTerms = await this.$store.dispatch('api/getMemberTerms')
-        console.log('Query latest terms')
-
         this.$store.commit('account/UNLOCK_ACCOUNT_SCATTER')
-        this.loading = false
-        this.$emit('done')
+        //we should have an identity! do stuff with it...
+        let queryAccount = await this.$store.dispatch('api/getAccount', {account_name: identity.accounts[0].name} );
+        let memberRegistration = await this.$store.dispatch('api/getRegistered');
+        let latestMemberTerms = await this.$store.dispatch('api/getMemberTerms');
+        this.$emit('done');
+
       } catch (err) {
-        this.loading = false
         if (err.type === 'locked') {
           this.scatterError = true
           this.scatterErrorText = 'scatter_signin.scatter_is_locked'
