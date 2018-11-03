@@ -189,12 +189,14 @@ export async function getRegistered({
       limit:1
     })
     if (!members.rows.length) {
+      commit('account/ADD_REGISTRATION', null, {root: true});
       return false
     } else {
       if (members.rows[0].sender === rootState.account.info.account_name) {
         commit('account/ADD_REGISTRATION', members.rows[0].agreedterms, {root: true})
         return members.rows[0]
       } else {
+        commit('account/ADD_REGISTRATION', null, {root: true});
         return false
       }
     }
@@ -376,14 +378,18 @@ export async function getMemberTerms({
   try {
     eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint
     let eos = Eos(eosConfig)
-    const memberterms = await eos.getTableRows({
+    let memberterms = await eos.getTableRows({
       json: true,
       scope: configFile.network.tokenContract.name,
       code: configFile.network.tokenContract.name,
       table: 'memberterms'
     })
-    commit('account/ADD_MEMBER_TERMS', memberterms.rows[memberterms.rows.length - 1], {root: true})
-    return memberterms.rows[memberterms.rows.length - 1]
+    memberterms = memberterms.rows.sort(function(a, b) {
+      return a.version - b.version;
+    });
+    let latest = memberterms.slice(-1)[0] 
+    commit('account/ADD_MEMBER_TERMS', latest, {root: true})
+    return latest
     commit('SET_CURRENT_CONNECTION_STATUS', true)
   } catch (error) {
     apiDown(error,commit)

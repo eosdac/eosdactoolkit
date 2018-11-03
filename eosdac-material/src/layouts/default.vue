@@ -183,8 +183,9 @@
     <Notifier :drawer="leftDrawerOpen" />
 
   </q-page-container>
-  <NodeSelector setup  />
-  <MultiModal ref="Multi" />
+  <NodeSelector setup />
+  <ScatterInterface ref="scatter_interface"/>
+  <!-- <MultiModal ref="Multi" /> -->
 
   <q-btn v-back-to-top.animate="{offset: 500, duration: 200}" round color="primary" class="fixed-bottom-right animate-pop z-max" style="margin: 0 20px 15px 0;">
     <q-icon name="keyboard_arrow_up" />
@@ -204,6 +205,7 @@ import {
 import {
   Quasar
 } from 'quasar'
+import ScatterInterface from 'components/scatter-interface'
 import NodeSelector from 'components/nodeselector'
 import Initialize from 'components/initialize'
 import Register from 'components/register'
@@ -222,7 +224,8 @@ export default {
     MenuDropdown,
     MultiModal,
     VoteEosdac,
-    NodeSelector
+    NodeSelector,
+    ScatterInterface
   },
   data() {
     return {
@@ -259,7 +262,7 @@ export default {
   methods: {
     openURL,
     unlockAccount() {
-      this.$refs.Multi.init('signin')
+      this.$refs.scatter_interface.pairScatter()
     },
     lockAccount() {
       this.$store.commit('account/LOCK_ACCOUNT')
@@ -288,13 +291,14 @@ export default {
   },
   mounted() {
     this.getActiveCustodians();
-    if (!this.getImported) {
-      this.$refs.Multi.init('register')
-    } else {
-      if (!this.getUnlocked && this.getScatter) {
-        this.$refs.Multi.init('signin')
-      }
-    }
+    // if (!this.getImported) {
+    //   this.$refs.Multi.init('register')
+    // } else {
+    //   if (!this.getUnlocked && this.getScatter) {
+    //     this.$refs.Multi.init('signin')
+    //   }
+    // }
+    this.queryApis()
     setInterval(this.queryApis, 1000)
   },
   created() {

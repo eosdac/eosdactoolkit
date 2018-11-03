@@ -127,6 +127,10 @@ export default {
   },
   methods: {
     async getFastestNode() {
+      if(this.$configFile.network.chainId == '038f4b0fc8ff18a4f0842a8f0564611f6e96e8535901dd45e43ac8691a1c4dca'){
+        this.connect('http://dev.cryptolions.io:18888');
+        return false;
+      }
       let s = new NodeSelector(this.$configFile.api.bpNodeApiUrl)
       this.loading = true
       this.loadingText = 'nodeselector.gathering_endpoints'
@@ -136,6 +140,7 @@ export default {
       }
       this.loading = false
     },
+
     async loadEndpoints() {
       let s = new NodeSelector(this.$configFile.api.bpNodeApiUrl)
       this.loading = true
