@@ -29,32 +29,15 @@
           <span class="text-dimwhite">Hash: </span>
           <span>{{latestMemberTerms.hash}}</span>
         </div>
-        <div style="height:30px">
-          <q-btn class="float-right"  @click="signConstitution()"  color="primary" label="register" />
+        <div class="row items-center justify-end" style="height:30px">
+          <q-btn v-if="!getRegistered" class="float-right"  @click="signConstitution()"  color="primary" label="register" />
+          <div  v-if="getRegistered" >You have signed the constitution!</div>
         </div>
 
       </div>
     </div>
   </div>
 </div><!-- end row -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
   <q-scroll-observable @scroll="userHasScrolled" />

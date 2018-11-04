@@ -1,7 +1,7 @@
 <template>
 <q-page class="text-white q-pa-md">
 
-<Transaction ref="Transaction" v-on:done="$refs.Register.checkRegistered(true)" />
+<Transaction ref="Transaction" v-on:done="checkRegistered" />
 
 <h4 class="q-display-1 q-mt-none q-mb-md">{{ $t("settings.settings") }}</h4>
 
@@ -168,6 +168,11 @@ export default {
         }
       }], false)  
     },
+
+    async checkRegistered(){
+        let memberRegistration = await this.$store.dispatch('api/getRegistered');
+        let latestMemberTerms = await this.$store.dispatch('api/getMemberTerms');
+    }
 
   },
   watch: {
