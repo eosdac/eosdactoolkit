@@ -21,7 +21,7 @@
   <!-- second column -->
   <div class="col-xs-12 col-xl-4" >
     <div>
-      <div class="bg-dark2 q-pa-md round-borders shadow-5" >
+      <div id="registerbox" class="bg-dark2 q-pa-md round-borders shadow-5" >
         <div class="q-mb-sm"><span class="text-dimwhite">Constitution: </span><span>V{{latestMemberTerms.version}}</span></div>
         <div class="q-mb-sm" style="overflow:hidden; white-space: nowrap;" ><span class="text-dimwhite">Direct Link: </span><span ><a  target="_blank" :href="latestMemberTerms.terms">{{latestMemberTerms.terms}}</a></span></div>
         <div class="q-mb-sm">
@@ -57,7 +57,7 @@
 
 
 
-
+  <q-scroll-observable @scroll="userHasScrolled" />
   <Transaction ref="Transaction" v-on:done="checkRegistered" />
   <LoadingSpinner :visible="isloading" :text="$t('constitution.loading_constitution')" />
 </q-page>
@@ -66,6 +66,11 @@
 <style lang="stylus">
 @import '~variables'
 
+#registerbox{
+  position:relative;
+  transition: all 1s ease 0s;
+  top: 0;
+}
 .overwrite {
   background: none !important;
   color: rgba(255,255,255,0.8) !important;
@@ -161,6 +166,15 @@ export default {
     async checkRegistered(){
         let memberRegistration = await this.$store.dispatch('api/getRegistered');
         let latestMemberTerms = await this.$store.dispatch('api/getMemberTerms');
+    },
+    userHasScrolled(scroll){
+      const votebox = document.getElementById('registerbox');
+      if(scroll.position < 40 || window.innerWidth < 1200){
+        votebox.style.top = '0px';
+        return false;
+      }
+      // console.log(`votebox: ${offset(votebox).top} scroll: ${scroll.position}`);
+      votebox.style.top = (scroll.position)+'px';
     }
 
 
