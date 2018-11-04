@@ -5,17 +5,17 @@
 <div class="row gutter-md reverse-wrap">
   <!-- first column  -->
   <div class="col-xs-12 col-xl-8" >
-    <div >
-      <div class="row justify-center q-mt-sm bg-dark2 shadow-5 round-borders">
+    
+      <div class="row justify-center bg-dark2 shadow-5 round-borders">
         <div class="col-lg-12 col-xl-auto ">
-          <div class="bg-dark2 q-pa-md">
+          <div class="bg-dark2 q-pa-md round-borders">
             <q-toggle class="float-right" color="p-light" v-model="white_constitution" left-label :label="$t('constitution.switch_contrast')" /></div>
           <div v-if="!isloading" class="q-pt-md   bg-dark2">
             <div v-bind:class="{ overwrite: !white_constitution }" class="markdown-body" v-html="constitution"></div>
           </div>
         </div>
       </div>
-    </div>
+   
   </div>
 
   <!-- second column -->
@@ -146,7 +146,8 @@ export default {
 
     async loadConstitutionFromGithub(url) {
       try {
-        let constitution = await this.$axios.get(url)
+        let constitution = await this.$axios.get(url);
+        // console.log(constitution)
         return constitution.data
       } catch (err) {
         throw err
