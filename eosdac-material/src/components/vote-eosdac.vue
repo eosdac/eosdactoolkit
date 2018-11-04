@@ -4,7 +4,7 @@
     <q-icon name="icon-menu-3" class="on-left text-dimwhite"/> 
     <span>Vote For eosDAC</span>
   </q-btn>
-  <div v-else><q-icon name="icon-ui-6" class="on-left text-dimwhite" style="margin-top:-5px"/><span>Thank you for your vote!</span></div>
+  <div v-else class="animate-fade" ><q-icon name="icon-ui-6" class="on-left text-dimwhite" style="margin-top:-5px"/><span>Thank you for your vote!</span></div>
 
   <q-modal minimized v-model="votemodal" >
     <div class="bg-dark">
@@ -92,16 +92,19 @@ export default {
         this.eosdacBP = 'eosdacserver';
       }
       this.myvotes = await this.$store.dispatch('api/getProducerVotes', {member: this.getAccountName});
-      console.log(this.myvotes)
+      // console.log(this.myvotes)
+
       this.hasVotedForUs = this.myvotes[0].producers.indexOf(this.eosdacBP) >= 0 ? true : false;
 
       let vote_weight_now = this._calculateVoteWeight(this.myvotes[0].staked)*100000000000000000;
       let last_vote_weight = this.myvotes[0].last_vote_weight*100000000000000000;
 
-      this.votedecay_percent = (Math.abs((last_vote_weight) - (vote_weight_now)) /(((last_vote_weight)+(vote_weight_now))/2))*100;
-      if(this.votedecay_percent > 0){
-        this.votedecay = true;
+      //only calculate vote decay if previous voted
+      if(last_vote_weight != 0){
+        this.votedecay_percent = (Math.abs((last_vote_weight) - (vote_weight_now)) /(((last_vote_weight)+(vote_weight_now))/2))*100;
       }
+      this.votedecay = this.votedecay_percent > 0 ? true : false;
+
 
     },
 
