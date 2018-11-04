@@ -1,21 +1,63 @@
 <template>
 <q-page class="text-white q-pa-md">
-  <div>
-    <div>{{latestMemberTerms.terms}}</div>
-    <div>{{latestMemberTerms.hash}}</div>
-    <div>{{latestMemberTerms.version}}</div>
-    <q-btn  @click="signConstitution()"  color="primary" label="Sign" />
 
-  </div>
-  <div class="row justify-center q-mt-sm">
-    <div class="col-lg-12 col-xl-auto shadow-5">
-      <div class="bg-dark2 q-pa-md">
-        <q-toggle class="float-right" color="p-light" v-model="white_constitution" left-label :label="$t('constitution.switch_contrast')" /></div>
-      <div v-if="!isloading" class="q-pt-md round-borders  bg-dark2">
-        <div v-bind:class="{ overwrite: !white_constitution }" class="markdown-body" v-html="constitution"></div>
+
+<div class="row gutter-md reverse-wrap">
+  <!-- first column  -->
+  <div class="col-xs-12 col-xl-8" >
+    <div >
+      <div class="row justify-center q-mt-sm bg-dark2 shadow-5 round-borders">
+        <div class="col-lg-12 col-xl-auto ">
+          <div class="bg-dark2 q-pa-md">
+            <q-toggle class="float-right" color="p-light" v-model="white_constitution" left-label :label="$t('constitution.switch_contrast')" /></div>
+          <div v-if="!isloading" class="q-pt-md   bg-dark2">
+            <div v-bind:class="{ overwrite: !white_constitution }" class="markdown-body" v-html="constitution"></div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
+
+  <!-- second column -->
+  <div class="col-xs-12 col-xl-4" >
+    <div>
+      <div class="bg-dark2 q-pa-md round-borders shadow-5" >
+        <div class="q-mb-sm"><span class="text-dimwhite">Constitution: </span><span>V{{latestMemberTerms.version}}</span></div>
+        <div class="q-mb-sm" style="overflow:hidden; white-space: nowrap;" ><span class="text-dimwhite">Direct Link: </span><span ><a  target="_blank" :href="latestMemberTerms.terms">{{latestMemberTerms.terms}}</a></span></div>
+        <div class="q-mb-sm">
+          <q-icon title="Downloaded constitution is verified!" name="icon-ui-6" color="positive" class="q-mr-xs" style="margin-top:-8px"/>
+          <span class="text-dimwhite">Hash: </span>
+          <span>{{latestMemberTerms.hash}}</span>
+        </div>
+        <div style="height:30px">
+          <q-btn class="float-right"  @click="signConstitution()"  color="primary" label="register" />
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div><!-- end row -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   <Transaction ref="Transaction" v-on:done="checkRegistered" />
   <LoadingSpinner :visible="isloading" :text="$t('constitution.loading_constitution')" />
 </q-page>
