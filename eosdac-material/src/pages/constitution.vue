@@ -30,8 +30,14 @@
           <span>{{latestMemberTerms.hash}}</span>
         </div>
         <div class="row items-center justify-end" style="height:30px">
-          <q-btn v-if="!getRegistered" class="float-right"  @click="signConstitution()"  color="primary" label="register" />
-          <div  v-if="getRegistered" >You have signed the constitution!</div>
+          <div v-if="getAccountName">
+            <q-btn v-if="!getRegistered"  @click="signConstitution()"  color="primary" label="register" />
+            <div  v-if="getRegistered" >You have signed the constitution!</div>
+          </div>
+        </div>
+          <div v-if="!getAccountName">
+            <div>Please login to sign.</div>
+          </div>
         </div>
 
       </div>
