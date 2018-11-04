@@ -2,7 +2,6 @@
 <q-page class="text-white q-pa-md">
 
 <Transaction ref="Transaction" v-on:done="$refs.Register.checkRegistered(true)" />
-<Register ref="Register" />
 
 <h4 class="q-display-1 q-mt-none q-mb-md">{{ $t("settings.settings") }}</h4>
 
@@ -123,7 +122,7 @@
 <script>
 import packageJson from '../../package.json';
 import Transaction from 'components/transaction'
-import Register from 'components/register'
+
 import NodeSelector from 'components/nodeselector'
 import LangSelector from 'components/lang-selector'
 import {
@@ -135,7 +134,7 @@ export default {
     NodeSelector,
     LangSelector,
     Transaction,
-    Register
+ 
 
   },
   data (){

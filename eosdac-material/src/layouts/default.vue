@@ -208,7 +208,6 @@ import {
 } from 'quasar'
 import InitInterface from 'components/init-interface'
 import NodeSelector from 'components/nodeselector'
-import Register from 'components/register'
 import Notifier from 'components/notifier'
 import MenuDropdown from 'components/menu-dropdown'
 import VoteEosdac from 'components/vote-eosdac'
@@ -217,7 +216,6 @@ export default {
 
   name: 'LayoutDefault',
   components: {
-    Register,
     Notifier,
     MenuDropdown,
     VoteEosdac,
