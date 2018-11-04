@@ -211,7 +211,6 @@ import NodeSelector from 'components/nodeselector'
 import Register from 'components/register'
 import Notifier from 'components/notifier'
 import MenuDropdown from 'components/menu-dropdown'
-import MultiModal from 'components/multi-modal'
 import VoteEosdac from 'components/vote-eosdac'
 export default {
 
@@ -221,7 +220,6 @@ export default {
     Register,
     Notifier,
     MenuDropdown,
-    MultiModal,
     VoteEosdac,
     NodeSelector,
     InitInterface

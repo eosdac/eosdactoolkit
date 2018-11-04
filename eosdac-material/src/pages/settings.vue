@@ -53,7 +53,7 @@
         <p class="q-title">{{ $t('settings.register_as_member') }}</p>
         <p class="text-dimwhite q-body-1" style="min-height:30px">{{ $t('settings.click_register_now') }}</p>
         <div class="q-mt-lg">
-          <q-btn size="md" :disabled="getRegistered" class="float-right" color="primary" @click="$refs.Multi.init('sign')" :label="$t('settings.register_now')" />
+          <q-btn size="md" :disabled="getRegistered" class="float-right" color="primary" to="/constitution" :label="$t('settings.register_now')" />
         </div>
       </div>
     </div>
@@ -110,7 +110,6 @@
 </div>
 <div class="q-mt-lg q-pb-md"><span class="float-right text-dimwhite q-title text-weight-thin">eosDAC v{{app_version}}</span></div>
 
-<MultiModal ref="Multi" />
 </q-page>
 </template>
 
@@ -125,7 +124,6 @@
 import packageJson from '../../package.json';
 import Transaction from 'components/transaction'
 import Register from 'components/register'
-import MultiModal from 'components/multi-modal'
 import NodeSelector from 'components/nodeselector'
 import LangSelector from 'components/lang-selector'
 import {
@@ -137,8 +135,7 @@ export default {
     NodeSelector,
     LangSelector,
     Transaction,
-    Register,
-    MultiModal
+    Register
 
   },
   data (){
