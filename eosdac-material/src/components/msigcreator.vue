@@ -89,7 +89,11 @@ export default {
   },
 
   methods: {
-    init(){
+    async init(){
+      if(this.getActiveCustodians == null){
+        await this.$store.dispatch('api/getCustodians');
+      };
+
       this.msigtemplate.proposer = this.getAccountName;
       this.msigtemplate.requested = this.getActiveCustodians.map(c => {
         let req = {actor: c.cust_name, permission: 'active'};
