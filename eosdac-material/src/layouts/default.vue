@@ -14,7 +14,7 @@
         <MenuDropdown class="no-pointer-events" v-if="getAccountName && getRegistered && !getTokenBalance" iconColor="white" :label="$t('default.member_status')" :statusLabel="3" :sublabel="$t('default.pending')" icon="icon-role-2" />
         <MenuDropdown v-close-overlay v-if="getAccountName && !getRegistered" iconColor="white" :label="$t('default.member_status')" :statusLabel="2" :sublabel="$t('default.not_registered')" icon="icon-role-1" :iconRight="true">
           <q-list class="bg-dark2" dark link>
-            <q-item @click.native="alert('sign')" dark>
+            <q-item to="/constitution" dark>
               <q-item-side>
                 <q-item-tile icon="icon-register-3">
                 </q-item-tile>
@@ -175,7 +175,7 @@
         </div>
         <span v-if="!getRegisteredVersionUpdate" class="on-left">{{ $t('default.you_have_not_yet_registered') }}</span>
         <span v-else class="on-left">{{ $t('default.constitution_has_been_updated') }}</span>
-        <q-btn class="q-mt-sm" @click="alert('xxxxxxxxxxxxxxxx')" text-color="blue" color="white">{{ $t('default.sign_the_constitution') }}</q-btn>
+        <q-btn class="q-mt-sm" to="/constitution" text-color="blue" color="white">{{ $t('default.sign_the_constitution') }}</q-btn>
       </q-alert>
     </transition>
     <router-view />
