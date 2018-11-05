@@ -4,7 +4,7 @@
       <div class="q-my-md">Proposal name</div>
       <q-input dark  v-model="msigtemplate.proposal_name" />
       <div class="q-my-md">Expiration</div>
-      <q-datetime-picker minimal dark color="positive" v-model="msigtemplate.trx.expiration" type="date" />
+      <q-datetime-picker minimal dark color="positive" v-model="msigtemplate.trx.expiration" :min="mindate" :max="maxdate" type="date" />
     </div>
     <div class="col-md-6 col-xs-12 q-pa-md ">
       <div class="column full-height justify-between">
@@ -23,7 +23,18 @@
               <q-input dark stack-label="Memo" v-model="msigtemplate.trx.actions[0].data.memo"/>
             </q-tab-pane>
             <q-tab-pane class="bg-dark" name="rawmsigtr">
-              <pre>{{msigtemplate}}</pre>
+              <q-scroll-area
+                style="width: 100%; height: 300px;"
+                :thumb-style="{
+                  right: '-13px',
+                  borderRadius: '2px',
+                  background: '#7c41ba',
+                  width: '10px',
+                  opacity: 0.8
+                }"
+              >
+                <pre>{{msigtemplate}}</pre>
+              </q-scroll-area>
             </q-tab-pane>
           </q-tabs>
         </div>
@@ -37,8 +48,12 @@
 </template>
 
 <script>
-import Vue from 'vue'
 import Transaction from './transaction'
+import { date } from 'quasar'
+
+const today = new Date()
+const { addToDate, subtractFromDate } = date
+
 import {
   Quasar
 } from 'quasar'
@@ -54,7 +69,8 @@ export default {
 
   data () {
     return {
-
+      mindate: today,
+      maxdate: addToDate(today, {days: 14}),
       msigtemplate: {
         proposer: '',
         proposal_name: '',
