@@ -37,6 +37,7 @@
 </template>
 
 <script>
+import Vue from 'vue'
 import Transaction from './transaction'
 import {
   Quasar
@@ -99,6 +100,7 @@ export default {
         let req = {actor: c.cust_name, permission: 'active'};
         return req;
       });
+      // Vue.set(this.msigtemplate, actor.trx.actions[0].authorization[0].actor, this.getAccountName)
       this.msigtemplate.trx.actions[0].authorization[0].actor = this.getAccountName;
 
     },
