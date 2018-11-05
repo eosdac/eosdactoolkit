@@ -1,6 +1,30 @@
 <template>
   <div class="row  bg-dark2 round-borders shadow-5" style="">
     <div class="col-md-6 col-xs-12 q-pa-md">
+
+	    <q-select
+        class="q-mb-md"
+        dark
+	      stack-label ="Controlled accounts"
+	      placeholder="Select an account"
+	      v-model="msigtemplate.trx.actions[0].authorization[0].actor"
+	      :options="controlledAccountOptions"
+	      @input="getPermissions"
+	    />
+
+	    <q-select
+        class="q-mb-md"
+        :disabled="msigtemplate.trx.actions[0].authorization[0].actor==''"
+        dark
+	      stack-label ="Permission"
+	      placeholder="Select permission"
+	      v-model="selected_permission"
+	      :options="permissionsOptions"
+	      @input="msigtemplate.trx.actions[0].authorization[0].permission = selected_permission"
+	    />
+
+
+
       <div class="q-my-md">Proposal name</div>
       <q-input dark  v-model="msigtemplate.proposal_name" />
       <div class="q-my-md">Expiration</div>
@@ -69,6 +93,17 @@ export default {
 
   data () {
     return {
+      //select msig controlled account
+      controlledAccountOptions: [],
+      selected_controlledAccount:'',
+
+      //select permission level from selected controlled account
+      permissionsOptions: [],
+      selected_permission:'',
+
+
+
+      msigaccount: 'dacauthority',
       mindate: today,
       maxdate: addToDate(today, {days: 14}),
       msigtemplate: {
@@ -87,7 +122,7 @@ export default {
                 { 
                 account: 'eosio.token', 
                 name: 'transfer', 
-                authorization: [ { actor: '', permission: 'active' } ], 
+                authorization: [ { actor: '', permission: '' } ], 
                 data: {from:'', to:'', quantity: '', memo:''} 
                 }
             ], 
@@ -111,24 +146,59 @@ export default {
         await this.$store.dispatch('api/getCustodians');
       };
 
+      let ctrlacc = await this.$store.dispatch('api/getControlledAccounts', {accountname: 'boiboiboiboi'});
+      console.log(ctrlacc)
+      this.controlledAccountOptions = ctrlacc.controlled_accounts.map(function(a){ return {label: a, value: a} });
+
       this.msigtemplate.proposer = this.getAccountName;
       this.msigtemplate.requested = this.getActiveCustodians.map(c => {
         let req = {actor: c.cust_name, permission: 'active'};
         return req;
       });
       // Vue.set(this.msigtemplate, actor.trx.actions[0].authorization[0].actor, this.getAccountName)
-      this.msigtemplate.trx.actions[0].authorization[0].actor = this.getAccountName;
+      // this.msigtemplate.trx.actions[0].authorization[0].actor = this.getAccountName;
 
+    },
+
+    async getPermissions(){
+      let ctrlacc = this.msigtemplate.trx.actions[0].authorization[0].actor;
+      //get permissions from selected msig account
+      let accperms = await this.$store.dispatch('api/getAccountPermissions', {accountname: ctrlacc });
+      console.log(accperms);
+
+      //filter the permissions that only requires the signature from the logged in account
+      accperms = accperms.filter(ap => {
+        if(ap.required_auth.accounts.find(ac => ac.permission.actor == "boiboiboiboi") ) return true;
+      })
+
+      //map result ready for select box
+      this.permissionsOptions = accperms.map(function(a){ return {label: a.perm_name, value: a.perm_name} });
     },
     //send proposal to msig system contract. this should be changed to the eosdac msig relay contract
     proposeMsig(){
-      this.msigtemplate.trx.expiration = this.msigtemplate.trx.expiration.split('.')[0];
+      if(!this.verifyMsig() ){
+        return false;
+      }
+
       let actions = [{
         contract: 'eosio.msig', 
         action: 'propose', 
         fields: this.msigtemplate
       }];
       this.$refs.Transaction.newTransaction(actions, false);
+    },
+
+    verifyMsig(){
+      this.msigtemplate.trx.expiration = this.msigtemplate.trx.expiration.split('.')[0];
+
+      if(this.msigtemplate.trx.actions[0].data.from ==''){
+        alert('please input from data');
+        return false;
+
+      }
+
+      return true;
+      
     },
 
     //approve a proposal via msig relay {"proposer":0,"proposal_name":0,"level":0}
@@ -157,6 +227,7 @@ export default {
 
 
   mounted:function(){
+
     this.init();
   }
 

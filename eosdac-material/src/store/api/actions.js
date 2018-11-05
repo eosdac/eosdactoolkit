@@ -764,3 +764,53 @@ export async function getProducerVotes({
     throw error
   }
 }
+
+// .getControlledAccounts(controlling_account)
+export async function getControlledAccounts({
+  state,
+  commit,
+  rootState
+}, payload = {}) {
+
+  let account_to_query = rootState.account.info.account_name;
+  const flag_other_account = payload.accountname != undefined ? true : false;
+  if(flag_other_account){
+    account_to_query = payload.accountname;
+  }
+  try {
+    eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint
+    let eos = Eos(eosConfig)
+    const controlledaccs = await eos.getControlledAccounts(account_to_query);
+    // console.log('controlled accounts', controlledaccs);
+    return controlledaccs;
+
+    commit('SET_CURRENT_CONNECTION_STATUS', true)
+  } catch (error) {
+    apiDown(error,commit)
+    throw error
+  }
+}
+
+export async function getAccountPermissions({
+  state,
+  commit
+}, payload) {
+  try {
+    eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint
+    let eos = Eos(eosConfig)
+    const account = await eos.getAccount({
+      account_name: payload.accountname
+    });
+    if(account.account_name == payload.accountname){
+      return account.permissions;
+    }
+    else{
+      console.log('error getting account '+payload.accountname);
+      return false;
+    }
+    commit('SET_CURRENT_CONNECTION_STATUS', true)
+  } catch (error) {
+    apiDown(error,commit)
+    throw error
+  }
+}
