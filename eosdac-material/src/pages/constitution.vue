@@ -159,7 +159,7 @@ export default {
     },
     userHasScrolled(scroll){
       const votebox = document.getElementById('registerbox');
-      if(scroll.position < 40 || window.innerWidth < 1200){
+      if(scroll.position < 40 || window.innerWidth < 1199){
         votebox.style.top = '0px';
         return false;
       }

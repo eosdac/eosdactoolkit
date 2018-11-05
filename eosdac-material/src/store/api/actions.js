@@ -1,7 +1,10 @@
 import Eos from 'eosjs'
 import Timeout from 'await-timeout'
 import configFile from '../../statics/config.json'
+import Vue from 'vue'
 import axios from 'axios'
+// console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx')
+// console.log(Vue.prototype)
 
 
 const eosConfig = {

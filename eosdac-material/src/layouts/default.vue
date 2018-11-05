@@ -183,8 +183,8 @@
     <Notifier :drawer="leftDrawerOpen" />
 
   </q-page-container>
-  <NodeSelector setup />
-  <InitInterface autorun ref="init_interface"/>
+  <NodeSelector setup v-on:done="$refs.init_interface.pairScatter()"/>
+  <InitInterface ref="init_interface"/>
   <!-- depricated multimodal -->
   <!-- <MultiModal ref="Multi" /> -->
 
