@@ -279,13 +279,14 @@ export default {
       }
     },
     //wip
-    async getActiveCustodians(){
-      let c = await this.$store.dispatch('api/getCustodians');
-      // console.log(c)
-    }
+    // async getActiveCustodians(){
+    //   let c = await this.$store.dispatch('api/getCustodians');
+    //   // console.log(c)
+    // }
+    
   },
   mounted() {
-    this.getActiveCustodians();
+    // this.getActiveCustodians();
     // if (!this.getImported) {
     //   this.$refs.Multi.init('register')
     // } else {
