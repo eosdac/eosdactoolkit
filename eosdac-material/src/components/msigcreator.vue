@@ -20,7 +20,7 @@
 	      placeholder="Select permission"
 	      v-model="selected_permission"
 	      :options="permissionsOptions"
-	      @input="msigtemplate.trx.actions[0].authorization[0].permission = selected_permission"
+	      @input="msigtemplate.trx.actions[0].authorization[0].permission = selected_permission; setRequested()"
 	    />
 
 
@@ -94,18 +94,22 @@ export default {
   data () {
     return {
       //select msig controlled account
+      //v-model = msigtemplate.trx.actions[0].authorization[0].actor
       controlledAccountOptions: [],
-      selected_controlledAccount:'',
 
       //select permission level from selected controlled account
+      //v-model = msigtemplate.trx.actions[0].authorization[0].permission
       permissionsOptions: [],
-      selected_permission:'',
+      selected_permission: '',
 
+      //raw data account permissions
+      accperms: [],
 
-
-      msigaccount: 'dacauthority',
+      //init values for datepicker
       mindate: today,
       maxdate: addToDate(today, {days: 14}),
+
+      //msig
       msigtemplate: {
         proposer: '',
         proposal_name: '',
@@ -131,6 +135,7 @@ export default {
       },
     }
   },
+
   computed: {
     ...mapGetters({
 
@@ -146,8 +151,8 @@ export default {
         await this.$store.dispatch('api/getCustodians');
       };
 
-      let ctrlacc = await this.$store.dispatch('api/getControlledAccounts', {accountname: 'boiboiboiboi'});
-      console.log(ctrlacc)
+      let ctrlacc = await this.$store.dispatch('api/getControlledAccounts');
+      // console.log(ctrlacc)
       this.controlledAccountOptions = ctrlacc.controlled_accounts.map(function(a){ return {label: a, value: a} });
 
       this.msigtemplate.proposer = this.getAccountName;
@@ -155,25 +160,32 @@ export default {
         let req = {actor: c.cust_name, permission: 'active'};
         return req;
       });
-      // Vue.set(this.msigtemplate, actor.trx.actions[0].authorization[0].actor, this.getAccountName)
-      // this.msigtemplate.trx.actions[0].authorization[0].actor = this.getAccountName;
+
 
     },
 
     async getPermissions(){
       let ctrlacc = this.msigtemplate.trx.actions[0].authorization[0].actor;
       //get permissions from selected msig account
-      let accperms = await this.$store.dispatch('api/getAccountPermissions', {accountname: ctrlacc });
-      console.log(accperms);
+      this.accperms = await this.$store.dispatch('api/getAccountPermissions', {accountname: ctrlacc });
+      console.log(this.accperms);
 
-      //filter the permissions that only requires the signature from the logged in account
-      accperms = accperms.filter(ap => {
-        if(ap.required_auth.accounts.find(ac => ac.permission.actor == "boiboiboiboi") ) return true;
+      //filter the permissions that requires the signature from the logged in account
+      this.accperms = this.accperms.filter(ap => {
+        if(ap.required_auth.accounts.find(ac => ac.permission.actor == this.getAccountName) ) return true;
       })
 
-      //map result ready for select box
-      this.permissionsOptions = accperms.map(function(a){ return {label: a.perm_name, value: a.perm_name} });
+      //map result ready for select box options
+      this.permissionsOptions = this.accperms.map(function(a){ return {label: a.perm_name, value: a.perm_name } });
     },
+
+    setRequested(){
+      this.msigtemplate.requested=[];
+      let p = this.accperms.find(ap => ap.perm_name == this.selected_permission );
+      this.msigtemplate.requested = p.required_auth.accounts.map(a => a.permission )
+    },
+
+
     //send proposal to msig system contract. this should be changed to the eosdac msig relay contract
     proposeMsig(){
       if(!this.verifyMsig() ){
