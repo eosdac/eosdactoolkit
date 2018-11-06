@@ -182,7 +182,13 @@ export default {
     setRequested(){
       this.msigtemplate.requested=[];
       let p = this.accperms.find(ap => ap.perm_name == this.selected_permission );
-      this.msigtemplate.requested = p.required_auth.accounts.map(a => a.permission )
+      this.msigtemplate.requested = p.required_auth.accounts.map(a => a.permission );
+
+      //set transaction delay
+      if(p.required_auth.waits.length){
+        this.msigtemplate.trx.delay_sec = p.required_auth.waits[0].wait_sec;
+      }
+      
     },
 
 
