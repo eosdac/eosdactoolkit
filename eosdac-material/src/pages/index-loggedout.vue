@@ -102,14 +102,15 @@
       </div>
     </div>
   </div>
-<MultiModal ref="Multi" />
+<!-- <MultiModal ref="Multi" /> -->
+<InitInterface  ref="init_interface"/>
 </q-page>
 </template>
 
 
 
 <script>
-import MultiModal from 'components/multi-modal'
+import InitInterface from 'components/init-interface'
 import {
   openURL
 } from 'quasar'
@@ -118,7 +119,7 @@ import {
 } from 'vuex'
 export default {
   components:{
-    MultiModal
+    InitInterface
   },
   data () {
     return {
@@ -144,7 +145,7 @@ export default {
   methods:{
     openURL,
     signin(){
-      this.$refs.Multi.init('signin')
+      this.$refs.init_interface.pairScatter();
     },
     async logout() {
       this.getScatter.forgetIdentity()

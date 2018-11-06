@@ -73,7 +73,7 @@
 
 
           <div class="q-mt-md text-dimwhite animate-fade " v-if="userMsg != ''">{{userMsg}}</div>
-          <!-- <pre>{{getMemberRoles}}</pre> -->
+          <pre>{{getMemberRoles}}</pre>
         </div>
   </div>
 </div>
@@ -254,7 +254,8 @@ export default {
       let p = await this.$store.dispatch('api/getProfileData', {accountname: this.getAccountName} );
       if(p && p.length){
         this.hasprofile = true;
-        this.profile_is_irrevirsible = p[0].irrevirsible;
+        // this.profile_is_irrevirsible = p[0].irrevirsible;
+        this.profile_is_irrevirsible = true;
       }
       else{
         this.profile_is_irrevirsible = false;
