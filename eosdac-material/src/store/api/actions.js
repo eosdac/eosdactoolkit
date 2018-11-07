@@ -436,6 +436,9 @@ export async function getTokenContractBalance({
   rootState,
   commit
 }) {
+  if(!rootState.account.info){
+    return false;
+  }
   try {
     eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint
     let eos = Eos(eosConfig)
@@ -462,6 +465,9 @@ export async function getMainCurrencyBalance({
   rootState,
   commit
 }) {
+  if(!rootState.account.info){
+    return false;
+  }
   try {
     eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint
     let eos = Eos(eosConfig)
