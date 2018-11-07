@@ -24,9 +24,10 @@
 	    />
 
 
+      <q-input stack-label="Proposal name" dark  v-model="msigtemplate.proposal_name" />
+      <q-input stack-label="Title" dark  v-model="meta.title" />
+      <q-input dark v-model="meta.description" type="textarea" stack-label="Description" :max-height="100" rows="7" />
 
-      <div class="q-my-md">Proposal name</div>
-      <q-input dark  v-model="msigtemplate.proposal_name" />
       <div class="q-my-md">Expiration</div>
       <q-datetime-picker minimal dark color="positive" v-model="msigtemplate.trx.expiration" :min="mindate" :max="maxdate" type="date" />
     </div>
@@ -110,6 +111,10 @@ export default {
       maxdate: addToDate(today, {days: 14}),
 
       //msig
+      meta: {
+        title: '',
+        description: 'desctest'
+      },
       msigtemplate: {
         proposer: '',
         proposal_name: '',
