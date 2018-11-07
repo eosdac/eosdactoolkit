@@ -71,9 +71,10 @@
             <div class="q-title q-mb-lg">{{$t('index.subscribe_newsletter')}}</div>
             <div class="q-body-1 text-dimwhite relative-position">
               <q-icon name="icon-ui-22" size="48px" class="absolute-top-left" />
-              <div style="display:inline-block;margin-left:55px;margin-top:-3px;">
+              <div style="display:block;margin-left:55px;margin-top:-3px; width: calc(100% - 55px);" >
                 <q-input dark class="q-mb-xs" color="white" v-model="email_address" :stack-label="$t('index.your_email')" @focus="onsubscribemsg=''" />
                 <q-select
+                
                 color="white"
                 :float-label="$t('index.your_language')"
                  @focus="onsubscribemsg=''"

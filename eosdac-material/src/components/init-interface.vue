@@ -45,10 +45,8 @@ export default {
       default:
         break;
     }
-
-    
-
   },
+
   methods: {
     async pairScatter() {
       if(!this.hasScatter){
@@ -56,6 +54,7 @@ export default {
         //todo, gui for getting scatter
         return false;
       }
+
       let current = this.getCurrentEndpoint;
       let pp;
       if (current.httpEndpoint.split(':')[0].replace(/\//g, '') === 'https') {
@@ -101,6 +100,7 @@ export default {
 
         this.$emit('done');
 
+      //todo do error handling in GUI
       } catch (err) {
         if (err.type === 'locked') {
           this.scatterError = true
@@ -170,7 +170,7 @@ export default {
       if (v1parts.length != v2parts.length) {
         return -1;
       }
-
+      
       return 0;
     }
   }
