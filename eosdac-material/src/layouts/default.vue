@@ -257,24 +257,24 @@ export default {
   methods: {
     openURL,
     unlockAccount() {
-      this.$refs.init_interface.pairScatter()
+      this.$refs.init_interface.pairScatter();
     },
-    lockAccount() {
-      this.$store.commit('account/LOCK_ACCOUNT')
-    },
+    // lockAccount() {
+    //   this.$store.commit('account/LOCK_ACCOUNT')
+    // },
     async lockScatter() {
-      this.getScatter.forgetIdentity()
-      this.$store.commit('account/LOCK_ACCOUNT')
+      this.getScatter.forgetIdentity();
+      this.$store.commit('account/LOCK_ACCOUNT');
 
     },
     async queryApis() {
       let now = Date.now()
       if (this.getAccountName && this.$q.appVisible) {
         if (now > this.lastQuery + this.getConnectionInterval) {
-          this.lastQuery = now
-          this.$store.dispatch('api/getTokenContractBalance')
-          this.$store.dispatch('api/getMainCurrencyBalance')
-          this.$store.dispatch('api/updateAccountInfo')
+          this.lastQuery = now;
+          this.$store.dispatch('api/getTokenContractBalance');
+          this.$store.dispatch('api/getMainCurrencyBalance');
+          this.$store.dispatch('api/updateAccountInfo');
         }
       }
     },

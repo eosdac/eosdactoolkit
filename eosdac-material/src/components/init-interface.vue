@@ -51,6 +51,11 @@ export default {
   },
   methods: {
     async pairScatter() {
+      if(!this.hasScatter){
+        console.log('Scatter not detected.');
+        //todo, gui for getting scatter
+        return false;
+      }
       let current = this.getCurrentEndpoint;
       let pp;
       if (current.httpEndpoint.split(':')[0].replace(/\//g, '') === 'https') {
