@@ -23,6 +23,9 @@
       "memo": "daccustodian",
       "enable_voting" : false
     },
+    "msigContract":{
+      "name": ""
+    },
     "systemContract": {
       "name": "eosio"
     }

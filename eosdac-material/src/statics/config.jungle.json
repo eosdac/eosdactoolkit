@@ -23,6 +23,9 @@
       "memo": "dacelections",
       "enable_voting" : true
     },
+    "msigContract":{
+      "name": "dacmultisigs"
+    },
     "systemContract": {
       "name": "eosio"
     }
