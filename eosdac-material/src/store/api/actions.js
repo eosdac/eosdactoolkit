@@ -95,13 +95,15 @@ export async function transaction({
       let accountname = identity.accounts[0].name
       let actions = []
       for(let i = 0; i < payload.actions.length; i ++) {
+
+        let auth = [ {actor: accountname, permission: authority} ];
+        if(payload.actions[i].authorization){
+          auth = payload.actions[i].authorization;
+        }
         actions.push({
             account: payload.actions[i].contract,
             name: payload.actions[i].action,
-            authorization: [{
-              actor: accountname,
-              permission: authority
-            }],
+            authorization: auth,
             data: payload.actions[i].fields
         })
       }
