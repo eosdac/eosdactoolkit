@@ -391,6 +391,10 @@ export default {
 
     //get current votes from member from chain
     async getMemberVotes(){
+      if(!this.getAccountName){
+        console.log('Guest mode, unable to retrieve votes');
+        return false;
+      }
       let votes = await this.$store.dispatch('api/getMemberVotes', {member: this.getAccountName});
       if(votes){
         this.votesdidchange = false;
