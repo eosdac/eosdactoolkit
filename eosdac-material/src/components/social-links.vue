@@ -36,7 +36,7 @@ export default {
     matchSocialIcon(link){
       //supported social networks
       link = (link.indexOf('://') === -1) ? 'http://' + link : link;
-      console.log(link)
+      // console.log(link)
       const icons = ['social-youtube-com', 'social-linkedin-com', 'social-ask-fm', 'social-tumblr-com',
                     'social-weibo-com', 'social-qzoneqq-com', 'social-flickr-com', 'social-instagram-com',
                     'social-facebook-com', 'social-plusgoogle-com', 'social-meetup-com', 'social-ok-ru',
