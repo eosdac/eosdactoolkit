@@ -2,7 +2,7 @@
   <div class="row  bg-dark2 round-borders shadow-5" style="">
     <div class="col-md-6 col-xs-12 q-pa-md">
 
-	    <!-- <q-select
+	    <q-select
         class="q-mb-md"
         dark
 	      stack-label ="Controlled accounts"
@@ -21,7 +21,7 @@
 	      v-model="selected_permission"
 	      :options="permissionsOptions"
 	      @input="msigtemplate.trx.actions[0].authorization[0].permission = selected_permission; setRequested()"
-	    /> -->
+	    />
 
 
       <q-input stack-label="Proposal name" dark  v-model="msigtemplate.proposal_name" />
@@ -131,7 +131,7 @@ export default {
                 { 
                 account: 'eosio.token', 
                 name: 'transfer', 
-                authorization: [ { actor: 'eosdacdoshhq', permission: 'xfer' } ], 
+                authorization: [ { actor: '', permission: '' } ], 
                 data: {from:'eosdacdoshhq', to:'', quantity: '', memo:''} 
                 }
             ], 
@@ -156,6 +156,10 @@ export default {
         await this.$store.dispatch('api/getCustodians');
       };
 
+      let ctrlacc = await this.$store.dispatch('api/getControlledAccounts');
+      // console.log(ctrlacc)
+      this.controlledAccountOptions = ctrlacc.controlled_accounts.map(function(a){ return {label: a, value: a} });
+
       this.msigtemplate.proposer = this.getAccountName;
       this.msigtemplate.requested = this.getActiveCustodians.map(c => {
         let req = {actor: c.cust_name, permission: 'active'};
@@ -164,6 +168,34 @@ export default {
 
 
     },
+
+    async getPermissions(){
+      let ctrlacc = this.msigtemplate.trx.actions[0].authorization[0].actor;
+      //get permissions from selected msig account
+      this.accperms = await this.$store.dispatch('api/getAccountPermissions', {accountname: ctrlacc });
+      console.log(this.accperms);
+
+      //filter the permissions that requires the signature from the logged in account
+      this.accperms = this.accperms.filter(ap => {
+        if(ap.required_auth.accounts.find(ac => ac.permission.actor == this.getAccountName) ) return true;
+      })
+
+      //map result ready for select box options
+      this.permissionsOptions = this.accperms.map(function(a){ return {label: a.perm_name, value: a.perm_name, sublabel: 'Threshold: '+a.required_auth.threshold } });
+    },
+
+    setRequested(){
+      this.msigtemplate.requested=[];
+      let p = this.accperms.find(ap => ap.perm_name == this.selected_permission );
+      this.msigtemplate.requested = p.required_auth.accounts.map(a => a.permission );
+
+      //set transaction delay
+      if(p.required_auth.waits.length){
+        this.msigtemplate.trx.delay_sec = p.required_auth.waits[0].wait_sec;
+      }
+      
+    },
+
 
     //send proposal to msig system contract. this should be changed to the eosdac msig relay contract
     proposeMsig(){
