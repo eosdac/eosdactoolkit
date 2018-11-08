@@ -76,7 +76,7 @@
                 <q-select
                 
                 color="white"
-                :float-label="$t('index.your_language')"
+                :stack-label="$t('index.your_language')"
                  @focus="onsubscribemsg=''"
                 dark
                   :options="[
