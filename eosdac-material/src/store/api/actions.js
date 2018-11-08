@@ -79,15 +79,17 @@ export async function transaction({
   try {
     eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint
     let eos = Eos(eosConfig);
-    console.log("normal eos", eos.fc)
+    console.log("normal eos", eos.fc)//works
     if (payload.scatter) {
       const network = await scatterNetwork(state)
       const identity = await state.scatter.getIdentity({
         accounts: [network]
       })
 
-      eos =  state.scatter.eos(network, Eos, eosConfig)
-      console.log("scatter eos", eos.fc)
+      eos = state.scatter.eos(network, Eos, eosConfig)
+      console.log(eos)//works
+      console.log("scatter eos", eos.fc)//doesn't work
+
       // const contract = await eos.getAbi('kasdactokens');
       // eos.fc.abiCache.abi('kasdactokens', contract.abi)
 
