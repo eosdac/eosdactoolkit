@@ -10,8 +10,8 @@
         <img src="statics/img/icon-signet-eosdacmemberclient175x48.svg" style="height:48px;" :title="$t('default.member_client')">
       </q-toolbar-title>
       <div class="xs-hide sm-hide md-hide" >
-        <MenuDropdown class="no-pointer-events" v-if="getAccountName && getRegistered && getTokenBalance" iconColor="white" :label="$t('default.member_status')" :statusLabel="1" :sublabel="$t('default.registered')" icon="icon-role-3" />
-        <MenuDropdown class="no-pointer-events" v-if="getAccountName && getRegistered && !getTokenBalance" iconColor="white" :label="$t('default.member_status')" :statusLabel="3" :sublabel="$t('default.pending')" icon="icon-role-2" />
+        <MenuDropdown class="no-pointer-events animate-fade" v-if="getAccountName && getRegistered && getTokenBalance" iconColor="white" :label="$t('default.member_status')" :statusLabel="1" :sublabel="$t('default.registered')" icon="icon-role-3" />
+        <MenuDropdown class="no-pointer-events animate-fade" v-if="getAccountName && getRegistered && !getTokenBalance" iconColor="white" :label="$t('default.member_status')" :statusLabel="3" :sublabel="$t('default.pending')" icon="icon-role-2" />
         <MenuDropdown v-close-overlay v-if="getAccountName && !getRegistered" iconColor="white" :label="$t('default.member_status')" :statusLabel="2" :sublabel="$t('default.not_registered')" icon="icon-role-1" :iconRight="true">
           <q-list class="bg-dark2" dark link>
             <q-item to="/constitution" dark>
@@ -23,10 +23,10 @@
             </q-item>
           </q-list>
         </MenuDropdown>
-        <MenuDropdown class="no-pointer-events" v-if="getAccountName" iconColor="white" :label="$t('default.your_token_balance', { tokenName: tokenName })" :sublabel="String(getTokenBalance)" icon="icon-dac-balance" />
-        <MenuDropdown class="no-pointer-events" v-if="getAccountName" iconColor="white" :label="$t('default.your_token_balance', { tokenName: mainCurrencyName })" :sublabel="String(getMainCurrencyBalance)" icon="icon-type-2" />
-        <MenuDropdown class="no-pointer-events" v-if="getAccountName" iconColor="white" :label="$t('default.account_name')" :sublabel="getAccountName" icon="icon-topmenu-2" />
-        <MenuDropdown v-if="getAccountName" iconColor="positive" :label="$t('default.status')" :sublabel="$t('default.logged_in')" icon="icon-topmenu-1" :iconRight="true">
+        <MenuDropdown class="no-pointer-events animate-fade" v-if="getAccountName" iconColor="white" :label="$t('default.your_token_balance', { tokenName: tokenName })" :sublabel="String(getTokenBalance)" icon="icon-dac-balance" />
+        <MenuDropdown class="no-pointer-events animate-fade" v-if="getAccountName" iconColor="white" :label="$t('default.your_token_balance', { tokenName: mainCurrencyName })" :sublabel="String(getMainCurrencyBalance)" icon="icon-type-2" />
+        <MenuDropdown class="no-pointer-events animate-fade" v-if="getAccountName" iconColor="white" :label="$t('default.account_name')" :sublabel="getAccountName" icon="icon-topmenu-2" />
+        <MenuDropdown class="animate-fade" v-if="getAccountName" iconColor="positive" :label="$t('default.status')" :sublabel="$t('default.logged_in')" icon="icon-topmenu-1" :iconRight="true">
           <q-list v-close-overlay class="bg-dark2" dark link>
             <q-item @click.native="lockScatter()" dark>
               <q-item-side>
