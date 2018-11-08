@@ -66,7 +66,10 @@ export default {
   },
 
   methods: {
-    auto_scatter(){
+    async auto_scatter(){
+      //need to wait for scatter when using firefox browser
+      await new Promise(resolve=>{setTimeout(resolve, 200)})
+      // console.log('auto connect scatter', this.hasScatter, this.getImported);
       if(this.hasScatter && this.getImported){
         this.pairScatter();
       }

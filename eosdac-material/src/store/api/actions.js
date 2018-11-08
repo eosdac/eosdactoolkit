@@ -78,7 +78,7 @@ export async function transaction({
 }, payload) {
   try {
     eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint
-    let eos = Eos(eosConfig);
+    // let eos = Eos(eosConfig);
     // console.log("normal eos.fc", eos.fc)//works
     if (payload.scatter) {
       const network = await scatterNetwork(state)
@@ -86,9 +86,10 @@ export async function transaction({
         accounts: [network]
       })
 
-      eos = state.scatter.eos(network, Eos, eosConfig)
+      let eos = state.scatter.eos(network, Eos, eosConfig)
       // console.log("scatter eos obj", eos)//works
-      // console.log("scatter eos.fc", eos.fc())//doesn't work
+
+      // console.log("scatter eos.fc", eos.fc.abiCache)//doesn't work
 
       // const contract = await eos.getAbi('kasdactokens');
       // eos.fc.abiCache.abi('kasdactokens', contract.abi)
@@ -119,11 +120,11 @@ export async function transaction({
   }
 }
 
-function timeOut(time) {
-  return new Promise(function(resolve, reject) {
-    setTimeout(reject('timeout'), time)
-  })
-}
+// function sleep(ms){
+//   return new Promise(resolve=>{
+//       setTimeout(resolve,ms)
+//   })
+// }
 
 export async function pingCurrentEndpoint({
   state,
