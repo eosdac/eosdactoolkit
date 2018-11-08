@@ -168,10 +168,10 @@
   </q-layout-drawer>
   <q-page-container>
     <transition appear enter-active-class="animated fadeInDown">
-      <q-alert v-if="!getRegistered && getAccountName && showBanner" color="blue" appear>
+      <q-alert v-if="!getRegistered && getAccountName && setupComplete" color="blue" appear>
         <q-icon flat size="30px" class="float-left q-ma-sm" name="icon-register-3"></q-icon>
         <div class="q-title">{{ $t('default.sign_the_constitution') }}
-          <q-icon flat size="40px" class="float-right q-mt-sm cursor-pointer" name="icon-ui-8" @click.native="showBanner = false"></q-icon>
+          <q-icon flat size="40px" class="float-right q-mt-sm cursor-pointer" name="icon-ui-8" @click.native="setupComplete = false"></q-icon>
         </div>
         <span v-if="!getRegisteredVersionUpdate" class="on-left">{{ $t('default.you_have_not_yet_registered') }}</span>
         <span v-else class="on-left">{{ $t('default.constitution_has_been_updated') }}</span>
@@ -184,7 +184,7 @@
 
   </q-page-container>
   <NodeSelector setup v-on:done="$refs.init_interface.auto_scatter()"/>
-  <InitInterface ref="init_interface" v-on:done="showBanner=true"/>
+  <InitInterface ref="init_interface" v-on:done="setupComplete=true"/>
   <!-- depricated multimodal -->
   <!-- <MultiModal ref="Multi" /> -->
 
@@ -230,7 +230,7 @@ export default {
       mainCurrencyName: this.$configFile.network.mainCurrencyContract.token,
       lastQuery: 0,
       memberStatus: 0,
-      showBanner: false,
+      setupComplete: false,
       submenuheader_open: false 
     }
   },
