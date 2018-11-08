@@ -183,7 +183,7 @@
     <Notifier :drawer="leftDrawerOpen" />
 
   </q-page-container>
-  <NodeSelector setup v-on:done="$refs.init_interface.pairScatter()"/>
+  <NodeSelector setup v-on:done="$refs.init_interface.auto_scatter()"/>
   <InitInterface ref="init_interface"/>
   <!-- depricated multimodal -->
   <!-- <MultiModal ref="Multi" /> -->
@@ -263,6 +263,7 @@ export default {
     //   this.$store.commit('account/LOCK_ACCOUNT')
     // },
     async lockScatter() {
+      console.log('clicked lockscatter')
       this.getScatter.forgetIdentity();
       this.$store.commit('account/LOCK_ACCOUNT');
 
@@ -318,12 +319,8 @@ export default {
       else{
         this.leftDrawerOpen = this.$q.platform.is.desktop;
       }
-    },
-    getScatter(val) {
-      if (val && this.getImported && !this.getUnlocked) {
-        this.$refs.init_interface.pairScatter()
-      }
     }
+
   }
 }
 </script>

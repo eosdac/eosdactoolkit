@@ -29,25 +29,32 @@ export default {
       getCurrentEndpoint: 'api/getCurrentEndpoint',
       getCurrentConnectionStatus: 'api/getCurrentConnectionStatus',
       hasScatter: 'api/hasScatter',
-      getScatter: 'api/getScatter'
+      getScatter: 'api/getScatter',
+      getImported: 'account/getImported'
     })
   },
   mounted() {
     //preparation for multiple login interfaces
-    switch (this.connectionMethod) {
-      case 'scatter':
-        if(this.autorun && this.hasScatter){
-          console.log('Pair scatter automatically.');
-          this.pairScatter();
-        }
-        break;
+    // switch (this.connectionMethod) {
+    //   case 'scatter':
+    //     if(this.autorun && this.hasScatter && this.getImported){
+    //       console.log('Pair scatter automatically.');
+    //       this.pairScatter();
+    //     }
+    //     break;
     
-      default:
-        break;
-    }
+    //   default:
+    //     break;
+    // }
   },
 
   methods: {
+    auto_scatter(){
+      if(this.hasScatter && this.getImported){
+        this.pairScatter();
+      }
+
+    },
     async pairScatter() {
       if(!this.hasScatter){
         console.log('Scatter not detected.');
@@ -170,7 +177,7 @@ export default {
       if (v1parts.length != v2parts.length) {
         return -1;
       }
-      
+
       return 0;
     }
   }
