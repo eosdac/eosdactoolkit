@@ -34,18 +34,7 @@ export default {
     })
   },
   mounted() {
-    //preparation for multiple login interfaces
-    // switch (this.connectionMethod) {
-    //   case 'scatter':
-    //     if(this.autorun && this.hasScatter && this.getImported){
-    //       console.log('Pair scatter automatically.');
-    //       this.pairScatter();
-    //     }
-    //     break;
-    
-    //   default:
-    //     break;
-    // }
+
   },
 
   methods: {

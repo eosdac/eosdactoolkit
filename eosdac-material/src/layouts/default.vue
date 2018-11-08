@@ -184,7 +184,7 @@
 
   </q-page-container>
   <NodeSelector setup v-on:done="$refs.init_interface.auto_scatter()"/>
-  <InitInterface ref="init_interface"/>
+  <InitInterface ref="init_interface" v-on:done="showBanner=true"/>
   <!-- depricated multimodal -->
   <!-- <MultiModal ref="Multi" /> -->
 
@@ -230,7 +230,7 @@ export default {
       mainCurrencyName: this.$configFile.network.mainCurrencyContract.token,
       lastQuery: 0,
       memberStatus: 0,
-      showBanner: true,
+      showBanner: false,
       submenuheader_open: false 
     }
   },
