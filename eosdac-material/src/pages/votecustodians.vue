@@ -420,6 +420,12 @@ export default {
       votebox.style.top = (scroll.position-375)+'px';
     }
 
+  },
+  watch:{
+    getAccountName(val) {
+      this.getMemberVotes();
+    }
+
   }
 }
 </script>

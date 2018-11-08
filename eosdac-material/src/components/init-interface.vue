@@ -89,10 +89,10 @@ export default {
         let queryAccount = await this.$store.dispatch('api/getAccount', {account_name: identity.accounts[0].name} );
         let memberRegistration = await this.$store.dispatch('api/getRegistered');
         let latestMemberTerms = await this.$store.dispatch('api/getMemberTerms');
-        this.$store.dispatch('api/getCustodians');
+        await this.$store.dispatch('api/getCustodians');
 
-        this.$store.dispatch('api/getIsCandidate');
-        this.$store.dispatch('api/getIsCustodian');//todo: should be checked from res getcustodians.
+        await this.$store.dispatch('api/getIsCandidate');
+        await this.$store.dispatch('api/getIsCustodian');//todo: should be checked from res getcustodians.
 
         this.$emit('done');
 

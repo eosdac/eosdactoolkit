@@ -92,7 +92,11 @@ export default {
         this.eosdacBP = 'eosdacserver';
       }
       this.myvotes = await this.$store.dispatch('api/getProducerVotes', {member: this.getAccountName});
-      // console.log(this.myvotes)
+      // console.log('my votes', JSON.stringify(this.myvotes) )
+
+      if(!this.myvotes[0]){//never voted hack
+        this.myvotes[0]={producers: [], staked:0, last_vote_weight:0}
+      }
 
       this.hasVotedForUs = this.myvotes[0].producers.indexOf(this.eosdacBP) >= 0 ? true : false;
 
