@@ -94,14 +94,15 @@ export default {
       Object.assign(this.$data, this.$options.data())
       this.visible = false
     },
-    async newTransaction(transactionActions, cancelable = false, add_abicache=false) {
+    async newTransaction(transactionActions, cancelable = false, abicache=false) {
       if(!this.getAccountName){
         alert('please sign in')
         return false;
       }
-      this.add_abicache = add_abicache;
-
-      Object.assign(this.$data, this.$options.data())
+      
+      Object.assign(this.$data, this.$options.data());
+      this.add_abicache = abicache;
+      // console.log('transaction comp abi cache', abicache, this.add_abicache)
       this.cancelable = cancelable
       this.visible = this.getTransactionPopup //boolean
       this.loading = this.getTransactionPopup //boolean
@@ -154,7 +155,8 @@ export default {
       this.loading = true
       this.loadingText = 'transaction.pushing_transaction'
       try {
-        let trx = await this.$store.dispatch('api/transaction', {actions: this.actions, scatter: this.getUsesScatter, add_abicache: true})
+        // console.log('transact comp abi cache', this.add_abicache)
+        let trx = await this.$store.dispatch('api/transaction', {actions: this.actions, scatter: this.getUsesScatter, add_abicache: this.add_abicache})
         this.$store.commit('api/NOTIFY', {
           icon: 'icon-ui-6',
           color: 'positive',

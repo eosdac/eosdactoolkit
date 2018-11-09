@@ -90,12 +90,12 @@ export async function transaction({
 
       //if payload.add_abicache
       if(payload.add_abicache){
-        console.log('abicache addition')
+        console.log('abicache addition', payload.add_abicache)
         const contract = await eos.getAbi('kasdactokens');
         await eos.fc.abiCache.abi('kasdactokens', contract.abi);
       }
       else{
-        console.log('no abicache addition')
+        // console.log('no abicache addition', payload.add_abicache)
       }
 
       let authority = identity.accounts[0].authority
