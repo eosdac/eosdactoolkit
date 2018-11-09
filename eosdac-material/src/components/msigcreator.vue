@@ -113,7 +113,7 @@ export default {
       //msig
       meta: {
         title: "",
-        description: "desctest"
+        description: ""
       },
       msigtemplate: {
         proposer: '',
@@ -129,7 +129,7 @@ export default {
             context_free_actions: [], 
             actions: [ 
                 { 
-                account: 'eosio.token', 
+                account: 'kasdactokens', 
                 name: 'transfer', 
                 authorization: [ { actor: 'eosdacdoshhq', permission: 'xfer' } ], 
                 data: {from:'eosdacdoshhq', to:'', quantity: '', memo:''} 

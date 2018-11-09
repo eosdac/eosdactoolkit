@@ -86,18 +86,21 @@ export async function transaction({
         accounts: [network]
       })
 
-      let eos = state.scatter.eos(network, Eos, eosConfig)
-      console.log("scatter eos obj", eos)//works
+      let eos = state.scatter.eos(network, Eos, eosConfig);
 
-      console.log("scatter eos.fc", eos.fc)//doesn't work
-      // console.log("scatter eos.fc()", eos.fc.abiCache )//doesn't work
-
-      // const contract = await eos.getAbi('kasdactokens');
-      // eos.fc.abiCache.abi('kasdactokens', contract.abi)
+      //if payload.add_abicache
+      if(payload.add_abicache){
+        const contract = await eos.getAbi('kasdactokens');
+        await eos.fc.abiCache.abi('kasdactokens', contract.abi);
+      }
+      else{
+        console.log('no abicache addition')
+      }
 
       let authority = identity.accounts[0].authority
       let accountname = identity.accounts[0].name
-      let actions = []
+      let actions = [];
+
       for(let i = 0; i < payload.actions.length; i ++) {
 
         let auth = [ {actor: accountname, permission: authority} ];
@@ -111,6 +114,7 @@ export async function transaction({
             data: payload.actions[i].fields
         })
       }
+
       let res = await eos.transaction( { actions: actions } )
       return res
       commit('SET_CURRENT_CONNECTION_STATUS', true)
