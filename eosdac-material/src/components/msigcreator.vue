@@ -31,20 +31,40 @@
       <div class="q-my-md">Expiration</div>
       <q-datetime-picker minimal dark color="positive" v-model="msigtemplate.trx.expiration" :min="mindate" :max="maxdate" type="date" />
     </div>
+
+    <!-- coll 2 -->
     <div class="col-md-6 col-xs-12 q-pa-md ">
       <div class="column full-height justify-between">
+       
         <div>
           <q-tabs>
-            <!-- Tabs - notice slot="title" -->
-
-            <q-tab slot="title" default name="tab-4"  label="transfer eos" />
+            <!-- Tabs -->
+            <q-tab slot="title" default name="tab-4"  label="transfer" />
             <q-tab slot="title" name="rawmsigtr" label="raw" />
-
             <!-- Targets -->
             <q-tab-pane class="bg-dark" name="tab-4">
-              <q-input dark stack-label="From" v-model="msigtemplate.trx.actions[0].data.from"/>
+              <q-select
+                class="q-mb-md"
+                :disabled="false"
+                dark
+                stack-label ="From (dac account)"
+                placeholder="Select account"
+                v-model="msigtemplate.trx.actions[0].data.from"
+                :options="[{label: 'eosdacdoshhq', value: 'eosdacdoshhq'}, {label: 'kasdactokens', value: 'kasdactokens'}]"
+                @input="msigtemplate.trx.actions[0].authorization[0].actor=msigtemplate.trx.actions[0].data.from"
+              />
               <q-input dark stack-label="To" v-model="msigtemplate.trx.actions[0].data.to"/>
-              <q-input dark stack-label="Quantity" v-model="msigtemplate.trx.actions[0].data.quantity"/>
+              <q-input type="number" dark stack-label="Quantity" v-model="raw_quantity"/>
+              <q-select
+                class="q-mb-md"
+                :disabled="false"
+                dark
+                stack-label ="Asset"
+                placeholder="Select token symbol"
+                v-model="token"
+                :options="[{label: 'KASDAC', value: 'kasdactokens-KASDAC'}, {label: 'EOS', value: 'eosio.token-EOS'}]"
+                @input=""
+              />
               <q-input dark stack-label="Memo" v-model="msigtemplate.trx.actions[0].data.memo"/>
             </q-tab-pane>
             <q-tab-pane class="bg-dark" name="rawmsigtr">
@@ -91,20 +111,22 @@ export default {
     Transaction
   },
 
-
+  watch:{
+    raw_quantity(v){
+      if(!v) v=0;
+      this.msigtemplate.trx.actions[0].data.quantity = v.toFixed(4)+' '+this.token.split('-')[1];
+      
+    },
+    token(v){
+      if(!this.raw_quantity) this.raw_quantity = 0;
+      this.msigtemplate.trx.actions[0].data.quantity = this.raw_quantity.toFixed(4)+' '+v.split('-')[1];
+      this.msigtemplate.trx.actions[0].account = v.split('-')[0]
+    }
+  },
   data () {
     return {
-      //select msig controlled account
-      //v-model = msigtemplate.trx.actions[0].authorization[0].actor
-      controlledAccountOptions: [],
-
-      //select permission level from selected controlled account
-      //v-model = msigtemplate.trx.actions[0].authorization[0].permission
-      permissionsOptions: [],
-      selected_permission: '',
-
-      //raw data account permissions
-      accperms: [],
+      raw_quantity:'',
+      token: '',
 
       //init values for datepicker
       mindate: today,
@@ -132,7 +154,7 @@ export default {
                 account: 'kasdactokens', 
                 name: 'transfer', 
                 authorization: [ { actor: 'eosdacdoshhq', permission: 'xfer' } ], 
-                data: {from:'eosdacdoshhq', to:'', quantity: '', memo:''} 
+                data: {from:'', to:'', quantity: '', memo:''} 
                 }
             ], 
             transaction_extensions: [] 
@@ -185,7 +207,11 @@ export default {
         }
 
       ];
-      this.$refs.Transaction.newTransaction(actions, false);
+      let abicache = false;
+      if(this.msigtemplate.trx.actions[0].account != 'eosio.token'){
+        abicache = this.msigtemplate.trx.actions[0].account;
+      }
+      this.$refs.Transaction.newTransaction(actions, false, abicache);
     },
 
     verifyMsig(){
@@ -219,9 +245,6 @@ export default {
     cancelProposal(){
 
     }
-
-
-  
 
   },
 

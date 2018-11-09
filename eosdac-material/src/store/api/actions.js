@@ -90,6 +90,7 @@ export async function transaction({
 
       //if payload.add_abicache
       if(payload.add_abicache){
+        console.log('abicache addition')
         const contract = await eos.getAbi('kasdactokens');
         await eos.fc.abiCache.abi('kasdactokens', contract.abi);
       }
