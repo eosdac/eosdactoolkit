@@ -153,9 +153,9 @@ export default {
             context_free_actions: [], 
             actions: [ 
                 { 
-                account: 'kasdactokens', 
+                account: '', 
                 name: 'transfer', 
-                authorization: [ { actor: 'eosdacdoshhq', permission: 'xfer' } ], 
+                authorization: [ { actor: '', permission: 'xfer' } ], 
                 data: {from:'', to:'', quantity: '', memo:''} 
                 }
             ], 
@@ -213,7 +213,7 @@ export default {
       res = res.filter(acc => {
         if(acc.permissions.find(p => p.perm_name == 'xfer') ) return true;
       });
-      
+
       //set from account options
       this.fromAccountOptions = res.map(o => {
         return {value: o.account, label: o.account};
