@@ -50,7 +50,7 @@
                 stack-label ="From (dac account)"
                 placeholder="Select account"
                 v-model="msigtemplate.trx.actions[0].data.from"
-                :options="[{label: 'eosdacdoshhq', value: 'eosdacdoshhq'}, {label: 'kasdactokens', value: 'kasdactokens'}, {label: 'dacelections', value: 'dacelections'}]"
+                :options="fromAccountOptions"
                 @input="msigtemplate.trx.actions[0].authorization[0].actor=msigtemplate.trx.actions[0].data.from"
               />
               <q-input dark stack-label="To" v-model="msigtemplate.trx.actions[0].data.to"/>
@@ -128,6 +128,8 @@ export default {
       raw_quantity:'',
       token: '',
 
+      fromAccountOptions: [],
+
       //init values for datepicker
       mindate: today,
       maxdate: addToDate(today, {days: 14}),
@@ -183,16 +185,40 @@ export default {
         let req = {actor: c.cust_name, permission: 'active'};
         return req;
       });
-      this.getControlledAccounts();
+      this.setFromAccountOptions();
       
 
     },
-    async getControlledAccounts(account = this.$configFile.network.authorityAccount){
-      //this.accperms = await this.$store.dispatch('api/getAccountPermissions', {accountname: ctrlacc });
-      let ctrlacc = await this.$store.dispatch('api/getControlledAccounts', {accountname: account});
-      console.log(ctrlacc)
-    },
 
+    async setFromAccountOptions(){
+      //get controlled accounts from authority account
+      let ctrlaccs = await this.$store.dispatch('api/getControlledAccounts', {accountname: this.$configFile.network.authorityAccount});
+
+      //get the permissions from each account synchronous
+      let proms = [];
+      ctrlaccs.controlled_accounts.forEach(ctrlacc =>{
+        proms.push( this.$store.dispatch('api/getAccountPermissions', {accountname: ctrlacc }) );
+      });
+      let res = await Promise.all(proms);
+
+      //map accountnames with fetched permissions
+      res = res.map((r, i)=>{
+        let t = {};
+        t.account = ctrlaccs.controlled_accounts[i];
+        t.permissions = r;
+        return t;
+      })
+
+      //filter: only keep accounts where xfer is set
+      res = res.filter(acc => {
+        if(acc.permissions.find(p => p.perm_name == 'xfer') ) return true;
+      });
+      
+      //set from account options
+      this.fromAccountOptions = res.map(o => {
+        return {value: o.account, label: o.account};
+      });
+    },
 
     //send proposal to msig system contract. this should be changed to the eosdac msig relay contract
     proposeMsig(){
