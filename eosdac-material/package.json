@@ -28,6 +28,7 @@
     "yallist": "^3.0.2"
   },
   "devDependencies": {
+    "@babel/runtime": "^7.1.5",
     "babel-core": "6",
     "babel-eslint": "^8.2.1",
     "devtron": "1.4.0",
