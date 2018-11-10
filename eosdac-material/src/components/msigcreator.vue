@@ -50,7 +50,7 @@
                 stack-label ="From (dac account)"
                 placeholder="Select account"
                 v-model="msigtemplate.trx.actions[0].data.from"
-                :options="[{label: 'eosdacdoshhq', value: 'eosdacdoshhq'}, {label: 'kasdactokens', value: 'kasdactokens'}]"
+                :options="[{label: 'eosdacdoshhq', value: 'eosdacdoshhq'}, {label: 'kasdactokens', value: 'kasdactokens'}, {label: 'dacelections', value: 'dacelections'}]"
                 @input="msigtemplate.trx.actions[0].authorization[0].actor=msigtemplate.trx.actions[0].data.from"
               />
               <q-input dark stack-label="To" v-model="msigtemplate.trx.actions[0].data.to"/>

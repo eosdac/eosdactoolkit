@@ -10,7 +10,7 @@
     <div class="bg-dark">
       <!-- header -->
       <div style="height:50px" class="bg-dark2 row items-center justify-between q-px-md">
-        <span>dddddd</span>
+        <span>Vote for eosDAC BP</span>
         <q-icon class=" cursor-pointer" name="icon-ui-8" @click.native="votemodal = false" />
       </div>
       <!-- content -->
@@ -136,7 +136,10 @@ export default {
         }
       }
       else{
-        this.modal_msg = `Thank you for voting for "${this.eosdacBP}"`;
+        this.modal_msg = `Thank you for voting for "${this.eosdacBP}". `;
+        if(this.votedecay){
+          this.modal_msg +=' Your vote weight has decayed!'
+        }
       }
     },
     removeVote(i){
