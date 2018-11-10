@@ -183,9 +183,16 @@ export default {
         let req = {actor: c.cust_name, permission: 'active'};
         return req;
       });
-
+      this.getControlledAccounts();
+      
 
     },
+    async getControlledAccounts(account = this.$configFile.network.authorityAccount){
+      //this.accperms = await this.$store.dispatch('api/getAccountPermissions', {accountname: ctrlacc });
+      let ctrlacc = await this.$store.dispatch('api/getControlledAccounts', {accountname: account});
+      console.log(ctrlacc)
+    },
+
 
     //send proposal to msig system contract. this should be changed to the eosdac msig relay contract
     proposeMsig(){
