@@ -2,15 +2,15 @@
 <div v-if="getAccountName">
   <q-btn v-if="!hasVotedForUs || votedecay" color="dark" class="animate-pop" @click="openModal" >
     <q-icon name="icon-menu-3" class="on-left text-dimwhite"/> 
-    <span>Vote For eosDAC</span>
+    <span>{{ $t('vote_eosdac.vote_for_eosdac') }}</span>
   </q-btn>
-  <div v-else class="animate-fade" ><q-icon name="icon-ui-6" class="on-left text-dimwhite" style="margin-top:-5px"/><span>Thank you for your vote!</span></div>
+  <div v-else class="animate-fade" ><q-icon name="icon-ui-6" class="on-left text-dimwhite" style="margin-top:-5px"/><span>{{ $t('vote_eosdac.thank_you') }}</span></div>
 
   <q-modal minimized v-model="votemodal" >
     <div class="bg-dark">
       <!-- header -->
       <div style="height:50px" class="bg-dark2 row items-center justify-between q-px-md">
-        <span>Vote for eosDAC BP</span>
+        <span>{{ $t('vote_eosdac.vote_for_eosdac') }}</span>
         <q-icon class=" cursor-pointer" name="icon-ui-8" @click.native="votemodal = false" />
       </div>
       <!-- content -->
@@ -19,9 +19,9 @@
           <div>{{modal_msg}} </div>
           <div class="relative-position justify-start row q-pa-md q-mt-md bg-dark2 round-borders">
             <div class="q-mb-md row inline full-width justify-between items-center text-dimwhite">
-              <div class="col-xs-12 col-md-2">Votes <span>{{myvotes[0].producers.length}}/30</span></div>
+              <div class="col-xs-12 col-md-2">{{ $t('vote_eosdac.votes') }} <span>{{myvotes[0].producers.length}}/30</span></div>
               <div class="col-xs-12 col-md-4">
-                <div class="q-caption q-my-xs">Voting Power <span>{{(100-votedecay_percent).toFixed(2)}}%</span></div>
+                <div class="q-caption q-my-xs">{{ $t('vote_eosdac.voting_power') }} <span>{{(100-votedecay_percent).toFixed(2)}}%</span></div>
                 <q-progress :percentage="100-votedecay_percent" />
               </div>
             </div>
@@ -32,7 +32,7 @@
           </div>
           <div class="row justify-end q-mt-md items-center" style="height:30px">
             <div  class="on-left animate-fade" v-if="btn_feedback">{{btn_feedback}}</div>
-            <q-btn label="confirm" color="primary" @click="castVotes" @blur.native="btn_feedback=''" />
+            <q-btn :label="$t('vote_eosdac.confirm')" color="primary" @click="castVotes" @blur.native="btn_feedback=''" />
           </div>
         </div>
       </div>
@@ -115,7 +115,7 @@ export default {
     castVotes(){
         let votes = this.myvotes[0].producers;
         if(votes.length >30){
-          this.btn_feedback = 'Please remove one of your votes.';
+          this.btn_feedback = this.$t('vote_eosdac.remove_vote');
           return false;
         }
         this.$refs.Transaction.newTransaction([{
@@ -129,16 +129,16 @@ export default {
       if(!this.hasVotedForUs){
         this.myvotes[0].producers.push(this.eosdacBP);
         this.myvotes[0].producers.sort();
-        this.modal_msg = `Our BP is added to your vote list. `;
+        this.modal_msg = this.$t('vote_eosdac.added_to_list');
         //move this to html
         if(this.myvotes[0].producers.length >30){
-          this.modal_msg += `Please delete a vote to replace with ${this.eosdacBP}`;
+          this.modal_msg += this.$t('vote_eosdac.please_delete', {eosdac_bp: this.eosdacBP });
         }
       }
       else{
-        this.modal_msg = `Thank you for voting for "${this.eosdacBP}". `;
+        this.modal_msg = this.$t('vote_eosdac.thank_you_for', {eosdac_bp: this.eosdacBP })+' ';
         if(this.votedecay){
-          this.modal_msg +=' Your vote weight has decayed!'
+          this.modal_msg += this.$t('vote_eosdac.vote_decayed');
         }
       }
     },

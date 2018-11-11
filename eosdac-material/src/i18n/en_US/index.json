@@ -301,6 +301,20 @@
     "voting_disabled_title": "Voting Disabled",
     "voting_progress": "voting progress"
   },
+  "vote_eosdac":{
+    "added_to_list": "Our BP is added to your vote list.",
+    "confirm": "confirm",
+    "please_delete": "Please delete a vote to replace with {eosdac_bp}.",
+    "remove_vote": "Please remove one of your votes.",
+    "thank_you": "Thank you for your vote!",
+    "thank_you_for": "Thank you for voting for {eosdac_bp}.",
+    "vote_decayed": "Your vote weight has decayed!",
+    "vote_for_eosdac": "Vote For eosDAC",
+    "voting_power": "Voting Power",
+    "votes": "Votes"
+    
+
+  },
   "votingprogress": {
     "activated_at": "The DAC will be activated at 15%",
     "loading": "loading...",

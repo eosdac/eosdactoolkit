@@ -230,7 +230,8 @@ export default {
         {
           contract: 'eosio.msig', 
           action: 'propose', 
-          fields: this.msigtemplate
+          fields: this.msigtemplate,
+          
         },
         {
           contract: 'dacmultisigs', 
