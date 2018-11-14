@@ -1,8 +1,8 @@
 <template>
-  <q-modal minimized v-model="scatterModal" >
-    <div class="bg-blue full-height">
+  <q-modal minimized v-model="scatterModal">
+    <div class="bg-blue full-height ">
       <!-- header -->
-      <div style="height:50px" class="bg-dark2 row items-center justify-between q-px-md">
+      <div style="height:50px" class="bg-dark2 row items-center justify-between q-px-md ">
         <q-icon name="icon-topmenu-3" />
         <q-icon class=" cursor-pointer" name="icon-ui-8" @click.native="scatterModal = false" />
       </div>

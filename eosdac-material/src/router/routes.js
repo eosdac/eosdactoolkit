@@ -12,7 +12,7 @@ const Guards = {
   custodianCheck (to, from, next) {
     let roles = store.getters['account/getMemberRoles'];
     if (!roles.custodian) {
-      next({path: '/notallowed'})
+      next({path: ''})
     } else {
       next();
     }
@@ -35,7 +35,7 @@ export default [
       { path: 'managecandidateship', component: () => import('pages/registercandidate'), beforeEnter: Guards.logInCheck },
       { path: 'loggedout', component: () => import('pages/index-loggedout')},
       { path: 'custodiandashboard', component: () => import('pages/custodian-dashboard'), beforeEnter: Guards.custodianCheck },
-      { path: 'msigproposals', component: () => import('pages/custodians/msigproposals'), beforeEnter: Guards.logInCheck },
+      { path: 'msigproposals', component: () => import('pages/custodians/msigproposals'), beforeEnter: Guards.custodianCheck },
       { path: 'notallowed', component: () => import('pages/notallowed')}
     ]
   },
