@@ -69,17 +69,7 @@ export default {
       lb: 0
     }
   },
-  computed:{
-      rowsPerPage(){
-          return this.serverPagination.rowsPerPage;
-      }
-  },
-  watch:{
-      rowsPerPage(){
-          console.log('changed')
-          this.lb = 0;
-      }
-  },
+
   methods: {
     async test(){
         
