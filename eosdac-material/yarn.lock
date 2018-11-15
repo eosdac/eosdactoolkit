@@ -3186,7 +3186,7 @@ env-paths@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/env-paths/-/env-paths-1.0.0.tgz#4168133b42bb05c38a35b1ae4397c8298ab369e0"
 
-eosjs-api@7.0.4:
+eosjs-api@7.0.4, eosjs-api@^7.0.4:
   version "7.0.4"
   resolved "https://registry.yarnpkg.com/eosjs-api/-/eosjs-api-7.0.4.tgz#dc3a7206d4ac3e6818f0a950b8d24333175ac7c9"
   dependencies:
@@ -3206,7 +3206,7 @@ eosjs-ecc@4.0.4:
     ecurve "^1.0.5"
     randombytes "^2.0.5"
 
-eosjs@^16.0.8:
+eosjs@^16.0.9:
   version "16.0.9"
   resolved "https://registry.yarnpkg.com/eosjs/-/eosjs-16.0.9.tgz#ee3790f2f038079e71981f20354be8d1d98de873"
   dependencies:

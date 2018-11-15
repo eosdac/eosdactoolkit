@@ -104,7 +104,7 @@ export default {
         if (typeof this.getScatter.getVersion === 'function') { //is desktop
           let version = await this.getScatter.getVersion()
           if (this.versionCompare(version, '6.1.10') < 0) {
-            throw Error('outdated')
+            throw Error('ouated')
           }
         } else if (typeof this.getScatter.requireVersion === 'function') { // is extension
           this.getScatter.requireVersion(6.1)

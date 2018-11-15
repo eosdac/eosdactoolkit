@@ -116,6 +116,10 @@
           </q-item>
         </div>
       </q-collapsible>
+      <q-item to="/members">
+        <q-item-side icon="icon-register-3" />
+        <q-item-main label="members" sublabel="" />
+      </q-item>
       <q-item to="/constitution">
         <q-item-side icon="icon-register-3" />
         <q-item-main :label="$t('default.constitution')" sublabel="" />

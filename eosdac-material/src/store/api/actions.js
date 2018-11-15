@@ -1,4 +1,5 @@
 import Eos from 'eosjs'
+import eosapi from 'eosjs-api'
 import Timeout from 'await-timeout'
 import configFile from '../../statics/config.json'
 import Vue from 'vue'
@@ -829,6 +830,69 @@ export async function getAccountPermissions({
       return false;
     }
     commit('SET_CURRENT_CONNECTION_STATUS', true)
+  } catch (error) {
+    apiDown(error,commit)
+    throw error
+  }
+}
+
+export async function getMembers({
+  state,
+  commit
+}, payload) {
+  eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint;
+  let eos = eosapi(eosConfig)
+  if(typeof eos.getTableByScope !== "function"){
+    console.log('eos.getTableByScope is not a function. you need to add it to eosjs manually.');
+    // return false;   
+  }
+  try {    
+    let t = await eos.getTableByScope({
+      "code": "kasdactokens",
+      "table": "members",
+      "lower_bound": "",
+      "upper_bound": "",
+      "limit":10
+    })
+    if(t){
+      return t;
+    }
+    else{
+      console.log('error getting membersscope');
+      return false;
+    }
+    commit('SET_CURRENT_CONNECTION_STATUS', true)
+  } catch (error) {
+    console.log(error)
+    apiDown(error,commit)
+    throw error
+  }
+}
+
+export async function readTable({
+  state,
+  commit,
+}, payload) {
+  try {
+    console.log('payload', payload)
+    eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint
+    let eos = Eos(eosConfig)
+    const entries = await eos.getTableRows({
+      json: true,
+      code: 'kasdactokens',
+      scope: 'kasdactokens',
+      table: 'members',
+      lower_bound: payload.lb,
+      upper_bound: payload.ub,
+      limit: payload.limit
+    });
+    commit('SET_CURRENT_CONNECTION_STATUS', true)
+    if (!entries.rows.length) {
+      return []
+    } 
+    else {
+      return entries.rows
+    }
   } catch (error) {
     apiDown(error,commit)
     throw error
