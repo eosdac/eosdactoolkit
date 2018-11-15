@@ -73,7 +73,7 @@
 
 
           <div class="q-mt-md text-dimwhite animate-fade " v-if="userMsg != ''">{{userMsg}}</div>
-          <pre>{{getMemberRoles}}</pre>
+          <!-- <pre>{{getMemberRoles}}</pre> -->
         </div>
   </div>
 </div>
