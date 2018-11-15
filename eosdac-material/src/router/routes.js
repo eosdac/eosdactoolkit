@@ -34,8 +34,8 @@ export default [
       { path: 'constitution', component: () => import('pages/constitution') },
       { path: 'managecandidateship', component: () => import('pages/registercandidate'), beforeEnter: Guards.logInCheck },
       { path: 'loggedout', component: () => import('pages/index-loggedout')},
-      { path: 'custodiandashboard', component: () => import('pages/custodian-dashboard'), beforeEnter: Guards.custodianCheck },
-      { path: 'msigproposals', component: () => import('pages/custodians/msigproposals'), beforeEnter: Guards.custodianCheck },
+      //{ path: 'custodiandashboard', component: () => import('pages/custodian-dashboard'), beforeEnter: Guards.custodianCheck },
+      //{ path: 'msigproposals', component: () => import('pages/custodians/msigproposals'), beforeEnter: Guards.custodianCheck },
       { path: 'notallowed', component: () => import('pages/notallowed')}
     ]
   },

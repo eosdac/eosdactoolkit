@@ -108,6 +108,7 @@
         <q-item-side class="text-blue" icon="icon-role-4" />
         <q-item-main label="Custodian Dashboard" sublabel="" />
       </q-item> -->
+      <!--
       <q-collapsible  v-if="getMemberRoles.custodian && getAccountName" dark icon="icon-role-4" @hide="submenuheader_open = false" @show="submenuheader_open = true" :header-class="{submenuheader: submenuheader_open}"  label="Custodian Tools">
         <div class="bg-dark">
           <q-item class="q-pl-lg" link to="/msigproposals">
@@ -116,6 +117,7 @@
           </q-item>
         </div>
       </q-collapsible>
+      -->
       <q-item to="/constitution">
         <q-item-side icon="icon-register-3" />
         <q-item-main :label="$t('default.constitution')" sublabel="" />
