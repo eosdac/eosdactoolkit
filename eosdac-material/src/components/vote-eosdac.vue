@@ -4,7 +4,9 @@
     <q-icon name="icon-menu-3" class="on-left text-dimwhite"/> 
     <span>{{ $t('vote_eosdac.vote_for_eosdac') }}</span>
   </q-btn>
-  <div v-else class="animate-fade" ><q-icon name="icon-ui-6" class="on-left text-dimwhite" style="margin-top:-5px"/><span>{{ $t('vote_eosdac.thank_you') }}</span></div>
+  <div v-else class="animate-fade" >
+    <q-icon name="icon-ui-6" class="on-left text-dimwhite" style="margin-top:-5px"/><span>{{ $t('vote_eosdac.thank_you') }}</span>
+  </div>
 
   <q-modal minimized v-model="votemodal" >
     <div class="bg-dark">
@@ -69,7 +71,7 @@ export default {
       votemodal: false,
       modal_msg: '',
       hasVotedForUs: false,
-      eosdacBP : '',
+      eosdacBP : this.$configFile.network.tokenContract.name=="kasdactokens"?"eosdacserval":"eosdacserver",
       votedecay: false,
       votedecay_percent: 0,
       btn_feedback:''
@@ -85,17 +87,12 @@ export default {
   },
   methods:{
     async init(){
-      if(this.$configFile.network.tokenContract.name=="kasdactokens"){
-        this.eosdacBP = 'eosdacserval';
-      }
-      else{
-        this.eosdacBP = 'eosdacserver';
-      }
-      this.myvotes = await this.$store.dispatch('api/getProducerVotes', {member: this.getAccountName});
-      // console.log('my votes', JSON.stringify(this.myvotes) )
+      // this.myvotes = await this.$store.dispatch('api/getProducerVotes', {member: this.getAccountName}); //lukeeosproxy
+      this.myvotes = await this.$store.dispatch('api/getProducerVotes', {member: 'lukeeosproxy'}); //lukeeosproxy
+      console.log('my votes', JSON.stringify(this.myvotes) )
 
       if(!this.myvotes[0]){//never voted hack
-        this.myvotes[0]={producers: [], staked:0, last_vote_weight:0}
+        this.myvotes[0]={producers: [], staked:0, last_vote_weight:0, is_proxy: 0}
       }
 
       this.hasVotedForUs = this.myvotes[0].producers.indexOf(this.eosdacBP) >= 0 ? true : false;
@@ -103,7 +100,10 @@ export default {
       let vote_weight_now = this._calculateVoteWeight(this.myvotes[0].staked)*100000000000000000;
       let last_vote_weight = this.myvotes[0].last_vote_weight*100000000000000000;
 
-      //only calculate vote decay if previous voted
+      //if account is a proxy
+      if(this.myvotes[0].is_proxy) last_vote_weight -= this.myvotes[0].proxied_vote_weight*100000000000000000;
+
+      //only calculate vote decay if previously voted
       if(last_vote_weight != 0){
         this.votedecay_percent = (Math.abs((last_vote_weight) - (vote_weight_now)) /(((last_vote_weight)+(vote_weight_now))/2))*100;
       }
