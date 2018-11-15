@@ -22,21 +22,21 @@
   <div class="col-xs-12 col-xl-4" >
     <div>
       <div id="registerbox" class="bg-dark2 q-pa-md round-borders shadow-5" >
-        <div class="q-mb-sm"><span class="text-dimwhite">Constitution: </span><span>V{{latestMemberTerms.version}}</span></div>
-        <div class="q-mb-sm" style="overflow:hidden; white-space: nowrap;" ><span class="text-dimwhite">Direct Link: </span><span ><a  target="_blank" :href="latestMemberTerms.terms">{{latestMemberTerms.terms}}</a></span></div>
+        <div class="q-mb-sm"><span class="text-dimwhite">{{ $t('default.constitution') }}: </span><span>V{{latestMemberTerms.version}}</span></div>
+        <div class="q-mb-sm" style="overflow:hidden; white-space: nowrap;" ><span class="text-dimwhite">{{ $t('constitution.direct_link') }}: </span><span ><a  target="_blank" :href="latestMemberTerms.terms">{{latestMemberTerms.terms}}</a></span></div>
         <div class="q-mb-sm">
-          <q-icon title="Downloaded constitution is verified!" name="icon-ui-6" color="positive" class="q-mr-xs" style="margin-top:-8px"/>
-          <span class="text-dimwhite">Hash: </span>
+          <q-icon :title="$t('constitution.verified_message')" name="icon-ui-6" color="positive" class="q-mr-xs" style="margin-top:-8px"/>
+          <span class="text-dimwhite">{{ $t('constitution.hash') }}: </span>
           <span>{{latestMemberTerms.hash}}</span>
         </div>
         <div class="row items-center justify-end" style="height:30px">
           <div v-if="getAccountName">
             <q-btn v-if="!getRegistered"  @click="signConstitution()"  color="primary" label="register" />
-            <div  v-if="getRegistered" >You have signed the constitution!</div>
+            <div  v-if="getRegistered" >{{ $t('constitution.signed_message') }}</div>
           </div>
         </div>
           <div v-if="!getAccountName">
-            <div>Please login to sign.</div>
+            <div>{{ $t('constitution.please_login_to_sign') }}</div>
           </div>
         </div>
 
