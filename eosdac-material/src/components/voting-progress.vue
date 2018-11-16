@@ -58,9 +58,10 @@ export default {
     },
 
     intervaller (i){
-      if(this.met_initial_votes_threshold){
+      if(this.met_initial_votes_threshold || !this.$configFile.network.custodianContract.enable_voting){
         return false;
       }
+
       let oldi = i;
       this.timer = setInterval(() => {
         this.update_in_seconds = i;

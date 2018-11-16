@@ -19,6 +19,7 @@
 
 <div class="q-pa-md"> <!-- padding wrapper -->
 <div class="row gutter-md reverse-wrap">
+
   <!-- first column  -->
   <div class="col-xs-12 col-xl-8" >
      <!-- <pre>{{getSelectedCand}}</pre> -->
