@@ -316,6 +316,7 @@
     "vote_decayed": "Your vote weight has decayed!",
     "vote_for_eosdac": "Vote For eosDAC",
     "votes": "Votes",
+    "voted_with_proxy": "You voted with proxy",
     "voting_power": "Voting Power"
   },
   "votingprogress": {
