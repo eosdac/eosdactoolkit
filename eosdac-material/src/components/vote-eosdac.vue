@@ -74,7 +74,8 @@ export default {
       eosdacBP : this.$configFile.network.tokenContract.name=="kasdactokens"?"eosdacserval":"eosdacserver",
       votedecay: false,
       votedecay_percent: 0,
-      btn_feedback:''
+      btn_feedback:'',
+      voted_with_proxy: false
 
     }
   },
@@ -87,12 +88,19 @@ export default {
   },
   methods:{
     async init(){
-      // this.myvotes = await this.$store.dispatch('api/getProducerVotes', {member: this.getAccountName}); //lukeeosproxy
-      this.myvotes = await this.$store.dispatch('api/getProducerVotes', {member: 'lukeeosproxy'}); //lukeeosproxy
-      console.log('my votes', JSON.stringify(this.myvotes) )
+      this.myvotes = await this.$store.dispatch('api/getProducerVotes', {member: this.getAccountName});
+      // console.log('my votes', JSON.stringify(this.myvotes) )
 
       if(!this.myvotes[0]){//never voted hack
-        this.myvotes[0]={producers: [], staked:0, last_vote_weight:0, is_proxy: 0}
+        this.myvotes[0]={producers: [], staked:0, last_vote_weight:0, is_proxy: 0, proxy:''};
+      }
+
+      if(this.myvotes[0].proxy){
+        this.voted_with_proxy = true;
+        let proxy_votes = await this.$store.dispatch('api/getProducerVotes', {member: this.myvotes[0].proxy});
+        //console.log('proxy votes:', proxy_votes[0].producers);
+        if(proxy_votes[0]) this.myvotes[0].producers = proxy_votes[0].producers;
+        
       }
 
       this.hasVotedForUs = this.myvotes[0].producers.indexOf(this.eosdacBP) >= 0 ? true : false;
@@ -124,6 +132,7 @@ export default {
         fields: {"voter": this.getAccountName,"proxy":"","producers": votes.sort()}
       }]);
     },
+
     openModal(){
       this.votemodal = true;
       if(!this.hasVotedForUs){
