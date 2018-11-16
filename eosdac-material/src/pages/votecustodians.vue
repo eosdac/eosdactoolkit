@@ -1,11 +1,11 @@
 <template>
 <q-page class="text-white">
-<Transaction ref="Transaction" v-on:done="getMemberVotes(); $refs.votebar.initProgressbar();" />
+<Transaction ref="Transaction" v-on:done="getMemberVotes(); $refs.votebar.initProgressbar(); sortCandidatesByVotes()" />
 
   <div class=" gradient-bg-primary q-px-md q-pt-md relative-position" style="min-height:260px; overflow:hidden">
     <div class="row">
       <div class="col-12">
-        <q-btn v-if="!getMemberRoles.candidate" class="float-right" color="dark" to="/managecandidateship" :label="$t('vote_custodians.candidate_registration')" />
+        <q-btn v-if="!getMemberRoles.candidate && getAccountName" class="float-right" color="dark" to="/managecandidateship" :label="$t('vote_custodians.candidate_registration')" />
         <h4 class="q-display-1 q-mb-sm q-mt-none">{{ $t("default.custodians") }}</h4>
       </div>
     </div>
@@ -135,12 +135,7 @@
 </template>
 
 <script>
-	function offset(el) {
-	    var rect = el.getBoundingClientRect(),
-	    scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,
-	    scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-	    return { top: rect.top + scrollTop, left: rect.left + scrollLeft }
-	}
+
 
 
 
@@ -342,6 +337,13 @@ export default {
       }], false)
 
     },
+    sortCandidatesByVotes(){
+      this.custodians = this.custodians.sort(function(a, b) {
+          let t = b.total_votes - a.total_votes;
+          return t;
+      });
+
+    },
 
     //add profile data to candidate
     addProfile(eventdata){
@@ -389,6 +391,10 @@ export default {
 
     //get current votes from member from chain
     async getMemberVotes(){
+      if(!this.getAccountName){
+        console.log('Guest mode, unable to retrieve votes');
+        return false;
+      }
       let votes = await this.$store.dispatch('api/getMemberVotes', {member: this.getAccountName});
       if(votes){
         this.votesdidchange = false;
@@ -412,6 +418,12 @@ export default {
       }
       // console.log(`votebox: ${offset(votebox).top} scroll: ${scroll.position}`);
       votebox.style.top = (scroll.position-375)+'px';
+    }
+
+  },
+  watch:{
+    getAccountName(val) {
+      this.getMemberVotes();
     }
 
   }

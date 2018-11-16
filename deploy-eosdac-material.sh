@@ -44,10 +44,6 @@ if [[ "$3" == "true" ]]
     LOCAL_DEV=true
 fi
 
-
-echo "Copying $CONFIG_FILE to config.json"
-cp "eosdac-material/src/statics/$CONFIG_FILE" eosdac-material/src/statics/config.json;
-
 git checkout .
 git checkout master
 if ! git pull
@@ -61,6 +57,10 @@ fi
 git fetch --tags
 git checkout "$2"
 git pull
+
+echo "Copying $CONFIG_FILE to config.json"
+cp "eosdac-material/src/statics/$CONFIG_FILE" eosdac-material/src/statics/config.json;
+
 cd eosdac-material
 
 if $LOCAL_DEV ;

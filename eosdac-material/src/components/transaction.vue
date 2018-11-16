@@ -1,4 +1,5 @@
 <template>
+
 <q-modal class="text-white z-max" v-model="visible" :content-css="{maxWidth: '30vw'}">
   <q-card v-for="(action, index) in actions" :key="index" v-show="index === showAction" dark class="bg-dark">
     <q-card-title>
@@ -43,8 +44,10 @@
 
     </div>
     <LoadingSpinner :visible="loading" :text="$t(loadingText)" />
+    
   </q-card>
 </q-modal>
+
 </template>
 
 <script>
@@ -57,6 +60,7 @@ export default {
   name: 'Transaction',
   components: {
     LoadingSpinner
+    
   },
   data() {
     return {
@@ -64,6 +68,7 @@ export default {
       loadingText: 'initialize.loading_text',
       visible: false,
       actions: [],
+      add_abicache: false,
       showAction: 0,
       fields: {},
       contract: '',
@@ -84,12 +89,20 @@ export default {
   },
 
   methods: {
+
     close() {
       Object.assign(this.$data, this.$options.data())
       this.visible = false
     },
-    async newTransaction(transactionActions, cancelable = false) {
-      Object.assign(this.$data, this.$options.data())
+    async newTransaction(transactionActions, cancelable = false, abicache=false) {
+      if(!this.getAccountName){
+        alert('please sign in')
+        return false;
+      }
+      
+      Object.assign(this.$data, this.$options.data());
+      this.add_abicache = abicache;
+      // console.log('transaction comp abi cache', abicache, this.add_abicache)
       this.cancelable = cancelable
       this.visible = this.getTransactionPopup //boolean
       this.loading = this.getTransactionPopup //boolean
@@ -111,7 +124,7 @@ export default {
         } else {
           transactionActions[i].ricardianError = true
         }
-        console.log(transactionActions[i].ricardian)
+        // console.log(transactionActions[i].ricardian)
       }
       this.actions = transactionActions
       if(!this.getTransactionPopup){
@@ -142,7 +155,8 @@ export default {
       this.loading = true
       this.loadingText = 'transaction.pushing_transaction'
       try {
-        let trx = await this.$store.dispatch('api/transaction', {actions: this.actions, scatter: this.getUsesScatter})
+        // console.log('transact comp abi cache', this.add_abicache)
+        let trx = await this.$store.dispatch('api/transaction', {actions: this.actions, scatter: this.getUsesScatter, add_abicache: this.add_abicache})
         this.$store.commit('api/NOTIFY', {
           icon: 'icon-ui-6',
           color: 'positive',
@@ -181,6 +195,7 @@ export default {
     
     parseError(err){
 // assertion failure with message: ERR::UNSTAKE_CANNOT_UNSTAKE_FROM_ACTIVE_CAND::Cannot unstake tokens for an active candidate. Call withdrawcand first.
+      // console.log(err)
       err = JSON.parse(err);
       if(err.error.details[0].message && err.error.details[0].message.indexOf('ERR::') > -1){
         err = err.error.details[0].message.substr(err.error.details[0].message.indexOf('ERR::'));

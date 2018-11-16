@@ -23,8 +23,9 @@ export const UPDATE_MAIN_CURRENCY_BALANCE = (state, balance) => {
 
 export const LOCK_ACCOUNT = (state) => {
   state.pkeysArray = []
-  state.unlocked = false
-  state.info = null
+  state.unlocked = false;
+  state.info = null;
+  state.imported = false;
 }
 
 export const UNLOCK_ACCOUNT = (state, payload) => {
