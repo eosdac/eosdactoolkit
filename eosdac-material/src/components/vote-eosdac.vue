@@ -1,6 +1,7 @@
 <template>
 <div v-if="getAccountName">
-  <q-btn v-if="!hasVotedForUs || votedecay" color="dark" class="animate-pop" @click="openModal" >
+
+  <q-btn v-if="(!hasVotedForUs || votedecay) && !voted_with_proxy" color="dark" class="animate-pop" @click="openModal" >
     <q-icon name="icon-menu-3" class="on-left text-dimwhite"/> 
     <span>{{ $t('vote_eosdac.vote_for_eosdac') }}</span>
   </q-btn>
@@ -96,7 +97,7 @@ export default {
       }
 
       if(this.myvotes[0].proxy){
-        this.voted_with_proxy = true;
+        this.voted_with_proxy = this.myvotes[0].proxy;// =true
         let proxy_votes = await this.$store.dispatch('api/getProducerVotes', {member: this.myvotes[0].proxy});
         //console.log('proxy votes:', proxy_votes[0].producers);
         if(proxy_votes[0]) this.myvotes[0].producers = proxy_votes[0].producers;
