@@ -110,6 +110,9 @@ export default {
         if(proxy_votes[0]) this.myvotes[0].producers = proxy_votes[0].producers;
         
       }
+      else{
+        this.voted_with_proxy = false;
+      }
 
       this.hasVotedForUs = this.myvotes[0].producers.indexOf(this.eosdacBP) >= 0 ? true : false;
 
@@ -216,7 +219,9 @@ export default {
   },
   watch:{
     getAccountName(v){
+      console.log('getaccountname', v)
       if(v){
+      
         this.init();
       }
     }
