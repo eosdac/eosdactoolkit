@@ -94,7 +94,9 @@ export default {
   },
   methods:{
     async init(){
-      this.myvotes = await this.$store.dispatch('api/getProducerVotes', {member: this.getAccountName});
+      // this.myvotes = await this.$store.dispatch('api/getProducerVotes', {member: this.getAccountName});
+      this.myvotes = await this.$store.dispatch('api/getProducerVotes', {member: 'lukeeosproxy'});
+
       // console.log('my votes', JSON.stringify(this.myvotes) )
 
       if(!this.myvotes[0]){//never voted hack
@@ -116,11 +118,12 @@ export default {
 
       //if account is a proxy
       if(this.myvotes[0].is_proxy) last_vote_weight -= this.myvotes[0].proxied_vote_weight*100000000000000000;
-
+      console.log('last vote weight', last_vote_weight)
       //only calculate vote decay if previously voted
       if(last_vote_weight != 0){
-        this.votedecay_percent = (Math.abs((last_vote_weight) - (vote_weight_now)) /(((last_vote_weight)+(vote_weight_now))/2))*100;
+        this.votedecay_percent = ((Math.abs((last_vote_weight) - (vote_weight_now)) /(((last_vote_weight)+(vote_weight_now))/2))*100).toFixed(2);
       }
+      console.log('decay percent', this.votedecay_percent)
       this.votedecay = this.votedecay_percent > 0 ? true : false;
 
 
