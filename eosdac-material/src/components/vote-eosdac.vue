@@ -1,5 +1,5 @@
 <template>
-<div v-if="getAccountName">
+<div v-if="getAccountName && !loading">
 
   <q-btn v-if="(!hasVotedForUs || votedecay) && !voted_with_proxy" color="dark" class="animate-pop" @click="openModal" >
     <q-icon name="icon-menu-3" class="on-left text-dimwhite"/> 
@@ -50,14 +50,14 @@
   </q-modal>
 
   <Transaction ref="Transaction" v-on:done="votemodal=false; init()" />
-  <LoadingSpinner :visible="loading" :text="loadingText" />
+
 </div>
 
 </template>
 
 <script>
 import Transaction from 'components/transaction'
-import LoadingSpinner from 'components/loading-spinner'
+
 
 import {
   mapGetters
@@ -65,9 +65,7 @@ import {
 export default {
   name: 'voteeosdac',
   components: {
-      Transaction,
-      LoadingSpinner
-
+      Transaction
   },
   data() {
     return {
@@ -94,6 +92,7 @@ export default {
   },
   methods:{
     async init(){
+      this.loading = true;
       this.myvotes = await this.$store.dispatch('api/getProducerVotes', {member: this.getAccountName});
       // this.myvotes = await this.$store.dispatch('api/getProducerVotes', {member: 'lukeeosproxy'});
 
@@ -128,7 +127,7 @@ export default {
       }
       // console.log('decay percent', this.votedecay_percent)
       this.votedecay = this.votedecay_percent > 0 ? true : false;
-
+      this.loading = false;
 
     },
 
