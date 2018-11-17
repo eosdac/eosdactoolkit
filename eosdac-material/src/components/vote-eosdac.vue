@@ -94,8 +94,8 @@ export default {
   },
   methods:{
     async init(){
-      // this.myvotes = await this.$store.dispatch('api/getProducerVotes', {member: this.getAccountName});
-      this.myvotes = await this.$store.dispatch('api/getProducerVotes', {member: 'lukeeosproxy'});
+      this.myvotes = await this.$store.dispatch('api/getProducerVotes', {member: this.getAccountName});
+      // this.myvotes = await this.$store.dispatch('api/getProducerVotes', {member: 'lukeeosproxy'});
 
       // console.log('my votes', JSON.stringify(this.myvotes) )
 
