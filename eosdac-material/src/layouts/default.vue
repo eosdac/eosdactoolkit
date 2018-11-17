@@ -126,6 +126,7 @@
       <q-item to="/constitution">
         <q-item-side icon="icon-register-3" />
         <q-item-main :label="$t('default.constitution')" sublabel="" />
+        <q-chip  v-if="getRegisteredVersionUpdate" dense small square color="red">{{$t('default.new_version')}}</q-chip>
       </q-item>
       <q-item v-if="getAccountName" :to="'/profile/'+getAccountName">
         <q-item-side icon="icon-menu-10" />
