@@ -1,7 +1,6 @@
 <template>
 <q-page class="text-white q-pa-md">
 
-
 <div class="row gutter-md reverse-wrap">
   <!-- first column  -->
   <div class="col-xs-12 col-xl-8" >
