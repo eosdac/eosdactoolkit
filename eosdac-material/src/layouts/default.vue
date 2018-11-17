@@ -35,6 +35,13 @@
                 {{ $t('default.log_out') }}
               </q-item-side>
             </q-item>
+            <!-- <q-item @click.native="switchIdentity()" dark>
+              <q-item-side>
+                <q-item-tile icon="icon-topmenu-4">
+                </q-item-tile>
+                {{ $t('default.switch_account') }}
+              </q-item-side>
+            </q-item> -->
           </q-list>
         </MenuDropdown>
         <MenuDropdown v-else iconColor="white" :label="$t('default.status')" :sublabel="$t('default.logged_out')" icon="icon-topmenu-4" :iconRight="true">
@@ -122,10 +129,6 @@
         <q-item-side icon="icon-register-3" />
         <q-item-main :label="$t('default.constitution')" sublabel="" />
       </q-item>
-      <q-item to="/votecustodians">
-        <q-item-side icon="icon-ui-3" />
-        <q-item-main :label="$t('default.custodians')" sublabel="" />
-      </q-item>
       <q-item v-if="getAccountName" :to="'/profile/'+getAccountName">
         <q-item-side icon="icon-menu-10" />
         <q-item-main :label="$t('default.profile')" sublabel="" />
@@ -134,14 +137,9 @@
         <q-item-side icon="icon-menu-6" />
         <q-item-main :label="$t('default.wallet')" sublabel="" />
       </q-item>
-      <q-item @click.native="openURL($configFile.api.tokenExplorerUrl)">
-        <q-item-side icon="icon-menu-4" />
-        <q-item-main :label="$t('default.token_explorer')" sublabel="" />
-        <q-item-side right icon="icon-transfer-out" />
-      </q-item>
-      <q-item to="/settings">
-        <q-item-side icon="icon-topmenu-6" />
-        <q-item-main :label="$t('default.settings')" sublabel="" />
+      <q-item to="/votecustodians">
+        <q-item-side icon="icon-ui-3" />
+        <q-item-main :label="$t('default.custodians')" sublabel="" />
       </q-item>
 
       <q-item v-if="!getMemberRoles.candidate" to="/managecandidateship">
@@ -153,16 +151,29 @@
         <q-item-main :label="$t('default.unregister_as_candidate')" sublabel="" />
       </q-item>
 
-      <!-- <q-item to="/workerproposals">
-        <q-item-side icon="icon-menu-8" />
-        <q-item-main :label="$t('default.worker_proposals')" sublabel="" />
-      </q-item> -->
-
+      <q-item @click.native="openURL($configFile.api.tokenExplorerUrl)">
+        <q-item-side icon="icon-menu-4" />
+        <q-item-main :label="$t('default.token_explorer')" sublabel="" />
+        <q-item-side right icon="icon-transfer-out" />
+      </q-item>
       <q-item @click.native="openURL($configFile.external.discordUrl)">
         <q-item-side icon="icon-menu-11" />
         <q-item-main :label="$t('default.support')" sublabel="" />
         <q-item-side right icon="icon-transfer-out" />
       </q-item>
+      <q-item to="/settings">
+        <q-item-side icon="icon-topmenu-6" />
+        <q-item-main :label="$t('default.settings')" sublabel="" />
+      </q-item>
+
+
+
+      <!-- <q-item to="/workerproposals">
+        <q-item-side icon="icon-menu-8" />
+        <q-item-main :label="$t('default.worker_proposals')" sublabel="" />
+      </q-item> -->
+
+
 
     </q-list>
 
@@ -270,6 +281,10 @@ export default {
       this.$store.commit('account/LOCK_ACCOUNT');
 
     },
+    // switchIdentity(){
+    //   this.getScatter.forgetIdentity();
+    //   location.reload(); 
+    // },
     async queryApis() {
       let now = Date.now()
       if (this.getAccountName && this.$q.appVisible) {
