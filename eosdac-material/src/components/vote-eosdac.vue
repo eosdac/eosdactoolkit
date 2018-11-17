@@ -6,7 +6,12 @@
     <span>{{ $t('vote_eosdac.vote_for_eosdac') }}</span>
   </q-btn>
   <div v-else class="animate-fade" >
-    <q-icon name="icon-ui-6" class="on-left text-dimwhite" style="margin-top:-5px"/><span>{{ $t('vote_eosdac.thank_you') }}</span>
+    <div v-if="!voted_with_proxy" ><q-icon  name="icon-ui-6" class="on-left text-dimwhite" style="margin-top:-5px"/><span>{{ $t('vote_eosdac.thank_you') }}</span></div>
+    <div v-if="voted_with_proxy" >
+      <q-icon  name="icon-ui-6" class="on-left text-dimwhite" style="margin-top:-5px"/>
+      <span>{{ $t('vote_eosdac.voted_with_proxy') }}</span>
+      <div class="q-caption text-center text-dimwhite">{{voted_with_proxy}}</div>
+    </div>
   </div>
 
   <q-modal minimized v-model="votemodal" >

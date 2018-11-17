@@ -90,10 +90,15 @@ class NodeSelector {
 			let url = node_url;
 			return new Promise(function(resolve, reject) {
 				request({
+					method : 'POST',
 					url : url + self.benchmark_url,
 					time : true,
 					rejectUnauthorized: false,
-					headers: {'User-Agent': 'Chrome/59.0.3071.115'},
+					// headers: {
+					// 	'User-Agent': 'Chrome/59.0.3071.115', 
+					// 	'Content-Type': 'text/plain;charset=UTF-8',
+					// 	'Access-Control-Request-Headers': 'Content-Type'
+					// },
 
 				}, function(err, response){
 					if(err){
