@@ -56,7 +56,7 @@ export const getRegistered = (state) => {
 
 export const getRegisteredVersionUpdate = (state) => {
   if (state.registered.version && state.registered.memberterms) {
-    if (state.registered.version < state.registered.memberterms) {
+    if (state.registered.version < state.registered.memberterms.version) {
       return true
     } else {
       return false
