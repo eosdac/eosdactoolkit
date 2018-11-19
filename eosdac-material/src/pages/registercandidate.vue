@@ -78,7 +78,7 @@
   </div>
 </div>
 
-<Transaction ref="Transaction" v-on:done="checkMemberRoles()" />
+<Transaction ref="Transaction" v-on:done="init()" />
 <LoadingSpinner :visible="init_loading" :text="$t('regcandidate.loadconfig')" />
 </q-page>
 </template>
@@ -117,9 +117,10 @@ export default {
     }
   },
   created() {
-    this.getProfileData();
-    this.getContractConfig();
-    this.checkMemberRoles();
+    this.init()
+    // this.checkMemberRoles();
+    // this.getProfileData();
+    // this.getContractConfig();
   },
 
   computed: {
@@ -228,42 +229,69 @@ export default {
         }], false)
 
     },
-
-    async getContractConfig() {
-      this.init_loading = true;
-      let config = await this.$store.dispatch('api/getContractConfig', {contract: this.$configFile.network.custodianContract.name});
-      // console.log(config)
-      if(config){
-        this.minStakeAmount = config.lockupasset;
-        // this.stakeamount = config.lockupasset;
-        this.requested_pay_max = config.requested_pay_max;
-      }
-      this.init_loading = false;
-    },
-
-    async checkMemberRoles(){
+    async init(){
       try {
+         this.init_loading = true;
+        //get contract config
+        let config = await this.$store.dispatch('api/getContractConfig', {contract: this.$configFile.network.custodianContract.name});
+        //check profile
+        let p = await this.$store.dispatch('api/getProfileData', {accountname: this.getAccountName} );
+        if(p && p.length){
+          this.hasprofile = true;
+          // this.profile_is_irrevirsible = p[0].irrevirsible;
+          this.profile_is_irrevirsible = true;
+        }
+        else{
+          this.profile_is_irrevirsible = false;
+        }
+        // console.log(config)
+        if(config){
+          this.minStakeAmount = config.lockupasset;
+          // this.stakeamount = config.lockupasset;
+          this.requested_pay_max = config.requested_pay_max;
+        }
+        //check memberrole
         this.iscandidatedata = await this.$store.dispatch('api/getIsCandidate');
         // console.log(iscandidate);
+         this.init_loading = false;
       } catch (err) {
+         this.init_loading = false;
         throw err
       }
     },
 
-    async getProfileData(){
-      let p = await this.$store.dispatch('api/getProfileData', {accountname: this.getAccountName} );
-      if(p && p.length){
-        this.hasprofile = true;
-        // this.profile_is_irrevirsible = p[0].irrevirsible;
-        this.profile_is_irrevirsible = true;
-      }
-      else{
-        this.profile_is_irrevirsible = false;
-      }
+    // async getContractConfig() {
+    //   this.init_loading = true;
+    //   let config = await this.$store.dispatch('api/getContractConfig', {contract: this.$configFile.network.custodianContract.name});
+    //   // console.log(config)
+    //   if(config){
+    //     this.minStakeAmount = config.lockupasset;
+    //     // this.stakeamount = config.lockupasset;
+    //     this.requested_pay_max = config.requested_pay_max;
+    //   }
+    //   this.init_loading = false;
+    // },
 
+    // async checkMemberRoles(){
+    //   try {
+    //     this.iscandidatedata = await this.$store.dispatch('api/getIsCandidate');
+    //     // console.log(iscandidate);
+    //   } catch (err) {
+    //     throw err
+    //   }
+    // },
 
-
-    },
+    // async getProfileData(){
+    //   let p = await this.$store.dispatch('api/getProfileData', {accountname: this.getAccountName} );
+    //   if(p && p.length){
+    //     this.hasprofile = true;
+    //     // this.profile_is_irrevirsible = p[0].irrevirsible;
+    //     this.profile_is_irrevirsible = true;
+    //   }
+    //   else{
+    //     this.profile_is_irrevirsible = false;
+    //   }
+    // },
 
 
 

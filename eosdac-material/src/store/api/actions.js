@@ -674,13 +674,14 @@ export async function getCustodians({
       table: 'custodians',
       limit:12
     });
+    commit('SET_CURRENT_CONNECTION_STATUS', true);
     if (!custodians.rows.length) {
-      return false
+      return false;
     } else {
-      commit('SET_ACTIVE_CUSTODIANS', custodians.rows)
-      return custodians.rows
+      commit('SET_ACTIVE_CUSTODIANS', custodians.rows);
+      return custodians.rows;
     }
-    commit('SET_CURRENT_CONNECTION_STATUS', true)
+    
   } catch (error) {
     apiDown(error,commit)
     throw error

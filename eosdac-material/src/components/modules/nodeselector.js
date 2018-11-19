@@ -6,6 +6,7 @@ class NodeSelector {
 			//configs
 			this.nodes_api_url = nodes_api_url;
 			this.benchmark_url ='/v1/chain/get_info';
+			this.exclude_nodes = ['eoscochain', 'atticlab', 'eospacex']; //blacklist nodes
 		}
 
 		async get_fastest_node(){
@@ -58,8 +59,21 @@ class NodeSelector {
 							self.nodelist = body.filter((node) => node.startsWith('https'));
 							self.nodelist = self.nodelist.map(node => {
 								 node = node.substr(-1) =='/'?node.slice(0,-1):node;
-								return node
-							})
+								 return node;
+							});
+							if(self.exclude_nodes.length){
+								//filter out excluded nodes
+								// console.log('node list', self.nodelist)
+								self.nodelist = self.nodelist.filter(n => {
+									for (var i = 0; i < self.exclude_nodes.length; i++) {
+										if (n.indexOf(self.exclude_nodes[i]) > -1) {
+										  return false;
+										}
+									  }
+									  return true;
+								})
+								// console.log('node list excluded', self.nodelist)
+							}
 						}
 						resolve(self.nodelist);
 					}
@@ -76,6 +90,7 @@ class NodeSelector {
 			}
 			this.proms = [];
 			this.nodelist.forEach((node, index) => {
+				
 				node = node.substr(-1) =='/'?node.slice(0,-1):node;
 				let p = this._racer_request(node).then(res => res ).catch(e => e );
 				this.proms.push(p)

@@ -1,5 +1,5 @@
 <template>
-<div v-if="getAccountName">
+<div v-if="getAccountName && !loading">
 
   <q-btn v-if="(!hasVotedForUs || votedecay) && !voted_with_proxy" color="dark" class="animate-pop" @click="openModal" >
     <q-icon name="icon-menu-3" class="on-left text-dimwhite"/> 
@@ -50,14 +50,14 @@
   </q-modal>
 
   <Transaction ref="Transaction" v-on:done="votemodal=false; init()" />
-  <LoadingSpinner :visible="loading" :text="loadingText" />
+
 </div>
 
 </template>
 
 <script>
 import Transaction from 'components/transaction'
-import LoadingSpinner from 'components/loading-spinner'
+
 
 import {
   mapGetters
@@ -65,9 +65,7 @@ import {
 export default {
   name: 'voteeosdac',
   components: {
-      Transaction,
-      LoadingSpinner
-
+      Transaction
   },
   data() {
     return {
@@ -94,7 +92,10 @@ export default {
   },
   methods:{
     async init(){
+      this.loading = true;
       this.myvotes = await this.$store.dispatch('api/getProducerVotes', {member: this.getAccountName});
+      // this.myvotes = await this.$store.dispatch('api/getProducerVotes', {member: 'lukeeosproxy'});
+
       // console.log('my votes', JSON.stringify(this.myvotes) )
 
       if(!this.myvotes[0]){//never voted hack
@@ -108,6 +109,9 @@ export default {
         if(proxy_votes[0]) this.myvotes[0].producers = proxy_votes[0].producers;
         
       }
+      else{
+        this.voted_with_proxy = false;
+      }
 
       this.hasVotedForUs = this.myvotes[0].producers.indexOf(this.eosdacBP) >= 0 ? true : false;
 
@@ -116,13 +120,14 @@ export default {
 
       //if account is a proxy
       if(this.myvotes[0].is_proxy) last_vote_weight -= this.myvotes[0].proxied_vote_weight*100000000000000000;
-
+      // console.log('last vote weight', last_vote_weight)
       //only calculate vote decay if previously voted
       if(last_vote_weight != 0){
-        this.votedecay_percent = (Math.abs((last_vote_weight) - (vote_weight_now)) /(((last_vote_weight)+(vote_weight_now))/2))*100;
+        this.votedecay_percent = ((Math.abs((last_vote_weight) - (vote_weight_now)) /(((last_vote_weight)+(vote_weight_now))/2))*100).toFixed(2);
       }
+      // console.log('decay percent', this.votedecay_percent)
       this.votedecay = this.votedecay_percent > 0 ? true : false;
-
+      this.loading = false;
 
     },
 
@@ -213,7 +218,9 @@ export default {
   },
   watch:{
     getAccountName(v){
+      console.log('getaccountname', v)
       if(v){
+      
         this.init();
       }
     }
