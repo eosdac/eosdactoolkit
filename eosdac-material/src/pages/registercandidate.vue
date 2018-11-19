@@ -41,8 +41,8 @@
           </div>
 
           <div v-if="getMemberRoles.custodian">{{ $t('regcandidate.page_description_active_custodian') }}</div>
-          <!-- <pre>{{iscandidatedata}}</pre> -->
-          <!-- <pre>{{stakeRequirementMet}}</pre> -->
+          <!-- <pre>{{iscandidatedata}}</pre>
+          <pre>{{stakeRequirementMet}}</pre> -->
         </div>
 
         <div class="col-md-4 col-sm-12 q-pa-md">
@@ -138,7 +138,7 @@ export default {
         if(stake ==''){
           return false;
         }
-        if(stake >= required_stake ){
+        else if(parseInt(stake) >= parseInt(required_stake) ){
           return stake;
         }
         else{
@@ -229,6 +229,7 @@ export default {
         }], false)
 
     },
+
     async init(){
       try {
          this.init_loading = true;
@@ -292,8 +293,6 @@ export default {
     //     this.profile_is_irrevirsible = false;
     //   }
     // },
-
-
 
   }
 }
