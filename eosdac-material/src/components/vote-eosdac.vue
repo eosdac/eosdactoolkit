@@ -147,7 +147,7 @@ export default {
     openModal(){
       this.votemodal = true;
       if(!this.hasVotedForUs){
-        this.myvotes[0].producers.push(this.eosdacBP);
+        if(!this.myvotes[0].producers.includes(this.eosdacBP) ) this.myvotes[0].producers.push(this.eosdacBP);
         this.myvotes[0].producers.sort();
         this.modal_msg = this.$t('vote_eosdac.added_to_list');
         //move this to html
