@@ -96,7 +96,8 @@ export default {
     },
     async newTransaction(transactionActions, cancelable = false, abicache=false) {
       if(!this.getAccountName){
-        alert('please sign in')
+        this.$root.$emit("showScatterModal");
+        // alert('please sign in')
         return false;
       }
       
@@ -194,7 +195,7 @@ export default {
     },
     
     parseError(err){
-// assertion failure with message: ERR::UNSTAKE_CANNOT_UNSTAKE_FROM_ACTIVE_CAND::Cannot unstake tokens for an active candidate. Call withdrawcand first.
+      // example error: assertion failure with message: ERR::UNSTAKE_CANNOT_UNSTAKE_FROM_ACTIVE_CAND::Cannot unstake tokens for an active candidate. Call withdrawcand first.
       // console.log(err)
       err = JSON.parse(err);
       if(err.error.details[0].message && err.error.details[0].message.indexOf('ERR::') > -1){

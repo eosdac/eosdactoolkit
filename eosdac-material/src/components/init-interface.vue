@@ -48,7 +48,7 @@ export default {
     return {
       scatterModal: false,
       scatterError: false,
-      scatterErrorText: 'hello test',
+      scatterErrorText: 'Please login with scatter.',
       connectionMethod: 'scatter'
     }
   },
@@ -61,8 +61,9 @@ export default {
       getImported: 'account/getImported'
     })
   },
-  mounted() {
 
+  created(){
+    this.$root.$on("showScatterModal", ()=>{this.scatterModal = true});
   },
 
   methods: {
