@@ -242,7 +242,7 @@
     "requested_custodian_pay_placeholder": "requested pay in EOS",
     "requested_pay": "Requested Pay",
     "stake_amount": "Stake Amount",
-    "stake_description": "Please specify the amaont of tokens you want to stake. The minimum amount is {minimum_stake}.",
+    "stake_description": "Please specify the amount of tokens you want to stake. The minimum amount is {minimum_stake}.",
     "unregister": "unregister",
     "unregister_as_candidate": "Unregister as Candidate",
     "unstake": "unstake"
