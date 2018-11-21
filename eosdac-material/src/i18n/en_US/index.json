@@ -245,7 +245,8 @@
     "stake_description": "Please specify the amount of tokens you want to stake. The minimum amount is {minimum_stake}.",
     "unregister": "unregister",
     "unregister_as_candidate": "Unregister as Candidate",
-    "unstake": "unstake"
+    "unstake": "unstake",
+    "unstake_description": "xxxxxxxxxxtext for explaining unstake action"
   },
   "register": {
     "already_registered": "You are already registered as a eosDAC Member.",

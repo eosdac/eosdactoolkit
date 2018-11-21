@@ -61,21 +61,22 @@
                 <q-spinner slot="loading" />
               </q-btn>
 
-
-              <q-btn size="md"  v-if="!getMemberRoles.candidate && (stakeRequirementMet>0)" class="animate-pop on-right"  color="primary"  @click="unstake" :label="$t('regcandidate.unstake')">
-              </q-btn>
             </div>
-
           </div>
+
           <q-btn size="md" v-if="getMemberRoles.candidate" class="animate-pop" :loading="loading" color="primary" @blur.native="userMsg=''" @click="unregisterAsCandidtate" :label="$t('regcandidate.unregister')">
             <q-spinner slot="loading" />
           </q-btn>
-
-
           <div class="q-mt-md text-dimwhite animate-fade " v-if="userMsg != ''">{{userMsg}}</div>
           <!-- <pre>{{getMemberRoles}}</pre> -->
         </div>
   </div>
+  <div class="q-pa-md q-mt-md bg-dark2 round-corners shadow-5">
+    <div>{{$t('regcandidate.unstake_description')}}</div>
+    <div style="height:30px"><q-btn size="md"  v-if="!getMemberRoles.candidate && (stakeRequirementMet>0)" class="animate-pop on-right float-right"  color="primary"  @click="unstake" :label="$t('regcandidate.unstake')" /></div>
+    
+  </div>
+
 </div>
 
 <Transaction ref="Transaction" v-on:done="init()" />
