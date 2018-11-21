@@ -72,7 +72,7 @@
         </div>
   </div>
   <div class="q-pa-md q-mt-md bg-dark2 round-corners shadow-5">
-    <div>{{$t('regcandidate.unstake_description')}}</div>
+    <div>{{$t('regcandidate.unstake_description')}} {{lockup_release_time_delay_days}}</div>
     <div style="height:30px"><q-btn size="md"  v-if="!getMemberRoles.candidate && (stakeRequirementMet>0)" class="animate-pop on-right float-right"  color="primary"  @click="unstake" :label="$t('regcandidate.unstake')" /></div>
     
   </div>
@@ -112,7 +112,9 @@ export default {
       stakeamount: 0,
       requested_pay_max : false,
       requestedpay : 0,
+      lockup_release_time_delay_days : 0,
       minStakeAmount:'',
+      contract_config: {},
       userMsg: ''
 
     }
@@ -236,6 +238,7 @@ export default {
          this.init_loading = true;
         //get contract config
         let config = await this.$store.dispatch('api/getContractConfig', {contract: this.$configFile.network.custodianContract.name});
+        console.log(config)
         //check profile
         let p = await this.$store.dispatch('api/getProfileData', {accountname: this.getAccountName} );
         if(p && p.length){
@@ -249,6 +252,7 @@ export default {
         // console.log(config)
         if(config){
           this.minStakeAmount = config.lockupasset;
+          this.lockup_release_time_delay_days = config.lockup_release_time_delay/60/60/24;
           // this.stakeamount = config.lockupasset;
           this.requested_pay_max = config.requested_pay_max;
         }
