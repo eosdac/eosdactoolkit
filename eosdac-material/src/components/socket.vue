@@ -1,7 +1,7 @@
 <template>
   
 <div>
-  <q-btn label="test" @click="emittest" />
+  <q-btn :label="`test ${clients}`" @click="emittest" />
 </div>
 
 </template>
@@ -19,16 +19,21 @@ export default {
     //     alert('connected')
     // },
     customEmit: function (data) {
-      alert(data)
+      // alert(data)
     }
   },
 
   data() {
     return {
+      clients: 0
 
     }
   },
-
+  created(){
+    this.sockets.subscribe('clientcount', (data) => {
+        this.clients = data;
+    });
+  },
 
   methods: {
     emittest(){
