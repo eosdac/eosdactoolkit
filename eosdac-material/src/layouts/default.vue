@@ -132,7 +132,7 @@
         <q-item-side icon="icon-menu-10" />
         <q-item-main :label="$t('default.profile')" sublabel="" />
       </q-item>
-      <q-item to="/wallet">
+      <q-item to="/wallet" :disabled="!getAccountName">
         <q-item-side icon="icon-menu-6" />
         <q-item-main :label="$t('default.wallet')" sublabel="" />
       </q-item>
@@ -141,11 +141,11 @@
         <q-item-main :label="$t('default.custodians')" sublabel="" />
       </q-item>
 
-      <q-item v-if="!getMemberRoles.candidate" to="/managecandidateship">
+      <q-item v-if="!getMemberRoles.candidate" to="/managecandidateship" :disabled="!getAccountName">
         <q-item-side icon="icon-menu-12" />
         <q-item-main :label="$t('default.register_as_candidate')" sublabel="" />
       </q-item>
-      <q-item v-if="getMemberRoles.candidate" to="/managecandidateship">
+      <q-item v-if="getMemberRoles.candidate" to="/managecandidateship" :disabled="!getAccountName">
         <q-item-side icon="icon-menu-12" />
         <q-item-main :label="$t('default.unregister_as_candidate')" sublabel="" />
       </q-item>
