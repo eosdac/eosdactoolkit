@@ -11,7 +11,8 @@ module.exports = function(ctx) {
       'scatter',
       'consolemessage',
       'helper',
-      'medium-editor'
+      'medium-editor',
+      'socketio'
     ],
     css: [
       'app.styl',

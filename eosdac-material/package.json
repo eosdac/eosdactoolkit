@@ -23,6 +23,7 @@
     "scatterjs-plugin-eosjs": "1.3.10",
     "turndown": "^5.0.1",
     "vue-i18n": "^7.3.3",
+    "vue-socket.io": "^3.0.1",
     "vue2-medium-editor": "^1.1.5",
     "vuex-persistedstate": "^2.5.4",
     "yallist": "^3.0.2"

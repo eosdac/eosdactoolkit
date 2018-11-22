@@ -164,6 +164,7 @@
         <q-item-side icon="icon-topmenu-6" />
         <q-item-main :label="$t('default.settings')" sublabel="" />
       </q-item>
+       
 
 
 
@@ -175,7 +176,7 @@
 
 
     </q-list>
-
+    <div><socket /></div>
     <div class="absolute-bottom row  bg-dark2 justify-center q-pa-md" style="border-top: 1px solid #272B35;margin-left:-20px" ><VoteEosdac /></div>
   </q-layout-drawer>
   <q-page-container>
@@ -197,6 +198,7 @@
   </q-page-container>
   <NodeSelector setup v-on:done="$refs.init_interface.auto_scatter()"/>
   <InitInterface ref="init_interface" v-on:done="setupComplete=true"/>
+ 
   <!-- depricated multimodal -->
   <!-- <MultiModal ref="Multi" /> -->
 
@@ -218,6 +220,7 @@ import {
 import {
   Quasar
 } from 'quasar'
+import socket from 'components/socket'
 import InitInterface from 'components/init-interface'
 import NodeSelector from 'components/nodeselector'
 import Notifier from 'components/notifier'
@@ -228,12 +231,14 @@ export default {
 
   name: 'LayoutDefault',
   components: {
+    socket,
     Notifier,
     MenuDropdown,
     VoteEosdac,
     NodeSelector,
     InitInterface
   },
+
   data() {
     return {
       // leftDrawerOpen: this.$q.platform.is.desktop,
