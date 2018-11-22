@@ -19,7 +19,7 @@ export default {
     //     alert('connected')
     // },
     customEmit: function (data) {
-      // alert(data)
+      console.log(data)
     }
   },
 
@@ -29,6 +29,7 @@ export default {
 
     }
   },
+
   created(){
     this.sockets.subscribe('clientcount', (data) => {
         this.clients = data;
