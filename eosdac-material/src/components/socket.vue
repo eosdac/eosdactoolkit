@@ -15,9 +15,9 @@ export default {
   name: 'socket',
 
   sockets: {
-    connect: function (data) {
-        alert('connected')
-    },
+    // connect: function (data) {
+    //     alert('connected')
+    // },
     customEmit: function (data) {
       alert(data)
     }
