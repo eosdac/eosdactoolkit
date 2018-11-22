@@ -23,7 +23,7 @@
   },
   "contract_errors": {
     "BURN_INVALID_QTY_": "유효하지 않은 수량",
-    "BURN_LOCKED_TOKEN": "transferLocked 토큰의 토큰을 소각하십시오. 발급자는 먼저 '잠금 해제'해야합니다.",
+    "BURN_LOCKED_TOKEN": "락업된 토큰은 소각할 수 없습니다. 발행자가 먼저 토큰을 락업 해제해야 합니다.",
     "BURN_NON_POSITIVE_QTY_": "소각량은 0보다 커야 합니다",
     "BURN_SYMBOL_MISMATCH": "심볼 정확도 불일치",
     "BURN_UNKNOWN_SYMBOL": "해당 계약이 식별할 수 없는 토큰을 소각하려 합니다.",
