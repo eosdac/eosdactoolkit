@@ -1,19 +1,19 @@
 {
   "network": {
-    "chainId": "aca376f206b8fc25a6ed44dbdc66547c36c6c33e3a119ffbeaef943642f0e906",
-    "default_node": "",
+    "chainId": "e70aaab8997e1dfce58fbfac80cbbb8fecec7b99cf982a9444273cbc64c41473",
+    "default_node": "http://jungle2.cryptolions.io:80",
     "authorityAccount": "dacauthority",
 
     "tokenContracts":{
       "eosio.token":[{"token": "EOS", "decimals": 4 }],
-      "eosdactokens":[{"token": "EOSDAC", "decimals": 4}]
+      "kasdactokens":[{"token": "KASDAC", "decimals": 4}]
     },
 
     "tokenContract": {
-      "name": "eosdactokens",
-      "token": "EOSDAC",
+      "name": "kasdactokens",
+      "token": "KASDAC",
       "decimals": 4,
-      "totalSupply": 994895254.9762
+      "totalSupply": 1000000000.0000
     },
     "mainCurrencyContract": {
       "name": "eosio.token",
@@ -21,12 +21,12 @@
       "decimals": 4
     },
     "custodianContract": {
-      "name": "daccustodian",
-      "memo": "daccustodian",
-      "enable_voting" : false
+      "name": "dacelections",
+      "memo": "dacelections",
+      "enable_voting" : true
     },
     "msigContract":{
-      "name": ""
+      "name": "dacmultisigs"
     },
     "systemContract": {
       "name": "eosio"
@@ -34,9 +34,9 @@
   },
   "api": {
     "bpNodeApiUrl": "https://eosdac.io/topnodes.json",
-    "mainCurrencyExplorerUrl": "https://www.bloks.io",
+    "mainCurrencyExplorerUrl": "https://jungle.bloks.io",
     "tokenExplorerUrl": "https://explorer.eosdac.io",
-    "profileApiUrl": "https://toolkit-api.eosdac.io/"
+    "profileApiUrl": "http://ns3119712.ip-51-38-42.eu:3000/"
   },
   "external":{
     "homepage": "https://eosdac.io",
