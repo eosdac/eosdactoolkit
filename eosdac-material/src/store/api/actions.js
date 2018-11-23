@@ -211,7 +211,7 @@ export async function getRegistered({
       return false
     } else {
       if (members.rows[0].sender === rootState.account.info.account_name) {
-        commit('account/ADD_REGISTRATION', members.rows[0].agreedterms, {root: true})
+        commit('account/ADD_REGISTRATION', members.rows[0].agreedtermsversion, {root: true})
         return members.rows[0]
       } else {
         commit('account/ADD_REGISTRATION', null, {root: true});

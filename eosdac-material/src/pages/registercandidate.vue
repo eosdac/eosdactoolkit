@@ -71,9 +71,9 @@
           <!-- <pre>{{getMemberRoles}}</pre> -->
         </div>
   </div>
-  <div class="q-pa-md q-mt-md bg-dark2 round-corners shadow-5">
+  <div class="q-pa-md q-mt-md bg-dark2 round-corners shadow-5" v-if="!getMemberRoles.candidate && (stakeRequirementMet>0)">
     <div>{{$t('regcandidate.unstake_description')}} {{lockup_release_time_delay_days}}</div>
-    <div style="height:30px"><q-btn size="md"  v-if="!getMemberRoles.candidate && (stakeRequirementMet>0)" class="animate-pop on-right float-right"  color="primary"  @click="unstake" :label="$t('regcandidate.unstake')" /></div>
+    <div style="height:30px"><q-btn size="md"  class="animate-pop on-right float-right"  color="primary"  @click="unstake" :label="$t('regcandidate.unstake')" /></div>
     
   </div>
 
