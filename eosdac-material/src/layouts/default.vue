@@ -160,7 +160,7 @@
         <q-item-main :label="$t('default.support')" sublabel="" />
         <q-item-side right icon="icon-transfer-out" />
       </q-item>
-      <q-item to="/settings">
+      <q-item to="/settings" :disabled="!getAccountName">
         <q-item-side icon="icon-topmenu-6" />
         <q-item-main :label="$t('default.settings')" sublabel="" />
       </q-item>
