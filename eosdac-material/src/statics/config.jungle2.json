@@ -1,6 +1,7 @@
 {
   "network": {
     "chainId": "e70aaab8997e1dfce58fbfac80cbbb8fecec7b99cf982a9444273cbc64c41473",
+    "name": "jungle2",
     "default_node": "http://jungle2.cryptolions.io:80",
     "authorityAccount": "dacauthority",
 
