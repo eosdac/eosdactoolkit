@@ -51,7 +51,7 @@ export default {
       let state = await this.$store.dispatch('api/getContractState', {contract: this.$configFile.network.custodianContract.name});
       // console.log(state)
       if(state){
-        this.voting_progress = state.total_weight_of_votes/totalsupply*100;
+        this.voting_progress = (state.total_weight_of_votes/totalsupply*100).toFixed(2);
         this.met_initial_votes_threshold = state.met_initial_votes_threshold;
       }
       this.loading = false;

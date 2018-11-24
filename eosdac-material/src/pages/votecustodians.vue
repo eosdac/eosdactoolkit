@@ -106,7 +106,6 @@
           </transition-group>
         </q-list>
         <!-- <pre>{{getSelectedCand}}</pre> -->
-
         <!-- <pre>{{getTokenBalance}}</pre> -->
         <!-- <pre>{{votesdidchange}}</pre> -->
       </q-card>
