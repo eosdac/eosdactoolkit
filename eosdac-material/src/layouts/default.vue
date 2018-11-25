@@ -181,13 +181,15 @@
   <q-page-container>
     <transition appear enter-active-class="animated fadeInDown">
       <q-alert v-if="!getRegistered && getAccountName && setupComplete" color="blue" appear>
+      
         <q-icon flat size="30px" class="float-left q-ma-sm" name="icon-register-3"></q-icon>
         <div class="q-title">{{ $t('default.sign_the_constitution') }}
           <q-icon flat size="40px" class="float-right q-mt-sm cursor-pointer" name="icon-ui-8" @click.native="setupComplete = false"></q-icon>
         </div>
         <span v-if="!getRegisteredVersionUpdate" class="on-left">{{ $t('default.you_have_not_yet_registered') }}</span>
         <span v-else class="on-left">{{ $t('default.constitution_has_been_updated') }}</span>
-        <q-btn class="q-mt-sm" to="/constitution" text-color="blue" color="white">{{ $t('default.sign_the_constitution') }}</q-btn>
+        <q-btn v-if="$router.currentRoute.path!='/constitution'" class="q-mt-sm" to="/constitution" text-color="blue" color="white">{{ $t('default.sign_the_constitution') }}</q-btn>
+    
       </q-alert>
     </transition>
     <router-view />
