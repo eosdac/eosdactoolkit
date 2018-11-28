@@ -6,6 +6,7 @@ class NodeSelector {
 			//configs
 			this.nodes_api_url = nodes_api_url;
 			this.benchmark_url ='/v1/chain/get_info';
+			this.exclude_nodes = ['eoscochain', 'atticlab', 'eospacex']; //blacklist nodes
 		}
 
 		async get_fastest_node(){
@@ -17,14 +18,13 @@ class NodeSelector {
 				}catch(e){};//no need to catch the error here
 			}
 			//return false if node api error
-			if(!this.nodelist){
-				console.log('error getting node list!');
-				return false
+			if(!this.nodelist || !this.nodelist.length){
+				console.log('error getting node list from api server!');
+				return false;
 			}
 
 			return new Promise(async function(resolve, reject){
 				let flag = true;
-				let winners = [];
 				while(flag){
 					try{
 						let winner = await self._start_race();
@@ -59,8 +59,21 @@ class NodeSelector {
 							self.nodelist = body.filter((node) => node.startsWith('https'));
 							self.nodelist = self.nodelist.map(node => {
 								 node = node.substr(-1) =='/'?node.slice(0,-1):node;
-								return node
-							})
+								 return node;
+							});
+							if(self.exclude_nodes.length){
+								//filter out excluded nodes
+								// console.log('node list', self.nodelist)
+								self.nodelist = self.nodelist.filter(n => {
+									for (var i = 0; i < self.exclude_nodes.length; i++) {
+										if (n.indexOf(self.exclude_nodes[i]) > -1) {
+										  return false;
+										}
+									  }
+									  return true;
+								})
+								// console.log('node list excluded', self.nodelist)
+							}
 						}
 						resolve(self.nodelist);
 					}
@@ -77,6 +90,7 @@ class NodeSelector {
 			}
 			this.proms = [];
 			this.nodelist.forEach((node, index) => {
+				
 				node = node.substr(-1) =='/'?node.slice(0,-1):node;
 				let p = this._racer_request(node).then(res => res ).catch(e => e );
 				this.proms.push(p)
@@ -91,10 +105,15 @@ class NodeSelector {
 			let url = node_url;
 			return new Promise(function(resolve, reject) {
 				request({
+					method : 'POST',
 					url : url + self.benchmark_url,
 					time : true,
 					rejectUnauthorized: false,
-					headers: {'User-Agent': 'Chrome/59.0.3071.115'},
+					// headers: {
+					// 	'User-Agent': 'Chrome/59.0.3071.115', 
+					// 	'Content-Type': 'text/plain;charset=UTF-8',
+					// 	'Access-Control-Request-Headers': 'Content-Type'
+					// },
 
 				}, function(err, response){
 					if(err){

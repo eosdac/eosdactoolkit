@@ -94,7 +94,8 @@
 
               :placeholder="$t('profile.social_profile_link')"
             />
-            <q-btn  round  color="primary" @click="addSocial" icon="icon-plus" />
+            <q-btn  round  color="primary" @click="addSocial" icon="icon-plus" @blur.native="maxLinksmsg=''" />
+            <span v-if="maxLinksmsg !=''" class="animate-fade on-right">{{maxLinksmsg}}</span>
           </div>
 
           <div v-if="allow_edit" class="row gutter-sm justify-end q-mt-md">
@@ -114,6 +115,10 @@
   <div v-if="rawprofiledata" class="q-pa-md q-my-md text-dimwhite">
     <TimeZone :offset="form.timezone" />
   </div>
+
+
+  <!-- <q-input color="p-light" dark type="url" v-model="profileUrl" />
+  <q-btn size="md" class="animate-pop"  color="primary" @click="saveProfileUrl" :label="$t('profile.save_url')" /> -->
 
   <q-modal v-model="visible"  minimized @hide="handleModalClose"  :content-css="{width: '80vw'}" >
     <div  class="bg-dark round-borders q-pa-md">
@@ -162,12 +167,14 @@ export default {
       profile_is_loading : false,
       profile_is_irrevirsible : true,
       rawprofiledata: false,
+      profileUrl: '',
 
       visible:false,
       centerimage:true,
       setwidth: true,
       loaded:false,
-      form:ProfileTemplate
+      form:ProfileTemplate,
+      maxLinksmsg: ''
     }
   },
 
@@ -193,6 +200,9 @@ export default {
     },
      onLoaded() {
         let img = this.$refs.profile_pic;
+        if(img == undefined){
+          return false;
+        }
         // this.$consoleMsg('Profile image size: '+img.width +' x '+ img.height);
         this.setwidth = img.width <= img.height ? true : false;
         this.centerimage = img.width == img.height ? false : true;
@@ -211,6 +221,12 @@ export default {
     async getProfileData(){
       let p = await this.$store.dispatch('api/getProfileData2', {accountname: [this.account_name]} );
       // console.log(p);
+
+      // if(this.$helper.isUrl(p[0].profile)){
+      //   //todo fetch profileurl
+      //   p = false;
+      // }
+
       if(p && p.length && this.validateProfile(p[0].profile)){
         this.rawprofiledata = p[0];
         //todo validate profile
@@ -243,18 +259,46 @@ export default {
     },
 
     saveProfile(){
+      this.deleteEmptyLinks();
       this.form.timezone = new Date().getTimezoneOffset();
-      this.$refs.Transaction.newTransaction(this.$configFile.network.custodianContract.name, 'stprofileuns', {
-        cand: this.getAccountName,
-        profile: JSON.stringify(this.form),
-      })
+      this.$refs.Transaction.newTransaction([{
+        contract: this.$configFile.network.custodianContract.name,
+        action: 'stprofileuns',
+        fields: {
+          cand: this.getAccountName,
+          profile: JSON.stringify(this.form)
+        }
+      }])
     },
 
+    saveProfileUrl(){
+      // this.form.timezone = new Date().getTimezoneOffset();
+      if(!this.$helper.isUrl(this.profileUrl)){
+        console.log('this is not a valid url');
+        return false;
+      }
+      this.$refs.Transaction.newTransaction([{
+        contract: this.$configFile.network.custodianContract.name,
+        action: 'stprofile',
+        fields: {
+          cand: this.getAccountName,
+          profile: this.profileUrl
+        }
+      }])
+
+    },
+
+
     addSocial(){
+      let max = 4;
       this.deleteEmptyLinks();
-      if(this.form.sameAs.length < 4 ){
+      if(this.form.sameAs.length < max ){
         this.form.sameAs.push({link:''});
       }
+      else{
+          this.maxLinksmsg = this.$t('profile.maxLinksmsg', {number_allowed_links : max});
+      }
+
     },
 
     deleteEmptyLinks(){

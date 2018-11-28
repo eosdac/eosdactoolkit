@@ -1,9 +1,9 @@
 <template>
 <span>
-  <div v-if="!met_initial_votes_threshold && !loading" class="full-width">
+  <div v-if="!met_initial_votes_threshold" class="full-width">
     <span class="uppercase">
       {{ $t("vote_custodians.voting_progress") }} 
-      <span class="text-dimwhite on-right on-left"> {{ voting_progress }}%</span>
+      <span class="text-dimwhite on-right on-left"> {{ voting_progress.toFixed(2) }}%</span>
     </span>
     <span class="q-body-1 text-dimwhite text-italic">({{$t('votingprogress.activated_at')}})</span>
     <q-progress animate stripe class="round-borders votingprogress_bar q-my-xs" :style="{height: height}" color="positive" :percentage="voting_progress" />
@@ -58,9 +58,10 @@ export default {
     },
 
     intervaller (i){
-      if(this.met_initial_votes_threshold){
+      if(this.met_initial_votes_threshold || !this.$configFile.network.custodianContract.enable_voting){
         return false;
       }
+
       let oldi = i;
       this.timer = setInterval(() => {
         this.update_in_seconds = i;

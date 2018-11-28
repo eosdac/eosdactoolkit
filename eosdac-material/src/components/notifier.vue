@@ -7,9 +7,9 @@
           <q-icon flat size="30px" class="float-left on-left q-ma-sm" :name="icon"></q-icon>
         </div>
         <div class="col-md-8 col-lg-9">
-          <div class="q-title">{{ $t(message) }}</div>
-          {{ $t(details) }}
-          <q-btn v-if="linkText" @click="openLink(linkUrl)" :text-color="color" :color="textColor">{{ $t(linkText) }}</q-btn>
+          <div class="q-title">{{ message }}</div>
+          <span>{{ details }}</span>
+          <q-btn class="on-right" v-if="linkText" @click="openLink(linkUrl)" :text-color="color" :color="textColor">{{ linkText }}</q-btn>
         </div>
         <div class="col-xs-2">
           <q-icon flat size="40px" class="float-right no-padding cursor-pointer" name="clear" @click.native="markSeen()"></q-icon>

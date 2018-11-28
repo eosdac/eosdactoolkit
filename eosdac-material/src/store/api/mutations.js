@@ -66,3 +66,7 @@ export const SET_CONFIG = (state, config) => {
 export const SET_CONTRACT_CONFIG = (state, config) => {
   state.contractConfigs.push(config)
 }
+export const SET_ACTIVE_CUSTODIANS = (state, custodians) => {
+  state.activeCustodians=custodians;
+}
+

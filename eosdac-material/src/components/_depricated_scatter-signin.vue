@@ -9,7 +9,7 @@
       <q-select color="white" dark v-model="connectionMethod" radio :options="[{label:'Scatter',value:'Scatter'}]" />
     </q-field>
     <q-alert v-if="!hasScatter" :message="$t('scatter_signin.scatter_is_not_available')" class="text-truncate q-ma-sm" icon="info" color="grey" />
-    <q-alert v-if="scatterError" class="text-truncate q-ma-lg" icon="info" color="grey">
+    <q-alert v-if="scatterError && hasScatter" class="text-truncate q-ma-lg" icon="info" color="grey">
       {{ $t(scatterErrorText) }}
     </q-alert>
     <ScatterTutorial v-if="scatterError" />

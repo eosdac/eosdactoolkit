@@ -13,12 +13,15 @@
           <div class="q-ml-lg">
             <router-link class="q-headline" :to="{path: '/profile/' + data.candidate_name}" >
               <q-icon title="Nominated for next custodian board" style="margin-top:-5px" v-if="data.position < 13" name="star_border" color="yellow" />{{ data.candidate_name }}
-            </router-link><br>
-            <span><span class="text-dimwhite">votes:</span> {{data.total_votes/10000}}</span>
+            </router-link>
+            <span class="text-dimwhite"  v-if="data.profile && (data.profile.givenName !='' || data.profile.familyName !='')" >({{data.profile.givenName}} {{data.profile.familyName}})</span>
+            <br>
+            <span><span class="text-dimwhite">{{$t('candidate.votes')}}:</span> {{data.total_votes/10000}}</span>
+            <span><span class="q-pl-md text-dimwhite">{{$t('candidate.staked')}}:</span> {{data.locked_tokens}}</span>
           </div>
         </q-item-main>
       </template>
-      <div class="q-pt-sm q-pt-none" style="border-top:1px solid grey">
+      <div class="q-pt-sm q-px-md" style="border-top:1px solid grey; overflow-x: hidden">
         <q-scroll-area
           style="width: 100%; height: 300px;"
           :thumb-style="{

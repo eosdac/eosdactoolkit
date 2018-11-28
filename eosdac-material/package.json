@@ -1,10 +1,10 @@
 {
   "name": "eosdac-material",
-  "version": "1.0.0",
+  "version": "0.1.1",
   "description": "Toolkit GUI for eosDAC",
   "productName": "eosDAC Member Client",
   "cordovaId": "org.cordova.quasar.app",
-  "author": "nanonano7 <nanonano@protonmail.com>",
+  "author": "eosDAC <hello@eosdac.io>",
   "private": true,
   "scripts": {
     "lint": "eslint --ext .js,.vue src",
@@ -19,7 +19,8 @@
     "medium-editor": "^5.23.3",
     "request": "^2.87.0",
     "sanitize-html": "^1.19.0",
-    "scatter-js": "^2.4.0",
+    "scatterjs-core": "2.3.8",
+    "scatterjs-plugin-eosjs": "1.3.10",
     "turndown": "^5.0.1",
     "vue-i18n": "^7.3.3",
     "vue2-medium-editor": "^1.1.5",
@@ -27,6 +28,8 @@
     "yallist": "^3.0.2"
   },
   "devDependencies": {
+    "@babel/runtime": "^7.1.5",
+    "babel-core": "6",
     "babel-eslint": "^8.2.1",
     "devtron": "1.4.0",
     "electron": "2.0.8",
@@ -42,7 +45,7 @@
     "eslint-plugin-promise": "^3.7.0",
     "eslint-plugin-standard": "^3.0.1",
     "eslint-plugin-vue": "^4.3.0",
-    "quasar-cli": "^0.17.10",
+    "quasar-cli": "^0.17.20",
     "strip-ansi": "=3.0.1"
   },
   "engines": {

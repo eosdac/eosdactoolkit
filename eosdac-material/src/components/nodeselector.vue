@@ -1,6 +1,6 @@
 <template>
 <div v-if="setup">
-  <div v-if="setupError" class="row justify-center">
+  <div v-if="setupError && successEndpoint" class="row justify-center">
     <div class="col-sm-12 text-center">
       <div class="row justify-center">
         <div class="col-sm-12 q-pa-sm text-center">
@@ -81,7 +81,7 @@ import LoadingSpinner from 'components/loading-spinner'
 import NodeSelector from 'components/modules/nodeselector.js'
 import {
   mapGetters
-} from 'vuex'
+} from 'vuex' 
 export default {
   name: 'NodeSelector',
   props: {
@@ -92,6 +92,8 @@ export default {
   },
   computed: {
     ...mapGetters({
+      
+      getAccountName: 'account/getAccountName',
       getCurrentEndpoint: 'api/getCurrentEndpoint'
     })
   },
@@ -125,6 +127,12 @@ export default {
   },
   methods: {
     async getFastestNode() {
+      //if the chain id is not from mainnet then use the default node from the config file
+      if(this.$configFile.network.chainId !== 'aca376f206b8fc25a6ed44dbdc66547c36c6c33e3a119ffbeaef943642f0e906'){
+        this.connect(this.$configFile.network.default_node);
+        return false;
+      }
+      
       let s = new NodeSelector(this.$configFile.api.bpNodeApiUrl)
       this.loading = true
       this.loadingText = 'nodeselector.gathering_endpoints'
@@ -134,6 +142,7 @@ export default {
       }
       this.loading = false
     },
+
     async loadEndpoints() {
       let s = new NodeSelector(this.$configFile.api.bpNodeApiUrl)
       this.loading = true

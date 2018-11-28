@@ -39,12 +39,14 @@ module.exports = function(ctx) {
       // analyze: true,
       // extractCSS: false,
       extendWebpack(cfg) {
-        //  cfg.module.rules.push({
-        //    enforce: 'pre',
-        //    test: /\.(js|vue)$/,
-        //    loader: 'eslint-loader',
-        //    exclude: /(node_modules|quasar)/
-        //  })
+        cfg.resolve.extensions = [ ...cfg.resolve.extensions, '.json' ]
+
+        cfg.module.rules.push({
+          test: /\.json$/i,
+          type: 'javascript/auto',
+          loader: 'json-loader',
+        })
+
         cfg.module.rules.push({
           resourceQuery: /blockType=i18n/,
           use: [{
@@ -122,7 +124,10 @@ module.exports = function(ctx) {
         'QTooltip',
         'QAutocomplete',
         'QBtnToggle',
-        'QScrollObservable'
+        'QScrollObservable',
+        'QDatetimePicker',
+        'QVideo'
+
       ],
       directives: [
         'Ripple',
@@ -132,7 +137,8 @@ module.exports = function(ctx) {
       // Quasar plugins
       plugins: [
         'Notify',
-        'AppVisibility'
+        'AppVisibility',
+        'Meta'
       ],
       // iconSet: ctx.theme.mat ? 'material-icons' : 'ionicons'
       // i18n: 'de' // Quasar language

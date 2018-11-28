@@ -1,8 +1,7 @@
 <template>
 <q-page class="text-white q-pa-md">
 
-<Transaction ref="Transaction" v-on:done="$refs.Register.checkRegistered(true)" />
-<Register ref="Register" />
+<Transaction ref="Transaction" v-on:done="checkRegistered" />
 
 <h4 class="q-display-1 q-mt-none q-mb-md">{{ $t("settings.settings") }}</h4>
 
@@ -53,7 +52,7 @@
         <p class="q-title">{{ $t('settings.register_as_member') }}</p>
         <p class="text-dimwhite q-body-1" style="min-height:30px">{{ $t('settings.click_register_now') }}</p>
         <div class="q-mt-lg">
-          <q-btn size="md" :disabled="getRegistered" class="float-right" color="primary" @click="$refs.Multi.init('sign')" :label="$t('settings.register_now')" />
+          <q-btn size="md" :disabled="getRegistered" class="float-right" color="primary" to="/constitution" :label="$t('settings.register_now')" />
         </div>
       </div>
     </div>
@@ -95,20 +94,26 @@
       <span class="hack_height"></span>
     </template>
 
-    <div class="row ">
+    <div class="row q-mb-lg">
       <div class="col-sm-12 col-lg-4 q-pa-md relative-position" >
-        <p class="q-title" ></p>
+        <div>{{$t('settings.transaction_popup_desc')}} <span v-if="transactionpopup" class="text-positive">{{ $t('settings.on') }}</span><span v-if="!transactionpopup"  class="text-negative">{{ $t('settings.off') }}</span></div>
         <div class="q-mt-lg">
           <q-toggle  class="float-left" v-model="transactionpopup" color="p-light" left-label :label="$t('settings.transaction_popup_label')" />
           <!-- <q-toggle  class="float-left" v-model="consolemessage" color="p-light" left-label :label="$t('settings.console_message_label')" /> -->
         </div>
       </div>
     </div>
-    
+
   </q-collapsible>
+  
+</div>
+<div class="q-mt-lg q-pb-md">
+  <span class="float-right text-dimwhite q-title text-weight-thin">
+    <span class="uppercase">{{$configFile.network.name}}: </span>
+    <span>eosDAC v{{app_version}}</span>
+  </span>
 </div>
 
-<MultiModal ref="Multi" />
 </q-page>
 </template>
 
@@ -120,10 +125,9 @@
 </style>
 
 <script>
-
+import packageJson from '../../package.json';
 import Transaction from 'components/transaction'
-import Register from 'components/register'
-import MultiModal from 'components/multi-modal'
+
 import NodeSelector from 'components/nodeselector'
 import LangSelector from 'components/lang-selector'
 import {
@@ -135,14 +139,14 @@ export default {
     NodeSelector,
     LangSelector,
     Transaction,
-    Register,
-    MultiModal
+ 
 
   },
   data (){
     return{
       transactionpopup: '',
-      consolemessage: ''
+      consolemessage: '',
+      app_version: packageJson.version
     }
   },
   mounted() {
@@ -161,10 +165,19 @@ export default {
   },
   methods:{
     unRegisterMember() {
-      this.$refs.Transaction.newTransaction(this.$configFile.network.tokenContract.name, 'memberunreg', {
-        sender: this.getAccountName
-      }, false)
+      this.$refs.Transaction.newTransaction([{
+        contract: this.$configFile.network.tokenContract.name,
+        action: 'memberunreg',
+        fields: {
+          sender: this.getAccountName
+        }
+      }], false)  
     },
+
+    async checkRegistered(){
+        let memberRegistration = await this.$store.dispatch('api/getRegistered');
+        let latestMemberTerms = await this.$store.dispatch('api/getMemberTerms');
+    }
 
   },
   watch: {
