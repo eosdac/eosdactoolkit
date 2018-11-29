@@ -275,6 +275,7 @@ export default {
       await this.addProfiles(temp, candidates_names);
 
       this.custodians = temp;
+      
       await this.getMemberVotes();
       // await setContractState();
 

@@ -338,10 +338,11 @@ export async function getCandidates({
       code: configFile.network.custodianContract.name,
       table: 'candidates',
       lower_bound: param.lb,
-      limit:0
+      limit:-1
       // key_type: 'i64',
       // index_position:1
     })
+    console.log('getcandidates', custodians)
     if (!custodians.rows.length) {
       return false
     } else {
