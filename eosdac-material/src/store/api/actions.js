@@ -708,7 +708,7 @@ export async function getProposalsFromAccount({
       scope: account,
       code: 'eosio.msig',
       table: 'proposal',
-      limit:0
+      limit:-1
     });
     if (!proposals.rows.length) {
       return false
@@ -738,7 +738,7 @@ export async function getProducers({
       scope: 'eosio',
       code: 'eosio',
       table: 'producers',
-      limit:0
+      limit:-1
     })
     if (!producers.rows.length) {
       return false
