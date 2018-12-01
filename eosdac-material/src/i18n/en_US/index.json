@@ -245,7 +245,7 @@
     "unregister": "unregister",
     "unregister_as_candidate": "Unregister as Candidate",
     "unstake": "unstake",
-    "unstake_description": "xxxxxxxxxxtext for explaining unstake action"
+    "unstake_description": "Please note, the unstaking action has a built in delay of 60 minutes from the time you unstake before you will see the funds back in your wallet. Please be patient for the transfer to complete. Also, if you were ever elected as a custodian, the funds will be held in a smart contract for a number of days, currently set to: "
   },
   "register": {
     "already_registered": "You are already registered as a eosDAC Member.",

@@ -244,8 +244,7 @@
     "stake_description": "Vui lòng cho biết cụ thể số lượng token bạn muốn đặt cọc. Số lượng tối thiểu là {minimum_stake}.",
     "unregister": "hủy đăng ký",
     "unregister_as_candidate": "Hủy Đăng Ký Ứng Viên",
-    "unstake": "hoàn cọc",
-    "unstake_description": "xxxxxxxxxxtext để giải thích hành động hoàn cọc"
+    "unstake": "hoàn cọc"
   },
   "register": {
     "already_registered": "Bạn đã được đăng ký Thành Viên eosDAC.",

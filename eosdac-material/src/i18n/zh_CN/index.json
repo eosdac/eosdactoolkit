@@ -244,8 +244,7 @@
     "stake_description": "请指定您想要用于权益押注的代币数量。最低数额为 {minimum_stake}。",
     "unregister": "注销",
     "unregister_as_candidate": "注销成为候选人",
-    "unstake": "解除押注",
-    "unstake_description": "解释解除押注行为的文字"
+    "unstake": "解除押注"
   },
   "register": {
     "already_registered": "您已经注册成为 eosDAC 会员。",

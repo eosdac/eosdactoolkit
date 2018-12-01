@@ -244,8 +244,7 @@
     "stake_description": "ステークしたいトークンの数量を入力して下さい。指定できる数量は最小で {minimum_stake} です。",
     "unregister": "登録解除",
     "unregister_as_candidate": "候補者としての登録を解除",
-    "unstake": "ステークを解除",
-    "unstake_description": "xxxxxxxxxxステーク解除アクションの説明テキスト"
+    "unstake": "ステークを解除"
   },
   "register": {
     "already_registered": "eosDACのメンバーとして登録済みです。",
