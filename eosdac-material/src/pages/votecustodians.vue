@@ -227,6 +227,7 @@ export default {
       let temp = [];
 
       while(lb !== null){
+        // console.log('lb', lb)
         let c = await this.$store.dispatch('api/getCandidates', {lb: lb});
         if(c){
 
@@ -250,6 +251,7 @@ export default {
         }
       }
       //filter only active candidates
+      
       temp = temp.filter(c => c.is_active == true);
 
       if(!temp.length){
