@@ -3,7 +3,7 @@
   <div v-if="!met_initial_votes_threshold" class="full-width">
     <span class="uppercase">
       {{ $t("vote_custodians.voting_progress") }} 
-      <span class="text-dimwhite on-right on-left"> {{ voting_progress }}%</span>
+      <span class="text-dimwhite on-right on-left"> {{ voting_progress.toFixed(2) }}%</span>
     </span>
     <span class="q-body-1 text-dimwhite text-italic">({{$t('votingprogress.activated_at')}})</span>
     <q-progress animate stripe class="round-borders votingprogress_bar q-my-xs" :style="{height: height}" color="positive" :percentage="voting_progress" />

@@ -106,7 +106,6 @@
           </transition-group>
         </q-list>
         <!-- <pre>{{getSelectedCand}}</pre> -->
-
         <!-- <pre>{{getTokenBalance}}</pre> -->
         <!-- <pre>{{votesdidchange}}</pre> -->
       </q-card>
@@ -228,6 +227,7 @@ export default {
       let temp = [];
 
       while(lb !== null){
+        // console.log('lb', lb)
         let c = await this.$store.dispatch('api/getCandidates', {lb: lb});
         if(c){
 
@@ -251,6 +251,7 @@ export default {
         }
       }
       //filter only active candidates
+      
       temp = temp.filter(c => c.is_active == true);
 
       if(!temp.length){
@@ -276,6 +277,7 @@ export default {
       await this.addProfiles(temp, candidates_names);
 
       this.custodians = temp;
+      
       await this.getMemberVotes();
       // await setContractState();
 

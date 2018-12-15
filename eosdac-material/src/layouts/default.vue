@@ -115,7 +115,6 @@
         <q-item-side class="text-blue" icon="icon-role-4" />
         <q-item-main label="Custodian Dashboard" sublabel="" />
       </q-item> -->
-      <!--
       <q-collapsible  v-if="getMemberRoles.custodian && getAccountName" dark icon="icon-role-4" @hide="submenuheader_open = false" @show="submenuheader_open = true" :header-class="{submenuheader: submenuheader_open}"  label="Custodian Tools">
         <div class="bg-dark">
           <q-item class="q-pl-lg" link to="/msigproposals">
@@ -124,7 +123,6 @@
           </q-item>
         </div>
       </q-collapsible>
-      -->
       <q-item to="/constitution">
         <q-item-side icon="icon-register-3" />
         <q-item-main :label="$t('default.constitution')" sublabel="" />
@@ -134,7 +132,7 @@
         <q-item-side icon="icon-menu-10" />
         <q-item-main :label="$t('default.profile')" sublabel="" />
       </q-item>
-      <q-item to="/wallet">
+      <q-item to="/wallet" :disabled="!getAccountName">
         <q-item-side icon="icon-menu-6" />
         <q-item-main :label="$t('default.wallet')" sublabel="" />
       </q-item>
@@ -143,11 +141,11 @@
         <q-item-main :label="$t('default.custodians')" sublabel="" />
       </q-item>
 
-      <q-item v-if="!getMemberRoles.candidate" to="/managecandidateship">
+      <q-item v-if="!getMemberRoles.candidate" to="/managecandidateship" :disabled="!getAccountName">
         <q-item-side icon="icon-menu-12" />
         <q-item-main :label="$t('default.register_as_candidate')" sublabel="" />
       </q-item>
-      <q-item v-if="getMemberRoles.candidate" to="/managecandidateship">
+      <q-item v-if="getMemberRoles.candidate" to="/managecandidateship" :disabled="!getAccountName">
         <q-item-side icon="icon-menu-12" />
         <q-item-main :label="$t('default.unregister_as_candidate')" sublabel="" />
       </q-item>
@@ -162,12 +160,10 @@
         <q-item-main :label="$t('default.support')" sublabel="" />
         <q-item-side right icon="icon-transfer-out" />
       </q-item>
-      <q-item to="/settings">
+      <q-item to="/settings" :disabled="!getAccountName">
         <q-item-side icon="icon-topmenu-6" />
         <q-item-main :label="$t('default.settings')" sublabel="" />
       </q-item>
-
-
 
       <!-- <q-item to="/workerproposals">
         <q-item-side icon="icon-menu-8" />
@@ -183,13 +179,15 @@
   <q-page-container>
     <transition appear enter-active-class="animated fadeInDown">
       <q-alert v-if="!getRegistered && getAccountName && setupComplete" color="blue" appear>
+      
         <q-icon flat size="30px" class="float-left q-ma-sm" name="icon-register-3"></q-icon>
         <div class="q-title">{{ $t('default.sign_the_constitution') }}
           <q-icon flat size="40px" class="float-right q-mt-sm cursor-pointer" name="icon-ui-8" @click.native="setupComplete = false"></q-icon>
         </div>
         <span v-if="!getRegisteredVersionUpdate" class="on-left">{{ $t('default.you_have_not_yet_registered') }}</span>
         <span v-else class="on-left">{{ $t('default.constitution_has_been_updated') }}</span>
-        <q-btn class="q-mt-sm" to="/constitution" text-color="blue" color="white">{{ $t('default.sign_the_constitution') }}</q-btn>
+        <q-btn v-if="$router.currentRoute.path!='/constitution'" class="q-mt-sm" to="/constitution" text-color="blue" color="white">{{ $t('default.sign_the_constitution') }}</q-btn>
+    
       </q-alert>
     </transition>
     <router-view />
@@ -202,7 +200,7 @@
   <!-- depricated multimodal -->
   <!-- <MultiModal ref="Multi" /> -->
 
-  <q-btn v-back-to-top.animate="{offset: 500, duration: 200}" round color="primary" class="fixed-bottom-right animate-pop z-max" style="margin: 0 20px 15px 0;">
+  <q-btn v-back-to-top.animate="{offset: 500, duration: 200}" round color="primary" class="fixed-bottom-right animate-pop" style="margin: 0 20px 15px 0;">
     <q-icon name="keyboard_arrow_up" />
   </q-btn>
 

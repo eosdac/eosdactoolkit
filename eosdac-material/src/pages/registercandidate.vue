@@ -61,21 +61,22 @@
                 <q-spinner slot="loading" />
               </q-btn>
 
-
-              <q-btn size="md"  v-if="!getMemberRoles.candidate && (stakeRequirementMet>0)" class="animate-pop on-right"  color="primary"  @click="unstake" :label="$t('regcandidate.unstake')">
-              </q-btn>
             </div>
-
           </div>
+
           <q-btn size="md" v-if="getMemberRoles.candidate" class="animate-pop" :loading="loading" color="primary" @blur.native="userMsg=''" @click="unregisterAsCandidtate" :label="$t('regcandidate.unregister')">
             <q-spinner slot="loading" />
           </q-btn>
-
-
           <div class="q-mt-md text-dimwhite animate-fade " v-if="userMsg != ''">{{userMsg}}</div>
           <!-- <pre>{{getMemberRoles}}</pre> -->
         </div>
   </div>
+  <div class="q-pa-md q-mt-md bg-dark2 round-corners shadow-5" v-if="!getMemberRoles.candidate && (stakeRequirementMet>0)">
+    <div>{{$t('regcandidate.unstake_description')}} {{lockup_release_time_delay_days}}</div>
+    <div style="height:30px"><q-btn size="md"  class="animate-pop on-right float-right"  color="primary"  @click="unstake" :label="$t('regcandidate.unstake')" /></div>
+    
+  </div>
+
 </div>
 
 <Transaction ref="Transaction" v-on:done="init()" />
@@ -111,7 +112,9 @@ export default {
       stakeamount: 0,
       requested_pay_max : false,
       requestedpay : 0,
+      lockup_release_time_delay_days : 0,
       minStakeAmount:'',
+      contract_config: {},
       userMsg: ''
 
     }
@@ -248,6 +251,7 @@ export default {
         // console.log(config)
         if(config){
           this.minStakeAmount = config.lockupasset;
+          this.lockup_release_time_delay_days = config.lockup_release_time_delay/60/60/24;
           // this.stakeamount = config.lockupasset;
           this.requested_pay_max = config.requested_pay_max;
         }

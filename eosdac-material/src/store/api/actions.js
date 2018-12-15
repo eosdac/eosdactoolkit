@@ -211,7 +211,7 @@ export async function getRegistered({
       return false
     } else {
       if (members.rows[0].sender === rootState.account.info.account_name) {
-        commit('account/ADD_REGISTRATION', members.rows[0].agreedterms, {root: true})
+        commit('account/ADD_REGISTRATION', members.rows[0].agreedtermsversion, {root: true})
         return members.rows[0]
       } else {
         commit('account/ADD_REGISTRATION', null, {root: true});
@@ -338,10 +338,11 @@ export async function getCandidates({
       code: configFile.network.custodianContract.name,
       table: 'candidates',
       lower_bound: param.lb,
-      limit:0
+      limit:-1
       // key_type: 'i64',
       // index_position:1
     })
+    console.log('getcandidates', custodians)
     if (!custodians.rows.length) {
       return false
     } else {
@@ -707,7 +708,7 @@ export async function getProposalsFromAccount({
       scope: account,
       code: 'eosio.msig',
       table: 'proposal',
-      limit:0
+      limit:-1
     });
     if (!proposals.rows.length) {
       return false
@@ -737,7 +738,7 @@ export async function getProducers({
       scope: 'eosio',
       code: 'eosio',
       table: 'producers',
-      limit:0
+      limit:-1
     })
     if (!producers.rows.length) {
       return false

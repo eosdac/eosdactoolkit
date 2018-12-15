@@ -200,6 +200,7 @@ export default {
         proms.push( this.$store.dispatch('api/getAccountPermissions', {accountname: ctrlacc }) );
       });
       let res = await Promise.all(proms);
+      
 
       //map accountnames with fetched permissions
       res = res.map((r, i)=>{
@@ -208,6 +209,7 @@ export default {
         t.permissions = r;
         return t;
       })
+      console.log(res);
 
       //filter: only keep accounts where xfer is set
       res = res.filter(acc => {

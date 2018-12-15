@@ -107,7 +107,12 @@
   </q-collapsible>
   
 </div>
-<div class="q-mt-lg q-pb-md"><span class="float-right text-dimwhite q-title text-weight-thin">eosDAC v{{app_version}}</span></div>
+<div class="q-mt-lg q-pb-md">
+  <span class="float-right text-dimwhite q-title text-weight-thin">
+    <span class="uppercase">{{$configFile.network.name}}: </span>
+    <span>eosDAC v{{app_version}}</span>
+  </span>
+</div>
 
 </q-page>
 </template>
