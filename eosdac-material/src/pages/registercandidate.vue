@@ -238,7 +238,6 @@ export default {
          this.init_loading = true;
         //get contract config
         let config = await this.$store.dispatch('api/getContractConfig', {contract: this.$configFile.network.custodianContract.name});
-        // console.log(config)
         //check profile
         let p = await this.$store.dispatch('api/getProfileData', {accountname: this.getAccountName} );
         if(p && p.length){
