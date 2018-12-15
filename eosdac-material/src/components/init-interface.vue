@@ -48,7 +48,7 @@ export default {
     return {
       scatterModal: false,
       scatterError: false,
-      scatterErrorText: 'Please login with scatter.',
+      scatterErrorText: this.$t('scatter_signin.login_with_scatter'),
       connectionMethod: 'scatter'
     }
   },

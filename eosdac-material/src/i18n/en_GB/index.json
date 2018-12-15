@@ -258,6 +258,7 @@
     "choose_connection_type": "Choose Connection Type",
     "connection_type": "Connection Type",
     "identity_request_denied": "Identity request was denied. Please try again and accept the request.",
+    "login_with_scatter": "Please login with Scatter",
     "scatter_is_locked": "Scatter is locked. Please unlock to continue.",
     "scatter_is_not_available": "Scatter is not available. If you have Scatter installed please refresh or go to Permissions, remove the permission for this site, and try again.",
     "scatter_is_outdated": "Your Scatter is outdated. Please update your Scatter and try again.",
