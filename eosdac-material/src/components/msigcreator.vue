@@ -230,7 +230,7 @@ export default {
 
       let actions = [
         {
-          contract: 'eosio.msig', 
+          contract: 'eosiomsigold', 
           action: 'propose', 
           fields: this.msigtemplate,
           
@@ -247,6 +247,7 @@ export default {
       if(this.msigtemplate.trx.actions[0].account != 'eosio.token'){
         abicache = this.msigtemplate.trx.actions[0].account;
       }
+      console.log(abicache)
       this.$refs.Transaction.newTransaction(actions, false, abicache);
     },
 
@@ -261,26 +262,9 @@ export default {
 
       return true;
       
-    },
-
-    //approve a proposal via msig relay {"proposer":0,"proposal_name":0,"level":0}
-    approveProposal(){
-
-    },
-    //unapprove a proposal via msig relay {"proposer":0,"proposal_name":0,"level":0}
-    unapproveProposal(){
-
-    },
-
-    //execute a proposal via msig relay {"proposer":0,"proposal_name":0,"executer":0}
-    executeProposal(){
-
-    },
-    
-    //cancel a proposal via msig relay {"proposer":0,"proposal_name":0,"canceler":0}
-    cancelProposal(){
-
     }
+
+
 
   },
 

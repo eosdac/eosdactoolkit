@@ -94,7 +94,7 @@ export async function transaction({
         console.log('eos.fc', eos.fc)
         const contract = await eos.getAbi(payload.add_abicache);
         let t = await eos.fc.abiCache.abi(payload.add_abicache, contract.abi);
-        console.log('eos.fc.abiCache.abi("kasdactokens", contract.abi)', t)
+
       }
       else{
         // console.log('no abicache addition', payload.add_abicache)

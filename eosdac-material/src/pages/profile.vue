@@ -221,7 +221,6 @@ export default {
     async getProfileData(){
       let p = await this.$store.dispatch('api/getProfileData2', {accountname: [this.account_name]} );
       // console.log(p);
-
       // if(this.$helper.isUrl(p[0].profile)){
       //   //todo fetch profileurl
       //   p = false;

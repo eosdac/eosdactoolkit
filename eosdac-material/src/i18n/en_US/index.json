@@ -10,7 +10,8 @@
   },
   "candidate": {
     "staked": "Staked",
-    "votes": "Votes"
+    "votes": "Votes",
+    "requestedpay": "Requested Pay"
   },
   "constitution": {
     "direct_link": "Direct Link",

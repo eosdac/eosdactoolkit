@@ -178,7 +178,7 @@
 
     <div class="absolute-bottom row  bg-dark2 justify-center q-pa-md" style="border-top: 1px solid #272B35;margin-left:-20px" ><VoteEosdac /></div>
   </q-layout-drawer>
-  <q-page-container>
+  <q-page-container style="overflow:hidden">
     <transition appear enter-active-class="animated fadeInDown">
       <q-alert v-if="!getRegistered && getAccountName && setupComplete" color="blue" appear>
       
@@ -192,7 +192,13 @@
     
       </q-alert>
     </transition>
+    
+    <!-- animated router paths -->
+    <!-- <transition-group appear enter-active-class="animated slideInRight" leave-active-class="animated slideOutLeft" mode="out-in" :duration="300">
+      <router-view key="mainpages" />
+    </transition-group> -->
     <router-view />
+
 
     <Notifier :drawer="leftDrawerOpen" />
 

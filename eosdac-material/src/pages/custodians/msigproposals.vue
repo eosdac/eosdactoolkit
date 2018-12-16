@@ -75,6 +75,7 @@ export default {
   },
   data() {
     return {
+      systemmsig: 'eosiomsigold',
       proposals: [],
       msigproposals:[
         {
@@ -115,18 +116,47 @@ export default {
       });
       
     },
-    
+  
+    //approve a proposal via msig relay {"proposer":0,"proposal_name":0,"level":0}
     approveProposal(proposer, proposal_name, permission="active"){
-        this.$refs.Transaction.newTransaction([{
-        contract: 'eosio.msig',
-        action: 'approve',
-        fields: {
-          proposer: proposer,
-          proposal_name: proposal_name,
-          level: { "actor": this.getAccountName, "permission": permission },
-         
+        let actions = [
+        {
+          contract: this.systemmsig, 
+          action: 'approve', 
+          fields: {
+            proposer: proposer,
+            proposal_name: proposal_name,
+            level: { "actor": this.getAccountName, "permission": permission }
+          }
+          
+        },
+        {
+          contract: 'dacmultisigs', 
+          action: 'approved',
+          authorization: [ {actor: this.getAccountName, permission: 'active'} ],
+          fields: {
+            proposer: proposer, 
+            proposal_name: proposal_name, 
+            approver: this.getAccountName }
         }
-      }]);
+
+      ];
+        this.$refs.Transaction.newTransaction(actions);
+    },
+
+    //unapprove a proposal via msig relay {"proposer":0,"proposal_name":0,"level":0}
+    unapproveProposal(){
+
+    },
+
+    //execute a proposal via msig relay {"proposer":0,"proposal_name":0,"executer":0}
+    executeProposal(){
+
+    },
+    
+    //cancel a proposal via msig relay {"proposer":0,"proposal_name":0,"canceler":0}
+    cancelProposal(){
+
     }
   },
   mounted(){
