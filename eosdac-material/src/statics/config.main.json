@@ -24,7 +24,7 @@
     "custodianContract": {
       "name": "daccustodian",
       "memo": "daccustodian",
-      "enable_voting" : false
+      "enable_voting" : true
     },
     "msigContract":{
       "name": ""
