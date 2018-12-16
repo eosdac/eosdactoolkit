@@ -128,7 +128,7 @@ export default {
   methods: {
     async getFastestNode() {
       //if the chain id is not from mainnet then use the default node from the config file
-      if(this.$configFile.network.chainId !== 'aca376f206b8fc25a6ed44dbdc66547c36c6c33e3a119ffbeaef943642f0e906'){
+      if(this.$configFile.network.chainId !== 'aca376f206b8fc25a6ed44dbdc66547c36c6c33e3a119ffbeaef943642f0e906' || this.setup){
         this.connect(this.$configFile.network.default_node);
         return false;
       }
@@ -148,7 +148,9 @@ export default {
       this.loading = true
       this.loadingText = 'nodeselector.gathering_endpoints'
       try {
-        let getEndpoints = await s.get_nodes()
+        let getEndpoints = await s.get_nodes();
+        //add the default node to the list
+        getEndpoints.unshift(this.$configFile.network.default_node);
         let res = []
         getEndpoints.forEach(function(element) {
           res.push({

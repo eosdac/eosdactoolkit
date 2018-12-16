@@ -15,6 +15,7 @@ const eosConfig = {
   sign: true
 }
 
+
 async function scatterNetwork(state) {
   let pp
   if (state.endpoints[state.activeEndpointIndex].httpEndpoint.split(':')[0].replace(/\//g, '') === 'https') {
@@ -511,7 +512,8 @@ export async function updateAccountInfo({
   }
   try {
     eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint
-    let eos = Eos(eosConfig)
+    let eos = Eos(eosConfig);
+
     const account = await eos.getAccount({
       account_name: rootState.account.info.account_name
     })
