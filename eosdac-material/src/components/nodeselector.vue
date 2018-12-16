@@ -149,14 +149,19 @@ export default {
       this.loadingText = 'nodeselector.gathering_endpoints'
       try {
         let getEndpoints = await s.get_nodes();
-        //add the default node to the list
-        getEndpoints.unshift(this.$configFile.network.default_node);
         let res = []
         getEndpoints.forEach(function(element) {
           res.push({
             label: element,
             value: element
           })
+        })
+
+        //add the default node to the list
+        res.unshift({
+            label: this.$configFile.network.default_node,
+            value: this.$configFile.network.default_node,
+            sublabel: 'Default node'
         })
         this.endpoints = res
         this.loading = false
