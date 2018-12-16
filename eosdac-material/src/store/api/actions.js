@@ -40,8 +40,8 @@ function apiDown(e,c,s) {
       c('NOTIFY',{
         icon: 'error',
         color: 'warning',
-        message: 'api.connection_to_endpoint_failed',
-        details: 'api.connection_to_endpoint_failed_details',
+        message: this.$t('api.connection_to_endpoint_failed'),
+        details: this.$t('api.connection_to_endpoint_failed_details'),
         textColor: 'black',
         autoclose: 8
       })

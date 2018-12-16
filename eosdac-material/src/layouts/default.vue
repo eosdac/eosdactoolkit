@@ -165,8 +165,6 @@
         <q-item-main :label="$t('default.settings')" sublabel="" />
       </q-item>
 
-
-
       <!-- <q-item to="/workerproposals">
         <q-item-side icon="icon-menu-8" />
         <q-item-main :label="$t('default.worker_proposals')" sublabel="" />
