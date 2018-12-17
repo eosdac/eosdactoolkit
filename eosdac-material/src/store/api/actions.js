@@ -11,6 +11,10 @@ const eosConfig = {
   sign: true
 }
 
+//initialize an eos object only when it doesn't exist yet
+//rebuild eos with current set httpendpoint when flag is true
+//this function is used in the api store (this). it also get called 
+//in the nodeselector component (rebuild).
 export async function getEos({state, rootState, commit}, payload={rebuild:false} ){
   
   if(state.eosjs !== null && !payload.rebuild){
