@@ -51,26 +51,26 @@ function apiDown(e,c,s) {
   }
 }
 
-export async function getActionHistory({
-  state,
-  rootState,
-  commit
-}, payload) {
-  try {
-    eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint
-    let eos = Eos(eosConfig)
-    const history = await eos.getActions(/*rootState.account.info.account_name*/ 'pxneosincome', payload.pos, payload.offset)
-    if (history && history.actions) {
-      return history.actions
-    } else {
-      throw 'unavailable'
-    }
-    commit('SET_CURRENT_CONNECTION_STATUS', true)
-  } catch (error) {
-    apiDown(error,commit)
-    throw error
-  }
-}
+// export async function getActionHistory({
+//   state,
+//   rootState,
+//   commit
+// }, payload) {
+//   try {
+//     eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint
+//     let eos = Eos(eosConfig)
+//     const history = await eos.getActions(/*rootState.account.info.account_name*/ 'pxneosincome', payload.pos, payload.offset)
+//     if (history && history.actions) {
+//       return history.actions
+//     } else {
+//       throw 'unavailable'
+//     }
+//     commit('SET_CURRENT_CONNECTION_STATUS', true)
+//   } catch (error) {
+//     apiDown(error,commit)
+//     throw error
+//   }
+// }
 
 export async function transaction({
   state,
@@ -78,8 +78,7 @@ export async function transaction({
   commit
 }, payload) {
   try {
-    eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint
-    let eos = Eos(eosConfig);
+    eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint;
     // console.log("normal eos.fc", eos.fc)//works
     if (payload.scatter) {
       const network = await scatterNetwork(state)
@@ -135,37 +134,37 @@ export async function transaction({
 //   })
 // }
 
-export async function pingCurrentEndpoint({
-  state,
-  commit
-}) {
-  const timeout = new Timeout()
-  try {
-    eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint
-    const eos = Eos(eosConfig)
-    const sTime = Date.now()
-    const timer = timeout.set(state.connectionTimeoutMilSec, 'timeout')
-    const ginfo = eos.getInfo({})
-    const info = await Promise.race([ginfo, timer])
-    const ping = Math.floor((Date.now() - sTime) / 1000)
-    const utcD = new Date().toISOString().slice(0, -5)
-    if (info.chain_id !== configFile.network.chainId) {
-      throw Error('Wrong chainId')
-    }
-    if (new Date(info.head_block_time).getTime() + 10000 > new Date(utcD).getTime()) {
-      commit('SET_CURRENT_CONNECTION_STATUS', true)
-    } else {
-      commit('SET_CURRENT_CONNECTION_STATUS', false)
-    }
-    return info
-  } catch (error) {
-    clearTimeout(timeout)
-    commit('SET_CURRENT_CONNECTION_STATUS', false)
-    throw error
-  } finally {
-    timeout.clear()
-  }
-}
+// export async function pingCurrentEndpoint({
+//   state,
+//   commit
+// }) {
+//   const timeout = new Timeout()
+//   try {
+//     eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint
+//     const eos = Eos(eosConfig)
+//     const sTime = Date.now()
+//     const timer = timeout.set(state.connectionTimeoutMilSec, 'timeout')
+//     const ginfo = eos.getInfo({})
+//     const info = await Promise.race([ginfo, timer])
+//     const ping = Math.floor((Date.now() - sTime) / 1000)
+//     const utcD = new Date().toISOString().slice(0, -5)
+//     if (info.chain_id !== configFile.network.chainId) {
+//       throw Error('Wrong chainId')
+//     }
+//     if (new Date(info.head_block_time).getTime() + 10000 > new Date(utcD).getTime()) {
+//       commit('SET_CURRENT_CONNECTION_STATUS', true)
+//     } else {
+//       commit('SET_CURRENT_CONNECTION_STATUS', false)
+//     }
+//     return info
+//   } catch (error) {
+//     clearTimeout(timeout)
+//     commit('SET_CURRENT_CONNECTION_STATUS', false)
+//     throw error
+//   } finally {
+//     timeout.clear()
+//   }
+// }
 
 export async function testEndpoint({
   state,

@@ -4,7 +4,7 @@ export default {
   clientConfig: null,
   activeEndpointIndex: 0,
   checkIntervalMilSec: 10000,
-  connectionTimeoutMilSec: 10000,
+  connectionTimeoutMilSec: 15000,
   scatterAvailable: false,
   scatter: null,
   scatterChainId: null,
