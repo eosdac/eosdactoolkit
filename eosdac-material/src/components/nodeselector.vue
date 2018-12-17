@@ -161,7 +161,7 @@ export default {
         res.unshift({
             label: this.$configFile.network.default_node,
             value: this.$configFile.network.default_node,
-            sublabel: 'Default node'
+            sublabel: this.$t('nodeselector.default_node')
         })
         this.endpoints = res
         this.loading = false
@@ -190,6 +190,7 @@ export default {
       this.errorEndpoint = false
     },
     async connect(u) {
+      //todo: push eos object to store...
       this.loading = true
       this.loadingText = 'nodeselector.connecting'
       try {
@@ -202,6 +203,7 @@ export default {
           chainId: this.$configFile.network.chainId
         })
         this.$store.commit('api/CHANGE_ENDPOINT', url)
+        await this.$store.dispatch('api/getEos', {rebuild:true})
         this.endpointSuccess()
         this.$emit('done')
       } catch (err) {

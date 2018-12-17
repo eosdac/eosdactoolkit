@@ -188,6 +188,7 @@
     "connect": "Connect",
     "connecting": "Connecting...",
     "custom_endpoint": "Custom Endpoint",
+    "default_node": "Default node",
     "endpoint_set": "Endpoint set successfully",
     "error_chain_id": "The chain ID returned by the endpoint is incorrect.",
     "error_could_not_connect_to_endpoint": "Could not connect to endpoint.",

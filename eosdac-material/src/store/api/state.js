@@ -20,5 +20,6 @@ export default {
     details: '',
     seen: false,
     autoclose: 0
-  }
+  },
+  eosjs: null
 }
