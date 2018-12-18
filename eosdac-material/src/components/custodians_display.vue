@@ -1,5 +1,5 @@
 <template>
-  <div>custodianDisplay</div>
+  <div>{{custodians}}</div>
 </template>
 
 <script>
@@ -16,8 +16,14 @@ export default {
 
   data () {
     return {
+      custodians:[]
 
     }
+  },
+  computed: {
+    ...mapGetters({
+      getActiveCustodians: 'api/getActiveCustodians'
+    })
   },
 
   methods: {
@@ -25,7 +31,16 @@ export default {
   },
 
   mounted:function(){
+    if(this.getActiveCustodians){
+      this.custodians = this.getActiveCustodians.map(c => c.cust_name);
+    }
     
+    
+  },
+  watch:{
+    getActiveCustodians: function(){
+      this.custodians = this.getActiveCustodians.map(c => c.cust_name);
+    }
   }
 
 }

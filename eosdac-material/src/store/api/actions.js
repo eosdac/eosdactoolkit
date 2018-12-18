@@ -1,3 +1,7 @@
+// const { Api, JsonRpc, RpcError, JsSignatureProvider, Serialize } = require('eosjs');
+// const { TextDecoder, TextEncoder } = require('text-encoding');
+// const fetch = require('node-fetch');
+
 import Eos from 'eosjs'
 import Timeout from 'await-timeout'
 import configFile from '../../statics/config.json'
@@ -22,6 +26,11 @@ export async function getEos({state, rootState, commit}, payload={rebuild:false}
     return state.eosjs;
   }
   else{
+    //eosjs@beta
+    // const rpc = new JsonRpc(state.endpoints[state.activeEndpointIndex].httpEndpoint, { fetch });
+    // const chainId = configFile.network.chainId;
+    // state.eosjs = new Api({rpc, chainId, textDecoder: new TextDecoder(), textEncoder: new TextEncoder()});
+
     eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint;
     state.eosjs = Eos(eosConfig);
     return state.eosjs;

@@ -14,14 +14,21 @@
     <span v-else class="q-caption float-right">{{$t('votingprogress.loading')}}</span>
   </div>
 
-  <div v-if="met_initial_votes_threshold && !loading">{{$t('votingprogress.threshold_met')}}</div>
+  <div v-if="met_initial_votes_threshold && !loading">{{$t('votingprogress.threshold_met')}}
+    <custodiansDisplay />
+  </div>
 </span>
 
 </template>
 
 <script>
+import custodiansDisplay from './custodians_display'
 export default {
-  name: 'VotingProgress',
+ name: 'VotingProgress',
+  components: {
+    custodiansDisplay
+  },
+ 
 
   props: {
     height: String
