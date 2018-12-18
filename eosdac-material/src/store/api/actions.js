@@ -309,7 +309,7 @@ export async function getCandidates({
       // key_type: 'i64',
       // index_position:1
     })
-    console.log('getcandidates', custodians)
+    // console.log('getcandidates', custodians)
     if (!custodians.rows.length) {
       return false
     } else {

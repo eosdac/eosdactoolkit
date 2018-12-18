@@ -29,7 +29,7 @@
       <p class="text-dimwhite q-body-1">{{ $t('vote_custodians.description_main') }}</p>
       <div  class="row bg-dark2 q-pa-md q-mb-md shadow-5 round-borders justify-between" v-if="!loading" >
         <q-search dark color="p-light"  v-model="filter" :placeholder="$t('vote_custodians.search')" />
-        <div class="row inline items-center" style="font-size:12px;">
+        <div class="row inline items-center q-mt-md" style="font-size:12px;">
           <span>{{ $t('vote_custodians.rows_per_page') }}:</span>
            <q-select
               class="q-ml-md"
@@ -54,7 +54,7 @@
 
       <div class="row bg-dark2 q-pa-md q-mb-md shadow-5 round-borders justify-between" v-if="!loading" >
         <q-search dark color="primary"  v-model="filter" :placeholder="$t('vote_custodians.search')" />
-        <div class="row inline items-center" style="font-size:12px;">
+        <div class="row inline items-center q-mt-md" style="font-size:12px;">
           <span>{{ $t('vote_custodians.rows_per_page') }}:</span>
            <q-select
               class="q-ml-md"

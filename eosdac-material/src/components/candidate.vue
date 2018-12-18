@@ -1,5 +1,41 @@
 <template>
-  <div class="q-mb-md bg-dark2 round-borders"  v-bind:class="{ 'selected_candidate': data.selected, 'unselected_candidate':!data.selected, 'shadow-5':!data.selected}">
+<div>
+  <div class="q-mb-md relative-position bg-dark2 round-borders lt-sm"  v-bind:class="{ 'selected_candidate': data.selected, 'unselected_candidate':!data.selected, 'shadow-5':!data.selected}">
+    <q-chip class="q-ma-xs absolute-top-left" color="dark" >{{data.position}}</q-chip>
+    <div class="row justify-center q-pt-md">
+      <div class="center_background_image"  style="width: 100px; height:100px" v-bind:style="{ 'background-image': 'url(' + image_profile + ')' }" ></div>
+    </div>
+
+    <div class="row justify-center">
+      <router-link class="q-headline" :to="{path: '/profile/' + data.candidate_name}" >
+        <q-icon title="Nominated for next custodian board" style="margin-top:-5px" v-if="data.position < 13" name="star_border" color="yellow" />{{ data.candidate_name }}
+      </router-link>
+    </div>
+
+    <div class="row justify-between  q-px-md q-pt-md q-body-1"  >
+      <span><span class="text-dimwhite">{{$t('candidate.votes')}}:</span> {{data.total_votes/10000}}</span>
+      <span><span class="text-dimwhite">{{$t('candidate.staked')}}:</span> {{data.locked_tokens}}</span>
+    </div>
+
+
+    <div class="row justify-between  q-px-md q-pb-md q-body-1"  >
+      <span><span class="text-dimwhite">Pay:</span> {{data.requestedpay}}</span>
+      <span class="text-dimwhite"  v-if="data.profile && (data.profile.givenName !='' || data.profile.familyName !='')" >({{data.profile.givenName}} {{data.profile.familyName}})</span>
+
+    </div>
+    <div class="bg-dark q-pa-md text-italic" v-if="data.profile !== undefined">
+    {{data.profile.description.slice(0, 200)+'...'}}
+    </div>
+
+    <div class="row justify-between q-pa-md">
+      <q-btn v-if="!data.selected" icon="icon-plus" color="primary" label="select" @click="$emit('clickvotefor')" />
+      <q-btn v-if="data.selected" icon="icon-ui-6" color="positive" label="unselect" @click="$emit('clickunvotefor')" />
+      <q-btn color="dark" label="read more" />
+    </div>
+
+  </div>
+
+  <div class="q-mb-md bg-dark2 round-borders gt-xs"  v-bind:class="{ 'selected_candidate': data.selected, 'unselected_candidate':!data.selected, 'shadow-5':!data.selected}">
     <q-collapsible  label="First" group="candidates" icon-toggle header-class="candidate_header" collapse-icon="icon-ui-11">
       <template slot="header" >
         <q-item-side left >
@@ -45,6 +81,7 @@
       </div>
     </q-collapsible>
   </div>
+</div>
 </template>
 
 <script>
