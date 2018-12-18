@@ -13,6 +13,7 @@
     <div class="blur-details q-pa-md absolute-bottom" style="height:120px;margin-right:-16px;margin-left:-16px;">
       <div class="column  justify-center q-px-md full-height">
         <VotingProgress height="30px" ref="votebar"/>
+        
       </div>
     </div>
   </div>
@@ -143,6 +144,7 @@ import Candidate from 'components/candidate'
 import Transaction from 'components/transaction'
 import LoadingSpinner from 'components/loading-spinner'
 import VotingProgress from 'components/voting-progress'
+
 import {
   mapGetters
 } from 'vuex'

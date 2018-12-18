@@ -128,7 +128,7 @@ export default {
   methods: {
     async getFastestNode() {
       //if the chain id is not from mainnet then use the default node from the config file
-      if(this.$configFile.network.chainId !== 'aca376f206b8fc25a6ed44dbdc66547c36c6c33e3a119ffbeaef943642f0e906'){
+      if(this.$configFile.network.chainId !== 'aca376f206b8fc25a6ed44dbdc66547c36c6c33e3a119ffbeaef943642f0e906' || this.setup){
         this.connect(this.$configFile.network.default_node);
         return false;
       }
@@ -148,13 +148,20 @@ export default {
       this.loading = true
       this.loadingText = 'nodeselector.gathering_endpoints'
       try {
-        let getEndpoints = await s.get_nodes()
+        let getEndpoints = await s.get_nodes();
         let res = []
         getEndpoints.forEach(function(element) {
           res.push({
             label: element,
             value: element
           })
+        })
+
+        //add the default node to the list
+        res.unshift({
+            label: this.$configFile.network.default_node,
+            value: this.$configFile.network.default_node,
+            sublabel: this.$t('nodeselector.default_node')
         })
         this.endpoints = res
         this.loading = false
@@ -183,6 +190,7 @@ export default {
       this.errorEndpoint = false
     },
     async connect(u) {
+      //todo: push eos object to store...
       this.loading = true
       this.loadingText = 'nodeselector.connecting'
       try {
@@ -195,6 +203,7 @@ export default {
           chainId: this.$configFile.network.chainId
         })
         this.$store.commit('api/CHANGE_ENDPOINT', url)
+        await this.$store.dispatch('api/getEos', {rebuild:true})
         this.endpointSuccess()
         this.$emit('done')
       } catch (err) {

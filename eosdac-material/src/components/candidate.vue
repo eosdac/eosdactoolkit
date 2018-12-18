@@ -32,7 +32,7 @@
             opacity: 0.8
           }"
         >
-        <div class="q-my-md">BIO</div>
+        <div class="q-my-md">BIO <div class="float-right q-body-2"><span class="text-dimwhite">{{$t('candidate.requestedpay')}}: </span>{{data.requestedpay}}</div></div>
         <!--<div class="text-dimwhite q-body-1" style="overflow:hidden; white-space: pre-wrap;" v-if="data.profile !== undefined">{{data.profile.description}}</div>-->
         <MarkdownViewer v-if="data.profile !== undefined" :tags="['h1', 'h2', 'h3', 'italic', 'bold', 'underline', 'strikethrough', 'subscript',
           'superscript', 'anchor', 'orderedlist', 'unorderedlist']" class="bg-dark2" dark :text="data.profile.description" />
