@@ -14,7 +14,7 @@
     </div>
 
     <div class="row justify-between  q-px-md q-pt-md q-body-1"  >
-      <span><span class="text-dimwhite">{{$t('candidate.votes')}}:</span> {{data.total_votes/10000}}</span>
+      <span><span class="text-dimwhite">{{$t('candidate.votes')}}:</span> {{(data.total_votes/10000).toLocaleString()}}</span>
       <span><span class="text-dimwhite">{{$t('candidate.staked')}}:</span> {{data.locked_tokens}}</span>
     </div>
 
@@ -54,7 +54,7 @@
             </router-link>
             <span class="text-dimwhite"  v-if="data.profile && (data.profile.givenName !='' || data.profile.familyName !='')" >({{data.profile.givenName}} {{data.profile.familyName}})</span>
             <br>
-            <span><span class="text-dimwhite">{{$t('candidate.votes')}}:</span> {{data.total_votes/10000}}</span>
+            <span><span class="text-dimwhite">{{$t('candidate.votes')}}:</span> {{(data.total_votes/10000).toLocaleString() }}</span>
             <span><span class="q-pl-md text-dimwhite">{{$t('candidate.staked')}}:</span> {{data.locked_tokens}}</span>
           </div>
         </q-item-main>
