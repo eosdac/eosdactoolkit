@@ -9,7 +9,12 @@
     "title": "eosDac Member Client"
   },
   "candidate": {
+    "nominated_next": "Nominated for next custodian board",
+    "pay": "Pay",
+    "read_more": "read more",
+    "select": "select",
     "staked": "Staked",
+    "unselect": "unselect",
     "votes": "Votes",
     "requestedpay": "Requested Pay"
   },
