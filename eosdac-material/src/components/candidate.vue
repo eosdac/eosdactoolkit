@@ -1,5 +1,63 @@
 <template>
-  <div class="q-mb-md bg-dark2 round-borders"  v-bind:class="{ 'selected_candidate': data.selected, 'unselected_candidate':!data.selected, 'shadow-5':!data.selected}">
+<div>
+  <!--mobile view (small screen)-->
+  <div class="q-mb-md relative-position bg-dark2 round-borders lt-sm"  v-bind:class="{ 'selected_candidate': data.selected, 'unselected_candidate':!data.selected, 'shadow-5':!data.selected}">
+    <q-chip class="q-ma-xs absolute-top-left" color="dark" >{{data.position}}</q-chip>
+    <div class="row justify-center q-pt-md">
+      <div class="center_background_image"  style="width: 100px; height:100px" v-bind:style="{ 'background-image': 'url(' + image_profile + ')' }" ></div>
+    </div>
+
+    <div class="row justify-center">
+      <router-link class="q-headline" :to="{path: '/profile/' + data.candidate_name}" >
+        <q-icon title="Nominated for next custodian board" style="margin-top:-5px" v-if="data.position < 13" name="star_border" color="yellow" />{{ data.candidate_name }}
+      </router-link>
+    </div>
+
+    <div class="row justify-between  q-px-md q-pt-md q-body-1"  >
+      <span><span class="text-dimwhite">{{$t('candidate.votes')}}:</span> {{(data.total_votes/10000).toLocaleString()}}</span>
+      <span><span class="text-dimwhite">{{$t('candidate.staked')}}:</span> {{data.locked_tokens}}</span>
+    </div>
+
+
+    <div class="row justify-between  q-px-md q-pb-md q-body-1"  >
+      <span><span class="text-dimwhite">Pay:</span> {{data.requestedpay}}</span>
+      <span class="text-dimwhite"  v-if="data.profile && (data.profile.givenName !='' || data.profile.familyName !='')" >({{data.profile.givenName}} {{data.profile.familyName}})</span>
+
+    </div>
+    <div class="bg-dark text-italic text-dimwhite q-body-1" v-if="data.profile !== undefined">
+   
+    <MarkdownViewer v-if="data.profile !== undefined" :tags="['h1', 'h2', 'h3', 'italic', 'bold', 'underline', 'strikethrough', 'subscript', 'superscript', 'anchor', 'orderedlist', 'unorderedlist']" dark :text="data.profile.description.slice(0, 140)+'...'" />
+
+    </div>
+
+    <div class="row justify-between q-pa-md">
+      <q-btn v-if="!data.selected" icon="icon-plus" color="primary" label="select" @click="$emit('clickvotefor')" />
+      <q-btn v-if="data.selected" icon="icon-ui-6" color="positive" label="unselect" @click="$emit('clickunvotefor')" />
+      <q-btn v-if="data.profile" color="dark" label="read more" @click="profilemodal = true"/>
+    </div>
+  
+
+    <q-modal maximized v-model="profilemodal">
+      <div style="height:50px" class="bg-dark row items-center justify-between q-px-md">
+        <span>Bio</span>
+        <q-icon class=" cursor-pointer" name="icon-ui-8" @click.native="profilemodal = false" />
+      </div>
+      <div class="q-pa-md">
+        <div class="row items-center">
+          <div class="center_background_image on-left"  style="width: 60px; height:60px" v-bind:style="{ 'background-image': 'url(' + image_profile + ')' }" ></div>
+          <router-link class="q-headline" :to="{path: '/profile/' + data.candidate_name}" >
+            <q-icon title="Nominated for next custodian board" style="margin-top:-5px" v-if="data.position < 13" name="star_border" color="yellow" />{{ data.candidate_name }}
+          </router-link>
+        </div>
+        <MarkdownViewer v-if="data.profile !== undefined" :tags="['h1', 'h2', 'h3', 'italic', 'bold', 'underline', 'strikethrough', 'subscript', 'superscript', 'anchor', 'orderedlist', 'unorderedlist']" class="bg-dark2" dark :text="data.profile.description" />
+        <SocialLinks :links="sociallinks" />
+      </div>
+    </q-modal>
+
+  </div>
+
+  <!--desktop-->
+  <div class="q-mb-md bg-dark2 round-borders gt-xs"  v-bind:class="{ 'selected_candidate': data.selected, 'unselected_candidate':!data.selected, 'shadow-5':!data.selected}">
     <q-collapsible  label="First" group="candidates" icon-toggle header-class="candidate_header" collapse-icon="icon-ui-11">
       <template slot="header" >
         <q-item-side left >
@@ -16,7 +74,7 @@
             </router-link>
             <span class="text-dimwhite"  v-if="data.profile && (data.profile.givenName !='' || data.profile.familyName !='')" >({{data.profile.givenName}} {{data.profile.familyName}})</span>
             <br>
-            <span><span class="text-dimwhite">{{$t('candidate.votes')}}:</span> {{data.total_votes/10000}}</span>
+            <span><span class="text-dimwhite">{{$t('candidate.votes')}}:</span> {{(data.total_votes/10000).toLocaleString() }}</span>
             <span><span class="q-pl-md text-dimwhite">{{$t('candidate.staked')}}:</span> {{data.locked_tokens}}</span>
           </div>
         </q-item-main>
@@ -45,6 +103,7 @@
       </div>
     </q-collapsible>
   </div>
+</div>
 </template>
 
 <script>
@@ -65,7 +124,8 @@ export default {
     return {
       image_profile:'../statics/img/default-avatar.png',
       sociallinks : [],
-      website : false
+      website : false,
+      profilemodal: false
     }
   },
 

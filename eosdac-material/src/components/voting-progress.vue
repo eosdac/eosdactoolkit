@@ -13,11 +13,11 @@
     </span>
     <span v-else class="q-caption float-right">{{$t('votingprogress.loading')}}</span>
   </div>
-<!--
+
   <div v-if="met_initial_votes_threshold && !loading">{{$t('votingprogress.threshold_met')}}
-    <custodiansDisplay />
+    <!-- <custodiansDisplay /> -->
   </div>
--->
+
 </span>
 
 </template>
