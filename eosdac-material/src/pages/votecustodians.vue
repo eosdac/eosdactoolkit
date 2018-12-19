@@ -13,7 +13,6 @@
     <div class="blur-details q-pa-md absolute-bottom" style="height:120px;margin-right:-16px;margin-left:-16px;">
       <div class="column  justify-center q-px-md full-height">
         <VotingProgress height="30px" ref="votebar"/>
-        
       </div>
     </div>
   </div>
@@ -91,13 +90,11 @@
                 <q-item-tile style="height:36px;width:36px;" class="q-mr-sm">
                   <div v-if="cand.profile != undefined && $helper.isUrl(cand.profile.image)" class="center_background_image" style="width: 36px; height:36px" v-bind:style="{ 'background-image': 'url(' + cand.profile.image + ')' }"></div>
                   <div v-else class="center_background_image" style="width: 36px; height:36px" v-bind:style="{ 'background-image': 'url(../statics/img/default-avatar.png)' }"></div>
-                  <!-- <img v-if="!cand.profile" style="height:36px;width:36px;border-radius:50%;" class="q-mr-md responsive" src="https://eosdac.io/wp-content/uploads/elementor/thumbs/female1-nqk9ciy87u6os74yatkpw2xi7qbjzjq3r5sl9wy0mm.jpg">
-                  <img v-if="cand.profile" style="height:36px;width:36px;border-radius:50%;" class="q-mr-md responsive" :src="cand.profile.image"> -->
                 </q-item-tile>
               </q-item-side>
               <q-item-main>
                 <router-link class="q-headline a2" :to="{path: '/profile/' + cand.candidate_name}" >
-                  <h6 class="q-ma-none">{{cand.candidate_name}}</h6>
+                  <div class="q-ma-none" style="min-width:100px; overflow:hidden">{{cand.candidate_name}}</div>
                 </router-link>
               </q-item-main>
               <q-item-side right>
