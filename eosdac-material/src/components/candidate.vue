@@ -31,8 +31,26 @@
     <div class="row justify-between q-pa-md">
       <q-btn v-if="!data.selected" icon="icon-plus" color="primary" label="select" @click="$emit('clickvotefor')" />
       <q-btn v-if="data.selected" icon="icon-ui-6" color="positive" label="unselect" @click="$emit('clickunvotefor')" />
-      <q-btn color="dark" label="read more" />
+      <q-btn v-if="data.profile" color="dark" label="read more" @click="profilemodal = true"/>
     </div>
+  
+
+    <q-modal maximized v-model="profilemodal">
+      <div style="height:50px" class="bg-dark row items-center justify-between q-px-md">
+        <span>{{ $t('vote_eosdac.vote_for_eosdac') }}</span>
+        <q-icon class=" cursor-pointer" name="icon-ui-8" @click.native="profilemodal = false" />
+      </div>
+      <div class="q-pa-md">
+        <div class="row items-center">
+          <div class="center_background_image on-left"  style="width: 60px; height:60px" v-bind:style="{ 'background-image': 'url(' + image_profile + ')' }" ></div>
+          <router-link class="q-headline" :to="{path: '/profile/' + data.candidate_name}" >
+            <q-icon title="Nominated for next custodian board" style="margin-top:-5px" v-if="data.position < 13" name="star_border" color="yellow" />{{ data.candidate_name }}
+          </router-link>
+        </div>
+        <MarkdownViewer v-if="data.profile !== undefined" :tags="['h1', 'h2', 'h3', 'italic', 'bold', 'underline', 'strikethrough', 'subscript', 'superscript', 'anchor', 'orderedlist', 'unorderedlist']" class="bg-dark2" dark :text="data.profile.description" />
+        <SocialLinks :links="sociallinks" />
+      </div>
+    </q-modal>
 
   </div>
 
@@ -104,7 +122,8 @@ export default {
     return {
       image_profile:'../statics/img/default-avatar.png',
       sociallinks : [],
-      website : false
+      website : false,
+      profilemodal: false
     }
   },
 
