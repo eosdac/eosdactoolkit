@@ -24,8 +24,10 @@
       <span class="text-dimwhite"  v-if="data.profile && (data.profile.givenName !='' || data.profile.familyName !='')" >({{data.profile.givenName}} {{data.profile.familyName}})</span>
 
     </div>
-    <div class="bg-dark q-pa-md text-italic text-dimwhite q-body-1" v-if="data.profile !== undefined">
-    {{data.profile.description.slice(0, 200)+'...'}}
+    <div class="bg-dark text-italic text-dimwhite q-body-1" v-if="data.profile !== undefined">
+   
+    <MarkdownViewer v-if="data.profile !== undefined" :tags="['h1', 'h2', 'h3', 'italic', 'bold', 'underline', 'strikethrough', 'subscript', 'superscript', 'anchor', 'orderedlist', 'unorderedlist']" dark :text="data.profile.description.slice(0, 150)+'...'" />
+
     </div>
 
     <div class="row justify-between q-pa-md">
@@ -37,7 +39,7 @@
 
     <q-modal maximized v-model="profilemodal">
       <div style="height:50px" class="bg-dark row items-center justify-between q-px-md">
-        <span>{{ $t('vote_eosdac.vote_for_eosdac') }}</span>
+        <span>Bio</span>
         <q-icon class=" cursor-pointer" name="icon-ui-8" @click.native="profilemodal = false" />
       </div>
       <div class="q-pa-md">
