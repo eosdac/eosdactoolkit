@@ -1,5 +1,6 @@
 <template>
 <div>
+  <!--mobile view (small screen)-->
   <div class="q-mb-md relative-position bg-dark2 round-borders lt-sm"  v-bind:class="{ 'selected_candidate': data.selected, 'unselected_candidate':!data.selected, 'shadow-5':!data.selected}">
     <q-chip class="q-ma-xs absolute-top-left" color="dark" >{{data.position}}</q-chip>
     <div class="row justify-center q-pt-md">
@@ -23,7 +24,7 @@
       <span class="text-dimwhite"  v-if="data.profile && (data.profile.givenName !='' || data.profile.familyName !='')" >({{data.profile.givenName}} {{data.profile.familyName}})</span>
 
     </div>
-    <div class="bg-dark q-pa-md text-italic" v-if="data.profile !== undefined">
+    <div class="bg-dark q-pa-md text-italic text-dimwhite q-body-1" v-if="data.profile !== undefined">
     {{data.profile.description.slice(0, 200)+'...'}}
     </div>
 
@@ -35,6 +36,7 @@
 
   </div>
 
+  <!--desktop-->
   <div class="q-mb-md bg-dark2 round-borders gt-xs"  v-bind:class="{ 'selected_candidate': data.selected, 'unselected_candidate':!data.selected, 'shadow-5':!data.selected}">
     <q-collapsible  label="First" group="candidates" icon-toggle header-class="candidate_header" collapse-icon="icon-ui-11">
       <template slot="header" >
