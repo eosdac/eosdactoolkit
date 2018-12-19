@@ -26,7 +26,7 @@
     </div>
     <div class="bg-dark text-italic text-dimwhite q-body-1" v-if="data.profile !== undefined">
    
-    <MarkdownViewer v-if="data.profile !== undefined" :tags="['h1', 'h2', 'h3', 'italic', 'bold', 'underline', 'strikethrough', 'subscript', 'superscript', 'anchor', 'orderedlist', 'unorderedlist']" dark :text="data.profile.description.slice(0, 150)+'...'" />
+    <MarkdownViewer v-if="data.profile !== undefined" :tags="['h1', 'h2', 'h3', 'italic', 'bold', 'underline', 'strikethrough', 'subscript', 'superscript', 'anchor', 'orderedlist', 'unorderedlist']" dark :text="data.profile.description.slice(0, 140)+'...'" />
 
     </div>
 
