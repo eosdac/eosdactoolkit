@@ -22,12 +22,10 @@
     <div class="row justify-between  q-px-md q-pb-md q-body-1"  >
       <span><span class="text-dimwhite">{{$t('candidate.pay')}}:</span> {{data.requestedpay}}</span>
       <span class="text-dimwhite"  v-if="data.profile && (data.profile.givenName !='' || data.profile.familyName !='')" >({{data.profile.givenName}} {{data.profile.familyName}})</span>
-
     </div>
-    <div class="bg-dark text-italic text-dimwhite q-body-1" v-if="data.profile !== undefined">
-   
-    <MarkdownViewer v-if="data.profile !== undefined" :tags="['h1', 'h2', 'h3', 'italic', 'bold', 'underline', 'strikethrough', 'subscript', 'superscript', 'anchor', 'orderedlist', 'unorderedlist']" dark :text="data.profile.description.slice(0, 140)+'...'" />
 
+    <div class="bg-dark text-italic text-dimwhite q-body-1 q-mx-xs round-borders" v-if="data.profile !== undefined">
+      <MarkdownViewer v-if="data.profile !== undefined" :tags="['h1', 'h2', 'h3', 'italic', 'bold', 'underline', 'strikethrough', 'subscript', 'superscript', 'anchor', 'orderedlist', 'unorderedlist']" dark :text="data.profile.description.slice(0, 140)+'...'" />
     </div>
 
     <div class="row justify-between q-pa-md">
