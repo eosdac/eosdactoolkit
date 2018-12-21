@@ -44,7 +44,7 @@
         </div>
       </div>
     </q-collapsible>
-    <Transaction ref="Transaction" v-on:done="checkApprovals()" />
+    <Transaction ref="Transaction" v-on:done="transactionCallback($event)" />
   </div>
 </template>
 
@@ -79,7 +79,7 @@ export default {
     }),
     isExecutable: function(){
       if(this.provided_approvals){
-        return this.provided_approvals.length <= this.msig.threshold;
+        return this.provided_approvals.length >= this.msig.threshold;
         // return this.provided_approvals.length > 0;
       }
       else{
@@ -93,12 +93,13 @@ export default {
   methods: {
     //get the requested and provided approvals for this msg proposal from chain
     async checkApprovals(){
-      
+
       let approvals = await this.$store.dispatch('api/getApprovalsFromProposal', {proposer: this.msig.proposer, proposal_name: this.msig.proposal_name});
       this.provided_approvals = approvals.provided_approvals;
       this.requested_approvals = approvals.requested_approvals;
       //check if user has already approved the proposal
       this.isApproved = this.provided_approvals.find(a => a.actor == this.getAccountName) ? true : false;
+      //check if the proposal is created by current user
       this.isCreator = this.getAccountName == this.msig.proposer
 
     },
@@ -127,7 +128,7 @@ export default {
         }
 
       ];
-        this.$refs.Transaction.newTransaction(actions);
+        this.$refs.Transaction.newTransaction(actions, false, false, 'e_approval');
     },
   
     //unapprove a proposal via msig relay {"proposer":0,"proposal_name":0,"level":0}
@@ -154,7 +155,7 @@ export default {
         }
 
       ];
-        this.$refs.Transaction.newTransaction(actions);
+        this.$refs.Transaction.newTransaction(actions, false, false, 'e_unapproval');
     },
     //execute a proposal via msig relay {"proposer":0,"proposal_name":0,"executer":0}
     executeProposal(){
@@ -164,6 +165,14 @@ export default {
     //cancel a proposal via msig relay {"proposer":0,"proposal_name":0,"canceler":0}
     cancelProposal(){
 
+    },
+
+    transactionCallback(e_t){
+      this.provided_approvals = null;//temporary show spinner by setting to null
+
+      if(e_t === 'e_unapproval' || e_t === 'e_approval'){
+        this.checkApprovals();
+      }
     }
 
 
