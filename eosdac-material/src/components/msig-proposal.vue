@@ -28,38 +28,35 @@
         </q-item-side>
       </template>
 
-      <div class="q-px-md q-pb-md" >
-        <div style="border-top:1px solid grey;">
-          <div class="row gutter-md q-pt-md">
-            <div class="col-md-4 col-xs-12" >
-              <div style="background:none">
-                <!-- <div class="row justify-between q-py-md" v-for="(key, i) in Object.keys(msig.data)" :key="i" style="border-bottom: 1px solid grey">
-                  <span class="text-dimwhite ">{{key}}:</span><span class=""> {{msig.data[key]}}</span>
-                </div> -->
-              </div>
-            </div>
-            <div class="col-md-8 col-xs-12" >
-              <div class="column justify-between full-height" style="background:none">
-                <pre>{{msig.provided_approvals}}</pre>
-                <div class="text-dimwhite">{{msig.description}}</div>
-                <div style="height:35px">
-                  <q-btn class="float-right" color="positive" label="Approve" @click="approveProposal(msig.proposer, msig.proposal_name)"  />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+      <div class="q-px-md q-pb-md">
+        <div style="border-top: 1px solid grey">
 
+          <pre>{{provided_approvals}}</pre>
+          <div class="text-dimwhite">{{msig.description}}</div>
+
+          <div class="row justify-end">
+            <q-btn v-if="!isApproved" color="positive" label="Approve" @click="approveProposal(msig.proposer, msig.proposal_name)"  />
+            <q-btn v-if="isApproved" color="warning" label="Unapprove" @click="unapproveProposal(msig.proposer, msig.proposal_name)"  />
+            <q-btn v-if="isCreator" color="red" label="cancel" />
+            <q-btn v-if="isExecutable" color="blue" label="execute" />
+          </div>
+
+        </div>
       </div>
     </q-collapsible>
+    <Transaction ref="Transaction" v-on:done="checkApprovals()" />
   </div>
 </template>
 
 <script>
-
+import Transaction from 'components/transaction'
+import {
+  mapGetters
+} from 'vuex'
 export default {
   name: 'Msigproposal',
   components: {
+    Transaction
   },
 
   props: {
@@ -68,17 +65,105 @@ export default {
 
   data () {
     return {
+      systemmsig: 'eosiomsigold',
       provided_approvals: null,
-      requested_approvals:null
+      requested_approvals:null,
+      isApproved: false,
+      isCreator: false
 
     }
   },
+  computed: {
+    ...mapGetters({
+      getAccountName: 'account/getAccountName'
+    }),
+    isExecutable: function(){
+      if(this.provided_approvals){
+        return this.provided_approvals.length <= this.msig.threshold;
+        // return this.provided_approvals.length > 0;
+      }
+      else{
+        return false;
+      }
+      
+    }
+
+  },
 
   methods: {
-    async getApprovals(){
+    //get the requested and provided approvals for this msg proposal from chain
+    async checkApprovals(){
+      
       let approvals = await this.$store.dispatch('api/getApprovalsFromProposal', {proposer: this.msig.proposer, proposal_name: this.msig.proposal_name});
       this.provided_approvals = approvals.provided_approvals;
       this.requested_approvals = approvals.requested_approvals;
+      //check if user has already approved the proposal
+      this.isApproved = this.provided_approvals.find(a => a.actor == this.getAccountName) ? true : false;
+      this.isCreator = this.getAccountName == this.msig.proposer
+
+    },
+
+    //approve a proposal via msig relay {"proposer":0,"proposal_name":0,"level":0}
+    approveProposal(proposer, proposal_name, permission="active"){
+        let actions = [
+        {
+          contract: this.systemmsig, 
+          action: 'approve', 
+          fields: {
+            proposer: proposer,
+            proposal_name: proposal_name,
+            level: { "actor": this.getAccountName, "permission": permission }
+          }
+          
+        },
+        {
+          contract: 'dacmultisigs', 
+          action: 'approved',
+          authorization: [ {actor: this.getAccountName, permission: 'active'}, {actor: 'dacauthority', permission: 'one'}],
+          fields: {
+            proposer: proposer, 
+            proposal_name: proposal_name, 
+            approver: this.getAccountName }
+        }
+
+      ];
+        this.$refs.Transaction.newTransaction(actions);
+    },
+  
+    //unapprove a proposal via msig relay {"proposer":0,"proposal_name":0,"level":0}
+    unapproveProposal(proposer, proposal_name, permission="active"){
+        let actions = [
+        {
+          contract: this.systemmsig, 
+          action: 'unapprove', 
+          fields: {
+            proposer: proposer,
+            proposal_name: proposal_name,
+            level: { "actor": this.getAccountName, "permission": permission }
+          }
+          
+        },
+        {
+          contract: 'dacmultisigs', 
+          action: 'unapproved',
+          authorization: [ {actor: this.getAccountName, permission: 'active'}, {actor: 'dacauthority', permission: 'one'}],
+          fields: {
+            proposer: proposer, 
+            proposal_name: proposal_name, 
+            unapprover: this.getAccountName }
+        }
+
+      ];
+        this.$refs.Transaction.newTransaction(actions);
+    },
+    //execute a proposal via msig relay {"proposer":0,"proposal_name":0,"executer":0}
+    executeProposal(){
+
+    },
+    
+    //cancel a proposal via msig relay {"proposer":0,"proposal_name":0,"canceler":0}
+    cancelProposal(){
+
     }
 
 
@@ -87,7 +172,7 @@ export default {
 
 
   mounted:function(){
-   this. getApprovals()
+   this.checkApprovals();
   }
 
 }
