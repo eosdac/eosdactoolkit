@@ -1,16 +1,14 @@
 <template>
 <q-page class="text-white q-pa-md">
-  <h4 class="q-display-1 q-mt-none q-mb-md">Create Msig Transaction</h4>
-  <div class="q-mb-lg"><MsigCreator /></div>
   <h4 class="q-display-1 q-mt-none q-mb-md">Review Msig Transactions</h4>
 
 
-  <div v-for="(msig, index) in msigproposals" class="q-mb-md bg-dark2 round-borders shadow-5" :key="index">
+  <div v-for="(msig, index) in proposals" class="q-mb-md bg-dark2 round-borders shadow-5" :key="index">
     <q-collapsible  label="First" group="msigproposals" icon-toggle header-class="msigproposal_header" collapse-icon="icon-ui-11">
       <template slot="header" >
         <q-item-side left >
           <div class="row full-height items-center">
-            <q-icon size="24px" name="icon-transfers" class="q-mr-xs" /><span> {{msig.type}}</span>
+            <q-icon size="24px" name="icon-transfers" class="q-mr-xs" /><span> type</span>
           </div>
         </q-item-side>
         <q-item-main >
@@ -29,14 +27,15 @@
           <div class="text-white q-display-1"><span class="text-p-light">5</span> / 12</div>
         </q-item-side>
       </template>
+      
       <div class="q-px-md q-pb-md" >
         <div style="border-top:1px solid grey;">
           <div class="row gutter-md q-pt-md">
             <div class="col-md-4 col-xs-12" >
               <div style="background:none">
-                <div class="row justify-between q-py-md" v-for="(key, i) in Object.keys(msig.data)" :key="i" style="border-bottom: 1px solid grey">
+                <!-- <div class="row justify-between q-py-md" v-for="(key, i) in Object.keys(msig.data)" :key="i" style="border-bottom: 1px solid grey">
                   <span class="text-dimwhite ">{{key}}:</span><span class=""> {{msig.data[key]}}</span>
-                </div>
+                </div> -->
               </div>
             </div>
             <div class="col-md-8 col-xs-12" >
@@ -53,6 +52,9 @@
       </div>
     </q-collapsible>
   </div>
+
+  <h4 class="q-display-1 q-mt-none q-mb-md">Create Msig Transaction</h4>
+  <div class="q-mb-lg"><MsigCreator /></div>
 
 
 
@@ -103,19 +105,20 @@ export default {
     })
 
   },
+  mounted() {
+    console.log('ddddqqssq')
+    this.getProposals();
+
+  },
   methods:{
-    getProposalsFromAllCustodians(){
-      console.log(this.getactiveCustodians);
-      let proms = [];
-      this.getactiveCustodians.forEach( c => {
-        let p =  this.$store.dispatch('api/getProposalsFromAccount', c.cust_name);
-        proms.push(p);
-      });
-      Promise.all(proms).then(values => {
-        this.proposals = values;
-      });
+    async getProposals(){
+      console.log('dddddddddddddddd')
+      let p =  await this.$store.dispatch('api/getMsigProposals');
+      this.proposals = p;
+      console.log('wwwwww',p)
       
     },
+
   
     //approve a proposal via msig relay {"proposer":0,"proposal_name":0,"level":0}
     approveProposal(proposer, proposal_name, permission="active"){
@@ -158,9 +161,6 @@ export default {
     cancelProposal(){
 
     }
-  },
-  mounted(){
-
   }
 
 }

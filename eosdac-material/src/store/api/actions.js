@@ -823,3 +823,13 @@ export async function getAccountPermissions({
     throw error
   }
 }
+
+export async function getMsigProposals({}, payload){
+
+  return axios.get('http://localhost:3000/msigproposals').then(r => {
+      // console.log(r.data)
+      return r.data;
+    }).catch(e => {
+      console.log('could not load profile file');
+      return [];});
+}

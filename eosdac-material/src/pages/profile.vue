@@ -220,11 +220,6 @@ export default {
 
     async getProfileData(){
       let p = await this.$store.dispatch('api/getProfileData2', {accountname: [this.account_name]} );
-      console.log(p);
-      // if(this.$helper.isUrl(p[0].profile)){
-      //   //todo fetch profileurl
-      //   p = false;
-      // }
 
       if(p && p.length && this.validateProfile(p[0].profile)){
         this.rawprofiledata = p[0];
@@ -329,10 +324,14 @@ export default {
       this.initProfile();
   },
   watch: {
-  '$route': function(){
-              this.initProfile();
-            }
-  },
+    '$route': function(){
+                this.initProfile();
+              },
+    getAccountName : function(val){
+      this.allow_edit = this.account_name === val && this.profile_is_irrevirsible ? true : false;
+    }
+
+  }
 
 }
 </script>
