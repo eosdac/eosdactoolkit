@@ -31,8 +31,17 @@
       <div class="q-px-md q-pb-md">
         <div style="border-top: 1px solid grey">
 
-          <pre>{{provided_approvals}}</pre>
+          <div>
+            <q-chip class="animate-fade" color="positive" v-for="(c,i) in provided_approvals" :key="i"> {{c.actor}}</q-chip>
+            <q-chip class="animate-fade" color="dark" v-for="(c,i) in requested_approvals" :key="i"> {{c.actor}}</q-chip>
+          </div>
           <div class="text-dimwhite">{{msig.description}}</div>
+
+          <div>
+            
+            <Actionparser :actions="this.msig.trx.actions" />
+
+          </div>
 
           <div class="row justify-end">
             <q-btn v-if="!isApproved" color="positive" label="Approve" @click="approveProposal(msig.proposer, msig.proposal_name)"  />
@@ -50,13 +59,15 @@
 
 <script>
 import Transaction from 'components/transaction'
+import Actionparser from 'components/action-parser'
 import {
   mapGetters
 } from 'vuex'
 export default {
   name: 'Msigproposal',
   components: {
-    Transaction
+    Transaction,
+    Actionparser
   },
 
   props: {
@@ -85,7 +96,15 @@ export default {
       else{
         return false;
       }
-      
+    },
+    parseActions: function(){
+      if(this.msig){
+        return this.msig.trx.actions
+        // return this.provided_approvals.length > 0;
+      }
+      else{
+        return false;
+      }   
     }
 
   },
