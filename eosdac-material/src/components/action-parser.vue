@@ -1,13 +1,33 @@
 <template>
 <div>
-  <div>Action {{activeSlide+1}}/{{actions.length}}</div>
-  <div>{{actions[activeSlide].account}} > {{actions[activeSlide].name}}</div>
-  <q-carousel class="text-white" @input="handleslide($event)">
-    <q-carousel-slide v-for="(action, i) in actions" class="bg-dark" :key="i+'actionslide'">
-      <pre>{{action}}</pre>
+  <q-carousel class="text-white" v-model="activeSlide" @input="handleslide($event)">
+    <q-carousel-slide v-for="(action, i) in actions" :key="i+'actionslide'">
+      <div class="row">
+        <span class="q-pa-sm bg-primary">{{action.account}}</span>
+        <span class="q-pa-sm bg-p-light">{{action.name}}</span>
+      </div>
+      <div><span >Authorization: </span><span class="text-dimwhite">{{action.authorization.map(a => a.actor+'@'+a.permission).join(', ')}}</span></div>
+      <div v-for="(key, i) in Object.keys(action.data)" :key="i+'actionkey'">
+        <div><span>{{key}}: </span><span class="text-dimwhite">{{action.data[key]}}</span></div>
+      </div>
     </q-carousel-slide>
 
   </q-carousel>
+
+<q-btn
+  rounded
+  color="primary"
+  @click="prevAction()"
+  icon="arrow_left"
+/>
+<span>{{activeSlide+1}}/{{actions.length}}</span>
+<q-btn
+  rounded
+  color="primary"
+  @click="nextAction()"
+  icon="arrow_right"
+/>
+
 </div>
 </template>
 
@@ -22,6 +42,9 @@ export default {
   props: {
     actions: Array,
   },
+  computed :{
+
+  },
 
   data () {
     return {
@@ -31,6 +54,18 @@ export default {
   },
 
   methods: {
+    nextAction(){
+      if(this.activeSlide < this.actions.length-1) this.activeSlide++;
+    },
+    prevAction(){
+      if(this.activeSlide > 0) this.activeSlide--;
+
+    },
+    parseActionData(actiondata){
+      let keys = Object.keys(actiondata);
+      let values = Object.values(actiondata);
+      return values;
+    },
     handleslide(e){
       console.log('slide',e)
       this.activeSlide = e;
