@@ -126,7 +126,10 @@ module.exports = function(ctx) {
         'QBtnToggle',
         'QScrollObservable',
         'QDatetimePicker',
-        'QVideo'
+        'QVideo',
+        'QCarousel',
+        'QCarouselSlide',
+        'QCarouselControl'
 
       ],
       directives: [

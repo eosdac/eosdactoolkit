@@ -32,8 +32,8 @@
         <div style="border-top: 1px solid grey">
 
           <div>
-            <q-chip class="animate-fade" color="positive" v-for="(c,i) in provided_approvals" :key="i"> {{c.actor}}</q-chip>
-            <q-chip class="animate-fade" color="dark" v-for="(c,i) in requested_approvals" :key="i"> {{c.actor}}</q-chip>
+            <q-chip class="animate-fade" color="positive" v-for="(c,i) in provided_approvals" :key="i+'p'"> {{c.actor}}</q-chip>
+            <q-chip class="animate-fade" color="dark" v-for="(c,i) in requested_approvals" :key="i+'r'"> {{c.actor}}</q-chip>
           </div>
           <div class="text-dimwhite">{{msig.description}}</div>
 
