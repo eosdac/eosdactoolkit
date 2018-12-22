@@ -9,7 +9,13 @@
     "title": "eosDACメンバークライアント"
   },
   "candidate": {
+    "nominated_next": "次期カストディアンに指名されました",
+    "pay": "支払い",
+    "read_more": "続きを読む",
+    "requestedpay": "希望報酬",
+    "select": "選択",
     "staked": "ステーク",
+    "unselect": "選択解除",
     "votes": "票"
   },
   "constitution": {
@@ -187,6 +193,7 @@
     "connect": "接続する",
     "connecting": "接続中...",
     "custom_endpoint": "カスタムエンドポイント",
+    "default_node": "デフォルトノード",
     "endpoint_set": "エンドポイントが正常に設定されました",
     "error_chain_id": "エンドポイントによって返されたチェーンIDが正しくありません。",
     "error_could_not_connect_to_endpoint": "エンドポイントに接続できませんでした。",
@@ -244,7 +251,8 @@
     "stake_description": "ステークしたいトークンの数量を入力して下さい。指定できる数量は最小で {minimum_stake} です。",
     "unregister": "登録解除",
     "unregister_as_candidate": "候補者としての登録を解除",
-    "unstake": "ステークを解除"
+    "unstake": "ステークを解除",
+    "unstake_description": "ステークを解除してからウォレットに残高が反映されるまで、承認時間として60分の待ち時間が生じることにご注意下さい。ご不便をおかけしますが処理が完了するまでお待ち下さい。また、カストディアンとして選任された場合、残高は所定の日数、スマートコントラクトに保管されます。現在の保管日数："
   },
   "register": {
     "already_registered": "eosDACのメンバーとして登録済みです。",
@@ -267,6 +275,7 @@
     "choose_connection_type": "接続タイプを選択",
     "connection_type": "接続タイプ",
     "identity_request_denied": "IDリクエストが拒否されました。もう一度お試しください。",
+    "login_with_scatter": "Scatterでログインしてください",
     "scatter_is_locked": "Scatterがロックされています。続行するにはロックを解除してください。",
     "scatter_is_not_available": "Scatterが利用できません。Scatterがインストールされている場合、更新するか、Permissionメニューから当サイトへのpermissionを削除して、もう一度お試しください。",
     "scatter_is_outdated": "お使いのScatterのバージョンが古くなっています。Scatterをアップデートしてから再度お試し下さい。",

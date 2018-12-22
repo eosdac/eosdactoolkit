@@ -9,9 +9,14 @@
     "title": "eosDac Member Client"
   },
   "candidate": {
+    "nominated_next": "Nominated for next custodian board",
+    "pay": "Pay",
+    "read_more": "read more",
+    "requestedpay": "Requested Pay",
+    "select": "select",
     "staked": "Staked",
-    "votes": "Votes",
-    "requestedpay": "Requested Pay"
+    "unselect": "unselect",
+    "votes": "Votes"
   },
   "constitution": {
     "direct_link": "Direct Link",
@@ -356,7 +361,6 @@
     "vote_for_eosdac": "Vote For eosDAC",
     "voted_with_proxy": "You voted with proxy",
     "votes": "Votes",
-    "voted_with_proxy": "You voted with proxy",
     "voting_power": "Voting Power"
   },
   "votingprogress": {
