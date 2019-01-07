@@ -5,8 +5,14 @@
       <div class="row">
         <span class="q-pa-sm bg-primary">{{action.account}}</span>
         <span class="q-pa-sm bg-p-light">{{action.name}}</span>
+        <span class="q-pa-sm bg-dark">
+          <span class="on-left">Authorization</span>
+          <span class="text-dimwhite">{{action.authorization.map(a => a.actor+'@'+a.permission).join(', ')}}</span>
+        </span>
       </div>
-      <div><span >Authorization: </span><span class="text-dimwhite">{{action.authorization.map(a => a.actor+'@'+a.permission).join(', ')}}</span></div>
+      <div class="row">
+
+      </div>
       <div v-for="(key, i) in Object.keys(action.data)" :key="i+'actionkey'">
         <div><span>{{key}}: </span><span class="text-dimwhite">{{action.data[key]}}</span></div>
       </div>

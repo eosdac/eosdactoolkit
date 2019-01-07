@@ -745,6 +745,10 @@
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@positron/stack-trace/-/stack-trace-1.0.0.tgz#14fcc712a530038ef9be1ce6952315a839f466a8"
 
+"@types/jest@^23.3.1":
+  version "23.3.12"
+  resolved "https://registry.yarnpkg.com/@types/jest/-/jest-23.3.12.tgz#7e0ced251fa94c3bc2d1023d4b84b2992fa06376"
+
 "@types/node@^8.0.24":
   version "8.10.38"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-8.10.38.tgz#e05c201a668492e534b48102aca0294898f449f6"
@@ -3195,7 +3199,7 @@ eosjs-api@7.0.4:
     camel-case "^3.0.0"
     isomorphic-fetch "^2.2.1"
 
-eosjs-ecc@4.0.4:
+eosjs-ecc@4.0.4, eosjs-ecc@^4.0.1:
   version "4.0.4"
   resolved "https://registry.yarnpkg.com/eosjs-ecc/-/eosjs-ecc-4.0.4.tgz#431450f30a6f73088ff5d7ba1ebdfe967a5ca4ab"
   dependencies:
@@ -3218,6 +3222,15 @@ eosjs@16.0.8:
     eosjs-api "7.0.4"
     eosjs-ecc "4.0.4"
     fcbuffer "2.2.1"
+
+eosjs@20.0.0-beta2:
+  version "20.0.0-beta2"
+  resolved "https://registry.yarnpkg.com/eosjs/-/eosjs-20.0.0-beta2.tgz#026255a13fefeb4d46a98b0c55de7b972de661c0"
+  dependencies:
+    "@types/jest" "^23.3.1"
+    babel-polyfill "^6.26.0"
+    eosjs-ecc "^4.0.1"
+    text-encoding "^0.6.4"
 
 errno@^0.1.3, errno@~0.1.7:
   version "0.1.7"
@@ -7303,6 +7316,10 @@ scatterjs-core@2.3.8:
     isomorphic-ws "^4.0.1"
     ws "^6.1.0"
 
+scatterjs-plugin-eosjs2@1.1.6:
+  version "1.1.6"
+  resolved "https://registry.yarnpkg.com/scatterjs-plugin-eosjs2/-/scatterjs-plugin-eosjs2-1.1.6.tgz#4f6fa2f67da44c4da63abca77ed706c8f6cca79e"
+
 scatterjs-plugin-eosjs@1.3.10:
   version "1.3.10"
   resolved "https://registry.yarnpkg.com/scatterjs-plugin-eosjs/-/scatterjs-plugin-eosjs-1.3.10.tgz#f4f3ed8464454a622bd385b58f60cd533428f811"
@@ -7882,6 +7899,10 @@ tar@^4:
     safe-buffer "^5.1.2"
     yallist "^3.0.2"
 
+text-encoding@^0.6.4:
+  version "0.6.4"
+  resolved "https://registry.yarnpkg.com/text-encoding/-/text-encoding-0.6.4.tgz#e399a982257a276dae428bb92845cb71bdc26d19"
+
 text-table@^0.2.0, text-table@~0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/text-table/-/text-table-0.2.0.tgz#7f5ee823ae805207c00af2df4a84ec3fcfa570b4"
@@ -8398,6 +8419,21 @@ w3c-hr-time@^1.0.1:
   resolved "https://registry.yarnpkg.com/w3c-hr-time/-/w3c-hr-time-1.0.1.tgz#82ac2bff63d950ea9e3189a58a65625fedf19045"
   dependencies:
     browser-process-hrtime "^0.1.2"
+
+wal-eos-scatter-provider@^0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/wal-eos-scatter-provider/-/wal-eos-scatter-provider-0.0.3.tgz#008cf4f3263bc76d02cbd1f0c3a7b7c1f03671a8"
+  dependencies:
+    scatterjs-core "2.3.8"
+    scatterjs-plugin-eosjs2 "1.1.6"
+    wal-eos "^0.0.3"
+
+wal-eos@^0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/wal-eos/-/wal-eos-0.0.3.tgz#459d9399414af56c2e0407d35351a7cb8a794e99"
+  dependencies:
+    eosjs "20.0.0-beta2"
+    uuid "^3.3.2"
 
 watchpack@^1.3.1, watchpack@^1.5.0:
   version "1.6.0"
