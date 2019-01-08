@@ -1,5 +1,5 @@
 <template>
-<q-layout view="hHh Lpr lFf">
+<q-layout view="hHh Lpr lff">
   <q-layout-header class="no-shadow">
     <q-toolbar color="dark2">
       <q-btn size="md" flat dense round class="q-mr-sm" style="margin-top:-4px" @click="leftDrawerOpen = !leftDrawerOpen" :aria-label="$t('default.menu')">
@@ -173,9 +173,12 @@
 
 
     </q-list>
-    <partnerbps />
+    
     <div class="absolute-bottom row  bg-dark2 justify-center q-pa-md" style="border-top: 1px solid #272B35;margin-left:-20px" ><VoteEosdac /></div>
   </q-layout-drawer>
+
+
+
   <q-page-container style="overflow:hidden">
     <transition appear enter-active-class="animated fadeInDown">
       <q-alert v-if="!getRegistered && getAccountName && setupComplete" color="blue" appear>
@@ -199,6 +202,9 @@
 
 
     <Notifier :drawer="leftDrawerOpen" />
+
+
+
 
   </q-page-container>
   <NodeSelector setup v-on:done="$refs.init_interface.auto_scatter()"/>
@@ -229,7 +235,7 @@ import NodeSelector from 'components/nodeselector'
 import Notifier from 'components/notifier'
 import MenuDropdown from 'components/menu-dropdown'
 import VoteEosdac from 'components/vote-eosdac'
-import Partnerbps from 'components/partner_bp'
+
 export default {
 
 
@@ -239,8 +245,7 @@ export default {
     MenuDropdown,
     VoteEosdac,
     NodeSelector,
-    InitInterface,
-    Partnerbps
+    InitInterface
   },
   data() {
     return {

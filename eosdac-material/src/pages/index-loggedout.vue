@@ -102,7 +102,15 @@
         </div>
       </div>
     </div>
+
   </div>
+
+  <div class="row bg-dark q-pa-md round-borders shadow-5 partnerbox">
+    <partnerbps />
+  </div>
+    
+    
+ 
 <!-- <MultiModal ref="Multi" /> -->
 <InitInterface  ref="init_interface"/>
 </q-page>
@@ -112,6 +120,8 @@
 
 <script>
 import InitInterface from 'components/init-interface'
+import Partnerbps from 'components/partner_bp'
+
 import {
   openURL
 } from 'quasar'
@@ -120,7 +130,8 @@ import {
 } from 'vuex'
 export default {
   components:{
-    InitInterface
+    InitInterface,
+    Partnerbps
   },
   data () {
     return {
@@ -217,9 +228,16 @@ export default {
   top:-100px;
   transition: all .2s ease-in-out;
 }
+.partnerbox{
+  top:0px;
+  position:relative;
+}
 
 
 @media screen and (max-width: 1200px) {
+  .partnerbox{
+    top:40px!important;;
+  }
   .row_boxes_index_page{
     top:20px !important;
   }
