@@ -173,7 +173,7 @@
 
 
     </q-list>
-
+    <partnerbps />
     <div class="absolute-bottom row  bg-dark2 justify-center q-pa-md" style="border-top: 1px solid #272B35;margin-left:-20px" ><VoteEosdac /></div>
   </q-layout-drawer>
   <q-page-container style="overflow:hidden">
@@ -229,6 +229,7 @@ import NodeSelector from 'components/nodeselector'
 import Notifier from 'components/notifier'
 import MenuDropdown from 'components/menu-dropdown'
 import VoteEosdac from 'components/vote-eosdac'
+import Partnerbps from 'components/partner_bp'
 export default {
 
 
@@ -238,7 +239,8 @@ export default {
     MenuDropdown,
     VoteEosdac,
     NodeSelector,
-    InitInterface
+    InitInterface,
+    Partnerbps
   },
   data() {
     return {
