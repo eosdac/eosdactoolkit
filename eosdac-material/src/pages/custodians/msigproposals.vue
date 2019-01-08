@@ -53,6 +53,9 @@ export default {
     this.getProposals();
 
   },
+  created(){
+    this.$root.$on("reloadproposals", this.getProposalsWithDelay);
+  },
 
   methods:{
     async getProposals(){
@@ -61,6 +64,9 @@ export default {
       console.log(p)
       
     },
+    getProposalsWithDelay(){
+      setTimeout(this.getProposals, 6000)
+    }
 
 
   }

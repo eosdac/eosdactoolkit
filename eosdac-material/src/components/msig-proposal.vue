@@ -1,5 +1,5 @@
 <template>
-<div class="q-mb-md bg-dark2 round-borders shadow-5" >
+<div v-if="!isCancelled" class="q-mb-md bg-dark2 round-borders shadow-5" >
     <q-collapsible  label="First" group="msigproposals" icon-toggle header-class="msigproposal_header" collapse-icon="icon-ui-11">
       <template slot="header" >
         <q-item-side left >
@@ -46,7 +46,7 @@
           <div class="row justify-end">
             <q-btn v-if="!isApproved" color="positive" label="Approve" @click="approveProposal(msig.proposer, msig.proposal_name)"  />
             <q-btn v-if="isApproved" color="warning" label="Unapprove" @click="unapproveProposal(msig.proposer, msig.proposal_name)"  />
-            <q-btn v-if="isCreator" color="red" label="cancel" />
+            <q-btn v-if="isCreator" color="red" label="cancel" @click="cancelProposal(msig.proposer, msig.proposal_name)" />
             <q-btn v-if="isExecutable" color="blue" label="execute" />
           </div>
 
@@ -80,7 +80,8 @@ export default {
       provided_approvals: null,
       requested_approvals:null,
       isApproved: false,
-      isCreator: false
+      isCreator: false,
+      isCancelled: false,
 
     }
   },
@@ -174,7 +175,7 @@ export default {
         }
 
       ];
-        this.$refs.Transaction.newTransaction(actions, false, false, 'e_unapproval');
+      this.$refs.Transaction.newTransaction(actions, false, false, 'e_unapproval');
     },
     //execute a proposal via msig relay {"proposer":0,"proposal_name":0,"executer":0}
     executeProposal(){
@@ -182,16 +183,45 @@ export default {
     },
     
     //cancel a proposal via msig relay {"proposer":0,"proposal_name":0,"canceler":0}
-    cancelProposal(){
+    cancelProposal(proposer, proposal_name){
+        let actions = [
+        {
+          contract: this.systemmsig, 
+          action: 'cancel', 
+          fields: {
+            proposer: proposer,
+            proposal_name: proposal_name,
+            canceler: this.getAccountName
+          }
+          
+        },
+        {
+          contract: 'dacmultisigs', 
+          action: 'cancelled',
+          authorization: [ {actor: this.getAccountName, permission: 'active'}, {actor: 'dacauthority', permission: 'one'}],
+          fields: {
+            proposer: proposer, 
+            proposal_name: proposal_name, 
+            canceler: this.getAccountName }
+        }
+
+      ];
+      this.$refs.Transaction.newTransaction(actions, false, false, 'e_cancel');
 
     },
 
     transactionCallback(e_t){
-      this.provided_approvals = null;//temporary show spinner by setting to null
-
+      
       if(e_t === 'e_unapproval' || e_t === 'e_approval'){
+        this.provided_approvals = null;//temporary show spinner by setting to null
         this.checkApprovals();
       }
+
+      if(e_t === 'e_cancel'){
+        //hide the proposal
+        this.isCancelled = true;
+      }
+
     }
 
 
