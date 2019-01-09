@@ -164,6 +164,10 @@
         <q-item-side icon="icon-topmenu-6" />
         <q-item-main :label="$t('default.settings')" sublabel="" />
       </q-item>
+      <q-item to="/credits">
+        <q-item-side icon="stars" />
+        <q-item-main :label="$t('default.credits')" sublabel="" />
+      </q-item>
 
       <!-- <q-item to="/workerproposals">
         <q-item-side icon="icon-menu-8" />

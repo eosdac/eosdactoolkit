@@ -6,7 +6,6 @@
 <q-tabs class="q-mb-md" @select="manageTabChange">
   <!-- Tabs - notice slot="title" -->
   <q-tab default slot="title" name="open" label="open" />
-  <q-tab slot="title" name="approved" label="approved" />
   <q-tab slot="title" name="executed" label="executed"  />
   <q-tab slot="title" name="cancelled" label="cancelled"  />
 
@@ -72,9 +71,6 @@ export default {
       switch(tab) {
         case 'open':
           console.log('get open');
-          break;
-        case 'approved':
-          console.log('filter approved');
           break;
         case 'executed':
           console.log('show executed');
