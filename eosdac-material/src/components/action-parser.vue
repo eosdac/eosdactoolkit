@@ -25,13 +25,15 @@
   color="primary"
   @click="prevAction()"
   icon="arrow_left"
+  size="sm"
 />
-<span>{{activeSlide+1}}/{{actions.length}}</span>
+<span class="q-mx-sm">{{activeSlide+1}}/{{actions.length}}</span>
 <q-btn
   rounded
   color="primary"
   @click="nextAction()"
   icon="arrow_right"
+  size="sm"
 />
 
 </div>

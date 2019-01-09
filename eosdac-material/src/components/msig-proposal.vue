@@ -9,7 +9,7 @@
         </q-item-side>
         <q-item-main >
           <div class="q-ml-lg">
-            <div class="q-title q-mb-xs">{{msig.title}}</div>
+            <div class="q-title q-mb-xs">{{msig.proposal_name}}: {{msig.title}}</div>
             <div class="q-caption">
               <span class="text-dimwhite">Submitted by: </span>
               <router-link :to="{path: '/profile/' + msig.proposer}" >
@@ -22,7 +22,7 @@
           <div class="q-caption text-dimwhite" >Received Approvals:</div>
           <div class="text-white q-display-1">
             <q-spinner v-if="provided_approvals==null" color="primary" size="30px" style="margin-top:-4px" />
-            <span v-if="provided_approvals" class="text-p-light">{{provided_approvals.length}}</span>
+            <span v-if="provided_approvals" class="text-p-light cursor-pointer"  @click="approvals_modal = true">{{provided_approvals.length}}</span>
             <span>/ {{msig.threshold}}</span>
           </div>
         </q-item-side>
@@ -31,10 +31,6 @@
       <div class="q-px-md q-pb-md">
         <div style="border-top: 1px solid grey">
 
-          <div class="row justify-start q-mt-sm">
-            <q-chip class="animate-fade" color="positive" v-for="(c,i) in provided_approvals" :key="i+'p'"> {{c.actor}}</q-chip>
-            <q-chip class="animate-fade" color="dark" v-for="(c,i) in requested_approvals" :key="i+'r'"> {{c.actor}}</q-chip>
-          </div>
           <div class="text-dimwhite">{{msig.description}}</div>
 
           <div>
@@ -53,7 +49,29 @@
         </div>
       </div>
     </q-collapsible>
+
+    <q-modal minimized v-model="approvals_modal" >
+      <div class="bg-dark">
+        <!-- header -->
+        <div style="height:50px" class="bg-dark2 row items-center justify-between q-px-md">
+          <span>Approvals</span>
+          <q-icon class=" cursor-pointer" name="icon-ui-8" @click.native="approvals_modal = false" />
+        </div>
+        <!-- content -->
+        <div class="q-pa-md">
+          <div class="row justify-start q-mt-sm">
+            <q-chip class="animate-fade" color="positive" v-for="(c,i) in provided_approvals" :key="i+'p'"> {{c.actor}}</q-chip>
+            <q-chip class="animate-fade" color="dark" v-for="(c,i) in requested_approvals" :key="i+'r'"> {{c.actor}}</q-chip>
+          </div>
+        </div>
+      </div> 
+    </q-modal>
+
     <Transaction ref="Transaction" v-on:done="transactionCallback($event)" />
+
+
+
+
   </div>
 </template>
 
@@ -82,6 +100,7 @@ export default {
       isApproved: false,
       isCreator: false,
       isCancelled: false,
+      approvals_modal: false
 
     }
   },
