@@ -30,8 +30,8 @@
 
       <div class="q-px-md q-pb-md">
         <div style="border-top: 1px solid grey">
-
-          <div class="text-dimwhite">{{msig.description}}</div>
+          <div class="q-mt-md">Description</div>
+          <div class="text-dimwhite q-mb-md">{{msig.description}}</div>
 
           <div>
             
@@ -41,9 +41,9 @@
 
           <div class="row justify-end">
             <q-btn v-if="!isApproved" color="positive" label="Approve" @click="approveProposal(msig.proposer, msig.proposal_name)"  />
-            <q-btn v-if="isApproved" color="warning" label="Unapprove" @click="unapproveProposal(msig.proposer, msig.proposal_name)"  />
-            <q-btn v-if="isCreator" color="red" label="cancel" @click="cancelProposal(msig.proposer, msig.proposal_name)" />
-            <q-btn v-if="isExecutable" color="blue" label="execute" />
+            <q-btn v-if="isApproved" class="on-right" color="warning" label="Unapprove" @click="unapproveProposal(msig.proposer, msig.proposal_name)"  />
+            <q-btn v-if="isCreator" class="on-right" color="red" label="cancel" @click="cancelProposal(msig.proposer, msig.proposal_name)" />
+            <q-btn v-if="isExecutable" class="on-right" color="blue" label="execute" />
           </div>
 
         </div>
