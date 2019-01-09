@@ -29,10 +29,10 @@
   </q-carousel>
 
   <!-- controls -->
-  <div v-if="actions.length > 1">
-    <q-btn rounded color="primary" @click="prevAction()" icon="arrow_left" size="sm" />
+  <div v-if="actions.length > 1" class="q-mt-sm">
+    <q-btn  color="primary" @click="prevAction()" icon="arrow_left" size="sm" />
     <span class="q-mx-sm">{{activeSlide+1}}/{{actions.length}}</span>
-    <q-btn rounded color="primary" @click="nextAction()" icon="arrow_right" size="sm" />
+    <q-btn  color="primary" @click="nextAction()" icon="arrow_right" size="sm" />
   </div>
 
 </div>

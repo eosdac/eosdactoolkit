@@ -1,5 +1,5 @@
 <template>
-<div v-if="!isCancelled" class="q-mb-md bg-dark2 round-borders shadow-5" >
+<div v-if="!isCancelled" class="q-mb-md bg-dark2 round-borders shadow-5"  v-bind:class="{ 'proposal_approved': isApproved, 'proposal_unapproved':!isApproved,}" >
     <q-collapsible  label="First" group="msigproposals" icon-toggle header-class="msigproposal_header" collapse-icon="icon-ui-11">
       <template slot="header" >
         <q-item-side left >
@@ -29,13 +29,17 @@
       </template>
 
       <div class="q-px-md q-pb-md">
-        <div style="border-top: 1px solid grey">
+        <div style="border-top: 1px solid grey" >
           <div class="q-mt-md">Description</div>
           <div class="text-dimwhite q-mb-md">{{msig.description}}</div>
+          <div class="q-mt-md">Expiration</div>
+          <div class="text-dimwhite q-mb-md">{{new Date(msig.trx.expiration).toString()}}</div>
+          <div class="q-mt-md">Actions <span class="text-dimwhite">({{msig.trx.actions.length}})</span></div>
+          <div class="text-dimwhite q-mb-md">{{msig.trx.actions.map(a=>a.name).join(', ')}}</div>
 
-          <div>
+          <div class="bg-dark q-mb-md">
             
-            <Actionparser :actions="this.msig.trx.actions" />
+            <Actionparser :actions="msig.trx.actions" />
 
           </div>
 
@@ -257,6 +261,16 @@ export default {
 
 <style lang ="stylus">
 @import '~variables'
+
+.proposal_approved{
+  border:2px solid $positive;
+  transition : border 400ms ease;
+}
+
+.proposal_unapproved{
+  border:2px solid transparent;
+  transition : border 400ms ease;
+}
 
 
 

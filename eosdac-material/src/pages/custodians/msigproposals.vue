@@ -2,6 +2,16 @@
 <q-page class="text-white q-pa-md">
   <h4 class="q-display-1 q-mt-none q-mb-md">Review Msig Transactions</h4>
 
+
+<q-tabs class="q-mb-md" @select="manageTabChange">
+  <!-- Tabs - notice slot="title" -->
+  <q-tab default slot="title" name="open" label="open" />
+  <q-tab slot="title" name="approved" label="approved" />
+  <q-tab slot="title" name="executed" label="executed"  />
+  <q-tab slot="title" name="cancelled" label="cancelled"  />
+
+</q-tabs>
+
   <Msigproposal
         v-for="(msig, index) in proposals"
         :key="index"
@@ -58,6 +68,24 @@ export default {
   },
 
   methods:{
+    manageTabChange(tab){
+      switch(tab) {
+        case 'open':
+          console.log('get open');
+          break;
+        case 'approved':
+          console.log('filter approved');
+          break;
+        case 'executed':
+          console.log('show executed');
+          break;
+        case 'cancelled':
+          console.log('get cancelled');
+          break;
+        default:
+          // code block
+      } 
+    },
     async getProposals(){
       let p =  await this.$store.dispatch('api/getMsigProposals');
       this.proposals = p;
