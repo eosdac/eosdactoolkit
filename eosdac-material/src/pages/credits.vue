@@ -1,20 +1,44 @@
 <template>
-<q-page class="text-white bg-dark2">
+<q-page class="text-white bg-dark">
+
+
+
   <div class="retro_bg full-height full-width absolute"  v-bind:class="{ 'fadeit': !isPlaying }" ></div>
-  <div class="q-pa-md">
+
+
+  <div v-if="isPlaying" class="q-pa-md ">
     
     <div class="row justify-between q-mb-md">
-      <div class="relative-position retrotext" style="font-size:150px;opacity: 0.7;">CREDITS</div>
+      <div class="relative-position retrotext animate-pop" style="font-size:150px;opacity: 0.7;">CREDITS</div>
       <span>
       <q-btn v-if="isPlaying" color="dark" icon="volume_up" @click="pauseAudio" />
       <q-btn v-else color="dark" icon="volume_off" @click="playAudio" />
       </span>
       
     </div>
-    <div class="relative-position retrotext" style="font-size:60px;opacity: 0.7;color:black">THANK YOU BP!!</div>
 
-    <div class="row q-pa-md relative-position retrobox">
-      <partnerbps class="retrotext"/>
+    <div class="relative-position retrotext" style="font-size:60px;opacity: 0.7;color:black">THANK YOU BPs!!</div>
+    <div class="row q-pa-lg relative-position retrobox ">
+      
+      <partnerbps class="retrotext animate-pop"/>
+    </div>
+  </div>
+
+
+    <div v-if="!isPlaying" class="q-pa-md animate-fade">
+    
+    <div class="row justify-between q-mb-md">
+      <div class="relative-position q-display-1 ">Credits</div>
+      <span>
+      <q-btn v-if="isPlaying" color="dark" icon="volume_up" @click="pauseAudio" />
+      <q-btn v-else color="dark" icon="volume_off" @click="playAudio" />
+      </span>
+      
+    </div>
+    
+    <div class=" q-pa-lg relative-position round-borders bg-dark2 shadow-5">
+      <div class="q-mb-sm">Partner BPs</div>
+      <partnerbps/>
     </div>
   </div>
   
@@ -97,12 +121,13 @@ export default {
 }
 .retrobox{
   box-sizing: border-box;
-  /* border: 10px dashed red; */
+  border: 8px solid rgb(255, 255, 255);
   outline-color: red;
   outline-style: dashed;
   outline-width: 8px;
+  outline-offset: -8px;
   animation-name: flash_border;
-  animation-duration: 3s;
+  animation-duration: 2s;
   animation-timing-function: step-end;
   animation-iteration-count: infinite;
   background: rgba(255,255,255,0.7)
@@ -110,15 +135,15 @@ export default {
 @keyframes flash_border {
   0% {
     border-color: green;
-    outline-color: green;
+    outline-color: red;
   }
   25% {
     border-color: orange;
-    outline-color:orange;
+    outline-color:green;
   }
   50% {
     border-color: red;
-    outline-color: red;
+    outline-color: orange;
   }
 }
 </style>
