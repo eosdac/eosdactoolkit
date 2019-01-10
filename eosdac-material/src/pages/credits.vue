@@ -1,16 +1,23 @@
 <template>
-<q-page class="text-white bg-blue">
-  <div class="retro_banner_color"></div>
+<q-page class="text-white bg-dark2">
+  <div class="retro_bg full-height full-width absolute"  v-bind:class="{ 'fadeit': !isPlaying }" ></div>
   <div class="q-pa-md">
-
-    <div>
-      <q-btn v-if="isPlaying" icon="volume_up" @click="pauseAudio" />
-      <q-btn v-else icon="volume_off" @click="playAudio" />
+    
+    <div class="row justify-between q-mb-md">
+      <div class="relative-position retrotext" style="font-size:150px;opacity: 0.7;">CREDITS</div>
+      <span>
+      <q-btn v-if="isPlaying" color="dark" icon="volume_up" @click="pauseAudio" />
+      <q-btn v-else color="dark" icon="volume_off" @click="playAudio" />
+      </span>
+      
     </div>
-    <div class="row bg-dark q-pa-md round-borders shadow-5 partnerbox">
-      <partnerbps />
+    <div class="relative-position retrotext" style="font-size:60px;opacity: 0.7;color:black">THANK YOU BP!!</div>
+
+    <div class="row q-pa-md relative-position retrobox">
+      <partnerbps class="retrotext"/>
     </div>
   </div>
+  
 
 
 
@@ -18,8 +25,7 @@
 </template>
 
 <script>
-import Transaction from 'components/transaction'
-import LoadingSpinner from 'components/loading-spinner'
+
 import Partnerbps from 'components/partner_bp'
 const audio = new Audio('../statics/sounds/retro.mp3');
 audio.addEventListener('ended', function() {
@@ -42,13 +48,12 @@ export default {
 
     }
   },
-  computed: {
-    ...mapGetters({
-      // getactiveCustodians: 'api/getActiveCustodians',
-      // getAccountName: 'account/getAccountName'
-      })
+  // computed: {
+  //   ...mapGetters({
+  //     getAccountName: 'account/getAccountName'
+  //     })
 
-  },
+  // },
   methods:{
     playAudio(){
       audio.play();
@@ -60,7 +65,7 @@ export default {
     }
 
   },
-  
+
   mounted(){
     this.playAudio();
   },
@@ -73,8 +78,47 @@ export default {
 </script>
 
 <style>
-.retro_banner_color{
-  height:50px;
+@import url('https://fonts.googleapis.com/css?family=VT323');
+.bg-flash-color{
   background-image: url('../statics/gifs/colors.gif');
+  background-size : cover;
+}
+.retro_bg{
+  background-image: url('../statics/gifs/retro_star.gif');
+  background-size : cover;
+  
+}
+.fadeit{
+  opacity: 0.0;
+  transition: opacity 0.4s;
+}
+.retrotext{
+  font-family: 'VT323', monospace;
+}
+.retrobox{
+  box-sizing: border-box;
+  /* border: 10px dashed red; */
+  outline-color: red;
+  outline-style: dashed;
+  outline-width: 8px;
+  animation-name: flash_border;
+  animation-duration: 3s;
+  animation-timing-function: step-end;
+  animation-iteration-count: infinite;
+  background: rgba(255,255,255,0.7)
+}
+@keyframes flash_border {
+  0% {
+    border-color: green;
+    outline-color: green;
+  }
+  25% {
+    border-color: orange;
+    outline-color:orange;
+  }
+  50% {
+    border-color: red;
+    outline-color: red;
+  }
 }
 </style>

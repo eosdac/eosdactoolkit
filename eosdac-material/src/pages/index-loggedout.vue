@@ -105,9 +105,7 @@
 
   </div>
 
-  <div class="row bg-dark q-pa-md round-borders shadow-5 partnerbox">
-    <partnerbps />
-  </div>
+
     
     
  
@@ -120,7 +118,7 @@
 
 <script>
 import InitInterface from 'components/init-interface'
-import Partnerbps from 'components/partner_bp'
+
 
 import {
   openURL
@@ -130,8 +128,7 @@ import {
 } from 'vuex'
 export default {
   components:{
-    InitInterface,
-    Partnerbps
+    InitInterface
   },
   data () {
     return {
