@@ -1,46 +1,43 @@
 <template>
 <q-page class="text-white bg-dark">
-
-
-
+  <!-- retro style -->
   <div class="retro_bg full-height full-width absolute"  v-bind:class="{ 'fadeit': !isPlaying }" ></div>
-
-
   <div v-if="isPlaying" class="q-pa-md ">
     
     <div class="row justify-between q-mb-md">
       <div class="relative-position retrotext animate-pop" style="font-size:150px;opacity: 0.7;">CREDITS</div>
       <span>
-      <q-btn v-if="isPlaying" color="dark" icon="volume_up" @click="pauseAudio" />
-      <q-btn v-else color="dark" icon="volume_off" @click="playAudio" />
+        <q-btn v-if="isPlaying" color="dark" icon="volume_up" @click="pauseAudio" />
+        <q-btn v-else color="dark" icon="volume_off" @click="playAudio" />
       </span>
-      
     </div>
 
     <div class="relative-position retrotext" style="font-size:60px;opacity: 0.7;color:black">THANK YOU BPs!!</div>
     <div class="row q-pa-lg relative-position retrobox ">
-      
       <partnerbps class="retrotext animate-pop"/>
     </div>
+
   </div>
+  <!-- -- -->
 
-
-    <div v-if="!isPlaying" class="q-pa-md animate-fade">
+  <!-- eosdac corporate style -->
+  <div v-if="!isPlaying" class="q-pa-md animate-fade">
     
     <div class="row justify-between q-mb-md">
       <div class="relative-position q-display-1 ">Credits</div>
       <span>
-      <q-btn v-if="isPlaying" color="dark" icon="volume_up" @click="pauseAudio" />
-      <q-btn v-else color="dark" icon="volume_off" @click="playAudio" />
+        <q-btn v-if="isPlaying" color="dark" icon="volume_up" @click="pauseAudio" />
+        <q-btn v-else color="dark" icon="volume_off" @click="playAudio" />
       </span>
-      
     </div>
     
     <div class=" q-pa-lg relative-position round-borders bg-dark2 shadow-5">
       <div class="q-mb-sm">Partner BPs</div>
       <partnerbps/>
     </div>
+
   </div>
+  <!-- --- -->
   
 
 
