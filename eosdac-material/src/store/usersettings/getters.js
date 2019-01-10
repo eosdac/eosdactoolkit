@@ -10,3 +10,7 @@ export const getTransactionPopup = (state) => {
 export const getConsoleMessage = (state) => {
   return state.consoleMessage
 }
+
+export const getRetroStyle = (state) => {
+  return state.retroStyle
+}

@@ -32,7 +32,7 @@
     </div>
     
     <div class=" q-pa-lg relative-position round-borders bg-dark2 shadow-5">
-      <div class="q-mb-sm">Partner BPs</div>
+      <div class="q-mb-md">Partner BPs</div>
       <partnerbps/>
     </div>
 
@@ -46,8 +46,8 @@
 </template>
 
 <script>
-
 import Partnerbps from 'components/partner_bp'
+
 const audio = new Audio('../statics/sounds/retro.mp3');
 audio.addEventListener('ended', function() {
     this.currentTime = 0;
@@ -65,34 +65,41 @@ export default {
   },
   data() {
     return {
-      isPlaying: true
+      isPlaying: this.getRetroStyle
 
     }
   },
-  // computed: {
-  //   ...mapGetters({
-  //     getAccountName: 'account/getAccountName'
-  //     })
+  computed: {
+    ...mapGetters({
+      // getAccountName: 'account/getAccountName'
+        getRetroStyle: 'usersettings/getRetroStyle'
+      })
 
-  // },
+  },
   methods:{
     playAudio(){
       audio.play();
       this.isPlaying = true;
+      this.$store.commit('usersettings/SET_RETROSTYLE', true); //remember in store
     },
+
     pauseAudio(){
       audio.pause();
       this.isPlaying = false;
+      this.$store.commit('usersettings/SET_RETROSTYLE', false);//remember in store
     }
 
   },
 
   mounted(){
-    this.playAudio();
+
+    if(this.getRetroStyle){
+      this.playAudio();
+    }
   },
 
   beforeRouteLeave (to, from, next) {
-    this.pauseAudio();
+    audio.pause();
     next();
   }
 }
@@ -118,7 +125,7 @@ export default {
 }
 .retrobox{
   box-sizing: border-box;
-  border: 8px solid rgb(255, 255, 255);
+  border: 8px solid green;
   outline-color: red;
   outline-style: dashed;
   outline-width: 8px;

@@ -10,3 +10,7 @@ export const SET_TRANSACTIONPOPUP = (state, payload) => {
 export const SET_CONSOLEMESSAGE = (state, payload) => {
     state.consoleMessage = payload
 }
+
+export const SET_RETROSTYLE = (state, payload) => {
+    state.retroStyle = payload
+}
