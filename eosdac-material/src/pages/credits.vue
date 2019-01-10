@@ -4,18 +4,37 @@
   <div class="retro_bg full-height full-width absolute"  v-bind:class="{ 'fadeit': !isPlaying }" ></div>
   <div v-if="isPlaying" class="q-pa-md ">
     
-    <div class="row justify-between q-mb-md">
-      <div class="relative-position retrotext animate-pop" style="font-size:150px;opacity: 0.7;">CREDITS</div>
+    <div class="row justify-between q-mb-lg">
+      <div class="relative-position retrotext animate-pop" style="font-size:8vw; opacity: 0.7;text-decoration: underline;">CREDITS</div>
       <span>
         <q-btn v-if="isPlaying" color="dark" icon="volume_up" @click="pauseAudio" />
         <q-btn v-else color="dark" icon="volume_off" @click="playAudio" />
       </span>
     </div>
+    
+    <div class="relative-position retrotext row items-center q-mt-md" >
+      <img class="on-left" src="../statics/gifs/heart.gif" style="height:40px" />
+      <span style="font-size:60px;opacity: 0.7;color:black">THANK YOU DAC Workers!!</span>
+    </div>
+    <div class="row q-pa-lg relative-position retrobox retrotext" style="font-size:20px; color:grey">
+      {{dac_workers.join(', ')}}
+    </div>
 
-    <div class="relative-position retrotext" style="font-size:60px;opacity: 0.7;color:black">THANK YOU BPs!!</div>
+    <div class="relative-position retrotext row items-center q-mt-md" >
+      <img class="on-left" src="../statics/gifs/heart.gif" style="height:40px" />
+      <span style="font-size:60px;opacity: 0.7;color:black">THANK YOU BPs!!</span>
+    </div>
     <div class="row q-pa-lg relative-position retrobox ">
       <partnerbps class="retrotext animate-pop"/>
     </div>
+
+    <div class="relative-position retrotext row items-center q-mt-md" >
+      <img class="on-left" src="../statics/gifs/heart.gif" style="height:40px" />
+      <span style="font-size:60px;opacity: 0.7;color:black">THANK YOU COMMUNITY!!</span>
+      <img class="on-left" src="../statics/gifs/heart.gif" style="height:40px" />
+    </div>
+
+    <div class="retrotext absolute-bottom-right q-pa-md full-width" style="font-size:20px; text-align:right">© eosDAC</div>
 
   </div>
   <!-- -- -->
@@ -30,8 +49,13 @@
         <q-btn v-else color="dark" icon="volume_off" @click="playAudio" />
       </span>
     </div>
-    
-    <div class=" q-pa-lg relative-position round-borders bg-dark2 shadow-5">
+
+    <div class=" q-pa-lg relative-position round-borders bg-dark2 shadow-5 q-mt-md">
+      <div class="q-mb-md">eosDAC Workers</div>
+      <div class="text-dimwhite">{{dac_workers.join(', ')}}</div>
+    </div>
+
+    <div class=" q-pa-lg q-mt-md relative-position round-borders bg-dark2 shadow-5">
       <div class="q-mb-md">Partner BPs</div>
       <partnerbps/>
     </div>
@@ -46,6 +70,7 @@
 </template>
 
 <script>
+import credits from '../statics/credits.json'
 import Partnerbps from 'components/partner_bp'
 
 const audio = new Audio('../statics/sounds/retro.mp3');
@@ -65,7 +90,8 @@ export default {
   },
   data() {
     return {
-      isPlaying: this.getRetroStyle
+      isPlaying: this.getRetroStyle,
+      dac_workers: credits.dac_workers
 
     }
   },
@@ -108,8 +134,11 @@ export default {
 <style>
 @import url('https://fonts.googleapis.com/css?family=VT323');
 .bg-flash-color{
+  opacity: 0.4;
   background-image: url('../statics/gifs/colors.gif');
   background-size : cover;
+  border-top:2px solid white;
+ 
 }
 .retro_bg{
   background-image: url('../statics/gifs/retro_star.gif');
@@ -136,6 +165,7 @@ export default {
   animation-iteration-count: infinite;
   background: rgba(255,255,255,0.7)
 }
+
 @keyframes flash_border {
   0% {
     border-color: green;
@@ -150,4 +180,5 @@ export default {
     outline-color: orange;
   }
 }
+
 </style>

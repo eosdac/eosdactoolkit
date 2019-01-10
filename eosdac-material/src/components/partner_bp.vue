@@ -15,13 +15,13 @@
 
 <script>
 
-import partnerbps from '../statics/partner_bp.json'
+import partnerbps from '../statics/credits.json'
 export default {
   name: 'partnerbp',
 
   data() {
     return {
-      partners : partnerbps
+      partners : partnerbps.bps
     }
   },
 

@@ -19,6 +19,7 @@
   <div class="row">
     <q-btn color="primary" label="create new" @click="createmsig_modal = true" />
   </div>
+ 
 
   <q-modal maximized v-model="createmsig_modal" >
     <div class="bg-dark">
