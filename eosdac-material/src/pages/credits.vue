@@ -14,15 +14,15 @@
     
     <div class="relative-position retrotext row items-center q-mt-md" >
       <img class="on-left" src="../statics/gifs/heart.gif" style="height:40px" />
-      <span style="font-size:60px;opacity: 0.7;color:black">THANK YOU DAC Workers!!</span>
+      <span style="font-size:60px;opacity: 0.7;color:black">THANK YOU DAC Workers...</span>
     </div>
     <div class="row q-pa-lg relative-position retrobox retrotext" style="font-size:20px; color:grey">
-      {{dac_workers.join(', ')}}
+      [ {{dac_workers.join(', ')}}, ... ]
     </div>
 
     <div class="relative-position retrotext row items-center q-mt-md" >
       <img class="on-left" src="../statics/gifs/heart.gif" style="height:40px" />
-      <span style="font-size:60px;opacity: 0.7;color:black">THANK YOU BPs!!</span>
+      <span style="font-size:60px;opacity: 0.7;color:black">AND BPs!!</span>
     </div>
     <div class="row q-pa-lg relative-position retrobox ">
       <partnerbps class="retrotext animate-pop"/>
@@ -30,11 +30,18 @@
 
     <div class="relative-position retrotext row items-center q-mt-md" >
       <img class="on-left" src="../statics/gifs/heart.gif" style="height:40px" />
-      <span style="font-size:60px;opacity: 0.7;color:black">THANK YOU COMMUNITY!!</span>
-      <img class="on-left" src="../statics/gifs/heart.gif" style="height:40px" />
+      <span style="font-size:60px;opacity: 0.7;color:black">THANK YOU COMMUNITY...</span>
     </div>
 
-    <div class="retrotext absolute-bottom-right q-pa-md full-width" style="font-size:20px; text-align:right">© eosDAC</div>
+    <div class="relative-position retrotext row items-center " >
+      <span style="font-size:60px;opacity: 0.7;color:black">AND ALSO</span>
+      <img class="on-right" src="../statics/gifs/heart.gif" style="height:40px" />
+    </div>
+    <div class="row q-pa-lg relative-position retrobox retrotext" style="font-size:20px; color:grey">
+      [ {{others.join(', ')}}, ... ]
+    </div>
+
+    <div class="retrotext relative-position full-width q-mt-xl" style="font-size:20px; text-align:right">© eosDAC</div>
 
   </div>
   <!-- -- -->
@@ -91,7 +98,8 @@ export default {
   data() {
     return {
       isPlaying: this.getRetroStyle,
-      dac_workers: credits.dac_workers
+      dac_workers: credits.dac_workers,
+      others: credits.others
 
     }
   },
