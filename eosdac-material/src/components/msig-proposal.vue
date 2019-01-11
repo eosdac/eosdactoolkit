@@ -1,6 +1,6 @@
 <template>
 <div v-if="!isCancelled" class="q-mb-md bg-dark2 round-borders shadow-5"  v-bind:class="{ 'proposal_approved': !isApproved, 'proposal_unapproved':!isApproved,}" >
-    <q-collapsible  label="First" group="msigproposals" icon-toggle header-class="msigproposal_header" collapse-icon="icon-ui-11">
+    <q-collapsible  label="First" group="msigproposals" icon-toggle header-class="msigproposal_header" collapse-icon="icon-ui-11" @show="handleIsSeenCache(true)">
       <template slot="header" >
         <q-item-side left >
           
@@ -69,6 +69,7 @@
           <div class="row justify-start q-mt-sm">
             <q-chip class="animate-fade" color="positive" v-for="(c,i) in provided_approvals" :key="i+'p'"> {{c.actor}}</q-chip>
             <q-chip class="animate-fade" color="dark" v-for="(c,i) in requested_approvals" :key="i+'r'"> {{c.actor}}</q-chip>
+            <pre>{{getmsigIsSeenCache}}</pre>
           </div>
         </div>
       </div> 
@@ -115,7 +116,8 @@ export default {
   },
   computed: {
     ...mapGetters({
-      getAccountName: 'account/getAccountName'
+      getAccountName: 'account/getAccountName',
+      getmsigIsSeenCache: 'usersettings/getmsigIsSeenCache'
     }),
     isExecutable: function(){
       if(this.provided_approvals){
@@ -281,8 +283,19 @@ export default {
 
     },
 
-    handleIsSeenCache(v){
-      console.log(v, this.msig._id);
+    handleIsSeenCache(isSeen_toggle_bool){
+      console.log(isSeen_toggle_bool, this.msig._id);
+      
+      if(isSeen_toggle_bool){
+        this.isSeen = true;
+        this.$store.commit('usersettings/SET_MSIGISSEENCACHE', {mode: 'add', msig_id: this.msig._id} );
+
+      }
+      else{
+        this.isSeen = false;
+        this.$store.commit('usersettings/SET_MSIGISSEENCACHE', {mode: 'remove', msig_id: this.msig._id} );
+      }
+      
     }
 
 

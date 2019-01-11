@@ -1,16 +1,20 @@
 
 export const getLanguage = (state) => {
-  return state.language
+  return state.language;
 }
 
 export const getTransactionPopup = (state) => {
-  return state.transactionPopup
+  return state.transactionPopup;
 }
 
 export const getConsoleMessage = (state) => {
-  return state.consoleMessage
+  return state.consoleMessage;
 }
 
 export const getRetroStyle = (state) => {
-  return state.retroStyle
+  return state.retroStyle;
+}
+
+export const getmsigIsSeenCache = (state) => {
+  return state.msigIsSeenCache;
 }
