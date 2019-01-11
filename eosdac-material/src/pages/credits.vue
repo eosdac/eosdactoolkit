@@ -30,7 +30,7 @@
 
     <div class="relative-position retrotext row items-center q-mt-md" >
       <img class="on-left" src="../statics/gifs/heart.gif" style="height:40px" />
-      <span style="font-size:60px;opacity: 0.7;color:black">THANK YOU COMMUNITY...</span>
+      <span style="font-size:60px;opacity: 0.7;color:black">THANK YOU <span class="animate-blink">COMMUNITY</span>...</span>
     </div>
 
     <div class="relative-position retrotext row items-center " >
@@ -65,6 +65,11 @@
     <div class=" q-pa-lg q-mt-md relative-position round-borders bg-dark2 shadow-5">
       <div class="q-mb-md">Partner BPs</div>
       <partnerbps/>
+    </div>
+  
+    <div class=" q-pa-lg relative-position round-borders bg-dark2 shadow-5 q-mt-md">
+      <div class="q-mb-md">Others</div>
+      <div class="text-dimwhite">{{others.join(', ')}}</div>
     </div>
 
   </div>
@@ -161,6 +166,7 @@ export default {
   font-family: 'VT323', monospace;
 }
 .retrobox{
+  
   box-sizing: border-box;
   border: 8px solid green;
   outline-color: red;

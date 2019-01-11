@@ -43,7 +43,7 @@
 
           </div>
 
-          <div class="row justify-end">
+          <div v-if="msig.status == 1" class="row justify-end">
             <q-btn v-if="!isApproved" color="positive" label="Approve" @click="approveProposal(msig.proposer, msig.proposal_name)"  />
             <q-btn v-if="isApproved" class="on-right" color="warning" label="Unapprove" @click="unapproveProposal(msig.proposer, msig.proposal_name)"  />
             <q-btn v-if="isCreator" class="on-right" color="red" label="cancel" @click="cancelProposal(msig.proposer, msig.proposal_name)" />
@@ -137,13 +137,15 @@ export default {
     //get the requested and provided approvals for this msg proposal from chain
     async checkApprovals(){
 
-      let approvals = await this.$store.dispatch('api/getApprovalsFromProposal', {proposer: this.msig.proposer, proposal_name: this.msig.proposal_name});
-      this.provided_approvals = approvals.provided_approvals;
-      this.requested_approvals = approvals.requested_approvals;
-      //check if user has already approved the proposal
-      this.isApproved = this.provided_approvals.find(a => a.actor == this.getAccountName) ? true : false;
-      //check if the proposal is created by current user
-      this.isCreator = this.getAccountName == this.msig.proposer
+      if(this.msig.status === 1){
+        let approvals = await this.$store.dispatch('api/getApprovalsFromProposal', {proposer: this.msig.proposer, proposal_name: this.msig.proposal_name});
+        this.provided_approvals = approvals.provided_approvals;
+        this.requested_approvals = approvals.requested_approvals;
+        //check if user has already approved the proposal
+        this.isApproved = this.provided_approvals.find(a => a.actor == this.getAccountName) ? true : false;
+        //check if the proposal is created by current user
+        this.isCreator = this.getAccountName == this.msig.proposer
+      }
 
     },
 

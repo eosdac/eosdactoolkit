@@ -82,21 +82,26 @@ export default {
       switch(tab) {
         case 'open':
           console.log('get open');
+          this.getProposals({ status: 1 });
           break;
         case 'executed':
           console.log('show executed');
+          this.getProposals({ status: 2 });
           break;
         case 'cancelled':
           console.log('get cancelled');
+          this.getProposals({ status: 0 });
           break;
         default:
           // code block
       } 
     },
-    async getProposals(){
-      let p =  await this.$store.dispatch('api/getMsigProposals');
+    async getProposals(q={ status: 1 } ){
+      //todo: loading animation
+      this.proposals = [];
+      let p =  await this.$store.dispatch('api/getMsigProposals', q );
       this.proposals = p;
-      console.log(p)
+      // console.log(p)
       
     },
     getProposalsWithDelay(){
