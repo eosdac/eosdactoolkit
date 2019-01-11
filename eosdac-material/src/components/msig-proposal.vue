@@ -1,10 +1,12 @@
 <template>
-<div v-if="!isCancelled" class="q-mb-md bg-dark2 round-borders shadow-5"  v-bind:class="{ 'proposal_approved': isApproved, 'proposal_unapproved':!isApproved,}" >
+<div v-if="!isCancelled" class="q-mb-md bg-dark2 round-borders shadow-5"  v-bind:class="{ 'proposal_approved': !isApproved, 'proposal_unapproved':!isApproved,}" >
     <q-collapsible  label="First" group="msigproposals" icon-toggle header-class="msigproposal_header" collapse-icon="icon-ui-11">
       <template slot="header" >
         <q-item-side left >
-          <div class="row full-height items-center">
-            <q-icon size="24px" name="icon-transfers" class="q-mr-xs" /><span> type</span>
+          
+          <div class="row full-height items-center relative-position">
+            <q-chip  v-if="msig.trx.actions.length > 1" floating dense color="dark">{{msig.trx.actions.length}}</q-chip>
+            <q-icon size="48px" count="5" :name="'icon-'+matchIcon" class="q-mr-xs" :color="getStatusColor" />
           </div>
         </q-item-side>
         <q-item-main >
@@ -129,6 +131,33 @@ export default {
       else{
         return false;
       }   
+    },
+    matchIcon: function(){
+      const knownactions = ['updateconfig', 'transfer', 'newmemterms']
+      let actions = this.msig.trx.actions.map(a=>a.name);
+      if(actions.length > 1){
+        return 'action-default';
+      }
+      else if(!knownactions.includes(actions[0]) ){
+        return 'action-default';
+      }
+      else{
+        return 'action-'+actions[0];
+      }
+
+    },
+    getStatusColor: function(){
+      let statuscolor='';
+      if(this.msig.status === 1 && this.isApproved){
+        statuscolor = 'positive';
+      }
+      if(this.msig.status === 0){
+        statuscolor = 'negative';
+      }
+      if(this.isExecutable){
+        statuscolor = 'info';
+      }
+      return statuscolor;
     }
 
   },

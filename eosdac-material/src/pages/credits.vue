@@ -53,7 +53,7 @@
       <div class="relative-position q-display-1 ">Credits</div>
       <span>
         <q-btn v-if="isPlaying" color="dark" icon="volume_up" @click="pauseAudio" />
-        <q-btn v-else color="dark" icon="volume_off" @click="playAudio" />
+        <q-btn v-else color="primary" icon="volume_off" @click="playAudio" />
       </span>
     </div>
 

@@ -1,7 +1,9 @@
 <template>
 <q-page class="text-white q-pa-md">
-  <h4 class="q-display-1 q-mt-none q-mb-md">Review Msig Transactions</h4>
-
+  <div class="row relative-position justify-between">
+    <h4 class="q-display-1 q-mt-none q-mb-md">Review Msig Transactions</h4>
+    <span><q-btn color="primary" label="create new"  @click="createmsig_modal = true" /></span>
+  </div>
   <q-tabs class="q-mb-md" @select="manageTabChange">
     <!-- Tabs - notice slot="title" -->
     <q-tab default slot="title" name="open" label="open" />
