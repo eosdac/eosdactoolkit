@@ -1,11 +1,11 @@
 <template>
-<div v-if="!isCancelled" class="q-mb-md bg-dark2 round-borders shadow-5"  v-bind:class="{ 'proposal_approved': !isApproved, 'proposal_unapproved':!isApproved,}" >
+<div v-if="!isCancelled" class="q-mb-md bg-dark2 round-borders shadow-5" v-bind:class="{ 'proposal_approved': !isApproved, 'proposal_unapproved':!isApproved,}" >
     <q-collapsible  label="First" group="msigproposals" icon-toggle header-class="msigproposal_header" collapse-icon="icon-ui-11" @show="handleIsSeenCache(true)">
       <template slot="header" >
         <q-item-side left >
-          
           <div class="row full-height items-center relative-position">
             <q-chip  v-if="msig.trx.actions.length > 1" floating dense color="dark">{{msig.trx.actions.length}}</q-chip>
+            <q-chip  v-if="!is_seen_computed" class="animate-fade" floating dense color="dark">new</q-chip>
             <q-icon size="48px" count="5" :name="'icon-'+matchIcon" class="q-mr-xs" :color="getStatusColor" />
           </div>
         </q-item-side>
@@ -20,7 +20,8 @@
             </div>
           </div>
         </q-item-main>
-        <q-item-side right >
+        <q-item-side right>
+
           <div class="q-caption text-dimwhite" >Received Approvals:</div>
           <div class="text-white q-display-1">
             <q-spinner v-if="provided_approvals==null" color="primary" size="30px" style="margin-top:-4px" />
@@ -110,7 +111,7 @@ export default {
       isCancelled: false,
       approvals_modal: false,
 
-      isSeen: true
+      isSeen: this.is_seen_computed
 
     }
   },
@@ -163,7 +164,11 @@ export default {
         statuscolor = 'info';
       }
       return statuscolor;
+    },
+    is_seen_computed: function(){
+      return this.getmsigIsSeenCache.includes(this.msig._id);
     }
+
 
   },
 
@@ -322,7 +327,5 @@ export default {
   border:2px solid transparent;
   transition : border 400ms ease;
 }
-
-
 
 </style>
