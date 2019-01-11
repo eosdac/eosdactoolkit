@@ -32,6 +32,7 @@
 
       <div class="q-px-md q-pb-md">
         <div style="border-top: 1px solid grey" >
+          <q-checkbox dark :label="isSeen ?'Unmark as seen':'Mark as seen' " v-model="isSeen" @input="handleIsSeenCache" />
           <div class="q-mt-md">Description</div>
           <div class="text-dimwhite q-mb-md">{{msig.description}}</div>
           <div class="q-mt-md">Expiration</div>
@@ -106,7 +107,9 @@ export default {
       isApproved: false,
       isCreator: false,
       isCancelled: false,
-      approvals_modal: false
+      approvals_modal: false,
+
+      isSeen: true
 
     }
   },
@@ -154,7 +157,7 @@ export default {
       if(this.msig.status === 0){
         statuscolor = 'negative';
       }
-      if(this.isExecutable){
+      if(this.isExecutable || this.msig.status === 2){
         statuscolor = 'info';
       }
       return statuscolor;
@@ -276,6 +279,10 @@ export default {
         this.isCancelled = true;
       }
 
+    },
+
+    handleIsSeenCache(v){
+      console.log(v, this.msig._id);
     }
 
 
