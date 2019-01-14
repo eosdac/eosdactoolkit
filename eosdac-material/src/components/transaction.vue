@@ -69,6 +69,7 @@ export default {
       visible: false,
       actions: [],
       add_abicache: false,
+      callbackeventparameter:null,
       showAction: 0,
       fields: {},
       contract: '',
@@ -94,7 +95,7 @@ export default {
       Object.assign(this.$data, this.$options.data())
       this.visible = false
     },
-    async newTransaction(transactionActions, cancelable = false, abicache=false) {
+    async newTransaction(transactionActions, cancelable = false, abicache=false, callbackeventparameter = null) {
       if(!this.getAccountName){
         this.$root.$emit("showScatterModal");
         // alert('please sign in')
@@ -103,6 +104,7 @@ export default {
       
       Object.assign(this.$data, this.$options.data());
       this.add_abicache = abicache;
+      this.callbackeventparameter = callbackeventparameter;
       // console.log('transaction comp abi cache', abicache, this.add_abicache)
       this.cancelable = cancelable
       this.visible = this.getTransactionPopup //boolean
@@ -167,7 +169,7 @@ export default {
           linkUrl: this.$configFile.api.mainCurrencyExplorerUrl + '/transaction/' + trx.transaction_id,
           autoclose: 10
         })
-        this.$emit('done', trx)
+        this.$emit('done', this.callbackeventparameter);
         this.close()
       } catch (err) {
         if (err.type) {

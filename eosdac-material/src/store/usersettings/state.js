@@ -1,5 +1,7 @@
 export default {
   language: null,
   transactionPopup : false,
-  consoleMessage : true
+  consoleMessage : true,
+  retroStyle: true,
+  msigIsSeenCache: []
 }

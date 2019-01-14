@@ -72,6 +72,7 @@ module.exports = function(ctx) {
       components: [
         'QLayout',
         'QLayoutHeader',
+        'QLayoutFooter',
         'QLayoutDrawer',
         'QPageContainer',
         'QPage',
@@ -126,7 +127,10 @@ module.exports = function(ctx) {
         'QBtnToggle',
         'QScrollObservable',
         'QDatetimePicker',
-        'QVideo'
+        'QVideo',
+        'QCarousel',
+        'QCarouselSlide',
+        'QCarouselControl'
 
       ],
       directives: [

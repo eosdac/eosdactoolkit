@@ -102,7 +102,13 @@
         </div>
       </div>
     </div>
+
   </div>
+
+
+    
+    
+ 
 <!-- <MultiModal ref="Multi" /> -->
 <InitInterface  ref="init_interface"/>
 </q-page>
@@ -112,6 +118,8 @@
 
 <script>
 import InitInterface from 'components/init-interface'
+
+
 import {
   openURL
 } from 'quasar'
@@ -217,9 +225,16 @@ export default {
   top:-100px;
   transition: all .2s ease-in-out;
 }
+.partnerbox{
+  top:0px;
+  position:relative;
+}
 
 
 @media screen and (max-width: 1200px) {
+  .partnerbox{
+    top:40px!important;;
+  }
   .row_boxes_index_page{
     top:20px !important;
   }

@@ -9,7 +9,7 @@
 
     <div class="row justify-center">
       <router-link class="q-headline" :to="{path: '/profile/' + data.candidate_name}" >
-        <q-icon title="Nominated for next custodian board" style="margin-top:-5px" v-if="data.position < 13" name="star_border" color="yellow" />{{ data.candidate_name }}
+        <q-icon :title="$t('candidate.nominated_next')" style="margin-top:-5px" v-if="data.position < 13" name="star_border" color="yellow" />{{ data.candidate_name }}
       </router-link>
     </div>
 
@@ -20,20 +20,18 @@
 
 
     <div class="row justify-between  q-px-md q-pb-md q-body-1"  >
-      <span><span class="text-dimwhite">Pay:</span> {{data.requestedpay}}</span>
+      <span><span class="text-dimwhite">{{$t('candidate.pay')}}:</span> {{data.requestedpay}}</span>
       <span class="text-dimwhite"  v-if="data.profile && (data.profile.givenName !='' || data.profile.familyName !='')" >({{data.profile.givenName}} {{data.profile.familyName}})</span>
-
     </div>
-    <div class="bg-dark text-italic text-dimwhite q-body-1" v-if="data.profile !== undefined">
-   
-    <MarkdownViewer v-if="data.profile !== undefined" :tags="['h1', 'h2', 'h3', 'italic', 'bold', 'underline', 'strikethrough', 'subscript', 'superscript', 'anchor', 'orderedlist', 'unorderedlist']" dark :text="data.profile.description.slice(0, 140)+'...'" />
 
+    <div class="bg-dark text-italic text-dimwhite q-body-1 q-mx-xs round-borders" v-if="data.profile !== undefined">
+      <MarkdownViewer v-if="data.profile !== undefined" :tags="['h1', 'h2', 'h3', 'italic', 'bold', 'underline', 'strikethrough', 'subscript', 'superscript', 'anchor', 'orderedlist', 'unorderedlist']" dark :text="data.profile.description.slice(0, 140)+'...'" />
     </div>
 
     <div class="row justify-between q-pa-md">
-      <q-btn v-if="!data.selected" icon="icon-plus" color="primary" label="select" @click="$emit('clickvotefor')" />
-      <q-btn v-if="data.selected" icon="icon-ui-6" color="positive" label="unselect" @click="$emit('clickunvotefor')" />
-      <q-btn v-if="data.profile" color="dark" label="read more" @click="profilemodal = true"/>
+      <q-btn v-if="!data.selected" icon="icon-plus" color="primary" :label="$t('candidate.select')" @click="$emit('clickvotefor')" />
+      <q-btn v-if="data.selected" icon="icon-ui-6" color="positive" :label="$t('candidate.unselect')" @click="$emit('clickunvotefor')" />
+      <q-btn v-if="data.profile" color="dark" :label="$t('candidate.read_more')" @click="profilemodal = true"/>
     </div>
   
 
@@ -46,7 +44,7 @@
         <div class="row items-center">
           <div class="center_background_image on-left"  style="width: 60px; height:60px" v-bind:style="{ 'background-image': 'url(' + image_profile + ')' }" ></div>
           <router-link class="q-headline" :to="{path: '/profile/' + data.candidate_name}" >
-            <q-icon title="Nominated for next custodian board" style="margin-top:-5px" v-if="data.position < 13" name="star_border" color="yellow" />{{ data.candidate_name }}
+            <q-icon :title="$t('candidate.nominated_next')" style="margin-top:-5px" v-if="data.position < 13" name="star_border" color="yellow" />{{ data.candidate_name }}
           </router-link>
         </div>
         <MarkdownViewer v-if="data.profile !== undefined" :tags="['h1', 'h2', 'h3', 'italic', 'bold', 'underline', 'strikethrough', 'subscript', 'superscript', 'anchor', 'orderedlist', 'unorderedlist']" class="bg-dark2" dark :text="data.profile.description" />

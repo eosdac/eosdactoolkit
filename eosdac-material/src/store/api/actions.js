@@ -823,3 +823,36 @@ export async function getAccountPermissions({
     throw error
   }
 }
+
+export async function getMsigProposals({}, payload={status:1}){
+  //status 1: active; 2: executed; 0: cancelled
+  return axios.post('http://localhost:3000/msigproposals', payload).then(r => {
+      // console.log(r.data)
+      return r.data;
+    }).catch(e => {
+      console.log('could not load msig proposals from db');
+      return [];});
+}
+
+export async function getApprovalsFromProposal({}, payload){
+  try{
+    let eos = await this.dispatch('api/getEos');
+
+    let approvals = (await eos.getTableRows({
+      code: 'eosiomsigold',
+      json: true,
+      limit: 1,
+      lower_bound: payload.proposal_name,
+      scope: payload.proposer,
+      table: 'approvals'
+      }) ).rows[0];
+      
+      return approvals;
+
+  } catch(e){
+    console.log(e);
+    return [];
+  }
+
+
+}
