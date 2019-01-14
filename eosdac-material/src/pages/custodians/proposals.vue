@@ -4,7 +4,7 @@
   <div v-for="(proposal, index) in proposals" :key="index" >
     <pre>{{getactiveCustodians[index].cust_name}} - {{proposal}}</pre>
   </div>
-  <Transaction ref="Transaction" v-on:done="" />
+  <Transaction ref="Transaction"  />
 </q-page>
 </template>
 

@@ -1,5 +1,5 @@
 <template>
-<q-layout view="hHh Lpr lFf">
+<q-layout view="hHh Lpr lff">
   <q-layout-header class="no-shadow">
     <q-toolbar color="dark2">
       <q-btn size="md" flat dense round class="q-mr-sm" style="margin-top:-4px" @click="leftDrawerOpen = !leftDrawerOpen" :aria-label="$t('default.menu')">
@@ -164,6 +164,10 @@
         <q-item-side icon="icon-topmenu-6" />
         <q-item-main :label="$t('default.settings')" sublabel="" />
       </q-item>
+      <q-item to="/credits">
+        <q-item-side icon="stars" />
+        <q-item-main :label="$t('default.credits')" sublabel="" />
+      </q-item>
 
       <!-- <q-item to="/workerproposals">
         <q-item-side icon="icon-menu-8" />
@@ -173,9 +177,12 @@
 
 
     </q-list>
-
+    
     <div class="absolute-bottom row  bg-dark2 justify-center q-pa-md" style="border-top: 1px solid #272B35;margin-left:-20px" ><VoteEosdac /></div>
   </q-layout-drawer>
+
+
+
   <q-page-container style="overflow:hidden">
     <transition appear enter-active-class="animated fadeInDown">
       <q-alert v-if="!getRegistered && getAccountName && setupComplete" color="blue" appear>
@@ -199,6 +206,9 @@
 
 
     <Notifier :drawer="leftDrawerOpen" />
+
+
+
 
   </q-page-container>
   <NodeSelector setup v-on:done="$refs.init_interface.auto_scatter()"/>
@@ -229,6 +239,7 @@ import NodeSelector from 'components/nodeselector'
 import Notifier from 'components/notifier'
 import MenuDropdown from 'components/menu-dropdown'
 import VoteEosdac from 'components/vote-eosdac'
+
 export default {
 
 

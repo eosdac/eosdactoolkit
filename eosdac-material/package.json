@@ -1,6 +1,6 @@
 {
   "name": "eosdac-material",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Toolkit GUI for eosDAC",
   "productName": "eosDAC Member Client",
   "cordovaId": "org.cordova.quasar.app",
@@ -45,7 +45,7 @@
     "eslint-plugin-promise": "^3.7.0",
     "eslint-plugin-standard": "^3.0.1",
     "eslint-plugin-vue": "^4.3.0",
-    "quasar-cli": "^0.17.20",
+    "quasar-cli": "^0.17.23",
     "strip-ansi": "=3.0.1"
   },
   "engines": {

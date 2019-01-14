@@ -20,6 +20,10 @@ export const ADD_ENDPOINT = (state, payload) => {
   }
 }
 
+// export const TRANSIT_API = (state, payload) => {
+//   state.transitapi = payload.transitapi;
+// }
+
 export const CLEAR_ENDPOINTS = (state) => {
   state.endpoints = []
 }

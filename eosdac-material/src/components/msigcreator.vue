@@ -85,10 +85,11 @@
         </div>
         <div class="q-mt-md" style="height:30px">
           <q-btn class="float-right" label="propose" color="primary" @click="proposeMsig" />
+          <!-- <q-btn class="float-right" label="test" color="primary" @click="transactionCallback" /> -->
         </div>
       </div>
     </div>
-    <Transaction ref="Transaction"  />
+    <Transaction ref="Transaction" v-on:done="transactionCallback" />
   </div>
 </template>
 
@@ -262,6 +263,10 @@ export default {
 
       return true;
       
+    },
+
+    transactionCallback(){
+      this.$root.$emit("reloadproposals");
     }
 
 
