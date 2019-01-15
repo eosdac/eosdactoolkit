@@ -360,7 +360,8 @@ export default {
         console.log('This method needs an array of candidate names');
         return false;
       }
-      let p = await this.$store.dispatch('api/getProfileData2', {accountname: candlist} );
+      
+      let p = await this.$profiles.getProfiles(candlist);
 
       if(p.length){
         p.forEach(pdb =>{

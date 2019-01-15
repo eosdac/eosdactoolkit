@@ -219,8 +219,7 @@ export default {
     },
 
     async getProfileData(){
-      let p = await this.$store.dispatch('api/getProfileData2', {accountname: [this.account_name]} );
-
+      let p = await this.$profiles.getProfiles([this.account_name]);
       if(p && p.length && this.validateProfile(p[0].profile)){
         this.rawprofiledata = p[0];
         //todo validate profile
