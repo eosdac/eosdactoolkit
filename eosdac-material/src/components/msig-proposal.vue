@@ -5,7 +5,7 @@
         <q-item-side left >
           <div class="row full-height items-center relative-position">
             <q-chip  v-if="msig.trx.actions.length > 1" floating dense color="dark">{{msig.trx.actions.length}}</q-chip>
-            <q-chip  v-if="!is_seen_computed" class="animate-fade" floating dense color="dark">new</q-chip>
+            <q-chip  v-if="!is_seen_computed" class="animate-fade" floating dense color="negative">new</q-chip>
             <q-icon size="48px" count="5" :name="'icon-'+matchIcon" class="q-mr-xs" :color="getStatusColor" />
           </div>
         </q-item-side>

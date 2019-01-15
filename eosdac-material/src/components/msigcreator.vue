@@ -63,7 +63,6 @@
                 placeholder="Select token symbol"
                 v-model="token"
                 :options="[{label: 'KASDAC', value: 'kasdactokens-KASDAC'}, {label: 'EOS', value: 'eosio.token-EOS'}]"
-                @input=""
               />
               <q-input dark stack-label="Memo" v-model="msigtemplate.trx.actions[0].data.memo"/>
             </q-tab-pane>
