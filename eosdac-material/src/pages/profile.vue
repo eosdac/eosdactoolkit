@@ -130,7 +130,7 @@
       </div>
     </div>
   </q-modal>
-  <Transaction ref="Transaction" v-on:done="allow_edit=false;is_edit=false;profile_is_irrevirsible=false" />
+  <Transaction ref="Transaction" v-on:done="saveProfileSuccessCallback" />
   <LoadingSpinner :visible="profile_is_loading" :text="$t('profile.loading_text')" />
 </q-page>
 </template>
@@ -262,6 +262,11 @@ export default {
           profile: JSON.stringify(this.form)
         }
       }])
+    },
+
+    saveProfileSuccessCallback(){
+      this.allow_edit = this.is_edit = this.profile_is_irrevirsible = false;
+      this.$profiles.removeFromCache([this.getAccountName]);
     },
 
     saveProfileUrl(){
