@@ -11,7 +11,6 @@ class ProfileCache{
   }
 
   async getProfiles(accountnames){
-
     //reduce requested accountnames
     let profiles = accountnames.reduce((temp, accountname)=>{
 
@@ -20,8 +19,6 @@ class ProfileCache{
       return temp;
 
     }, {cached:[], fetch:[]} );
-
-    // console.log(profiles)
 
     //fetch profiles only when not in cache
     if(profiles.fetch.length){
@@ -61,9 +58,8 @@ class ProfileCache{
 
 }
 
-let profiles = new ProfileCache();
-
+let profilecache = new ProfileCache();
 
 export default ({ Vue }) => {
-  Vue.prototype.$profiles = profiles;
+  Vue.prototype.$profiles = profilecache;
 }

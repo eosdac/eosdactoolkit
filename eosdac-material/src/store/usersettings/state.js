@@ -3,6 +3,5 @@ export default {
   transactionPopup : false,
   consoleMessage : true,
   retroStyle: true,
-  msigIsSeenCache: [],
-  profilecache:[]
+  msigIsSeenCache: []
 }
