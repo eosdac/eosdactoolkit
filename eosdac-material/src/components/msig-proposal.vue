@@ -69,11 +69,11 @@
         <div class="q-pa-md">
           <div class="row justify-start q-mt-sm">
             <!-- <pre>{{provided_approvals}}</pre> -->
-            <q-chip class="animate-fade" color="positive" v-for="(c,i) in provided_approvals" :avatar="c.avatar.image" :key="i+'p'">
-              {{c.actor}}
+            <q-chip class="animate-fade q-mb-sm on-left" color="positive" v-for="(c,i) in provided_approvals" :avatar="c.avatar.image" :key="i+'p'">
+              <a :href="'./profile/'+c.actor">{{c.actor}}</a>
             </q-chip>
-            <q-chip class="animate-fade" color="dark" v-for="(c,i) in requested_approvals" :avatar="c.avatar.image" :key="i+'r'">
-              {{c.actor}}
+            <q-chip class="animate-fade q-mb-sm on-left" color="dark2" v-for="(c,i) in requested_approvals" :avatar="c.avatar.image" :key="i+'r'">
+              <a :href="'./profile/'+c.actor">{{c.actor}}</a>
             </q-chip>
             <!-- <pre>{{getmsigIsSeenCache}}</pre> -->
           </div>

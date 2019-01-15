@@ -33,11 +33,10 @@ class ProfileCache{
 
   async getAvatars(accountnames){
     let profiles = await this.getProfiles(accountnames);
-
     let avatars = accountnames.map(accountname=>{
       let p = profiles.find(x=> x._id === accountname );
       let img = p && p.profile && p.profile.image ? p.profile.image : this.default_avatar;
-      return {_id: accountname, image: img}
+      return {_id: accountname, image: img};
     });
     return avatars;
   }
