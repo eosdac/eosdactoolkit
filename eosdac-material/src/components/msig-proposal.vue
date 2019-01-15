@@ -68,9 +68,20 @@
         <!-- content -->
         <div class="q-pa-md">
           <div class="row justify-start q-mt-sm">
-            <q-chip class="animate-fade" color="positive" v-for="(c,i) in provided_approvals" :key="i+'p'"> {{c.actor}}</q-chip>
-            <q-chip class="animate-fade" color="dark" v-for="(c,i) in requested_approvals" :key="i+'r'"> {{c.actor}}</q-chip>
-            <pre>{{getmsigIsSeenCache}}</pre>
+            <!-- <pre>{{provided_approvals}}</pre> -->
+            <q-chip class="animate-fade" color="positive" v-for="(c,i) in provided_approvals" :key="i+'p'">
+              <q-item-tile v-if="c.profile" avatar>
+                <img :src="c.profile.profile.image">
+              </q-item-tile>
+              {{c.actor}}
+            </q-chip>
+            <q-chip class="animate-fade" color="dark" v-for="(c,i) in requested_approvals" :key="i+'r'">
+              <q-item-tile v-if="c.profile" avatar>
+                <img :src="c.profile.profile.image">
+              </q-item-tile>
+              {{c.actor}}
+            </q-chip>
+            <!-- <pre>{{getmsigIsSeenCache}}</pre> -->
           </div>
         </div>
       </div> 
@@ -105,7 +116,7 @@ export default {
     return {
       systemmsig: 'eosiomsigold',
       provided_approvals: null,
-      requested_approvals:null,
+      requested_approvals: null,
       isApproved: false,
       isCreator: false,
       isCancelled: false,
@@ -120,6 +131,7 @@ export default {
       getAccountName: 'account/getAccountName',
       getmsigIsSeenCache: 'usersettings/getmsigIsSeenCache'
     }),
+
     isExecutable: function(){
       if(this.provided_approvals){
         return this.provided_approvals.length >= this.msig.threshold;
@@ -129,6 +141,7 @@ export default {
         return false;
       }
     },
+
     parseActions: function(){
       if(this.msig){
         return this.msig.trx.actions
@@ -138,6 +151,7 @@ export default {
         return false;
       }   
     },
+
     matchIcon: function(){
       const knownactions = ['updateconfig', 'transfer', 'newmemterms']
       let actions = this.msig.trx.actions.map(a=>a.name);
@@ -150,8 +164,8 @@ export default {
       else{
         return 'action-'+actions[0];
       }
-
     },
+
     getStatusColor: function(){
       let statuscolor='';
       if(this.msig.status === 1 && this.isApproved){
@@ -165,6 +179,7 @@ export default {
       }
       return statuscolor;
     },
+
     is_seen_computed: function(){
       return this.getmsigIsSeenCache.includes(this.msig._id);
     }
@@ -178,8 +193,15 @@ export default {
 
       if(this.msig.status === 1){
         let approvals = await this.$store.dispatch('api/getApprovalsFromProposal', {proposer: this.msig.proposer, proposal_name: this.msig.proposal_name});
-        this.provided_approvals = approvals.provided_approvals;
-        this.requested_approvals = approvals.requested_approvals;
+        let profiles = await this.$profiles.getProfiles([...approvals.provided_approvals.map(a=>a.actor), ...approvals.requested_approvals.map(a=>a.actor) ]);
+        this.provided_approvals = approvals.provided_approvals.map(pa=>{
+          pa.profile = profiles.find(p=> p._id===pa.actor );
+          return pa;
+        });
+        this.requested_approvals = approvals.requested_approvals.map(ra=>{
+          ra.profile = profiles.find(p=>p._id===ra.actor);
+          return ra;
+        });
         //check if user has already approved the proposal
         this.isApproved = this.provided_approvals.find(a => a.actor == this.getAccountName) ? true : false;
         //check if the proposal is created by current user

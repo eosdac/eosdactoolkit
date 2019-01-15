@@ -604,35 +604,6 @@ export async function getRamPrice({
   }
 }
 
-// export async function getProfileData({}, payload){
-//   // console.log(payload.accountname)
-//   let url = configFile.api.profileApiUrl+'profile/'+payload.accountname;
-
-//   return axios.get(url).then(r => {
-//       // console.log(r.data)
-//       return r.data;
-//     }).catch(e => {
-//       console.log('could not load profile file');
-//       return false;});
-// }
-
-// export async function getProfileData2({state, rootState, commit}, payload){
-
-//   let url = configFile.api.profileApiUrl;
-//   if (url.substr(-1) != '/'){
-//     url += '/profiles';
-//   }
-//   else{
-//     url += 'profiles';
-//   }
-
-//   return axios.post(url, payload.accountname ).then(r => {
-//       return r.data;
-//     }).catch(e => {
-//       console.log('could not load profile file');
-//       return false;});
-// }
-
 export async function getCustodians({
   state,
   commit,
