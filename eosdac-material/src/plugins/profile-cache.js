@@ -58,16 +58,22 @@ class ProfileCache{
     else{
       url += 'profiles';
     }
-    
+    //lets add the accounts temporary in the cache {_id:xxxxx, loading:true}
+    //we do this just before the server call. This to prevent requesting the
+    //same profile(s) when multiple requests are fired in a very short time span.
+    this.cache = this.cache.concat( accountnames.map(a=> {return {_id: a, loading:true} }) );
     return axios.post(url, accountnames).then(r => {
-
+        this.removeFromCache(accountnames); //immediatly remove the temporary placeholders
         console.log('fetched new profiles', r.data.length)
-        this.cache = this.cache.concat( r.data.filter(profile=> profile.irrevirsible===true ) );
+        this.cache = this.cache.concat( r.data.filter(profile=> profile.irrevirsible===true ) ); //add the real profiles to the cache
         return r.data;
-      }).catch(e => {
+      })
+      .catch(e => {
         console.log('could not load profile file');
+        this.removeFromCache(accountnames); //also remove them when there is an error
         return false;
-      });
+      })
+
   }
 
   inCache(accountname){
