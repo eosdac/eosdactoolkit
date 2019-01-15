@@ -62,7 +62,7 @@ class ProfileCache{
     return axios.post(url, accountnames).then(r => {
 
         console.log('fetched new profiles', r.data.length)
-        this.cache = this.cache.concat( r.data );
+        this.cache = this.cache.concat( r.data.filter(profile=> profile.irrevirsible===true ) );
         return r.data;
       }).catch(e => {
         console.log('could not load profile file');
