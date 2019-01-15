@@ -8,6 +8,7 @@ class ProfileCache{
   constructor(){
     console.log('profile cache initiated');
     this.cache=[];
+    this.default_avatar = '../statics/img/default-avatar.png';
   }
 
   async getProfiles(accountnames){
@@ -28,6 +29,17 @@ class ProfileCache{
     //return combined array of profiles
     return [...profiles.cached, ...profiles.fetch];
     
+  }
+
+  async getAvatars(accountnames){
+    let profiles = await this.getProfiles(accountnames);
+
+    let avatars = accountnames.map(accountname=>{
+      let p = profiles.find(x=> x._id === accountname );
+      let img = p && p.profile && p.profile.image ? p.profile.image : this.default_avatar;
+      return {_id: accountname, image: img}
+    });
+    return avatars;
   }
 
   async fetchProfiles(accountnames){

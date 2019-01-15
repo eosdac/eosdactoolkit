@@ -69,16 +69,10 @@
         <div class="q-pa-md">
           <div class="row justify-start q-mt-sm">
             <!-- <pre>{{provided_approvals}}</pre> -->
-            <q-chip class="animate-fade" color="positive" v-for="(c,i) in provided_approvals" :key="i+'p'">
-              <q-item-tile v-if="c.profile" avatar>
-                <img :src="c.profile.profile.image">
-              </q-item-tile>
+            <q-chip class="animate-fade" color="positive" v-for="(c,i) in provided_approvals" :avatar="c.avatar.image" :key="i+'p'">
               {{c.actor}}
             </q-chip>
-            <q-chip class="animate-fade" color="dark" v-for="(c,i) in requested_approvals" :key="i+'r'">
-              <q-item-tile v-if="c.profile" avatar>
-                <img :src="c.profile.profile.image">
-              </q-item-tile>
+            <q-chip class="animate-fade" color="dark" v-for="(c,i) in requested_approvals" :avatar="c.avatar.image" :key="i+'r'">
               {{c.actor}}
             </q-chip>
             <!-- <pre>{{getmsigIsSeenCache}}</pre> -->
@@ -193,13 +187,13 @@ export default {
 
       if(this.msig.status === 1){
         let approvals = await this.$store.dispatch('api/getApprovalsFromProposal', {proposer: this.msig.proposer, proposal_name: this.msig.proposal_name});
-        let profiles = await this.$profiles.getProfiles([...approvals.provided_approvals.map(a=>a.actor), ...approvals.requested_approvals.map(a=>a.actor) ]);
+        let avatars = await this.$profiles.getAvatars([...approvals.provided_approvals.map(a=>a.actor), ...approvals.requested_approvals.map(a=>a.actor) ]);
         this.provided_approvals = approvals.provided_approvals.map(pa=>{
-          pa.profile = profiles.find(p=> p._id===pa.actor );
+          pa.avatar = avatars.find(p=> p._id===pa.actor );
           return pa;
         });
         this.requested_approvals = approvals.requested_approvals.map(ra=>{
-          ra.profile = profiles.find(p=>p._id===ra.actor);
+          ra.avatar = avatars.find(p=>p._id===ra.actor);
           return ra;
         });
         //check if user has already approved the proposal
