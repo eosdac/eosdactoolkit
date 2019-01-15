@@ -9,9 +9,17 @@ class ProfileCache{
     console.log('profile cache initiated');
     this.cache=[];
     this.default_avatar = '../statics/img/default-avatar.png';
+    let cache_life = 1000*60*60;
+
+    if(cache_life){
+      setInterval(()=>{this.cache=[]; console.log('emptied cache')}, cache_life );
+    }
+    
   }
 
-  async getProfiles(accountnames){
+  async getProfiles(accountnames, force_reload=false){
+
+    if(force_reload) this.removeFromCache(accountnames);
     //reduce requested accountnames
     let profiles = accountnames.reduce((temp, accountname)=>{
 
@@ -31,8 +39,8 @@ class ProfileCache{
     
   }
 
-  async getAvatars(accountnames){
-    let profiles = await this.getProfiles(accountnames);
+  async getAvatars(accountnames, force_reload = false){
+    let profiles = await this.getProfiles(accountnames, force_reload);
     let avatars = accountnames.map(accountname=>{
       let p = profiles.find(x=> x._id === accountname );
       let img = p && p.profile && p.profile.image ? p.profile.image : this.default_avatar;
@@ -50,7 +58,7 @@ class ProfileCache{
     else{
       url += 'profiles';
     }
-  
+    
     return axios.post(url, accountnames).then(r => {
 
         console.log('fetched new profiles', r.data.length)
@@ -65,6 +73,10 @@ class ProfileCache{
   inCache(accountname){
     let profile = this.cache.find(p=>p._id==accountname);
     return profile || false;
+  }
+
+  removeFromCache(accountnames){
+    this.cache = this.cache.filter(p=> !accountnames.includes(p._id) );
   }
 
 }
