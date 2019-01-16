@@ -51,7 +51,7 @@ class ProfileCache{
 
   async fetchProfiles(accountnames){
 
-    let url = configFile.api.profileApiUrl;
+    let url = configFile.api.memberClientApiUrl;
     if (url.substr(-1) != '/'){
       url += '/profiles';
     }

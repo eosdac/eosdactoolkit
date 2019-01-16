@@ -170,14 +170,9 @@ export default {
         this.onsubscribemsg = this.$t('index.valid_input_required');
         return false;
       }
-      let url = this.$configFile.api.profileApiUrl;
 
-      if (url.substr(-1) != '/'){
-        url += '/subscribe';
-      }
-      else{
-        url += 'subscribe';
-      }
+      let url = this.$helper.noBackSlash(this.$configFile.api.memberClientApiUrl)+'/subscribe';
+
       this.loading =true;
       try{
         let result = await this.$axios.post(url, data);
