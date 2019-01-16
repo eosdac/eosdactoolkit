@@ -796,8 +796,8 @@ export async function getAccountPermissions({
 
 export async function getMsigProposals({}, payload={status:1}){
   //status 1: active; 2: executed; 0: cancelled
-  //let url = configFile.api.memberClientApiUrl
-  return axios.post('http://localhost:3000/msigproposals', payload).then(r => {
+  let url = configFile.api.memberClientApiUrl
+  return axios.post(url+'/msigproposals', payload).then(r => {
       // console.log(r.data)
       return r.data;
     }).catch(e => {
