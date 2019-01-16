@@ -40,7 +40,8 @@
           <div class="q-mt-md">Actions <span class="text-dimwhite">({{msig.trx.actions.length}})</span></div>
           <div class="text-dimwhite q-mb-md">{{msig.trx.actions.map(a=>a.name).join(', ')}}</div>
           <div style="text-align:right">
-            <a target="_blank" :href="$configFile.external.mainCurrencyExplorerUrl+`/transaction/${msig.trxid}`" class="q-body-1">view on bloks.io</a>
+            <span>trx: </span>
+            <a target="_blank" :href="$configFile.external.mainCurrencyExplorerUrl+`/transaction/${msig.trxid}`" class="q-body-1">{{msig.trxid.substring(0, 8)}}</a>
           </div>
           <div class="bg-dark q-mb-md">
             
@@ -50,10 +51,10 @@
 
           <div v-if="msig.status == 1" class="row justify-between">
             <span>
-              <q-btn v-if="!isApproved" :disabled="disable_approve" color="positive" label="Approve" @click="approveProposal(msig.proposer, msig.proposal_name)"  />
-              <q-btn v-if="isApproved" class="on-right" color="warning" label="Unapprove" @click="unapproveProposal(msig.proposer, msig.proposal_name)"  />
-              <q-btn v-if="isCreator" class="on-right" color="red" label="cancel" @click="cancelProposal(msig.proposer, msig.proposal_name)" />
-              <q-btn v-if="isExecutable" class="on-right" color="blue" label="execute" />
+              <q-btn v-if="!isApproved" class="on-left" :disabled="disable_approve" color="positive" label="Approve" @click="approveProposal(msig.proposer, msig.proposal_name)"  />
+              <q-btn v-if="isApproved" class="on-left" color="warning" label="Unapprove" @click="unapproveProposal(msig.proposer, msig.proposal_name)"  />
+              <q-btn v-if="isCreator" class="on-left" color="red" label="cancel" @click="cancelProposal(msig.proposer, msig.proposal_name)" />
+              <q-btn v-if="isExecutable" color="blue" label="execute" />
             </span>
             <span>
               <q-checkbox dark left-label :label="isSeen ?'Unmark as seen':'Mark as seen' " v-model="isSeen" @input="handleIsSeenCache" />

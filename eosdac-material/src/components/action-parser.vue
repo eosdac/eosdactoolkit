@@ -2,7 +2,7 @@
 <div>
   <div class="row">
     <!-- <span class="q-pa-sm">{{actions[activeSlide].account}} > {{actions[activeSlide].name}}</span> -->
-    <span>{{seenAll}}</span>
+    <!-- <span>{{seenAll}}</span> -->
     <span class="q-pa-sm bg-primary">{{actions[activeSlide].account}}</span>
     <span class="q-pa-sm bg-p-light">{{actions[activeSlide].name}}</span>
     <span class="q-pa-sm bg-dark">
