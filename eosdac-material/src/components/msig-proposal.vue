@@ -39,7 +39,9 @@
           <div class="text-dimwhite q-mb-md">{{new Date(msig.trx.expiration).toString()}}</div>
           <div class="q-mt-md">Actions <span class="text-dimwhite">({{msig.trx.actions.length}})</span></div>
           <div class="text-dimwhite q-mb-md">{{msig.trx.actions.map(a=>a.name).join(', ')}}</div>
-
+          <div style="text-align:right">
+            <a target="_blank" :href="$configFile.external.mainCurrencyExplorerUrl+`/transaction/${msig.trxid}`" class="q-body-1">view on bloks.io</a>
+          </div>
           <div class="bg-dark q-mb-md">
             
             <Actionparser @seenAllActions="disable_approve = false" :actions="msig.trx.actions" />
