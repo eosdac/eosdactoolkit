@@ -2,6 +2,7 @@
 <div>
   <div class="row">
     <!-- <span class="q-pa-sm">{{actions[activeSlide].account}} > {{actions[activeSlide].name}}</span> -->
+    <span>{{seenAll}}</span>
     <span class="q-pa-sm bg-primary">{{actions[activeSlide].account}}</span>
     <span class="q-pa-sm bg-p-light">{{actions[activeSlide].name}}</span>
     <span class="q-pa-sm bg-dark">
@@ -56,7 +57,8 @@ export default {
 
   data () {
     return {
-      activeSlide: 0
+      activeSlide: 0,
+      seenAll: false
 
     }
   },
@@ -64,6 +66,7 @@ export default {
   methods: {
     nextAction(){
       if(this.activeSlide < this.actions.length-1) this.activeSlide++;
+      
     },
     prevAction(){
       if(this.activeSlide > 0) this.activeSlide--;
@@ -75,16 +78,18 @@ export default {
       return values;
     },
     handleslide(e){
-      console.log('slide',e)
+      // console.log('slide',e)
       this.activeSlide = e;
+      if(this.activeSlide === this.actions.length-1 && !this.seenAll){
+        this.seenAll = true;
+        this.$emit('seenAllActions')
+      }
     }
 
   },
 
-
-
   mounted:function(){
-
+    if(this.actions.length === 1) this.$emit('seenAllActions');
   }
 
 }

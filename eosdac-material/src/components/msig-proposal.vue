@@ -42,13 +42,13 @@
 
           <div class="bg-dark q-mb-md">
             
-            <Actionparser :actions="msig.trx.actions" />
+            <Actionparser @seenAllActions="disable_approve = false" :actions="msig.trx.actions" />
 
           </div>
 
           <div v-if="msig.status == 1" class="row justify-between">
             <span>
-              <q-btn v-if="!isApproved" color="positive" label="Approve" @click="approveProposal(msig.proposer, msig.proposal_name)"  />
+              <q-btn v-if="!isApproved" :disabled="disable_approve" color="positive" label="Approve" @click="approveProposal(msig.proposer, msig.proposal_name)"  />
               <q-btn v-if="isApproved" class="on-right" color="warning" label="Unapprove" @click="unapproveProposal(msig.proposer, msig.proposal_name)"  />
               <q-btn v-if="isCreator" class="on-right" color="red" label="cancel" @click="cancelProposal(msig.proposer, msig.proposal_name)" />
               <q-btn v-if="isExecutable" class="on-right" color="blue" label="execute" />
@@ -126,7 +126,9 @@ export default {
       isCancelled: false,
       approvals_modal: false,
 
-      isSeen: this.is_seen_computed
+      isSeen: this.is_seen_computed,
+
+      disable_approve: true
 
     }
   },
@@ -330,6 +332,10 @@ export default {
         this.$store.commit('usersettings/SET_MSIGISSEENCACHE', {mode: 'remove', msig_id: this.msig._id} );
       }
       
+    },
+
+    enableApprove(){
+      console.log('enabled...')
     }
 
 
