@@ -150,7 +150,7 @@
         <q-item-main :label="$t('default.unregister_as_candidate')" sublabel="" />
       </q-item>
 
-      <q-item @click.native="openURL($configFile.api.tokenExplorerUrl)">
+      <q-item @click.native="openURL($configFile.external.tokenExplorerUrl)">
         <q-item-side icon="icon-menu-4" />
         <q-item-main :label="$t('default.token_explorer')" sublabel="" />
         <q-item-side right icon="icon-transfer-out" />

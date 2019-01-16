@@ -166,7 +166,7 @@ export default {
           message: this.$t('transaction.transaction_successful'),
           details: trx.transaction_id,
           linkText: this.$t('transaction.view_in_explorer'),
-          linkUrl: this.$configFile.api.mainCurrencyExplorerUrl + '/transaction/' + trx.transaction_id,
+          linkUrl: this.$configFile.external.mainCurrencyExplorerUrl + '/transaction/' + trx.transaction_id,
           autoclose: 10
         })
         this.$emit('done', this.callbackeventparameter);

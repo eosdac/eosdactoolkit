@@ -1,6 +1,7 @@
 
 import configFile from '../statics/config.json';
 import axios from 'axios';
+import helper from './helper.js';
 
 
 class ProfileCache{
@@ -52,6 +53,7 @@ class ProfileCache{
   async fetchProfiles(accountnames){
 
     let url = configFile.api.memberClientApiUrl;
+    // let url = let url = this.$helper.noBackSlash(this.$configFile.api.memberClientApiUrl)+'/subscribe';
     if (url.substr(-1) != '/'){
       url += '/profiles';
     }

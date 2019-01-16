@@ -35,12 +35,12 @@
   },
   "api": {
     "bpNodeApiUrl": "https://eosdac.io/topnodes.json",
-    "mainCurrencyExplorerUrl": "https://jungle.bloks.io",
-    "tokenExplorerUrl": "https://explorer.eosdac.io",
     "memberClientApiUrl": "http://ns3119712.ip-51-38-42.eu:3000"
   },
   "external":{
     "homepage": "https://eosdac.io",
-    "discordUrl": "https://discord.io/eosdac"
+    "discordUrl": "https://discord.io/eosdac",
+    "tokenExplorerUrl": "https://explorer.eosdac.io",
+    "mainCurrencyExplorerUrl": "https://jungle.bloks.io"
   }
 }
