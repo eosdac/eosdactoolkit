@@ -144,7 +144,7 @@ export default {
         proposal_name: '',
         requested: [],
         trx: { 
-            expiration: '', 
+            expiration: new Date(new Date().getTime() + 3 * 24 * 60 * 60 * 1000), 
             ref_block_num: 0, 
             ref_block_prefix: 0, 
             max_net_usage_words: 0, 
