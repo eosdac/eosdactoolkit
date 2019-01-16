@@ -3,7 +3,9 @@
     <!-- <pre>{{custodians}}</pre> -->
     <span v-for="x in custodians" :key="x.cust_name">
       <div class="center_background_image" style="border-radius:50%; width:20px;height:20px" v-bind:style="{ 'background-image': `url(${x.profile.image})` }"></div>
-      {{x.cust_name}}
+      <router-link class="q-headline a2" :to="{path: '/profile/' + x.cust_name}" >
+        <div class="q-ma-none" style="min-width:100px; overflow:hidden">{{x.cust_name}}</div>
+      </router-link>
     </span>
   </div>
 </template>

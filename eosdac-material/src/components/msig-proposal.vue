@@ -26,14 +26,13 @@
           <div class="text-white q-display-1">
             <q-spinner v-if="provided_approvals==null" color="primary" size="30px" style="margin-top:-4px" />
             <span v-if="provided_approvals" class="text-p-light cursor-pointer"  @click="approvals_modal = true">{{provided_approvals.length}}</span>
-            <span>/ {{msig.threshold}}</span>
+            <span class="">/{{msig.threshold}}</span>
           </div>
         </q-item-side>
       </template>
 
       <div class="q-px-md q-pb-md">
         <div style="border-top: 1px solid grey" >
-          <q-checkbox dark :label="isSeen ?'Unmark as seen':'Mark as seen' " v-model="isSeen" @input="handleIsSeenCache" />
           <div class="q-mt-md">Description</div>
           <div class="text-dimwhite q-mb-md">{{msig.description}}</div>
           <div class="q-mt-md">Expiration</div>
@@ -47,11 +46,16 @@
 
           </div>
 
-          <div v-if="msig.status == 1" class="row justify-end">
-            <q-btn v-if="!isApproved" color="positive" label="Approve" @click="approveProposal(msig.proposer, msig.proposal_name)"  />
-            <q-btn v-if="isApproved" class="on-right" color="warning" label="Unapprove" @click="unapproveProposal(msig.proposer, msig.proposal_name)"  />
-            <q-btn v-if="isCreator" class="on-right" color="red" label="cancel" @click="cancelProposal(msig.proposer, msig.proposal_name)" />
-            <q-btn v-if="isExecutable" class="on-right" color="blue" label="execute" />
+          <div v-if="msig.status == 1" class="row justify-between">
+            <span>
+              <q-btn v-if="!isApproved" color="positive" label="Approve" @click="approveProposal(msig.proposer, msig.proposal_name)"  />
+              <q-btn v-if="isApproved" class="on-right" color="warning" label="Unapprove" @click="unapproveProposal(msig.proposer, msig.proposal_name)"  />
+              <q-btn v-if="isCreator" class="on-right" color="red" label="cancel" @click="cancelProposal(msig.proposer, msig.proposal_name)" />
+              <q-btn v-if="isExecutable" class="on-right" color="blue" label="execute" />
+            </span>
+            <span>
+              <q-checkbox dark left-label :label="isSeen ?'Unmark as seen':'Mark as seen' " v-model="isSeen" @input="handleIsSeenCache" />
+            </span>
           </div>
 
         </div>
@@ -62,18 +66,24 @@
       <div class="bg-dark">
         <!-- header -->
         <div style="height:50px" class="bg-dark2 row items-center justify-between q-px-md">
-          <span>Approvals</span>
+          <span>Approvals <span v-if="provided_approvals" class="q-caption text-weight-thin">needs {{msig.threshold-provided_approvals.length}} more</span></span>
           <q-icon class=" cursor-pointer" name="icon-ui-8" @click.native="approvals_modal = false" />
         </div>
         <!-- content -->
         <div class="q-pa-md">
           <div class="row justify-start q-mt-sm">
             <!-- <pre>{{provided_approvals}}</pre> -->
-            <q-chip class="animate-fade q-mb-sm on-left" color="positive" v-for="(c,i) in provided_approvals" :avatar="c.avatar.image" :key="i+'p'">
-              <a :href="'./profile/'+c.actor">{{c.actor}}</a>
+            <q-chip class="animate-fade q-mb-sm on-left relative-position" color="dark2" v-for="(c,i) in provided_approvals" :avatar="c.avatar.image" :key="i+'p'">
+              <q-icon class="absolute" style="top:-3px; right:-5px" color="positive" name="icon-ui-6" size="18px" />
+              <router-link class=" a2" :to="{path: '/profile/' + c.actor}" >
+                <div class="q-ma-none" style="min-width:100px; overflow:hidden">{{c.actor}}</div>
+              </router-link>
             </q-chip>
-            <q-chip class="animate-fade q-mb-sm on-left" color="dark2" v-for="(c,i) in requested_approvals" :avatar="c.avatar.image" :key="i+'r'">
-              <a :href="'./profile/'+c.actor">{{c.actor}}</a>
+            <q-chip class="animate-fade q-mb-sm on-left relative-position" color="dark2" v-for="(c,i) in requested_approvals" :avatar="c.avatar.image" :key="i+'r'">
+              <!-- <div class="center_background_image" style="border-radius:50%; width:50px;height:50px" v-bind:style="{ 'background-image': `url(${c.avatar.image})` }"></div> -->
+              <router-link class=" a2" :to="{path: '/profile/' + c.actor}" >
+                <div class="q-ma-none" style="min-width:100px; overflow:hidden">{{c.actor}}</div>
+              </router-link>
             </q-chip>
             <!-- <pre>{{getmsigIsSeenCache}}</pre> -->
           </div>
@@ -188,10 +198,13 @@ export default {
       if(this.msig.status === 1){
         let approvals = await this.$store.dispatch('api/getApprovalsFromProposal', {proposer: this.msig.proposer, proposal_name: this.msig.proposal_name});
         let avatars = await this.$profiles.getAvatars([...approvals.provided_approvals.map(a=>a.actor), ...approvals.requested_approvals.map(a=>a.actor) ]);
+
         this.provided_approvals = approvals.provided_approvals.map(pa=>{
           pa.avatar = avatars.find(p=> p._id===pa.actor );
+          // this.$set(pa, 'avatar', avatars.find(p=> p._id===pa.actor ))
           return pa;
         });
+        
         this.requested_approvals = approvals.requested_approvals.map(ra=>{
           ra.avatar = avatars.find(p=>p._id===ra.actor);
           return ra;

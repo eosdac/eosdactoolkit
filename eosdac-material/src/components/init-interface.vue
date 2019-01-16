@@ -117,13 +117,14 @@ export default {
             blockchain: 'eos',
             chainId: current.chainId
           }]
-        })
+        }) 
         this.$store.commit('account/UNLOCK_ACCOUNT_SCATTER')
         //we should have an identity! do stuff with it...
         let queryAccount = await this.$store.dispatch('api/getAccount', {account_name: identity.accounts[0].name} );
         let memberRegistration = await this.$store.dispatch('api/getRegistered');
         let latestMemberTerms = await this.$store.dispatch('api/getMemberTerms');
-        await this.$store.dispatch('api/getCustodians');
+        let custs = await this.$store.dispatch('api/getCustodians');
+        this.$profiles.getProfiles(custs.map(c=>c.cust_name) );
 
         await this.$store.dispatch('api/getIsCandidate');
         await this.$store.dispatch('api/getIsCustodian');//todo: should be checked from res getcustodians.
