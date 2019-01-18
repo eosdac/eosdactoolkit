@@ -20,7 +20,7 @@
             </div>
           </div>
         </q-item-main>
-        <q-item-side right>
+        <q-item-side right v-if="msig.status !== 0">
 
           <div class="q-caption text-dimwhite" >Received Approvals:</div>
           <div class="text-white q-display-1">

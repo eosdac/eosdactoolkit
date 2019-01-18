@@ -15,6 +15,11 @@ const helper = {
 
   noBackSlash(url){
     return url.replace(/\/+$/, "");
+  },
+  
+  isAccountname(accountname){
+    const re = /^[a-z1-5.]{1,12}$/;
+    return re.test(accountname);
   }
 
 }
