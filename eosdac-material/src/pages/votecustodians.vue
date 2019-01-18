@@ -66,6 +66,7 @@
             <q-pagination  v-show="true" v-model="pagination.page" :min="1" :max="pagination.max" :max-pages="6" direction-links size="12px" />
         </div>
       </div>
+      
     </div>
   </div>
   <!-- second column -->
