@@ -331,6 +331,7 @@
     "to": "To",
     "transaction": "Transaction",
     "transaction_successful": "Transaction Successful",
+    "signature_rejected": "You have cancelled the transaction",
     "view_in_explorer": "View in explorer",
     "warning_bandwidth": "Low Network Bandwidth. Your network bandwidth allocation has less than 10% remaining. The Transaction might fail.",
     "warning_cpu": "Low CPU. Your CPU allocation has less than 10% remaining. The Transaction might fail.",

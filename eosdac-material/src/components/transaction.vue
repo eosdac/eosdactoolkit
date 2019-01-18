@@ -172,11 +172,13 @@ export default {
         this.$emit('done', this.callbackeventparameter);
         this.close()
       } catch (err) {
+        // console.log(err)
+        let msg = err.type == 'signature_rejected' ? this.$t('transaction.signature_rejected') : err.type;
         if (err.type) {
           this.$store.commit('api/NOTIFY', {
             icon: 'error',
             color: 'red',
-            message: this.$t('transaction.error')+': ' + err.type,
+            message: this.$t('transaction.error')+': ' + msg,
             detail: '',
             autoclose: 10
           })

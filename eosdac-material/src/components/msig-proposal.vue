@@ -1,5 +1,5 @@
 <template>
-<div v-if="!isCancelled" class="q-mb-md bg-dark2 round-borders shadow-5" v-bind:class="{ 'proposal_approved': !isApproved, 'proposal_unapproved':!isApproved,}" >
+<div v-if="!isCancelled" class="q-mb-md bg-dark2 round-borders shadow-5 animate-fade" v-bind:class="{ 'proposal_approved': !isApproved, 'proposal_unapproved':!isApproved,}" >
     <q-collapsible  label="First" group="msigproposals" icon-toggle header-class="msigproposal_header" collapse-icon="icon-ui-11" @show="handleIsSeenCache(true)">
       <template slot="header" >
         <q-item-side left >
