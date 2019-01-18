@@ -1,6 +1,6 @@
 <template>
 <q-page class="text-white q-pa-md">
-  <pre>{{pagination}}</pre>
+  <!-- <pre>{{pagination}}{{active_tab}}</pre> -->
   <div class="row relative-position justify-between">
     <h4 class="q-display-1 q-mt-none q-mb-md">Review Msig Transactions</h4>
     <span><q-btn color="primary" label="create new"  @click="createmsig_modal = true" /></span>

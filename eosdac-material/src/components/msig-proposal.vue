@@ -24,8 +24,8 @@
 
           <div class="q-caption text-dimwhite" >Received Approvals:</div>
           <div class="text-white q-display-1">
-            <q-spinner v-if="provided_approvals==null" color="primary" size="30px" style="margin-top:-4px" />
-            <span v-if="provided_approvals" class="text-p-light cursor-pointer"  @click="approvals_modal = true">{{provided_approvals.length}}</span>
+            <span><q-spinner v-if="provided_approvals==null" color="primary" size="25px" style="margin-top:-4px" /></span>
+            <span v-if="provided_approvals" class="text-p-light cursor-pointer animate-fade"  @click="approvals_modal = true">{{provided_approvals.length}}</span>
             <span class="">/{{msig.threshold}}</span>
           </div>
         </q-item-side>
