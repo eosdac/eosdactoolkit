@@ -173,8 +173,9 @@ export default {
         this.close()
       } catch (err) {
         // console.log(err)
-        let msg = err.type == 'signature_rejected' ? this.$t('transaction.signature_rejected') : err.type;
+        
         if (err.type) {
+          let msg = err.type == 'signature_rejected' ? this.$t('transaction.signature_rejected') : err.type;
           this.$store.commit('api/NOTIFY', {
             icon: 'error',
             color: 'red',
