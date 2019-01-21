@@ -1,7 +1,7 @@
 <template>
 <div>
  <!--small screens mobile-->
-<div v-if="!isCancelled" class="q-mb-md bg-dark2 round-borders shadow-5 animate-fade lt-sm" style="border:1px solid #4A1289">
+<div v-if="!isCancelled" class="q-mb-md bg-dark2 round-borders shadow-5 animate-fade lt-sm" style="border:1px solid #4A1289;">
 
     <div class="row justify-center q-pa-md relative-position">
         <q-chip  v-if="!is_seen_computed"  dense class="animate-fade absolute" style="top:10px;right:10px"  color="negative">new</q-chip>
@@ -34,7 +34,7 @@
             <span class="">/{{msig.threshold}}</span>
           </div>
       </div>
-      <q-btn label="view details" color="dark" @click="mobile_details_modal=true"/>
+      <q-btn label="view details" color="dark" @click="mobile_details_modal=true; handleIsSeenCache(true)"/>
     </div>
 
 <!-- mobile details modal -->
@@ -46,8 +46,9 @@
       <q-icon class=" cursor-pointer" name="icon-ui-8" @click.native="mobile_details_modal = false" />
     </div>
     <!-- content -->
-    <div >
-      <q-item class="q-pa-md">
+    <div class="q-pa-md" >
+
+      <q-item >
         <q-item-side left >
           <q-icon size="48px" count="5" :name="'icon-'+matchIcon" class=" text-dimwhite" :color="getStatusColor" />
         </q-item-side>
@@ -55,8 +56,11 @@
           {{msig.title}}
         </q-item-main>
       </q-item>
-   
-      <div class="q-pa-md" >
+
+      <div class="q-pt-md q-body-1" style="border-top:1px solid grey">
+      <div class="row justify-between items-center">
+        <q-checkbox dark left-label :label="isSeen ?'Unmark as seen':'Mark as seen' " v-model="isSeen" @input="handleIsSeenCache" />
+      </div>
         <div class="q-mb-sm" >
           Proposal name: <span class="text-dimwhite">{{msig.proposal_name}}</span>
         </div>
@@ -79,10 +83,10 @@
         </div>
       </div>
       
-      <div class="q-px-md">
+      <div class=" bg-dark">
         <Actionparser @seenAllActions="disable_approve = false" :actions="msig.trx.actions" />
       </div>
-    <div class="q-pa-md">  
+    <div class="q-mt-md">  
         <q-btn v-if="!isApproved" class="full-width q-mb-md" :disabled="disable_approve" color="positive" label="Approve" @click="approveProposal(msig.proposer, msig.proposal_name)"  />
         <q-btn v-if="isApproved" class="full-width q-mb-md" color="warning" label="Unapprove" @click="unapproveProposal(msig.proposer, msig.proposal_name)"  />
         <q-btn v-if="isCreator" class="full-width q-mb-md" color="red" label="cancel" @click="cancelProposal(msig.proposer, msig.proposal_name)" />
@@ -423,6 +427,7 @@ export default {
         //hide the proposal
         this.isCancelled = true;
       }
+      this.mobile_details_modal=false;
 
     },
 
