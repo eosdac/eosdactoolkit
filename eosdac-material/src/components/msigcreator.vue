@@ -1,5 +1,5 @@
 <template>
-  <div class="row  bg-dark2 round-borders shadow-5" style="">
+  <div class="row  bg-dark2 round-borders" style="">
     <div class="col-md-6 col-xs-12 q-pa-md">
 
 	    <!-- <q-select

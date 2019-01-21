@@ -57,23 +57,23 @@
         </q-item-main>
       </q-item>
 
-      <div class="q-pt-md q-body-1" style="border-top:1px solid grey">
-      <div class="row justify-between items-center">
+      <div class="q-pt-md q-caption" style="border-top:1px solid grey">
+      <div class="row justify-end items-center">
         <q-checkbox dark left-label :label="isSeen ?'Unmark as seen':'Mark as seen' " v-model="isSeen" @input="handleIsSeenCache" />
       </div>
-        <div class="q-mb-sm" >
+        <div class="q-pb-xs" >
           Proposal name: <span class="text-dimwhite">{{msig.proposal_name}}</span>
         </div>
 
-        <div class="q-mb-sm">
+        <div class="q-pb-xs">
           Submitted by: <span class="text-dimwhite">{{msig.proposer}}</span>
         </div>
 
-        <div class="q-mb-sm">
-          Submitted on: <span class="text-dimwhite">{{new Date(msig.block_time).toString()}}</span>
+        <div class="q-pb-xs">
+          Submitted on: <span class="text-dimwhite">{{new Date(msig.block_time).toUTCString()}}</span>
         </div>
 
-        <div  class="q-mb-sm">
+        <div  class="q-mb-xs">
           <div>Description:</div>
           <div class="text-dimwhite">{{msig.description}}</div>
         </div>

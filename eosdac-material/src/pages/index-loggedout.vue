@@ -1,5 +1,5 @@
 <template>
-<q-page class="gradient-bg-primary q-pa-xl" style="overflow:hidden">
+<q-page class="gradient-bg-primary q-pa-md" style="overflow:hidden">
   <div class="relative-position">
     <div class="bg-dark2 round-borders loggedout_big_container shadow-14" style="min-height:600px; padding-bottom: 120px; overflow:hidden">
       <div class="row q-px-xl" style="margin-bottom:-40px; padding-top:40px"><div class="col-xs-12 col-lg-6 q-display-3">{{$t('index.welcome_to_esodac_member_client')}}</div></div>

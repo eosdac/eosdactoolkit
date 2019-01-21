@@ -1,9 +1,9 @@
 <template>
 <q-page class="text-white q-pa-md">
   <!-- <pre>{{pagination}}{{active_tab}}</pre> -->
-  <div class="row relative-position justify-between">
-    <h4 class="q-display-1 q-mt-none q-mb-md">Review Msig Transactions</h4>
-    <span><q-btn color="primary" label="create new"  @click="createmsig_modal = true" /></span>
+  <div class="row relative-position justify-between q-mb-md">
+    <h4 class="q-display-1 q-my-none">Review Proposals</h4>
+    <span><q-btn color="primary" class="q-mt-xs" label="create new"  @click="createmsig_modal = true" /></span>
   </div>
   <q-tabs class="q-mb-md" @select="setActiveTab">
     <!-- Tabs - notice slot="title" -->
@@ -40,7 +40,7 @@
   <q-modal maximized v-model="createmsig_modal" >
     <div class="bg-dark">
       <!-- header -->
-      <div style="height:50px" class="bg-dark2 row items-center justify-between q-px-md">
+      <div style="height:50px" class="bg-dark row items-center justify-between q-px-md">
         <span>Create Msig Proposal</span>
         <q-icon class=" cursor-pointer" name="icon-ui-8" @click.native="createmsig_modal = false" />
       </div>
