@@ -18,3 +18,7 @@ export const getRetroStyle = (state) => {
 export const getmsigIsSeenCache = (state) => {
   return state.msigIsSeenCache;
 }
+
+export const getTransactionDelay = (state) => {
+  return state.transferdelay;
+}

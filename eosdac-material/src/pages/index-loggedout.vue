@@ -36,7 +36,7 @@
         </div>
       </div>
     </div>
-    <div class="row gutter-md relative-position justify-center q-px-lg row_boxes_index_page" style="min-height:240px;">
+    <div class="row gutter-md relative-position justify-center q-px-md row_boxes_index_page" style="min-height:240px;">
       <div class="col-xl-4 col-md-12 col-sm-12 col-xs-12" style="min-width:200px">
         <div class="column justify-between bg-primary shadow-14 round-borders full-height q-pa-md animate-pop">
           <div>

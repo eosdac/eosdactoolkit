@@ -119,7 +119,13 @@ export async function transaction({
         })
       }
 
-      let res = await eos.transaction( { actions: actions } )
+      let delay = rootState.usersettings.transferdelay ? rootState.usersettings.transferdelay : 0;
+
+      let res = await eos.transaction( { actions: actions }, { broadcast: true, delay_sec: delay } );
+      
+      // res.delay_sec = 30
+      // console.log(res)
+      // res = await eos.transaction( res )
       return res
       commit('SET_CURRENT_CONNECTION_STATUS', true)
     }

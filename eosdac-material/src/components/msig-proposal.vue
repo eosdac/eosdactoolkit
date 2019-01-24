@@ -57,7 +57,7 @@
         </q-item-main>
       </q-item>
 
-      <div class="q-pt-md q-caption" style="border-top:1px solid grey">
+      <div class="q-pt-md q-body-1" style="border-top:1px solid grey">
       <div class="row justify-end items-center">
         <q-checkbox dark left-label :label="isSeen ?'Unmark as seen':'Mark as seen' " v-model="isSeen" @input="handleIsSeenCache" />
       </div>
@@ -84,7 +84,7 @@
       </div>
       
       <div class=" bg-dark">
-        <Actionparser @seenAllActions="disable_approve = false" :actions="msig.trx.actions" />
+        <Actionparser class="q-body-1" @seenAllActions="disable_approve = false" :actions="msig.trx.actions" />
       </div>
     <div class="q-mt-md">  
         <q-btn v-if="!isApproved" class="full-width q-mb-md" :disabled="disable_approve" color="positive" label="Approve" @click="approveProposal(msig.proposer, msig.proposal_name)"  />

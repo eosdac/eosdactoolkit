@@ -561,7 +561,9 @@
       </div>
       <div class="row q-pa-xs">
         <div class="col-12 relative-postition">
-          <q-btn color="primary" @click="transfer()" :disabled="badTransferTo || transferAmountError || !tokenSelection" class="q-ma-md float-right no-shadow" :label="$t('wallet.transfer_tokens')" />
+          <q-btn color="primary" @click="transfer()" :disabled="badTransferTo || transferAmountError || !tokenSelection" class="q-ma-md float-right no-shadow" :label="$t('wallet.transfer_tokens')" >
+            <q-chip v-if="getTransactionDelay > 0"  floating style="font-size:9px" dense class="on-right" color="negative">Delay {{getTransactionDelay}}s</q-chip>
+          </q-btn>
         </div>
       </div>
     </div>
@@ -698,7 +700,8 @@ export default {
       getAccount: 'account/getAccount',
       getMainCurrencyBalance: 'account/getMainCurrencyBalance',
       getAccountResources: 'account/getAccountResources',
-      getContacts: 'account/getContacts'
+      getContacts: 'account/getContacts',
+      getTransactionDelay: 'usersettings/getTransactionDelay'
     }),
     getMainCurrencyStaked() {
       let mainCurrencyStaked = 0
