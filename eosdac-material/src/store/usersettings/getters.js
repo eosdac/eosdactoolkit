@@ -20,5 +20,5 @@ export const getmsigIsSeenCache = (state) => {
 }
 
 export const getTransactionDelay = (state) => {
-  return state.transferdelay;
+  return state.transactiondelay;
 }

@@ -16,7 +16,7 @@ export const SET_RETROSTYLE = (state, payload) => {
 }
 
 export const SET_TRANSACTIONDELAY = (state, payload) => {
-    state.transferdelay = payload
+    state.transactiondelay = payload
 }
 
 

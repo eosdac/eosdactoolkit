@@ -119,7 +119,7 @@ export async function transaction({
         })
       }
 
-      let delay = rootState.usersettings.transferdelay ? rootState.usersettings.transferdelay : 0;
+      let delay = rootState.usersettings.transactiondelay ? rootState.usersettings.transactiondelay : 0;
 
       let res = await eos.transaction( { actions: actions }, { broadcast: true, delay_sec: delay } );
       

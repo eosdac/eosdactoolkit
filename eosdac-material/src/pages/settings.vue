@@ -205,6 +205,7 @@ export default {
       this.$store.commit('usersettings/SET_CONSOLEMESSAGE', bool)
     },
     transactiondelay (delay) {
+      
       this.$store.commit('usersettings/SET_TRANSACTIONDELAY', delay)
     }
   }

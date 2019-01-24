@@ -48,7 +48,7 @@ const store = new Vuex.Store({
       'usersettings.consoleMessage',
       'usersettings.retroStyle',
       'usersettings.msigIsSeenCache',
-      'usersettings.transferdelay'
+      'usersettings.transactiondelay'
     ],
     //filter: mutation => (mutation.payload.save)? true : false
   })]
