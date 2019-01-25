@@ -130,7 +130,7 @@
       </div>
     </div>
   </q-modal>
-  <Transaction ref="Transaction" v-on:done="allow_edit=false;is_edit=false;profile_is_irrevirsible=false" />
+  <Transaction ref="Transaction" v-on:done="saveProfileSuccessCallback" />
   <LoadingSpinner :visible="profile_is_loading" :text="$t('profile.loading_text')" />
 </q-page>
 </template>
@@ -219,8 +219,7 @@ export default {
     },
 
     async getProfileData(){
-      let p = await this.$store.dispatch('api/getProfileData2', {accountname: [this.account_name]} );
-
+      let p = await this.$profiles.getProfiles([this.account_name]);
       if(p && p.length && this.validateProfile(p[0].profile)){
         this.rawprofiledata = p[0];
         //todo validate profile
@@ -263,6 +262,11 @@ export default {
           profile: JSON.stringify(this.form)
         }
       }])
+    },
+
+    saveProfileSuccessCallback(){
+      this.allow_edit = this.is_edit = this.profile_is_irrevirsible = false;
+      this.$profiles.removeFromCache([this.getAccountName]);
     },
 
     saveProfileUrl(){

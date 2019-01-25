@@ -119,7 +119,13 @@ export async function transaction({
         })
       }
 
-      let res = await eos.transaction( { actions: actions } )
+      let delay = rootState.usersettings.transactiondelay ? rootState.usersettings.transactiondelay : 0;
+
+      let res = await eos.transaction( { actions: actions }, { broadcast: true, delay_sec: delay } );
+      
+      // res.delay_sec = 30
+      // console.log(res)
+      // res = await eos.transaction( res )
       return res
       commit('SET_CURRENT_CONNECTION_STATUS', true)
     }
@@ -604,36 +610,6 @@ export async function getRamPrice({
   }
 }
 
-export async function getProfileData({}, payload){
-  // console.log(payload.accountname)
-  let url = configFile.api.profileApiUrl+'profile/'+payload.accountname;
-
-  return axios.get(url).then(r => {
-      // console.log(r.data)
-      return r.data;
-    }).catch(e => {
-      console.log('could not load profile file');
-      return false;});
-}
-
-export async function getProfileData2({}, payload){
-
-  let url = configFile.api.profileApiUrl;
-  if (url.substr(-1) != '/'){
-    url += '/profiles';
-  }
-  else{
-    url += 'profiles';
-  }
-
-  return axios.post(url, payload.accountname ).then(r => {
-      // console.log(r.data)
-      return r.data;
-    }).catch(e => {
-      console.log('could not load profile file');
-      return false;});
-}
-
 export async function getCustodians({
   state,
   commit,
@@ -826,7 +802,8 @@ export async function getAccountPermissions({
 
 export async function getMsigProposals({}, payload={status:1}){
   //status 1: active; 2: executed; 0: cancelled
-  return axios.post('http://localhost:3000/msigproposals', payload).then(r => {
+  let url = configFile.api.memberClientApiUrl
+  return axios.post(url+'/msigproposals', payload).then(r => {
       // console.log(r.data)
       return r.data;
     }).catch(e => {
@@ -856,3 +833,7 @@ export async function getApprovalsFromProposal({}, payload){
 
 
 }
+
+
+
+

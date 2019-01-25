@@ -69,14 +69,14 @@
       </q-item>
     </q-list>
     <q-list no-border link inset-delimiter dark>
-      <q-item class="lg-hide xl-hide" @click.native="lockScatter()">
+      <q-item v-if="getAccountName" class="lg-hide xl-hide" @click.native="lockScatter()">
         <q-item-side>
           <q-item-tile color="negative" icon="icon-topmenu-4" />
         </q-item-side>
         <q-item-main :label="$t('default.log_out')" sublabel="" />
       </q-item>
 
-      <q-item v-if="getRegistered" class="lg-hide xl-hide">
+      <q-item v-if="getRegistered && getAccountName" class="lg-hide xl-hide">
         <q-item-side>
           <q-item-tile color="white" icon="icon-dac-balance" />
         </q-item-side>
@@ -150,7 +150,7 @@
         <q-item-main :label="$t('default.unregister_as_candidate')" sublabel="" />
       </q-item>
 
-      <q-item @click.native="openURL($configFile.api.tokenExplorerUrl)">
+      <q-item @click.native="openURL($configFile.external.tokenExplorerUrl)">
         <q-item-side icon="icon-menu-4" />
         <q-item-main :label="$t('default.token_explorer')" sublabel="" />
         <q-item-side right icon="icon-transfer-out" />

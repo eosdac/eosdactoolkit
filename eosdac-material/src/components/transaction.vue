@@ -166,17 +166,20 @@ export default {
           message: this.$t('transaction.transaction_successful'),
           details: trx.transaction_id,
           linkText: this.$t('transaction.view_in_explorer'),
-          linkUrl: this.$configFile.api.mainCurrencyExplorerUrl + '/transaction/' + trx.transaction_id,
+          linkUrl: this.$configFile.external.mainCurrencyExplorerUrl + '/transaction/' + trx.transaction_id,
           autoclose: 10
         })
         this.$emit('done', this.callbackeventparameter);
         this.close()
       } catch (err) {
+        // console.log(err)
+        
         if (err.type) {
+          let msg = err.type == 'signature_rejected' ? this.$t('transaction.signature_rejected') : err.type;
           this.$store.commit('api/NOTIFY', {
             icon: 'error',
             color: 'red',
-            message: this.$t('transaction.error')+': ' + err.type,
+            message: this.$t('transaction.error')+': ' + msg,
             detail: '',
             autoclose: 10
           })

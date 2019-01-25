@@ -1,21 +1,23 @@
 
 export const SET_LANGUAGE = (state, payload) => {
-    state.language = payload
+    state.language = payload;
 }
 
 export const SET_TRANSACTIONPOPUP = (state, payload) => {
-    state.transactionPopup = payload
+    state.transactionPopup = payload;
 }
 
 export const SET_CONSOLEMESSAGE = (state, payload) => {
-    state.consoleMessage = payload
+    state.consoleMessage = payload;
 }
 
 export const SET_RETROSTYLE = (state, payload) => {
-    state.retroStyle = payload
+    state.retroStyle = payload;
 }
 
-
+export const SET_TRANSACTIONDELAY = (state, payload) => {
+    state.transactiondelay = payload;
+}
 
 
 export const SET_MSIGISSEENCACHE = (state, payload) => {

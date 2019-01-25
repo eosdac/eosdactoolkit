@@ -1,8 +1,11 @@
 <template>
   <div>
+    <!-- <pre>{{custodians}}</pre> -->
     <span v-for="x in custodians" :key="x.cust_name">
-      <span v-if="x.profile && x.profile.image">{{x.profile.image}}</span>
-      {{x.cust_name}}
+      <div class="center_background_image" style="border-radius:50%; width:20px;height:20px" v-bind:style="{ 'background-image': `url(${x.profile.image})` }"></div>
+      <router-link class="q-headline a2" :to="{path: '/profile/' + x.cust_name}" >
+        <div class="q-ma-none" style="min-width:100px; overflow:hidden">{{x.cust_name}}</div>
+      </router-link>
     </span>
   </div>
 </template>
@@ -41,12 +44,11 @@ export default {
         else{
           custodians = this.getActiveCustodians;
         }
-        let p = await this.$store.dispatch('api/getProfileData2', {accountname: custodians.map(c => c.cust_name)} );
-        console.log(p)
+        let p = await this.$profiles.getAvatars(custodians.map(c => c.cust_name) )
         p.forEach(pdb =>{
           let cand = custodians.find(x => x.cust_name === pdb._id);
           if(cand.profile === undefined){
-            cand.profile = pdb.profile;
+            cand.profile = pdb;
           }
         })
         this.custodians = custodians;
