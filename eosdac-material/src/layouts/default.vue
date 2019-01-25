@@ -76,7 +76,7 @@
         <q-item-main :label="$t('default.log_out')" sublabel="" />
       </q-item>
 
-      <q-item v-if="getRegistered" class="lg-hide xl-hide">
+      <q-item v-if="getRegistered && getAccountName" class="lg-hide xl-hide">
         <q-item-side>
           <q-item-tile color="white" icon="icon-dac-balance" />
         </q-item-side>
