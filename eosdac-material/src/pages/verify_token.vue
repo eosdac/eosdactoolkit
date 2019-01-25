@@ -4,14 +4,14 @@
   <div class="q-pa-md bg-dark2 shadow-5 round-borders">
 
     <p class="text-dimwhite">You've been redirected to this page to verify a token.</p>
-    <div>
-      <span class="bg-p-light q-pa-sm">token:</span> 
-      <div  style="min-width:120px;display:inline-block" class="bg-dark q-pa-sm">{{token}}</div>
-      <span class="bg-dark q-pa-sm cursor-pointer" @click="copyToClipboard"> <q-icon name="file_copy" /> </span>
+    <div class="row justify-start">
+      <div style="display:inline-block;" class="bg-p-light q-pa-sm">token:</div> 
+      <div  style="width:50%;max-width:360px;display:inline-block;"  class="bg-dark q-pa-sm"><div style="overflow:hidden">{{token}}</div></div>
+      <div class="bg-dark q-pa-sm cursor-pointer" style="display:inline-block" @click="copyToClipboard"> <q-icon style="margin-top:-3px" name="file_copy" /> </div>
       <span v-if="copied_to_clipboard_msg !=null" class="q-pa-sm animate-fade q-caption text-dimwhite" >{{copied_to_clipboard_msg}}</span>
     </div>
 
-    <div class="row justify-end">
+    <div class="row justify-end q-mt-md">
       
       <q-btn label="validate" color="primary" @click="sign_message" />
     </div>
@@ -79,7 +79,7 @@ export default {
       copyText.select();
       document.execCommand("copy");
       this.copied_to_clipboard_msg = `Copied the token to your clipboard!`;
-      setTimeout(()=>this.copied_to_clipboard_msg=null, 1000);
+      setTimeout(()=>this.copied_to_clipboard_msg=null, 1500);
     }
 
   },
