@@ -69,7 +69,7 @@
       </q-item>
     </q-list>
     <q-list no-border link inset-delimiter dark>
-      <q-item class="lg-hide xl-hide" @click.native="lockScatter()">
+      <q-item v-if="getAccountName" class="lg-hide xl-hide" @click.native="lockScatter()">
         <q-item-side>
           <q-item-tile color="negative" icon="icon-topmenu-4" />
         </q-item-side>
