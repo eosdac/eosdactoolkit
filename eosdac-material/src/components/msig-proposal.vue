@@ -1,7 +1,7 @@
 <template>
 <div>
  <!--small screens mobile-->
-<div v-if="!isCancelled" class="q-mb-md bg-dark2 round-borders shadow-5 animate-fade lt-sm" style="border:1px solid #4A1289;">
+<div v-if="!isHidden" class="q-mb-md bg-dark2 round-borders shadow-5 animate-fade lt-sm" style="border:1px solid #4A1289;">
 
     <div class="row justify-center q-pa-md relative-position">
         <q-chip  v-if="!is_seen_computed"  dense class="animate-fade absolute" style="top:10px;right:10px"  color="negative">new</q-chip>
@@ -101,7 +101,7 @@
 <!-- end mobile -->
 
  <!--big screens desktop-->
-<div v-if="!isCancelled" class="q-mb-md bg-dark2 round-borders shadow-5 animate-fade gt-xs">
+<div v-if="!isHidden" class="q-mb-md bg-dark2 round-borders shadow-5 animate-fade gt-xs">
     <q-collapsible  label="First" group="msigproposals" icon-toggle header-class="msigproposal_header" collapse-icon="icon-ui-11" @show="handleIsSeenCache(true)">
       <template slot="header" >
         <q-item-side left >
@@ -162,7 +162,7 @@
               <q-btn v-if="!isApproved" class="on-left" :disabled="disable_approve" color="positive" label="Approve" @click="approveProposal(msig.proposer, msig.proposal_name)"  />
               <q-btn v-if="isApproved" class="on-left" color="warning" label="Unapprove" @click="unapproveProposal(msig.proposer, msig.proposal_name)"  />
               <q-btn v-if="isCreator" class="on-left" color="red" label="cancel" @click="cancelProposal(msig.proposer, msig.proposal_name)" />
-              <q-btn v-if="isExecutable" color="blue" label="execute" />
+              <q-btn v-if="isExecutable" color="blue" label="execute" @click="executeProposal(msig.proposer, msig.proposal_name)" />
             </span>
             <span>
               <q-checkbox dark left-label :label="isSeen ?'Unmark as seen':'Mark as seen' " v-model="isSeen" @input="handleIsSeenCache" />
@@ -233,7 +233,7 @@ export default {
       requested_approvals: null,
       isApproved: false,
       isCreator: false,
-      isCancelled: false,
+      isHidden: false,
       approvals_modal: false,
       mobile_details_modal: false,
 
@@ -384,7 +384,30 @@ export default {
       this.$refs.Transaction.newTransaction(actions, false, false, 'e_unapproval');
     },
     //execute a proposal via msig relay {"proposer":0,"proposal_name":0,"executer":0}
-    executeProposal(){
+    executeProposal(proposer, proposal_name){
+        let actions = [
+        {
+          contract: this.systemmsig, 
+          action: 'exec', 
+          fields: {
+            proposer: proposer,
+            proposal_name: proposal_name,
+            executer: this.getAccountName
+          }
+          
+        },
+        {
+          contract: 'dacmultisigs', 
+          action: 'executed',
+          authorization: [ {actor: this.getAccountName, permission: 'active'}, {actor: 'dacauthority', permission: 'one'}],
+          fields: {
+            proposer: proposer, 
+            proposal_name: proposal_name, 
+            executer: this.getAccountName }
+        }
+
+      ];
+      this.$refs.Transaction.newTransaction(actions, false, false, 'e_exec');
 
     },
     
@@ -425,7 +448,11 @@ export default {
 
       if(e_t === 'e_cancel'){
         //hide the proposal
-        this.isCancelled = true;
+        this.isHidden = true;
+      }
+      if(e_t === 'e_exec'){
+        console.log('executed');
+        this.isHidden = true;
       }
       this.mobile_details_modal=false;
 
