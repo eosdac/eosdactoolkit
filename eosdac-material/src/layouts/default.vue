@@ -208,6 +208,7 @@
     <Notifier :drawer="leftDrawerOpen" />
 
 <div class="animate-fade" style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.9);z-index:99999" v-if="getLOADING" >
+  <div class="row justify-end q-pa-md"><q-btn  round color="primary" icon="icon-ui-8" @click="close_signature_prompt" /></div>
   <div class="fixed-center">
     <div class="text-center text-p-light"><q-icon name="vpn_key" class="animate-bounce" size="50px" /></div>
     <div class="text-center">{{getLOADING}}</div>
@@ -318,11 +319,9 @@ export default {
         }
       }
     },
-    //wip
-    // async getActiveCustodians(){
-    //   let c = await this.$store.dispatch('api/getCustodians');
-    //   // console.log(c)
-    // }
+  close_signature_prompt(){
+    this.$store.commit('usersettings/SET_LOADING', false);
+  }
     
   },
   mounted() {
