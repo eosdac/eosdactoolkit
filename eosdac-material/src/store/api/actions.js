@@ -1,8 +1,8 @@
-// const { Api, JsonRpc, RpcError, JsSignatureProvider, Serialize } = require('eosjs');
-// const { TextDecoder, TextEncoder } = require('text-encoding');
-// const fetch = require('node-fetch');
+const { Api, JsonRpc, RpcError, Serialize } = require('eosjs');
+const { TextDecoder, TextEncoder } = require('text-encoding');
+const fetch = require('node-fetch');
 
-import Eos from 'eosjs'
+// import Eos from 'eosjs'
 import Timeout from 'await-timeout'
 import configFile from '../../statics/config.json'
 import axios from 'axios'
@@ -27,12 +27,9 @@ export async function getEos({state, rootState, commit}, payload={rebuild:false}
   }
   else{
     //eosjs@beta
-    // const rpc = new JsonRpc(state.endpoints[state.activeEndpointIndex].httpEndpoint, { fetch });
-    // const chainId = configFile.network.chainId;
-    // state.eosjs = new Api({rpc, chainId, textDecoder: new TextDecoder(), textEncoder: new TextEncoder()});
+    const rpc = new JsonRpc(state.endpoints[state.activeEndpointIndex].httpEndpoint, { fetch });
+    state.eosjs = new Api({rpc, textDecoder: new TextDecoder(), textEncoder: new TextEncoder()});
 
-    eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint;
-    state.eosjs = Eos(eosConfig);
     return state.eosjs;
   }
 
@@ -74,6 +71,67 @@ function apiDown(e,c,s) {
 }
 
 export async function transaction({
+  state,
+  rootState,
+  commit
+}, payload) {
+  try {
+
+    if (payload.scatter) {
+      const network = await scatterNetwork(state)
+      console.log('network', network)
+      const identity = await state.scatter.getIdentity({
+        accounts: [network]
+      })
+      // let rpc = (await this.dispatch('api/getEos') ).rpc;
+      const rpc = new JsonRpc(state.endpoints[state.activeEndpointIndex].httpEndpoint);
+      let eos = state.scatter.eos(network, Api, {rpc, beta3: true} );
+
+      //if payload.add_abicache ie 'kasdactokens'
+      if(payload.add_abicache){
+        // console.log('abicache addition', payload.add_abicache)
+        // console.log('eos.fc', eos.fc)
+        // const contract = await eos.getAbi(payload.add_abicache);
+        // let t = await eos.fc.abiCache.abi(payload.add_abicache, contract.abi);
+
+      }
+      else{
+        // console.log('no abicache addition', payload.add_abicache)
+      }
+
+      let authority = identity.accounts[0].authority;
+      let accountname = identity.accounts[0].name;
+      let actions = [];
+
+      for(let i = 0; i < payload.actions.length; i ++) {
+
+        let auth = [ {actor: accountname, permission: authority} ];
+        if(payload.actions[i].authorization){
+          auth = payload.actions[i].authorization;
+        }
+        actions.push({
+            account: payload.actions[i].contract,
+            name: payload.actions[i].action,
+            authorization: auth,
+            data: payload.actions[i].fields
+        })
+      }
+
+      let res = await eos.transact( { actions: actions }, {blocksBehind: 3, expireSeconds: 30} ).catch(e=>console.log(e))
+      console.log('result',res)
+      commit('SET_CURRENT_CONNECTION_STATUS', true)
+      return res
+      
+      
+    }
+  } catch (error) {
+    apiDown(error,commit)
+    throw error
+  }
+}
+
+
+export async function transaction2({
   state,
   rootState,
   commit
@@ -135,28 +193,7 @@ export async function transaction({
   }
 }
 
-export async function testEndpoint({
-  state,
-  commit
-}, url) {
-  const timeout = new Timeout()
-  try {
-    eosConfig.httpEndpoint = url
-    const eos = Eos(eosConfig)
-    const sTime = Date.now()
-    const timer = timeout.set(state.connectionTimeoutMilSec, 'timeout')
-    const ginfo = eos.getInfo({})
-    const info = await Promise.race([ginfo, timer])
-    if (info.chain_id !== configFile.network.chainId) {
-      throw Error('Wrong chainId')
-    }
-    return info
-  } catch (error) {
-    throw error
-  } finally {
-    timeout.clear()
-  }
-}
+
 
 export async function getRegistered({
   state,
@@ -165,10 +202,8 @@ export async function getRegistered({
 }) {
   console.log('Query member registration');
   try {
-    // eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint
-    // let eos = Eos(eosConfig)
     let eos = await this.dispatch('api/getEos');
-    const members = await eos.getTableRows({
+    const members = await eos.rpc.get_table_rows({
       json: true,
       scope: configFile.network.tokenContract.name,
       code: configFile.network.tokenContract.name,
@@ -212,10 +247,8 @@ export async function getIsCandidate({
     account_to_query = payload.accountname;
   }
   try {
-    // eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint
-    // let eos = Eos(eosConfig)
     let eos = await this.dispatch('api/getEos');
-    const candidate = await eos.getTableRows({
+    const candidate = await eos.rpc.get_table_rows({
       json: true,
       scope: configFile.network.custodianContract.name,
       code: configFile.network.custodianContract.name,
@@ -264,10 +297,8 @@ export async function getIsCustodian({
     account_to_query = payload.accountname;
   }
   try {
-    // eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint
-    // let eos = Eos(eosConfig)
     let eos = await this.dispatch('api/getEos');
-    const custodian = await eos.getTableRows({
+    const custodian = await eos.rpc.get_table_rows({
       json: true,
       scope: configFile.network.custodianContract.name,
       code: configFile.network.custodianContract.name,
@@ -301,11 +332,8 @@ export async function getCandidates({
 }, param) {
 
   try {
-    // console.log(param)
-    // eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint
-    // let eos = Eos(eosConfig)
     let eos = await this.dispatch('api/getEos');
-    const custodians = await eos.getTableRows({
+    const custodians = await eos.rpc.get_table_rows({
       json: true,
       scope: configFile.network.custodianContract.name,
       code: configFile.network.custodianContract.name,
@@ -333,11 +361,8 @@ export async function getMemberVotes({
   commit,
 }, param) {
   try {
-
-    // eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint
-    // let eos = Eos(eosConfig)
     let eos = await this.dispatch('api/getEos');
-    const votes = await eos.getTableRows({
+    const votes = await eos.rpc.get_table_rows({
       json: true,
       scope: configFile.network.custodianContract.name,
       code: configFile.network.custodianContract.name,
@@ -370,10 +395,8 @@ export async function getMemberTerms({
 }) {
   console.log('Query latest terms');
   try {
-    // eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint
-    // let eos = Eos(eosConfig)
     let eos = await this.dispatch('api/getEos');
-    let memberterms = await eos.getTableRows({
+    let memberterms = await eos.rpc.get_table_rows({
       json: true,
       scope: configFile.network.tokenContract.name,
       code: configFile.network.tokenContract.name,
@@ -397,10 +420,8 @@ export async function getContractRicardian({
   commit
 }, payload) {
   try {
-    // eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint
-    // let eos = Eos(eosConfig)
     let eos = await this.dispatch('api/getEos');
-    const contract = await eos.getAbi(payload);
+    const contract = await eos.rpc.get_abi(payload);
     
     let ricardian = contract.abi.actions
     if (ricardian) {
@@ -428,10 +449,8 @@ export async function getTokenContractBalance({
     return false;
   }
   try {
-    // eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint
-    // let eos = Eos(eosConfig)
     let eos = await this.dispatch('api/getEos');
-    const balances = await eos.getCurrencyBalance(configFile.network.tokenContract.name, rootState.account.info.account_name, configFile.network.tokenContract.token)
+    const balances = await eos.rpc.get_currency_balance(configFile.network.tokenContract.name, rootState.account.info.account_name, configFile.network.tokenContract.token)
     let balance
     if (balances[0]) {
       balance = parseFloat(balances[0])
@@ -458,10 +477,8 @@ export async function getMainCurrencyBalance({
     return false;
   }
   try {
-    // eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint
-    // let eos = Eos(eosConfig)
     let eos = await this.dispatch('api/getEos');
-    const balances = await eos.getCurrencyBalance(configFile.network.mainCurrencyContract.name, rootState.account.info.account_name, configFile.network.mainCurrencyContract.token)
+    const balances = await eos.rpc.get_currency_balance(configFile.network.mainCurrencyContract.name, rootState.account.info.account_name, configFile.network.mainCurrencyContract.token)
     let balance
     if (balances[0]) {
       balance = parseFloat(balances[0])
@@ -488,13 +505,9 @@ export async function updateAccountInfo({
     return false;
   }
   try {
-    // eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint
-    // let eos = Eos(eosConfig)
     let eos = await this.dispatch('api/getEos');
 
-    const account = await eos.getAccount({
-      account_name: rootState.account.info.account_name
-    })
+    const account = await eos.rpc.get_account(rootState.account.info.account_name)
     commit('account/UPDATE_ACCOUNT_INFO', account, {
       root: true
     })
@@ -511,13 +524,8 @@ export async function getAccount({
   commit
 }, payload) {
   try {
-    
-    // eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint
-    // let eos = Eos(eosConfig)
     let eos = await this.dispatch('api/getEos');
-    const account = await eos.getAccount({
-      account_name: payload.account_name
-    })
+    const account = await eos.rpc.get_account(payload.account_name)
     commit('account/IMPORT_ACCOUNT', {info: account, scatter: true}, {root: true})
     return account
     commit('SET_CURRENT_CONNECTION_STATUS', true)
@@ -539,10 +547,8 @@ export async function getContractConfig({
   }
 
   try {
-    // eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint
-    // let eos = Eos(eosConfig)
     let eos = await this.dispatch('api/getEos');
-    const config = await eos.getTableRows({
+    const config = await eos.rpc.get_table_rows({
       json: true,
       scope: payload.contract,
       code: payload.contract,
@@ -567,10 +573,8 @@ export async function getContractState({
 }, payload) {
   console.log('getting contract state data');
   try {
-    // eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint
-    // let eos = Eos(eosConfig);
     let eos = await this.dispatch('api/getEos');
-    const cstate = await eos.getTableRows({
+    const cstate = await eos.rpc.get_table_rows({
       json: true,
       scope: payload.contract,
       code: payload.contract,
@@ -593,10 +597,8 @@ export async function getRamPrice({
   commit
 }) {
   try {
-    // eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint
-    // let eos = Eos(eosConfig)
     let eos = await this.dispatch('api/getEos');
-    const ramInfo = await eos.getTableRows({
+    const ramInfo = await eos.rpc.get_table_rows({
       json: true,
       scope: configFile.network.systemContract.name,
       code: configFile.network.systemContract.name,
@@ -621,10 +623,8 @@ export async function getCustodians({
     if(!state.endpoints[state.activeEndpointIndex]){
       return false;
     }
-    // eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint
-    // let eos = Eos(eosConfig)
     let eos = await this.dispatch('api/getEos');
-    const custodians = await eos.getTableRows({
+    const custodians = await eos.rpc.get_table_rows({
       json: true,
       scope: configFile.network.custodianContract.name,
       code: configFile.network.custodianContract.name,
@@ -657,10 +657,9 @@ export async function getProposalsFromAccount({
       console.log('specify an accountname as argument');
       return false;
     }
-    // eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint
-    // let eos = Eos(eosConfig)
+
     let eos = await this.dispatch('api/getEos');
-    const proposals = await eos.getTableRows({
+    const proposals = await eos.rpc.get_table_rows({
       json: true,
       scope: account,
       code: 'eosio.msig',
@@ -687,11 +686,9 @@ export async function getProducers({
 }, param) {
 
   try {
-    // console.log(param)
-    // eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint
-    // let eos = Eos(eosConfig)
+
     let eos = await this.dispatch('api/getEos');
-    const producers = await eos.getTableRows({
+    const producers = await eos.rpc.get_table_rows({
       json: true,
       scope: 'eosio',
       code: 'eosio',
@@ -716,10 +713,8 @@ export async function getProducerVotes({
 }, param) {
   try {
 
-    // eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint
-    // let eos = Eos(eosConfig)
     let eos = await this.dispatch('api/getEos');
-    const votes = await eos.getTableRows({
+    const votes = await eos.rpc.get_table_rows({
       json: true,
       scope: 'eosio',
       code: 'eosio',
@@ -759,11 +754,9 @@ export async function getControlledAccounts({
     account_to_query = payload.accountname;
   }
   try {
-    // eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint
-    // let eos = Eos(eosConfig)
     let eos = await this.dispatch('api/getEos');
 
-    const controlledaccs = await eos.getControlledAccounts(account_to_query);
+    const controlledaccs = await eos.rpc.history_get_controlled_accounts(account_to_query);
     // console.log('controlled accounts', controlledaccs);
     return controlledaccs;
 
@@ -779,13 +772,9 @@ export async function getAccountPermissions({
   commit
 }, payload) {
   try {
-    // eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint
-    // let eos = Eos(eosConfig)
     let eos = await this.dispatch('api/getEos');
 
-    const account = await eos.getAccount({
-      account_name: payload.accountname
-    });
+    const account = await eos.rpc.get_account(payload.accountname);
     if(account.account_name == payload.accountname){
       return account.permissions;
     }
@@ -815,7 +804,7 @@ export async function getApprovalsFromProposal({}, payload){
   try{
     let eos = await this.dispatch('api/getEos');
 
-    let approvals = (await eos.getTableRows({
+    let approvals = (await eos.rpc.get_table_rows({
       code: 'eosiomsigold',
       json: true,
       limit: 1,

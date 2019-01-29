@@ -86,6 +86,7 @@ export default {
       }
 
       let current = this.getCurrentEndpoint;
+      console.log('ggggg',current)
       let pp;
       if (current.httpEndpoint.split(':')[0].replace(/\//g, '') === 'https') {
         pp = 443
