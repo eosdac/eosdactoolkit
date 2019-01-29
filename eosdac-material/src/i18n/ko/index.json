@@ -9,7 +9,13 @@
     "title": "eosDAC 회원 클라이언트"
   },
   "candidate": {
+    "nominated_next": "다음 관리인단으로 출마",
+    "pay": "지불",
+    "read_more": "더 보기",
+    "requestedpay": "요청한 보상",
+    "select": "선택",
     "staked": "스테이킹됨",
+    "unselect": "선택 해제",
     "votes": "표"
   },
   "constitution": {
@@ -88,6 +94,7 @@
     "account_name": "계정 이름",
     "constitution": "헌법",
     "constitution_has_been_updated": "헌법이 개정되었습니다. 회원 클라이언트를 사용하려면 업데이트된 헌법에 서명하십시오.",
+    "credits": "크레딧",
     "custodians": "관리인",
     "log_in": "로그인",
     "log_out": "로그아웃",
@@ -187,6 +194,7 @@
     "connect": "연결",
     "connecting": "연결 중 ...",
     "custom_endpoint": "사용자 지정 엔드포인트",
+    "default_node": "기본 노드",
     "endpoint_set": "엔드포인트 설정 완료",
     "error_chain_id": "엔드포인트가 보낸 체인 ID가 올바르지 않습니다.",
     "error_could_not_connect_to_endpoint": "엔드포인트에 연결할 수 없습니다.",
@@ -244,7 +252,8 @@
     "stake_description": "스테이킹하려는 토큰 수를 정하십시오. 등록에 필요한 최소량은 {minimum_stake}입니다..",
     "unregister": "등록 취소",
     "unregister_as_candidate": "관리인 등록 취소",
-    "unstake": "스테이크 해제"
+    "unstake": "스테이크 해제",
+    "unstake_description": "주의: 스테이킹을 해제는 액션을 취한 후 토큰이 월렛에 다시 보일 때까지 60분의 지연이 발생합니다.  전송이 완료될 때까지 기다려주시기 바랍니다. 또한 관리인으로 선출된 경우에는 토큰이 며칠 동안 스마트 계약에 유지되며 현재 다음으로 설정됩니다 :\n\nPlease note, the unstaking action has a built in delay of 60 minutes from the time you unstake before you will see the funds back in your wallet. Please be patient for the transfer to complete. Also, if you were ever elected as a custodian, the funds will be held in a smart contract for a number of days, currently set to:"
   },
   "register": {
     "already_registered": "귀하는 이미 eosDAC 회원으로 등록되어 있습니다.",
@@ -267,6 +276,7 @@
     "choose_connection_type": "연결 유형 선택",
     "connection_type": "연결 유형",
     "identity_request_denied": "신원 인증 요청이 거부되었습니다. 다시 시도하고 요청을 수락하십시오.",
+    "login_with_scatter": "Scatter로 로그인",
     "scatter_is_locked": "Scatter가 잠금 상태입니다. 계속하려면 해제하십시오.",
     "scatter_is_not_available": "Scatter를 이용할 수 없습니다. Scatter를 이미 설치했다면 새로고침이나 권한 > 이 사이트의 권한 제거 후 다시 시도하십시오.",
     "scatter_is_outdated": "Scatter가 최신 버전이 아닙니다. Scatter를 업데이트한 후 다시 시도하십시오",
@@ -318,6 +328,7 @@
     "pushing_transaction": "트랜젝션 처리 중...",
     "quantity": "수량",
     "send": "보내다",
+    "signature_rejected": "트랜잭션을 취소했습니다",
     "to": "받는 계정",
     "transaction": "트랜잭션",
     "transaction_successful": "트랜젝션 성공",
