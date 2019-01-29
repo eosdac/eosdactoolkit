@@ -207,7 +207,12 @@
 
     <Notifier :drawer="leftDrawerOpen" />
 
-
+<div class="animate-fade" style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.9);z-index:99999" v-if="getLOADING" >
+  <div class="fixed-center">
+    <div class="text-center text-p-light"><q-icon name="vpn_key" class="animate-bounce" size="50px" /></div>
+    <div class="text-center">{{getLOADING}}</div>
+  </div>
+</div>
 
 
   </q-page-container>
@@ -280,7 +285,8 @@ export default {
       getMainCurrencyBalance: 'account/getMainCurrencyBalance',
       getLanguage: 'usersettings/getLanguage',
       getRegisteredVersionUpdate: 'account/getRegisteredVersionUpdate',
-      getMemberRoles: 'account/getMemberRoles'
+      getMemberRoles: 'account/getMemberRoles',
+      getLOADING: 'usersettings/getLOADING'
     })
   },
   methods: {

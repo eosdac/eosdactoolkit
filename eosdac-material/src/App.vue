@@ -1,21 +1,35 @@
 <template>
   <div id="q-app">
+    
     <router-view />
   </div>
 </template>
 
 <script>
+import {
+  mapGetters
+} from 'vuex'
 export default {
   name: 'App',
-  // meta () {
-  //   return {
-  //     title: this.$t('app.title'),
-  //     meta: {
-  //       description: { name: 'description', content: this.$t('app.meta_description') },
-  //       keywords: { name: 'keywords', content: this.$t('app.meta_keywords') }
-  //     }
-  //   }
-  // }
+  components: {
+  },
+  data() {
+    return {
+      // loading: false,
+      // loadingText: ''
+
+    }
+  },
+  computed: {
+    ...mapGetters({
+      // getLOADING: 'usersettings/getLOADING',
+      // getAccountName: 'account/getAccountName'
+      })
+
+  },
+  methods:{
+
+  }
 
 }
 </script>

@@ -19,6 +19,10 @@ export const SET_TRANSACTIONDELAY = (state, payload) => {
     state.transactiondelay = payload;
 }
 
+export const SET_LOADING = (state, payload) => {
+    state.LOADING = payload;
+}
+
 
 export const SET_MSIGISSEENCACHE = (state, payload) => {
     let mode = payload.mode;

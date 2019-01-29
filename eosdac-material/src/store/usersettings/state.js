@@ -4,5 +4,6 @@ export default {
   consoleMessage : true,
   retroStyle: true,
   msigIsSeenCache: [],
-  transactiondelay: 0
+  transactiondelay: 0,
+  LOADING: false
 }

@@ -1,5 +1,5 @@
 <template>
-
+<div>
 <q-modal class="text-white z-max" v-model="visible" :content-css="{maxWidth: '30vw'}">
   <q-card v-for="(action, index) in actions" :key="index" v-show="index === showAction" dark class="bg-dark">
     <q-card-title>
@@ -43,10 +43,12 @@
       <q-btn class="on-right" v-if="!cancelable" color="negative" @click="close()">{{ $t('transaction.cancel') }}</q-btn>
 
     </div>
-    <LoadingSpinner :visible="loading" :text="$t(loadingText)" />
+    
     
   </q-card>
 </q-modal>
+<LoadingSpinner :visible="loading" :text="$t(loadingText)" />
+</div>
 
 </template>
 
@@ -108,27 +110,31 @@ export default {
       // console.log('transaction comp abi cache', abicache, this.add_abicache)
       this.cancelable = cancelable
       this.visible = this.getTransactionPopup //boolean
-      this.loading = this.getTransactionPopup //boolean
-      this.loadingText = 'transaction.loading_abi'
-      for (let i = 0; i < transactionActions.length; i++) {
-        if (this.getRicardians[transactionActions[i].contract]) {
-          transactionActions[i].ricardian = this.getRicardians[transactionActions[i].contract]
-        } else {
-          transactionActions[i].ricardian = await this.$store.dispatch('api/getContractRicardian', transactionActions[i].contract)
-        }
-        let ricardianAction = transactionActions[i].ricardian.find(ricardianAction => {
-          return ricardianAction.name === transactionActions[i].action
-        })
-        if (ricardianAction && ricardianAction.ricardian_contract) {
-          transactionActions[i].ricardian = marked(ricardianAction.ricardian_contract, {
-            sanitize: true
+      this.loading = true //this.getTransactionPopup //boolean
+
+      if(this.getTransactionPopup){
+        this.loadingText = 'transaction.loading_abi'
+        for (let i = 0; i < transactionActions.length; i++) {
+          if (this.getRicardians[transactionActions[i].contract]) {
+            transactionActions[i].ricardian = this.getRicardians[transactionActions[i].contract]
+          } else {
+            transactionActions[i].ricardian = await this.$store.dispatch('api/getContractRicardian', transactionActions[i].contract)
+          }
+          let ricardianAction = transactionActions[i].ricardian.find(ricardianAction => {
+            return ricardianAction.name === transactionActions[i].action
           })
-          transactionActions[i].ricardian = this.replaceVars(transactionActions[i].ricardian, transactionActions[i].fields, transactionActions[i].action, transactionActions[i].contract)
-        } else {
-          transactionActions[i].ricardianError = true
+          if (ricardianAction && ricardianAction.ricardian_contract) {
+            transactionActions[i].ricardian = marked(ricardianAction.ricardian_contract, {
+              sanitize: true
+            })
+            transactionActions[i].ricardian = this.replaceVars(transactionActions[i].ricardian, transactionActions[i].fields, transactionActions[i].action, transactionActions[i].contract)
+          } else {
+            transactionActions[i].ricardianError = true
+          }
         }
-        // console.log(transactionActions[i].ricardian)
       }
+
+
       this.actions = transactionActions
       if(!this.getTransactionPopup){
         this.transact();

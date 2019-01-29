@@ -79,6 +79,9 @@ export async function transaction({
   commit
 }, payload) {
   try {
+    // console.log(this._vm);
+    // this._vm.$root.$emit('showloader')
+    commit('usersettings/SET_LOADING', 'Scatter Loading', {root: true});
     eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint;
     // console.log("normal eos.fc", eos.fc)//works
     if (payload.scatter) {
@@ -120,17 +123,19 @@ export async function transaction({
       }
 
       let delay = rootState.usersettings.transactiondelay ? rootState.usersettings.transactiondelay : 0;
-
+      setTimeout(()=>{commit('usersettings/SET_LOADING', 'Waiting For Signature', {root: true})},1000 );
       let res = await eos.transaction( { actions: actions }, { broadcast: true, delay_sec: delay } );
       
       // res.delay_sec = 30
       // console.log(res)
       // res = await eos.transaction( res )
+      commit('usersettings/SET_LOADING', false, {root: true});
       return res
       commit('SET_CURRENT_CONNECTION_STATUS', true)
     }
   } catch (error) {
     apiDown(error,commit)
+    commit('usersettings/SET_LOADING', false, {root: true});
     throw error
   }
 }
