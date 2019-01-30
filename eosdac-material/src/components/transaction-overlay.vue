@@ -9,7 +9,7 @@
       <q-icon v-if="getLOADING=='Transaction Succeeded'" name="check_circle_outline" class="text-positive animate-scale" size="70px" />
       <q-icon v-if="getLOADING=='Transaction Cancelled'" name="error_outline" class="text-negative animate-scale" size="70px" />
     </div>
-    <div class="text-center">
+    <div class="text-center" style="height:50px">
       {{getLOADING}}
       <div v-if="getTransactionDelay && getLOADING=='Waiting For Signature'" class="q-mt-sm q-caption text-dimwhite">(trx delay {{getTransactionDelay}}s)</div>
     </div>

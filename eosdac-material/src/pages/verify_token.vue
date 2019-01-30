@@ -1,11 +1,11 @@
 <template>
 <q-page class="text-white q-pa-md">
-  <h4 class="q-display-1 q-mb-sm q-mt-none">Verify token</h4>
+  <h4 class="q-display-1 q-mb-sm q-mt-none">{{$t('verify_token.title')}}</h4>
   <div class="q-pa-md bg-dark2 shadow-5 round-borders">
 
-    <p class="text-dimwhite">You've been redirected to this page to verify a token.</p>
+    <p class="text-dimwhite">{{$t('verify_token.description')}}</p>
     <div class="row justify-start">
-      <div style="display:inline-block;" class="bg-p-light q-pa-sm">token:</div> 
+      <div style="display:inline-block;" class="bg-p-light q-pa-sm">{{$t('verify_token.token')}}:</div> 
       <div  style="width:50%;max-width:360px;display:inline-block;"  class="bg-dark q-pa-sm"><div style="overflow:hidden">{{token}}</div></div>
       <div class="bg-dark q-pa-sm cursor-pointer" style="display:inline-block" @click="copyToClipboard"> <q-icon style="margin-top:-3px" name="file_copy" /> </div>
       <span v-if="copied_to_clipboard_msg !=null" class="q-pa-sm animate-fade q-caption text-dimwhite" >{{copied_to_clipboard_msg}}</span>
@@ -13,7 +13,7 @@
 
     <div class="row justify-end q-mt-md">
       
-      <q-btn label="validate" color="primary" @click="sign_message" />
+      <q-btn :label="$t('verify_token.validate')" color="primary" @click="sign_message" />
     </div>
     
   </div>
@@ -78,7 +78,7 @@ export default {
       var copyText = document.getElementById("token_to_verify");
       copyText.select();
       document.execCommand("copy");
-      this.copied_to_clipboard_msg = `Copied the token to your clipboard!`;
+      this.copied_to_clipboard_msg = this.$t('verify_token.copied_to_clipboard');
       setTimeout(()=>this.copied_to_clipboard_msg=null, 1500);
     }
 
