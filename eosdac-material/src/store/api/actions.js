@@ -76,11 +76,11 @@ function apiDown(e,c,s) {
 export async function transaction({
   state,
   rootState,
-  commit
+  commit,
 }, payload) {
   try {
-    // console.log(this._vm);
-    // this._vm.$root.$emit('showloader')
+    // console.log(this);
+    // payload.eventbus.$emit('showloader')
     commit('usersettings/SET_LOADING', 'Loading Scatter', {root: true});
     eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint;
     // console.log("normal eos.fc", eos.fc)//works
@@ -137,7 +137,7 @@ export async function transaction({
   } catch (error) {
     apiDown(error,commit)
     commit('usersettings/SET_LOADING', 'Transaction Cancelled',{root: true})
-    setTimeout(()=>{commit('usersettings/SET_LOADING', false, {root: true}) } ,2500);
+    setTimeout(()=>{commit('usersettings/SET_LOADING', false, {root: true}) } ,2000);
     throw error
   }
 }

@@ -161,17 +161,17 @@ export default {
       return ric
     },
      async transact() {
-      this.loading = true
+      // this.loading = true
       this.loadingText = 'transaction.pushing_transaction'
       try {
         // console.log('transact comp abi cache', this.add_abicache)
-        let trx = await this.$store.dispatch('api/transaction', {actions: this.actions, scatter: this.getUsesScatter, add_abicache: this.add_abicache})
+        let trx = await this.$store.dispatch('api/transaction', {actions: this.actions, scatter: this.getUsesScatter, add_abicache: this.add_abicache, eventbus:this.$root})
         this.$store.commit('api/NOTIFY', {
           icon: 'icon-ui-6',
           color: 'positive',
           message: this.$t('transaction.transaction_successful'),
-          details: trx.transaction_id,
-          linkText: this.$t('transaction.view_in_explorer'),
+          details: '', //trx.transaction_id,
+          linkText: 'explorer',
           linkUrl: this.$configFile.external.mainCurrencyExplorerUrl + '/transaction/' + trx.transaction_id,
           autoclose: 10
         })
@@ -185,7 +185,7 @@ export default {
           this.$store.commit('api/NOTIFY', {
             icon: 'error',
             color: 'red',
-            message: this.$t('transaction.error')+': ' + msg,
+            message: msg,
             detail: '',
             autoclose: 10
           })
@@ -195,7 +195,7 @@ export default {
             icon: 'error',
             color: 'red',
             // message: 'Error: ' + JSON.parse(err).error.details[0].message || JSON.parse(err),
-            message: this.$t('transaction.error')+': ' +this.parseError(err),
+            message: this.parseError(err),
             detail: '',
             autoclose: 10
           })
