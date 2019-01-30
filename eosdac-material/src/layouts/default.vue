@@ -207,16 +207,11 @@
 
     <Notifier :drawer="leftDrawerOpen" />
 
-<div class="animate-fade" style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.9);z-index:99999" v-if="getLOADING" >
-  <div class="row justify-end q-pa-md"><q-btn  round color="primary" icon="icon-ui-8" @click="close_signature_prompt" /></div>
-  <div class="fixed-center">
-    <div class="text-center text-p-light"><q-icon name="vpn_key" class="animate-bounce" size="50px" /></div>
-    <div class="text-center">{{getLOADING}}</div>
-  </div>
-</div>
 
+  <TransactionOverlay />
 
   </q-page-container>
+
   <NodeSelector setup v-on:done="$refs.init_interface.auto_scatter()"/>
   <InitInterface ref="init_interface" v-on:done="setupComplete=true"/>
   <!-- depricated multimodal -->
@@ -245,6 +240,7 @@ import NodeSelector from 'components/nodeselector'
 import Notifier from 'components/notifier'
 import MenuDropdown from 'components/menu-dropdown'
 import VoteEosdac from 'components/vote-eosdac'
+import TransactionOverlay from 'components/transaction-overlay'
 
 export default {
 
@@ -255,7 +251,8 @@ export default {
     MenuDropdown,
     VoteEosdac,
     NodeSelector,
-    InitInterface
+    InitInterface,
+    TransactionOverlay
   },
   data() {
     return {

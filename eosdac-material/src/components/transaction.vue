@@ -110,7 +110,7 @@ export default {
       // console.log('transaction comp abi cache', abicache, this.add_abicache)
       this.cancelable = cancelable
       this.visible = this.getTransactionPopup //boolean
-      this.loading = true //this.getTransactionPopup //boolean
+      this.loading = this.getTransactionPopup //this.getTransactionPopup //boolean
 
       if(this.getTransactionPopup){
         this.loadingText = 'transaction.loading_abi'

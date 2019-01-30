@@ -81,7 +81,7 @@ export async function transaction({
   try {
     // console.log(this._vm);
     // this._vm.$root.$emit('showloader')
-    commit('usersettings/SET_LOADING', 'Scatter Loading', {root: true});
+    commit('usersettings/SET_LOADING', 'Loading Scatter', {root: true});
     eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint;
     // console.log("normal eos.fc", eos.fc)//works
     if (payload.scatter) {
@@ -129,13 +129,15 @@ export async function transaction({
       // res.delay_sec = 30
       // console.log(res)
       // res = await eos.transaction( res )
-      commit('usersettings/SET_LOADING', false, {root: true});
+      commit('usersettings/SET_LOADING', 'Transaction Succeeded',{root: true})
+      setTimeout(()=>{commit('usersettings/SET_LOADING', false, {root: true}) } ,2500);
       return res
       commit('SET_CURRENT_CONNECTION_STATUS', true)
     }
   } catch (error) {
     apiDown(error,commit)
-    commit('usersettings/SET_LOADING', false, {root: true});
+    commit('usersettings/SET_LOADING', 'Transaction Cancelled',{root: true})
+    setTimeout(()=>{commit('usersettings/SET_LOADING', false, {root: true}) } ,2500);
     throw error
   }
 }
