@@ -72,6 +72,9 @@
         <div class="q-pb-xs">
           Submitted on: <span class="text-dimwhite">{{new Date(msig.block_time).toUTCString()}}</span>
         </div>
+        <div class="q-pb-xs">
+          Expiration: <span class="text-dimwhite">{{new Date(msig.trx.expiration).toUTCString()}}</span>
+        </div>
 
         <div  class="q-mb-xs">
           <div>Description:</div>

@@ -9,7 +9,7 @@
     <!-- Tabs - notice slot="title" -->
     <q-tab default slot="title" name="open" label="open" />
     <q-tab slot="title" name="executed" label="executed"  />
-    <q-tab slot="title" name="cancelled" label="cancelled"  />
+    <q-tab slot="title" name="cancelled" label="cancelled/expired"  />
   </q-tabs>
 
   <div class="row bg-dark2 q-pa-md q-mb-md shadow-5 round-borders justify-between" v-if="true" >
@@ -108,7 +108,16 @@ export default {
       //calculate skip
       let skip = (this.pagination.page-1) * this.pagination.items_per_page;
       //make request
-      this.getProposals({find:{ status: map[this.active_tab] }, skip: skip, limit: this.pagination.items_per_page});
+      let find = {
+        status: map[this.active_tab]
+      }
+      if(find.status === 1){
+        find["trx.expiration"] = { $gt: new Date()};
+      }
+      if(find.status === 0){
+        find =  {$or: [ { status: 0 }, { "trx.expiration": { $lt: new Date() }  } ] }  
+      }
+      this.getProposals({find: find, skip: skip, limit: this.pagination.items_per_page});
     },
 
     async getProposals(query){
