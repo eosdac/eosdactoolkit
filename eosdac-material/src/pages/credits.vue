@@ -41,7 +41,7 @@
       [ {{others.join(', ')}}, ... ]
     </div>
 
-    <div class="retrotext relative-position full-width q-mt-xl" style="font-size:20px; text-align:right">© eosDAC</div>
+    <div class="retrotext relative-position full-width q-mt-xl" style="font-size:20px; text-align:right">© TestDAC</div>
 
   </div>
   <!-- -- -->
@@ -58,7 +58,7 @@
     </div>
 
     <div class=" q-pa-lg relative-position round-borders bg-dark2 shadow-5 q-mt-md">
-      <div class="q-mb-md">eosDAC Workers</div>
+      <div class="q-mb-md">TestDAC Workers</div>
       <div class="text-dimwhite">{{dac_workers.join(', ')}}</div>
     </div>
 

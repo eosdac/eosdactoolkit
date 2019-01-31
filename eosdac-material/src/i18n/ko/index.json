@@ -6,7 +6,7 @@
   "app": {
     "meta_description": "해당 메타 태그로 파싱되는 멤버 클라이언트에 대한 설명입니다.",
     "meta_keywords": "자율, 탈중화, 커뮤니티, 투표",
-    "title": "eosDAC 회원 클라이언트"
+    "title": "TestDAC 회원 클라이언트"
   },
   "candidate": {
     "nominated_next": "다음 관리인단으로 출마",
@@ -127,9 +127,9 @@
   },
   "index": {
     "already_subscribed": "이미 구독 중입니다!",
-    "description_p1": "eosDAC은 탈중앙화된 자율 커뮤니티로서 eosDAC 헌법에 동의하고 정회원 등록을 한 토큰 홀더가 소유하고 운영합니다.",
-    "description_p2": "완성된 회원 클라이언트 기능: eosDAC 헌법 읽기, 회원 등록, 작업자 제안 제출, 관리인 후보 등록, 관리인 투표, 토큰 전송 등. 문의 사항은 하단의 링크를 통해 연락주십시오.",
-    "discord_description": "eosDAC은 다른 DAC들의 출범을 도와주는 툴을 개발하기 위해 적극적이고 활발하게 활동하는 커뮤니티로서 존재합니다. Discord에서 여러분의 재능과 능력을 증명하고 eosDAC 활동을 함께 해나갈 수 있습니다.",
+    "description_p1": "TestDAC은 탈중앙화된 자율 커뮤니티로서 TestDAC 헌법에 동의하고 정회원 등록을 한 토큰 홀더가 소유하고 운영합니다.",
+    "description_p2": "완성된 회원 클라이언트 기능: TestDAC 헌법 읽기, 회원 등록, 작업자 제안 제출, 관리인 후보 등록, 관리인 투표, 토큰 전송 등. 문의 사항은 하단의 링크를 통해 연락주십시오.",
+    "discord_description": "TestDAC은 다른 DAC들의 출범을 도와주는 툴을 개발하기 위해 적극적이고 활발하게 활동하는 커뮤니티로서 존재합니다. Discord에서 여러분의 재능과 능력을 증명하고 TestDAC 활동을 함께 해나갈 수 있습니다.",
     "eosdac": "eosdac.io/ko",
     "error_occured": "오류가 발생했습니다!",
     "join_discord": "Discord 커뮤니티 가입하기",
@@ -142,14 +142,14 @@
     "signout": "로그아웃",
     "submit_wp": "작업자 제안",
     "subscribe": "구독하기",
-    "subscribe_newsletter": "eosDAC 뉴스레터 구독",
+    "subscribe_newsletter": "TestDAC 뉴스레터 구독",
     "subscribed_successfully": "구독했습니다!",
     "valid_input_required": "입력하신 내용이 유효하지 않습니다",
     "visit_eosdac": "eosdac.io 웹사이트 방문",
     "vote_cust": "관리인 투표",
     "wallet": "지갑",
-    "website_description": "eosDAC에 대해 알고 싶다면 웹사이트 eosdac.io에 모든 것이 올라와 있습니다. 지금 방문하시고 커뮤니티가 운영하는 EOS 블록 프로듀서에 대해 알아보세요.",
-    "welcome_to_esodac_member_client": "eosDAC 회원 클라이언트에 오신 것을 환영합니다",
+    "website_description": "TestDAC에 대해 알고 싶다면 웹사이트 eosdac.io에 모든 것이 올라와 있습니다. 지금 방문하시고 커뮤니티가 운영하는 EOS 블록 프로듀서에 대해 알아보세요.",
+    "welcome_to_esodac_member_client": "TestDAC 회원 클라이언트에 오신 것을 환영합니다",
     "your_email": "내 이메일",
     "your_language": "내 언어"
   },
@@ -238,9 +238,9 @@
     "locked_tokens": "락업된 토큰",
     "msg_reqpay_error": "희망하는 지불 수량을 입력하십시오.",
     "msg_stake_error": "스테이크할 수량을 정하십시오.",
-    "page_description_active_custodian": "귀하는 현재 eosDAC 관리인단으로서 활동 중입니다.",
+    "page_description_active_custodian": "귀하는 현재 TestDAC 관리인단으로서 활동 중입니다.",
     "page_description_registered": "관리인단 후보로 등록해주셔서 감사합니다. 관리인 후보 등록 과정의 일부로 귀하의 토큰은 스테이킹되었습니다.",
-    "page_description_unregistered": "이 페이지에서 관리인단 후보로 등록할 수 있습니다. 관리인은 eosDAC 헌법에 명시된 책임을 가집니다. eosDAC 헌법을 이해하지 못 하였거나 관리인단으로서의 책임을 다 할 수 없을 시에는 등록하지 마십시오. 등록 전 헌법 제 5항을 자세히 읽어보시기 바랍니다.",
+    "page_description_unregistered": "이 페이지에서 관리인단 후보로 등록할 수 있습니다. 관리인은 TestDAC 헌법에 명시된 책임을 가집니다. TestDAC 헌법을 이해하지 못 하였거나 관리인단으로서의 책임을 다 할 수 없을 시에는 등록하지 마십시오. 등록 전 헌법 제 5항을 자세히 읽어보시기 바랍니다.",
     "pay_description": "관리인 임기(1주일) 동안 받고 싶은 EOS 토큰 수를 입력해 주십시오. 요구할 수 있는 최대치는 {requested_pay}입니다.",
     "profile_not_confirmed": "제출한 프로필이 아직 블록체인 상에서 확인되지 않았습니다. 기다렸다가 다시 시도해주십시오.",
     "profile_required": "관리인 후보로 등록하려면 프로필이 필요합니다.",
@@ -256,23 +256,23 @@
     "unstake_description": "주의: 스테이킹을 해제는 액션을 취한 후 토큰이 월렛에 다시 보일 때까지 60분의 지연이 발생합니다.  전송이 완료될 때까지 기다려주시기 바랍니다. 또한 관리인으로 선출된 경우에는 토큰이 며칠 동안 스마트 계약에 유지되며 현재 다음으로 설정됩니다 :\n\nPlease note, the unstaking action has a built in delay of 60 minutes from the time you unstake before you will see the funds back in your wallet. Please be patient for the transfer to complete. Also, if you were ever elected as a custodian, the funds will be held in a smart contract for a number of days, currently set to:"
   },
   "register": {
-    "already_registered": "귀하는 이미 eosDAC 회원으로 등록되어 있습니다.",
+    "already_registered": "귀하는 이미 TestDAC 회원으로 등록되어 있습니다.",
     "checking_status": "회원 상태 확인 중 ...",
     "close": "닫기",
-    "congratulations_registered": "축하합니다! 이제 eosDAC 회원으로 등록되었습니다.",
+    "congratulations_registered": "축하합니다! 이제 TestDAC 회원으로 등록되었습니다.",
     "constitution_hash": "헌법 해시",
     "could_not_retrieve_member_status": "회원 상태를 검색할 수 없습니다.",
     "fullscreen": "전체 화면",
     "i_accept_the_constitution": "나는 헌법에 동의합니다.",
     "loading_latest_constitution": "최신 헌법 불러오는 중 ...",
-    "must_sign_constitution": "eosDAC 회원이 되려면 헌법에 동의하고 서명해야 합니다.",
+    "must_sign_constitution": "TestDAC 회원이 되려면 헌법에 동의하고 서명해야 합니다.",
     "register": "등록",
     "registration_sign_the_constitution": "등록 - 헌법 서명",
     "try_again": "다시 시도하십시오.",
     "updated_constitution": "헌법이 개정되었습니다. 계속하려면 헌법에 서명하십시오."
   },
   "scatter_signin": {
-    "choose_authentication_type": "eosDAC 회원 클라이언트에 로그인하려면 인증 유형을 선택하십시오.",
+    "choose_authentication_type": "TestDAC 회원 클라이언트에 로그인하려면 인증 유형을 선택하십시오.",
     "choose_connection_type": "연결 유형 선택",
     "connection_type": "연결 유형",
     "identity_request_denied": "신원 인증 요청이 거부되었습니다. 다시 시도하고 요청을 수락하십시오.",
@@ -299,8 +299,8 @@
     "API_endpoint": "API 엔드포인트",
     "NOT_REGISTERED": "미등록",
     "REGISTERED": "등록됨",
-    "click_below_to_unregister_membership": "eosDAC 회원 가입을 취소하려면 아래 버튼을 클릭하십시오.",
-    "click_register_now": "eosDAC의 회원이 되려면 \"지금 등록\"을 클릭하십시오.",
+    "click_below_to_unregister_membership": "TestDAC 회원 가입을 취소하려면 아래 버튼을 클릭하십시오.",
+    "click_register_now": "TestDAC의 회원이 되려면 \"지금 등록\"을 클릭하십시오.",
     "current_connection": "현재 연결 상태",
     "current_language": "현재 언어",
     "current_status": "현재 상태",
@@ -341,7 +341,7 @@
   "vote_custodians": {
     "candidate_list": "후보 목록",
     "candidate_registration": "후보 등록하기",
-    "description_main": "관리인단은 DAC의 운영 및 업무를 관리합니다. 여기에는 DAC의 자산 및 부채의 관리 및 관리가 포함됩니다 (이에 국한되지 않음). 자신의 토큰 중 일부를 스테이킹하여 7일간 지속되는 관리인단 후보로 출마한 eosDAC 회원은 다음과 같습니다. 귀하의 투표는 다음 관리인단을 선출하기 위해 7일마다 재계산됩니다. 투표가 중요합니다! 누가 eosDAC의 가치를 높이는지 제대로 판단하려면 eosDAC에 계속해서 참여하고 정기적으로 투표하십시오.",
+    "description_main": "관리인단은 DAC의 운영 및 업무를 관리합니다. 여기에는 DAC의 자산 및 부채의 관리 및 관리가 포함됩니다 (이에 국한되지 않음). 자신의 토큰 중 일부를 스테이킹하여 7일간 지속되는 관리인단 후보로 출마한 TestDAC 회원은 다음과 같습니다. 귀하의 투표는 다음 관리인단을 선출하기 위해 7일마다 재계산됩니다. 투표가 중요합니다! 누가 TestDAC의 가치를 높이는지 제대로 판단하려면 TestDAC에 계속해서 참여하고 정기적으로 투표하십시오.",
     "description_side": "한 번에 최대 5명의 관리인 후보자에게 투표할 수 있습니다. DAC의 가치를 높일 수 있는 후보자를 선택하십시오.",
     "loading_candidates": "후보 불러오는 중",
     "my_votes": "내 투표",
@@ -353,14 +353,14 @@
     "voting_progress": "투표 진행 중"
   },
   "vote_eosdac": {
-    "added_to_list": "eosDAC BP가 귀하의 투표 목록에 추가되었습니다",
+    "added_to_list": "TestDAC BP가 귀하의 투표 목록에 추가되었습니다",
     "confirm": "확인",
     "please_delete": "{eosdac_bp}을 추가하려면 한 표를 제거하십시오.",
     "remove_vote": "한 표를 제거하십시오.",
     "thank_you": "투표해 주셔서 감사합니다!",
     "thank_you_for": "{eosdac_bp}에 투표해 주셔서 감사합니다.",
     "vote_decayed": "투표력이 약해지고 있습니다!",
-    "vote_for_eosdac": "eosDAC에 투표하세요",
+    "vote_for_eosdac": "TestDAC에 투표하세요",
     "voted_with_proxy": "대리 투표로 투표하셨습니다",
     "votes": "투표",
     "voting_power": "투표력"
@@ -370,7 +370,7 @@
     "loading": "불러오는 중...",
     "refresh": "새로고침",
     "seconds": "초",
-    "threshold_met": "15% 최소 투표율이 넘었습니다. eosDAC이 해제되었습니다.",
+    "threshold_met": "15% 최소 투표율이 넘었습니다. TestDAC이 해제되었습니다.",
     "update_in": "업데이트 시각"
   },
   "wallet": {

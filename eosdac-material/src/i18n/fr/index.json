@@ -6,7 +6,7 @@
   "app": {
     "meta_description": "Voici la description de notre client membre qui est analysé dans les tags correspondants",
     "meta_keywords": "autonome, décentralisée, communauté, vote",
-    "title": "eosDAC Membre Client"
+    "title": "TestDAC Membre Client"
   },
   "candidate": {
     "staked": "Investi",
@@ -50,9 +50,9 @@
   },
   "index": {
     "already_subscribed": "Déjà abonné !",
-    "description_p1": "eosDAC est une communauté décentralisée et autonome, ce qui signifie qu'elle appartient et est gérée par les personnes qui détiennent des tokens, qui acceptent de respecter la constitution et qui se sont inscrit en tant que membre de la communauté.",
+    "description_p1": "TestDAC est une communauté décentralisée et autonome, ce qui signifie qu'elle appartient et est gérée par les personnes qui détiennent des tokens, qui acceptent de respecter la constitution et qui se sont inscrit en tant que membre de la communauté.",
     "description_p2": "Une fois complété, ce client membre vous permettra de lire la constitution, de vous enregistrer en tant que membre, soumettre des propositions de travail, vous inscrire pour devenir candidat, voter pour les délégués, transférer des tokens, et plus. Si vous avez des questions, cliquez sur le lien ci-dessous.",
-    "discord_description": "eosDAC se présente comme étant une communauté active et engagée, un outil qui sert à développer d'autres DACs. Discord est l'endroit où nous rassemblons nos compétences et coordonnons nos activités.",
+    "discord_description": "TestDAC se présente comme étant une communauté active et engagée, un outil qui sert à développer d'autres DACs. Discord est l'endroit où nous rassemblons nos compétences et coordonnons nos activités.",
     "eosdac": "eosdac.io",
     "error_occured": "Quelque chose ne n'est pas bien passé !",
     "join_discord": "Rejoingé notre communauté sur Discord",
@@ -71,8 +71,8 @@
     "visit_eosdac": "Visité notre site internet eosdac.io",
     "vote_cust": "Voter Délégués",
     "wallet": "Portefeuille",
-    "website_description": "Tout ce que vous souhaitez savoir au sujet d'eosDAC est libre d'accès sur notre site internet eosdac.io. Visité le lien aujourd'hui et vous en apprendrez plus sur la communauté qui gère le block producer EOS.",
-    "welcome_to_esodac_member_client": "Bienvenue au client membre d'eosDAC",
+    "website_description": "Tout ce que vous souhaitez savoir au sujet d'TestDAC est libre d'accès sur notre site internet eosdac.io. Visité le lien aujourd'hui et vous en apprendrez plus sur la communauté qui gère le block producer EOS.",
+    "welcome_to_esodac_member_client": "Bienvenue au client membre d'TestDAC",
     "your_email": "Votre email",
     "your_language": "Votre langage"
   },
@@ -160,9 +160,9 @@
     "locked_tokens": "tokens bloqués",
     "msg_reqpay_error": "Veuillez remplir le montant du paiement.",
     "msg_stake_error": "Veuillez spécifier le montant de votre mise.",
-    "page_description_active_custodian": "Vous êtes actuellement actif en tant que membre du conseil des Délégués d'eosDAC.",
-    "page_description_registered": "Merci pour vous êtes inscris en tant que candidat pour servir au conseil des Délégués d'eosDAC. Dans le cadre de votre conditature, certains de vos tokens ont été *stake*.",
-    "page_description_unregistered": "Cette page sert à s'inscrire en tant que candidat au conseil des délégués. Cette position s'accompagne de responsabilités qui sont également mentionées dans la constitution d'eosDAC. S'il-vous-plaît, inscrivez-vous seulement en tant que candidat si vous avez entièrement compris les responsabilités d'un membre du conseil des délégués d'eosDAC. Vous pouvez vous référer à la partie 5 pour plus d'information.",
+    "page_description_active_custodian": "Vous êtes actuellement actif en tant que membre du conseil des Délégués d'TestDAC.",
+    "page_description_registered": "Merci pour vous êtes inscris en tant que candidat pour servir au conseil des Délégués d'TestDAC. Dans le cadre de votre conditature, certains de vos tokens ont été *stake*.",
+    "page_description_unregistered": "Cette page sert à s'inscrire en tant que candidat au conseil des délégués. Cette position s'accompagne de responsabilités qui sont également mentionées dans la constitution d'TestDAC. S'il-vous-plaît, inscrivez-vous seulement en tant que candidat si vous avez entièrement compris les responsabilités d'un membre du conseil des délégués d'TestDAC. Vous pouvez vous référer à la partie 5 pour plus d'information.",
     "pay_description": "veuillez indiquer le montant que vous souhaitez recevoir en tant que Délégué pendant une période. Le montant maximum est {requested_pay}.",
     "profile_not_confirmed": "Vous avez soumis votre profil mais il n'est toujours pas confirmé sur la blockchain, attendez un cours instant s'il-vous-plaît et réessayez à nouveau.",
     "profile_required": "Afin de pouvoir vous présenter comme candidat, vous devez d'abord avoir un profil.",
@@ -176,23 +176,23 @@
     "unregister_as_candidate": "Non enregistré en tant que Candidat"
   },
   "register": {
-    "already_registered": "Vous êtes déjà inscrit en tant que membre eosDAC",
+    "already_registered": "Vous êtes déjà inscrit en tant que membre TestDAC",
     "checking_status": "Vérification du statut du membre...",
     "close": "Fermer",
-    "congratulations_registered": "Toutes nos félicitations! Vous êtes maintenant inscrit en tant que membre eosDAC",
+    "congratulations_registered": "Toutes nos félicitations! Vous êtes maintenant inscrit en tant que membre TestDAC",
     "constitution_hash": "Constitution Hash",
     "could_not_retrieve_member_status": "Impossible de récupérer le statut du membre",
     "fullscreen": "Plein écran",
     "i_accept_the_constitution": "J'accepte la constitution",
     "loading_latest_constitution": "Chargement de la dernière constitution...",
-    "must_sign_constitution": "Pour devenir membre de eosDAC, vous devez accepter et signer la Constitution",
+    "must_sign_constitution": "Pour devenir membre de TestDAC, vous devez accepter et signer la Constitution",
     "register": "Inscription",
     "registration_sign_the_constitution": "Inscription - Signer la Constitution",
     "try_again": "Réessayer",
     "updated_constitution": "La constitution a été mise à jour. Veuillez signer la constitution pour continuer."
   },
   "scatter_signin": {
-    "choose_authentication_type": "Veuillez choisir un type d'authentification pour vous connecter au client membre eosDAC",
+    "choose_authentication_type": "Veuillez choisir un type d'authentification pour vous connecter au client membre TestDAC",
     "choose_connection_type": "Choisissez le type de connexion",
     "connection_type": "Type de connexion",
     "identity_request_denied": "La demande d'identification a été refusée. Veuillez réessayer et accepter la demande",
@@ -218,8 +218,8 @@
     "API_endpoint": "point final API",
     "NOT_REGISTERED": "NON ENREGISTRÉ",
     "REGISTERED": "INSCRIT",
-    "click_below_to_unregister_membership": "Cliquez sur le bouton ci-dessous pour annuler votre inscription à eosDAC",
-    "click_register_now": "Cliquez sur \"S'inscrire maintenant\" pour devenir membre d'eosDAC.",
+    "click_below_to_unregister_membership": "Cliquez sur le bouton ci-dessous pour annuler votre inscription à TestDAC",
+    "click_register_now": "Cliquez sur \"S'inscrire maintenant\" pour devenir membre d'TestDAC.",
     "current_connection": "Connexion actuelle",
     "current_language": "Langue courante",
     "current_status": "Statut actuel",
@@ -271,7 +271,7 @@
     "loading": "Chargement...",
     "refresh": "Rafraîchir",
     "seconds": "secondes",
-    "threshold_met": "Seuil de vote de 15% atteint. eosDAC est débloquée.",
+    "threshold_met": "Seuil de vote de 15% atteint. TestDAC est débloquée.",
     "update_in": "Mettre à jour dans"
   },
   "wallet": {

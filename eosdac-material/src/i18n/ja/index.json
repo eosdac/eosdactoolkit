@@ -6,7 +6,7 @@
   "app": {
     "meta_description": "対応するメタタグに解析されたメンバークライアントの説明です",
     "meta_keywords": "自律型、分散型、コミュニティ、投票",
-    "title": "eosDACメンバークライアント"
+    "title": "TestDACメンバークライアント"
   },
   "candidate": {
     "nominated_next": "次期カストディアンに指名されました",
@@ -126,12 +126,12 @@
   },
   "index": {
     "already_subscribed": "すでに購読しています！",
-    "description_p1": "eosDACは、規約に合意し、コミュニティのメンバーとして登録されたトークン保有者によって運営される分散自立コミュニティです。",
+    "description_p1": "TestDACは、規約に合意し、コミュニティのメンバーとして登録されたトークン保有者によって運営される分散自立コミュニティです。",
     "description_p2": "完了したら、メンバークライアントを使用して、規約の確認、ワーカープロポーザルの提出、カストディアン候補としての登録、カストディアンへの投票、トークンの転送などができるようになります。質問がある場合は、以下のリンクからご連絡下さい。",
-    "discord_description": "eosDACは、他のDACsを実現するためのツールを精力的に開発するコミュニティです。活動は主にDiscord上で行われています。",
+    "discord_description": "TestDACは、他のDACsを実現するためのツールを精力的に開発するコミュニティです。活動は主にDiscord上で行われています。",
     "eosdac": "eosdac.io",
     "error_occured": "問題が起こりました。",
-    "join_discord": "DiscordのeosDACコミュニティに是非参加して下さい",
+    "join_discord": "DiscordのTestDACコミュニティに是非参加して下さい",
     "key_features": "主要な機能",
     "open_discord": "Discordを開く",
     "read_constitution": "規約",
@@ -147,8 +147,8 @@
     "visit_eosdac": "ウェブサイト(eosdac.io)を見る",
     "vote_cust": "カストディアンへの投票",
     "wallet": "ウォレット",
-    "website_description": "eosDACに関するあらゆる情報はeosDACのウェブサイト(eosdac.io)で確認できます。是非ウェブサイトから、EOSのブロックプロデューサーを運営しているeosDACコミュニティの詳細を確認してみて下さい。",
-    "welcome_to_esodac_member_client": "eosDACメンバークライアントへようこそ",
+    "website_description": "TestDACに関するあらゆる情報はTestDACのウェブサイト(eosdac.io)で確認できます。是非ウェブサイトから、EOSのブロックプロデューサーを運営しているTestDACコミュニティの詳細を確認してみて下さい。",
+    "welcome_to_esodac_member_client": "TestDACメンバークライアントへようこそ",
     "your_email": "メールアドレス",
     "your_language": "言語"
   },
@@ -238,7 +238,7 @@
     "msg_reqpay_error": "支払い数量を入力してください。",
     "msg_stake_error": "ステーク数量を入力してください。",
     "page_description_active_custodian": "現在、カストディアンボードのアクティブメンバーです。",
-    "page_description_registered": "eosDACのカストディアン候補へのご登録ありがとうございます。候補登録の一環として、いくつかのトークンがステークされます。",
+    "page_description_registered": "TestDACのカストディアン候補へのご登録ありがとうございます。候補登録の一環として、いくつかのトークンがステークされます。",
     "page_description_unregistered": "このページは、カストディアンボードのメンバー候補への登録ページです。カストディアンボードのメンバーは、規約で概説されている責任を負います。カストディアンボードのメンバーとしての責任を理解し、それを全うできる場合にのみ、候補者登録をしてください。登録前に、規約のセクション5を入念に確認して下さい。",
     "pay_description": "カストディアンとして受け取りたい一期分の数量を入力して下さい。要求できる数量は最大で {requested_pay} です。",
     "profile_not_confirmed": "プロフィールを送信しましたが、まだブロックチェーン上で承認されていません。少し時間を置いてから再度お試し下さい。",
@@ -255,23 +255,23 @@
     "unstake_description": "ステークを解除してからウォレットに残高が反映されるまで、承認時間として60分の待ち時間が生じることにご注意下さい。ご不便をおかけしますが処理が完了するまでお待ち下さい。また、カストディアンとして選任された場合、残高は所定の日数、スマートコントラクトに保管されます。現在の保管日数："
   },
   "register": {
-    "already_registered": "eosDACのメンバーとして登録済みです。",
+    "already_registered": "TestDACのメンバーとして登録済みです。",
     "checking_status": "メンバーステータスを確認中...",
     "close": "閉じる",
-    "congratulations_registered": "おめでとうございます！eosDACのメンバーとして登録されました。",
+    "congratulations_registered": "おめでとうございます！TestDACのメンバーとして登録されました。",
     "constitution_hash": "規約のハッシュ",
     "could_not_retrieve_member_status": "メンバーステータスを取得できませんでした",
     "fullscreen": "全画面表示",
     "i_accept_the_constitution": "規約を承認する",
     "loading_latest_constitution": "最新の規約を読み込んでいます...",
-    "must_sign_constitution": "eosDACのメンバーになるためには、規約に同意し署名する必要があります。",
+    "must_sign_constitution": "TestDACのメンバーになるためには、規約に同意し署名する必要があります。",
     "register": "登録",
     "registration_sign_the_constitution": "登録 - 規約に署名する",
     "try_again": "再試行",
     "updated_constitution": "規約が更新されました。続行するには規約に署名してください。"
   },
   "scatter_signin": {
-    "choose_authentication_type": "eosDACメンバークライアントにサインインする認証タイプを選択してください。",
+    "choose_authentication_type": "TestDACメンバークライアントにサインインする認証タイプを選択してください。",
     "choose_connection_type": "接続タイプを選択",
     "connection_type": "接続タイプ",
     "identity_request_denied": "IDリクエストが拒否されました。もう一度お試しください。",
@@ -298,8 +298,8 @@
     "API_endpoint": "APIエンドポイント",
     "NOT_REGISTERED": "未登録",
     "REGISTERED": "登録済み",
-    "click_below_to_unregister_membership": "eosDACのメンバー登録を解除するには、下のボタンをクリックしてください",
-    "click_register_now": "eosDACのメンバーになるには、\"登録する\"をクリックしてください。",
+    "click_below_to_unregister_membership": "TestDACのメンバー登録を解除するには、下のボタンをクリックしてください",
+    "click_register_now": "TestDACのメンバーになるには、\"登録する\"をクリックしてください。",
     "current_connection": "現在のコネクション",
     "current_language": "現在の言語",
     "current_status": "現在のステータス",
@@ -358,7 +358,7 @@
     "thank_you": "ご投票いただきありがとうございます！",
     "thank_you_for": "{eosdac_bp}にご投票いただきありがとうございます！",
     "vote_decayed": "投票のウェイトが低下しています！",
-    "vote_for_eosdac": "eosDACに投票",
+    "vote_for_eosdac": "TestDACに投票",
     "voted_with_proxy": "代理で投票しました",
     "votes": "投票",
     "voting_power": "投票パワー"
@@ -368,7 +368,7 @@
     "loading": "読み込み中...",
     "refresh": "更新",
     "seconds": "秒",
-    "threshold_met": "投票の閾値(15%)に到達しました。eosDACがアンロックされます。",
+    "threshold_met": "投票の閾値(15%)に到達しました。TestDACがアンロックされます。",
     "update_in": "更新まで"
   },
   "wallet": {
