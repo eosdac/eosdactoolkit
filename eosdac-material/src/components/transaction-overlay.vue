@@ -51,12 +51,12 @@ export default {
     close() {
       // Object.assign(this.$data, this.$options.data())
       // this.visible = false
-      console.log('ggggggggggggggggggggggggggggggggggg')
+      
     },
    
   },
   created(){
-    this.$root.$on('showloader', this.close)
+    // this.$root.$on('showloader', this.close)
   }
 }
 </script>

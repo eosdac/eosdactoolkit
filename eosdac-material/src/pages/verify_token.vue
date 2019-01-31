@@ -1,8 +1,10 @@
 <template>
 <q-page class="text-white q-pa-md">
+  <!-- <pre>{{actor}} {{getAccountName}}</pre> -->
   <h4 class="q-display-1 q-mb-sm q-mt-none">{{$t('verify_token.title')}}</h4>
-  <div class="q-pa-md bg-dark2 shadow-5 round-borders">
 
+
+  <div v-if="enable_gui" class="q-pa-md bg-dark2 shadow-5 round-borders">
     <p class="text-dimwhite">{{$t('verify_token.description')}}</p>
     <div class="row justify-start">
       <div style="display:inline-block;" class="bg-p-light q-pa-sm">{{$t('verify_token.token')}}:</div> 
@@ -10,13 +12,18 @@
       <div class="bg-dark q-pa-sm cursor-pointer" style="display:inline-block" @click="copyToClipboard"> <q-icon style="margin-top:-3px" name="file_copy" /> </div>
       <span v-if="copied_to_clipboard_msg !=null" class="q-pa-sm animate-fade q-caption text-dimwhite" >{{copied_to_clipboard_msg}}</span>
     </div>
-
     <div class="row justify-end q-mt-md">
-      
       <q-btn :label="$t('verify_token.validate')" color="primary" @click="sign_message" />
     </div>
-    
   </div>
+
+
+  <div v-if="!enable_gui" class="q-pa-md bg-dark2 shadow-5 round-borders text-dimwhite">
+    Please login <span class="text-bold text-white">{{actor}}</span> to verify your token.
+  </div>
+
+
+
   <input id="token_to_verify" style="position:absolute;left:-9999px" :value="token" />
 
   <Transaction ref="Transaction"  />
@@ -43,20 +50,33 @@ export default {
       loading: false,
       loadingText: '',
       token: null,
-      copied_to_clipboard_msg:null
+      actor: undefined,
+      copied_to_clipboard_msg: null
 
     }
   },
   computed: {
     ...mapGetters({
       // getactiveCustodians: 'api/getActiveCustodians',
-      // getAccountName: 'account/getAccountName'
-      })
+      getAccountName: 'account/getAccountName'
+    }),
+    enable_gui (){
+      let enabled =  false;
+      if(this.getAccountName && this.actor == this.getAccountName){
+        enabled = true;
+      }
+      if(this.getAccountName && !this.actor  ){
+        enabled = true;
+      }
+      return enabled;
+    }
 
   },
   methods:{
     init(){
-      this.token = this.$route.params.token;
+      let [token, actor] = this.$route.params.token.split(':');
+      this.token = token;
+      this.actor = actor;
 
     },
 
@@ -88,7 +108,7 @@ export default {
   },
   watch: {
     '$route': function(){
-                this.initProfile();
+                this.init();
               },
 
   }
