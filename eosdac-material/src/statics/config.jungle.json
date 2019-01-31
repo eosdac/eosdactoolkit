@@ -35,7 +35,7 @@
   },
   "api": {
     "bpNodeApiUrl": "https://eosdac.io/topnodes.json",
-    "memberClientApiUrl": "http://ns3119712.ip-51-38-42.eu:3000"
+    "memberClientApiUrl": "http://localhost:3000"
   },
   "external":{
     "homepage": "https://eosdac.io",
