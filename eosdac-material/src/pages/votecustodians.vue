@@ -18,6 +18,11 @@
   </div>
 
 <div class="q-pa-md"> <!-- padding wrapper -->
+
+
+<custodians-display />
+
+
 <div class="row gutter-md reverse-wrap">
 
   <!-- first column  -->
@@ -142,6 +147,7 @@ import Candidate from 'components/candidate'
 import Transaction from 'components/transaction'
 import LoadingSpinner from 'components/loading-spinner'
 import VotingProgress from 'components/voting-progress'
+import custodiansDisplay from 'components/custodians_display'
 
 import {
   mapGetters
@@ -152,7 +158,8 @@ export default {
     Transaction,
     Candidate,
     LoadingSpinner,
-    VotingProgress
+    VotingProgress,
+    custodiansDisplay
   },
   data() {
     return {
