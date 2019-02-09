@@ -102,6 +102,20 @@
           <!-- <q-toggle  class="float-left" v-model="consolemessage" color="p-light" left-label :label="$t('settings.console_message_label')" /> -->
         </div>
       </div>
+      <div class="col-sm-12 col-lg-4 q-pa-md relative-position" >
+        <div style="full-width">
+          <div  class="q-mb-xs">Set a Delay on transactions.</div>
+          <div class="row items-end">
+            <div class="col" >
+              <q-input type="number" dark v-model="transactiondelay" />
+            </div>
+            <div class="col" >
+              <div class="text-dimwhite q-caption on-right">seconds</div>
+            </div>
+          </div>
+          
+        </div>
+      </div>
     </div>
 
   </q-collapsible>
@@ -146,12 +160,14 @@ export default {
     return{
       transactionpopup: '',
       consolemessage: '',
+      transactiondelay: 0,
       app_version: packageJson.version
     }
   },
   mounted() {
     this.transactionpopup = this.getTransactionPopup
     this.consolemessage = this.getConsoleMessage
+    this.transactiondelay = this.getTransactionDelay
 
   },
   computed: {
@@ -160,7 +176,8 @@ export default {
       getRegistered: 'account/getRegistered',
       getCurrentEndpoint: 'api/getCurrentEndpoint',
       getTransactionPopup: 'usersettings/getTransactionPopup',
-      getConsoleMessage: 'usersettings/getConsoleMessage'
+      getConsoleMessage: 'usersettings/getConsoleMessage',
+      getTransactionDelay: 'usersettings/getTransactionDelay'
     })
   },
   methods:{
@@ -186,6 +203,10 @@ export default {
     },
     consolemessage (bool) {
       this.$store.commit('usersettings/SET_CONSOLEMESSAGE', bool)
+    },
+    transactiondelay (delay) {
+      
+      this.$store.commit('usersettings/SET_TRANSACTIONDELAY', delay)
     }
   }
 }

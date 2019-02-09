@@ -1,19 +1,20 @@
 <template>
 <div v-if="visible && getAccount">
   <transition-group appear enter-active-class="animated fadeInUp" leave-active-class="animated fadeOutDown">
-    <q-alert key="alert" class="notifier fixed-bottom z-max" v-bind:class="{ 'drawer-margin': drawer }" :color="color" :text-color="textColor">
-      <div class="row">
-        <div class="col-md-2 col-lg-1">
+    <q-alert key="alert" class="notifier fixed-bottom z-max" v-bind:class="{ 'drawer-margin': drawer }" :color="color" :text-color="textColor" @click.native="markSeen()">
+      <div class="row justify-center items-center relative-position">
+        <div >
           <q-icon flat size="30px" class="float-left on-left q-ma-sm" :name="icon"></q-icon>
         </div>
-        <div class="col-md-8 col-lg-9">
+        <div>
           <div class="q-title">{{ message }}</div>
           <span>{{ details }}</span>
-          <q-btn class="on-right" v-if="linkText" @click="openLink(linkUrl)" :text-color="color" :color="textColor">{{ linkText }}</q-btn>
+          
         </div>
-        <div class="col-xs-2">
+        <div><q-btn class="on-right" dense v-if="linkText" @click="openLink(linkUrl)" :text-color="color" :color="textColor">{{ linkText }}</q-btn></div>
+        <!-- <div class="absolute-top-right">
           <q-icon flat size="40px" class="float-right no-padding cursor-pointer" name="clear" @click.native="markSeen()"></q-icon>
-        </div>
+        </div> -->
       </div>
     </q-alert>
   </transition-group>
@@ -81,7 +82,7 @@ export default {
       this.linkUrl = this.getNotification.linkUrl
       if (this.getNotification.autoclose) {
         this.sleep(this.getNotification.autoclose * 1000).then(() => {
-          this.markSeen()
+          this.markSeen();
         })
       }
     }

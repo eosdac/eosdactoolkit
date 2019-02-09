@@ -1,5 +1,5 @@
 <template>
-  <div class="row  bg-dark2 round-borders shadow-5" style="">
+  <div class="row  bg-dark2 round-borders" style="">
     <div class="col-md-6 col-xs-12 q-pa-md">
 
 	    <!-- <q-select
@@ -63,7 +63,6 @@
                 placeholder="Select token symbol"
                 v-model="token"
                 :options="[{label: 'KASDAC', value: 'kasdactokens-KASDAC'}, {label: 'EOS', value: 'eosio.token-EOS'}]"
-                @input=""
               />
               <q-input dark stack-label="Memo" v-model="msigtemplate.trx.actions[0].data.memo"/>
             </q-tab-pane>
@@ -145,7 +144,7 @@ export default {
         proposal_name: '',
         requested: [],
         trx: { 
-            expiration: '', 
+            expiration: new Date(new Date().getTime() + 3 * 24 * 60 * 60 * 1000).toISOString(), 
             ref_block_num: 0, 
             ref_block_prefix: 0, 
             max_net_usage_words: 0, 

@@ -37,7 +37,8 @@ export default [
       { path: 'loggedout', component: () => import('pages/index-loggedout')},
       { path: 'custodiandashboard', component: () => import('pages/custodian-dashboard'), beforeEnter: Guards.custodianCheck },
       { path: 'msigproposals', component: () => import('pages/custodians/msigproposals'), beforeEnter: Guards.custodianCheck },
-      { path: 'notallowed', component: () => import('pages/notallowed')}
+      { path: 'notallowed', component: () => import('pages/notallowed')},
+      { path: 'verify/:token', component: () => import('pages/verify_token')}
     ]
   },
 //   {path: '/custodians',

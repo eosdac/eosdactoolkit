@@ -69,14 +69,14 @@
       </q-item>
     </q-list>
     <q-list no-border link inset-delimiter dark>
-      <q-item class="lg-hide xl-hide" @click.native="lockScatter()">
+      <q-item v-if="getAccountName" class="lg-hide xl-hide" @click.native="lockScatter()">
         <q-item-side>
           <q-item-tile color="negative" icon="icon-topmenu-4" />
         </q-item-side>
         <q-item-main :label="$t('default.log_out')" sublabel="" />
       </q-item>
 
-      <q-item v-if="getRegistered" class="lg-hide xl-hide">
+      <q-item v-if="getRegistered && getAccountName" class="lg-hide xl-hide">
         <q-item-side>
           <q-item-tile color="white" icon="icon-dac-balance" />
         </q-item-side>
@@ -150,7 +150,7 @@
         <q-item-main :label="$t('default.unregister_as_candidate')" sublabel="" />
       </q-item>
 
-      <q-item @click.native="openURL($configFile.api.tokenExplorerUrl)">
+      <q-item @click.native="openURL($configFile.external.tokenExplorerUrl)">
         <q-item-side icon="icon-menu-4" />
         <q-item-main :label="$t('default.token_explorer')" sublabel="" />
         <q-item-side right icon="icon-transfer-out" />
@@ -208,9 +208,10 @@
     <Notifier :drawer="leftDrawerOpen" />
 
 
-
+  <TransactionOverlay />
 
   </q-page-container>
+
   <NodeSelector setup v-on:done="$refs.init_interface.auto_scatter()"/>
   <InitInterface ref="init_interface" v-on:done="setupComplete=true"/>
   <!-- depricated multimodal -->
@@ -239,6 +240,7 @@ import NodeSelector from 'components/nodeselector'
 import Notifier from 'components/notifier'
 import MenuDropdown from 'components/menu-dropdown'
 import VoteEosdac from 'components/vote-eosdac'
+import TransactionOverlay from 'components/transaction-overlay'
 
 export default {
 
@@ -249,7 +251,8 @@ export default {
     MenuDropdown,
     VoteEosdac,
     NodeSelector,
-    InitInterface
+    InitInterface,
+    TransactionOverlay
   },
   data() {
     return {
@@ -280,7 +283,8 @@ export default {
       getMainCurrencyBalance: 'account/getMainCurrencyBalance',
       getLanguage: 'usersettings/getLanguage',
       getRegisteredVersionUpdate: 'account/getRegisteredVersionUpdate',
-      getMemberRoles: 'account/getMemberRoles'
+      getMemberRoles: 'account/getMemberRoles',
+      getLOADING: 'usersettings/getLOADING'
     })
   },
   methods: {
@@ -312,11 +316,9 @@ export default {
         }
       }
     },
-    //wip
-    // async getActiveCustodians(){
-    //   let c = await this.$store.dispatch('api/getCustodians');
-    //   // console.log(c)
-    // }
+  close_signature_prompt(){
+    this.$store.commit('usersettings/SET_LOADING', false);
+  }
     
   },
   mounted() {

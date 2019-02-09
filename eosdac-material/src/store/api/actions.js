@@ -76,9 +76,12 @@ function apiDown(e,c,s) {
 export async function transaction({
   state,
   rootState,
-  commit
+  commit,
 }, payload) {
   try {
+    // console.log(this);
+    // payload.eventbus.$emit('showloader')
+    commit('usersettings/SET_LOADING', 'Loading Scatter', {root: true});
     eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint;
     // console.log("normal eos.fc", eos.fc)//works
     if (payload.scatter) {
@@ -119,12 +122,22 @@ export async function transaction({
         })
       }
 
-      let res = await eos.transaction( { actions: actions } )
+      let delay = rootState.usersettings.transactiondelay ? rootState.usersettings.transactiondelay : 0;
+      setTimeout(()=>{commit('usersettings/SET_LOADING', 'Waiting For Signature', {root: true})},1000 );
+      let res = await eos.transaction( { actions: actions }, { broadcast: true, delay_sec: delay } );
+      
+      // res.delay_sec = 30
+      // console.log(res)
+      // res = await eos.transaction( res )
+      commit('usersettings/SET_LOADING', 'Transaction Succeeded',{root: true})
+      setTimeout(()=>{commit('usersettings/SET_LOADING', false, {root: true}) } ,2500);
       return res
       commit('SET_CURRENT_CONNECTION_STATUS', true)
     }
   } catch (error) {
     apiDown(error,commit)
+    commit('usersettings/SET_LOADING', 'Transaction Cancelled',{root: true})
+    setTimeout(()=>{commit('usersettings/SET_LOADING', false, {root: true}) } ,2000);
     throw error
   }
 }
@@ -604,36 +617,6 @@ export async function getRamPrice({
   }
 }
 
-export async function getProfileData({}, payload){
-  // console.log(payload.accountname)
-  let url = configFile.api.profileApiUrl+'profile/'+payload.accountname;
-
-  return axios.get(url).then(r => {
-      // console.log(r.data)
-      return r.data;
-    }).catch(e => {
-      console.log('could not load profile file');
-      return false;});
-}
-
-export async function getProfileData2({}, payload){
-
-  let url = configFile.api.profileApiUrl;
-  if (url.substr(-1) != '/'){
-    url += '/profiles';
-  }
-  else{
-    url += 'profiles';
-  }
-
-  return axios.post(url, payload.accountname ).then(r => {
-      // console.log(r.data)
-      return r.data;
-    }).catch(e => {
-      console.log('could not load profile file');
-      return false;});
-}
-
 export async function getCustodians({
   state,
   commit,
@@ -826,7 +809,8 @@ export async function getAccountPermissions({
 
 export async function getMsigProposals({}, payload={status:1}){
   //status 1: active; 2: executed; 0: cancelled
-  return axios.post('http://localhost:3000/msigproposals', payload).then(r => {
+  let url = configFile.api.memberClientApiUrl
+  return axios.post(url+'/msigproposals', payload).then(r => {
       // console.log(r.data)
       return r.data;
     }).catch(e => {
@@ -856,3 +840,7 @@ export async function getApprovalsFromProposal({}, payload){
 
 
 }
+
+
+
+

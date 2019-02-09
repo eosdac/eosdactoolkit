@@ -331,11 +331,21 @@
     "to": "To",
     "transaction": "Transaction",
     "transaction_successful": "Transaction Successful",
+    "signature_rejected": "You have cancelled the transaction",
     "view_in_explorer": "View in explorer",
     "warning_bandwidth": "Low Network Bandwidth. Your network bandwidth allocation has less than 10% remaining. The Transaction might fail.",
     "warning_cpu": "Low CPU. Your CPU allocation has less than 10% remaining. The Transaction might fail.",
     "warning_ram": "Low RAM. Your RAM allocation has less than 10% remaining. The Transaction might fail.",
     "warning_ricardian": "The ricardian contract for this action could not be found. Are you sure you want to execute this transaction?"
+  },
+  "verify_token":{
+    "copied_to_clipboard": "Copied the token to your clipboard!",
+    "description": "You've been redirected to this page to pair an eos account with a discord id. Please sign the message and go back to the discord bot. Run the command $verify.",
+    "token": "token",
+    "title": "Verify token",
+    "validate": "validate"
+
+
   },
   "vote_custodians": {
     "candidate_list": "Candidate List",

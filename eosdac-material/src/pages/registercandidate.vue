@@ -239,7 +239,8 @@ export default {
         //get contract config
         let config = await this.$store.dispatch('api/getContractConfig', {contract: this.$configFile.network.custodianContract.name});
         //check profile
-        let p = await this.$store.dispatch('api/getProfileData', {accountname: this.getAccountName} );
+        let p = await this.$profiles.getProfiles([this.getAccountName]);
+        // console.log(p)
         if(p && p.length){
           this.hasprofile = true;
           // this.profile_is_irrevirsible = p[0].irrevirsible;

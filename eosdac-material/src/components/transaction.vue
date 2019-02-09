@@ -1,5 +1,5 @@
 <template>
-
+<div>
 <q-modal class="text-white z-max" v-model="visible" :content-css="{maxWidth: '30vw'}">
   <q-card v-for="(action, index) in actions" :key="index" v-show="index === showAction" dark class="bg-dark">
     <q-card-title>
@@ -43,10 +43,12 @@
       <q-btn class="on-right" v-if="!cancelable" color="negative" @click="close()">{{ $t('transaction.cancel') }}</q-btn>
 
     </div>
-    <LoadingSpinner :visible="loading" :text="$t(loadingText)" />
+    
     
   </q-card>
 </q-modal>
+<LoadingSpinner :visible="loading" :text="$t(loadingText)" />
+</div>
 
 </template>
 
@@ -108,27 +110,31 @@ export default {
       // console.log('transaction comp abi cache', abicache, this.add_abicache)
       this.cancelable = cancelable
       this.visible = this.getTransactionPopup //boolean
-      this.loading = this.getTransactionPopup //boolean
-      this.loadingText = 'transaction.loading_abi'
-      for (let i = 0; i < transactionActions.length; i++) {
-        if (this.getRicardians[transactionActions[i].contract]) {
-          transactionActions[i].ricardian = this.getRicardians[transactionActions[i].contract]
-        } else {
-          transactionActions[i].ricardian = await this.$store.dispatch('api/getContractRicardian', transactionActions[i].contract)
-        }
-        let ricardianAction = transactionActions[i].ricardian.find(ricardianAction => {
-          return ricardianAction.name === transactionActions[i].action
-        })
-        if (ricardianAction && ricardianAction.ricardian_contract) {
-          transactionActions[i].ricardian = marked(ricardianAction.ricardian_contract, {
-            sanitize: true
+      this.loading = this.getTransactionPopup //this.getTransactionPopup //boolean
+
+      if(this.getTransactionPopup){
+        this.loadingText = 'transaction.loading_abi'
+        for (let i = 0; i < transactionActions.length; i++) {
+          if (this.getRicardians[transactionActions[i].contract]) {
+            transactionActions[i].ricardian = this.getRicardians[transactionActions[i].contract]
+          } else {
+            transactionActions[i].ricardian = await this.$store.dispatch('api/getContractRicardian', transactionActions[i].contract)
+          }
+          let ricardianAction = transactionActions[i].ricardian.find(ricardianAction => {
+            return ricardianAction.name === transactionActions[i].action
           })
-          transactionActions[i].ricardian = this.replaceVars(transactionActions[i].ricardian, transactionActions[i].fields, transactionActions[i].action, transactionActions[i].contract)
-        } else {
-          transactionActions[i].ricardianError = true
+          if (ricardianAction && ricardianAction.ricardian_contract) {
+            transactionActions[i].ricardian = marked(ricardianAction.ricardian_contract, {
+              sanitize: true
+            })
+            transactionActions[i].ricardian = this.replaceVars(transactionActions[i].ricardian, transactionActions[i].fields, transactionActions[i].action, transactionActions[i].contract)
+          } else {
+            transactionActions[i].ricardianError = true
+          }
         }
-        // console.log(transactionActions[i].ricardian)
       }
+
+
       this.actions = transactionActions
       if(!this.getTransactionPopup){
         this.transact();
@@ -155,28 +161,31 @@ export default {
       return ric
     },
      async transact() {
-      this.loading = true
+      // this.loading = true
       this.loadingText = 'transaction.pushing_transaction'
       try {
         // console.log('transact comp abi cache', this.add_abicache)
-        let trx = await this.$store.dispatch('api/transaction', {actions: this.actions, scatter: this.getUsesScatter, add_abicache: this.add_abicache})
+        let trx = await this.$store.dispatch('api/transaction', {actions: this.actions, scatter: this.getUsesScatter, add_abicache: this.add_abicache, eventbus:this.$root})
         this.$store.commit('api/NOTIFY', {
           icon: 'icon-ui-6',
           color: 'positive',
           message: this.$t('transaction.transaction_successful'),
-          details: trx.transaction_id,
-          linkText: this.$t('transaction.view_in_explorer'),
-          linkUrl: this.$configFile.api.mainCurrencyExplorerUrl + '/transaction/' + trx.transaction_id,
+          details: '', //trx.transaction_id,
+          linkText: 'explorer',
+          linkUrl: this.$configFile.external.mainCurrencyExplorerUrl + '/transaction/' + trx.transaction_id,
           autoclose: 10
         })
         this.$emit('done', this.callbackeventparameter);
         this.close()
       } catch (err) {
+        // console.log(err)
+        
         if (err.type) {
+          let msg = err.type == 'signature_rejected' ? this.$t('transaction.signature_rejected') : err.type;
           this.$store.commit('api/NOTIFY', {
             icon: 'error',
             color: 'red',
-            message: this.$t('transaction.error')+': ' + err.type,
+            message: msg,
             detail: '',
             autoclose: 10
           })
@@ -186,7 +195,7 @@ export default {
             icon: 'error',
             color: 'red',
             // message: 'Error: ' + JSON.parse(err).error.details[0].message || JSON.parse(err),
-            message: this.$t('transaction.error')+': ' +this.parseError(err),
+            message: this.parseError(err),
             detail: '',
             autoclose: 10
           })

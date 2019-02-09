@@ -18,6 +18,11 @@
   </div>
 
 <div class="q-pa-md"> <!-- padding wrapper -->
+
+
+<custodians-display />
+
+
 <div class="row gutter-md reverse-wrap">
 
   <!-- first column  -->
@@ -66,6 +71,7 @@
             <q-pagination  v-show="true" v-model="pagination.page" :min="1" :max="pagination.max" :max-pages="6" direction-links size="12px" />
         </div>
       </div>
+      
     </div>
   </div>
   <!-- second column -->
@@ -141,6 +147,7 @@ import Candidate from 'components/candidate'
 import Transaction from 'components/transaction'
 import LoadingSpinner from 'components/loading-spinner'
 import VotingProgress from 'components/voting-progress'
+import custodiansDisplay from 'components/custodians_display'
 
 import {
   mapGetters
@@ -151,7 +158,8 @@ export default {
     Transaction,
     Candidate,
     LoadingSpinner,
-    VotingProgress
+    VotingProgress,
+    custodiansDisplay
   },
   data() {
     return {
@@ -360,7 +368,8 @@ export default {
         console.log('This method needs an array of candidate names');
         return false;
       }
-      let p = await this.$store.dispatch('api/getProfileData2', {accountname: candlist} );
+      
+      let p = await this.$profiles.getProfiles(candlist);
 
       if(p.length){
         p.forEach(pdb =>{

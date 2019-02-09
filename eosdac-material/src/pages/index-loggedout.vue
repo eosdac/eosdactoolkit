@@ -1,5 +1,5 @@
 <template>
-<q-page class="gradient-bg-primary q-pa-xl" style="overflow:hidden">
+<q-page class="gradient-bg-primary q-pa-md" style="overflow:hidden">
   <div class="relative-position">
     <div class="bg-dark2 round-borders loggedout_big_container shadow-14" style="min-height:600px; padding-bottom: 120px; overflow:hidden">
       <div class="row q-px-xl" style="margin-bottom:-40px; padding-top:40px"><div class="col-xs-12 col-lg-6 q-display-3">{{$t('index.welcome_to_esodac_member_client')}}</div></div>
@@ -36,7 +36,7 @@
         </div>
       </div>
     </div>
-    <div class="row gutter-md relative-position justify-center q-px-lg row_boxes_index_page" style="min-height:240px;">
+    <div class="row gutter-md relative-position justify-center q-px-md row_boxes_index_page" style="min-height:240px;">
       <div class="col-xl-4 col-md-12 col-sm-12 col-xs-12" style="min-width:200px">
         <div class="column justify-between bg-primary shadow-14 round-borders full-height q-pa-md animate-pop">
           <div>
@@ -170,14 +170,9 @@ export default {
         this.onsubscribemsg = this.$t('index.valid_input_required');
         return false;
       }
-      let url = this.$configFile.api.profileApiUrl;
 
-      if (url.substr(-1) != '/'){
-        url += '/subscribe';
-      }
-      else{
-        url += 'subscribe';
-      }
+      let url = this.$helper.noBackSlash(this.$configFile.api.memberClientApiUrl)+'/subscribe';
+
       this.loading =true;
       try{
         let result = await this.$axios.post(url, data);

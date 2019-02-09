@@ -11,7 +11,8 @@ module.exports = function(ctx) {
       'scatter',
       'consolemessage',
       'helper',
-      'medium-editor'
+      'medium-editor',
+      'profile-cache'
     ],
     css: [
       'app.styl',
@@ -130,7 +131,8 @@ module.exports = function(ctx) {
         'QVideo',
         'QCarousel',
         'QCarouselSlide',
-        'QCarouselControl'
+        'QCarouselControl',
+        'QAjaxBar'
 
       ],
       directives: [

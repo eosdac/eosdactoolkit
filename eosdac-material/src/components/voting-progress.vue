@@ -23,11 +23,11 @@
 </template>
 
 <script>
-import custodiansDisplay from './custodians_display'
+
 export default {
  name: 'VotingProgress',
   components: {
-    custodiansDisplay
+ 
   },
  
 
