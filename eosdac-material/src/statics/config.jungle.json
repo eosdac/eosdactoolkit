@@ -31,6 +31,9 @@
     },
     "systemContract": {
       "name": "eosio"
+    },
+    "botContract":{
+      "name": "piecesnbitss"
     }
   },
   "api": {

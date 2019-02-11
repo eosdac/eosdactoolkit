@@ -83,7 +83,7 @@ export default {
     sign_message: function(){
         let actions = [
         {
-          contract: 'piecesnbitss', 
+          contract: this.$configFile.network.botContract.name, 
           action: 'pair',
           fields: {
             token: this.token, 
