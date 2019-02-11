@@ -230,7 +230,7 @@ export default {
 
       let actions = [
         {
-          contract: 'eosiomsigold', 
+          contract: 'eosio.msig',
           action: 'propose', 
           fields: this.msigtemplate,
           
