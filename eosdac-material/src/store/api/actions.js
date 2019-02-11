@@ -826,7 +826,7 @@ export async function getApprovalsFromProposal({}, payload){
     let eos = await this.dispatch('api/getEos');
 
     let approvals = (await eos.getTableRows({
-      code: 'eosiomsigold',
+      code: 'eosio.msig',
       json: true,
       limit: 1,
       lower_bound: payload.proposal_name,
