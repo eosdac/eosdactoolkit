@@ -3,7 +3,7 @@
     <div class="q-display-1 q-mb-md">Custodian Board</div>
     <div  class="row  bg-dark2 shadow-5 round-borders q-pa-md  justify-between" >
       <div v-for="x in custodians" :key="x.cust_name" class="column items-center q-pa-xs">
-        <div class="center_background_image" style="border-radius:50%; width:60px;height:60px" v-bind:style="{ 'background-image': `url(${x.profile.image})` }"></div>
+        <div class="center_background_image" style="border-radius:50%; width:60px;height:60px; display:inline-block" v-bind:style="{ 'background-image': `url(${x.profile.image})` }"></div>
         <router-link class="q-body-1 a2 q-mt-xs" :to="{path: '/profile/' + x.cust_name}" >
           <div class="q-ma-none">{{x.cust_name}}</div>
         </router-link>

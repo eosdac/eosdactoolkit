@@ -124,7 +124,10 @@ export async function transaction({
 
       let delay = rootState.usersettings.transactiondelay ? rootState.usersettings.transactiondelay : 0;
       setTimeout(()=>{commit('usersettings/SET_LOADING', 'Waiting For Signature', {root: true})},1000 );
-      let res = await eos.transaction( { actions: actions }, { broadcast: true, delay_sec: delay } );
+      let res = await eos.transaction( { actions: actions }, { broadcast: true, delay_sec: delay } ).catch(e=>{
+        commit('usersettings/SET_LOADING', 'Transaction Cancelled',{root: true});
+        console.log(e);
+      });
       
       // res.delay_sec = 30
       // console.log(res)
