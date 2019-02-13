@@ -61,8 +61,8 @@
                 dark
                 stack-label ="Asset"
                 placeholder="Select token symbol"
-                v-model="token"
-                :options="[{label: 'KASDAC', value: 'kasdactokens-KASDAC'}, {label: 'EOS', value: 'eosio.token-EOS'}]"
+                v-model="token" 
+                :options="[{label: $configFile.tokenContract.token, value: `${$configFile.tokenContract.name}-${$configFile.tokenContract.token}`}, {label: 'EOS', value: 'eosio.token-EOS'}]"
               />
               <q-input dark stack-label="Memo" v-model="msigtemplate.trx.actions[0].data.memo"/>
             </q-tab-pane>
@@ -220,6 +220,7 @@ export default {
       this.fromAccountOptions = res.map(o => {
         return {value: o.account, label: o.account};
       });
+      
     },
 
     //send proposal to msig system contract. this should be changed to the eosdac msig relay contract
@@ -230,13 +231,13 @@ export default {
 
       let actions = [
         {
-          contract: 'eosiomsigold', 
+          contract: this.configFile.network.systemMsigContract.name, 
           action: 'propose', 
           fields: this.msigtemplate,
           
         },
         {
-          contract: 'dacmultisigs', 
+          contract: this.configFile.network.msigContract.name, 
           action: 'proposed',
           authorization: [ {actor: this.getAccountName, permission: 'active'}, {actor: 'dacauthority', permission: 'one'}],
           fields: {proposer: this.getAccountName, proposal_name: this.msigtemplate.proposal_name, metadata: JSON.stringify(this.meta)}
