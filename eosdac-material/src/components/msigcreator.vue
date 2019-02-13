@@ -192,34 +192,36 @@ export default {
 
     async setFromAccountOptions(){
       //get controlled accounts from authority account
-      let ctrlaccs = await this.$store.dispatch('api/getControlledAccounts', {accountname: this.$configFile.network.authorityAccount});
+      // let ctrlaccs = await this.$store.dispatch('api/getControlledAccounts', {accountname: this.$configFile.network.authorityAccount});
 
-      //get the permissions from each account synchronous
-      let proms = [];
-      ctrlaccs.controlled_accounts.forEach(ctrlacc =>{
-        proms.push( this.$store.dispatch('api/getAccountPermissions', {accountname: ctrlacc }) );
-      });
-      let res = await Promise.all(proms);
+      // //get the permissions from each account synchronous
+      // let proms = [];
+      // ctrlaccs.controlled_accounts.forEach(ctrlacc =>{
+      //   proms.push( this.$store.dispatch('api/getAccountPermissions', {accountname: ctrlacc }) );
+      // });
+      // let res = await Promise.all(proms);
       
 
-      //map accountnames with fetched permissions
-      res = res.map((r, i)=>{
-        let t = {};
-        t.account = ctrlaccs.controlled_accounts[i];
-        t.permissions = r;
-        return t;
-      })
-      console.log(res);
+      // //map accountnames with fetched permissions
+      // res = res.map((r, i)=>{
+      //   let t = {};
+      //   t.account = ctrlaccs.controlled_accounts[i];
+      //   t.permissions = r;
+      //   return t;
+      // })
+      // console.log(res);
 
-      //filter: only keep accounts where xfer is set
-      res = res.filter(acc => {
-        if(acc.permissions.find(p => p.perm_name == 'xfer') ) return true;
-      });
+      // //filter: only keep accounts where xfer is set
+      // res = res.filter(acc => {
+      //   if(acc.permissions.find(p => p.perm_name == 'xfer') ) return true;
+      // });
 
-      //set from account options
-      this.fromAccountOptions = res.map(o => {
-        return {value: o.account, label: o.account};
-      });
+      // //set from account options
+      // this.fromAccountOptions = res.map(o => {
+      //   return {value: o.account, label: o.account};
+      // });
+
+      this.fromAccountOptions = [{value: 'dacelections', label: 'dacelections'}];
 
     },
 
@@ -231,13 +233,13 @@ export default {
 
       let actions = [
         {
-          contract: this.configFile.network.systemMsigContract.name, 
+          contract: this.$configFile.network.systemMsigContract.name, 
           action: 'propose', 
           fields: this.msigtemplate,
           
         },
         {
-          contract: this.configFile.network.msigContract.name, 
+          contract: this.$configFile.network.msigContract.name, 
           action: 'proposed',
           authorization: [ {actor: this.getAccountName, permission: 'active'}, {actor: 'dacauthority', permission: 'one'}],
           fields: {proposer: this.getAccountName, proposal_name: this.msigtemplate.proposal_name, metadata: JSON.stringify(this.meta)}
