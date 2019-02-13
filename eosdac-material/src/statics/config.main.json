@@ -32,6 +32,9 @@
     "systemContract": {
       "name": "eosio"
     },
+    "systemMsigContract": {
+      "name": "eosio.msig"
+    },
     "botContract":{
       "name": "eosdacthebot"
     }
