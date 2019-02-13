@@ -231,7 +231,7 @@ export default {
 
   data () {
     return {
-      systemmsig: 'eosiomsigold',
+      systemmsig: this.$configFile.network.systemMsigContract.name,
       provided_approvals: null,
       requested_approvals: null,
       isApproved: false,

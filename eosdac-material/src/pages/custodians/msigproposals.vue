@@ -71,7 +71,7 @@ export default {
 
   data() {
     return {
-      systemmsig: 'eosiomsigold',
+      systemmsig: 'eosio.msig',
       proposals: [],
       createmsig_modal: false,
       active_tab : '',
