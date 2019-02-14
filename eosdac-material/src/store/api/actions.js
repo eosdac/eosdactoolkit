@@ -149,20 +149,23 @@ export async function testEndpoint({
   state,
   commit
 }, url) {
-  const timeout = new Timeout()
+  console.log('test endpoint', url);
+  const timeout = new Timeout();
   try {
     eosConfig.httpEndpoint = url
     const eos = Eos(eosConfig)
-    const sTime = Date.now()
     const timer = timeout.set(state.connectionTimeoutMilSec, 'timeout')
     const ginfo = eos.getInfo({})
     const info = await Promise.race([ginfo, timer])
     if (info.chain_id !== configFile.network.chainId) {
       throw Error('Wrong chainId')
     }
+    console.log('endtpoint ok',info)
     return info
+    
   } catch (error) {
-    throw error
+    console.log('endpoint error');
+    return false;
   } finally {
     timeout.clear()
   }
