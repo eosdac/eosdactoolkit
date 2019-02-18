@@ -847,6 +847,43 @@ export async function getApprovalsFromProposal({}, payload){
 
 }
 
+export async function getClaimPay({
+  state,
+  commit,
+  rootState,
+}, param) {
+  try {
+
+    // eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint
+    // let eos = Eos(eosConfig)
+    let eos = await this.dispatch('api/getEos');
+    const pendingpays = await eos.getTableRows({
+
+      json : true,
+      code: configFile.network.custodianContract.name,
+      scope: configFile.network.custodianContract.name,
+      table: 'pendingpay',
+      lower_bound : 'piecesnbitss',
+      upper_bound : 'piecesnbitss',
+      index_position : 2,
+      key_type : 'name',
+      limit: -1,
+
+    })
+    if (!pendingpays.rows.length) {
+      return []
+    } else {
+      // console.log(votes.rows[0].voter +'---'+param.member)
+      return pendingpays.rows;
+
+    }
+    commit('SET_CURRENT_CONNECTION_STATUS', true)
+  } catch (error) {
+    apiDown(error,commit)
+    throw error
+  }
+}
+
 
 
 

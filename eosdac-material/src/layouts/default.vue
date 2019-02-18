@@ -121,6 +121,10 @@
             <q-item-side icon="icon-topmenu-6" />
             <q-item-main label="Msig Proposals" sublabel="" />
           </q-item>
+          <q-item class="q-pl-lg" link to="/claimpay">
+            <q-item-side icon="icon-topmenu-6" />
+            <q-item-main label="Claim Payment" sublabel="" />
+          </q-item>
         </div>
       </q-collapsible>
       <q-item to="/constitution">
