@@ -119,11 +119,11 @@
         <div class="bg-dark">
           <q-item class="q-pl-lg" link to="/msigproposals">
             <q-item-side icon="icon-menu-12" />
-            <q-item-main label="Msig Proposals" sublabel="" />
+            <q-item-main :label="$t('default.msig_proposals')" sublabel="" />
           </q-item>
           <q-item class="q-pl-lg" link to="/claimpay">
             <q-item-side icon="icon-ui-19" />
-            <q-item-main label="Claim Payment" sublabel="" />
+            <q-item-main :label="$t('default.claim_payment')" sublabel="" />
           </q-item>
         </div>
       </q-collapsible>

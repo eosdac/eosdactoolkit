@@ -111,6 +111,7 @@
   },
   "default": {
     "account_name": "Account Name",
+    "claim_payment": "Claim Payment",
     "constitution": "Constitution",
     "constitution_has_been_updated": "The Constitution has been updated. Please sign the updated Constitution to use the Member Client.",
     "custodians": "Vote For Custodians",
@@ -121,6 +122,7 @@
     "member_client": "Member Client",
     "member_status": "Member Status",
     "menu": "Menu",
+    "msig_proposals": "Msig Proposals",
     "not_registered": "not registered",
     "pending": "Pending",
     "permission_denied_message": "Sorry, you do not have permission to view this page.",
