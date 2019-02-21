@@ -118,8 +118,12 @@
       <q-collapsible  v-if="getMemberRoles.custodian && getAccountName" dark icon="icon-role-4" @hide="submenuheader_open = false" @show="submenuheader_open = true" :header-class="{submenuheader: submenuheader_open}"  label="Custodian Tools">
         <div class="bg-dark">
           <q-item class="q-pl-lg" link to="/msigproposals">
-            <q-item-side icon="icon-topmenu-6" />
-            <q-item-main label="Msig Proposals" sublabel="" />
+            <q-item-side icon="icon-menu-12" />
+            <q-item-main :label="$t('default.msig_proposals')" sublabel="" />
+          </q-item>
+          <q-item class="q-pl-lg" link to="/claimpay">
+            <q-item-side icon="icon-ui-19" />
+            <q-item-main :label="$t('default.claim_payment')" sublabel="" />
           </q-item>
         </div>
       </q-collapsible>

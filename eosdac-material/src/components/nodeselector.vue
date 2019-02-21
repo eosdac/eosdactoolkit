@@ -129,8 +129,12 @@ export default {
     async getFastestNode() {
       //if the chain id is not from mainnet then use the default node from the config file
       if(this.$configFile.network.chainId !== 'aca376f206b8fc25a6ed44dbdc66547c36c6c33e3a119ffbeaef943642f0e906' || this.setup){
-        this.connect(this.$configFile.network.default_node);
-        return false;
+        let test = await this.$store.dispatch('api/testEndpoint', this.$configFile.network.default_node);
+        if(test){
+          console.log('ok')
+          this.connect(this.$configFile.network.default_node);
+          return false;
+        }
       }
       
       let s = new NodeSelector(this.$configFile.api.bpNodeApiUrl)
@@ -195,7 +199,7 @@ export default {
       this.loadingText = 'nodeselector.connecting'
       try {
         let url = await this.filterUrl(u)
-        let test = await this.$store.dispatch('api/testEndpoint', url)
+  
         this.loading = false
         this.$store.commit('api/ADD_ENDPOINT', {
           save: true,

@@ -32,6 +32,9 @@
     "systemContract": {
       "name": "eosio"
     },
+    "systemMsigContract": {
+      "name": "eosiomsigold"
+    },
     "botContract":{
       "name": "piecesnbitss"
     }

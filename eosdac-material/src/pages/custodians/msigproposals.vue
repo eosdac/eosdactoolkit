@@ -2,14 +2,14 @@
 <q-page class="text-white q-pa-md">
   <!-- <pre>{{pagination}}{{active_tab}}</pre> -->
   <div class="row relative-position justify-between q-mb-md">
-    <h4 class="q-display-1 q-my-none">Review Proposals</h4>
-    <span><q-btn color="primary" class="q-mt-xs" label="create new"  @click="createmsig_modal = true" /></span>
+    <h4 class="q-display-1 q-my-none">{{ $t('custodians.review_proposals') }}</h4>
+    <span><q-btn color="primary" class="q-mt-xs" :label="$t('custodians.create_new')"  @click="createmsig_modal = true" /></span>
   </div>
   <q-tabs class="q-mb-md" @select="setActiveTab">
     <!-- Tabs - notice slot="title" -->
-    <q-tab default slot="title" name="open" label="open" />
-    <q-tab slot="title" name="executed" label="executed"  />
-    <q-tab slot="title" name="cancelled" label="cancelled/expired"  />
+    <q-tab default slot="title" name="open" :label="$t('custodians.open')" />
+    <q-tab slot="title" name="executed" :label="$t('custodians.executed')"  />
+    <q-tab slot="title" name="cancelled" :label="$t('custodians.cancelled_expired')"  />
   </q-tabs>
 
   <div class="row bg-dark2 q-pa-md q-mb-md shadow-5 round-borders justify-between" v-if="true" >
@@ -33,7 +33,7 @@
   </div>
   
   <div class="row">
-    <q-btn color="primary" label="create new" @click="createmsig_modal = true" />
+    <q-btn color="primary" :label="$t('custodians.create_new')" @click="createmsig_modal = true" />
   </div>
  
 
@@ -41,7 +41,7 @@
     <div class="bg-dark">
       <!-- header -->
       <div style="height:50px" class="bg-dark row items-center justify-between q-px-md">
-        <span>Create Msig Proposal</span>
+        <span>{{ $t('custodians.create_msig_proposal') }}</span>
         <q-icon class=" cursor-pointer" name="icon-ui-8" @click.native="createmsig_modal = false" />
       </div>
       <!-- content -->

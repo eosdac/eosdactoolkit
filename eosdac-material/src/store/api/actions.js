@@ -149,20 +149,23 @@ export async function testEndpoint({
   state,
   commit
 }, url) {
-  const timeout = new Timeout()
+  console.log('test endpoint', url);
+  const timeout = new Timeout();
   try {
     eosConfig.httpEndpoint = url
     const eos = Eos(eosConfig)
-    const sTime = Date.now()
     const timer = timeout.set(state.connectionTimeoutMilSec, 'timeout')
     const ginfo = eos.getInfo({})
     const info = await Promise.race([ginfo, timer])
     if (info.chain_id !== configFile.network.chainId) {
       throw Error('Wrong chainId')
     }
+    console.log('endtpoint ok',info)
     return info
+    
   } catch (error) {
-    throw error
+    console.log('endpoint error');
+    return false;
   } finally {
     timeout.clear()
   }
@@ -826,7 +829,7 @@ export async function getApprovalsFromProposal({}, payload){
     let eos = await this.dispatch('api/getEos');
 
     let approvals = (await eos.getTableRows({
-      code: 'eosio.msig',
+      code: configFile.network.systemMsigContract.name,
       json: true,
       limit: 1,
       lower_bound: payload.proposal_name,
@@ -842,6 +845,43 @@ export async function getApprovalsFromProposal({}, payload){
   }
 
 
+}
+
+export async function getClaimPay({
+  state,
+  commit,
+  rootState,
+}, param) {
+  try {
+
+    // eosConfig.httpEndpoint = state.endpoints[state.activeEndpointIndex].httpEndpoint
+    // let eos = Eos(eosConfig)
+    let eos = await this.dispatch('api/getEos');
+    const pendingpays = await eos.getTableRows({
+
+      json : true,
+      code: configFile.network.custodianContract.name,
+      scope: configFile.network.custodianContract.name,
+      table: 'pendingpay',
+      lower_bound : rootState.account.info.account_name,
+      upper_bound : rootState.account.info.account_name,
+      index_position : 2,
+      key_type : 'name',
+      limit: -1,
+
+    })
+    if (!pendingpays.rows.length) {
+      return []
+    } else {
+      // console.log(votes.rows[0].voter +'---'+param.member)
+      return pendingpays.rows;
+
+    }
+    commit('SET_CURRENT_CONNECTION_STATUS', true)
+  } catch (error) {
+    apiDown(error,commit)
+    throw error
+  }
 }
 
 
