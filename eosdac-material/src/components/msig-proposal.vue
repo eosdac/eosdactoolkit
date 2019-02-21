@@ -4,7 +4,7 @@
 <div v-if="!isHidden" class="q-mb-md bg-dark2 round-borders shadow-5 animate-fade lt-sm" style="border:1px solid #4A1289;">
 
     <div class="row justify-center q-pa-md relative-position">
-        <q-chip  v-if="!is_seen_computed"  dense class="animate-fade absolute" style="top:10px;right:10px"  color="negative">new</q-chip>
+        <q-chip  v-if="!is_seen_computed"  dense class="animate-fade absolute" style="top:10px;right:10px"  color="negative">{{ $t('custodians.new') }}</q-chip>
         <div class="relative-position" style="text-align:center">
           <q-chip  v-if="msig.trx.actions.length > 1"   dense class="absolute" style="top:12px;left:100px" color="dark">{{msig.trx.actions.length}}</q-chip>
           <q-icon style="border:2px solid #4A1289;border-radius:50%" size="48px" count="5" :name="'icon-'+matchIcon" class="q-pa-md q-mr-xs q-mb-xs text-dimwhite" :color="getStatusColor" />
@@ -14,27 +14,27 @@
 
     <div class="row q-caption  bg-dark q-pa-md q-mx-xs round-borders" >
       <div class="full-width">
-        <span class="text-white">Proposal: <span class="text-dimwhite">{{msig.proposal_name}}</span></span>
+        <span class="text-white">{{ $t('custodians.proposal') }}: <span class="text-dimwhite">{{msig.proposal_name}}</span></span>
       </div>
       <div class="full-width q-mt-xs">
-        <span class="text-white">Submitted by:&nbsp;</span>
+        <span class="text-white">{{ $t('custodians.submitted_by') }}:&nbsp;</span>
         <router-link :to="{path: '/profile/' + msig.proposer}" >{{ msig.proposer }}</router-link>
       </div>
       <div class="full-width q-mt-xs">
-        <span class="text-white">Submitted on:&nbsp;<span class="text-dimwhite">{{new Date(msig.block_time).toDateString()}}</span></span>
+        <span class="text-white">{{ $t('custodians.submitted_on') }}:&nbsp;<span class="text-dimwhite">{{new Date(msig.block_time).toDateString()}}</span></span>
       </div>
     </div>
 
     <div class="row q-pa-md justify-between relative-position items-center">
       <div v-if="msig.status !== 0" @click="approvals_modal = true" class="cursor-pointer">
-          <div class="q-caption text-dimwhite" >Received Approvals:</div>
+          <div class="q-caption text-dimwhite" >{{ $t('custodians.received_approvals') }}:</div>
           <div class="text-white q-title">
             <span><q-spinner v-if="provided_approvals==null" color="primary" size="25px" style="margin-top:-4px" /></span>
             <span v-if="provided_approvals" class="text-p-light cursor-pointer animate-fade">{{provided_approvals.length}}</span>
             <span class="">/{{msig.threshold}}</span>
           </div>
       </div>
-      <q-btn label="view details" color="dark" @click="mobile_details_modal=true; handleIsSeenCache(true)"/>
+      <q-btn :label="$t('custodians.view_details')" color="dark" @click="mobile_details_modal=true; handleIsSeenCache(true)"/>
     </div>
 
 <!-- mobile details modal -->
@@ -42,7 +42,7 @@
   <div >
     <!-- header -->
     <div style="height:50px" class="bg-dark row items-center justify-between q-px-md">
-      <span>Proposal Details</span>
+      <span>{{ $t('custodians.proposal_details') }}</span>
       <q-icon class=" cursor-pointer" name="icon-ui-8" @click.native="mobile_details_modal = false" />
     </div>
     <!-- content -->
@@ -62,26 +62,26 @@
         <q-checkbox dark left-label :label="isSeen ?'Unmark as seen':'Mark as seen' " v-model="isSeen" @input="handleIsSeenCache" />
       </div>
         <div class="q-pb-xs" >
-          Proposal name: <span class="text-dimwhite">{{msig.proposal_name}}</span>
+          {{ $t('custodians.proposal_name') }}: <span class="text-dimwhite">{{msig.proposal_name}}</span>
         </div>
 
         <div class="q-pb-xs">
-          Submitted by: <span class="text-dimwhite">{{msig.proposer}}</span>
+          {{ $t('custodians.submitted_by') }}: <span class="text-dimwhite">{{msig.proposer}}</span>
         </div>
 
         <div class="q-pb-xs">
-          Submitted on: <span class="text-dimwhite">{{new Date(msig.block_time).toUTCString()}}</span>
+          {{ $t('custodians.submitted_on') }}: <span class="text-dimwhite">{{new Date(msig.block_time).toUTCString()}}</span>
         </div>
         <div class="q-pb-xs">
-          Expiration: <span class="text-dimwhite">{{new Date(msig.trx.expiration).toUTCString()}}</span>
+          {{ $t('custodians.expiration') }}: <span class="text-dimwhite">{{new Date(msig.trx.expiration).toUTCString()}}</span>
         </div>
 
         <div  class="q-mb-xs">
-          <div>Description:</div>
+          <div>{{ $t('custodians.description') }}:</div>
           <div class="text-dimwhite">{{msig.description}}</div>
         </div>
         <div >
-          <div>Actions <span class="text-dimwhite">({{msig.trx.actions.length}}) </span></div>
+          <div>{{ $t('custodians.actions') }}: <span class="text-dimwhite">({{msig.trx.actions.length}}) </span></div>
           <div class="text-dimwhite q-mb-md">{{msig.trx.actions.map(a=>a.name).join(', ')}}</div>
         </div>
       </div>
@@ -90,10 +90,10 @@
         <Actionparser class="q-body-1" @seenAllActions="disable_approve = false" :actions="msig.trx.actions" />
       </div>
     <div class="q-mt-md">  
-        <q-btn v-if="!isApproved" class="full-width q-mb-md" :disabled="disable_approve" color="positive" label="Approve" @click="approveProposal(msig.proposer, msig.proposal_name)"  />
-        <q-btn v-if="isApproved" class="full-width q-mb-md" color="warning" label="Unapprove" @click="unapproveProposal(msig.proposer, msig.proposal_name)"  />
-        <q-btn v-if="isCreator" class="full-width q-mb-md" color="red" label="cancel" @click="cancelProposal(msig.proposer, msig.proposal_name)" />
-        <q-btn v-if="isExecutable" class="full-width q-mb-md" label="execute" />
+        <q-btn v-if="!isApproved" class="full-width q-mb-md" :disabled="disable_approve" color="positive" :label="$t('custodians.approve')" @click="approveProposal(msig.proposer, msig.proposal_name)"  />
+        <q-btn v-if="isApproved" class="full-width q-mb-md" color="warning" :label="$t('custodians.unapprove')" @click="unapproveProposal(msig.proposer, msig.proposal_name)"  />
+        <q-btn v-if="isCreator" class="full-width q-mb-md" color="red" :label="$t('custodians.cancel')" @click="cancelProposal(msig.proposer, msig.proposal_name)" />
+        <q-btn v-if="isExecutable" class="full-width q-mb-md" :label="$t('custodians.execute')" />
     </div>
 
     </div>
@@ -110,7 +110,7 @@
         <q-item-side left >
           <div class="row full-height items-center relative-position">
             <q-chip  v-if="msig.trx.actions.length > 1" floating dense color="dark">{{msig.trx.actions.length}}</q-chip>
-            <q-chip  v-if="!is_seen_computed" class="animate-fade" floating dense color="negative">new</q-chip>
+            <q-chip  v-if="!is_seen_computed" class="animate-fade" floating dense color="negative">{{ $t('custodians.new') }}</q-chip>
             <q-icon size="48px" count="5" :name="'icon-'+matchIcon" class="q-mr-xs" :color="getStatusColor" />
           </div>
         </q-item-side>
@@ -119,13 +119,13 @@
             <div class="q-title q-mb-xs">{{msig.proposal_name}}: {{msig.title}}</div>
             <div class="q-caption">
               <div>
-                <span class="text-dimwhite">Submitted by: </span>
+                <span class="text-dimwhite">{{ $t('custodians.submitted_by') }}: </span>
                 <router-link :to="{path: '/profile/' + msig.proposer}" >
                   {{ msig.proposer }}
                 </router-link>
               </div>
               <div>
-                <span class="text-dimwhite">Submitted on:&nbsp;<span class="text-white">{{new Date(msig.block_time).toDateString()}}</span></span>
+                <span class="text-dimwhite">{{ $t('custodians.submitted_on') }}:&nbsp;<span class="text-white">{{new Date(msig.block_time).toDateString()}}</span></span>
               </div>
             </div>
 
@@ -133,7 +133,7 @@
         </q-item-main>
         <q-item-side right v-if="msig.status !== 0">
 
-          <div class="q-caption text-dimwhite" >Received Approvals:</div>
+          <div class="q-caption text-dimwhite">{{ $t('custodians.received_approvals') }}:</div>
           <div class="text-white q-display-1">
             <span><q-spinner v-if="provided_approvals==null" color="primary" size="25px" style="margin-top:-4px" /></span>
             <span v-if="provided_approvals" class="text-p-light cursor-pointer animate-fade"  @click="approvals_modal = true">{{provided_approvals.length}}</span>
@@ -144,11 +144,11 @@
 
       <div class="q-px-md q-pb-md">
         <div style="border-top: 1px solid grey" >
-          <div class="q-mt-md">Description</div>
+          <div class="q-mt-md">{{ $t('custodians.description') }}</div>
           <div class="text-dimwhite q-mb-md">{{msig.description}}</div>
-          <div class="q-mt-md">Expiration</div>
+          <div class="q-mt-md">{{ $t('custodians.expiration') }}</div>
           <div class="text-dimwhite q-mb-md">{{new Date(msig.trx.expiration).toString()}}</div>
-          <div class="q-mt-md">Actions <span class="text-dimwhite">({{msig.trx.actions.length}})</span></div>
+          <div class="q-mt-md">{{ $t('custodians.actions') }} <span class="text-dimwhite">({{msig.trx.actions.length}})</span></div>
           <div class="text-dimwhite q-mb-md">{{msig.trx.actions.map(a=>a.name).join(', ')}}</div>
           <div style="text-align:right">
             <span>trx: </span>
@@ -162,13 +162,13 @@
 
           <div v-if="msig.status == 1" class="row justify-between">
             <span>
-              <q-btn v-if="!isApproved" class="on-left" :disabled="disable_approve" color="positive" label="Approve" @click="approveProposal(msig.proposer, msig.proposal_name)"  />
-              <q-btn v-if="isApproved" class="on-left" color="warning" label="Unapprove" @click="unapproveProposal(msig.proposer, msig.proposal_name)"  />
-              <q-btn v-if="isCreator" class="on-left" color="red" label="cancel" @click="cancelProposal(msig.proposer, msig.proposal_name)" />
-              <q-btn v-if="isExecutable" color="blue" label="execute" @click="executeProposal(msig.proposer, msig.proposal_name)" />
+              <q-btn v-if="!isApproved" class="on-left" :disabled="disable_approve" color="positive" :label="$t('custodians.approve')" @click="approveProposal(msig.proposer, msig.proposal_name)"  />
+              <q-btn v-if="isApproved" class="on-left" color="warning" :label="$t('custodians.unapprove')" @click="unapproveProposal(msig.proposer, msig.proposal_name)"  />
+              <q-btn v-if="isCreator" class="on-left" color="red" :label="$t('custodians.cancel')" @click="cancelProposal(msig.proposer, msig.proposal_name)" />
+              <q-btn v-if="isExecutable" color="blue" :label="$t('custodians.execute')" @click="executeProposal(msig.proposer, msig.proposal_name)" />
             </span>
             <span>
-              <q-checkbox dark left-label :label="isSeen ?'Unmark as seen':'Mark as seen' " v-model="isSeen" @input="handleIsSeenCache" />
+              <q-checkbox dark left-label :label="isSeen ? $t('custodians.unmark_as_seen') : $t('custodians.mark_as_seen')" v-model="isSeen" @input="handleIsSeenCache" />
             </span>
           </div>
 
@@ -184,7 +184,7 @@
   <div class="bg-dark">
     <!-- header -->
     <div style="height:50px" class="bg-dark2 row items-center justify-between q-px-md">
-      <span>Approvals <span v-if="provided_approvals" class="q-caption text-weight-thin">needs {{msig.threshold-provided_approvals.length}} more</span></span>
+      <span>{{ $t('custodians.approvals') }} <span v-if="provided_approvals" class="q-caption text-weight-thin">{{ $t('custodians.needs') }} {{msig.threshold-provided_approvals.length}} {{ $t('custodians.more') }}</span></span>
       <q-icon class=" cursor-pointer" name="icon-ui-8" @click.native="approvals_modal = false" />
     </div>
     <!-- content -->
