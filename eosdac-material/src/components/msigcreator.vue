@@ -221,7 +221,7 @@ export default {
       //   return {value: o.account, label: o.account};
       // });
 
-      this.fromAccountOptions = [{value: 'dacelections', label: 'dacelections'}];
+      this.fromAccountOptions = [{value: 'dacelections', label: 'dacelections'}, {value:'eosdacdoshhq', label: 'eosdacdoshhq'}];
 
     },
 

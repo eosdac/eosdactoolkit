@@ -121,7 +121,7 @@ export async function transaction({
             data: payload.actions[i].fields
         })
       }
-
+      console.log(JSON.stringify(actions) )
       let delay = rootState.usersettings.transactiondelay ? rootState.usersettings.transactiondelay : 0;
       setTimeout(()=>{commit('usersettings/SET_LOADING', 'Waiting For Signature', {root: true})},1000 );
       let res = await eos.transaction( { actions: actions }, { broadcast: true, delay_sec: delay } ).catch(e=>{
