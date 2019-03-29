@@ -4,9 +4,9 @@
     "connection_to_endpoint_failed_details": "Vào Cài Đặt để thiết lập API Điểm Kết Nối đang hoạt động"
   },
   "app": {
-    "meta_description": "đây là mô tả công cụ thành viên của chúng tôi được phân tích cú pháp tương ứng với meta tags",
+    "meta_description": "đây là mô tả cổng thành viên của chúng tôi được phân tích cú pháp tương ứng với meta tags",
     "meta_keywords": "tự trị, phi tập trung, cộng đồng, bỏ phiếu",
-    "title": "Công Cụ Thành Viên eosDAC"
+    "title": "Cổng Thành Viên eosDAC"
   },
   "candidate": {
     "staked": "Đã Đặt Cọc",
@@ -87,13 +87,13 @@
   "default": {
     "account_name": "Tên Tài Khoản",
     "constitution": "Hiến Pháp",
-    "constitution_has_been_updated": "Hiến Pháp đã được cập nhật. Vui lòng ký duyệt Hiến Pháp mới để sử dụng Công Cụ Thành Viên.",
+    "constitution_has_been_updated": "Hiến Pháp đã được cập nhật. Vui lòng ký duyệt Hiến Pháp mới để sử dụng Cổng Thành Viên.",
     "custodians": "Bỏ Phiếu Bầu Người Giám Hộ",
     "log_in": "Đăng Nhập",
     "log_out": "Đăng Xuất",
     "logged_in": "Đã Đăng Nhập",
     "logged_out": "Đã Đăng Xuất",
-    "member_client": "Công Cụ Thành Viên",
+    "member_client": "Cổng Thành Viên",
     "member_status": "Trạng Thái Thành Viên",
     "menu": "Danh Mục",
     "new_version": "Phiên bản mới",
@@ -111,7 +111,7 @@
     "unregister_as_candidate": "Hủy Đăng Ký Ứng Viên",
     "wallet": "Ví",
     "worker_proposals": "Đề Xuất Công Việc",
-    "you_have_not_yet_registered": "Bạn chưa được đăng ký Thành Viên. Vui lòng ký duyệt hiến pháp để sử dụng Công Cụ Thành Viên.",
+    "you_have_not_yet_registered": "Bạn chưa được đăng ký Thành Viên. Vui lòng ký duyệt hiến pháp để sử dụng Cổng Thành Viên.",
     "your_token_balance": "Số Dư {tokenName}"
   },
   "four_zero_four": {
@@ -121,7 +121,7 @@
   "index": {
     "already_subscribed": "Đã Đăng Ký!",
     "description_p1": "eosDAC là một cộng đồng tự trị phi tập trung, điều đó có nghĩa là nó được sở hữu và vận hành bởi những người sở hữu token, đồng ý với hiến pháp và đăng ký thành viên cộng đồng.",
-    "description_p2": "Khi hoàn tất, bộ công cụ thành viên sẽ cho phép bạn đọc hiến pháp, đăng ký thành viên, nộp đề xuất công việc, đăng ký ứng viên người giám hộ, bầu ra người giám hộ, chuyển nhượng token và nhiều chức năng khác. Nếu bạn có bất kỳ câu hỏi gì, vui lòng liên hệ chúng tôi theo các đường link bên dưới.",
+    "description_p2": "Khi hoàn tất, cổng thành viên này sẽ cho phép bạn đọc hiến pháp, đăng ký thành viên, nộp đề xuất công việc, đăng ký ứng viên người giám hộ, bầu ra người giám hộ, chuyển nhượng token và nhiều chức năng khác. Nếu bạn có bất kỳ câu hỏi gì, vui lòng liên hệ chúng tôi theo các đường link bên dưới.",
     "discord_description": "eosDAC là một cộng đồng năng động và tích cực xây dựng các công cụ để kích hoạt các DAC khác. Discord là nơi chúng tôi trao đổi, giới thiệu và hợp tác làm việc cùng nhau.",
     "eosdac": "eosdac.io/vi",
     "error_occured": "Có lỗi xảy ra!",
@@ -263,7 +263,7 @@
     "updated_constitution": "Hiến pháp được cập nhật. Vui lòng ký duyệt hiến pháp để tiếp tục."
   },
   "scatter_signin": {
-    "choose_authentication_type": "Vui lòng chọn cách thức xác nhận để đăng nhập Bộ Công Cụ Thành Viên eosDAC.",
+    "choose_authentication_type": "Vui lòng chọn cách thức xác nhận để đăng nhập Cổng Thành Viên eosDAC.",
     "choose_connection_type": "Chọn Loại Kết Nối",
     "connection_type": "Loại Kết Nối",
     "identity_request_denied": "Không xác minh được. Vui lòng thử lại và chấp nhận yêu cầu.",
