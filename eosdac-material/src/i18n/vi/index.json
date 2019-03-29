@@ -4,9 +4,9 @@
     "connection_to_endpoint_failed_details": "Vào Cài Đặt để thiết lập API Điểm Kết Nối đang hoạt động"
   },
   "app": {
-    "meta_description": "đây là mô tả công cụ thành viên của chúng tôi được phân tích cú pháp tương ứng với meta tags",
+    "meta_description": "đây là mô tả cổng thành viên của chúng tôi được phân tích cú pháp tương ứng với meta tags",
     "meta_keywords": "tự trị, phi tập trung, cộng đồng, bỏ phiếu",
-    "title": "Công Cụ Thành Viên eosDAC"
+    "title": "Cổng Thành Viên eosDAC"
   },
   "candidate": {
     "staked": "Đã Đặt Cọc",
@@ -93,7 +93,7 @@
     "log_out": "Đăng Xuất",
     "logged_in": "Đã Đăng Nhập",
     "logged_out": "Đã Đăng Xuất",
-    "member_client": "Công Cụ Thành Viên",
+    "member_client": "Cổng Thành Viên",
     "member_status": "Trạng Thái Thành Viên",
     "menu": "Danh Mục",
     "new_version": "Phiên bản mới",
@@ -142,7 +142,7 @@
     "vote_cust": "Bầu Người Giám Hộ",
     "wallet": "Ví",
     "website_description": "Tất cả thông tin bạn muốn biết về eosDAC đều có thể tìm thấy trên website của chúng tôi tại eosdac.io. Truy cập ngay và tìm hiểu về cộng đồng vận hành nhà sản xuất block EOS.",
-    "welcome_to_esodac_member_client": "Chào mừng đến với Công Cụ Thành Viên eosDAC",
+    "welcome_to_esodac_member_client": "Chào mừng đến với Cổng Thành Viên eosDAC",
     "your_email": "Email của bạn",
     "your_language": "Ngôn Ngữ của bạn"
   },
