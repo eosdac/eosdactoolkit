@@ -1,3 +1,5 @@
+This code is deprecated. Please see https://github.com/eosdac/eosdac-client
+
 # eosdactoolkit
 
 ## Purpose
